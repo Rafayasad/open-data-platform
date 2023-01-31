@@ -48,10 +48,10 @@ const Main = memo(() => {
                         </Row>
                     </Col>
                 </Row>
-                <Row className="h-25 align-items-center justify-content-center text-align-center">
+                <Row className="h-25 align-items-center">
                     <Col />
-                    <Col xs={12} md={4}>
-                        <Button title="Explore Topics" />
+                    <Col xs={8} md={4} className='d-flex justify-content-center'>
+                        <Button title="Explore Topics" backgroundColor="#9159FF" textColor="white" />
                     </Col>
                     <Col />
                 </Row>
