@@ -1,0 +1,33 @@
+body,
+html {
+  margin: 0;
+  font-family: 'CircularStd-Semibold';
+  letter-spacing: -0.03em;
+  font-feature-settings: 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@font-face {
+  font-family: 'CircularStd-Regular';
+  src: local('CircularStd'), url(./assets/fonts/CircularStd-Book.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'CircularStd-Bold';
+  src: local('CircularStd'), url(./assets/fonts/CircularStd-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'CircularStd-Semibold';
+  src: local('CircularStd'), url(./assets/fonts/CircularStd-Medium.ttf) format('truetype');
+}
