@@ -3,7 +3,10 @@ import React, { memo } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { IoIosSearch } from 'react-icons/io'
 
-const Search = memo(() => {
+const Search = memo((props) => {
+
+    const { placeholder } = props
+
     return (
         <Container fluid>
             <Row className='search-box'>
@@ -11,7 +14,7 @@ const Search = memo(() => {
                     <IoIosSearch color="gray" size={24} />
                 </Col>
                 <Col className='p-0'>
-                    <p className='m-0' style={{ color: '#9F9F9F' }}>Search keyword, dataset, topic or publisher</p>
+                    <p className='m-0' style={{ color: '#9F9F9F' }}>{placeholder}</p>
                 </Col>
             </Row>
         </Container>

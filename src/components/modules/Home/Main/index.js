@@ -29,7 +29,7 @@ const Main = memo(() => {
                         <Row>
                             <Col />
                             <Col xs={12} md={8} className="py-3">
-                                <Search />
+                                <Search placeholder="Search keyword, dataset, topic or publisher" />
                             </Col>
                             <Col />
                         </Row>

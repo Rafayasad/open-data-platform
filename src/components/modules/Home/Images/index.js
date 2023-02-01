@@ -5,10 +5,11 @@ import CardOne from '../../../../assets/images/Card-One.png';
 import CardTwo from '../../../../assets/images/Card-Two.png';
 import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
+import { colors } from "../../../../utils/colors";
 
 const Images = memo(() => {
     return (
-        <Container fluid className="bg-black">
+        <Container fluid style={{ backgroundColor: colors.black }}>
             <Row>
                 <Col className="my-3">
                     <div className="d-flex flex-column justify-content-center" style={{
