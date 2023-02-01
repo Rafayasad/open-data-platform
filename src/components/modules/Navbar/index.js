@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import './style.css';
 import AbuDhabiLogo from '../../../assets/images/Abu-Dhabi-Data-Logo.png'
 import Button from "../../elements/Button";
+import { routes } from '../../../router/helper';
 
 const Navbar = memo(() => {
     return (
@@ -14,16 +15,24 @@ const Navbar = memo(() => {
                 </Col>
                 <Col md={6} className="d-flex justify-content-center align-items-center">
                     <div className="mx-3">
-                        <p className="m-0 text-white hover-underline-animation" style={{ fontSize: '18px' }}>Dataset</p>
+                        <Link to='/dataset'>
+                            <p className="m-0 text-white hover-underline-animation" style={{ fontSize: '18px' }}>Dataset</p>
+                        </Link>
                     </div>
                     <div className="mx-3">
-                        <p className="m-0 text-white hover-underline-animation" style={{ fontSize: '18px' }}>About us</p>
+                        <Link to='/about-us'>
+                            <p className="m-0 text-white hover-underline-animation" style={{ fontSize: '18px' }}>About us</p>
+                        </Link>
                     </div>
                     <div className="mx-3">
-                        <p className="m-0 text-white hover-underline-animation" style={{ fontSize: '18px' }}>Support</p>
+                        <Link to='/support'>
+                            <p className="m-0 text-white hover-underline-animation" style={{ fontSize: '18px' }}>Support</p>
+                        </Link>
                     </div>
                     <div className="mx-3">
-                        <p className="m-0 text-white hover-underline-animation" style={{ fontSize: '18px' }}>Application</p>
+                        <Link to='/applications'>
+                            <p className="m-0 text-white hover-underline-animation" style={{ fontSize: '18px' }}>Application</p>
+                        </Link>
                     </div>
                 </Col>
                 <Col className="d-flex justify-content-end align-items-center">
