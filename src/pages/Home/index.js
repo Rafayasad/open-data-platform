@@ -7,6 +7,7 @@ import Images from "../../components/modules/Home/Images";
 import Main from "../../components/modules/Home/Main";
 import PlatformInsights from "../../components/modules/Home/PlatformInsights";
 import Topics from "../../components/modules/Home/Topics";
+import Navbar from '../../components/modules/Navbar';
 
 const data = [
     {
@@ -26,7 +27,7 @@ const data = [
 const Home = memo(() => {
     return (
         <>
-            {/* <Navbar /> */}
+            <Navbar />
             <Main />
             <Topics />
             <Images />
