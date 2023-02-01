@@ -3,6 +3,8 @@ import { lazy, useEffect } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 
 const Home = lazy(() => import('./pages/Home'))
+const Dataset = lazy(() => import('./pages/Dataset'))
+const About = lazy(() => import('./pages/About'))
 
 
 function App() {
@@ -11,7 +13,9 @@ function App() {
     document.getElementsByTagName('html')[0].setAttribute("dir", i18n.language === "en" ? "ltr" : "rtl")
   }, [i18n.language])
   return (
-    <Home />
+    // <Home />
+    // <Dataset />
+    <About />
   );
 }
 

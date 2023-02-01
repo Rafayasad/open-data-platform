@@ -1,8 +1,13 @@
 import React, { memo } from "react";
+import Main from "../../components/modules/About/Main";
+import Rows from "../../components/modules/About/Rows";
 
 const About = memo(() => {
-    return(
+    return (
         <>
+            <Main />
+            <Rows />
+            <Rows />
         </>
     )
 })

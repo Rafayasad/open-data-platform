@@ -53,60 +53,70 @@ const OurPlatforms = [
 const MiddleFooter = memo((props) => {
 
     return (
-        <Container fluid className='bg-black py-3'>
-            <Row>
+        <Container fluid className='bg-black p-3'>
+            <div className='d-flex'>
                 <Col>
                     <div className='my-4'>
                         <Heading size="sm" color="white" heading="Datasets" />
                     </div>
-                    <p className='text-white'>Economy</p>
-                    <p className='text-white'>Enviornment</p>
-                    <p className='text-white'>Agricultural</p>
-                    <p className='text-white'>Dubai</p>
-                    <p className='text-white'>Police</p>
-                    <p className='text-white'>Safety</p>
+                    <div className='my-1'>
+                        <p className='text-white'>Economy</p>
+                        <p className='text-white'>Enviornment</p>
+                        <p className='text-white'>Agricultural</p>
+                        <p className='text-white'>Dubai</p>
+                        <p className='text-white'>Police</p>
+                        <p className='text-white'>Safety</p>
+                    </div>
                 </Col>
                 <Col>
                     <div className='my-4'>
                         <Heading size="sm" color="white" heading="Support" />
                     </div>
-                    {
-                        Support.map((item, index) => (
-                            <p key={index} className='text-white'>{item.title}</p>
-                        ))
-                    }
+                    <div className='my-1'>
+                        {
+                            Support.map((item, index) => (
+                                <p key={index} className='text-white'>{item.title}</p>
+                            ))
+                        }
+                    </div>
                 </Col>
                 <Col>
                     <div className='my-4'>
                         <Heading size="sm" color="white" heading="About us" />
                     </div>
-                    {
-                        AboutUs.map((item, index) => (
-                            <p key={index} className='text-white'>{item.title}</p>
-                        ))
-                    }
+                    <div className='my-1'>
+                        {
+                            AboutUs.map((item, index) => (
+                                <p key={index} className='text-white'>{item.title}</p>
+                            ))
+                        }
+                    </div>
                 </Col>
                 <Col>
                     <div className='my-4'>
                         <Heading size="sm" color="white" heading="Developers" />
                     </div>
-                    {
-                        Developers.map((item, index) => (
-                            <p key={index} className='text-white'>{item.title}</p>
-                        ))
-                    }
+                    <div className='my-1'>
+                        {
+                            Developers.map((item, index) => (
+                                <p key={index} className='text-white'>{item.title}</p>
+                            ))
+                        }
+                    </div>
                 </Col>
                 <Col>
                     <div className='my-4'>
                         <Heading size="sm" color="white" heading="Our platforms" />
                     </div>
-                    {
-                        OurPlatforms.map((item, index) => (
-                            <p key={index} className='text-white'>{item.title}</p>
-                        ))
-                    }
+                    <div className='my-1'>
+                        {
+                            OurPlatforms.map((item, index) => (
+                                <p key={index} className='text-white'>{item.title}</p>
+                            ))
+                        }
+                    </div>
                 </Col>
-            </Row>
+            </div>
         </Container>
     )
 });
