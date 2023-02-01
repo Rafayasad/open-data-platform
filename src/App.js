@@ -5,6 +5,7 @@ import { useTranslation, Trans } from 'react-i18next';
 const Home = lazy(() => import('./pages/Home'))
 const Dataset = lazy(() => import('./pages/Dataset'))
 const About = lazy(() => import('./pages/About'))
+const Applications = lazy(() => import('./pages/Applications'))
 
 
 function App() {
@@ -13,9 +14,12 @@ function App() {
     document.getElementsByTagName('html')[0].setAttribute("dir", i18n.language === "en" ? "ltr" : "rtl")
   }, [i18n.language])
   return (
-    // <Home />
-    // <Dataset />
-    <About />
+    <>
+      <Home />
+      <Dataset />
+      <About />
+      <Applications />
+    </>
   );
 }
 
