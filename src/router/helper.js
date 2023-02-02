@@ -7,7 +7,10 @@ export const routes = {
     DATASET: '/dataset',
     SUPPORT: '/support',
     ABOUTUS: '/about-us',
-    APPLICATIONS: '/applications'
+    APPLICATIONS: '/applications',
+    AUTHENTICATION: '/authentication',
+    LOGIN: `/login`,
+    REGISTER: `/register`,
 }
 
 // export const navigate = (route) => {
