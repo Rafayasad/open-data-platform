@@ -18,7 +18,6 @@ const Main = memo(() => {
         }}>
             <Container>
                 <Row className="h-25">
-                    <LanguageSwitcher />
                 </Row>
                 <Row className="h-50">
                     <Col className="d-flex flex-column justify-content-center">
