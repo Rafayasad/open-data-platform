@@ -1,0 +1,45 @@
+/* @keyframes example {
+    from {
+        text-decoration: none;
+    }
+
+    to {
+        text-decoration: underline;
+    }
+}
+
+.link-hover:hover {
+    text-decoration: none;
+    cursor: pointer;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 2.5px;
+    animation-name: example;
+    animation-duration: 1s;
+} */
+
+.hover-underline-animation {
+    display: inline-block;
+    position: relative;
+    color: #FFFFFF;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.hover-underline-animation::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background-color: #FFFFFF;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+    border-radius: 10px;
+}
+
+.hover-underline-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom center;
+}
