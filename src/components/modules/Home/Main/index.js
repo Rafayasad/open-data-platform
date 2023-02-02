@@ -4,11 +4,10 @@ import Button from "../../../elements/Button";
 import Search from "../../../elements/Search";
 import Heading from "../../../elements/Heading";
 import background from '../../../../assets/images/BG.png';
-import { useTranslation, Trans } from 'react-i18next';
 import LanguageSwitcher from "../../../elements/LanguageSwitcher";
+import { string } from "../../../../i18n/helper";
 
 const Main = memo(() => {
-    const { t, i18n } = useTranslation();
     return (
         <div className="d-flex" style={{
             height: '100vh',
@@ -26,7 +25,7 @@ const Main = memo(() => {
                         <Row>
                             <Col />
                             <Col xs={10} md={6} style={{ textAlign: 'center' }} className="py-2">
-                                <Heading color="white" heading={t("dataAvailable")} />
+                                <Heading color="white" heading={string("dataAvailable")} />
                             </Col>
                             <Col />
                         </Row>
