@@ -8,6 +8,7 @@ import LanguageSwitcher from "../../../elements/LanguageSwitcher";
 import { string } from "../../../../i18n/helper";
 
 const Main = memo(() => {
+
     return (
         <div className="d-flex" style={{
             height: '100vh',

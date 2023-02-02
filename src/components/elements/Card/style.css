@@ -1,3 +1,8 @@
-.card-hover:hover {
+.card-hover-light:hover {
     background-color: #F3F3F3;
+}
+
+.card-hover-primary:hover {
+    background-color: #762FFF;
+    color: #FFFFFF !important;
 }

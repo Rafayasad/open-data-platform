@@ -42,10 +42,10 @@ const Heading = memo((props) => {
 
     return (
         <Tag
-            className={ClassName}
             style={{
                 color: color ? color : "#00000"
             }}
+            className={ClassName}
         >
             {heading}
         </Tag>
