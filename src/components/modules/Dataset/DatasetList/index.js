@@ -1,5 +1,6 @@
 import React, { memo, useCallback, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { colors } from "../../../../utils/colors";
 import Card from "../../../elements/Card";
 import Header from "../../Cards/Header";
 
@@ -26,7 +27,7 @@ const data = [
         title: "Immunizations by Nationality, Type of Vaccine and Age Group",
         description: "Immunizations by Nationality, Type of Vaccine and Age Group",
         publisher: "Ministry of Health and Prevention",
-        tags: ['Social', 'Police']
+        tags: ['Social', 'Police',]
     },
     {
         title: "Licensed Social Care Professional 2021 - 2022 Immunizations by Nationality, Type of Vaccine and Age Group",
@@ -37,7 +38,7 @@ const data = [
         title: "List of applicants for participation in the school bus supervisors",
         description: "Immunizations by Nationality, Type of Vaccine and Age Group",
         publisher: "Telecommunication Regulatory Authority",
-        tags: ['Social', 'Enviornment', 'Education']
+        tags: ['Social', 'Enviornment']
     }
 ]
 
@@ -53,7 +54,7 @@ const DatasetList = memo((props) => {
     return (
         <Container fluid>
             <hr className="mt-5" style={{ color: 'lightgray', borderWidth: 2 }} />
-            <Header title={"3127 Datasets"} />
+            <Header title={"3127 Datasets"} backgroundColor={colors.white} />
             {
                 data.map((item, index) => (
                     <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
@@ -65,7 +66,7 @@ const DatasetList = memo((props) => {
                             size='sm'
                             headingSize='lg'
                             noborder
-                            hoverable
+                            hoverable="light"
                             shortTitle
                             title={item.title}
                             publisher={item.publisher}

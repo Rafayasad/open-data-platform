@@ -8,7 +8,9 @@ import { useTranslation, Trans } from 'react-i18next';
 import LanguageSwitcher from "../../../elements/LanguageSwitcher";
 
 const Main = memo(() => {
+
     const { t, i18n } = useTranslation();
+    
     return (
         <div className="d-flex" style={{
             height: '100vh',
@@ -19,7 +21,7 @@ const Main = memo(() => {
         }}>
             <Container>
                 <Row className="h-25">
-                    <LanguageSwitcher />
+                    {/* <LanguageSwitcher /> */}
                 </Row>
                 <Row className="h-50">
                     <Col className="d-flex flex-column justify-content-center">
