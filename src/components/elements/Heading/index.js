@@ -13,19 +13,25 @@ const Heading = memo((props) => {
 
     if (size === "xxs") {
         Tag = "p"
+        ClassName = "m-0"
     } else if (size === 'xs') {
         Tag = "h5"
+        ClassName = "m-0"
     } else if (size === 'sm') {
         Tag = "h4"
+        ClassName = "m-0"
     } else if (size === 'md') {
         Tag = "h3"
+        ClassName = "m-0"
     } else if (size === 'lg') {
         Tag = "h2"
+        ClassName = "m-0"
     } else if (size === 'xxl') {
         Tag = "h1"
         ClassName = "display-3"
     } else {
         Tag = "h1"
+        ClassName = "m-0"
     }
 
     if (underline) {

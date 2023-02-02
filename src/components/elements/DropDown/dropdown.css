@@ -1,0 +1,13 @@
+.my-dropdown-toggle::after {
+    content: none;
+}
+
+.dropdown-item:active{
+    background-color: white;
+}
+
+.dropdown-hover:hover {
+    background-color: #F3F3F3 !important;
+    color: #AD50F0 !important;
+    border:1px solid #AD50F0 !important;
+}
