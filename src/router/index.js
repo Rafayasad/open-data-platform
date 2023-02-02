@@ -8,7 +8,6 @@ const About = lazy(() => import('../pages/About'))
 const Applications = lazy(() => import('../pages/Applications'))
 const Register = lazy(() => import('../pages/Authentication/Register'))
 
-
 const Router = () => {
     return (
         <Routes>
