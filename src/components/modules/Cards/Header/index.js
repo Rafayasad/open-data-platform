@@ -2,8 +2,11 @@ import React, { memo, useState } from "react";
 import { Container } from "react-bootstrap";
 import { string } from "../../../../i18n/helper";
 import Button from "../../../elements/Button";
-import CustomDropdown from "../../../elements/DropDown";
+import Dropdown from "../../../elements/DropDown";
 import Heading from "../../../elements/Heading";
+import { FaFileExcel } from "react-icons/fa";
+import { FaFileCsv } from "react-icons/fa";
+import { FaFilePdf } from "react-icons/fa";
 
 const Header = memo((props) => {
 
@@ -26,6 +29,24 @@ const Header = memo((props) => {
         }
     ]
 
+    const iconData = [
+        {
+            title: string("excel source texts ssssssss ssssssss sssssssssss sssssssssssssssss ssssssssss"),
+            onClick: handleSelect,
+            icon: <FaFileExcel size={25} />
+        },
+        {
+            title: string("csv source text"),
+            onClick: handleSelect,
+            icon: <FaFileCsv size={25} />
+        },
+        {
+            title: string("pdf source text"),
+            onClick: handleSelect,
+            icon: <FaFilePdf size={25} />
+        }
+    ]
+
     return (
         <Container fluid className="d-flex justify-content-between align-items-center py-4">
             <div>
@@ -37,7 +58,7 @@ const Header = memo((props) => {
             </div>
             <div>
                 {dropdown ?
-                    <CustomDropdown data={data} bgColor={"transparent"} selectedValue={selectedValue} />
+                    <Dropdown dropdownName={string("sortBy")} data={data} bgColor={"transparent"} selectedValue={selectedValue} />
                     : <Button title={"View All"} />
                 }
             </div>
