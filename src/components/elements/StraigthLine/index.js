@@ -1,6 +1,9 @@
 import React, { memo } from "react";
 
-const StraigthLine = memo(({ label, textColor, lineColor }) => {
+const StraigthLine = memo((props) => {
+
+  const { label, textColor, lineColor } = props
+
   return (
     <div
       style={{ height: "50px", color: textColor }}

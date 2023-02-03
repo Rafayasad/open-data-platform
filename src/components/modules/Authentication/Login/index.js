@@ -49,12 +49,13 @@ const Login = memo(() => {
                 {
                   title: "Log in with UAE PASS",
                   onClick: "",
-                  backgroundColor: colors.black,
-                  textColor: colors.white,
+                  backgroundColor: colors.white,
+                  textColor: colors.black,
+                  borderColor:colors.black,
                   textSize: "",
                 },
               ]}
-              isForgetPassword={true}
+              isForgetPassword
             />
           </Col>
         </Row>

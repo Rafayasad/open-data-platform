@@ -43,7 +43,7 @@ const ResetPassword = memo(() => {
               checkbox={{
                 label: "I agree to Abu Dhabi Open Data",
                 linktext: "terms and privacy policy",
-                boxColor: colors.light_gray,
+                borderColor: colors.light_gray,
                 linktextColor: colors.purple,
                 labelColor: colors.black,
               }}
