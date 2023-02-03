@@ -30,6 +30,14 @@ const data = [
         title: "Economy",
         onClick: () => { }
     },
+    {
+        title: "Agriculture",
+        onClick: () => { }
+    },
+    {
+        title: "Safety & Security",
+        onClick: () => { }
+    },
 ]
 
 const Topics = memo(() => {
@@ -57,7 +65,7 @@ const Topics = memo(() => {
             }
             <Row className="p-3">
                 <Col className="d-flex justify-content-end">
-                    <Button title="View All" />
+                    <Button borderColor='white' backgroundColor='black' textColor='white' title="View All" />
                 </Col>
             </Row>
         </Container>

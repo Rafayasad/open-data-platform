@@ -21,7 +21,7 @@ const Card = memo((props) => {
     }
 
     if (hoverable) {
-        ClassName = "card-hover"
+        ClassName = "card-hover-" + hoverable
     }
 
     return (
@@ -35,7 +35,7 @@ const Card = memo((props) => {
                     }
                 </Col>
                 <Col md={2} className='d-flex justify-content-end'>
-                    <BsThreeDots color={colors.black} size={28} />
+                    <BsThreeDots size={28} style={{ cursor: 'pointer' }} />
                 </Col>
             </Row>
             <Row className="h-50">
@@ -51,7 +51,7 @@ const Card = memo((props) => {
             </Row>
             <Row className="h-25 align-items-end">
                 <Col>
-                    <Heading size='xxs' color={colors.gray} heading={publisher} />
+                    <Heading size='xxs' color={colors.gray} nomargin heading={publisher} />
                 </Col>
             </Row>
         </RBCard>
