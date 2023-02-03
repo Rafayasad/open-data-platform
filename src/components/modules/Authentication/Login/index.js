@@ -5,7 +5,7 @@ import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import AuthCard from "../AuthCard";
 
-const Register = memo(() => {
+const Login = memo(() => {
   return (
     <div
       className="d-flex"
@@ -31,30 +31,30 @@ const Register = memo(() => {
           </Col>
           <Col className="d-flex justify-content-center align-items-center">
             <AuthCard
-              title="Register"
-              subtitle="Already have an account?"
-              linktext={{ display_text: "Login", onClick: "" }}
+              title="Log in"
+              subtitle="Don't have an account?"
+              linktext={{ display_text: "Request access", onClick: "" }}
               inputFields={[
-                { placeholder: "Full name", type: "text" },
-                { placeholder: "Email", type: "email" },
-                { placeholder: "Re-enter email", type: "email" },
+                { placeholder: "Government email", type: "email" },
                 { placeholder: "Password", type: "password" },
               ]}
-              button={[{
-                title: "Register",
-                onClick: "",
-                backgroundColor: colors.black,
-                textColor: colors.white,
-                textSize:'',
-                borderColor:colors.black
-              }]}
-              checkbox={{
-                label:'I agree to Abu Dhabi Open Data',
-                linktext:'terms and privacy policy',
-                boxColor:colors.light_gray,
-                linktextColor:colors.purple,
-                labelColor:colors.black
-              }}
+              button={[
+                {
+                  title: "Log in",
+                  onClick: "",
+                  backgroundColor: colors.black,
+                  textColor: colors.white,
+                  textSize: "",
+                },
+                {
+                  title: "Log in with UAE PASS",
+                  onClick: "",
+                  backgroundColor: colors.black,
+                  textColor: colors.white,
+                  textSize: "",
+                },
+              ]}
+              isForgetPassword={true}
             />
           </Col>
         </Row>
@@ -63,4 +63,4 @@ const Register = memo(() => {
   );
 });
 
-export default Register;
+export default Login;
