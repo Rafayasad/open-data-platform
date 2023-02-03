@@ -8,6 +8,9 @@ const About = lazy(() => import('../pages/About'))
 const Applications = lazy(() => import('../pages/Applications'))
 const Support = lazy(() => import('../pages/Support'))
 const Register = lazy(() => import('../pages/Authentication/Register'))
+const Login = lazy(() => import('../pages/Authentication/Login'))
+const RecoverPassword = lazy(() => import('../pages/Authentication/RecoverPassword'))
+const ResetPassword = lazy(() => import('../pages/Authentication/ResetPassword'))
 
 const Router = () => {
     return (
@@ -18,6 +21,9 @@ const Router = () => {
             <Route path={routes.SUPPORT} element={<Support />} />
             <Route path={routes.ABOUTUS} element={<About />} />
             <Route path={routes.REGISTER} element={<Register />} />
+            <Route path={routes.LOGIN} element={<Login />} />
+            <Route path={routes.RECOVER} element={<RecoverPassword />} />
+            <Route path={routes.RESET} element={<ResetPassword />} />
         </Routes>
     )
 };
