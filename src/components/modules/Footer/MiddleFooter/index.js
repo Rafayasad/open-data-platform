@@ -51,7 +51,7 @@ const OurPlatforms = [
     },
 ]
 
-const MiddleFooter = memo((props) => {
+const MiddleFooter = memo(() => {
 
     const [topics, setTopics] = useState();
 
