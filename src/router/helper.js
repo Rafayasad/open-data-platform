@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom"
 export const routes = {
     HOME: '/',
     DATASET: '/dataset',
-    DATASET_DETAIL: '/dataset/detail',
     SUPPORT: '/support',
     ABOUTUS: '/about-us',
     APPLICATIONS: '/applications',
     AUTHENTICATION: '/authentication',
     LOGIN: `/login`,
     REGISTER: `/register`,
+    DATASET_DETAIL: '/dataset/detail',
 }
 
 // export const navigate = (route) => {
