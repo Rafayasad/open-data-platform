@@ -1,4 +1,5 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
+import { getPlatformInsights } from "../../axios/api";
 import Cards from "../../components/modules/Cards";
 import LowerFooter from "../../components/modules/Footer/LowerFooter";
 import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
@@ -25,6 +26,15 @@ const data = [
 ]
 
 const Home = memo(() => {
+
+    const [loading, setLoading] = useState(false)
+
+    const [platformInsights, setPlatformInsights] = useState();
+
+    useEffect(() => {
+        getPlatformInsights(setPlatformInsights, setLoading)
+    }, [])
+
     return (
         <>
             <Navbar />
@@ -33,7 +43,7 @@ const Home = memo(() => {
             <Images />
             <Cards title="Most Viewed Datasets" backgroundColor={'black'} data={data} />
             <Cards title="Recently Added Datasets" backgroundColor={'black'} data={data} />
-            <PlatformInsights />
+            <PlatformInsights data={platformInsights} />
             <UpperFooter title="Get more from Abu Dhabi Data" />
             <MiddleFooter />
             <LowerFooter />
