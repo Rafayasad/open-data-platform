@@ -5,7 +5,7 @@ import Heading from "../Heading";
 
 const ListItem = memo((props) => {
 
-    const { title, onClick } = props
+    const { title, value, onClick } = props
 
     return (
         <Row className="px-3 py-4 m-0 list-item-hover">
@@ -13,7 +13,7 @@ const ListItem = memo((props) => {
                 <Heading nomargin maxNumberOfLines={1} size="xxl" heading={title} color={'white'} />
                 {/* <div className="h-100 px-2"> */}
                 <h1 className="m-0 px-2">
-                    <sup className="text-white m-0 p-0">2189</sup>
+                    <sup className="text-white m-0 p-0">{value}</sup>
                 </h1>
                 {/* </div> */}
             </Col>

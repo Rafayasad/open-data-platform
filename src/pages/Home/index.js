@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
-import { getPlatformInsights } from "../../axios/api";
+import { getFacets, getMostViewedDatasets, getPlatformInsights, getRecentsDatasets } from "../../axios/api";
 import Cards from "../../components/modules/Cards";
 import LowerFooter from "../../components/modules/Footer/LowerFooter";
 import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
@@ -30,19 +30,25 @@ const Home = memo(() => {
     const [loading, setLoading] = useState(false)
 
     const [platformInsights, setPlatformInsights] = useState();
+    const [mostViewedDatasets, setMostViewedDatasets] = useState();
+    const [recentsDatasets, setRecentsDatasets] = useState();
+    const [topics, setTopics] = useState();
 
     useEffect(() => {
         getPlatformInsights(setPlatformInsights, setLoading)
+        getMostViewedDatasets(setMostViewedDatasets, setLoading)
+        getRecentsDatasets(setRecentsDatasets, setLoading)
+        getFacets("theme", setTopics)
     }, [])
 
     return (
         <>
             <Navbar />
             <Main />
-            <Topics />
+            <Topics data={topics} />
             <Images />
-            <Cards title="Most Viewed Datasets" backgroundColor={'black'} data={data} />
-            <Cards title="Recently Added Datasets" backgroundColor={'black'} data={data} />
+            <Cards title="Most Viewed Datasets" backgroundColor={'black'} data={mostViewedDatasets} />
+            <Cards title="Recently Added Datasets" backgroundColor={'black'} data={recentsDatasets} />
             <PlatformInsights data={platformInsights} />
             <UpperFooter title="Get more from Abu Dhabi Data" />
             <MiddleFooter />

@@ -12,7 +12,7 @@ const PlatformInsights = memo((props) => {
             <Container >
                 <Row className="my-3">
                     <Col className="text-center">
-                        <Heading size="xs" color={colors.gray} heading={"Abu Dhabi Data in numbers"} />
+                        <Heading size="xs" color={colors.pearl_white} heading={"Abu Dhabi Data in numbers"} />
                     </Col>
                 </Row>
                 <Row className="my-3 px-5">
@@ -20,10 +20,10 @@ const PlatformInsights = memo((props) => {
                         data && data.length > 0 && data.map((item, index) => (
                             <Col key={index} xs={6} md={2} className='text-center'>
                                 <Col>
-                                    <Heading color="white" heading={item.value} />
+                                    <Heading color="white" heading={parseInt(item.value).toLocaleString()} />
                                 </Col>
                                 <Col>
-                                    <Heading size='xxs' color={colors.gray} heading={item.label} />
+                                    <Heading size='xxs' color={colors.pearl_white} heading={item.label} />
                                 </Col>
                             </Col>
                         ))

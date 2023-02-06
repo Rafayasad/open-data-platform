@@ -1,5 +1,6 @@
-import React, { memo } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import React, { memo, useEffect, useState } from 'react';
+import { Col, Container } from 'react-bootstrap';
+import { getFacets } from '../../../../axios/api';
 import Heading from '../../../elements/Heading';
 
 const Support = [
@@ -52,6 +53,12 @@ const OurPlatforms = [
 
 const MiddleFooter = memo((props) => {
 
+    const [topics, setTopics] = useState();
+
+    useEffect(() => {
+        getFacets("theme", setTopics)
+    }, [])
+
     return (
         <Container fluid className='bg-black p-3 d-none d-lg-block'>
             <div className='d-flex'>
@@ -60,12 +67,11 @@ const MiddleFooter = memo((props) => {
                         <Heading size="sm" color="white" heading="Datasets" />
                     </div>
                     <div className='my-1'>
-                        <p className='text-white'>Economy</p>
-                        <p className='text-white'>Enviornment</p>
-                        <p className='text-white'>Agricultural</p>
-                        <p className='text-white'>Dubai</p>
-                        <p className='text-white'>Police</p>
-                        <p className='text-white'>Safety</p>
+                        {
+                            topics && topics.length > 0 && topics.map(item => (
+                                <p className='text-white'>{item.title}</p>
+                            ))
+                        }
                     </div>
                 </Col>
                 <Col>
