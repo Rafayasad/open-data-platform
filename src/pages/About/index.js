@@ -6,10 +6,12 @@ import Navbar from "../../components/modules/Navbar";
 const About = memo(() => {
     return (
         <>
-            {/* <Navbar theme='dark' /> */}
-            <Main />
-            <Rows />
-            <Rows />
+            <Navbar theme='dark' />
+            <div className="my-5 py-5"> 
+                <Main />
+                <Rows />
+                <Rows />
+            </div>
         </>
     )
 })

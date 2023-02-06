@@ -5,7 +5,7 @@ import Search from "../../../elements/Search";
 
 const Main = memo(() => {
     return (
-        <Container className="py-5 my-5">
+        <Container className="pt-5 mt-5">
             <Row className="py-5">
                 <Col className="d-flex flex-column justify-content-center">
                     <Row>

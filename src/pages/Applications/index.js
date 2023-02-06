@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import Main from "../../components/modules/Applications/Main";
 import Cards from "../../components/modules/Cards";
+import Navbar from '../../components/modules/Navbar';
 
 let data = [
     {
@@ -28,8 +29,11 @@ let data = [
 const Applications = memo(() => {
     return (
         <>
-            <Main />
-            <Cards type="image-outer-text" data={data} />
+            <Navbar theme='dark' />
+            <div className="my-5 py-5">
+                <Main />
+                <Cards type="image-outer-text" data={data} />
+            </div>
         </>
     )
 })
