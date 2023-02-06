@@ -6,12 +6,17 @@ import Heading from "../../../elements/Heading";
 
 const Header = memo((props) => {
 
-    const { title, backgroundColor, nobutton } = props
+    const { title, backgroundColor, nobutton, size } = props
 
     let color = colors.white;
+    let headingSize;
 
     if (backgroundColor === colors.white) {
         color = colors.black
+    }
+
+    if (size !== 'lg') {
+        headingSize = 'xl'
     }
 
     return (
@@ -19,7 +24,7 @@ const Header = memo((props) => {
             <div>
                 <Heading
                     nomargin
-                    size="xl"
+                    size={headingSize}
                     color={color}
                     heading={title} />
 
