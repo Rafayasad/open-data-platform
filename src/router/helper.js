@@ -11,6 +11,8 @@ export const routes = {
     AUTHENTICATION: '/authentication',
     LOGIN: `/login`,
     REGISTER: `/register`,
+    RECOVER: `/recover-password`,
+    RESET: `/reset-password`,
     DATASET_DETAIL: '/dataset/detail',
 }
 
