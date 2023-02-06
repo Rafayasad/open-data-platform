@@ -35,7 +35,7 @@ const Home = memo(() => {
             <Cards title="Recently Added Datasets" backgroundColor={'black'} data={data} />
             <PlatformInsights />
             <UpperFooter title="Get more from Abu Dhabi Data" />
-            {/* <MiddleFooter /> */}
+            <MiddleFooter />
             <LowerFooter />
         </>
     )
