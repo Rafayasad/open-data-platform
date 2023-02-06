@@ -10,13 +10,13 @@ const PlatformInsights = memo(() => {
 
     return (
         <div className="bg-black py-3">
-            <Container>
+            <Container >
                 <Row className="my-3">
                     <Col className="text-center">
                         <Heading size="xs" color="white" heading={"Abu Dhabi Data in numbers"} />
                     </Col>
                 </Row>
-                <Row className="my-3">
+                <Row className="my-3 px-5">
                     {
                         data.map((item, index) => (
                             <Col key={index} xs={6} md={2} className='text-center'>

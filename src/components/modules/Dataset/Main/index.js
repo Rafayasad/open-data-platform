@@ -18,7 +18,7 @@ const Main = memo(() => {
                     <Row>
                         <Col />
                         <Col xs={12} md={8} className="py-3">
-                            <Search placeholder="Search Keywords" />
+                            <Search placeholder="Search Keywords" filter />
                         </Col>
                         <Col />
                     </Row>

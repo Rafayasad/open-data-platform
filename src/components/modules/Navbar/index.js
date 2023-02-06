@@ -55,7 +55,7 @@ const Navbar = memo((props) => {
                         </Link>
                     </div>
                     <div className="d-flex justify-content-center mx-1">
-                        <Link to={routes.LOGIN}>
+                        <Link style={{ textDecoration: 'none' }} to={routes.LOGIN}>
                             <Button backgroundColor={color} textColor={color === colors.black && colors.white} title={"Login"} />
                         </Link>
                     </div>
