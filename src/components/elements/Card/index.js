@@ -8,7 +8,7 @@ import Tag from "../Tag";
 
 const Card = memo((props) => {
 
-    const { title, publisher, description, tags, size, noborder, hoverable, shortTitle, headingSize } = props
+    const { title, publisher, description, tags, size, noborder, hoverable, shortTitle, headingSize, onClick } = props
 
     var height = "332px", border, ClassName;
 
@@ -40,7 +40,7 @@ const Card = memo((props) => {
             </Row>
             <Row className="h-50">
                 <Col md={shortTitle ? 8 : 12}>
-                    <Heading underline maxNumberOfLines={shortTitle ? 2 : 3} size={headingSize ? headingSize : "md"} heading={title} />
+                    <Heading underline maxNumberOfLines={shortTitle ? 2 : 3} size={headingSize ? headingSize : "md"} heading={title} onClick={onClick} />
                 </Col>
                 {
                     description &&

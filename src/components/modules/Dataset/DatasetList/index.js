@@ -1,7 +1,11 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { getAllDatasets } from "../../../../axios/api";
+import { routes } from "../../../../router/helper";
 import { colors } from "../../../../utils/colors";
 import Card from "../../../elements/Card";
+import Pagination from "../../../elements/Pagination";
 import Header from "../../Cards/Header";
 
 const data = [
@@ -44,19 +48,31 @@ const data = [
 
 const DatasetList = memo((props) => {
 
-    // const { data } = props
+    const { onClick } = props
+
+    let navigate = useNavigate();
 
     const [currentHovered, setCurrentHovered] = useState(null);
 
     const onHover = useCallback((index) => setCurrentHovered(index), [currentHovered])
     const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered])
 
+    const [datasets, setDatasets] = useState();
+
+    const [totalCount, setTotalCount] = useState();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+
+    useEffect(() => {
+        getAllDatasets(setDatasets, setTotalCount, currentPage, rowsPerPage)
+    }, [])
+
     return (
         <Container fluid>
             <hr className="mt-5" style={{ color: 'lightgray', borderWidth: 2 }} />
-            <Header title={"3127 Datasets"} backgroundColor={colors.white} />
+            <Header title={`${totalCount} Datasets`} backgroundColor={colors.white} />
             {
-                data.map((item, index) => (
+                datasets && datasets.length > 0 && datasets.map((item, index) => (
                     <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
                         {
                             index > 0 &&
@@ -72,6 +88,7 @@ const DatasetList = memo((props) => {
                             publisher={item.publisher}
                             description={item.description}
                             tags={item.tags}
+                            onClick={() => onClick(item.id)}
                         />
                     </div>
                 ))

@@ -1,4 +1,5 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
+import { getAllApplications } from "../../axios/api";
 import Main from "../../components/modules/Applications/Main";
 import Cards from "../../components/modules/Cards";
 import Navbar from '../../components/modules/Navbar';
@@ -27,12 +28,19 @@ let data = [
 ]
 
 const Applications = memo(() => {
+
+    const [applications, setApplications] = useState();
+
+    useEffect(() => {
+        getAllApplications(setApplications);
+    }, [])
+
     return (
         <>
             <Navbar theme='dark' />
             <div className="my-5 py-5">
                 <Main />
-                <Cards type="image-outer-text" data={data} />
+                <Cards type="image-outer-text" data={applications} />
             </div>
         </>
     )

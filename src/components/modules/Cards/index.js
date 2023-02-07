@@ -1,6 +1,5 @@
 import React, { memo } from "react";
 import { Row, Col, Container } from "react-bootstrap";
-import _ from 'lodash';
 import Card from "../../elements/Card";
 import CardWithText from "../../elements/CardWithText";
 import Header from "./Header";
@@ -29,14 +28,14 @@ let images = [
 
 const Cards = memo((props) => {
 
-    const { title, data, backgroundColor, hoverable, type } = props
+    const { title, data, backgroundColor, hoverable, type, onClick } = props
 
     const renderContent = () => {
         if (type === 'image-inner-text') {
             return (
                 data && data.length > 0 && data.map((item, index) => (
                     <Col key={index} md={4} className="py-2">
-                        <CardWithText hoverable noborder title={item.title} description={item.description} image={images[Math.floor(Math.random() * images.length)]} />
+                        <CardWithText hoverable noborder title={item.title} description={item.description} image={images[Math.floor(Math.random() * images.length)]} onClick={() => onClick(item.id)} />
                     </Col>
                 ))
             )
@@ -44,7 +43,7 @@ const Cards = memo((props) => {
             return (
                 data && data.length > 0 && data.map((item, index) => (
                     <Col key={index} md={4} className="py-2">
-                        <CardWithOuterText title={item.title} description={item.description} image={item.image} />
+                        <CardWithOuterText title={item.title} description={item.description} image={item.image} onClick={() => onClick(item.id)} />
                     </Col>
                 ))
             )
@@ -52,7 +51,7 @@ const Cards = memo((props) => {
             return (
                 data && data.length > 0 && data.map((item, index) => (
                     <Col key={index} md={4} className="py-2">
-                        <Card hoverable={hoverable} title={item.title} publisher={item.publisher} />
+                        <Card hoverable={hoverable} title={item.title} publisher={item.publisher} onClick={() => onClick(item.id)} />
                     </Col>
                 ))
             )

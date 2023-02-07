@@ -1,7 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
-// let navigateTo = useNavigate();
-
 export const routes = {
   HOME: "/",
   DATASET: "/dataset",
@@ -15,9 +11,3 @@ export const routes = {
   RECOVER: `/recover-password`,
   RESET: `/reset-password`,
 };
-
-// export const navigate = (route) => {
-
-//     return navigateTo(route)
-
-// }

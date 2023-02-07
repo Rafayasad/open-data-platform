@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import Navbar from '../../components/modules/Navbar';
 import Cards from "../../components/modules/Cards";
 import Main from "../../components/modules/Dataset/Main";
@@ -7,6 +7,9 @@ import MiddleFooter from '../../components/modules/Footer/MiddleFooter';
 import LowerFooter from '../../components/modules/Footer/LowerFooter';
 import DatasetList from "../../components/modules/Dataset/DatasetList";
 import { colors } from "../../utils/colors";
+import { getRecentsDatasets } from "../../axios/api";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../router/helper";
 
 const data = [
     {
@@ -24,12 +27,23 @@ const data = [
 ]
 
 const Dataset = memo(() => {
+
+    const navigate = useNavigate();
+
+    const [recentsDatasets, setRecentsDatasets] = useState();
+
+    useEffect(() => {
+        getRecentsDatasets(setRecentsDatasets)
+    }, [])
+
+    const onClickCard = useCallback((id) => { navigate(`${routes.DATASET_DETAIL}?id=${id}`) }, []);
+
     return (
         <>
             <Navbar theme={'dark'} />
             <Main />
-            <Cards title="Featured datasets" hoverable="primary" backgroundColor={colors.white} data={data} />
-            <DatasetList />
+            <Cards title="Featured datasets" hoverable="primary" backgroundColor={colors.white} data={recentsDatasets} onClick={onClickCard} />
+            <DatasetList onClick={onClickCard} />
             <UpperFooter title="Get more from Abu Dhabi Data" />
             <MiddleFooter />
             <LowerFooter />

@@ -11,8 +11,8 @@ const CardWithOuterText = memo((props) => {
 
     return (
         <div>
-            <RBCard className="p-4" style={{ height: height, borderRadius: "30px" }}>
-
+            <RBCard className="p-4 justify-content-center align-items-center" style={{ height: height, borderRadius: "30px" }}>
+                <img height={'140px'} width={'240px'} src={image} />
             </RBCard>
             <Row>
                 <Col className="d-flex py-3" xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>

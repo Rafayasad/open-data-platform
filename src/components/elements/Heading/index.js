@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import "./style.css";
 
 const Heading = memo((props) => {
-  const { heading, color, size, underline, maxNumberOfLines, nomargin } = props;
+  const { heading, color, size, underline, maxNumberOfLines, nomargin, capitalize, onClick } = props;
 
   var Tag,
     ClassName = "";
@@ -40,12 +40,17 @@ const Heading = memo((props) => {
     ClassName = ClassName + " " + "m-0";
   }
 
+  if (capitalize) {
+    ClassName = ClassName + " " + "text-capitalize"
+  }
+
   return (
     <Tag
       className={ClassName}
       style={{
         color: color ? color : "#00000",
       }}
+      onClick={onClick ? onClick : () => { }}
     >
       {heading}
     </Tag>

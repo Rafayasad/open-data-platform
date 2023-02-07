@@ -5,6 +5,7 @@ import Navbar from '../../components/modules/Navbar';
 import QuestionList from "../../components/modules/Support/QuestionList";
 import UpperFooter from "../../components/modules/Footer/UpperFooter";
 import LowerFooter from "../../components/modules/Footer/LowerFooter";
+import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
 
 let data = [
     {
@@ -41,6 +42,7 @@ const Support = memo(() => {
             <Cards type='image-inner-text' data={data} />
             <QuestionList title={"Popular Questions"} />
             <UpperFooter title="Still need help?" />
+            <MiddleFooter />
             <LowerFooter />
         </>
     )
