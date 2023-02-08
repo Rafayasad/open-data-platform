@@ -1,3 +1,4 @@
+import { convertHtmlToString } from "../../utils"
 import { endpoints } from "../endpoints"
 
 export const getPlatformInsights = (setData, setLoading) => {
@@ -235,7 +236,7 @@ export const getDatasetById = (id, setData) => {
 
 export const getAllApplications = (setData) => {
     return endpoints.
-        getAllApplications().then(async(res) => {
+        getAllApplications().then(async (res) => {
             if (res.status === 200) {
 
                 let data = res.data.data
@@ -268,4 +269,152 @@ export const getAllApplications = (setData) => {
         }).catch((err) => {
             console.log("Error message", err)
         })
+}
+
+export const getAboutUs = (setData) => {
+    return endpoints.
+        getAboutUs().then(async (res) => {
+            if (res.status === 200) {
+
+                let data = res.data.data
+
+                let arr;
+
+                arr = await Promise.all(
+
+                    data.map(async (item) => {
+
+                        let { title, field_lqb, body, field_wsf } = item.attributes
+
+                        let obj = {
+                            title,
+                            title_ar: field_lqb,
+                            description: body,
+                            description_ar: field_wsf
+                        }
+
+                        let image = await endpoints.getImages(item.relationships.field_image.links.related.href)
+                            .then((res) => {
+                                if (res.status === 200) {
+                                    return `${process.env.REACT_APP_BASE_URL}${res.data.data.attributes.uri.url}`
+                                }
+                            }).catch((err) => {
+                                console.log("Error Message While Getting Image", err)
+                            })
+
+                        obj.image = image
+
+                        let rows = await endpoints.getImages(item.relationships.field_rows.links.related.href)
+                            .then(async (res) => {
+                                if (res.status === 200) {
+
+                                    let data = res.data.data
+
+                                    let rows = await Promise.all(
+                                        data.map(async (item) => {
+
+                                            let { field_title, field_title_ar, field_description, field_description_ar } = item.attributes
+
+                                            let obj = {
+                                                title: field_title,
+                                                title_ar: field_title_ar,
+                                                description: field_description,
+                                                description_ar: field_description_ar
+                                            }
+
+                                            let image = await endpoints.getImages(item.relationships.field_image.links.related.href)
+                                                .then((res) => {
+                                                    if (res.status === 200) {
+                                                        return `${process.env.REACT_APP_BASE_URL}${res.data.data.attributes.uri.url}`
+                                                    }
+                                                }).catch((err) => {
+                                                    console.log("Error Message While Getting Image", err)
+                                                })
+
+                                            obj.image = image
+
+                                            return obj;
+                                        })
+                                    )
+
+                                    return rows;
+                                }
+                            }).catch((err) => {
+                                console.log("Error Message While Getting Rows", err)
+                            })
+
+                        obj.rows = rows
+
+                        return obj;
+
+                    })
+                )
+                console.log("Cjecl", arr)
+
+                setData(arr)
+
+            }
+        }).catch((err) => {
+            console.log("Error message", err)
+        })
+}
+
+export const getFaqsCategory = async (setData) => {
+
+    let en = await endpoints.getEnFaqsCategory().then((res) => {
+
+        let categories = []
+
+        if (res.status === 200) {
+
+            let data = res.data.data;
+
+            data.map((item) => {
+
+                const { name, description } = item.attributes;
+
+                let obj = {
+                    title: name,
+                    description: convertHtmlToString(description.value)
+                }
+
+                categories.push(obj)
+
+            })
+        }
+
+        return categories
+
+    })
+
+    let ar = await endpoints.getArFaqsCategory().then((res) => {
+
+        let categories = []
+
+        if (res.status === 200) {
+
+            let data = res.data.data;
+
+            data.map((item) => {
+
+                const { name, description } = item.attributes;
+
+                let obj = {
+                    title: name,
+                    description: convertHtmlToString(description.value)
+                }
+
+                categories.push(obj)
+
+            })
+        }
+
+        return categories
+
+    })
+
+    let categories = { en, ar }
+
+    setData(categories)
+
 }

@@ -27,5 +27,14 @@ export const endpoints = {
     },
     getAllApplications: () => {
         return client.get('/jsonapi/node/applications');
+    },
+    getAboutUs: () => {
+        return client.get('/jsonapi/about_us');
+    },
+    getEnFaqsCategory: () => {
+        return client.get('/jsonapi/taxonomy_term/faqs_category');
+    },
+    getArFaqsCategory: () => {
+        return client.get('/jsonapi/taxonomy_term/faqs_category_in_arabic');
     }
-}
+} 

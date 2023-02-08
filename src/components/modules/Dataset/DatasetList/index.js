@@ -69,14 +69,14 @@ const DatasetList = memo((props) => {
 
     return (
         <Container fluid>
-            <hr className="mt-5" style={{ color: 'lightgray', borderWidth: 2 }} />
+            <hr className="mt-5" style={{ color: '#CFCFCF', borderWidth: 2 }} />
             <Header title={`${totalCount} Datasets`} backgroundColor={colors.white} />
             {
                 datasets && datasets.length > 0 && datasets.map((item, index) => (
                     <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
                         {
                             index > 0 &&
-                            <hr className="m-0" style={{ color: currentHovered == index || currentHovered != null && currentHovered + 1 == index ? 'white' : 'lightgray', borderWidth: 2 }} />
+                            <hr className="m-0" style={{ color: currentHovered == index || currentHovered != null && currentHovered + 1 == index ? 'white' : '#CFCFCF', borderWidth: 2 }} />
                         }
                         <Card
                             size='sm'

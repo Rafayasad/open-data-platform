@@ -1,4 +1,6 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
+import { getAboutUs } from "../../axios/api";
+import AdLogo from "../../components/modules/About/AdLogo";
 import Main from "../../components/modules/About/Main";
 import Rows from "../../components/modules/About/Rows";
 import Cards from "../../components/modules/Cards";
@@ -23,15 +25,34 @@ const data = [
 ]
 
 const About = memo(() => {
+
+    const [aboutus, setAboutus] = useState();
+
+    useEffect(() => {
+        getAboutUs(setAboutus);
+    }, [])
+
+    console.log("comm", aboutus)
+
     return (
         <>
             <Navbar theme='dark' />
             <div className="my-5 py-5">
-                <Main />
-                <Rows />
-                <Rows />
+                {
+                    aboutus && aboutus.length > 0 && aboutus.map((item, index) => (
+                        <>
+                            <Main key={index} title={item.title} description={item.description} image={item.image} />
+                            {
+                                item && item.rows.length > 0 && item.rows.map((item, index) => (
+                                    <Rows key={index} title={item.title} description={item.description} image={item.image} />
+                                ))
+                            }
+                        </>
+                    ))
+                }
             </div>
             <Cards backgroundColor={colors.white} title="Success Stories" data={data} />
+            <AdLogo />
             <MiddleFooter />
             <LowerFooter />
         </>

@@ -12,7 +12,7 @@ const Card = memo((props) => {
 
     var height = "332px", border, ClassName;
 
-    if (size == 'sm') {
+    if (size === 'sm') {
         height = "332px"
     }
 
@@ -30,7 +30,7 @@ const Card = memo((props) => {
                 <Col className="d-flex">
                     {
                         tags && tags.length > 0 && tags.map((item, index) => (
-                            <Tag title={item} />
+                            <Tag key={index} title={item} />
                         ))
                     }
                 </Col>

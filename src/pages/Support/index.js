@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import Cards from "../../components/modules/Cards";
 import Main from "../../components/modules/Support/Main";
 import Navbar from '../../components/modules/Navbar';
@@ -6,6 +6,7 @@ import QuestionList from "../../components/modules/Support/QuestionList";
 import UpperFooter from "../../components/modules/Footer/UpperFooter";
 import LowerFooter from "../../components/modules/Footer/LowerFooter";
 import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
+import { getFaqsCategory } from "../../axios/api";
 
 let data = [
     {
@@ -35,6 +36,13 @@ let data = [
 ]
 
 const Support = memo(() => {
+
+    const [categories, setCategories] = useState();
+
+    useEffect(() => {
+        getFaqsCategory(setCategories)
+    }, [])
+
     return (
         <>
             <Navbar theme='dark' />
@@ -48,4 +56,4 @@ const Support = memo(() => {
     )
 });
 
-export default Support;
+export default Support; 
