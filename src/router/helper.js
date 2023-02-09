@@ -13,6 +13,8 @@ export const routes = {
   REGISTER: `/register`,
   RECOVER: `/recover-password`,
   RESET: `/reset-password`,
+  CHANGE: `/change-password`,
+  POLICY: `/privacy-policy`,
 };
 
 // export const navigate = (route) => {
