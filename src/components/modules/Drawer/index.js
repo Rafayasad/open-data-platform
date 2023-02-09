@@ -11,7 +11,6 @@ import Button from "../../elements/Button";
 const MDrawer = (props) => {
 
     const { filtersHandler, filters } = props;
-    console.log("FILTERSSSSSSSSSSSSSSS",filters);
     const [isOpen, setIsOpen] = React.useState(false)
     const toggleDrawer = () => {
         setIsOpen((prevState) => !prevState)
@@ -66,13 +65,13 @@ const MDrawer = (props) => {
         <>
             <button onClick={toggleDrawer}>Show</button>
             <Drawer
-                size={"350px"}
+                size={"400px"}
                 open={isOpen}
                 onClose={toggleDrawer}
                 direction='right'
                 className=''
             >
-                <div className="m-3">
+                <div className="m-3 px-3">
                     <div className="d-flex align-items-center justify-content-between mb-5">
                         <Heading size="xxs" heading={"Filters"} nomargin />
                         <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className={"mx-1"} size={20} />

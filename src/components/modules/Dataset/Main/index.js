@@ -21,11 +21,8 @@ const Main = memo(() => {
         setFocusFilters([...temp])
     }
 
-    console.log("FILTERSSSSSSSSSSSSSSS", focusFilters);
-
     return (
         <Container>
-
             <Drawer filtersHandler={filtersHandler} filters={focusFilters} />
             <Row className="py-2">
                 <Col className="d-flex flex-column justify-content-center">
