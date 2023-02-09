@@ -10,6 +10,7 @@ import SupportTwoHover from '../../../assets/images/Support-2-Hover.png';
 import SupportThree from '../../../assets/images/Support-3.png';
 import SupportThreeHover from '../../../assets/images/Support-3-Hover.png';
 import CardWithOuterText from "../../elements/CardWithOuterText";
+import CardStory from "../../elements/CardStory";
 
 let images = [
     {
@@ -25,6 +26,8 @@ let images = [
         image_hover: SupportThreeHover
     }
 ]
+
+let sizes = ['400px', '340px', '280px']
 
 const Cards = memo((props) => {
 
@@ -44,6 +47,14 @@ const Cards = memo((props) => {
                 data && data.length > 0 && data.map((item, index) => (
                     <Col key={index} md={4} className="py-2">
                         <CardWithOuterText title={item.title} description={item.description} image={item.image} onClick={() => onClick(item.id)} />
+                    </Col>
+                ))
+            )
+        } else if (type === 'story-cards') {
+            return (
+                data && data.length > 0 && data.map((item, index) => (
+                    <Col key={index} md={6} lg={4} xl={4} xxl={4} sm={12} xs={12} className="py-2">
+                        <CardStory tags={item.tags} title={item.title} publisher={item.publisher} image={item.image} height={sizes[Math.floor(Math.random() * sizes.length)]} />
                     </Col>
                 ))
             )
