@@ -3,10 +3,10 @@ import { Col, Container, Row } from "react-bootstrap";
 
 const Button = memo((props) => {
 
-    const { title, backgroundColor, textColor } = props
+    const { title, backgroundColor, textColor, onClick } = props;
 
     return (
-        <button className="px-4" style={{ backgroundColor: backgroundColor ? backgroundColor : 'white', color: textColor ? textColor : 'black', height: 52, width: 'auto', borderRadius: 100, border: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <button onClick={() => onClick()} className="px-4" style={{ backgroundColor: backgroundColor ? backgroundColor : 'white', color: textColor ? textColor : 'black', height: 52, width: 'auto', borderRadius: 100, border: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             {title}
         </button>
         // <Container fluid>
