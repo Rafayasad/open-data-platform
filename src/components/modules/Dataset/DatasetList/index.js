@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import { getAllDatasets } from "../../../../axios/api";
 import { colors } from "../../../../utils/colors";
 import Card from "../../../elements/Card";
-import Paginations from "../../../elements/Pagination";
+import Pagination from "../../../elements/Pagination";
 import Header from "../../Cards/Header";
 
 const data = [
@@ -11,42 +11,36 @@ const data = [
         title: "Immunizations by Nationality, Type of Vaccine and Age Group",
         description: "Immunizations by Nationality, Type of Vaccine and Age Group",
         publisher: "Ministry of Health and Prevention",
-        tags: ['Social', 'Enviornment'],
-        pageNum: "1"
+        tags: ['Social', 'Enviornment']
     },
     {
         title: "Licensed Social Care Professional 2021 - 2022 Immunizations by Nationality, Type of Vaccine and Age Group",
         description: "Immunizations by Nationality, Type of Vaccine and Age Group. Immunizations by Nationality, Type of Vaccine and Age Group. Immunizations by Nationality, Type of Vaccine and Age Group",
         publisher: "Ministry of Health and Prevention",
-        tags: ['Enviornment', 'Social'],
-        pageNum: "1"
+        tags: ['Enviornment', 'Social']
     },
     {
         title: "List of applicants for participation in the school bus supervisors",
         description: "Immunizations by Nationality, Type of Vaccine and Age Group",
         publisher: "Telecommunication Regulatory Authority",
-        tags: ['Social', 'Enviornment'],
-        pageNum: "2"
+        tags: ['Social', 'Enviornment']
     },
     {
         title: "Immunizations by Nationality, Type of Vaccine and Age Group",
         description: "Immunizations by Nationality, Type of Vaccine and Age Group",
         publisher: "Ministry of Health and Prevention",
-        tags: ['Social', 'Police',],
-        pageNum: "2"
+        tags: ['Social', 'Police']
     },
     {
         title: "Licensed Social Care Professional 2021 - 2022 Immunizations by Nationality, Type of Vaccine and Age Group",
         description: "Immunizations by Nationality, Type of Vaccine and Age Group. Immunizations by Nationality, Type of Vaccine and Age Group. Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Ministry of Health and Prevention",
-        pageNum: "3"
+        publisher: "Ministry of Health and Prevention"
     },
     {
         title: "List of applicants for participation in the school bus supervisors",
         description: "Immunizations by Nationality, Type of Vaccine and Age Group",
         publisher: "Telecommunication Regulatory Authority",
-        tags: ['Social', 'Enviornment'],
-        pageNum: "3"
+        tags: ['Social', 'Enviornment']
     }
 ]
 
@@ -61,13 +55,11 @@ const DatasetList = memo((props) => {
 
     const [datasets, setDatasets] = useState();
 
-    const [totalCount, setTotalCount] = useState(10); //just for demi initailization.
+    const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
-    const PaginationHandler = (pageNum) => {
-        setCurrentPage(pageNum);
-    }
+    const onChangePage = useCallback((page) => setCurrentPage(page), [])
 
     useEffect(() => {
         getAllDatasets(setDatasets, setTotalCount, currentPage, rowsPerPage)
@@ -99,11 +91,10 @@ const DatasetList = memo((props) => {
                     </div>
                 ))
             }
-            <Paginations
+            <Pagination
                 currentPage={currentPage}
                 totalCount={totalCount}
-                rowsPerPage={rowsPerPage}
-                onChangePageNumber={PaginationHandler} />
+                onChange={onChangePage} />
         </Container>
     )
 });
