@@ -18,7 +18,7 @@ const theme = createTheme(
         }
     }
 );
-const Paginations = memo((props) => {
+const Pagination = memo((props) => {
 
     const { i18n } = useTranslation();
 
@@ -57,4 +57,4 @@ const Paginations = memo((props) => {
     )
 });
 
-export default Paginations;
+export default Pagination;
