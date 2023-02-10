@@ -3,7 +3,6 @@ import React, { memo } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { IoIosSearch } from 'react-icons/io';
 import { MdOutlineFilterAlt } from 'react-icons/md';
-import Heading from '../Heading';
 
 const Search = memo((props) => {
 
@@ -16,7 +15,7 @@ const Search = memo((props) => {
                     <IoIosSearch color="gray" size={24} />
                 </Col>
                 <Col className='p-0 h-100 d-flex align-items-center'>
-                    <Heading nomargin size='xxs' maxNumberOfLines={1} color="#9F9F9F" heading={placeholder} />
+                    <input type="text" className='border-0 bg-transparent w-100' placeholder={placeholder} />
                 </Col>
                 {
                     filter &&
