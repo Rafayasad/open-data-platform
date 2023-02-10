@@ -2,10 +2,11 @@ import React, { memo } from "react";
 
 const Button = memo((props) => {
 
-    const { title, backgroundColor, textColor, borderColor } = props
+    const { title, backgroundColor, textColor, borderColor, onClick } = props
 
     return (
         <button
+            onClick={onClick}
             className="px-4"
             style={{
                 backgroundColor: backgroundColor ? backgroundColor : 'white',

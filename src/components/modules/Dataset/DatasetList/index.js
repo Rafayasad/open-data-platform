@@ -54,7 +54,7 @@ const DatasetList = memo((props) => {
     return (
         <Container fluid>
             <hr className="mt-5" style={{ color: 'lightgray', borderWidth: 2 }} />
-            <Header title={"3127 Datasets"} backgroundColor={colors.white} />
+            <Header title={"3127 Datasets"} backgroundColor={colors.white} nobutton dropdown />
             {
                 data.map((item, index) => (
                     <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
