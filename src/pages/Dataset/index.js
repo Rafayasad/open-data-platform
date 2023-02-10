@@ -44,7 +44,7 @@ const Dataset = memo(() => {
             <Main />
             <Cards title="Featured datasets" hoverable="primary" backgroundColor={colors.white} data={recentsDatasets} onClick={onClickCard} />
             <DatasetList onClick={onClickCard} />
-            <UpperFooter title="Get more from Abu Dhabi Data" />
+            <UpperFooter title="Get more from Abu Dhabi Data" button="Register Now" />
             <MiddleFooter />
             <LowerFooter />
         </>

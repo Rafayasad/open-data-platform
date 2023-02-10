@@ -1,4 +1,5 @@
 import { convertHtmlToString } from "../../utils"
+import { client } from "../axios"
 import { endpoints } from "../endpoints"
 
 export const getPlatformInsights = (setData, setLoading) => {
@@ -371,9 +372,11 @@ export const getFaqsCategory = async (setData) => {
 
             data.map((item) => {
 
+                const id = item.id
                 const { name, description } = item.attributes;
 
                 let obj = {
+                    id,
                     title: name,
                     description: convertHtmlToString(description.value)
                 }
@@ -397,9 +400,11 @@ export const getFaqsCategory = async (setData) => {
 
             data.map((item) => {
 
+                const id = item.id
                 const { name, description } = item.attributes;
 
                 let obj = {
+                    id,
                     title: name,
                     description: convertHtmlToString(description.value)
                 }
@@ -417,4 +422,63 @@ export const getFaqsCategory = async (setData) => {
 
     setData(categories)
 
+}
+
+export const getPopularQuestions = (setData) => {
+    return endpoints.
+        getPopularQuestions().then((res) => {
+
+            if (res.status === 200) {
+
+                let data = res.data.data;
+
+                let popularQuestions = []
+
+                data.map(item => {
+
+                    const id = item.id
+                    const { title, field_question_ar, field_popular_faqs } = item.attributes;
+
+                    if (field_popular_faqs == "Yes") {
+
+                        popularQuestions.push({
+                            id,
+                            title,
+                            title_ar: field_question_ar
+                        })
+
+                        return;
+                    }
+
+                })
+
+                setData(popularQuestions)
+
+            }
+
+        }).catch((err) => {
+            console.log("Error Message", err)
+        })
+}
+
+export const getQuestionById = (id, setData) => {
+    return endpoints.
+        getQuestionById(id).then((res) => {
+            if (res.status === 200) {
+
+                let { title, field_question_ar, field_answer, field_answer_ar } = res.data.data.attributes;
+
+                let detail = {
+                    title,
+                    title_ar: field_question_ar,
+                    description: field_answer,
+                    description_ar: field_answer_ar
+                }
+
+                setData(detail)
+
+            }
+        }).catch((err) => {
+            console.log("Error message", err)
+        })
 }

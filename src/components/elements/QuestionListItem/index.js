@@ -6,11 +6,11 @@ import Heading from "../Heading";
 
 const QuestionListItem = memo((props) => {
 
-    const { title } = props
+    const { title, onClick } = props
 
     return (
         <Container fluid className="py-3 question-list-item-hover">
-            <Row>
+            <Row onClick={onClick}>
                 <Col xs={10} sm={10} md={10} className="d-flex align-items-center">
                     <Heading size="sm" underline nomargin heading={title} />
                 </Col>

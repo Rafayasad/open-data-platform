@@ -5,18 +5,22 @@ import Heading from "../Heading";
 
 const ListItem = memo((props) => {
 
-    const { title, value, onClick } = props
+    const { title, value, image, onClick } = props
 
     return (
         <Row className="px-3 py-4 m-0 list-item-hover">
-            <Col className="d-flex list-item-hover">
-                <Heading nomargin maxNumberOfLines={1} size="xxl" heading={title} color={'white'} />
-                {/* <div className="h-100 px-2"> */}
+            <Col md={6} className="p-0 m-0 d-flex list-item-hover">
+                <Heading nomargin size="xxl" heading={title} color={'white'} />
                 <h1 className="m-0 px-2">
                     <sup className="text-white m-0 p-0">{value}</sup>
                 </h1>
-                {/* </div> */}
             </Col>
+            {
+                image &&
+                <Col md={6} className='d-flex align-items-center'>
+                    <img src={image} height="180px" style={{ position: 'absolute' }} />
+                </Col>
+            }
         </Row>
     )
 });

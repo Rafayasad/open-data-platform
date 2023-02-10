@@ -1,14 +1,11 @@
 import React, { memo, useCallback, useState } from "react";
 import { Card as RBCard, Col, Row } from "react-bootstrap";
-import { BsThreeDots } from "react-icons/bs";
 import './style.css';
-import { colors } from "../../../utils/colors";
 import Heading from "../Heading";
-import Tag from "../Tag";
 
 const CardWithText = memo((props) => {
 
-    const { title, description, image, noborder, hoverable } = props
+    const { title, description, image, noborder, hoverable, onClick } = props
 
     const [currentHovered, setCurrentHovered] = useState(null);
 
@@ -35,7 +32,7 @@ const CardWithText = memo((props) => {
             <RBCard className={`p-4 justify-content-center align-items-center bg-transparent`} style={{ minHeight: '250px', height: height, borderWidth: border }}>
                 <Row>
                     <Col className="d-flex text-center">
-                        <Heading size='md' heading={title} />
+                        <Heading size='md' heading={title} onClick={onClick} />
                     </Col>
                 </Row>
                 <Row>

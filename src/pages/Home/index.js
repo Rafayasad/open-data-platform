@@ -50,7 +50,7 @@ const Home = memo(() => {
             <Cards title="Most Viewed Datasets" backgroundColor={'black'} data={mostViewedDatasets} />
             <Cards title="Recently Added Datasets" backgroundColor={'black'} data={recentsDatasets} />
             <PlatformInsights data={platformInsights} />
-            <UpperFooter title="Get more from Abu Dhabi Data" />
+            <UpperFooter title="Get more from Abu Dhabi Data" button="Register Now" />
             <MiddleFooter />
             <LowerFooter />
         </>

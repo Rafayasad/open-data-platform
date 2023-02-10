@@ -36,5 +36,11 @@ export const endpoints = {
     },
     getArFaqsCategory: () => {
         return client.get('/jsonapi/taxonomy_term/faqs_category_in_arabic');
+    },
+    getPopularQuestions: () => {
+        return client.get('/jsonapi/node/faqs');
+    },
+    getQuestionById: (id) => {
+        return client.get(`/jsonapi/node/faqs/${id}`)
     }
 } 
