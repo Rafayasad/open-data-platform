@@ -6,7 +6,7 @@ import Tag from "../Tag";
 
 const CardStory = memo((props) => {
 
-    const { title, publisher, image, height, tags } = props
+    const { title, publisher, image, height, tags } = props;
 
     return (
         <div>
