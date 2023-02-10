@@ -7,6 +7,7 @@ import AbuDhabiLogoDark from '../../../assets/images/Abu-Dhabi-Data-Logo-Dark.pn
 import Button from "../../elements/Button";
 import { routes } from '../../../router/helper';
 import { colors } from "../../../utils/colors";
+import LanguageSwitcher from "../../elements/LanguageSwitcher";
 
 const Navbar = memo((props) => {
 
@@ -49,6 +50,9 @@ const Navbar = memo((props) => {
                     </div>
                 </Col>
                 <Col className="d-flex justify-content-end align-items-center">
+                    <div className="d-flex justify-content-center mx-1">
+                        <LanguageSwitcher />
+                    </div>
                     <div className="d-flex justify-content-center mx-1">
                         <Link style={{ textDecoration: 'none' }} to={routes.REGISTER}>
                             <Button borderColor={color} backgroundColor='transparent' textColor={color} title={"Register"} />

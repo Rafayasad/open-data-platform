@@ -2,6 +2,8 @@ import React, { memo } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useTranslation } from 'react-i18next';
+import { locales } from "../../../i18n/helper";
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import './style.css';
@@ -16,9 +18,11 @@ const theme = createTheme(
         }
     }
 );
-
 const Paginations = memo((props) => {
+
+    const { i18n } = useTranslation();
     const { currentPage, totalCount, onChangePageNumber, rowsPerPage } = props;
+
     return (
         <Container className="d-flex justify-content-center py-5">
             <ThemeProvider theme={theme}>
@@ -35,10 +39,10 @@ const Paginations = memo((props) => {
                             renderItem={(item) => (
                                 <PaginationItem
                                     slots={{
-                                        previous: FiChevronLeft,
-                                        next: FiChevronRight,
-                                        first: FiChevronsLeft,
-                                        last: FiChevronsRight
+                                        previous: i18n.language == locales.EN ? FiChevronLeft : FiChevronRight,
+                                        next: i18n.language == locales.EN ? FiChevronRight : FiChevronLeft,
+                                        first: i18n.language == locales.EN ? FiChevronsLeft : FiChevronsRight,
+                                        last: i18n.language == locales.EN ? FiChevronsRight : FiChevronsLeft
                                     }}
                                     {...item}
                                 />
