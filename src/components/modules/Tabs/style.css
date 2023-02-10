@@ -1,0 +1,26 @@
+.tab-underline {
+    display: inline-block;
+    position: relative;
+    color: #FFFFFF;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.tab-underline::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(1);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    transform-origin: bottom left;
+    transition: transform 0.25s ease-out;
+    border-radius: 10px;
+    background-color: #8207C9;
+}
+
+/* .tab-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+} */

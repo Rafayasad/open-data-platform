@@ -53,7 +53,7 @@ const OurPlatforms = [
 const MiddleFooter = memo((props) => {
 
     return (
-        <Container fluid className='bg-black p-3'>
+        <Container fluid className='bg-black p-3 d-none d-lg-block'>
             <div className='d-flex'>
                 <Col>
                     <div className='my-4'>

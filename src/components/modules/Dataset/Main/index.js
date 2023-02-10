@@ -1,6 +1,5 @@
 import React, { memo, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Button from "../../../elements/Button";
 import Heading from "../../../elements/Heading";
 import Search from "../../../elements/Search";
 import Tag from "../../../elements/Tag";
@@ -22,9 +21,9 @@ const Main = memo(() => {
     }
 
     return (
-        <Container>
+        <Container className="pt-5 mt-5">
             <Drawer filtersHandler={filtersHandler} filters={focusFilters} />
-            <Row className="py-2">
+            <Row className="py-5">
                 <Col className="d-flex flex-column justify-content-center">
                     <Row>
                         <Col />
@@ -36,7 +35,7 @@ const Main = memo(() => {
                     <Row>
                         <Col />
                         <Col xs={12} md={8} className="py-3">
-                            <Search placeholder="Search Keywords" />
+                            <Search placeholder="Search Keywords" filter />
                         </Col>
                         <Col />
                     </Row>

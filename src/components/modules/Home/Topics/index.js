@@ -30,6 +30,14 @@ const data = [
         title: "Economy",
         onClick: () => { }
     },
+    {
+        title: "Agriculture",
+        onClick: () => { }
+    },
+    {
+        title: "Safety & Security",
+        onClick: () => { }
+    },
 ]
 
 const Topics = memo(() => {
@@ -44,6 +52,11 @@ const Topics = memo(() => {
             width: '100vw',
             backgroundColor: colors.black
         }}>
+            <Row className="p-4 d-block d-sm-none">
+                <Col>
+                    <Heading size='xs' nomargin color={colors.white} heading="Explore Topics" />
+                </Col>
+            </Row>
             {
                 data.map((item, index) => (
                     <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave} >
@@ -57,7 +70,7 @@ const Topics = memo(() => {
             }
             <Row className="p-3">
                 <Col className="d-flex justify-content-end">
-                    <Button title="View All" />
+                    <Button borderColor='white' backgroundColor='black' textColor='white' title="View All" />
                 </Col>
             </Row>
         </Container>

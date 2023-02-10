@@ -1,6 +1,7 @@
-import React, { memo, useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { Container } from "react-bootstrap";
 import { string } from "../../../../i18n/helper";
+import { colors } from "../../../../utils/colors";
 import Button from "../../../elements/Button";
 import Dropdown from "../../../elements/DropDown";
 import Heading from "../../../elements/Heading";
@@ -10,13 +11,22 @@ import { FaFilePdf } from "react-icons/fa";
 
 const Header = memo((props) => {
 
-    const { title, color, dropdown } = props
+    const { title, backgroundColor, nobutton, size, dropdown } = props
 
     const [selectedValue, setSelectedValue] = useState("");
-    const handleSelect = (selectedValue) => {
-        console.log("callback", selectedValue);
-        setSelectedValue(selectedValue)
+
+    let color = colors.white;
+    let headingSize;
+
+    if (backgroundColor === colors.white) {
+        color = colors.black
     }
+
+    if (size !== 'lg') {
+        headingSize = 'xl'
+    }
+
+    const handleSelect = useCallback((value) => setSelectedValue(value), [selectedValue]);
 
     const data = [
         {
@@ -51,18 +61,32 @@ const Header = memo((props) => {
         <Container fluid className="d-flex justify-content-between align-items-center py-4">
             <div>
                 <Heading
-                    size="xl"
+                    nomargin
+                    size={headingSize}
                     color={color}
                     heading={title} />
 
             </div>
-            <div>
-                {dropdown ?
-                    <Dropdown dropdownName={string("sortBy")} data={data} bgColor={"transparent"} selectedValue={selectedValue} />
-                    : <Button title={"View All"} />
-                }
-            </div>
-        </Container>
+            {
+                !nobutton ?
+                    <div>
+                        <Button
+                            title={"View All"}
+                            textColor={color}
+                            borderColor={color}
+                            backgroundColor='transparent'
+                        />
+                    </div> :
+                    dropdown ?
+                        <Dropdown
+                            dropdownName={string("sortBy")}
+                            data={data}
+                            bgColor={"transparent"}
+                            selectedValue={selectedValue}
+                        /> :
+                        null
+            }
+        </Container >
     )
 });
 

@@ -8,6 +8,7 @@ import LanguageSwitcher from "../../../elements/LanguageSwitcher";
 import { string } from "../../../../i18n/helper";
 
 const Main = memo(() => {
+
     return (
         <div className="d-flex" style={{
             height: '100vh',
@@ -31,7 +32,7 @@ const Main = memo(() => {
                         <Row>
                             <Col />
                             <Col xs={12} md={8} className="py-3">
-                                <Search placeholder="Search keyword, dataset, topic or publisher" />
+                                <Search placeholder="Search keyword, dataset, topic or publisher" filter />
                             </Col>
                             <Col />
                         </Row>
@@ -48,7 +49,7 @@ const Main = memo(() => {
                 </Row>
                 <Row className="h-25 align-items-center">
                     <Col />
-                    <Col xs={8} md={4} className='d-flex justify-content-center'>
+                    <Col xs={8} md={4} className='d-none d-lg-flex justify-content-center '>
                         <Button title="Explore Topics" backgroundColor="#9159FF" textColor="white" />
                     </Col>
                     <Col />
