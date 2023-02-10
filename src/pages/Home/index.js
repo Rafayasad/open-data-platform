@@ -45,7 +45,7 @@ const Home = memo(() => {
         <>
             <Navbar />
             <Main />
-            <Topics data={topics} />
+            {/* <Topics data={topics} /> */}
             <Images />
             <Cards title="Most Viewed Datasets" backgroundColor={'black'} data={mostViewedDatasets} />
             <Cards title="Recently Added Datasets" backgroundColor={'black'} data={recentsDatasets} />
