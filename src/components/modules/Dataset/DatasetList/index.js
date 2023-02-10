@@ -1,8 +1,6 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Container } from "react-bootstrap";
 import { getAllDatasets } from "../../../../axios/api";
-import { routes } from "../../../../router/helper";
 import { colors } from "../../../../utils/colors";
 import Card from "../../../elements/Card";
 import Pagination from "../../../elements/Pagination";
@@ -31,12 +29,12 @@ const data = [
         title: "Immunizations by Nationality, Type of Vaccine and Age Group",
         description: "Immunizations by Nationality, Type of Vaccine and Age Group",
         publisher: "Ministry of Health and Prevention",
-        tags: ['Social', 'Police',]
+        tags: ['Social', 'Police']
     },
     {
         title: "Licensed Social Care Professional 2021 - 2022 Immunizations by Nationality, Type of Vaccine and Age Group",
         description: "Immunizations by Nationality, Type of Vaccine and Age Group. Immunizations by Nationality, Type of Vaccine and Age Group. Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Ministry of Health and Prevention",
+        publisher: "Ministry of Health and Prevention"
     },
     {
         title: "List of applicants for participation in the school bus supervisors",
@@ -50,8 +48,6 @@ const DatasetList = memo((props) => {
 
     const { onClick } = props
 
-    let navigate = useNavigate();
-
     const [currentHovered, setCurrentHovered] = useState(null);
 
     const onHover = useCallback((index) => setCurrentHovered(index), [currentHovered])
@@ -59,9 +55,11 @@ const DatasetList = memo((props) => {
 
     const [datasets, setDatasets] = useState();
 
-    const [totalCount, setTotalCount] = useState();
+    const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
+
+    const onChangePage = useCallback((page) => setCurrentPage(page), [])
 
     useEffect(() => {
         getAllDatasets(setDatasets, setTotalCount, currentPage, rowsPerPage)
@@ -93,6 +91,10 @@ const DatasetList = memo((props) => {
                     </div>
                 ))
             }
+            <Pagination
+                currentPage={currentPage}
+                totalCount={totalCount}
+                onChange={onChangePage} />
         </Container>
     )
 });

@@ -1,5 +1,6 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { getAllApplications } from "../../axios/api";
+import Pagination from "../../components/elements/Pagination";
 import Main from "../../components/modules/Applications/Main";
 import Cards from "../../components/modules/Cards";
 import Navbar from '../../components/modules/Navbar';
@@ -31,6 +32,12 @@ const Applications = memo(() => {
 
     const [applications, setApplications] = useState();
 
+    const [totalCount, setTotalCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+
+    const onChangePage = useCallback((page) => setCurrentPage(page), [])
+
     useEffect(() => {
         getAllApplications(setApplications);
     }, [])
@@ -42,6 +49,11 @@ const Applications = memo(() => {
                 <Main />
                 <Cards type="image-outer-text" data={applications} />
             </div>
+            <Pagination
+                currentPage={currentPage}
+                totalCount={totalCount}
+                onChange={onChangePage}
+            />
         </>
     )
 })
