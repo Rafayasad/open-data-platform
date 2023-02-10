@@ -9,7 +9,7 @@ const RecoverPassword = memo(() => {
   return (
     <div>
       <div
-        className="d-flex background-image d-none d-lg-block"
+        className="d-none d-lg-flex"
         style={{
           minHeight: "100vh",
           width: "100vw",
@@ -18,8 +18,8 @@ const RecoverPassword = memo(() => {
           backgroundSize: "100vw 100%",
         }}
       >
-        <Container fluid className="py-3">
-          <Row className="py-5">
+        <Container fluid className="my-5">
+          <Row>
             <Col>
               <Row className="p-4">
                 <Col md={8}>
@@ -68,9 +68,9 @@ const RecoverPassword = memo(() => {
           </Row>
         </Container>
       </div>
-      <div className=" d-block d-lg-none">
-        <Container fluid className="py-3">
-          <Row className="py-5">
+      <div style={{ width: '100vw', height: '100vh' }} className="d-flex justify-content-center align-items-end d-lg-none">
+        <Container>
+          <Row>
             <Col className="d-flex justify-content-center align-items-center">
               <Card
                 className="p-0 mt-5"

@@ -1,11 +1,9 @@
 .modal-content{
-    border-radius: 25px !important;
+    border-radius: 25px;
 }
 .modal-header{
-    border-bottom: none !important;
+    border-bottom: none;
 }
 .btn-close{
-    box-sizing: border-box !important;
-    /* background-color: black; */
-    color: black !important;
+    box-sizing: border-box;
 }

@@ -13,20 +13,21 @@ const AuthCard = memo((props) => {
 
   return (
     <Container fluid>
-      <Row >
+      <Row className="py-2">
         <Col>
-          <Heading heading={title} size="md" />
+          <Heading nomargin heading={title} size="lg" />
         </Col>
       </Row>
-      <Row>
+      <Row className="py-2">
         <Col className="d-flex">
           <div>
-            <Heading heading={subtitle} size="xxs" />
+            <Heading nomargin heading={subtitle} size="xxs" />
           </div>
           {
             linktext &&
             <div className="mx-2">
               <Heading
+                nomargin
                 heading={linktext.display_text}
                 size="xxs"
                 color={colors.purple}
@@ -36,7 +37,7 @@ const AuthCard = memo((props) => {
           }
         </Col>
       </Row>
-      <Row className="mb-2">
+      <Row className="py-2">
         {
           inputFields.map((items, index) => (
             <Col key={index} md={12}>
@@ -50,6 +51,7 @@ const AuthCard = memo((props) => {
         <Row>
           <Col className=" d-flex direction-row justify-content-end">
             <Heading
+              nomargin
               heading={"Forget password"}
               size="xxs"
               color={colors.purple}
@@ -60,17 +62,19 @@ const AuthCard = memo((props) => {
       }
       {
         checkbox &&
-        <Row>
-          <Col className="d-flex mt-2">
+        <Row className="py-2">
+          <Col className="d-flex">
             <CheckBox borderColor={checkbox.boxColor} callBack={""} />
-            <div className="d-flex mx-2">
+            <div className="d-flex">
               <Heading
+                nomargin
                 heading={checkbox.label}
                 size="xxs"
                 color={checkbox.labelColor}
               />
-              <div className="mx-1">
+              <div>
                 <Heading
+                  nomargin
                   heading={checkbox.linktext}
                   size="xxs"
                   color={checkbox.linktextColor}
@@ -81,8 +85,8 @@ const AuthCard = memo((props) => {
           </Col>
         </Row>
       }
-      <Row className="mt-3">
-        {title === "Register" && <Col sm="8" md={8}>i'm not a robot</Col>}
+      <Row className="py-2">
+        {title === "Register" && <Col sm={8} md={8}>i'm not a robot</Col>}
         <Col sm="12" md={title === "Register" ? 4 : 12}>
           {
             button.map((items, index) => (
