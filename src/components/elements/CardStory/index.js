@@ -7,12 +7,11 @@ import Tag from "../Tag";
 const CardStory = memo((props) => {
 
     const { title, publisher, image, height, tags } = props
-    console.log("tags", tags);
+
     return (
         <div>
             <Card
                 style={{
-                    width: '400px',
                     borderRadius: "30px",
                     height: height
                 }}
@@ -22,8 +21,7 @@ const CardStory = memo((props) => {
                         borderRadius: "30px",
                         height: '100%'
                     }}
-                    alt="Sample"
-                    src="https://picsum.photos/300/200"
+                    src="https://picsum.photos/2000"
                 />
             </Card>
             <Row className="flex-column py-2">

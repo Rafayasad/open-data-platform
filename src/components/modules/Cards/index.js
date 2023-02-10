@@ -53,7 +53,7 @@ const Cards = memo((props) => {
         } else if (type === 'story-cards') {
             return (
                 data && data.length > 0 && data.map((item, index) => (
-                    <Col key={index} md={6} lg={4} xl={4} xxl={4} sm={12} xs={12} className="py-2">
+                    <Col key={index} md={4} className="py-2">
                         <CardStory tags={item.tags} title={item.title} publisher={item.publisher} image={item.image} height={sizes[Math.floor(Math.random() * sizes.length)]} />
                     </Col>
                 ))
