@@ -2,6 +2,7 @@ import React, { memo, useCallback, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { colors } from "../../../../utils/colors";
 import QuestionListItem from "../../../elements/QuestionListItem";
+import Shimmer from "../../../elements/Shimmer";
 import Header from '../../Cards/Header';
 
 const QuestionList = memo((props) => {
@@ -18,7 +19,7 @@ const QuestionList = memo((props) => {
             <Header title={title} backgroundColor={colors.white} nobutton />
             <Row>
                 {
-                    data && data.length > 0 && data.map((item, index) => (
+                    data && data.length > 0 ? data.map((item, index) => (
                         <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
                             {
                                 index > 0 &&
@@ -26,7 +27,13 @@ const QuestionList = memo((props) => {
                             }
                             <QuestionListItem title={item.title} onClick={() => onClick(item.id)} />
                         </div>
-                    ))
+                    )) : (
+                        Array(3).fill(null).map(() => (
+                            <div>
+                                <Shimmer className="my-2" height={60} rounded="sm" />
+                            </div>
+                        ))
+                    )
                 }
             </Row>
         </Container>

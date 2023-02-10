@@ -6,6 +6,7 @@ import { routes } from "../../../../router/helper";
 import { colors } from "../../../../utils/colors";
 import Card from "../../../elements/Card";
 import Pagination from "../../../elements/Pagination";
+import Shimmer from "../../../elements/Shimmer";
 import Header from "../../Cards/Header";
 
 const data = [
@@ -59,7 +60,7 @@ const DatasetList = memo((props) => {
 
     const [datasets, setDatasets] = useState();
 
-    const [totalCount, setTotalCount] = useState();
+    const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -72,7 +73,7 @@ const DatasetList = memo((props) => {
             <hr className="mt-5" style={{ color: '#CFCFCF', borderWidth: 2 }} />
             <Header title={`${totalCount} Datasets`} backgroundColor={colors.white} />
             {
-                datasets && datasets.length > 0 && datasets.map((item, index) => (
+                datasets && datasets.length > 0 ? datasets.map((item, index) => (
                     <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
                         {
                             index > 0 &&
@@ -91,7 +92,13 @@ const DatasetList = memo((props) => {
                             onClick={() => onClick(item.id)}
                         />
                     </div>
-                ))
+                )) : (
+                    Array(3).fill(null).map(() => (
+                        <Col md={12} className="my-2">
+                            <Shimmer height={332} rounded="lg" />
+                        </Col>
+                    ))
+                )
             }
         </Container>
     )

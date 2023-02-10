@@ -1,8 +1,9 @@
 import React, { memo } from "react";
 import { Row, Col, Container } from "react-bootstrap";
+import Header from "./Header";
+import Loader from "./Loader";
 import Card from "../../elements/Card";
 import CardWithText from "../../elements/CardWithText";
-import Header from "./Header";
 import SupportOne from '../../../assets/images/Support-1.png';
 import SupportOneHover from '../../../assets/images/Support-1-Hover.png';
 import SupportTwo from '../../../assets/images/Support-2.png';
@@ -36,19 +37,19 @@ const Cards = memo((props) => {
     const renderContent = () => {
         if (type === 'image-inner-text') {
             return (
-                data && data.length > 0 && data.map((item, index) => (
+                data && data.length > 0 ? data.map((item, index) => (
                     <Col key={index} md={4} className="py-2">
                         <CardWithText hoverable noborder title={item.title} description={item.description} image={images[Math.floor(Math.random() * images.length)]} onClick={() => onClick(item.id)} />
                     </Col>
-                ))
+                )) : <Loader type={type} backgroundColor={backgroundColor} />
             )
         } else if (type === 'image-outer-text') {
             return (
-                data && data.length > 0 && data.map((item, index) => (
+                data && data.length > 0 ? data.map((item, index) => (
                     <Col key={index} md={4} className="py-2">
                         <CardWithOuterText title={item.title} description={item.description} image={item.image} onClick={() => onClick(item.id)} />
                     </Col>
-                ))
+                )) : <Loader type={type} backgroundColor={backgroundColor} />
             )
         } else if (type === 'story-cards') {
             return (
@@ -60,11 +61,11 @@ const Cards = memo((props) => {
             )
         } else {
             return (
-                data && data.length > 0 && data.map((item, index) => (
+                data && data.length > 0 ? data.map((item, index) => (
                     <Col key={index} md={4} className="py-2">
                         <Card hoverable={hoverable} title={item.title} publisher={item.publisher} onClick={() => onClick(item.id)} />
                     </Col>
-                ))
+                )) : <Loader backgroundColor={backgroundColor} />
             )
         }
     }
