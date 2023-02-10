@@ -12,4 +12,6 @@ export const routes = {
   REGISTER: `/register`,
   RECOVER: `/recover-password`,
   RESET: `/reset-password`,
+  SUCCESS_STOIRES: '/success-stories',
+  SUCCESS_STOIRES_DETAIL:'/success-stories/detail'
 };

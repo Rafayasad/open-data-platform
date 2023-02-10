@@ -14,6 +14,8 @@ const Register = lazy(() => import('../pages/Authentication/Register'))
 const Login = lazy(() => import('../pages/Authentication/Login'))
 const RecoverPassword = lazy(() => import('../pages/Authentication/RecoverPassword'))
 const ResetPassword = lazy(() => import('../pages/Authentication/ResetPassword'))
+const SuccessStories = lazy(() => import('../pages/SuccessStories'))
+const SuccessStoriesDetail = lazy(() => import('../pages/SuccessStoriesDetail'))
 
 const Router = () => {
     return (
@@ -30,6 +32,8 @@ const Router = () => {
             <Route path={routes.LOGIN} element={<Login />} />
             <Route path={routes.RECOVER} element={<RecoverPassword />} />
             <Route path={routes.RESET} element={<ResetPassword />} />
+            <Route path={routes.SUCCESS_STOIRES} element={<SuccessStories />} />
+            <Route path={routes.SUCCESS_STOIRES_DETAIL} element={<SuccessStoriesDetail />} />
         </Routes>
     )
 };
