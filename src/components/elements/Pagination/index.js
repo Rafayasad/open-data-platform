@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Pagination from '@mui/material/Pagination';
-import PaginationItem from '@mui/material/PaginationItem';
+import MUIPagination from '@mui/material/Pagination';
+import MUIPaginationItem from '@mui/material/PaginationItem';
 import { useTranslation } from 'react-i18next';
 import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -29,7 +29,7 @@ const Pagination = memo((props) => {
             <ThemeProvider theme={theme}>
                 <Row>
                     <Col md={12} xl={12} sm={12} lg={12} xs={12}>
-                        <Pagination
+                        <MUIPagination
                             showFirstButton
                             showLastButton
                             page={currentPage}
@@ -39,7 +39,7 @@ const Pagination = memo((props) => {
                                 onChange(value);
                             }}
                             renderItem={(item) => (
-                                <PaginationItem
+                                <MUIPaginationItem
                                     slots={{
                                         previous: i18n.language === locales.EN ? FiChevronLeft : FiChevronRight,
                                         next: i18n.language === locales.EN ? FiChevronRight : FiChevronLeft,
