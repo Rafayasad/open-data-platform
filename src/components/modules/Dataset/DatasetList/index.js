@@ -4,7 +4,9 @@ import { getAllDatasets } from "../../../../axios/api";
 import { colors } from "../../../../utils/colors";
 import Card from "../../../elements/Card";
 import Pagination from "../../../elements/Pagination";
+import Shimmer from "../../../elements/Shimmer";
 import Header from "../../Cards/Header";
+import Loader from "../../Loader";
 
 const data = [
     {
@@ -70,7 +72,7 @@ const DatasetList = memo((props) => {
             <hr className="mt-5" style={{ color: '#CFCFCF', borderWidth: 2 }} />
             <Header title={`${totalCount} Datasets`} backgroundColor={colors.white} />
             {
-                datasets && datasets.length > 0 && datasets.map((item, index) => (
+                datasets && datasets.length > 0 ? datasets.map((item, index) => (
                     <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
                         {
                             index > 0 &&
@@ -89,7 +91,7 @@ const DatasetList = memo((props) => {
                             onClick={() => onClick(item.id)}
                         />
                     </div>
-                ))
+                )) : <Loader type="full-width-max" />
             }
             <Pagination
                 currentPage={currentPage}

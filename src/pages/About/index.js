@@ -32,24 +32,11 @@ const About = memo(() => {
         getAboutUs(setAboutus);
     }, [])
 
-    console.log("comm", aboutus)
-
     return (
         <>
             <Navbar theme='dark' />
             <div className="my-5 py-5">
-                {
-                    aboutus && aboutus.length > 0 && aboutus.map((item, index) => (
-                        <>
-                            <Main key={index} title={item.title} description={item.description} image={item.image} />
-                            {
-                                item && item.rows.length > 0 && item.rows.map((item, index) => (
-                                    <Rows key={index} title={item.title} description={item.description} image={item.image} />
-                                ))
-                            }
-                        </>
-                    ))
-                }
+                <Main data={aboutus} />
             </div>
             <Cards backgroundColor={colors.white} title="Success Stories" data={data} />
             <AdLogo />

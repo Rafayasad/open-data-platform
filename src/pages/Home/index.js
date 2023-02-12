@@ -9,6 +9,7 @@ import Main from "../../components/modules/Home/Main";
 import PlatformInsights from "../../components/modules/Home/PlatformInsights";
 import Topics from "../../components/modules/Home/Topics";
 import Navbar from '../../components/modules/Navbar';
+import { colors } from "../../utils/colors";
 
 const data = [
     {
@@ -47,8 +48,8 @@ const Home = memo(() => {
             <Main />
             <Topics data={topics} />
             <Images />
-            <Cards title="Most Viewed Datasets" backgroundColor={'black'} data={mostViewedDatasets} />
-            <Cards title="Recently Added Datasets" backgroundColor={'black'} data={recentsDatasets} />
+            <Cards title="Most Viewed Datasets" backgroundColor={colors.black} data={mostViewedDatasets} />
+            <Cards title="Recently Added Datasets" backgroundColor={colors.black} data={recentsDatasets} />
             <PlatformInsights data={platformInsights} />
             <UpperFooter title="Get more from Abu Dhabi Data" button="Register Now" />
             <MiddleFooter />
