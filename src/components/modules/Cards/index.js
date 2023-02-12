@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import Header from "./Header";
-import Loader from "./Loader";
+import Loader from "../Loader";
 import Card from "../../elements/Card";
 import CardWithText from "../../elements/CardWithText";
 import SupportOne from '../../../assets/images/Support-1.png';

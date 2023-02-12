@@ -8,6 +8,7 @@ import Card from "../../../elements/Card";
 import Pagination from "../../../elements/Pagination";
 import Shimmer from "../../../elements/Shimmer";
 import Header from "../../Cards/Header";
+import Loader from "../../Loader";
 
 const data = [
     {
@@ -92,13 +93,7 @@ const DatasetList = memo((props) => {
                             onClick={() => onClick(item.id)}
                         />
                     </div>
-                )) : (
-                    Array(3).fill(null).map(() => (
-                        <Col md={12} className="my-2">
-                            <Shimmer height={332} rounded="lg" />
-                        </Col>
-                    ))
-                )
+                )) : <Loader type="full-width-max" />
             }
         </Container>
     )

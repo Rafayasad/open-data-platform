@@ -4,6 +4,7 @@ import { colors } from "../../../../utils/colors";
 import QuestionListItem from "../../../elements/QuestionListItem";
 import Shimmer from "../../../elements/Shimmer";
 import Header from '../../Cards/Header';
+import Loader from "../../Loader";
 
 const QuestionList = memo((props) => {
 
@@ -27,13 +28,7 @@ const QuestionList = memo((props) => {
                             }
                             <QuestionListItem title={item.title} onClick={() => onClick(item.id)} />
                         </div>
-                    )) : (
-                        Array(3).fill(null).map(() => (
-                            <div>
-                                <Shimmer className="my-2" height={60} rounded="sm" />
-                            </div>
-                        ))
-                    )
+                    )) : <Loader type='full-width-min' />
                 }
             </Row>
         </Container>
