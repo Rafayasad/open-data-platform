@@ -1,7 +1,7 @@
 body,
 html {
   margin: 0;
-  font-family: 'CircularStd-Semibold';
+  font-family: 'CircularStd-Regular';
   letter-spacing: -0.03em;
   font-feature-settings: 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on;
   -webkit-font-smoothing: antialiased;

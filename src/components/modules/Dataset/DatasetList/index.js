@@ -61,42 +61,47 @@ const DatasetList = memo((props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
+    const [loading, setLoading] = useState(false);
+
     const onChangePage = useCallback((page) => setCurrentPage(page), [])
 
     useEffect(() => {
-        getAllDatasets(setDatasets, setTotalCount, currentPage, rowsPerPage)
-    }, [])
+        getAllDatasets(setDatasets, setTotalCount, setLoading, currentPage, rowsPerPage)
+    }, [currentPage])
 
     return (
         <Container fluid>
             <hr className="mt-5" style={{ color: '#CFCFCF', borderWidth: 2 }} />
             <Header title={`${totalCount} Datasets`} backgroundColor={colors.white} nobutton dropdown />
             {
-                datasets && datasets.length > 0 ? datasets.map((item, index) => (
-                    <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
-                        {
-                            index > 0 &&
-                            <hr className="m-0" style={{ color: currentHovered == index || currentHovered != null && currentHovered + 1 == index ? 'white' : '#CFCFCF', borderWidth: 2 }} />
-                        }
-                        <Card
-                            size='sm'
-                            headingSize='lg'
-                            noborder
-                            hoverable="light"
-                            shortTitle
-                            title={item.title}
-                            publisher={item.publisher}
-                            description={item.description}
-                            tags={item.tags}
-                            onClick={() => onClick(item.id)}
-                        />
-                    </div>
-                )) : <Loader type="full-width-max" />
+                !loading ?
+                    datasets && datasets.length > 0 && datasets.map((item, index) => (
+                        <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
+                            {
+                                index > 0 &&
+                                <hr className="m-0" style={{ color: currentHovered == index || currentHovered != null && currentHovered + 1 == index ? 'white' : '#CFCFCF', borderWidth: 2 }} />
+                            }
+                            <Card
+                                size='sm'
+                                headingSize='lg'
+                                noborder
+                                hoverable="light"
+                                shortTitle
+                                title={item.title}
+                                publisher={item.publisher}
+                                description={item.description}
+                                tags={item.tags}
+                                onClick={() => onClick(item.id)}
+                            />
+                        </div>
+                    ))
+                    : <Loader type="full-width-max" />
             }
             <Pagination
                 currentPage={currentPage}
-                totalCount={totalCount}
-                onChange={onChangePage} />
+                totalCount={Math.ceil(totalCount / rowsPerPage)}
+                onChange={onChangePage}
+            />
         </Container>
     )
 });

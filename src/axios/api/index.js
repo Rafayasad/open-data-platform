@@ -151,7 +151,10 @@ export const getFacets = (key, setData) => {
         })
 }
 
-export const getAllDatasets = (setData, setTotalCount, currentPage, rowsPerPage) => {
+export const getAllDatasets = (setData, setTotalCount, setLoading, currentPage, rowsPerPage) => {
+
+    setLoading(true)
+
     return endpoints.
         getAllDatasets(currentPage, rowsPerPage).then((res) => {
             if (res.status === 200) {
@@ -167,13 +170,14 @@ export const getAllDatasets = (setData, setTotalCount, currentPage, rowsPerPage)
                         title_ar: item.titlear,
                         description: item.description,
                         description_ar: item.descriptionlear,
-                        publisher: item.publisher.name,
-                        publisher_ar: item.publisherlear.name,
+                        publisher: item.publisher?.name,
+                        publisher_ar: item.publisherlear?.name,
                         tags: item.theme,
                         tags_ar: item.themelear
                     }
                 ))
 
+                setLoading(false)
                 setData(arr)
 
             }

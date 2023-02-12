@@ -4,7 +4,6 @@ import Button from "../../../elements/Button";
 import Search from "../../../elements/Search";
 import Heading from "../../../elements/Heading";
 import background from '../../../../assets/images/BG.png';
-import LanguageSwitcher from "../../../elements/LanguageSwitcher";
 import { string } from "../../../../i18n/helper";
 
 const Main = memo(() => {
@@ -50,7 +49,7 @@ const Main = memo(() => {
                 <Row className="h-25 align-items-center">
                     <Col />
                     <Col xs={8} md={4} className='d-none d-lg-flex justify-content-center '>
-                        <Button title="Explore Topics" backgroundColor="#9159FF" textColor="white" />
+                        <Button title={string("explore")} backgroundColor="#9159FF" textColor="white" />
                     </Col>
                     <Col />
                 </Row>
