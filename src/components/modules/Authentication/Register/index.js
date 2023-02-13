@@ -4,8 +4,12 @@ import AuthBackground1 from "../../../../assets/images/Auth-Background-1.png";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import AuthCard from "../AuthCard";
+import { useTranslation } from "react-i18next";
 
 const Register = memo(() => {
+
+  const { t } = useTranslation()
+
   return (
     <div
       className="d-flex"
@@ -23,7 +27,7 @@ const Register = memo(() => {
             <Row className="p-5">
               <Col md={8}>
                 <Heading
-                  heading="An Open Data experience that's tailored for you"
+                  heading={t("pwdopendata")}
                   color={colors.white}
                 />
               </Col>
@@ -31,17 +35,17 @@ const Register = memo(() => {
           </Col>
           <Col className="d-flex justify-content-center align-items-center">
             <AuthCard
-              title="Register"
-              subtitle="Already have an account?"
-              linktext={{ display_text: "Login", onClick: "" }}
+              title="register"
+              subtitle="accExist"
+              linktext={{ display_text: "login", onClick: "" }}
               inputFields={[
-                { placeholder: "Full name", type: "text" },
-                { placeholder: "Email", type: "email" },
-                { placeholder: "Re-enter email", type: "email" },
-                { placeholder: "Password", type: "password" },
+                { placeholder: "fullName", type: "text" },
+                { placeholder: "pwdEmail", type: "email" },
+                { placeholder: "reEmail", type: "email" },
+                { placeholder: "password", type: "password" },
               ]}
               button={[{
-                title: "Register",
+                title: "register",
                 onClick: "",
                 backgroundColor: colors.black,
                 textColor: colors.white,
@@ -49,8 +53,8 @@ const Register = memo(() => {
                 borderColor:colors.black
               }]}
               checkbox={{
-                label:'I agree to Abu Dhabi Open Data',
-                linktext:'terms and privacy policy',
+                label:'agreeCond',
+                linktext:'termsAndPolicy',
                 borderColor:colors.light_gray,
                 linktextColor:colors.purple,
                 labelColor:colors.black

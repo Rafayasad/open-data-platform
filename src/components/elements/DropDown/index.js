@@ -3,8 +3,11 @@ import Heading from '../Heading';
 import './style.css';
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { Fragment, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Dropdown = ({ data, selectedValue, dropdownName, dropdownSize }) => {
+    
+    const { t } = useTranslation()
 
     const [isOpen, setIsOpen] = useState(false);
     const [indexx, setIndexx] = useState();
@@ -19,7 +22,7 @@ const Dropdown = ({ data, selectedValue, dropdownName, dropdownSize }) => {
                 <BSDropdown.Toggle
                     className={`w-100 my-1 d-flex align-items-center justify-content-between my-dropdown-toggle text-black border border-1 ${isOpen && "dropdown-hover"}`} variant="" id="">
                     <div className=''>
-                        <Heading size="xxs" nomargin heading={selectedValue ? selectedValue : "Title"} />
+                        <Heading size="xxs" nomargin heading={selectedValue ? selectedValue : t("title")} />
                     </div>
                     <div className='my-1'>
                         <MdKeyboardArrowDown />

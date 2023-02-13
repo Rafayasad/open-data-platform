@@ -31,3 +31,18 @@ code {
   font-family: 'CircularStd-Semibold';
   src: local('CircularStd'), url(./assets/fonts/CircularStd-Medium.ttf) format('truetype');
 }
+
+@font-face {
+  font-family: 'CircularAr-Regular';
+  src: local('CircularAr'), url(./assets/fonts/CircularAr-Book.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'CircularAr-Bold';
+  src: local('CircularAr'), url(./assets/fonts/CircularAr-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'CircularAr-Semibold';
+  src: local('CircularAr'), url(./assets/fonts/CircularAr-Medium.ttf) format('truetype');
+}

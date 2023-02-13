@@ -6,8 +6,12 @@ import CardTwo from '../../../../assets/images/Card-Two.png';
 import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
 import { colors } from "../../../../utils/colors";
+import { useTranslation } from "react-i18next";
 
 const StoryTitleImage = memo(() => {
+
+    const { t } = useTranslation()
+
     return (
         <Container fluid style={{ }}>
             <Row>
@@ -27,7 +31,7 @@ const StoryTitleImage = memo(() => {
                             <div className="d-flex">
                                 <Col />
                                 <Col xs={12} md={8} className='px-3 d-flex justify-content-center align-items-center text-center'>
-                                    <Heading underline color='white' heading="Title of success story with no truncation; text box can exceed to however many characters" />
+                                    <Heading underline color='white' heading={t("storyTitleDescription")} />
                                 </Col>
                                 <Col />
                             </div>

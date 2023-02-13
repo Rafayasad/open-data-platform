@@ -8,8 +8,11 @@ import Heading from "../../../elements/Heading";
 import { FaFileExcel } from "react-icons/fa";
 import { FaFileCsv } from "react-icons/fa";
 import { FaFilePdf } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const Header = memo((props) => {
+
+    const { t } = useTranslation()
 
     const { title, backgroundColor, nobutton, size, dropdown } = props
 
@@ -30,28 +33,28 @@ const Header = memo((props) => {
 
     const data = [
         {
-            title: string("modified"),
+            title: t("modified"),
             onClick: handleSelect,
         },
         {
-            title: string("title"),
+            title: t("title"),
             onClick: handleSelect,
         }
     ]
 
     const iconData = [
         {
-            title: string("excel source texts ssssssss ssssssss sssssssssss sssssssssssssssss ssssssssss"),
+            title: t("excel source texts ssssssss ssssssss sssssssssss sssssssssssssssss ssssssssss"),
             onClick: handleSelect,
             icon: <FaFileExcel size={25} />
         },
         {
-            title: string("csv source text"),
+            title: t("csv source text"),
             onClick: handleSelect,
             icon: <FaFileCsv size={25} />
         },
         {
-            title: string("pdf source text"),
+            title: t("pdf source text"),
             onClick: handleSelect,
             icon: <FaFilePdf size={25} />
         }
@@ -71,7 +74,7 @@ const Header = memo((props) => {
                 !nobutton ?
                     <div>
                         <Button
-                            title={"View All"}
+                            title={t("viewAll")}
                             textColor={color}
                             borderColor={color}
                             backgroundColor='transparent'
@@ -79,7 +82,7 @@ const Header = memo((props) => {
                     </div> :
                     dropdown ?
                         <Dropdown
-                            dropdownName={string("sortBy")}
+                            dropdownName={t("sortBy")}
                             data={data}
                             bgColor={"transparent"}
                             selectedValue={selectedValue}

@@ -7,8 +7,11 @@ import Heading from "../../elements/Heading";
 import './style.css';
 import Tag from "../../elements/Tag";
 import Button from "../../elements/Button";
+import { useTranslation } from "react-i18next";
 
 const Drawer = memo((props) => {
+
+    const { t } = useTranslation()
 
     const { filtersHandler, filters } = props;
 
@@ -72,7 +75,7 @@ const Drawer = memo((props) => {
         >
             <div className="m-3 px-3">
                 <div className="d-flex align-items-center justify-content-between mb-5">
-                    <Heading size="xxs" heading={"Filters"} nomargin />
+                    <Heading size="xxs" heading={t("filter")} nomargin />
                     <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className={"mx-1"} size={20} />
                 </div>
                 {data?.map((item, index) => {

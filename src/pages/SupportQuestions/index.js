@@ -7,8 +7,11 @@ import LowerFooter from "../../components/modules/Footer/LowerFooter";
 import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
 import { getPopularQuestions } from "../../axios/api";
 import { routes } from "../../router/helper";
+import { useTranslation } from "react-i18next";
 
 const SupportQuestions = memo(() => {
+
+    const { t } = useTranslation()
 
     let navigate = useNavigate();
     const { search, state } = useLocation();
@@ -36,9 +39,9 @@ const SupportQuestions = memo(() => {
         <>
             <Navbar theme='dark' />
             <div className="mt-5 pt-5">
-                <QuestionList title={"Getting Started"} data={questions} onClick={onClickQuestion} />
+                <QuestionList title={t("gettingStarted")} data={questions} onClick={onClickQuestion} />
             </div>
-            <UpperFooter title="Still need help?" description="Send us a message using the contact form and someone from the team will get back to you." button="Contact us" />
+            <UpperFooter title={t("stillNeedHelp")} description={t("footerPartText")} button={t("contactUs")} />
             <MiddleFooter />
             <LowerFooter />
         </>

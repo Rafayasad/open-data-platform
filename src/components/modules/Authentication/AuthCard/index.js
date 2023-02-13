@@ -5,9 +5,12 @@ import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
 import TextInput from "../../../elements/TextInput";
 import StraigthLine from "../../../elements/StraigthLine";
-import CheckBox from "../../../elements/CheckBox";
+import CheckBox from "../../../elements/checkBox";
+import { useTranslation } from "react-i18next";
 
 const AuthCard = memo((props) => {
+
+  const { t } = useTranslation()
 
   const { title, subtitle, linktext, inputFields, button, checkbox, isForgetPassword } = props;
 
@@ -23,19 +26,19 @@ const AuthCard = memo((props) => {
       <Container>
         <Row>
           <Col>
-            <Heading heading={title} size="xl" />
+            <Heading heading={t(title)} size="xl" />
           </Col>
         </Row>
         <Row>
           <Col className="d-flex">
             <div>
-              <Heading heading={subtitle} size="xxs" />
+              <Heading heading={t(subtitle)} size="xxs" />
             </div>
             {
               linktext &&
               <div className="mx-2">
                 <Heading
-                  heading={linktext.display_text}
+                  heading={t(linktext.display_text)}
                   size="xxs"
                   color={colors.purple}
                   underline
@@ -48,7 +51,7 @@ const AuthCard = memo((props) => {
           {
             inputFields.map((items, index) => (
               <Col key={index} md={12}>
-                <TextInput placeholder={items.placeholder} type={items.type} />
+                <TextInput placeholder={t(items.placeholder)} type={items.type} />
               </Col>
             ))
           }
@@ -58,7 +61,7 @@ const AuthCard = memo((props) => {
           <Row>
             <Col className=" d-flex direction-row justify-content-end">
               <Heading
-                heading={"Forget password"}
+                heading={t("forgetPassword")}
                 size="xxs"
                 color={colors.purple}
                 underline
@@ -73,13 +76,13 @@ const AuthCard = memo((props) => {
               <CheckBox borderColor={checkbox.boxColor} callBack={""} />
               <div className="d-flex mx-2">
                 <Heading
-                  heading={checkbox.label}
+                  heading={t(checkbox.label)}
                   size="xxs"
                   color={checkbox.labelColor}
                 />
                 <div className="mx-1">
                   <Heading
-                    heading={checkbox.linktext}
+                    heading={t(checkbox.linktext)}
                     size="xxs"
                     color={checkbox.linktextColor}
                     underline
@@ -96,7 +99,7 @@ const AuthCard = memo((props) => {
               button.map((items, index) => (
                 <div className="d-flex flex-column align-items-center">
                   <Button
-                    title={items.title}
+                    title={t(items.title)}
                     backgroundColor={items.backgroundColor}
                     textColor={items.textColor}
                     borderColor={items.borderColor && items.borderColor}

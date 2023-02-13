@@ -5,8 +5,11 @@ import Search from "../../../elements/Search";
 import Tag from "../../../elements/Tag";
 import { RxCross2 } from "react-icons/rx";
 import Drawer from "../../../modules/Drawer";
+import { useTranslation } from "react-i18next";
 
 const Main = memo(() => {
+
+    const { t } = useTranslation()
 
     const [focusFilters, setFocusFilters] = useState([]);
 
@@ -28,14 +31,14 @@ const Main = memo(() => {
                     <Row>
                         <Col />
                         <Col xs={10} md={6} style={{ textAlign: 'center' }} className="py-2">
-                            <Heading color="black" heading={"Datasets to drive your curiosity"} />
+                            <Heading color="black" heading={t("datasetTitle")} />
                         </Col>
                         <Col />
                     </Row>
                     <Row>
                         <Col />
                         <Col xs={12} md={8} className="py-3">
-                            <Search placeholder="Search Keywords" filter />
+                            <Search placeholder="searchKeywords" filter />
                         </Col>
                         <Col />
                     </Row>

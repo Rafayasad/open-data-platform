@@ -6,8 +6,12 @@ import { colors } from "../../utils/colors";
 import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
 import LowerFooter from "../../components/modules/Footer/LowerFooter";
 import Navbar from "../../components/modules/Navbar";
+import { useTranslation } from "react-i18next";
 
 const SuccessStoriesDetail = memo(() => {
+    
+    const { t } = useTranslation()
+
     const data = [
         {
             publisher: "ABU DHABI POLICE",
@@ -44,7 +48,7 @@ const SuccessStoriesDetail = memo(() => {
             <div className="my-5 pt-5">
                 <StoriesDetails data={data} />
                 <hr className="m-0 mx-3" />
-                <Cards title="Success stories" backgroundColor={colors.white} data={datas} />
+                <Cards title={t("successStories")} backgroundColor={colors.white} data={datas} />
             </div>
             <MiddleFooter />
             <LowerFooter />

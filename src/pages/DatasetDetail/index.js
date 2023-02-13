@@ -7,6 +7,7 @@ import LowerFooter from "../../components/modules/Footer/LowerFooter";
 import Navbar from "../../components/modules/Navbar";
 import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
+import { useTranslation } from "react-i18next";
 
 const data = [
     {
@@ -25,6 +26,8 @@ const data = [
 
 const DatasetDetail = memo(() => {
 
+    const { t } = useTranslation()
+    
     const navigate = useNavigate();
     const { search } = useLocation();
 
@@ -56,7 +59,7 @@ const DatasetDetail = memo(() => {
             <Navbar theme="dark" />
             <div className="my-5 py-5">
                 <Main data={dataset} />
-                <Cards title="Similar Datasets" backgroundColor={colors.white} data={similarDataset} />
+                <Cards title={t("similarDatasets")} backgroundColor={colors.white} data={similarDataset} />
             </div>
             <LowerFooter />
         </>

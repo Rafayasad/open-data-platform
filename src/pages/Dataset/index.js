@@ -10,6 +10,7 @@ import { colors } from "../../utils/colors";
 import { getRecentsDatasets } from "../../axios/api";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../router/helper";
+import { useTranslation } from "react-i18next";
 
 const data = [
     {
@@ -28,6 +29,8 @@ const data = [
 
 const Dataset = memo(() => {
 
+    const { t } = useTranslation()
+
     const navigate = useNavigate();
 
     const [recentsDatasets, setRecentsDatasets] = useState();
@@ -42,9 +45,9 @@ const Dataset = memo(() => {
         <>
             <Navbar theme={'dark'} />
             <Main />
-            <Cards title="Featured datasets" hoverable="primary" backgroundColor={colors.white} data={recentsDatasets} onClick={onClickCard} />
+            <Cards title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={recentsDatasets} onClick={onClickCard} />
             <DatasetList onClick={onClickCard} />
-            <UpperFooter title="Get more from Abu Dhabi Data" button="Register Now" />
+            <UpperFooter title={t("GetMore")} button={t("registerNow")} />
             <MiddleFooter />
             <LowerFooter />
         </>
