@@ -10,13 +10,12 @@ import Button from "../../elements/Button";
 
 const Drawer = memo((props) => {
 
-    const { filtersHandler, filters } = props;
+    const { filtersHandler, filters, open, setOpen } = props;
 
-    const [isOpen, setIsOpen] = useState(false);
     const [filtersData, setFiltersData] = useState([]);
 
     const toggleDrawer = () => {
-        setIsOpen((prevState) => !prevState)
+        setOpen(!open)
     }
 
     const onFocusItems = (items) => {
@@ -65,7 +64,7 @@ const Drawer = memo((props) => {
     return (
         <RMDrawer
             size={"400px"}
-            open={isOpen}
+            open={open}
             onClose={toggleDrawer}
             direction='right'
             className=''
@@ -73,7 +72,7 @@ const Drawer = memo((props) => {
             <div className="m-3 px-3">
                 <div className="d-flex align-items-center justify-content-between mb-5">
                     <Heading size="xxs" heading={"Filters"} nomargin />
-                    <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className={"mx-1"} size={20} />
+                    <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="mx-1" size={20} />
                 </div>
                 {data?.map((item, index) => {
                     return (

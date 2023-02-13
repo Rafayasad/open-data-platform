@@ -6,3 +6,7 @@
     background-color: #762FFF;
     color: #FFFFFF !important;
 }
+
+.card-hover-primary:hover p {
+    color: #FFFFFF !important;
+}

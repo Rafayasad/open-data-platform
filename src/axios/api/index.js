@@ -151,12 +151,12 @@ export const getFacets = (key, setData) => {
         })
 }
 
-export const getAllDatasets = (setData, setTotalCount, setLoading, currentPage, rowsPerPage) => {
+export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage) => {
 
     setLoading(true)
 
     return endpoints.
-        getAllDatasets(currentPage, rowsPerPage).then((res) => {
+        getAllDatasets(search, sort, currentPage, rowsPerPage).then((res) => {
             if (res.status === 200) {
 
                 setTotalCount(res.data.total)
@@ -199,8 +199,8 @@ export const getDatasetById = (id, setData) => {
                     title_ar: item.titlear,
                     description: item.description,
                     description_ar: item.description_ar,
-                    publisher: item.publisher.name,
-                    publisher_ar: item.publisherlear.name,
+                    publisher: item.publisher?.name,
+                    publisher_ar: item.publisherlear?.name,
                     frequency: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
                     frequency_ar: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
                     access_level: item.accessLevel,

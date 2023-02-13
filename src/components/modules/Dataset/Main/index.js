@@ -6,7 +6,9 @@ import Tag from "../../../elements/Tag";
 import { RxCross2 } from "react-icons/rx";
 import Drawer from "../../../modules/Drawer";
 
-const Main = memo(() => {
+const Main = memo((props) => {
+
+    const { onChangeSearch } = props
 
     const [focusFilters, setFocusFilters] = useState([]);
 
@@ -35,7 +37,7 @@ const Main = memo(() => {
                     <Row>
                         <Col />
                         <Col xs={12} md={8} className="py-3">
-                            <Search placeholder="Search Keywords" filter />
+                            <Search placeholder="Search Keywords" onChange={onChangeSearch} filter />
                         </Col>
                         <Col />
                     </Row>
