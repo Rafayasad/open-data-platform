@@ -6,6 +6,7 @@ import { locales } from '../../../../i18n/helper';
 import Tabs from "../../Tabs";
 import Header from "../../Cards/Header";
 import DataCard from "../DataCard";
+import SwaggerUI from "../../SwaggerUI";
 
 const Main = memo((props) => {
 
@@ -47,7 +48,7 @@ const Main = memo((props) => {
         },
         {
             title: t("tags"),
-            detail: ['Ahmed', 'Hassan Ali Chor', 'Daniyal Raza', 'Alishan', 'Nadeem'],
+            detail: i18n.language === locales.AR ? data.tags_ar : data.tags,
             tags: true
         },
         {
@@ -80,7 +81,7 @@ const Main = memo((props) => {
         },
         {
             name: t("APIDocumentation"),
-            component: null
+            component: data && <SwaggerUI url={`${process.env.REACT_APP_BASE_URL}/api/1/metastore/schemas/dataset/items/${data.id}/docs`} />
         }
     ]
 
