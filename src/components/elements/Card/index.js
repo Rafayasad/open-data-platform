@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Card as RBCard, Col, Row } from "react-bootstrap";
-import { BsDownload, BsShare, BsThreeDots } from "react-icons/bs";
+import { BsPerson, BsShare, BsThreeDots } from "react-icons/bs";
 import './style.css';
 import Dropdown from '../../elements/DropDown';
 import { colors } from "../../../utils/colors";
@@ -41,11 +41,7 @@ const Card = memo((props) => {
                             [
                                 {
                                     title: "Download",
-                                    icon: <BsDownload />
-                                },
-                                {
-                                    title: "Bookmark",
-                                    icon: <BsShare />
+                                    icon: <BsPerson />
                                 },
                                 {
                                     title: "Share",

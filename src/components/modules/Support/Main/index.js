@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 const Main = memo(() => {
 
     const { t } = useTranslation()
-    
+
     return (
         <Container className="pt-5 mt-5">
             <Row className="py-5">
@@ -22,7 +22,7 @@ const Main = memo(() => {
                     <Row>
                         <Col />
                         <Col xs={12} md={8} className="py-3">
-                            <Search placeholder="searchKeywords" />
+                            <Search placeholder={t("searchKeywords")} />
                         </Col>
                         <Col />
                     </Row>

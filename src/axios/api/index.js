@@ -142,7 +142,8 @@ export const getFacets = async (key_en, key_ar, setData) => {
 
                 let transform = res.data.facets.map(item => ({
                     title: item.name,
-                    value: item.total
+                    value: item.total,
+                    type: item.type
                 }))
 
                 return transform
@@ -159,7 +160,8 @@ export const getFacets = async (key_en, key_ar, setData) => {
 
                 let transform = res.data.facets.map(item => ({
                     title: item.name,
-                    value: item.total
+                    value: item.total,
+                    type: item.type
                 }))
 
                 return transform

@@ -55,11 +55,11 @@ const Dropdown = (props) => {
                                     key={index} className={`d-flex rounded p-2 align-items-center ${indexx === index && "dropdown-items"} ${index > 0 && "mt-1"}`}>
                                     {
                                         item.icon &&
-                                        <div>
+                                        <div className='px-2'>
                                             {item.icon}
                                         </div>
                                     }
-                                    <div className='d-flex flex-wrap'>
+                                    <div className={`d-flex flex-wrap ${item.icon && "px-2"}`}>
                                         <Heading color={colors.black} maxNumberOfLines={1} size="xxs" heading={item.title} nomargin />
                                     </div>
                                 </BSDropdown.Item>

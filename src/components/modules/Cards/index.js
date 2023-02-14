@@ -88,6 +88,7 @@ const Cards = memo((props) => {
                             hoverable={hoverable}
                             title={i18n.language === locales.AR ? item.title_ar : item.title}
                             publisher={i18n.language === locales.AR ? item.publisher_ar : item.publisher}
+                            tags={i18n.language === locales.AR ? item.tags && item.tags_ar.slice(0, 2) : item.tags && item.tags.slice(0, 2)}
                             onClick={() => onClick(item.id)}
                         />
                     </Col>

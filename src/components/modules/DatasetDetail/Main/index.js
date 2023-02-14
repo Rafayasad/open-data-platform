@@ -39,8 +39,17 @@ const Main = memo((props) => {
         },
     ]
 
-
     let f = data && [
+        {
+            title: t("topics"),
+            detail: i18n.language === locales.AR ? data.topics_ar : data.topics,
+            tags: true
+        },
+        {
+            title: t("tags"),
+            detail: ['Ahmed', 'Hassan Ali Chor', 'Daniyal Raza', 'Alishan', 'Nadeem'],
+            tags: true
+        },
         {
             title: t("createdAt"),
             detail: new Date(data.created).toLocaleDateString("en-US", option)
