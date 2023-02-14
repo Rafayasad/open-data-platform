@@ -4,6 +4,7 @@ import { getFacets } from '../../../../axios/api';
 import Heading from '../../../elements/Heading';
 import { useTranslation } from 'react-i18next';
 import { colors } from '../../../../utils/colors';
+import { locales } from '../../../../i18n/helper';
 
 const Support = [
     {
@@ -55,7 +56,7 @@ const OurPlatforms = [
 
 const MiddleFooter = memo(() => {
 
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const [topics, setTopics] = useState();
 
@@ -72,9 +73,15 @@ const MiddleFooter = memo(() => {
                     </div>
                     <div className='my-1'>
                         {
-                            topics && topics.en && topics.en.length > 0 && topics.en.map((item, index) => (
-                                <Heading key={index} size='xxs' heading={item.title} color={colors.white} />
-                            ))
+                            i18n.language === locales.AR ? (
+                                topics && topics.ar && topics.ar.length > 0 && topics.ar.map((item, index) => (
+                                    <Heading key={index} size='xxs' heading={item.title} color={colors.white} />
+                                ))
+                            ) : (
+                                topics && topics.en && topics.en.length > 0 && topics.en.map((item, index) => (
+                                    <Heading key={index} size='xxs' heading={item.title} color={colors.white} />
+                                ))
+                            )
                         }
                     </div>
                 </Col>

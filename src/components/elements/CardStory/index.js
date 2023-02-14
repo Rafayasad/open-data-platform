@@ -33,11 +33,10 @@ const CardStory = memo((props) => {
                 </Col>
                 <Col className="d-flex">
                     {
-                    tags?.map((item, index) => {
-                        return (
+                        tags && tags.length > 0 && tags.map((item, index) => (
                             <Tag key={index} title={item} />
                         )
-                    })}
+                        )}
                 </Col>
             </Row>
         </div>

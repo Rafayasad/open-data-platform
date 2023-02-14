@@ -12,7 +12,7 @@ function App() {
     document.getElementsByTagName('html')[0].setAttribute("dir", i18n.language === locales.EN ? "ltr" : "rtl")
   }, [i18n.language])
 
-  return <div style={{ fontFamily: i18n.language == 'ar' && 'CircularAr-Regular' }}>
+  return <div className={`${i18n.language === locales.AR && "ar-font"}`}>
     <Router />
   </div>
 

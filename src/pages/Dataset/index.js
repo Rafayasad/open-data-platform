@@ -29,7 +29,9 @@ const Dataset = memo(() => {
 
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => { getRecentsDatasets(setRecentsDatasets) }, []);
+    useEffect(() => {
+        getRecentsDatasets(setRecentsDatasets)
+    }, []);
 
     useEffect(() => { getAllDatasets(setDatasets, setTotalCount, setLoading, search, sort.toLowerCase(), currentPage, rowsPerPage) }, [currentPage, search, sort]);
 

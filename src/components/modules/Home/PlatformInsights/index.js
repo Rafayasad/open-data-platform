@@ -3,10 +3,11 @@ import { Col, Container, Row } from "react-bootstrap";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import { useTranslation } from "react-i18next";
+import { locales } from "../../../../i18n/helper";
 
 const PlatformInsights = memo((props) => {
 
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const { data } = props
 
@@ -26,7 +27,7 @@ const PlatformInsights = memo((props) => {
                                     <Heading color="white" heading={parseInt(item.value).toLocaleString()} />
                                 </Col>
                                 <Col>
-                                    <Heading size='xxs' color={colors.pearl_white} heading={item.label} />
+                                    <Heading size='xxs' color={colors.pearl_white} heading={i18n.language === locales.AR ? item.label_ar : item.label} />
                                 </Col>
                             </Col>
                         ))

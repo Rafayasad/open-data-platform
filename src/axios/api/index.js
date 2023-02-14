@@ -226,7 +226,7 @@ export const getDatasetById = (id, setData) => {
                     publisher: item.publisher?.name,
                     publisher_ar: item.publisherlear?.name,
                     frequency: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
-                    frequency_ar: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
+                    frequency_ar: item.accrualPeriodicity === "R/P1Y" ? "سنوي" : item.accrualPeriodicity === "auto/freq" ? "تلقائي" : "لا يوجد",
                     access_level: item.accessLevel,
                     access_level_ar: item.accessLevellear,
                     license: item.license,

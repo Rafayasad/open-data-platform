@@ -1,6 +1,7 @@
 import React, { memo, useEffect, useState } from "react";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { getFacets, getMostViewedDatasets, getPlatformInsights, getRecentsDatasets } from "../../axios/api";
 import Cards from "../../components/modules/Cards";
 import LowerFooter from "../../components/modules/Footer/LowerFooter";
@@ -13,26 +14,11 @@ import Topics from "../../components/modules/Home/Topics";
 import Navbar from '../../components/modules/Navbar';
 import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
-import { useTranslation } from "react-i18next";
-
-const data = [
-    {
-        title: "Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Ministry of Health and Prevention"
-    },
-    {
-        title: "Licensed Social Care Professional 2021 - 2022",
-        publisher: "Ministry of Health and Prevention"
-    },
-    {
-        title: "List of applicants for participation in the school bus supervisors",
-        publisher: "Telecommunication Regulatory Authority"
-    }
-]
+import { locales } from "../../i18n/helper";
 
 const Home = memo(() => {
 
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false)
@@ -55,7 +41,7 @@ const Home = memo(() => {
         <>
             <Navbar />
             <Main />
-            <Topics data={topics.en} />
+            <Topics data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en} />
             <Images />
             <Cards title={t("mostViewedDatasets")} backgroundColor={colors.black} data={mostViewedDatasets} onClick={onClickCard} />
             <Cards title={t("recentlyAddedDatasets")} backgroundColor={colors.black} data={recentsDatasets} onClick={onClickCard} />

@@ -17,6 +17,14 @@ code {
     monospace;
 }
 
+.ar-font {
+  font-family: 'CircularAr-Regular';
+}
+
+.en-font {
+  font-family: 'CircularStd-Regular';
+}
+
 @font-face {
   font-family: 'CircularStd-Regular';
   src: local('CircularStd'), url(./assets/fonts/CircularStd-Book.ttf) format('truetype');

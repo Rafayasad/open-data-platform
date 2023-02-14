@@ -1,6 +1,8 @@
-import React, { memo, useCallback } from "react";
+import React, { memo } from "react";
 import { Container } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { colors } from "../../../../utils/colors";
+import { locales } from '../../../../i18n/helper';
 import Tabs from "../../Tabs";
 import Header from "../../Cards/Header";
 import DataCard from "../DataCard";
@@ -9,24 +11,26 @@ const Main = memo((props) => {
 
     const { data } = props
 
+    const { t, i18n } = useTranslation();
+
     let option = { dateStyle: 'long' };
 
     let e = data && [
         {
-            title: "About",
-            detail: data.description
+            title: t("about"),
+            detail: i18n.language === locales.AR ? data.description_ar : data.description
         },
         {
-            title: "Managed by",
-            detail: data.publisher
+            title: t("managedBy"),
+            detail: i18n.language === locales.AR ? data.publisher_ar : data.publisher
         },
         {
-            title: "Frequency",
-            detail: data.frequency
+            title: t("frequency"),
+            detail: i18n.language === locales.AR ? data.frequency_ar : data.frequency
         },
         {
-            title: "Access Level",
-            detail: data.access_level,
+            title: t("accessLevel"),
+            detail: i18n.language === locales.AR ? data.access_level_ar : data.access_level,
             capitalize: true
         },
         {
@@ -38,21 +42,21 @@ const Main = memo((props) => {
 
     let f = data && [
         {
-            title: "Created At",
+            title: t("createdAt"),
             detail: new Date(data.created).toLocaleDateString("en-US", option)
         },
         {
-            title: "Last Updated",
+            title: t("lastUpdated"),
             detail: new Date(data.modified).toLocaleDateString("en-US", option)
         },
         {
-            title: "Source URL",
+            title: t("sourceURL"),
             detail: "https://developers.data.gov.sg/data-gov-sg-apis/apis/get/transport/carpark-availability",
             color: colors.purple,
             underline: true
         },
         {
-            title: "License",
+            title: t("license"),
             detail: "Abu Dhabi Government Open Data License",
             color: colors.purple,
             underline: true,
@@ -62,18 +66,18 @@ const Main = memo((props) => {
 
     let tabs = [
         {
-            name: "Overview",
+            name: t("overview"),
             component: data && <DataCard data={e} />
         },
         {
-            name: "API Documentation",
+            name: t("APIDocumentation"),
             component: null
         }
     ]
 
     return (
         <Container fluid>
-            <Header size='lg' backgroundColor={colors.white} title={data && data.title} nobutton />
+            <Header size='lg' backgroundColor={colors.white} title={i18n.language === locales.AR ? data && data.title_ar : data && data.title} nobutton />
             <Tabs data={tabs} staticComponentOnRight={data && <DataCard data={f} />} />
         </Container>
     )

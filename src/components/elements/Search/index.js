@@ -2,6 +2,7 @@ import React, { memo, useState, useCallback } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { IoIosSearch } from 'react-icons/io';
 import { MdOutlineFilterAlt } from 'react-icons/md';
+import { useTranslation } from "react-i18next";
 import './index.css'
 import Drawer from '../../modules/Drawer';
 

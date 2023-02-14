@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { getAllDatasets } from "../../../../axios/api";
-import { string } from "../../../../i18n/helper";
+import { locales, string } from "../../../../i18n/helper";
 import { colors } from "../../../../utils/colors";
 import Card from "../../../elements/Card";
 import Pagination from "../../../elements/Pagination";
@@ -52,7 +52,7 @@ const DatasetList = memo((props) => {
 
     const { onClick, datasets, totalCount, currentPage, rowsPerPage, loading, onChangePage, selectedValue, onSelectDropdown } = props
 
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const [currentHovered, setCurrentHovered] = useState(null);
 
@@ -78,7 +78,7 @@ const DatasetList = memo((props) => {
                 backgroundColor={colors.white}
                 nobutton
                 dropdown={{
-                    title: "Sort By",
+                    title: t("sortBy"),
                     options: data,
                     selectedValue
                 }}
@@ -97,11 +97,11 @@ const DatasetList = memo((props) => {
                                 noborder
                                 hoverable="light"
                                 shortTitle
-                                title={item.title}
-                                publisher={item.publisher}
-                                description={item.description}
-                                tags={item.tags}
-                                onClick={() => onClick(item.id)}
+                                title={i18n.language === locales.AR ? item.title_ar : item.title}
+                                publisher={i18n.language === locales.AR ? item.publisher_ar : item.publisher}
+                                description={i18n.language === locales.AR ? item.description_ar : item.description}
+                            tags={item.tags}
+                            onClick={() => onClick(item.id)}
                             />
                         </div>
                     ))
