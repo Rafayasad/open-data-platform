@@ -133,9 +133,11 @@ export const getSimilarDatasets = (topic, setData, setLoading) => {
         })
 }
 
-export const getFacets = (key, setData) => {
-    return endpoints.
-        getFacets(key).then((res) => {
+export const getFacets = async (key_en, key_ar, setData) => {
+
+    let en = await endpoints.
+        getFacets(key_en).then((res) => {
+
             if (res.status === 200) {
 
                 let transform = res.data.facets.map(item => ({
@@ -143,20 +145,42 @@ export const getFacets = (key, setData) => {
                     value: item.total
                 }))
 
-                setData(transform)
+                return transform
+
+            }
+
+        }).catch((err) => {
+            console.log("Error message", err)
+        })
+
+    let ar = await endpoints.
+        getFacets(key_ar).then((res) => {
+            if (res.status === 200) {
+
+                let transform = res.data.facets.map(item => ({
+                    title: item.name,
+                    value: item.total
+                }))
+
+                return transform
 
             }
         }).catch((err) => {
             console.log("Error message", err)
         })
+
+    let facets = { en, ar }
+
+    setData(facets)
+
 }
 
-export const getAllDatasets = (setData, setTotalCount, setLoading, currentPage, rowsPerPage) => {
+export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage) => {
 
     setLoading(true)
 
     return endpoints.
-        getAllDatasets(currentPage, rowsPerPage).then((res) => {
+        getAllDatasets(search, sort, currentPage, rowsPerPage).then((res) => {
             if (res.status === 200) {
 
                 setTotalCount(res.data.total)
@@ -199,8 +223,8 @@ export const getDatasetById = (id, setData) => {
                     title_ar: item.titlear,
                     description: item.description,
                     description_ar: item.description_ar,
-                    publisher: item.publisher.name,
-                    publisher_ar: item.publisherlear.name,
+                    publisher: item.publisher?.name,
+                    publisher_ar: item.publisherlear?.name,
                     frequency: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
                     frequency_ar: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
                     access_level: item.accessLevel,
@@ -354,7 +378,6 @@ export const getAboutUs = (setData) => {
 
                     })
                 )
-                console.log("Cjecl", arr)
 
                 setData(arr)
 

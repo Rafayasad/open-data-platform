@@ -7,25 +7,10 @@ import MiddleFooter from '../../components/modules/Footer/MiddleFooter';
 import LowerFooter from '../../components/modules/Footer/LowerFooter';
 import DatasetList from "../../components/modules/Dataset/DatasetList";
 import { colors } from "../../utils/colors";
-import { getRecentsDatasets } from "../../axios/api";
+import { getAllDatasets, getRecentsDatasets } from "../../axios/api";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../router/helper";
 import { useTranslation } from "react-i18next";
-
-const data = [
-    {
-        title: "Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Ministry of Health and Prevention"
-    },
-    {
-        title: "Licensed Social Care Professional 2021 - 2022",
-        publisher: "Ministry of Health and Prevention"
-    },
-    {
-        title: "List of applicants for participation in the school bus supervisors",
-        publisher: "Telecommunication Regulatory Authority"
-    }
-]
 
 const Dataset = memo(() => {
 
@@ -33,20 +18,35 @@ const Dataset = memo(() => {
 
     const navigate = useNavigate();
 
-    const [recentsDatasets, setRecentsDatasets] = useState();
+    const [totalCount, setTotalCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
 
-    useEffect(() => {
-        getRecentsDatasets(setRecentsDatasets)
-    }, [])
+    const [recentsDatasets, setRecentsDatasets] = useState();
+    const [datasets, setDatasets] = useState();
+    const [search, setSearch] = useState("");
+    const [sort, setSort] = useState("Title");
+
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => { getRecentsDatasets(setRecentsDatasets) }, []);
+
+    useEffect(() => { getAllDatasets(setDatasets, setTotalCount, setLoading, search, sort.toLowerCase(), currentPage, rowsPerPage) }, [currentPage, search, sort]);
 
     const onClickCard = useCallback((id) => { navigate(`${routes.DATASET_DETAIL}?id=${id}`) }, []);
+
+    const onChangePage = useCallback((page) => setCurrentPage(page), []);
+
+    const onChangeSearch = useCallback((e) => setSearch(e), [search])
+
+    const onChangeDropdownValue = useCallback((e) => setSort(e), [sort])
 
     return (
         <>
             <Navbar theme={'dark'} />
-            <Main />
+            <Main onChangeSearch={onChangeSearch} />
             <Cards title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={recentsDatasets} onClick={onClickCard} />
-            <DatasetList onClick={onClickCard} />
+            <DatasetList totalCount={totalCount} rowsPerPage={rowsPerPage} datasets={datasets} currentPage={currentPage} loading={loading} onChangePage={onChangePage} selectedValue={sort} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue} />
             <UpperFooter title={t("GetMore")} button={t("registerNow")} />
             <MiddleFooter />
             <LowerFooter />

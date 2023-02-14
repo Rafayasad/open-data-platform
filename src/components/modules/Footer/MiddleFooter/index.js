@@ -60,7 +60,7 @@ const MiddleFooter = memo(() => {
     const [topics, setTopics] = useState();
 
     useEffect(() => {
-        getFacets("theme", setTopics)
+        getFacets("theme", "themelear", setTopics)
     }, [])
 
     return (
@@ -72,8 +72,8 @@ const MiddleFooter = memo(() => {
                     </div>
                     <div className='my-1'>
                         {
-                            topics && topics.length > 0 && topics.map((item, index) => (
-                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} />
+                            topics && topics.en && topics.en.length > 0 && topics.en.map((item, index) => (
+                                <Heading key={index} size='xxs' heading={item.title} color={colors.white} />
                             ))
                         }
                     </div>
@@ -98,7 +98,7 @@ const MiddleFooter = memo(() => {
                         {
                             AboutUs.map((item, index) => (
                                 <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} />
-                                ))
+                            ))
                         }
                     </div>
                 </Col>
@@ -110,7 +110,7 @@ const MiddleFooter = memo(() => {
                         {
                             Developers.map((item, index) => (
                                 <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} />
-                                ))
+                            ))
                         }
                     </div>
                 </Col>
@@ -122,7 +122,7 @@ const MiddleFooter = memo(() => {
                         {
                             OurPlatforms.map((item, index) => (
                                 <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} />
-                                ))
+                            ))
                         }
                     </div>
                 </Col>

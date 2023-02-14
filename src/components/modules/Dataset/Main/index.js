@@ -6,8 +6,11 @@ import Tag from "../../../elements/Tag";
 import { RxCross2 } from "react-icons/rx";
 import Drawer from "../../../modules/Drawer";
 import { useTranslation } from "react-i18next";
+import { colors } from "../../../../utils/colors";
 
-const Main = memo(() => {
+const Main = memo((props) => {
+
+    const { onChangeSearch } = props
 
     const { t } = useTranslation()
 
@@ -38,7 +41,7 @@ const Main = memo(() => {
                     <Row>
                         <Col />
                         <Col xs={12} md={8} className="py-3">
-                            <Search placeholder="searchKeywords" filter />
+                            <Search placeholder={t("searchKeywords")} onChange={onChangeSearch} filter />
                         </Col>
                         <Col />
                     </Row>
@@ -50,7 +53,7 @@ const Main = memo(() => {
                     (
                         <div className="py-1">
                             <Tag
-                                backgroundColor={"black"}
+                                backgroundColor={colors.black}
                                 textColor={"white"}
                                 title={item.name}
                                 crossIcon={<RxCross2 size={20} onClick={() => deleteFilter(item, index)} />} />

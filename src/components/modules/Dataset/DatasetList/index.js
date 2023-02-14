@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { getAllDatasets } from "../../../../axios/api";
+import { string } from "../../../../i18n/helper";
 import { colors } from "../../../../utils/colors";
 import Card from "../../../elements/Card";
 import Pagination from "../../../elements/Pagination";
@@ -49,33 +50,39 @@ const data = [
 
 const DatasetList = memo((props) => {
 
-    const { t } = useTranslation()
-    
-    const { onClick } = props
+    const { onClick, datasets, totalCount, currentPage, rowsPerPage, loading, onChangePage, selectedValue, onSelectDropdown } = props
+
+    const { t } = useTranslation();
 
     const [currentHovered, setCurrentHovered] = useState(null);
 
-    const onHover = useCallback((index) => setCurrentHovered(index), [currentHovered])
-    const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered])
+    const onHover = useCallback((index) => setCurrentHovered(index), [currentHovered]);
+    const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered]);
 
-    const [datasets, setDatasets] = useState();
-
-    const [totalCount, setTotalCount] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
-
-    const [loading, setLoading] = useState(false);
-
-    const onChangePage = useCallback((page) => setCurrentPage(page), [])
-
-    useEffect(() => {
-        getAllDatasets(setDatasets, setTotalCount, setLoading, currentPage, rowsPerPage)
-    }, [currentPage])
+    const data = [
+        {
+            title: string("modified"),
+            onClick: onSelectDropdown,
+        },
+        {
+            title: string("title"),
+            onClick: onSelectDropdown,
+        }
+    ]
 
     return (
         <Container fluid>
             <hr className="mt-5" style={{ color: '#CFCFCF', borderWidth: 2 }} />
-            <Header title={`${totalCount} ${t("datasets")}`} backgroundColor={colors.white} nobutton dropdown />
+            <Header
+                title={`${totalCount} ${t("datasets")}`}
+                backgroundColor={colors.white}
+                nobutton
+                dropdown={{
+                    title: "Sort By",
+                    options: data,
+                    selectedValue
+                }}
+            />
             {
                 !loading ?
                     datasets && datasets.length > 0 && datasets.map((item, index) => (
@@ -105,7 +112,7 @@ const DatasetList = memo((props) => {
                 totalCount={Math.ceil(totalCount / rowsPerPage)}
                 onChange={onChangePage}
             />
-        </Container>
+        </Container >
     )
 });
 

@@ -1,10 +1,10 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import RMDrawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import { RxCross2 } from "react-icons/rx";
 import Accordion from 'react-bootstrap/Accordion';
-import Heading from "../../elements/Heading";
 import './style.css';
+import Heading from "../../elements/Heading";
 import Tag from "../../elements/Tag";
 import Button from "../../elements/Button";
 import { useTranslation } from "react-i18next";
@@ -13,13 +13,12 @@ const Drawer = memo((props) => {
 
     const { t } = useTranslation()
 
-    const { filtersHandler, filters } = props;
+    const { filtersHandler, filters, open, setOpen } = props;
 
-    const [isOpen, setIsOpen] = useState(false);
     const [filtersData, setFiltersData] = useState([]);
 
     const toggleDrawer = () => {
-        setIsOpen((prevState) => !prevState)
+        setOpen(!open)
     }
 
     const onFocusItems = (items) => {
@@ -68,7 +67,7 @@ const Drawer = memo((props) => {
     return (
         <RMDrawer
             size={"400px"}
-            open={isOpen}
+            open={open}
             onClose={toggleDrawer}
             direction='right'
             className=''
@@ -76,7 +75,7 @@ const Drawer = memo((props) => {
             <div className="m-3 px-3">
                 <div className="d-flex align-items-center justify-content-between mb-5">
                     <Heading size="xxs" heading={t("filter")} nomargin />
-                    <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className={"mx-1"} size={20} />
+                    <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="mx-1" size={20} />
                 </div>
                 {data?.map((item, index) => {
                     return (
