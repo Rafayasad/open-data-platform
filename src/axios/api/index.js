@@ -133,9 +133,11 @@ export const getSimilarDatasets = (topic, setData, setLoading) => {
         })
 }
 
-export const getFacets = (key, setData) => {
-    return endpoints.
-        getFacets(key).then((res) => {
+export const getFacets = async (key_en, key_ar, setData) => {
+
+    let en = await endpoints.
+        getFacets(key_en).then((res) => {
+
             if (res.status === 200) {
 
                 let transform = res.data.facets.map(item => ({
@@ -143,12 +145,34 @@ export const getFacets = (key, setData) => {
                     value: item.total
                 }))
 
-                setData(transform)
+                return transform
+
+            }
+
+        }).catch((err) => {
+            console.log("Error message", err)
+        })
+
+    let ar = await endpoints.
+        getFacets(key_ar).then((res) => {
+            if (res.status === 200) {
+
+                let transform = res.data.facets.map(item => ({
+                    title: item.name,
+                    value: item.total
+                }))
+
+                return transform
 
             }
         }).catch((err) => {
             console.log("Error message", err)
         })
+
+    let facets = { en, ar }
+
+    setData(facets)
+
 }
 
 export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage) => {
@@ -354,7 +378,6 @@ export const getAboutUs = (setData) => {
 
                     })
                 )
-                console.log("Cjecl", arr)
 
                 setData(arr)
 

@@ -46,7 +46,7 @@ const Main = memo((props) => {
                     </Row>
                 </Container>
                 {
-                    item.rows && item.rows.length > 0 && item.map((item, index) => (
+                    item.rows && item.rows.length > 0 && item.rows.map((item, index) => (
                         <Rows key={index} title={item.title} description={item.description} image={item.image} />
                     ))
                 }

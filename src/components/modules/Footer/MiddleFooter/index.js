@@ -56,7 +56,7 @@ const MiddleFooter = memo(() => {
     const [topics, setTopics] = useState();
 
     useEffect(() => {
-        getFacets("theme", setTopics)
+        getFacets("theme", "themelear", setTopics)
     }, [])
 
     return (
@@ -68,7 +68,7 @@ const MiddleFooter = memo(() => {
                     </div>
                     <div className='my-1'>
                         {
-                            topics && topics.length > 0 && topics.map(item => (
+                            topics && topics.en && topics.en.length > 0 && topics.en.map(item => (
                                 <p className='text-white'>{item.title}</p>
                             ))
                         }
