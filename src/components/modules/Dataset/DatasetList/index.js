@@ -8,6 +8,7 @@ import Pagination from "../../../elements/Pagination";
 import Shimmer from "../../../elements/Shimmer";
 import Header from "../../Cards/Header";
 import Loader from "../../Loader";
+import { useTranslation } from "react-i18next";
 
 const data = [
     {
@@ -51,6 +52,8 @@ const DatasetList = memo((props) => {
 
     const { onClick, datasets, totalCount, currentPage, rowsPerPage, loading, onChangePage, selectedValue, onSelectDropdown } = props
 
+    const { t } = useTranslation();
+
     const [currentHovered, setCurrentHovered] = useState(null);
 
     const onHover = useCallback((index) => setCurrentHovered(index), [currentHovered]);
@@ -70,12 +73,16 @@ const DatasetList = memo((props) => {
     return (
         <Container fluid>
             <hr className="mt-5" style={{ color: '#CFCFCF', borderWidth: 2 }} />
-            <Header title={`${totalCount} Datasets`} backgroundColor={colors.white} nobutton
+            <Header
+                title={`${totalCount} ${t("datasets")}`}
+                backgroundColor={colors.white}
+                nobutton
                 dropdown={{
                     title: "Sort By",
                     options: data,
                     selectedValue
-                }} />
+                }}
+            />
             {
                 !loading ?
                     datasets && datasets.length > 0 && datasets.map((item, index) => (
@@ -105,7 +112,7 @@ const DatasetList = memo((props) => {
                 totalCount={Math.ceil(totalCount / rowsPerPage)}
                 onChange={onChangePage}
             />
-        </Container>
+        </Container >
     )
 });
 

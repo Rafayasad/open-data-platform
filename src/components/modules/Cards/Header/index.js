@@ -1,15 +1,14 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo } from "react";
 import { Container } from "react-bootstrap";
-import { string } from "../../../../i18n/helper";
 import { colors } from "../../../../utils/colors";
 import Button from "../../../elements/Button";
 import Dropdown from "../../../elements/DropDown";
 import Heading from "../../../elements/Heading";
-import { FaFileExcel } from "react-icons/fa";
-import { FaFileCsv } from "react-icons/fa";
-import { FaFilePdf } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const Header = memo((props) => {
+
+    const { t } = useTranslation()
 
     const { title, backgroundColor, nobutton, size, dropdown } = props
 
@@ -38,7 +37,7 @@ const Header = memo((props) => {
                 !nobutton ?
                     <div>
                         <Button
-                            title={"View All"}
+                            title={t("viewAll")}
                             textColor={color}
                             borderColor={color}
                             backgroundColor='transparent'

@@ -2,56 +2,60 @@ import React, { memo, useEffect, useState } from 'react';
 import { Col, Container } from 'react-bootstrap';
 import { getFacets } from '../../../../axios/api';
 import Heading from '../../../elements/Heading';
+import { useTranslation } from 'react-i18next';
+import { colors } from '../../../../utils/colors';
 
 const Support = [
     {
-        title: "Getting Started",
+        title: "gettingStarted",
         onClick: () => { }
     },
     {
-        title: "Using Open Data",
+        title: "usingOpenData",
         onClick: () => { }
     },
     {
-        title: "Contact us",
+        title: "contactUs",
         onClick: () => { }
     },
 ]
 
 const AboutUs = [
     {
-        title: "Open Data platform",
+        title: "openDataPlatform",
         onClick: () => { }
     },
     {
-        title: "Success Stories",
+        title: "successStories",
         onClick: () => { }
     },
     {
-        title: "Applications",
+        title: "applications",
         onClick: () => { }
     },
 ]
 
 const Developers = [
     {
-        title: "Real Time API",
+        title: "realTimeAPI",
         onClick: () => { }
     }
 ]
 
 const OurPlatforms = [
     {
-        title: "Abu Dhabi Government Data Management Standards",
+        title: "GovtManagStandard",
         onClick: () => { }
     },
     {
-        title: "Abu Dhabi Government Data Management Policy",
+        title: "GovtManagPolicy",
         onClick: () => { }
     },
 ]
 
 const MiddleFooter = memo(() => {
+
+    const { t } = useTranslation()
 
     const [topics, setTopics] = useState();
 
@@ -64,60 +68,60 @@ const MiddleFooter = memo(() => {
             <div className='d-flex'>
                 <Col>
                     <div className='my-4'>
-                        <Heading size="sm" color="white" heading="Datasets" />
+                        <Heading size="sm" color="white" heading={t("datasets")} />
                     </div>
                     <div className='my-1'>
                         {
-                            topics && topics.en && topics.en.length > 0 && topics.en.map(item => (
-                                <p className='text-white'>{item.title}</p>
+                            topics && topics.en && topics.en.length > 0 && topics.en.map((item, index) => (
+                                <Heading key={index} size='xxs' heading={item.title} color={colors.white} />
                             ))
                         }
                     </div>
                 </Col>
                 <Col>
                     <div className='my-4'>
-                        <Heading size="sm" color="white" heading="Support" />
+                        <Heading size="sm" color="white" heading={t("supports")} />
                     </div>
                     <div className='my-1'>
                         {
                             Support.map((item, index) => (
-                                <p key={index} className='text-white'>{item.title}</p>
+                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} />
                             ))
                         }
                     </div>
                 </Col>
                 <Col>
                     <div className='my-4'>
-                        <Heading size="sm" color="white" heading="About us" />
+                        <Heading size="sm" color="white" heading={t("aboutus")} />
                     </div>
                     <div className='my-1'>
                         {
                             AboutUs.map((item, index) => (
-                                <p key={index} className='text-white'>{item.title}</p>
+                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} />
                             ))
                         }
                     </div>
                 </Col>
                 <Col>
                     <div className='my-4'>
-                        <Heading size="sm" color="white" heading="Developers" />
+                        <Heading size="sm" color="white" heading={t("developers")} />
                     </div>
                     <div className='my-1'>
                         {
                             Developers.map((item, index) => (
-                                <p key={index} className='text-white'>{item.title}</p>
+                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} />
                             ))
                         }
                     </div>
                 </Col>
                 <Col>
                     <div className='my-4'>
-                        <Heading size="sm" color="white" heading="Our platforms" />
+                        <Heading size="sm" color="white" heading={t("ourPlatforms")} />
                     </div>
                     <div className='my-1'>
                         {
                             OurPlatforms.map((item, index) => (
-                                <p key={index} className='text-white'>{item.title}</p>
+                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} />
                             ))
                         }
                     </div>

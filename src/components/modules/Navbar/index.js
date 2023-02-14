@@ -8,9 +8,11 @@ import Button from "../../elements/Button";
 import { routes } from '../../../router/helper';
 import { colors } from "../../../utils/colors";
 import LanguageSwitcher from "../../elements/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 const Navbar = memo((props) => {
 
+    const { t } = useTranslation()
     const { theme } = props
 
     let color = colors.white;
@@ -30,22 +32,22 @@ const Navbar = memo((props) => {
                 <Col md={6} className="d-flex justify-content-center align-items-center">
                     <div className="mx-3">
                         <Link to={routes.DATASET}>
-                            <p className={`m-0 hover-underline-animation ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>Dataset</p>
+                            <p className={`m-0 hover-underline-animation ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("dataset")}</p>
                         </Link>
                     </div>
                     <div className="mx-3">
                         <Link to={routes.ABOUTUS}>
-                            <p className={`m-0 hover-underline-animation ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>About us</p>
+                            <p className={`m-0 hover-underline-animation ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("aboutus")}</p>
                         </Link>
                     </div>
                     <div className="mx-3">
                         <Link to={routes.SUPPORT}>
-                            <p className={`m-0 hover-underline-animation ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>Support</p>
+                            <p className={`m-0 hover-underline-animation ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("supports")}</p>
                         </Link>
                     </div>
                     <div className="mx-3">
                         <Link to={routes.APPLICATIONS}>
-                            <p className={`m-0 hover-underline-animation ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>Application</p>
+                            <p className={`m-0 hover-underline-animation ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t('applications')}</p>
                         </Link>
                     </div>
                 </Col>
@@ -55,12 +57,12 @@ const Navbar = memo((props) => {
                     </div>
                     <div className="d-flex justify-content-center mx-1">
                         <Link style={{ textDecoration: 'none' }} to={routes.REGISTER}>
-                            <Button borderColor={color} backgroundColor='transparent' textColor={color} title={"Register"} />
+                            <Button borderColor={color} backgroundColor='transparent' textColor={color} title={t("register")} />
                         </Link>
                     </div>
                     <div className="d-flex justify-content-center mx-1">
                         <Link style={{ textDecoration: 'none' }} to={routes.LOGIN}>
-                            <Button backgroundColor={color} textColor={color === colors.black && colors.white} title={"Login"} />
+                            <Button backgroundColor={color} textColor={color === colors.black && colors.white} title={t("login")} />
                         </Link>
                     </div>
                 </Col>

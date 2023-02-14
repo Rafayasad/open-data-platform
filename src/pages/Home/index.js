@@ -13,6 +13,7 @@ import Topics from "../../components/modules/Home/Topics";
 import Navbar from '../../components/modules/Navbar';
 import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
+import { useTranslation } from "react-i18next";
 
 const data = [
     {
@@ -31,6 +32,7 @@ const data = [
 
 const Home = memo(() => {
 
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false)
@@ -55,10 +57,10 @@ const Home = memo(() => {
             <Main />
             <Topics data={topics.en} />
             <Images />
-            <Cards title="Most Viewed Datasets" backgroundColor={colors.black} data={mostViewedDatasets} onClick={onClickCard} />
-            <Cards title="Recently Added Datasets" backgroundColor={colors.black} data={recentsDatasets} onClick={onClickCard} />
+            <Cards title={t("mostViewedDatasets")} backgroundColor={colors.black} data={mostViewedDatasets} onClick={onClickCard} />
+            <Cards title={t("recentlyAddedDatasets")} backgroundColor={colors.black} data={recentsDatasets} onClick={onClickCard} />
             <PlatformInsights data={platformInsights} />
-            <UpperFooter title="Get more from Abu Dhabi Data" button="Register Now" />
+            <UpperFooter title={t("GetMore")} button={t("registerNow")} />
             <MiddleFooter />
             <LowerFooter />
         </>

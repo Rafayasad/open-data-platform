@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import "./style.css";
 
 const Heading = memo((props) => {
+  
   const { heading, color, size, underline, maxNumberOfLines, nomargin, capitalize, onClick } = props;
 
   var Tag,
@@ -48,7 +49,7 @@ const Heading = memo((props) => {
     <Tag
       className={ClassName}
       style={{
-        color: color ? color : "#00000",
+        color: color ? color : "#00000"
       }}
       onClick={onClick ? onClick : () => { }}
     >

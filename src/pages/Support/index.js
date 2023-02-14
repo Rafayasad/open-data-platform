@@ -9,8 +9,11 @@ import LowerFooter from "../../components/modules/Footer/LowerFooter";
 import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
 import { getFaqsCategory, getPopularQuestions } from "../../axios/api";
 import { routes } from "../../router/helper";
+import { useTranslation } from "react-i18next";
 
 const Support = memo(() => {
+
+    const { t } = useTranslation()
 
     const navigate = useNavigate()
 
@@ -35,8 +38,8 @@ const Support = memo(() => {
             <Navbar theme='dark' />
             <Main />
             <Cards type='image-inner-text' data={categories && categories.en} onClick={onClickCard} />
-            <QuestionList title={"Popular Questions"} data={questions} onClick={onClickQuestion} />
-            <UpperFooter title="Still need help?" description="Send us a message using the contact form and someone from the team will get back to you." button="Contact us" />
+            <QuestionList title={t("popularQues")} data={questions} onClick={onClickQuestion} />
+            <UpperFooter title={t("stillNeedHelp")} description={t("footerPartText")} button={t("contactUs")} />
             <MiddleFooter />
             <LowerFooter />
         </>

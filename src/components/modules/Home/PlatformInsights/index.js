@@ -2,8 +2,11 @@ import React, { memo } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
+import { useTranslation } from "react-i18next";
 
 const PlatformInsights = memo((props) => {
+
+    const { t } = useTranslation()
 
     const { data } = props
 
@@ -12,7 +15,7 @@ const PlatformInsights = memo((props) => {
             <Container >
                 <Row className="my-3">
                     <Col className="text-center">
-                        <Heading size="xs" color={colors.pearl_white} heading={"Abu Dhabi Data in numbers"} />
+                        <Heading size="xs" color={colors.pearl_white} heading={t("abuDhabiDataInNumbers")} />
                     </Col>
                 </Row>
                 <Row className="my-3 px-5">

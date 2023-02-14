@@ -5,10 +5,14 @@ import Search from "../../../elements/Search";
 import Tag from "../../../elements/Tag";
 import { RxCross2 } from "react-icons/rx";
 import Drawer from "../../../modules/Drawer";
+import { useTranslation } from "react-i18next";
+import { colors } from "../../../../utils/colors";
 
 const Main = memo((props) => {
 
     const { onChangeSearch } = props
+
+    const { t } = useTranslation()
 
     const [focusFilters, setFocusFilters] = useState([]);
 
@@ -30,14 +34,14 @@ const Main = memo((props) => {
                     <Row>
                         <Col />
                         <Col xs={10} md={6} style={{ textAlign: 'center' }} className="py-2">
-                            <Heading color="black" heading={"Datasets to drive your curiosity"} />
+                            <Heading color="black" heading={t("datasetTitle")} />
                         </Col>
                         <Col />
                     </Row>
                     <Row>
                         <Col />
                         <Col xs={12} md={8} className="py-3">
-                            <Search placeholder="Search Keywords" onChange={onChangeSearch} filter />
+                            <Search placeholder={t("searchKeywords")} onChange={onChangeSearch} filter />
                         </Col>
                         <Col />
                     </Row>
@@ -49,7 +53,7 @@ const Main = memo((props) => {
                     (
                         <div className="py-1">
                             <Tag
-                                backgroundColor={"black"}
+                                backgroundColor={colors.black}
                                 textColor={"white"}
                                 title={item.name}
                                 crossIcon={<RxCross2 size={20} onClick={() => deleteFilter(item, index)} />} />

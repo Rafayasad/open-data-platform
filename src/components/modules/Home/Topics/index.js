@@ -5,8 +5,11 @@ import Button from "../../../elements/Button";
 import Heading from "../../../elements/Heading";
 import ListItem from "../../../elements/ListItem";
 import Drone from '../../../../assets/images/TopicDrone.png';
+import { useTranslation } from "react-i18next";
 
 const Topics = memo((props) => {
+
+    const { t } = useTranslation()
 
     const { data } = props
 
@@ -21,7 +24,7 @@ const Topics = memo((props) => {
         <Container fluid className="m-0 p-0 bg-black">
             <Row className="p-4 d-block d-sm-none">
                 <Col>
-                    <Heading size='xs' nomargin color={colors.white} heading="Explore Topics" />
+                    <Heading size='xs' nomargin color={colors.white} heading={t("explore")} />
                 </Col>
             </Row>
             {
@@ -37,7 +40,7 @@ const Topics = memo((props) => {
             }
             <Row className="py-3 m-0">
                 <Col className="d-flex justify-content-end">
-                    <Button borderColor='white' backgroundColor='black' textColor='white' title={all ? "View Less" : "View All"} onClick={onClick} />
+                    <Button borderColor='white' backgroundColor='black' textColor='white' title={all ? t("viewLess") : t("viewAll")} onClick={onClick} />
                 </Col>
             </Row>
         </Container>

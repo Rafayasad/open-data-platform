@@ -4,15 +4,19 @@ import Heading from "../../../elements/Heading";
 import GOADLogo from "../../../../assets/images/GOAD-Logo.png";
 import TAMMLogo from "../../../../assets/images/TAMM-Logo.png";
 import TELogo from "../../../../assets/images/TE-Logo.png";
+import { useTranslation } from "react-i18next";
 
 let data = [GOADLogo, GOADLogo, TELogo, TAMMLogo]
 
 const AdLogo = memo(() => {
+
+    const { t } = useTranslation()
+
     return (
         <Container className="py-4">
             <Row className="my-4">
                 <Col className="text-center">
-                    <Heading size="xs" heading={"Powered By"} />
+                    <Heading size="xs" heading={t("powered")} />
                 </Col>
             </Row>
             <Row className="my-4">

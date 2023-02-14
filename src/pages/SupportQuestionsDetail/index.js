@@ -7,8 +7,11 @@ import { getQuestionById } from "../../axios/api";
 import Main from "../../components/modules/SupportQuestionsDetail/Main";
 import { useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../router/helper";
+import { useTranslation } from "react-i18next";
 
 const SupportQuestionsDetail = memo(() => {
+
+    const { t } = useTranslation()
 
     const navigate = useNavigate();
     const { search, state } = useLocation();
@@ -32,7 +35,7 @@ const SupportQuestionsDetail = memo(() => {
         <>
             <Navbar theme='dark' />
             <Main title={details && details.title} description={details && details.description} />
-            <UpperFooter title="Still need help?" description="Send us a message using the contact form and someone from the team will get back to you." button="Contact us" />
+            <UpperFooter title={t("stillNeedHelp")} description={t("footerPartText")} button={t("contactus")} />
             <MiddleFooter />
             <LowerFooter />
         </>

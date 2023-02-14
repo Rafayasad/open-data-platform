@@ -4,8 +4,12 @@ import AuthBackground2 from "../../../../assets/images/recover-pass-Image.png";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import AuthCard from "../AuthCard";
+import { useTranslation } from "react-i18next";
 
 const RecoverPassword = memo(() => {
+
+  const { t } = useTranslation()
+
   return (
     <div
       className="d-flex"
@@ -23,7 +27,7 @@ const RecoverPassword = memo(() => {
             <Row className="p-5">
               <Col md={8}>
                 <Heading
-                  heading="An Open Data experience that's tailored for you"
+                  heading={t("pwdopendata")}
                   color={colors.white}
                 />
               </Col>
@@ -31,19 +35,19 @@ const RecoverPassword = memo(() => {
           </Col>
           <Col className="d-flex justify-content-center align-items-center">
             <AuthCard
-              title="Recover password"
-              subtitle="Enter the email you use for Abu Dhabi Data. We'll send you instructions there."
-              inputFields={[{ placeholder: "Registered email", type: "email" }]}
+              title="recoverPassword"
+              subtitle="pwdrecovery"
+              inputFields={[{ placeholder: "registeredEmail", type: "email" }]}
               button={[
                 {
-                  title: "Send code",
+                  title: "sendCode",
                   onClick: "",
                   backgroundColor: colors.black,
                   textColor: colors.white,
                   textSize: "",
                 },
                 {
-                  title: "Log in with UAE PASS",
+                  title: "LoginWithUAE",
                   onClick: "",
                   backgroundColor: colors.white,
                   textColor: colors.black,

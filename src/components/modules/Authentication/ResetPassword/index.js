@@ -4,8 +4,12 @@ import AuthBackground2 from "../../../../assets/images/recover-pass-Image.png";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import AuthCard from "../AuthCard";
+import { useTranslation } from "react-i18next";
 
 const ResetPassword = memo(() => {
+
+  const { t } = useTranslation()
+
   return (
     <div
       className="d-flex"
@@ -22,9 +26,9 @@ const ResetPassword = memo(() => {
           <Col>
             <Row className="p-5">
               <Col md={8}>
-                <Heading heading="You're almost there!" color={colors.white} />
+                <Heading heading={t("almostThere")} color={colors.white} />
                 <Heading
-                  heading="Password must be different from your previous there."
+                  heading={t("passwordValidation")}
                   color={colors.white}
                   size="xs"
                 />
@@ -33,23 +37,23 @@ const ResetPassword = memo(() => {
           </Col>
           <Col className="d-flex justify-content-center align-items-center">
             <AuthCard
-              title="Reset password"
-              subtitle="Create a strong password to ensure account safety."
+              title="resetPassword"
+              subtitle="strongPassword"
               inputFields={[
-                { placeholder: "Government email", type: "email" },
-                { placeholder: "Password", type: "password" },
-                { placeholder: "Re-enter password", type: "password" },
+                { placeholder: "governmentEmail", type: "email" },
+                { placeholder: "password", type: "password" },
+                { placeholder: "rePwd", type: "password" },
               ]}
               checkbox={{
-                label: "I agree to Abu Dhabi Open Data",
-                linktext: "terms and privacy policy",
+                label: "agreeCond",
+                linktext: "termsAndPolicy",
                 borderColor: colors.light_gray,
                 linktextColor: colors.purple,
                 labelColor: colors.black,
               }}
               button={[
                 {
-                  title: "Login",
+                  title: "login",
                   onClick: "",
                   backgroundColor: colors.black,
                   textColor: colors.white,

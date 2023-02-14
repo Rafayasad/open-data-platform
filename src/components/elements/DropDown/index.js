@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Dropdown as BSDropdown } from 'react-bootstrap';
 import { MdKeyboardArrowDown } from "react-icons/md";
+import './style.css';
 import { colors } from '../../../utils/colors';
 import Heading from '../Heading';
-import './style.css';
 
 const Dropdown = (props) => {
 

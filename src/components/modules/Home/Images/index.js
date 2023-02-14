@@ -6,8 +6,12 @@ import CardTwo from '../../../../assets/images/Card-Two.png';
 import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
 import { colors } from "../../../../utils/colors";
+import { useTranslation } from "react-i18next";
 
 const Images = memo(() => {
+
+    const { t } = useTranslation()
+
     return (
         <Container fluid style={{ backgroundColor: colors.black }}>
             <Row>
@@ -22,17 +26,17 @@ const Images = memo(() => {
                     }}>
                         <Row>
                             <Col className='text-center'>
-                                <Heading size="xs" color="white" heading="Latest insights from us." />
+                                <Heading size="xs" color="white" heading={t("latest")} />
                             </Col>
                             <div className="d-flex">
                                 <Col />
                                 <Col xs={12} md={8} className='px-3 d-flex justify-content-center align-items-center text-center'>
-                                    <Heading color='white' heading="Renewable energy share increased for the last 2 years" />
+                                    <Heading color='white' heading={t("renewable")} />
                                 </Col>
                                 <Col />
                             </div>
                             <Col className='d-flex justify-content-center'>
-                                <Button title={"Find out More"} />
+                                <Button title={t("find")} />
                             </Col>
                         </Row>
                     </div>
@@ -51,14 +55,14 @@ const Images = memo(() => {
                         <Row>
                             <Col />
                             <Col sm={12} md={8} className='text-center'>
-                                <Heading color='white' heading="Are you new to open data?" />
+                                <Heading color='white' heading={t("areYouNewToOpenData")} />
                             </Col>
                             <Col />
                         </Row>
                         <Row>
                             <Col />
                             <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                <Button title={"Discover"} />
+                                <Button title={t("discover")} />
                             </Col>
                             <Col />
                         </Row>
@@ -76,14 +80,14 @@ const Images = memo(() => {
                         <Row>
                             <Col />
                             <Col sm={10} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                <Heading size='xlg' color='white' heading="Join us / Register with us" />
+                                <Heading size='xlg' color='white' heading={t("joinUsRegisterWithUs")} />
                             </Col>
                             <Col />
                         </Row>
                         <Row>
                             <Col />
                             <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                <Button title={"Get Started"} />
+                                <Button title={t("getStarted")} />
                             </Col>
                             <Col />
                         </Row>

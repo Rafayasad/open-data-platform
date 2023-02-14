@@ -10,8 +10,11 @@ import { colors } from "../../utils/colors";
 import { getAllDatasets, getRecentsDatasets } from "../../axios/api";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../router/helper";
+import { useTranslation } from "react-i18next";
 
 const Dataset = memo(() => {
+
+    const { t } = useTranslation()
 
     const navigate = useNavigate();
 
@@ -42,9 +45,9 @@ const Dataset = memo(() => {
         <>
             <Navbar theme={'dark'} />
             <Main onChangeSearch={onChangeSearch} />
-            <Cards title="Featured datasets" hoverable="primary" backgroundColor={colors.white} data={recentsDatasets} onClick={onClickCard} />
+            <Cards title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={recentsDatasets} onClick={onClickCard} />
             <DatasetList totalCount={totalCount} rowsPerPage={rowsPerPage} datasets={datasets} currentPage={currentPage} loading={loading} onChangePage={onChangePage} selectedValue={sort} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue} />
-            <UpperFooter title="Get more from Abu Dhabi Data" button="Register Now" />
+            <UpperFooter title={t("GetMore")} button={t("registerNow")} />
             <MiddleFooter />
             <LowerFooter />
         </>

@@ -1,13 +1,13 @@
-import './index.css'
-import React, { memo } from "react";
+import React, { memo, useState, useCallback } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { IoIosSearch } from 'react-icons/io';
 import { MdOutlineFilterAlt } from 'react-icons/md';
-import { useState } from 'react';
+import './index.css'
 import Drawer from '../../modules/Drawer';
-import { useCallback } from 'react';
 
 const Search = memo((props) => {
+
+    const { t } = useTranslation();
 
     const { placeholder, filter, onChange } = props
 
@@ -31,13 +31,13 @@ const Search = memo((props) => {
                     <Col xs={2} md={2}>
                         <div onClick={toggle} className='d-flex align-items-center justify-content-center filter py-2' style={{ borderRadius: '30px' }}>
                             <MdOutlineFilterAlt size={24} />
-                            <p className='m-0 d-none d-md-block'>Filter</p>
+                            <p className='m-0 d-none d-md-block'>{t("filter")}</p>
                         </div>
                         <Drawer open={filterOpen} setOpen={setFilterOpen} />
                     </Col>
                 }
             </Row>
-        </Container>
+        </Container >
     )
 });
 

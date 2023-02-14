@@ -1,7 +1,9 @@
 import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 
 const StraigthLine = memo((props) => {
 
+  const { t } = useTranslation()
   const { label, textColor, lineColor } = props
 
   return (
@@ -16,7 +18,7 @@ const StraigthLine = memo((props) => {
           height: "0.5px",
         }}
       ></div>
-      {label}
+      {t(label)}
       <div
         style={{
           backgroundColor: lineColor,
