@@ -5,7 +5,7 @@ import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
 import TextInput from "../../../elements/TextInput";
 import StraigthLine from "../../../elements/StraigthLine";
-import CheckBox from "../../../elements/checkBox";
+import CheckBox from "../../../elements/CheckBox";
 import { useTranslation } from "react-i18next";
 
 const AuthCard = memo((props) => {
