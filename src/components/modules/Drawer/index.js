@@ -74,39 +74,41 @@ const Drawer = memo((props) => {
                     <Heading size="xxs" heading={t("filter")} nomargin />
                     <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="mx-1" size={20} />
                 </div>
-                {data?.map((item, index) => {
-                    return (
-                        <>
-                            <Accordion key={index} className="bg-transparent">
-                                <Accordion.Item eventKey={index} className="border-0 my-2">
-                                    <Accordion.Header>
-                                        <div className="col-11" style={{ textAlign: "start" }}>
-                                            <Heading size="xs" heading={item.title} nomargin />
-                                        </div>
-                                    </Accordion.Header>
-                                    <Accordion.Body>
-                                        <div className="d-flex flex-wrap">
-                                            {item.tags?.map((item, index) => {
-                                                return (
-                                                    <div className={`my-1`}>
-                                                        <Tag
-                                                            backgroundColor={filtersData?.some(items => items.title === item.title) ? "black" : "white"}
-                                                            textColor={filtersData?.some(items => items.title === item.title) ? "white" : "black"}
-                                                            borderColor={"1px solid grey"}
-                                                            title={`${item.title} (${item.value})`}
-                                                            onClick={() => onFocusItems(item)}
-                                                        />
-                                                    </div>
-                                                )
-                                            })}
-                                        </div>
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                            </Accordion>
-                            <hr />
-                        </>
-                    )
-                })}
+                {
+                    data?.map((item, index) => {
+                        return (
+                            <>
+                                <Accordion key={index} className="bg-transparent">
+                                    <Accordion.Item eventKey={index} className="border-0 my-2">
+                                        <Accordion.Header>
+                                            <div className="col-11" style={{ textAlign: "start" }}>
+                                                <Heading bold size="xs" heading={item.title} nomargin />
+                                            </div>
+                                        </Accordion.Header>
+                                        <Accordion.Body>
+                                            <div className="d-flex flex-wrap">
+                                                {item.tags?.map((item, index) => {
+                                                    return (
+                                                        <div className={`my-1`}>
+                                                            <Tag
+                                                                backgroundColor={filtersData?.some(items => items.title === item.title) ? "black" : "white"}
+                                                                textColor={filtersData?.some(items => items.title === item.title) ? "white" : "black"}
+                                                                borderColor={"1px solid grey"}
+                                                                title={`${item.title} (${item.value})`}
+                                                                onClick={() => onFocusItems(item)}
+                                                            />
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                </Accordion>
+                                <hr />
+                            </>
+                        )
+                    })
+                }
                 <div className="fixed-bottom bg-white">
                     <hr />
                     <div className="m-3 d-flex justify-content-between align-items-center">

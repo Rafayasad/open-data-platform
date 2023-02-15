@@ -8,15 +8,16 @@ import LowerFooter from '../../components/modules/Footer/LowerFooter';
 import DatasetList from "../../components/modules/Dataset/DatasetList";
 import { colors } from "../../utils/colors";
 import { getAllDatasets, getRecentsDatasets } from "../../axios/api";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../router/helper";
 import { useTranslation } from "react-i18next";
 
 const Dataset = memo(() => {
 
-    const { t } = useTranslation()
+    const { t } = useTranslation();
 
     const navigate = useNavigate();
+    const { state } = useLocation();
 
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
@@ -30,7 +31,13 @@ const Dataset = memo(() => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        getRecentsDatasets(setRecentsDatasets)
+
+        getRecentsDatasets(setRecentsDatasets);
+
+        if (state && state.search) {
+            setSearch(state.search)
+        }
+
     }, []);
 
     useEffect(() => { getAllDatasets(setDatasets, setTotalCount, setLoading, search, sort.toLowerCase(), currentPage, rowsPerPage) }, [currentPage, search, sort]);
@@ -46,7 +53,7 @@ const Dataset = memo(() => {
     return (
         <>
             <Navbar theme={'dark'} />
-            <Main onChangeSearch={onChangeSearch} />
+            <Main search={search} onChangeSearch={onChangeSearch} />
             <Cards title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={recentsDatasets} onClick={onClickCard} />
             <DatasetList totalCount={totalCount} rowsPerPage={rowsPerPage} datasets={datasets} currentPage={currentPage} loading={loading} onChangePage={onChangePage} selectedValue={sort} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue} />
             <UpperFooter title={t("GetMore")} button={t("registerNow")} />

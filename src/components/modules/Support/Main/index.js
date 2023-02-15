@@ -15,7 +15,7 @@ const Main = memo(() => {
                     <Row>
                         <Col />
                         <Col xs={10} md={6} style={{ textAlign: 'center' }} className="py-2">
-                            <Heading color="black" heading={t("howCanHelp")} />
+                            <Heading bold color="black" heading={t("howCanHelp")} />
                         </Col>
                         <Col />
                     </Row>

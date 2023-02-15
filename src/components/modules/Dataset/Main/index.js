@@ -10,7 +10,7 @@ import { colors } from "../../../../utils/colors";
 
 const Main = memo((props) => {
 
-    const { onChangeSearch } = props
+    const { search, onChangeSearch } = props
 
     const { t } = useTranslation()
 
@@ -34,14 +34,14 @@ const Main = memo((props) => {
                     <Row>
                         <Col />
                         <Col xs={10} md={6} style={{ textAlign: 'center' }} className="py-2">
-                            <Heading color="black" heading={t("datasetTitle")} />
+                            <Heading bold color="black" heading={t("datasetTitle")} />
                         </Col>
                         <Col />
                     </Row>
                     <Row>
                         <Col />
                         <Col xs={12} md={8} className="py-3">
-                            <Search placeholder={t("searchKeywords")} onChange={onChangeSearch} filter />
+                            <Search placeholder={t("searchKeywords")} onChange={onChangeSearch} value={search} filter />
                         </Col>
                         <Col />
                     </Row>

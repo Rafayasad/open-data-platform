@@ -6,7 +6,9 @@ import Heading from "../../../elements/Heading";
 import background from '../../../../assets/images/BG.png';
 import { useTranslation } from "react-i18next";
 
-const Main = memo(() => {
+const Main = memo((props) => {
+
+    const { onSearch } = props;
 
     const { t } = useTranslation()
 
@@ -26,14 +28,14 @@ const Main = memo(() => {
                         <Row>
                             <Col />
                             <Col xs={10} md={6} style={{ textAlign: 'center' }} className="py-2">
-                                <Heading color="white" heading={t("dataAvailable")} />
+                                <Heading bold color="white" heading={t("dataAvailable")} />
                             </Col>
                             <Col />
                         </Row>
                         <Row>
                             <Col />
                             <Col xs={12} md={8} className="py-3">
-                                <Search placeholder={t("searchPlaceholder")} filter />
+                                <Search placeholder={t("searchPlaceholder")} filter onPressEnter={onSearch} />
                             </Col>
                             <Col />
                         </Row>

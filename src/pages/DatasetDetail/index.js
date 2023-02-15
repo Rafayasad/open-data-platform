@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { getDatasetById, getSimilarDatasets } from "../../axios/api";
 import Cards from "../../components/modules/Cards";
 import Main from "../../components/modules/DatasetDetail/Main";
+import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
 import LowerFooter from "../../components/modules/Footer/LowerFooter";
 import Navbar from "../../components/modules/Navbar";
 import { routes } from "../../router/helper";
@@ -27,7 +28,7 @@ const data = [
 const DatasetDetail = memo(() => {
 
     const { t } = useTranslation()
-    
+
     const navigate = useNavigate();
     const { search } = useLocation();
 
@@ -61,6 +62,7 @@ const DatasetDetail = memo(() => {
                 <Main data={dataset} />
                 <Cards title={t("similarDatasets")} backgroundColor={colors.white} data={similarDataset} />
             </div>
+            <MiddleFooter />
             <LowerFooter />
         </>
     )

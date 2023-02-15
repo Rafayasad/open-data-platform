@@ -4,9 +4,10 @@ import { useTranslation } from "react-i18next";
 import { colors } from "../../../../utils/colors";
 import { locales } from '../../../../i18n/helper';
 import Tabs from "../../Tabs";
-import Header from "../../Cards/Header";
 import DataCard from "../DataCard";
 import SwaggerUI from "../../SwaggerUI";
+import DataHeader from "../DataHeader";
+import Shimmer from '../../../elements/Shimmer';
 
 const Main = memo((props) => {
 
@@ -16,22 +17,36 @@ const Main = memo((props) => {
 
     let option = { dateStyle: 'long' };
 
-    let e = data && [
+    let e = [
         {
             title: t("about"),
-            detail: i18n.language === locales.AR ? data.description_ar : data.description
+            detail: data ? (
+                i18n.language === locales.AR ? data.description_ar : data.description
+            ) : (
+                <>
+                    <Shimmer rounded='xs' className={"my-1"} />
+                    <Shimmer rounded='xs' className={"my-1"} />
+                    <Shimmer rounded='xs' width="70%" className={"my-1"} />
+                </>
+            )
         },
         {
             title: t("managedBy"),
-            detail: i18n.language === locales.AR ? data.publisher_ar : data.publisher
+            detail: data ? (
+                i18n.language === locales.AR ? data.publisher_ar : data.publisher
+            ) : <Shimmer rounded='xs' width="70%" className={"my-1"} />
         },
         {
             title: t("frequency"),
-            detail: i18n.language === locales.AR ? data.frequency_ar : data.frequency
+            detail: data ? (
+                i18n.language === locales.AR ? data.frequency_ar : data.frequency
+            ) : <Shimmer rounded='xs' width="70%" className={"my-1"} />
         },
         {
             title: t("accessLevel"),
-            detail: i18n.language === locales.AR ? data.access_level_ar : data.access_level,
+            detail: data ? (
+                i18n.language === locales.AR ? data.access_level_ar : data.access_level
+            ) : <Shimmer rounded='xs' width="20%" className={"my-1"} />,
             capitalize: true
         },
         {
@@ -40,24 +55,29 @@ const Main = memo((props) => {
         },
     ]
 
-    let f = data && [
+    let f = [
         {
             title: t("topics"),
-            detail: i18n.language === locales.AR ? data.topics_ar : data.topics,
+            detail: data && (i18n.language === locales.AR ? (data.topics_ar.length > 0 && !data.topics_ar.includes(" ") ? data.topics_ar : [t("noTopicsFound")]) : (data.topics.length > 0 && !data.topics.includes(" ") ? data.topics : [t("noTopicsFound")])),
             tags: true
         },
         {
             title: t("tags"),
-            detail: i18n.language === locales.AR ? data.tags_ar : data.tags,
-            tags: true
+            detail: data && (i18n.language === locales.AR ? (data.tags_ar.length > 0 && !data.tags_ar.includes(" ") ? data.tags_ar : [t("noTagsFound")]) : (data.tags.length > 0 && !data.tags.includes(" ") ? data.tags : [t("noTagsFound")])),
+            tags: true,
+            theme: 'light'
         },
         {
             title: t("createdAt"),
-            detail: new Date(data.created).toLocaleDateString("en-US", option)
+            detail: data ? (
+                new Date(data.created).toLocaleDateString("en-US", option)
+            ) : <Shimmer rounded='xs' width="40%" className={"my-1"} />
         },
         {
             title: t("lastUpdated"),
-            detail: new Date(data.modified).toLocaleDateString("en-US", option)
+            detail: data ? (
+                new Date(data.modified).toLocaleDateString("en-US", option)
+            ) : <Shimmer rounded='xs' width="40%" className={"my-1"} />
         },
         {
             title: t("sourceURL"),
@@ -67,28 +87,28 @@ const Main = memo((props) => {
         },
         {
             title: t("license"),
-            detail: "Abu Dhabi Government Open Data License",
+            detail: data ? "Abu Dhabi Government Open Data License" : <Shimmer rounded='xs' width="70%" className={"my-1"} />,
             color: colors.purple,
             underline: true,
-            onClick: () => window.open(data.license, '_blank')
+            onClick: () => data && window.open(data.license, '_blank')
         }
     ]
 
     let tabs = [
         {
             name: t("overview"),
-            component: data && <DataCard data={e} />
+            component: <DataCard data={e} />
         },
         {
             name: t("APIDocumentation"),
-            component: data && <SwaggerUI url={`${process.env.REACT_APP_BASE_URL}/api/1/metastore/schemas/dataset/items/${data.id}/docs`} />
+            component: <SwaggerUI url={`${process.env.REACT_APP_BASE_URL}/api/1/metastore/schemas/dataset/items/${data && data.id}/docs`} />
         }
     ]
 
     return (
         <Container fluid>
-            <Header size='lg' backgroundColor={colors.white} title={i18n.language === locales.AR ? data && data.title_ar : data && data.title} nobutton />
-            <Tabs data={tabs} staticComponentOnRight={data && <DataCard data={f} />} />
+            <DataHeader title={i18n.language === locales.AR ? data && data.title_ar : data && data.title} />
+            <Tabs data={tabs} staticComponentOnRight={<DataCard data={f} />} />
         </Container>
     )
 });

@@ -9,6 +9,8 @@ import { routes } from '../../../router/helper';
 import { colors } from "../../../utils/colors";
 import LanguageSwitcher from "../../elements/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import i18n from "../../../i18n/i18n";
+import { locales } from "../../../i18n/helper";
 
 const Navbar = memo((props) => {
 
@@ -32,22 +34,22 @@ const Navbar = memo((props) => {
                 <Col md={6} className="d-flex justify-content-center align-items-center">
                     <div className="mx-3">
                         <Link to={routes.DATASET}>
-                            <p className={`m-0 hover-underline-animation ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("dataset")}</p>
+                            <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("dataset")}</p>
                         </Link>
                     </div>
                     <div className="mx-3">
                         <Link to={routes.ABOUTUS}>
-                            <p className={`m-0 hover-underline-animation ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("aboutus")}</p>
+                            <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("aboutus")}</p>
                         </Link>
                     </div>
                     <div className="mx-3">
                         <Link to={routes.SUPPORT}>
-                            <p className={`m-0 hover-underline-animation ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("supports")}</p>
+                            <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("supports")}</p>
                         </Link>
                     </div>
                     <div className="mx-3">
                         <Link to={routes.APPLICATIONS}>
-                            <p className={`m-0 hover-underline-animation ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t('applications')}</p>
+                            <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t('applications')}</p>
                         </Link>
                     </div>
                 </Col>

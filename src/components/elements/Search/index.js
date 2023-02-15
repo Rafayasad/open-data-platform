@@ -10,13 +10,15 @@ const Search = memo((props) => {
 
     const { t } = useTranslation();
 
-    const { placeholder, filter, onChange } = props
+    const { placeholder, value, filter, onChange, onPressEnter } = props
 
     const [filterOpen, setFilterOpen] = useState(false);
 
     const toggle = useCallback(() => setFilterOpen(!filterOpen));
 
-    const onChangeSearch = useCallback((e) => onChange(e.target.value));
+    const onChangeSearch = useCallback((e) => onChange && onChange(e.target.value));
+
+    const onKeyDown = useCallback((e) => e.key === "Enter" && onPressEnter && onPressEnter(e.target.value))
 
     return (
         <Container fluid>
@@ -25,7 +27,7 @@ const Search = memo((props) => {
                     <IoIosSearch color="gray" size={24} />
                 </Col>
                 <Col className='p-0 d-flex align-items-center'>
-                    <input type="text" className='border-0 bg-transparent w-100' placeholder={placeholder} onChange={onChangeSearch} />
+                    <input type="text" className='border-0 bg-transparent w-100' value={value} placeholder={placeholder} onChange={onChangeSearch} onKeyDown={onKeyDown} />
                 </Col>
                 {
                     filter &&

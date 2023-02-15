@@ -25,6 +25,18 @@ code {
   font-family: 'CircularStd-Regular';
 }
 
+.ar-font-bold {
+  font-family: 'CircularAr-Semibold';
+}
+
+.en-font-bold {
+  font-family: 'CircularStd-Semibold';
+}
+
+.en-font-default {
+  font-feature-settings: normal;
+}
+
 @font-face {
   font-family: 'CircularStd-Regular';
   src: local('CircularStd'), url(./assets/fonts/CircularStd-Book.ttf) format('truetype');

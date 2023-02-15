@@ -28,7 +28,7 @@ const Applications = memo(() => {
     return (
         <>
             <Navbar theme='dark' />
-            <div className="my-5 py-5">
+            <div className="my-5 pt-5">
                 <Main />
                 <Cards type="image-outer-text" data={applications} />
             </div>

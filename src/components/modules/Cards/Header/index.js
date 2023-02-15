@@ -27,6 +27,7 @@ const Header = memo((props) => {
         <Container fluid className="d-flex justify-content-between align-items-center py-4">
             <div>
                 <Heading
+                    bold
                     nomargin
                     size={headingSize}
                     color={color}

@@ -1,6 +1,8 @@
 import React, { memo } from "react";
 import { Container } from "react-bootstrap";
+import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
+import Shimmer from "../../../elements/Shimmer";
 import Tag from "../../../elements/Tag";
 
 const DataCard = memo((props) => {
@@ -11,9 +13,9 @@ const DataCard = memo((props) => {
         <Container fluid className="p-0">
             {
                 data && data.length > 0 && data.map((item, index) => (
-                    <div key={index}>
+                    <div key={index} className="py-1">
                         <div>
-                            <Heading heading={item.title} size='xs' />
+                            <Heading heading={item.title} size='xs' bold />
                         </div>
                         {
                             !item.tags ? (
@@ -23,11 +25,22 @@ const DataCard = memo((props) => {
                             ) : (
                                 <div className="d-flex flex-wrap mb-3">
                                     {
-                                        item.detail.map((item, index) => (
+                                        item && item.detail && item.detail.length > 0 ? item.detail.map((value, index) => (
                                             <div key={index} className="my-1">
-                                                <Tag title={item} />
+                                                <Tag
+                                                    title={value}
+                                                    backgroundColor={item.theme === 'light' && colors.white}
+                                                    borderColor={item.theme === 'light' && `1.5px solid ${colors.light_gray}`}
+                                                    textColor={item.theme === 'light' && colors.black}
+                                                />
                                             </div>
-                                        ))
+                                        )) : (
+                                            <>
+                                                <Shimmer rounded='lg' width="25%" height="36px" className={"m-1"} />
+                                                <Shimmer rounded='lg' width="40%" height="36px" className={"m-1"} />
+                                                {/* <Shimmer rounded='lg' width="30%" height="36px" className={"m-1"} /> */}
+                                            </>
+                                        )
                                     }
                                 </div>
                             )

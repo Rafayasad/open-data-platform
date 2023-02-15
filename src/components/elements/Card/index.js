@@ -55,7 +55,7 @@ const Card = memo((props) => {
             </Row>
             <Row className="h-50">
                 <Col md={shortTitle ? 8 : 12}>
-                    <Heading underline maxNumberOfLines={shortTitle ? 2 : 3} size={headingSize ? headingSize : "md"} heading={title} onClick={onClick} />
+                    <Heading bold underline maxNumberOfLines={shortTitle ? 2 : 3} size={headingSize ? headingSize : "md"} heading={title} onClick={onClick} />
                 </Col>
                 {
                     description &&

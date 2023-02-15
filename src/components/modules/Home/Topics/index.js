@@ -22,7 +22,7 @@ const Topics = memo((props) => {
 
     return (
         <Container fluid className="m-0 p-0 bg-black">
-            <Row className="p-4 d-block d-sm-none">
+            <Row className="py-4 px-2 m-0 d-block d-sm-none">
                 <Col>
                     <Heading size='xs' nomargin color={colors.white} heading={t("explore")} />
                 </Col>

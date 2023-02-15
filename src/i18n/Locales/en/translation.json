@@ -205,5 +205,7 @@
     "frequency": "Frequency",
     "sources": "Sources",
     "modified": "Modified",
-    "title": "Title"
+    "title": "Title",
+    "noTagsFound": "No Tags Found",
+    "noTopicsFound": "No Topics Found"
 }

@@ -12,7 +12,7 @@ const Rows = memo((props) => {
                 <Col md={5} xs={12} className='py-2'>
                     <Row className="py-3">
                         <Col>
-                            <Heading size='xl' nomargin heading={title} />
+                            <Heading bold size='xl' nomargin heading={title} />
                         </Col>
                     </Row>
                     <Row>

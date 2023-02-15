@@ -32,7 +32,7 @@ const CardWithText = memo((props) => {
             <RBCard className={`p-4 justify-content-center align-items-center bg-transparent`} style={{ minHeight: '250px', height: height, borderWidth: border }}>
                 <Row>
                     <Col className="d-flex text-center">
-                        <Heading size='md' heading={title} onClick={onClick} />
+                        <Heading bold size='md' heading={title} onClick={onClick} />
                     </Col>
                 </Row>
                 <Row>

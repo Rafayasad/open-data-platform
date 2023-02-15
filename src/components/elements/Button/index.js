@@ -10,7 +10,7 @@ const Button = memo((props) => {
     return (
         <button
             onClick={onClick}
-            className="px-4"
+            className="px-4 en-font-default"
             style={{
                 backgroundColor: backgroundColor ? backgroundColor : 'white',
                 color: textColor ? textColor : 'black',

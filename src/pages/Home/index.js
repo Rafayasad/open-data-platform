@@ -36,11 +36,12 @@ const Home = memo(() => {
     }, [])
 
     const onClickCard = useCallback((id) => { navigate(`${routes.DATASET_DETAIL}?id=${id}`) }, []);
+    const onSearch = useCallback((value) => { navigate(routes.DATASET, { state: { search: value } }) }, []);
 
     return (
         <>
             <Navbar />
-            <Main />
+            <Main onSearch={onSearch} />
             <Topics data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en} />
             <Images />
             <Cards title={t("mostViewedDatasets")} backgroundColor={colors.black} data={mostViewedDatasets} onClick={onClickCard} />

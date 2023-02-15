@@ -37,7 +37,7 @@ const Main = memo((props) => {
                 <Container fluid className="my-4">
                     <Row className="align-items-center">
                         <Col md={6} xs={12} className='py-2'>
-                            <Heading nomargin heading={i18n.language === locales.AR ? item.title_ar : item.title} />
+                            <Heading bold nomargin heading={i18n.language === locales.AR ? item.title_ar : item.title} />
                         </Col>
                         <Col md={6} xs={12} className='py-2'>
                             <Heading size='xxs' nomargin heading={i18n.language === locales.AR ? item.description_ar : item.description} />
