@@ -12,7 +12,7 @@ const Card = memo((props) => {
 
     var height = "332px", border, ClassName;
 
-    if (size == 'sm') {
+    if (size === 'sm') {
         height = "332px"
     }
 

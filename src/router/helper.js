@@ -15,6 +15,7 @@ export const routes = {
   RESET: `/reset-password`,
   CHANGE: `/change-password`,
   POLICY: `/privacy-policy`,
+  CONTACT: `/contact-us`,
 };
 
 // export const navigate = (route) => {
