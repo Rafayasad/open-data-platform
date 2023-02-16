@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useCallback, useState, useEffect } from "react";
+import React, { Fragment, memo, useCallback, useState } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { routes } from '../../../router/helper';
@@ -7,6 +7,17 @@ import LanguageSwitcher from "../../elements/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import i18n from "../../../i18n/i18n";
 import { locales } from "../../../i18n/helper";
+import AbuDhabiLogo from '../../../assets/images/Abu-Dhabi-Data-Logo.png';
+import AbuDhabiLogoDark from '../../../assets/images/Abu-Dhabi-Data-Logo-Dark.png';
+import AbuDhabiLogoMobile from '../../../assets/images/Abu-Dhabi-Data-Logo-Mobile.png';
+import AbuDhabiLogoDarkMobile from '../../../assets/images/Abu-Dhabi-Data-Logo-Mobile-Dark.png';
+import Button from "../../elements/Button";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { AiOutlineSearch } from "react-icons/ai";
+import Drawer from 'react-modern-drawer';
+import Heading from "../../elements/Heading";
+import 'react-modern-drawer/dist/index.css';
+import './style.css';
 
 const Navbar = memo((props) => {
 
@@ -179,7 +190,7 @@ const Navbar = memo((props) => {
                 </Row>
                 <Row className="p-3 d-flex justify-content-end align-items-end m-0 py-3 fixed-bottom mb-5">
                     <Col className="d-flex align-items-center">
-                        <LanguageSwitcher />
+                        <LanguageSwitcher theme={"dark"} />
                     </Col>
                     <Col className="d-flex align-items-center justify-content-end">
                         <Heading size={"xxs"} nomargin color={colors.gray} heading={"ADDA @ 2022"} />
