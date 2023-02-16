@@ -10,25 +10,32 @@ import { colors } from "../../../../utils/colors";
 
 const Main = memo((props) => {
 
-    const { search, onChangeSearch } = props
+    const { search, onChangeSearch, onSelectedFilters } = props
 
     const { t } = useTranslation()
 
-    const [focusFilters, setFocusFilters] = useState([]);
+    const [selectedFilters, setSelectedFilters] = useState([]);
 
-    const filtersHandler = (data) => {
-        setFocusFilters(data);
+    const onClickApplyFilter = (filters) => {
+
+        setSelectedFilters(filters)
+        onSelectedFilters(filters)
+
     }
 
-    const deleteFilter = (items, index) => {
-        const temp = focusFilters;
+    const onDeleteFilter = (index) => {
+
+        let temp = [...selectedFilters]
+
         temp.splice(index, 1)
-        setFocusFilters([...temp])
+
+        setSelectedFilters(temp)
+        onSelectedFilters(temp)
+
     }
 
     return (
         <Container className="pt-5 mt-5">
-            <Drawer filtersHandler={filtersHandler} filters={focusFilters} />
             <Row className="py-5">
                 <Col className="d-flex flex-column justify-content-center">
                     <Row>
@@ -41,7 +48,14 @@ const Main = memo((props) => {
                     <Row>
                         <Col />
                         <Col xs={12} md={8} className="py-3">
-                            <Search placeholder={t("searchKeywords")} onChange={onChangeSearch} value={search} filter />
+                            <Search
+                                placeholder={t("searchKeywords")}
+                                onChange={onChangeSearch}
+                                value={search}
+                                filter
+                                selectedFilters={selectedFilters}
+                                onClickApplyFilter={onClickApplyFilter}
+                            />
                         </Col>
                         <Col />
                     </Row>
@@ -49,16 +63,17 @@ const Main = memo((props) => {
             </Row>
             <Row className="py-1">
                 <Col className="d-flex flex-wrap justify-content-center align-items-center">
-                    {focusFilters?.map((item, index) =>
-                    (
-                        <div className="py-1">
-                            <Tag
-                                backgroundColor={colors.black}
-                                textColor={"white"}
-                                title={item.name}
-                                crossIcon={<RxCross2 size={20} onClick={() => deleteFilter(item, index)} />} />
-                        </div>
-                    ))}
+                    {
+                        selectedFilters && selectedFilters.length > 0 && selectedFilters.map((item, index) =>
+                        (
+                            <div className="py-1">
+                                <Tag
+                                    backgroundColor={colors.black}
+                                    textColor={"white"}
+                                    title={item.title}
+                                    crossIcon={<RxCross2 size={20} onClick={() => onDeleteFilter(index)} />} />
+                            </div>
+                        ))}
                 </Col>
             </Row>
         </Container>

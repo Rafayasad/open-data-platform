@@ -10,15 +10,26 @@ const Search = memo((props) => {
 
     const { t } = useTranslation();
 
-    const { placeholder, value, filter, onChange, onPressEnter } = props
+    const { placeholder, value, filter, onChange, onPressEnter, selectedFilters, onClickApplyFilter } = props
 
     const [filterOpen, setFilterOpen] = useState(false);
+
+    const [filters, setFilters] = useState([]);
 
     const toggle = useCallback(() => setFilterOpen(!filterOpen));
 
     const onChangeSearch = useCallback((e) => onChange && onChange(e.target.value));
 
     const onKeyDown = useCallback((e) => e.key === "Enter" && onPressEnter && onPressEnter(e.target.value))
+
+    const onClickApply = useCallback((filters) => {
+        setFilterOpen(!filterOpen)
+        onClickApplyFilter(filters)
+    });
+
+    const onClickClear = useCallback(() => {
+        setFilters([])
+    });
 
     return (
         <Container fluid>
@@ -36,7 +47,7 @@ const Search = memo((props) => {
                             <MdOutlineFilterAlt size={24} />
                             <p className='m-0 d-none d-md-block'>{t("filter")}</p>
                         </div>
-                        <Drawer open={filterOpen} setOpen={setFilterOpen} />
+                        <Drawer open={filterOpen} setOpen={setFilterOpen} filters={filters} setFilters={setFilters} selectedFilters={selectedFilters} onClickApplyFilter={onClickApply} onClickClearFilter={onClickClear} />
                     </Col>
                 }
             </Row>

@@ -177,12 +177,28 @@ export const getFacets = async (key_en, key_ar, setData) => {
 
 }
 
-export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage) => {
+export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage, filters) => {
 
     setLoading(true)
 
+    console.log("FILTERS", filters);
+    let finalFilters = []
+    let themeArray = []
+    let publisherArray = []
+    let tagsArray = []
+    filters?.filter((el, index) => {
+        el.type == "theme" ? themeArray.push(el.title)
+            : el.type == "publisher__name" ? publisherArray.push(el.title)
+                : el.type == "keyword" && tagsArray.push(el.title)
+    })
+    finalFilters.push(
+        { key: "theme", values: themeArray },
+        { key: "publisher__name", values: publisherArray },
+        { key: "keyword", values: tagsArray }
+    )
+
     return endpoints.
-        getAllDatasets(search, sort, currentPage, rowsPerPage).then((res) => {
+        getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then((res) => {
             if (res.status === 200) {
 
                 setTotalCount(res.data.total)

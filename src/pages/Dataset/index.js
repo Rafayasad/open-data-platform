@@ -27,6 +27,7 @@ const Dataset = memo(() => {
     const [datasets, setDatasets] = useState();
     const [search, setSearch] = useState("");
     const [sort, setSort] = useState("Title");
+    const [filters, setFilters] = useState();
 
     const [loading, setLoading] = useState(false);
 
@@ -40,7 +41,7 @@ const Dataset = memo(() => {
 
     }, []);
 
-    useEffect(() => { getAllDatasets(setDatasets, setTotalCount, setLoading, search, sort.toLowerCase(), currentPage, rowsPerPage) }, [currentPage, search, sort]);
+    useEffect(() => { getAllDatasets(setDatasets, setTotalCount, setLoading, search, sort.toLowerCase(), currentPage, rowsPerPage, filters) }, [currentPage, search, sort, filters]);
 
     const onClickCard = useCallback((id) => { navigate(`${routes.DATASET_DETAIL}?id=${id}`) }, []);
 
@@ -50,10 +51,12 @@ const Dataset = memo(() => {
 
     const onChangeDropdownValue = useCallback((e) => setSort(e), [sort])
 
+    const onSelectFilterItems = useCallback((filters) => setFilters(filters), [filters])
+
     return (
         <>
             <Navbar theme={'dark'} />
-            <Main search={search} onChangeSearch={onChangeSearch} />
+            <Main search={search} onChangeSearch={onChangeSearch} onSelectedFilters={onSelectFilterItems} />
             <Cards title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={recentsDatasets} onClick={onClickCard} />
             <DatasetList totalCount={totalCount} rowsPerPage={rowsPerPage} datasets={datasets} currentPage={currentPage} loading={loading} onChangePage={onChangePage} selectedValue={sort} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue} />
             <UpperFooter title={t("GetMore")} button={t("registerNow")} />

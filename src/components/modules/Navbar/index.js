@@ -128,7 +128,7 @@ const Navbar = memo((props) => {
                 </Row>
             </Container>
             <Drawer
-                style={{ width: "100%", height: "100vh" }}
+                style={{ width: "100%", height: "100vh", scrollBehavior: "smooth",overflow:"auto",minHeight:"100vh" }}
                 open={isOpen}
                 direction='right'
                 className="p-3"
@@ -191,7 +191,7 @@ const Navbar = memo((props) => {
                         </div>
                     </Col>
                 </Row>
-                <Row className="p-3 d-flex justify-content-end align-items-end m-0 py-3 fixed-bottom mb-5">
+                <Row className="">
                     <Col className="d-flex align-items-center">
                         <LanguageSwitcher theme={"dark"} />
                     </Col>
