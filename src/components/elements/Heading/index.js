@@ -26,7 +26,7 @@ const Heading = memo((props) => {
     Tag = "h2";
   } else if (size === "xxl") {
     Tag = "h1";
-    ClassName = "display-3 fw-bolder";
+    ClassName = "display-3";
   } else {
     Tag = "h1";
   }

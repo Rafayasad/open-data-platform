@@ -98,6 +98,9 @@ const Navbar = memo((props) => {
                         </div>
                     </Col>
                     <Col className="d-flex justify-content-end align-items-center">
+                        <div className="d-flex justify-content-center mx-2">
+                            <LanguageSwitcher theme={theme} />
+                        </div>
                         <div className="d-flex justify-content-center mx-1">
                             <Link style={{ textDecoration: 'none' }} to={routes.REGISTER}>
                                 <Button borderColor={color} backgroundColor='transparent' textColor={color} title={"Register"} />
