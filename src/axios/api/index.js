@@ -381,6 +381,8 @@ export const getAboutUs = (setData) => {
                     })
                 )
 
+                console.log("here ia m", arr)
+
                 setData(arr)
 
             }
@@ -507,6 +509,66 @@ export const getQuestionById = (id, setData) => {
                 setData(detail)
 
             }
+        }).catch((err) => {
+            console.log("Error message", err)
+        })
+}
+
+export const getSuccessStories = (setData) => {
+    return endpoints.
+        getSuccessStories().then(async (res) => {
+
+            if (res.status === 200) {
+
+                let data = res.data.data;
+                console.log("Success Stories", data)
+
+                let stories = await Promise.all(data.map(async item => {
+
+                    let { id, attributes, relationships } = item;
+                    let { title, titlear, short_description, short_descriptionar } = attributes;
+                    let { story_paragraph, story_tags, story_tagsar } = relationships;
+
+                    let tags = await endpoints.getImages(story_tags.links.related.href).then((res) => {
+                        if (res.status === 200) {
+
+                            let tag = res.data.data.attributes.name
+
+                            return [tag]
+
+                        }
+                    }).catch((err) => {
+                        console.log("Error Message While Getting Tags", err)
+                    })
+
+                    let tags_ar = await endpoints.getImages(story_tagsar.links.related.href).then((res) => {
+                        if (res.status === 200) {
+
+                            let tag = res.data.data.attributes.name
+
+                            return [tag]
+
+                        }
+                    }).catch((err) => {
+                        console.log("Error Message While Getting Tags", err)
+                    })
+
+                    return {
+                        id,
+                        title,
+                        title_ar: titlear,
+                        description: short_description,
+                        description_ar: short_descriptionar,
+                        tags,
+                        tags_ar
+                    }
+
+                }))
+
+                setData(stories)
+
+            }
+
         }).catch((err) => {
             console.log("Error message", err)
         })

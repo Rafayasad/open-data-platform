@@ -42,5 +42,8 @@ export const endpoints = {
     },
     getQuestionById: (id) => {
         return client.get(`/jsonapi/node/faqs/${id}`)
+    },
+    getSuccessStories: () => {
+        return client.get('/jsonapi/node/stories')
     }
 } 

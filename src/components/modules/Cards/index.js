@@ -36,7 +36,7 @@ const Cards = memo((props) => {
 
     const { i18n } = useTranslation();
 
-    const { title, data, backgroundColor, hoverable, type, onClick } = props
+    const { title, data, backgroundColor, hoverable, type, size, onClick } = props
 
     const renderContent = () => {
         if (type === 'image-inner-text') {
@@ -85,9 +85,11 @@ const Cards = memo((props) => {
                 data && data.length > 0 ? data.map((item, index) => (
                     <Col key={index} md={4} className="py-2">
                         <Card
+                            size={size}
                             hoverable={hoverable}
                             title={i18n.language === locales.AR ? item.title_ar : item.title}
-                            publisher={i18n.language === locales.AR ? item.publisher_ar : item.publisher}
+                            description={item.description && item.description_ar && i18n.language === locales.AR ? item.description_ar : item.description}
+                            publisher={item.publisher && item.publisher_ar && i18n.language === locales.AR ? item.publisher_ar : item.publisher}
                             tags={i18n.language === locales.AR ? item.tags && item.tags_ar.slice(0, 2) : item.tags && item.tags.slice(0, 2)}
                             onClick={() => onClick(item.id)}
                         />

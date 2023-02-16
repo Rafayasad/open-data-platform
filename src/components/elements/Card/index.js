@@ -15,6 +15,8 @@ const Card = memo((props) => {
 
     if (size === 'sm') {
         height = "332px"
+    } else if (size === 'md') {
+        height = '290px'
     }
 
     if (noborder) {
@@ -53,22 +55,25 @@ const Card = memo((props) => {
                     />
                 </Col>
             </Row>
-            <Row className="h-50">
+            <Row className={`${publisher ? "h-50" : "h-75"}`}>
                 <Col md={shortTitle ? 8 : 12}>
                     <Heading bold underline maxNumberOfLines={shortTitle ? 2 : 3} size={headingSize ? headingSize : "md"} heading={title} onClick={onClick} />
                 </Col>
                 {
                     description &&
                     <Col md={10}>
-                        <Heading maxNumberOfLines={shortTitle ? 2 : 3} color={'#404040'} size="xs" heading={description} />
+                        <Heading maxNumberOfLines={shortTitle ? 2 : 3} color={'#404040'} size="xxs" heading={description} />
                     </Col>
                 }
             </Row>
-            <Row className="h-25 align-items-end" >
-                <Col>
-                    <Heading size='xxs' color={colors.gray} nomargin heading={publisher} />
-                </Col>
-            </Row>
+            {
+                publisher &&
+                <Row className="h-25 align-items-end" >
+                    <Col>
+                        <Heading size='xxs' color={colors.gray} nomargin heading={publisher} />
+                    </Col>
+                </Row>
+            }
         </RBCard>
     )
 });
