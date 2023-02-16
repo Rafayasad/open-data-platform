@@ -57,7 +57,7 @@ const DatasetDetail = memo(() => {
 
     return (
         <>
-            <Navbar theme="dark" />
+            <Navbar theme="dark" sticky />
             <div className="my-5 py-5">
                 <Main data={dataset} />
                 <Cards title={t("similarDatasets")} backgroundColor={colors.white} data={similarDataset} />

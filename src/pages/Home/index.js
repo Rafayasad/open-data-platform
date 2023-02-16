@@ -22,6 +22,7 @@ const Home = memo(() => {
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false)
+    const [scrolling, setScrolling] = useState();
 
     const [platformInsights, setPlatformInsights] = useState();
     const [mostViewedDatasets, setMostViewedDatasets] = useState();
@@ -40,7 +41,7 @@ const Home = memo(() => {
 
     return (
         <>
-            <Navbar />
+            <Navbar sticky />
             <Main onSearch={onSearch} />
             <Topics data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en} />
             <Images />

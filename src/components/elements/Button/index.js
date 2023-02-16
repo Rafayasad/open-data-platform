@@ -5,7 +5,7 @@ const Button = memo((props) => {
 
     const { t } = useTranslation()
 
-    const { title, backgroundColor, textColor, borderColor, onClick } = props
+    const { title, backgroundColor, textColor, width, borderColor, onClick } = props
 
     return (
         <button
@@ -15,7 +15,7 @@ const Button = memo((props) => {
                 backgroundColor: backgroundColor ? backgroundColor : 'white',
                 color: textColor ? textColor : 'black',
                 height: 52,
-                width: 'auto',
+                width: width ? width : 'auto',
                 borderRadius: 100,
                 border: borderColor ? '2px solid' : 'none',
                 borderColor: borderColor,
