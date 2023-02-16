@@ -37,9 +37,10 @@ const Tabs = memo((props) => {
                             }
                         </Tab.Content>
                     </Col>
+                    <div className="mx-2" style={{ border: '1px solid #CFCFCF' }} />
                     {
                         staticComponentOnRight &&
-                        <Col md={4} className="px-3" style={{ borderLeft: '1.5px solid #CFCFCF' }}>
+                        <Col md={4} className="px-3">
                             {staticComponentOnRight}
                         </Col>
                     }

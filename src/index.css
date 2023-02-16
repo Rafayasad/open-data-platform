@@ -1,6 +1,6 @@
 html, body {
   margin: 0;
-  font-family: 'CircularStd-Semibold';
+  font-family: 'CircularStd-Regular';
   letter-spacing: -0.03em;
   font-feature-settings: 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on;
   -webkit-font-smoothing: antialiased;
@@ -16,6 +16,26 @@ code {
     monospace;
 }
 
+.ar-font {
+  font-family: 'CircularAr-Regular';
+}
+
+.en-font {
+  font-family: 'CircularStd-Regular';
+}
+
+.ar-font-bold {
+  font-family: 'CircularAr-Semibold';
+}
+
+.en-font-bold {
+  font-family: 'CircularStd-Semibold';
+}
+
+.en-font-default {
+  font-feature-settings: normal;
+}
+
 @font-face {
   font-family: 'CircularStd-Regular';
   src: local('CircularStd'), url(./assets/fonts/CircularStd-Book.ttf) format('truetype');
@@ -29,4 +49,19 @@ code {
 @font-face {
   font-family: 'CircularStd-Semibold';
   src: local('CircularStd'), url(./assets/fonts/CircularStd-Medium.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'CircularAr-Regular';
+  src: local('CircularAr'), url(./assets/fonts/CircularAr-Book.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'CircularAr-Bold';
+  src: local('CircularAr'), url(./assets/fonts/CircularAr-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'CircularAr-Semibold';
+  src: local('CircularAr'), url(./assets/fonts/CircularAr-Medium.ttf) format('truetype');
 }

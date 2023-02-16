@@ -3,27 +3,19 @@ import { Container, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { routes } from '../../../router/helper';
 import { colors } from "../../../utils/colors";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { AiOutlineSearch } from "react-icons/ai";
-import { locales } from "../../../i18n/helper";
-import i18n from "../../../i18n/i18n";
-import Drawer from 'react-modern-drawer'
-import AbuDhabiLogo from '../../../assets/images/Abu-Dhabi-Data-Logo.png'
-import AbuDhabiLogoDark from '../../../assets/images/Abu-Dhabi-Data-Logo-Dark.png'
-import AbuDhabiLogoMobile from '../../../assets/images/Abu-Dhabi-Data-Logo-Mobile.png'
-import AbuDhabiLogoDarkMobile from '../../../assets/images/Abu-Dhabi-Data-Logo-Mobile-Dark.png'
-import Button from "../../elements/Button";
-import Heading from "../../elements/Heading";
 import LanguageSwitcher from "../../elements/LanguageSwitcher";
-import 'react-modern-drawer/dist/index.css';
-import './style.css';
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18n/i18n";
+import { locales } from "../../../i18n/helper";
 
 const Navbar = memo((props) => {
 
-    const { theme, sticky } = props;
+    const { t } = useTranslation()
+    const { theme, sticky } = props
 
     const [isOpen, setIsOpen] = useState(false)
     const [scroll, setScrolling] = useState();
+
 
     let color = colors.white;
 
@@ -75,22 +67,22 @@ const Navbar = memo((props) => {
                     <Col md={6} className="d-flex justify-content-center align-items-center">
                         <div className="mx-3">
                             <Link to={routes.DATASET}>
-                                <p className={`m-0 hover-underline-animation ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>Dataset</p>
+                                <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>Dataset</p>
                             </Link>
                         </div>
                         <div className="mx-3">
                             <Link to={routes.ABOUTUS}>
-                                <p className={`m-0 hover-underline-animation ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>About us</p>
+                                <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>About us</p>
                             </Link>
                         </div>
                         <div className="mx-3">
                             <Link to={routes.SUPPORT}>
-                                <p className={`m-0 hover-underline-animation ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>Support</p>
+                                <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>Support</p>
                             </Link>
                         </div>
                         <div className="mx-3">
                             <Link to={routes.APPLICATIONS}>
-                                <p className={`m-0 hover-underline-animation ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>Application</p>
+                                <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>Application</p>
                             </Link>
                         </div>
                     </Col>

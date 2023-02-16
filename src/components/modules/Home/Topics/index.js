@@ -4,43 +4,12 @@ import { colors } from "../../../../utils/colors";
 import Button from "../../../elements/Button";
 import Heading from "../../../elements/Heading";
 import ListItem from "../../../elements/ListItem";
-
-// const data = [
-//     {
-//         title: "Enviornment",
-//         onClick: () => { }
-//     },
-//     {
-//         title: "Police",
-//         onClick: () => { }
-//     },
-//     {
-//         title: "Agriculture",
-//         onClick: () => { }
-//     },
-//     {
-//         title: "Safety & Security",
-//         onClick: () => { }
-//     },
-//     {
-//         title: "Abu Dhabi",
-//         onClick: () => { }
-//     },
-//     {
-//         title: "Economy",
-//         onClick: () => { }
-//     },
-//     {
-//         title: "Agriculture",
-//         onClick: () => { }
-//     },
-//     {
-//         title: "Safety & Security",
-//         onClick: () => { }
-//     },
-// ]
+import Drone from '../../../../assets/images/TopicDrone.png';
+import { useTranslation } from "react-i18next";
 
 const Topics = memo((props) => {
+
+    const { t } = useTranslation()
 
     const { data } = props
 
@@ -52,12 +21,10 @@ const Topics = memo((props) => {
     const onClick = useCallback(() => setAll(!all))
 
     return (
-        <Container fluid className="m-0 p-0" style={{
-            backgroundColor: colors.black
-        }}>
-            <Row className="p-4 d-block d-sm-none">
+        <Container fluid className="m-0 p-0 bg-black">
+            <Row className="py-4 px-2 m-0 d-block d-sm-none">
                 <Col>
-                    <Heading size='xs' nomargin color={colors.white} heading="Explore Topics" />
+                    <Heading size='xs' nomargin color={colors.white} heading={t("explore")} />
                 </Col>
             </Row>
             {
@@ -65,15 +32,15 @@ const Topics = memo((props) => {
                     <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave} >
                         {
                             index > 0 &&
-                            <hr className="m-0 mx-3" style={{ color: currentHovered == index || currentHovered != null && currentHovered + 1 == index ? 'black' : 'lightgray', borderWidth: 2 }} />
+                            <hr className="m-0 mx-3" style={{ color: currentHovered === index || currentHovered !== null && currentHovered + 1 === index ? 'black' : 'lightgray', borderWidth: 2 }} />
                         }
-                        <ListItem title={item.title} value={item.value} />
+                        <ListItem title={item.title} value={item.value} image={currentHovered === index && Drone} />
                     </div>
                 ))
             }
             <Row className="py-3 m-0">
                 <Col className="d-flex justify-content-end">
-                    <Button borderColor='white' backgroundColor='black' textColor='white' title={all ? "View Less" : "View All"} onClick={onClick} />
+                    <Button borderColor='white' backgroundColor='black' textColor='white' title={all ? t("viewLess") : t("viewAll")} onClick={onClick} />
                 </Col>
             </Row>
         </Container>

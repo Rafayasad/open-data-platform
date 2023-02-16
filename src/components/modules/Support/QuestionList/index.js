@@ -2,23 +2,13 @@ import React, { memo, useCallback, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { colors } from "../../../../utils/colors";
 import QuestionListItem from "../../../elements/QuestionListItem";
+import Shimmer from "../../../elements/Shimmer";
 import Header from '../../Cards/Header';
-
-const data = [
-    {
-        title: "What is dataset?"
-    },
-    {
-        title: "Are there any restrictions on how I can use Open Data?"
-    },
-    {
-        title: "How do I request a dataset that I cannot find?"
-    },
-]
+import Loader from "../../Loader";
 
 const QuestionList = memo((props) => {
 
-    const { title } = props
+    const { title, data, onClick } = props
 
     const [currentHovered, setCurrentHovered] = useState(null);
 
@@ -27,20 +17,18 @@ const QuestionList = memo((props) => {
 
     return (
         <Container fluid className="my-4">
-            {/* <Row> */}
             <Header title={title} backgroundColor={colors.white} nobutton />
-            {/* </Row> */}
             <Row>
                 {
-                    data.map((item, index) => (
+                    data && data.length > 0 ? data.map((item, index) => (
                         <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
                             {
                                 index > 0 &&
                                 <hr className="m-0" style={{ color: currentHovered == index || currentHovered != null && currentHovered + 1 == index ? 'white' : 'lightgray', borderWidth: 2 }} />
                             }
-                            <QuestionListItem title={item.title} />
+                            <QuestionListItem title={item.title} onClick={() => onClick(item.id)} />
                         </div>
-                    ))
+                    )) : <Loader type='full-width-min' />
                 }
             </Row>
         </Container>

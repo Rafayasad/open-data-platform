@@ -1,4 +1,5 @@
 import { convertHtmlToString } from "../../utils"
+import { client } from "../axios"
 import { endpoints } from "../endpoints"
 
 export const getPlatformInsights = (setData, setLoading) => {
@@ -132,27 +133,56 @@ export const getSimilarDatasets = (topic, setData, setLoading) => {
         })
 }
 
-export const getFacets = (key, setData) => {
-    return endpoints.
-        getFacets(key).then((res) => {
+export const getFacets = async (key_en, key_ar, setData) => {
+
+    let en = await endpoints.
+        getFacets(key_en).then((res) => {
+
             if (res.status === 200) {
 
                 let transform = res.data.facets.map(item => ({
                     title: item.name,
-                    value: item.total
+                    value: item.total,
+                    type: item.type
                 }))
 
-                setData(transform)
+                return transform
+
+            }
+
+        }).catch((err) => {
+            console.log("Error message", err)
+        })
+
+    let ar = await endpoints.
+        getFacets(key_ar).then((res) => {
+            if (res.status === 200) {
+
+                let transform = res.data.facets.map(item => ({
+                    title: item.name,
+                    value: item.total,
+                    type: item.type
+                }))
+
+                return transform
 
             }
         }).catch((err) => {
             console.log("Error message", err)
         })
+
+    let facets = { en, ar }
+
+    setData(facets)
+
 }
 
-export const getAllDatasets = (setData, setTotalCount, currentPage, rowsPerPage) => {
+export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage) => {
+
+    setLoading(true)
+
     return endpoints.
-        getAllDatasets(currentPage, rowsPerPage).then((res) => {
+        getAllDatasets(search, sort, currentPage, rowsPerPage).then((res) => {
             if (res.status === 200) {
 
                 setTotalCount(res.data.total)
@@ -166,13 +196,14 @@ export const getAllDatasets = (setData, setTotalCount, currentPage, rowsPerPage)
                         title_ar: item.titlear,
                         description: item.description,
                         description_ar: item.descriptionlear,
-                        publisher: item.publisher.name,
-                        publisher_ar: item.publisherlear.name,
+                        publisher: item.publisher?.name,
+                        publisher_ar: item.publisherlear?.name,
                         tags: item.theme,
                         tags_ar: item.themelear
                     }
                 ))
 
+                setLoading(false)
                 setData(arr)
 
             }
@@ -194,10 +225,10 @@ export const getDatasetById = (id, setData) => {
                     title_ar: item.titlear,
                     description: item.description,
                     description_ar: item.description_ar,
-                    publisher: item.publisher.name,
-                    publisher_ar: item.publisherlear.name,
+                    publisher: item.publisher?.name,
+                    publisher_ar: item.publisherlear?.name,
                     frequency: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
-                    frequency_ar: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
+                    frequency_ar: item.accrualPeriodicity === "R/P1Y" ? "سنوي" : item.accrualPeriodicity === "auto/freq" ? "تلقائي" : "لا يوجد",
                     access_level: item.accessLevel,
                     access_level_ar: item.accessLevellear,
                     license: item.license,
@@ -349,7 +380,6 @@ export const getAboutUs = (setData) => {
 
                     })
                 )
-                console.log("Cjecl", arr)
 
                 setData(arr)
 
@@ -371,9 +401,11 @@ export const getFaqsCategory = async (setData) => {
 
             data.map((item) => {
 
+                const id = item.id
                 const { name, description } = item.attributes;
 
                 let obj = {
+                    id,
                     title: name,
                     description: convertHtmlToString(description.value)
                 }
@@ -397,9 +429,11 @@ export const getFaqsCategory = async (setData) => {
 
             data.map((item) => {
 
+                const id = item.id
                 const { name, description } = item.attributes;
 
                 let obj = {
+                    id,
                     title: name,
                     description: convertHtmlToString(description.value)
                 }
@@ -417,4 +451,63 @@ export const getFaqsCategory = async (setData) => {
 
     setData(categories)
 
+}
+
+export const getPopularQuestions = (setData) => {
+    return endpoints.
+        getPopularQuestions().then((res) => {
+
+            if (res.status === 200) {
+
+                let data = res.data.data;
+
+                let popularQuestions = []
+
+                data.map(item => {
+
+                    const id = item.id
+                    const { title, field_question_ar, field_popular_faqs } = item.attributes;
+
+                    if (field_popular_faqs == "Yes") {
+
+                        popularQuestions.push({
+                            id,
+                            title,
+                            title_ar: field_question_ar
+                        })
+
+                        return;
+                    }
+
+                })
+
+                setData(popularQuestions)
+
+            }
+
+        }).catch((err) => {
+            console.log("Error Message", err)
+        })
+}
+
+export const getQuestionById = (id, setData) => {
+    return endpoints.
+        getQuestionById(id).then((res) => {
+            if (res.status === 200) {
+
+                let { title, field_question_ar, field_answer, field_answer_ar } = res.data.data.attributes;
+
+                let detail = {
+                    title,
+                    title_ar: field_question_ar,
+                    description: field_answer,
+                    description_ar: field_answer_ar
+                }
+
+                setData(detail)
+
+            }
+        }).catch((err) => {
+            console.log("Error message", err)
+        })
 }

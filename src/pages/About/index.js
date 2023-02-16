@@ -8,6 +8,7 @@ import LowerFooter from "../../components/modules/Footer/LowerFooter";
 import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
 import Navbar from "../../components/modules/Navbar";
 import { colors } from "../../utils/colors";
+import { useTranslation } from "react-i18next";
 
 const data = [
     {
@@ -25,6 +26,8 @@ const data = [
 ]
 
 const About = memo(() => {
+    
+    const { t } = useTranslation()
 
     const [aboutus, setAboutus] = useState();
 
@@ -32,26 +35,13 @@ const About = memo(() => {
         getAboutUs(setAboutus);
     }, [])
 
-    console.log("comm", aboutus)
-
     return (
         <>
             <Navbar theme='dark' />
             <div className="my-5 py-5">
-                {
-                    aboutus && aboutus.length > 0 && aboutus.map((item, index) => (
-                        <>
-                            <Main key={index} title={item.title} description={item.description} image={item.image} />
-                            {
-                                item && item.rows.length > 0 && item.rows.map((item, index) => (
-                                    <Rows key={index} title={item.title} description={item.description} image={item.image} />
-                                ))
-                            }
-                        </>
-                    ))
-                }
+                <Main data={aboutus} />
             </div>
-            <Cards backgroundColor={colors.white} title="Success Stories" data={data} />
+            <Cards backgroundColor={colors.white} title={t("successStories")} data={data} />
             <AdLogo />
             <MiddleFooter />
             <LowerFooter />

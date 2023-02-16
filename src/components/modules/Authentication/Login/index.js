@@ -4,8 +4,12 @@ import AuthBackground1 from "../../../../assets/images/Auth-Background-1.png";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import AuthCard from "../AuthCard";
+import { useTranslation } from "react-i18next";
 
 const Login = memo(() => {
+
+  const { t } = useTranslation()
+
   return (
     <div
       className="d-flex"
@@ -23,7 +27,7 @@ const Login = memo(() => {
             <Row className="p-5">
               <Col md={8}>
                 <Heading
-                  heading="An Open Data experience that's tailored for you"
+                  heading={t("pwdopendata")}
                   color={colors.white}
                 />
               </Col>
@@ -31,23 +35,23 @@ const Login = memo(() => {
           </Col>
           <Col className="d-flex justify-content-center align-items-center">
             <AuthCard
-              title="Log in"
-              subtitle="Don't have an account?"
-              linktext={{ display_text: "Request access", onClick: "" }}
+              title="logIn"
+              subtitle="accDontExist"
+              linktext={{ display_text: "requestAccess", onClick: "" }}
               inputFields={[
-                { placeholder: "Government email", type: "email" },
-                { placeholder: "Password", type: "password" },
+                { placeholder: "governmentEmail", type: "email" },
+                { placeholder: "password", type: "password" },
               ]}
               button={[
                 {
-                  title: "Log in",
+                  title: "logIn",
                   onClick: "",
                   backgroundColor: colors.black,
                   textColor: colors.white,
                   textSize: "",
                 },
                 {
-                  title: "Log in with UAE PASS",
+                  title: "LoginWithUAE",
                   onClick: "",
                   backgroundColor: colors.white,
                   textColor: colors.black,

@@ -6,3 +6,7 @@
     background-color: #762FFF;
     color: #FFFFFF !important;
 }
+
+.card-hover-primary:hover div:nth-child(3) div p {
+    color: #FFFFFF !important;
+}

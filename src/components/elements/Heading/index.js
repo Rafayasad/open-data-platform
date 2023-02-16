@@ -1,8 +1,10 @@
 import React, { memo } from "react";
+import i18next from "i18next";
 import "./style.css";
 
 const Heading = memo((props) => {
-  const { heading, color, size, underline, maxNumberOfLines, nomargin, capitalize, onClick } = props;
+
+  const { heading, color, size, underline, maxNumberOfLines, nomargin, capitalize, bold, onClick } = props;
 
   var Tag,
     ClassName = "";
@@ -13,6 +15,7 @@ const Heading = memo((props) => {
 
   if (size === "xxs") {
     Tag = "p";
+    ClassName = ClassName + " " + "en-font-default"
   } else if (size === "xs") {
     Tag = "h5";
   } else if (size === "sm") {
@@ -44,11 +47,15 @@ const Heading = memo((props) => {
     ClassName = ClassName + " " + "text-capitalize"
   }
 
+  if (bold) {
+    ClassName = ClassName + " " + `${i18next.language === 'ar' ? "ar-font-bold" : "en-font-bold"}`
+  }
+
   return (
     <Tag
       className={ClassName}
       style={{
-        color: color ? color : "#00000",
+        color: color ? color : "#00000"
       }}
       onClick={onClick ? onClick : () => { }}
     >

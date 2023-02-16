@@ -1,7 +1,8 @@
 import React, { memo } from "react";
 import { Card as RBCard, Col, Row } from "react-bootstrap";
-import { BsThreeDots } from "react-icons/bs";
+import { BsPerson, BsShare, BsThreeDots } from "react-icons/bs";
 import './style.css';
+import Dropdown from '../../elements/DropDown';
 import { colors } from "../../../utils/colors";
 import Heading from "../Heading";
 import Tag from "../Tag";
@@ -35,12 +36,26 @@ const Card = memo((props) => {
                     }
                 </Col>
                 <Col md={2} className='d-flex justify-content-end'>
-                    <BsThreeDots size={28} style={{ cursor: 'pointer' }} />
+                    <Dropdown
+                        options={
+                            [
+                                {
+                                    title: "Download",
+                                    icon: <BsPerson />
+                                },
+                                {
+                                    title: "Share",
+                                    icon: <BsShare />
+                                }
+                            ]
+                        }
+                        headerComponent={<BsThreeDots color={colors.black} size={28} style={{ cursor: 'pointer' }} />}
+                    />
                 </Col>
             </Row>
             <Row className="h-50">
                 <Col md={shortTitle ? 8 : 12}>
-                    <Heading underline maxNumberOfLines={shortTitle ? 2 : 3} size={headingSize ? headingSize : "md"} heading={title} onClick={onClick} />
+                    <Heading bold underline maxNumberOfLines={shortTitle ? 2 : 3} size={headingSize ? headingSize : "md"} heading={title} onClick={onClick} />
                 </Col>
                 {
                     description &&
@@ -49,7 +64,7 @@ const Card = memo((props) => {
                     </Col>
                 }
             </Row>
-            <Row className="h-25 align-items-end">
+            <Row className="h-25 align-items-end" >
                 <Col>
                     <Heading size='xxs' color={colors.gray} nomargin heading={publisher} />
                 </Col>
