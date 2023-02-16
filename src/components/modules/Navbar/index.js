@@ -1,23 +1,29 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { Fragment, memo, useCallback, useState, useEffect } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { routes } from '../../../router/helper';
+import { colors } from "../../../utils/colors";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { AiOutlineSearch } from "react-icons/ai";
+import { locales } from "../../../i18n/helper";
+import i18n from "../../../i18n/i18n";
 import Drawer from 'react-modern-drawer'
-import 'react-modern-drawer/dist/index.css'
-import './style.css';
 import AbuDhabiLogo from '../../../assets/images/Abu-Dhabi-Data-Logo.png'
 import AbuDhabiLogoDark from '../../../assets/images/Abu-Dhabi-Data-Logo-Dark.png'
 import AbuDhabiLogoMobile from '../../../assets/images/Abu-Dhabi-Data-Logo-Mobile.png'
 import AbuDhabiLogoDarkMobile from '../../../assets/images/Abu-Dhabi-Data-Logo-Mobile-Dark.png'
 import Button from "../../elements/Button";
-import { routes } from '../../../router/helper';
-import { colors } from "../../../utils/colors";
-import { RxHamburgerMenu } from "react-icons/rx";
+import Heading from "../../elements/Heading";
+import LanguageSwitcher from "../../elements/LanguageSwitcher";
+import 'react-modern-drawer/dist/index.css';
+import './style.css';
 
 const Navbar = memo((props) => {
 
-    const { theme } = props
+    const { theme, sticky } = props;
 
     const [isOpen, setIsOpen] = useState(false)
+    const [scroll, setScrolling] = useState();
 
     let color = colors.white;
 
@@ -26,6 +32,36 @@ const Navbar = memo((props) => {
     }
 
     const onClickDrawer = useCallback(() => setIsOpen(!isOpen), [isOpen])
+
+    const MobileRoutes = [
+        {
+            name: "Datasets",
+            route: routes.DATASET
+        },
+        {
+            name: "Applications",
+            route: routes.APPLICATIONS
+        },
+        {
+            name: "Support",
+            route: routes.SUPPORT
+        },
+        {
+            name: "About us",
+            route: routes.ABOUTUS
+        }
+
+    ]
+
+    window.addEventListener("scroll", (event) => {
+        const windowHeight = window.innerHeight;
+        const currScroll = window.scrollY;
+        if (sticky && windowHeight < currScroll) {
+            setScrolling(windowHeight < currScroll);
+        } else {
+            setScrolling();
+        }
+    });
 
     return (
         <>
@@ -72,13 +108,16 @@ const Navbar = memo((props) => {
                     </Col>
                 </Row>
             </Container>
-            <Container fluid className="p-3 d-block d-lg-none" style={{ position: 'absolute', top: 0, right: 0, left: 0 }}>
+            <Container fluid className={`p-3 d-block d-lg-none ${scroll && "sticky bg-white transition"}`} style={{ position: !scroll && 'absolute', top: 0, left: 0, right: 0, zIndex: 1 }}>
                 <Row className="d-flex justify-content-between align-items-center" >
                     <Col className="d-flex align-items-center justify-content-start">
-                        <img height={"40px"} src={theme === 'dark' ? AbuDhabiLogoDarkMobile : AbuDhabiLogoMobile} />
+                        <Link to={routes.HOME}>
+                            <img height={"40px"}
+                                src={theme === 'dark' || scroll ? AbuDhabiLogoDarkMobile : AbuDhabiLogoMobile} />
+                        </Link>
                     </Col>
                     <Col className="d-flex align-items-center justify-content-end">
-                        <RxHamburgerMenu size={25} color="white" onClick={onClickDrawer} />
+                        <RxHamburgerMenu size={25} color={theme === 'dark' || scroll ? colors.black : colors.white} onClick={onClickDrawer} />
                     </Col>
                 </Row>
             </Container>
@@ -86,17 +125,72 @@ const Navbar = memo((props) => {
                 style={{ width: "100%", height: "100vh" }}
                 open={isOpen}
                 direction='right'
+                className="p-3"
+                lockBackgroundScroll
             >
-                <Row className="p-3">
+                <Row className="">
                     <Col className="d-flex align-items-center">
-                        <img height={"40px"} src={AbuDhabiLogoDarkMobile} />
+                        <Link to={routes.HOME}>
+                            <img height={"40px"} src={AbuDhabiLogoDarkMobile} />
+                        </Link>
                     </Col>
                     <Col className="d-flex justify-content-end align-items-center">
-                        <div className="d-flex justify-content-center mx-1">
+                        <div className="d-flex justify-content-center">
+                            <div className="px-4">
+                                <AiOutlineSearch size={25} color="black" onClick={onClickDrawer} />
+                            </div>
+                            <div className="">
+                                <RxHamburgerMenu size={25} color="black" onClick={onClickDrawer} />
+                            </div>
                         </div>
-                        <div className="d-flex justify-content-center mx-1">
-                            <RxHamburgerMenu size={25} color="black" onClick={onClickDrawer} />
+                    </Col>
+                </Row>
+                <Row className="d-flex my-5">
+                    {
+                        MobileRoutes.map((item, index) => {
+                            return (
+                                <Fragment>
+                                    <Col className="d-flex align-items-center py-2" xs={12}>
+                                        <Link style={{ textDecoration: "none" }} to={item.route}>
+                                            <Heading size={"xl"} color={colors.black} nomargin heading={item.name} />
+                                        </Link>
+                                    </Col>
+                                    {
+                                        index != MobileRoutes.length - 1
+                                        &&
+                                        <div className="">
+                                            <hr className="py-1" />
+                                        </div>
+                                    }
+                                </Fragment>
+                            )
+                        })}
+                </Row>
+                <Row className="">
+                    <Col>
+                        <Link style={{ textDecoration: 'none' }} to={routes.LOGIN}>
+                            <Button width={"100%"} borderColor={""} backgroundColor='black' textColor={"white"} title={"Log In"} />
+                        </Link>
+                    </Col>
+                </Row>
+                <Row className="d-flex justify-content-center my-3">
+                    <Col className="d-flex align-items-center justify-content-center py-4 bg-light" style={{ borderRadius: "20px" }} xs={11}>
+                        <div>
+                            <Heading size={"xxs"} color={colors.black} nomargin heading={`New to Abu Dhabi Data ${i18n.language === locales.EN ? "?" : "؟"}`} />
                         </div>
+                        <div className="px-2">
+                            <Link style={{ textDecoration: 'none' }} to={routes.REGISTER}>
+                                <Heading size={"xxs"} color={colors.purple} nomargin heading={"Register here"} />
+                            </Link>
+                        </div>
+                    </Col>
+                </Row>
+                <Row className="p-3 d-flex justify-content-end align-items-end m-0 py-3 fixed-bottom mb-5">
+                    <Col className="d-flex align-items-center">
+                        <LanguageSwitcher />
+                    </Col>
+                    <Col className="d-flex align-items-center justify-content-end">
+                        <Heading size={"xxs"} nomargin color={colors.gray} heading={"ADDA @ 2022"} />
                     </Col>
                 </Row>
             </Drawer>

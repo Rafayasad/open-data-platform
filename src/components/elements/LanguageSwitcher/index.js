@@ -16,7 +16,7 @@ const LanguageSwitcher = memo(() => {
             <p
                 style={{ cursor: "pointer" }}
                 onClick={handler}
-                className=''>{i18n.language === locales.AR ? "عربى" : "english"}
+                className='m-0 p-0'>{i18n.language === locales.EN ? "عربى" : "English"}
             </p>
         </div>
     )

@@ -39,7 +39,7 @@ const Images = memo(() => {
                 </Col>
             </Row>
             <Row>
-                <Col xs={12} md={6} className="my-2">
+                <Col xs={12} md={12} lg={6} className="my-2">
                     <div className="d-flex flex-column justify-content-center" style={{
                         height: '60vh',
                         backgroundImage: `url(${CardOne})`,
@@ -64,7 +64,7 @@ const Images = memo(() => {
                         </Row>
                     </div>
                 </Col>
-                <Col xs={12} md={6} className="my-2">
+                <Col xs={12} md={12} lg={6} className="my-2">
                     <div className="d-flex flex-column justify-content-center" style={{
                         height: '60vh',
                         backgroundImage: `url(${CardTwo})`,

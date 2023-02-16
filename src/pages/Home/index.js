@@ -28,6 +28,7 @@ const data = [
 const Home = memo(() => {
 
     const [loading, setLoading] = useState(false)
+    const [scrolling, setScrolling] = useState();
 
     const [platformInsights, setPlatformInsights] = useState();
     const [mostViewedDatasets, setMostViewedDatasets] = useState();
@@ -43,9 +44,9 @@ const Home = memo(() => {
 
     return (
         <>
-            <Navbar />
+            <Navbar sticky />
             <Main />
-            {/* <Topics data={topics} /> */}
+            <Topics data={topics} />
             <Images />
             <Cards title="Most Viewed Datasets" backgroundColor={'black'} data={mostViewedDatasets} />
             <Cards title="Recently Added Datasets" backgroundColor={'black'} data={recentsDatasets} />
