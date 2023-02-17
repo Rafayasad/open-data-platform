@@ -11,14 +11,16 @@ const Topics = memo((props) => {
 
     const { t } = useTranslation()
 
-    const { data } = props
+    const { data, onClickList } = props;
 
     const [currentHovered, setCurrentHovered] = useState(null);
     const [all, setAll] = useState(false);
+    const [selectedListItem, setSelectedListItem] = useState();
 
     const onHover = useCallback((index) => setCurrentHovered(index), [currentHovered])
     const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered])
     const onClick = useCallback(() => setAll(!all))
+    const onClickListItem = useCallback((item) => onClickList(item), [])
 
     return (
         <Container fluid className="m-0 p-0 bg-black">
@@ -34,7 +36,7 @@ const Topics = memo((props) => {
                             index > 0 &&
                             <hr className="m-0 mx-3" style={{ color: currentHovered === index || currentHovered !== null && currentHovered + 1 === index ? 'black' : 'lightgray', borderWidth: 2 }} />
                         }
-                        <ListItem title={item.title} value={item.value} image={currentHovered === index && Drone} />
+                        <ListItem title={item.title} value={item.value} image={currentHovered === index && Drone} onClick={() => onClickListItem(item)} />
                     </div>
                 ))
             }

@@ -41,3 +41,5 @@
 .transition{
     transition: 0.2s ease-in-out;
 }
+
+::-webkit-scrollbar {display:none;}

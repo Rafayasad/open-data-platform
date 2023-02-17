@@ -20,8 +20,8 @@ export const endpoints = {
     getFacets: (key) => {
         return client.get(`/api/1/search/facets?fulltext=&page=1&page-size=10&sort=modified&sort-order=desc&facets=${key}`);
     },
-    getAllDatasets: (search, sort, currentPage, rowsPerPage) => {
-        return client.get(`/api/1/search/facets?fulltext=${search}&page=${currentPage}&page-size=${rowsPerPage}&sort-order=${sort === 'modified' ? "desc" : "aesc"}&sort=${sort}&facets=0`);
+    getAllDatasets: (search, sort, currentPage, rowsPerPage, filters) => {
+        return client.get(`/api/1/search/facets?fulltext=${search}&page=${currentPage}&page-size=${rowsPerPage}&sort-order=${sort === 'modified' ? "desc" : "aesc"}&sort=${sort}&facets=0&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
     },
     getDatasetById: (id) => {
         return client.get(`/api/1/metastore/schemas/dataset/items/${id}`);

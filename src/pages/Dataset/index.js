@@ -11,13 +11,15 @@ import { getAllDatasets, getRecentsDatasets } from "../../axios/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../router/helper";
 import { useTranslation } from "react-i18next";
+import i18n from "../../i18n/i18n";
+import { locales } from "../../i18n/helper";
 
 const Dataset = memo(() => {
 
     const { t } = useTranslation();
 
     const navigate = useNavigate();
-    const { state } = useLocation();
+    const { state, pathname } = useLocation();
 
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
@@ -27,6 +29,7 @@ const Dataset = memo(() => {
     const [datasets, setDatasets] = useState();
     const [search, setSearch] = useState("");
     const [sort, setSort] = useState("Title");
+    const [filters, setFilters] = useState([]);
 
     const [loading, setLoading] = useState(false);
 
@@ -37,10 +40,26 @@ const Dataset = memo(() => {
         if (state && state.search) {
             setSearch(state.search)
         }
+        if (state && state.listItem) {
+            setFilters([state.listItem])
+        }
+
+        if (state) {
+            navigate(pathname, { replace: true, state: null },)
+            getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort.toLowerCase(), currentPage, rowsPerPage, state.listItem ? [state.listItem] : [])
+        }
 
     }, []);
 
-    useEffect(() => { getAllDatasets(setDatasets, setTotalCount, setLoading, search, sort.toLowerCase(), currentPage, rowsPerPage) }, [currentPage, search, sort]);
+    useEffect(() => {
+        if (currentPage || search || sort || filters) {
+
+            if (!state?.search && !state?.listItem) {
+                getAllDatasets(setDatasets, setTotalCount, setLoading, search, sort.toLowerCase(), currentPage, rowsPerPage, filters)
+            }
+
+        }
+    }, [currentPage, search, sort, filters]);
 
     const onClickCard = useCallback((id) => { navigate(`${routes.DATASET_DETAIL}?id=${id}`) }, []);
 
@@ -50,10 +69,25 @@ const Dataset = memo(() => {
 
     const onChangeDropdownValue = useCallback((e) => setSort(e), [sort])
 
+    const onApplyFilter = useCallback((filters) => setFilters([...filters]), [filters])
+
+    const onDeleteFilter = useCallback((filter) => {
+        if (filter) {
+
+            let arr = [...filters];
+            let index = filters.findIndex(item => item.title === filter.title)
+
+            arr.splice(index, 1)
+
+            setFilters([...arr])
+
+        }
+    }, [filters])
+
     return (
         <>
             <Navbar theme={'dark'} />
-            <Main search={search} onChangeSearch={onChangeSearch} />
+            <Main search={search} onChangeSearch={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
             <Cards title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={recentsDatasets} onClick={onClickCard} />
             <DatasetList totalCount={totalCount} rowsPerPage={rowsPerPage} datasets={datasets} currentPage={currentPage} loading={loading} onChangePage={onChangePage} selectedValue={sort} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue} />
             <UpperFooter title={t("GetMore")} button={t("registerNow")} />
