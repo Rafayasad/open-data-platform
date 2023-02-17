@@ -1,5 +1,7 @@
 import React, { memo, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { RxCross2 } from "react-icons/rx";
+import { useTranslation } from "react-i18next";
 import Heading from "../../../elements/Heading";
 import Search from "../../../elements/Search";
 import Tag from "../../../elements/Tag";
@@ -20,13 +22,13 @@ const Main = memo((props) => {
                     <Row>
                         <Col />
                         <Col xs={10} md={6} style={{ textAlign: 'center' }} className="py-2">
-                            <Heading bold color="black" heading={t("datasetTitle")} />
+                            <Heading bold color={colors.black} heading={t("datasetTitle")} />
                         </Col>
                         <Col />
                     </Row>
                     <Row>
                         <Col />
-                        <Col xs={12} md={8} className="py-2">
+                        <Col xs={12} md={10} lg={8} className="py-3">
                             <Search
                                 placeholder={t("searchKeywords")}
                                 onChange={onChangeSearch}
@@ -58,7 +60,7 @@ const Main = memo((props) => {
                     </Col>
                 </Row>
             }
-        </Container>
+        </Container >
     )
 });
 

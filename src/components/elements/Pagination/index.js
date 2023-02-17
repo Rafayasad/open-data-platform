@@ -32,8 +32,8 @@ const Pagination = memo((props) => {
                         <MUIPagination
                             showFirstButton
                             showLastButton
-                            page={currentPage}
-                            count={totalCount}
+                            page={currentPage || 1}
+                            count={totalCount || 1}
                             color="neutral"
                             onChange={(_, value) => {
                                 onChange(value);

@@ -55,7 +55,8 @@ const Heading = memo((props) => {
     <Tag
       className={ClassName}
       style={{
-        color: color ? color : "#00000"
+        color: color ? color : "#00000",
+        cursor: onClick && "pointer"
       }}
       onClick={onClick ? onClick : () => { }}
     >

@@ -2,7 +2,8 @@ import { client } from "../axios"
 
 export const endpoints = {
     getImages: (image) => {
-        return client.get(image);
+        let url = image.replace('http://', 'https://');
+        return client.get(url);
     },
     getPlatformInsights: () => {
         return client.get("/apis/platform_insights-2.php");
@@ -45,5 +46,8 @@ export const endpoints = {
     },
     getSuccessStories: () => {
         return client.get('/jsonapi/node/stories')
+    },
+    getSuccessStoriesById: (id) => {
+        return client.get(`/jsonapi/node/stories?filter[id]=${id}`)
     }
 } 

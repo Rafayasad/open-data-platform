@@ -180,6 +180,7 @@ export const getFacets = async (key_en, key_ar, setData) => {
 export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage, filters) => {
 
     setLoading(true)
+    setTotalCount(0)
 
     console.log("FILTERS", filters);
     let finalFilters = []
@@ -537,13 +538,26 @@ export const getSuccessStories = (setData) => {
             if (res.status === 200) {
 
                 let data = res.data.data;
-                console.log("Success Stories", data)
 
                 let stories = await Promise.all(data.map(async item => {
 
                     let { id, attributes, relationships } = item;
-                    let { title, titlear, short_description, short_descriptionar } = attributes;
-                    let { story_paragraph, story_tags, story_tagsar } = relationships;
+                    let { title, titlear, short_description, short_descriptionar, created } = attributes;
+                    let { banner, story_paragraph, story_tags, story_tagsar } = relationships;
+
+                    console.log("asa", attributes)
+
+                    let image = await endpoints.getImages(banner.links.related.href).then((res) => {
+                        if (res.status === 200) {
+
+                            let image = res.data.data.attributes.uri.url
+
+                            return `${process.env.REACT_APP_BASE_URL}${image}`;
+
+                        }
+                    }).catch((err) => {
+                        console.log("Error Message While Getting Tags", err)
+                    })
 
                     let tags = await endpoints.getImages(story_tags.links.related.href).then((res) => {
                         if (res.status === 200) {
@@ -576,12 +590,150 @@ export const getSuccessStories = (setData) => {
                         description: short_description,
                         description_ar: short_descriptionar,
                         tags,
-                        tags_ar
+                        tags_ar,
+                        image,
+                        created: new Date(created).toLocaleDateString("en-US", { dateStyle: 'long' })
                     }
 
                 }))
 
                 setData(stories)
+
+            }
+
+        }).catch((err) => {
+            console.log("Error message", err)
+        })
+}
+
+export const getSuccessStoriesById = (id, setData) => {
+    return endpoints.
+        getSuccessStoriesById(id).then(async (res) => {
+
+            if (res.status === 200) {
+
+                let data = res.data.data;
+
+                let stories = await Promise.all(data.map(async item => {
+
+                    let { id, attributes, relationships } = item;
+                    let { title, titlear, short_description, short_descriptionar, description, descriptionar, created } = attributes;
+                    let { banner, story_paragraph, story_tags, story_tagsar } = relationships;
+
+                    let rows = await endpoints.getImages(story_paragraph.links.related.href).then(async (res) => {
+                        if (res.status === 200) {
+
+                            let data = res.data.data;
+
+                            let rows = await Promise.all(data.map(async (item, index) => {
+
+                                console.log("cnana", item, index)
+
+                                let { field_paragraph_title, field__nwan_alfqrt, field_paragraph_description, field_wsf_alfqrt } = item.attributes;
+                                let { field_paragraph_image } = item.relationships;
+
+                                let image = await endpoints.getImages(field_paragraph_image.links.related.href).then((res) => {
+
+                                    if (res.status === 200) {
+
+                                        if (res.data.data) {
+                                            let image = res.data.data.attributes.uri.url;
+
+                                            return `${process.env.REACT_APP_BASE_URL}${image}`;
+                                        }
+
+                                        return null;
+
+                                    }
+
+                                });
+
+                                return {
+                                    title: field_paragraph_title,
+                                    title_ar: field__nwan_alfqrt,
+                                    description: field_paragraph_description,
+                                    description_ar: field_wsf_alfqrt,
+                                    image
+                                }
+
+                            }));
+
+                            return rows;
+
+                        }
+                    }).catch((err) => {
+                        console.log("Error Message While Getting Rows", err)
+                    })
+
+                    let image = await endpoints.getImages(banner.links.related.href).then((res) => {
+                        if (res.status === 200) {
+
+                            let image = res.data.data.attributes.uri.url
+
+                            return `${process.env.REACT_APP_BASE_URL}${image}`;
+
+                        }
+                    }).catch((err) => {
+                        console.log("Error Message While Getting Tags", err)
+                    })
+
+                    let tags = await endpoints.getImages(story_tags.links.related.href).then((res) => {
+                        if (res.status === 200) {
+
+                            let tag = res.data.data.attributes.name
+
+                            return [tag]
+
+                        }
+                    }).catch((err) => {
+                        console.log("Error Message While Getting Tags", err)
+                    })
+
+                    let tags_ar = await endpoints.getImages(story_tagsar.links.related.href).then((res) => {
+                        if (res.status === 200) {
+
+                            let tag = res.data.data.attributes.name
+
+                            return [tag]
+
+                        }
+                    }).catch((err) => {
+                        console.log("Error Message While Getting Tags", err)
+                    })
+
+                    console.log({
+                        id,
+                        title,
+                        title_ar: titlear,
+                        short_description: short_description,
+                        short_description_ar: short_descriptionar,
+                        description,
+                        description_ar: descriptionar,
+                        tags,
+                        tags_ar,
+                        image,
+                        created: new Date(created).toLocaleDateString("en-US", { dateStyle: 'long' }),
+                        rows
+                    })
+
+                    return {
+                        id,
+                        title,
+                        title_ar: titlear,
+                        short_description: short_description,
+                        short_description_ar: short_descriptionar,
+                        description,
+                        description_ar: descriptionar,
+                        tags,
+                        tags_ar,
+                        image,
+                        created: new Date(created).toLocaleDateString("en-US", { dateStyle: 'long' }),
+                        rows
+                    }
+
+                }))
+
+                setData(stories[0])
 
             }
 
