@@ -8,4 +8,5 @@ export const colors = {
     pearl_white: "#B7B7B7",
     purple: "#8207C9",
     light_purple: "#F3E6FA",
+    red:"#EA3F2E"
 }

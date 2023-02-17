@@ -182,7 +182,7 @@
     "GovtManagStandard": "Abu Dhabi Government Data Management Standards",
     "nameReq": "Name is required",
     "term&Conditions": "Terms and conditions",
-    "newUser": "New to Abu Dhabi Data?",
+    "newUser": "New to Abu Dhabi Data",
     "regHere": "Register Here",
     "listen": "Listen",
     "toDate": "To Date",
@@ -207,5 +207,7 @@
     "modified": "Modified",
     "title": "Title",
     "noTagsFound": "No Tags Found",
-    "noTopicsFound": "No Topics Found"
+    "noTopicsFound": "No Topics Found",
+    "application":"Application",
+    "adda":"ADDA @ 2022"
 }

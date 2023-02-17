@@ -38,19 +38,19 @@ const Navbar = memo((props) => {
 
     const MobileRoutes = [
         {
-            name: "Datasets",
+            name: t("dataset"),
             route: routes.DATASET
         },
         {
-            name: "Applications",
+            name: t("application"),
             route: routes.APPLICATIONS
         },
         {
-            name: "Support",
+            name: t("supports"),
             route: routes.SUPPORT
         },
         {
-            name: "About us",
+            name: t("aboutus"),
             route: routes.ABOUTUS
         }
 
@@ -78,22 +78,22 @@ const Navbar = memo((props) => {
                     <Col md={6} className="d-flex justify-content-center align-items-center">
                         <div className="mx-3">
                             <Link to={routes.DATASET}>
-                                <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>Dataset</p>
+                                <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("dataset")}</p>
                             </Link>
                         </div>
                         <div className="mx-3">
                             <Link to={routes.ABOUTUS}>
-                                <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>About us</p>
+                                <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("aboutus")}</p>
                             </Link>
                         </div>
                         <div className="mx-3">
                             <Link to={routes.SUPPORT}>
-                                <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>Support</p>
+                                <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("supports")}</p>
                             </Link>
                         </div>
                         <div className="mx-3">
                             <Link to={routes.APPLICATIONS}>
-                                <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>Application</p>
+                                <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("application")}</p>
                             </Link>
                         </div>
                     </Col>
@@ -128,75 +128,75 @@ const Navbar = memo((props) => {
                 </Row>
             </Container>
             <Drawer
-                style={{ width: "100%", height: "100vh", scrollBehavior: "smooth",overflow:"auto",minHeight:"100vh" }}
+                style={{ width: "100%", height: "100vh", scrollBehavior: "smooth", overflow: "auto", minHeight: "100vh" }}
                 open={isOpen}
                 direction='right'
                 className="p-3"
                 lockBackgroundScroll
             >
-                <Row className="">
-                    <Col className="d-flex align-items-center">
-                        <Link to={routes.HOME}>
-                            <img height={"40px"} src={AbuDhabiLogoDarkMobile} />
-                        </Link>
-                    </Col>
-                    <Col className="d-flex justify-content-end align-items-center">
-                        <div className="d-flex justify-content-center">
-                            <div className="px-4">
-                                <AiOutlineSearch size={25} color="black" onClick={onClickDrawer} />
-                            </div>
-                            <div className="">
-                                <RxHamburgerMenu size={25} color="black" onClick={onClickDrawer} />
-                            </div>
-                        </div>
-                    </Col>
-                </Row>
-                <Row className="d-flex my-5">
-                    {
-                        MobileRoutes.map((item, index) => {
-                            return (
-                                <Fragment>
-                                    <Col className="d-flex align-items-center py-2" xs={12}>
-                                        <Link style={{ textDecoration: "none" }} to={item.route}>
-                                            <Heading size={"xl"} color={colors.black} nomargin heading={item.name} />
-                                        </Link>
-                                    </Col>
-                                    {
-                                        index != MobileRoutes.length - 1
-                                        &&
-                                        <div className="">
-                                            <hr className="py-1" />
-                                        </div>
-                                    }
-                                </Fragment>
-                            )
-                        })}
-                </Row>
-                <Row className="">
-                    <Col>
-                        <Link style={{ textDecoration: 'none' }} to={routes.LOGIN}>
-                            <Button width={"100%"} borderColor={""} backgroundColor='black' textColor={"white"} title={"Log In"} />
-                        </Link>
-                    </Col>
-                </Row>
-                <Row className="d-flex justify-content-center my-3">
-                    <Col className="d-flex align-items-center justify-content-center py-4 bg-light" style={{ borderRadius: "20px" }} xs={11}>
-                        <div>
-                            <Heading size={"xxs"} color={colors.black} nomargin heading={`New to Abu Dhabi Data ${i18n.language === locales.EN ? "?" : "؟"}`} />
-                        </div>
-                        <div className="px-2">
-                            <Link style={{ textDecoration: 'none' }} to={routes.REGISTER}>
-                                <Heading size={"xxs"} color={colors.purple} nomargin heading={"Register here"} />
+                <div className="" style={{minHeight:"85vh"}}>
+                    <Row className="">
+                        <Col className="d-flex align-items-center">
+                            <Link to={routes.HOME}>
+                                <img height={"40px"} src={AbuDhabiLogoDarkMobile} />
                             </Link>
-                        </div>
-                    </Col>
-                </Row>
+                        </Col>
+                        <Col className="d-flex justify-content-end align-items-center">
+                            <div className="d-flex justify-content-center">
+                                <div className="px-4">
+                                    <AiOutlineSearch size={25} color="black" onClick={onClickDrawer} />
+                                </div>
+                                <div className="">
+                                    <RxHamburgerMenu size={25} color="black" onClick={onClickDrawer} />
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row className="d-flex my-5">
+                        {
+                            MobileRoutes.map((item, index) => {
+                                return (
+                                    <Fragment>
+                                        <Col className="d-flex align-items-center py-2" xs={12}>
+                                            <Link style={{ textDecoration: "none" }} to={item.route}>
+                                                <Heading size={"xl"} color={colors.black} nomargin heading={item.name} />
+                                            </Link>
+                                        </Col>
+                                        {
+                                            index != MobileRoutes.length - 1
+                                            &&
+                                            <div className="">
+                                                <hr className="py-1" />
+                                            </div>
+                                        }
+                                    </Fragment>
+                                )
+                            })}
+                    </Row>
+                    <Row className="">
+                        <Col>
+                            <Link style={{ textDecoration: 'none' }} to={routes.LOGIN}>
+                                <Button width={"100%"} borderColor={""} backgroundColor='black' textColor={"white"} title={t("logIn")} />
+                            </Link>
+                        </Col>
+                    </Row>
+                    <Row className="d-flex justify-content-center my-3">
+                        <Col sm={11} xs={11} className="d-flex align-items-center justify-content-center py-4 bg-light" style={{ borderRadius: "20px" }}>
+                            <p className="m-0 en-font-default" style={{ color: colors.black }}>
+                                {`${t("newUser")} ${i18n.language === locales.EN ? " ? " : " ؟ "}`}
+                                <span className="m-0 en-font-default" style={{ color: colors.purple }}>
+                                    {t("regHere")}
+                                </span>
+                            </p>
+                        </Col>
+                    </Row>
+                </div>
                 <Row className="">
                     <Col className="d-flex align-items-center">
                         <LanguageSwitcher theme={"dark"} />
                     </Col>
                     <Col className="d-flex align-items-center justify-content-end">
-                        <Heading size={"xxs"} nomargin color={colors.gray} heading={"ADDA @ 2022"} />
+                        <Heading size={"xxs"} nomargin color={colors.gray} heading={t("adda")} />
                     </Col>
                 </Row>
             </Drawer>

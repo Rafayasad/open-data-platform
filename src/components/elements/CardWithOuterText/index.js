@@ -19,7 +19,7 @@ const CardWithOuterText = memo((props) => {
             <Row>
                 <Col className="d-flex py-3" xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                     <Heading bold nomargin size='sm' heading={title} />
-                    <sup className="mx-1">
+                    <sup className="mx-1 my-1">
                         {
                             i18n.language === locales.AR ? <FiArrowUpLeft size={24} /> : <FiArrowUpRight size={24} />
                         }
