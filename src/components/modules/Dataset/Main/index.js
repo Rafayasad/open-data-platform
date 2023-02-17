@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Heading from "../../../elements/Heading";
 import Search from "../../../elements/Search";
@@ -9,29 +9,9 @@ import { colors } from "../../../../utils/colors";
 
 const Main = memo((props) => {
 
-    const { search, onChangeSearch, onSelectedFilters } = props
+    const { search, onChangeSearch, filter, onApplyFilter, onDeleteFilter } = props
 
-    const { t } = useTranslation()
-
-    const [selectedFilters, setSelectedFilters] = useState([]);
-
-    const onClickApplyFilter = (filters) => {
-
-        setSelectedFilters(filters)
-        onSelectedFilters(filters)
-
-    }
-
-    const onDeleteFilter = (index) => {
-
-        let temp = [...selectedFilters]
-
-        temp.splice(index, 1)
-
-        setSelectedFilters(temp)
-        onSelectedFilters(temp)
-
-    }
+    const { t } = useTranslation();
 
     return (
         <Container className="pt-5 my-5">
@@ -52,8 +32,8 @@ const Main = memo((props) => {
                                 onChange={onChangeSearch}
                                 value={search}
                                 filter
-                                selectedFilters={selectedFilters}
-                                onClickApplyFilter={onClickApplyFilter}
+                                appliedFilters={filter}
+                                onClickApplyFilter={onApplyFilter}
                             />
                         </Col>
                         <Col />
@@ -61,18 +41,18 @@ const Main = memo((props) => {
                 </Col>
             </Row>
             {
-                selectedFilters && selectedFilters.length > 0 &&
+                filter && filter.length > 0 &&
                 <Row className="">
                     <Col className="d-flex flex-wrap justify-content-center align-items-center">
                         {
-                            selectedFilters && selectedFilters.length > 0 && selectedFilters.map((item, index) =>
+                            filter && filter.length > 0 && filter.map((item, index) =>
                             (
                                 <div className="py-1">
                                     <Tag
                                         backgroundColor={colors.black}
                                         textColor={"white"}
                                         title={item.title}
-                                        crossIcon={<RxCross2 size={20} onClick={() => onDeleteFilter(index)} />} />
+                                        crossIcon={<RxCross2 size={20} onClick={() => onDeleteFilter(item)} />} />
                                 </div>
                             ))}
                     </Col>

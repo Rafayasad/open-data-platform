@@ -18,14 +18,14 @@ const Drawer = memo((props) => {
 
     const { t, i18n } = useTranslation()
 
-    const { open, setOpen, filters, setFilters, onClickApplyFilter, selectedFilters, onClickClearFilter } = props;
+    const { open, setOpen, onClickApplyFilter, appliedFilters } = props;
 
     const [topics, setTopics] = useState();
     const [tags, setTags] = useState();
     const [publisher, setPublisher] = useState();
 
     const [activeIndex, setActiveIndex] = useState();
-
+    const [filters, setFilters] = useState([]);
 
     useEffect(() => {
         getFacets("theme", "themelear", setTopics)
@@ -34,8 +34,10 @@ const Drawer = memo((props) => {
     }, []);
 
     useEffect(() => {
-        selectedFilters && setFilters(selectedFilters)
-    }, [selectedFilters])
+        if (appliedFilters && appliedFilters.length > 0) {
+            setFilters([...appliedFilters])
+        }
+    }, [appliedFilters])
 
     const data = [
         {
@@ -58,7 +60,7 @@ const Drawer = memo((props) => {
 
         let filter = [...filters]
 
-        if (filters.includes(item)) {
+        if (filters.some(el => el.title === item.title)) {
 
             let index = filters.indexOf(item)
             let temp = [...filter]
@@ -68,15 +70,17 @@ const Drawer = memo((props) => {
             setFilters(temp)
 
         } else {
-
             filter.push(item)
             setFilters(filter)
-
         }
 
     }, [filters])
 
     const onClickAccordian = useCallback((index) => activeIndex === index ? setActiveIndex(null) : setActiveIndex(index), [activeIndex]);
+
+    const onClickClear = useCallback(() => {
+        setFilters([])
+    });
 
     return (
         <RMDrawer
@@ -112,8 +116,8 @@ const Drawer = memo((props) => {
                                                         return (
                                                             <div className={`my-1`}>
                                                                 <Tag
-                                                                    backgroundColor={filters.includes(items) ? colors.black : colors.white}
-                                                                    textColor={filters.includes(items) ? colors.white : colors.black}
+                                                                    backgroundColor={filters.some(el => el.title === items.title) ? colors.black : colors.white}
+                                                                    textColor={filters.some(el => el.title === items.title) ? colors.white : colors.black}
                                                                     // backgroundColor={filtersData?.some(items => items.title === item.title) ? "black" : "white"}
                                                                     // textColor={filtersData?.some(items => items.title === item.title) ? "white" : "black"}
                                                                     borderColor={"1px solid grey"}
@@ -131,7 +135,6 @@ const Drawer = memo((props) => {
                                 {
                                     index != data.length - 1
                                     && <hr className="" />
-
                                 }
                             </>
                         )
@@ -142,7 +145,7 @@ const Drawer = memo((props) => {
                 <hr />
                 <div className="m-3 d-flex justify-content-between align-items-center">
                     <div className="">
-                        <Button onClick={() => onClickClearFilter()} textColor={"#8207C9"} title={t("clearAll")} />
+                        <Button onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} />
                     </div>
                     <div>
                         <Button onClick={() => onClickApplyFilter(filters)} title={`${t("apply")} ${filters.length > 0 ? `(${filters.length})` : ""}`} backgroundColor={"black"} textColor={"white"} />

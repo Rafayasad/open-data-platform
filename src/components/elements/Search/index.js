@@ -1,4 +1,4 @@
-import React, { memo, useState, useCallback } from "react";
+import React, { memo, useState, useCallback, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { IoIosSearch } from 'react-icons/io';
 import { MdOutlineFilterAlt } from 'react-icons/md';
@@ -13,11 +13,9 @@ const Search = memo((props) => {
 
     const { t } = useTranslation();
 
-    const { placeholder, value, filter, onChange, onPressEnter, selectedFilters, onClickApplyFilter } = props
+    const { placeholder, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter } = props
 
     const [filterOpen, setFilterOpen] = useState(false);
-
-    const [filters, setFilters] = useState([]);
 
     const toggle = useCallback(() => setFilterOpen(!filterOpen));
 
@@ -28,10 +26,6 @@ const Search = memo((props) => {
     const onClickApply = useCallback((filters) => {
         setFilterOpen(!filterOpen)
         onClickApplyFilter(filters)
-    });
-
-    const onClickClear = useCallback(() => {
-        setFilters([])
     });
 
     return (
@@ -61,7 +55,7 @@ const Search = memo((props) => {
                                 </sup>
                             </div> */}
                         </div>
-                        <Drawer open={filterOpen} setOpen={setFilterOpen} filters={filters} setFilters={setFilters} selectedFilters={selectedFilters} onClickApplyFilter={onClickApply} onClickClearFilter={onClickClear} />
+                        <Drawer open={filterOpen} setOpen={setFilterOpen} onClickApplyFilter={onClickApply} appliedFilters={appliedFilters} />
                     </Col>
                 }
             </Row>
