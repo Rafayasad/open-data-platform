@@ -1,5 +1,7 @@
 import React, { memo, useCallback, useState } from "react";
 import { Container, Row } from "react-bootstrap";
+import { locales } from "../../../../i18n/helper";
+import i18n from "../../../../i18n/i18n";
 import { colors } from "../../../../utils/colors";
 import QuestionListItem from "../../../elements/QuestionListItem";
 import Shimmer from "../../../elements/Shimmer";
@@ -26,7 +28,11 @@ const QuestionList = memo((props) => {
                                 index > 0 &&
                                 <hr className="m-0" style={{ color: currentHovered == index || currentHovered != null && currentHovered + 1 == index ? 'white' : 'lightgray', borderWidth: 2 }} />
                             }
-                            <QuestionListItem title={item.title} onClick={() => onClick(item.id)} />
+                            <QuestionListItem
+                                title={i18n.language === locales.AR ? item.title_ar : item.title}
+                                onClick={() => onClick(item.id)}
+                                icon={currentHovered === index}
+                            />
                         </div>
                     )) : <Loader type='full-width-min' />
                 }

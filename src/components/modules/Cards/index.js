@@ -73,9 +73,12 @@ const Cards = memo((props) => {
                     <Col key={index} md={4} className="py-2">
                         <CardStory
                             title={i18n.language === locales.AR ? item.title_ar : item.title}
-                            publisher={i18n.language === locales.AR ? item.publisher_ar : item.publisher}
+                            description={item.description && item.description_ar && i18n.language === locales.AR ? item.description_ar : item.description}
+                            tags={i18n.language === locales.AR ? item.tags && item.tags_ar.slice(0, 2) : item.tags && item.tags.slice(0, 2)}
+                            created={item.created}
                             image={item.image}
                             height={sizes[Math.floor(Math.random() * sizes.length)]}
+                            onClick={() => onClick(item.id)}
                         />
                     </Col>
                 ))

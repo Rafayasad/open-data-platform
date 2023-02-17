@@ -34,7 +34,7 @@ const Main = memo((props) => {
                         </Row>
                         <Row>
                             <Col />
-                            <Col xs={12} md={8} className="py-3">
+                            <Col xs={12} md={10} lg={8} className="py-3">
                                 <Search placeholder={t("searchPlaceholder")} filter onPressEnter={onSearch} />
                             </Col>
                             <Col />

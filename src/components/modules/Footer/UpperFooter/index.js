@@ -16,7 +16,7 @@ const UpperFooter = memo((props) => {
             backgroundSize: 'cover',
             backgroundPosition: 'center'
         }}>
-            <Container fluid>
+            <Container fluid className=''>
                 <Row>
                     <Col xs={8} md={4}>
                         <Heading color='white' heading={title} />

@@ -22,7 +22,7 @@ const PlatformInsights = memo((props) => {
                 <Row className="my-3 px-5">
                     {
                         data && data.length > 0 && data.map((item, index) => (
-                            <Col key={index} xs={6} md={2} className='text-center'>
+                            <Col key={index} xs={6} md={6} lg={2} className='text-center'>
                                 <Col>
                                     <Heading color="white" heading={parseInt(item.value).toLocaleString()} />
                                 </Col>

@@ -1,68 +1,73 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { Col, Container } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import { getFacets } from '../../../../axios/api';
 import Heading from '../../../elements/Heading';
 import { useTranslation } from 'react-i18next';
 import { colors } from '../../../../utils/colors';
+import { routes } from '../../../../router/helper';
 import { locales } from '../../../../i18n/helper';
 
 const Support = [
     {
         title: "gettingStarted",
-        onClick: () => { }
+        link: null
     },
     {
         title: "usingOpenData",
-        onClick: () => { }
+        link: routes.DATASET
     },
     {
         title: "contactUs",
-        onClick: () => { }
+        link: null
     },
 ]
 
 const AboutUs = [
     {
         title: "openDataPlatform",
-        onClick: () => { }
+        link: null
     },
     {
         title: "successStories",
-        onClick: () => { }
+        link: routes.SUCCESS_STOIRES
     },
     {
         title: "applications",
-        onClick: () => { }
+        link: routes.APPLICATIONS
     },
 ]
 
 const Developers = [
     {
         title: "realTimeAPI",
-        onClick: () => { }
+        link: null
     }
 ]
 
 const OurPlatforms = [
     {
         title: "GovtManagStandard",
-        onClick: () => { }
+        link: null
     },
     {
         title: "GovtManagPolicy",
-        onClick: () => { }
+        link: null
     },
 ]
 
 const MiddleFooter = memo(() => {
 
-    const { t, i18n } = useTranslation()
+    const { t, i18n } = useTranslation();
+    const navigate = useNavigate();
 
     const [topics, setTopics] = useState();
 
     useEffect(() => {
         getFacets("theme", "themelear", setTopics)
     }, [])
+
+    const onClick = useCallback((route) => route && navigate(route))
 
     return (
         <Container fluid className='bg-black p-3 d-none d-lg-block'>
@@ -92,7 +97,7 @@ const MiddleFooter = memo(() => {
                     <div className='my-1'>
                         {
                             Support.map((item, index) => (
-                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} />
+                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} onClick={() => onClick(item.link)} />
                             ))
                         }
                     </div>
@@ -104,7 +109,7 @@ const MiddleFooter = memo(() => {
                     <div className='my-1'>
                         {
                             AboutUs.map((item, index) => (
-                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} />
+                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} onClick={() => onClick(item.link)} />
                             ))
                         }
                     </div>
@@ -116,7 +121,7 @@ const MiddleFooter = memo(() => {
                     <div className='my-1'>
                         {
                             Developers.map((item, index) => (
-                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} />
+                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} onClick={() => onClick(item.link)} />
                             ))
                         }
                     </div>
@@ -128,7 +133,7 @@ const MiddleFooter = memo(() => {
                     <div className='my-1'>
                         {
                             OurPlatforms.map((item, index) => (
-                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} />
+                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} onClick={() => onClick(item.link)} />
                             ))
                         }
                     </div>

@@ -6,11 +6,12 @@ import Tag from "../Tag";
 
 const CardStory = memo((props) => {
 
-    const { title, publisher, image, height, tags } = props;
+    const { title, description, image, created, height, tags, onClick } = props;
 
     return (
         <div>
             <Card
+                className="border-0 shadow-sm"
                 style={{
                     borderRadius: "30px",
                     height: height
@@ -21,15 +22,18 @@ const CardStory = memo((props) => {
                         borderRadius: "30px",
                         height: '100%'
                     }}
-                    src="https://picsum.photos/2000"
+                    src={image}
                 />
             </Card>
             <Row className="flex-column py-2">
                 <Col>
-                    <Heading size='sm' underline heading={title} />
+                    <Heading size='sm' underline heading={title} onClick={onClick} />
                 </Col>
                 <Col>
-                    <Heading color={colors.gray} size='xxs' heading={publisher} />
+                    <Heading maxNumberOfLines={2} color={colors.gray} size='xxs' heading={description} />
+                </Col>
+                <Col>
+                    <Heading color={colors.gray} size='xxs' heading={`Published on ${created}`} />
                 </Col>
                 <Col className="d-flex">
                     {

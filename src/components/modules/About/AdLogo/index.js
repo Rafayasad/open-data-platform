@@ -24,7 +24,7 @@ const AdLogo = memo(() => {
                     <Row>
                         {
                             data && data.length > 0 && data.map((item, index) => (
-                                <Col key={index} className='d-flex justify-content-center align-items-center'>
+                                <Col md={6} lg={3} key={index} className='d-flex justify-content-center align-items-center'>
                                     <img width={'150px'} src={item} />
                                 </Col>
                             ))
