@@ -5,8 +5,6 @@ import { useTranslation } from "react-i18next";
 import Heading from "../../../elements/Heading";
 import Search from "../../../elements/Search";
 import Tag from "../../../elements/Tag";
-import { RxCross2 } from "react-icons/rx";
-import { useTranslation } from "react-i18next";
 import { colors } from "../../../../utils/colors";
 
 const Main = memo((props) => {
@@ -17,7 +15,7 @@ const Main = memo((props) => {
 
     return (
         <Container className="pt-5 my-5">
-            <Row className="py-2">
+            <Row className="pt-5 pb-2">
                 <Col className="d-flex flex-column justify-content-center">
                     <Row>
                         <Col />

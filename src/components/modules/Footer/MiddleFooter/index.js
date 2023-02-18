@@ -67,7 +67,7 @@ const MiddleFooter = memo(() => {
         getFacets("theme", "themelear", setTopics)
     }, [])
 
-    const onClick = useCallback((route) => route && navigate(route))
+    const onClick = useCallback((route, state) => route && navigate(route, { state }))
 
     return (
         <Container fluid className='bg-black p-3 d-none d-lg-block'>
@@ -84,7 +84,7 @@ const MiddleFooter = memo(() => {
                                 ))
                             ) : (
                                 topics && topics.en && topics.en.length > 0 && topics.en.map((item, index) => (
-                                    <Heading key={index} size='xxs' heading={item.title} color={colors.white} />
+                                    <Heading key={index} size='xxs' heading={item.title} color={colors.white} onClick={() => onClick(routes.DATASET, { listItem: item })} />
                                 ))
                             )
                         }

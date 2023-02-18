@@ -103,12 +103,12 @@ const Navbar = memo((props) => {
                         </div>
                         <div className="d-flex justify-content-center mx-1">
                             <Link style={{ textDecoration: 'none' }} to={routes.REGISTER}>
-                                <Button borderColor={color} backgroundColor='transparent' textColor={color} title={"Register"} />
+                                <Button borderColor={color} backgroundColor='transparent' textColor={color} title={t("register")} />
                             </Link>
                         </div>
                         <div className="d-flex justify-content-center mx-1">
                             <Link style={{ textDecoration: 'none' }} to={routes.LOGIN}>
-                                <Button backgroundColor={color} textColor={color === colors.black && colors.white} title={"Login"} />
+                                <Button backgroundColor={color} textColor={color === colors.black && colors.white} title={t("login")} />
                             </Link>
                         </div>
                     </Col>
