@@ -12,6 +12,9 @@ const Register = lazy(() => import('../pages/Authentication/Register'))
 const Login = lazy(() => import('../pages/Authentication/Login'))
 const RecoverPassword = lazy(() => import('../pages/Authentication/RecoverPassword'))
 const ResetPassword = lazy(() => import('../pages/Authentication/ResetPassword'))
+const PrivacyPolicy = lazy(() => import('../pages/Authentication/PrivacyPolicy'))
+const ChangePassword = lazy(() => import('../pages/Authentication/ChangePassword'))
+const ContactUs = lazy(() => import('../pages/ContactUs'))
 
 const Router = () => {
     return (
@@ -26,6 +29,9 @@ const Router = () => {
             <Route path={routes.LOGIN} element={<Login />} />
             <Route path={routes.RECOVER} element={<RecoverPassword />} />
             <Route path={routes.RESET} element={<ResetPassword />} />
+            <Route path={routes.POLICY} element={<PrivacyPolicy />} />
+            <Route path={routes.CHANGE} element={<ChangePassword />} />
+            <Route path={routes.CONTACT} element={<ContactUs />} />
         </Routes>
     )
 };

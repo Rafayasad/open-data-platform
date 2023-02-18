@@ -12,6 +12,7 @@ const CheckBox = memo((props) => {
       style={{
         minWidth: "16px",
         maxWidth: "16px",
+        marginRight:'10px',
         borderColor: borderColor,
       }}
     />
