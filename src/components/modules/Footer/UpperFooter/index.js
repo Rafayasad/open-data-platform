@@ -6,7 +6,7 @@ import Heading from '../../../elements/Heading';
 
 const UpperFooter = memo((props) => {
 
-    const { title } = props
+    const { title, description, button } = props
 
     return (
         <div className="d-flex flex-column py-5 px-3" style={{
@@ -16,15 +16,23 @@ const UpperFooter = memo((props) => {
             backgroundSize: 'cover',
             backgroundPosition: 'center'
         }}>
-            <Container fluid>
+            <Container fluid className=''>
                 <Row>
                     <Col xs={8} md={4}>
                         <Heading color='white' heading={title} />
                     </Col>
                 </Row>
+                {
+                    description &&
+                    <Row>
+                        <Col xs={12} md={6}>
+                            <Heading size='xxs' color='white' heading={description} />
+                        </Col>
+                    </Row>
+                }
                 <Row>
                     <Col xs={8} md={4}>
-                        <Button title={"Register Now"} />
+                        <Button title={button} />
                     </Col>
                 </Row>
             </Container>

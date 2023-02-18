@@ -1,0 +1,7 @@
+.css-1guwpl9-MuiButtonBase-root-MuiPaginationItem-root:hover {
+    background-color: none !important;
+}
+
+.css-1guwpl9-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover {
+    background-color: black !important;
+}

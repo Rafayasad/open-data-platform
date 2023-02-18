@@ -1,117 +1,139 @@
-import React, { memo } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import React, { memo, useCallback, useEffect, useState } from 'react';
+import { Col, Container } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import { getFacets } from '../../../../axios/api';
 import Heading from '../../../elements/Heading';
+import { useTranslation } from 'react-i18next';
+import { colors } from '../../../../utils/colors';
+import { routes } from '../../../../router/helper';
+import { locales } from '../../../../i18n/helper';
 
 const Support = [
     {
-        title: "Getting Started",
-        onClick: () => { }
+        title: "gettingStarted",
+        link: null
     },
     {
-        title: "Using Open Data",
-        onClick: () => { }
+        title: "usingOpenData",
+        link: routes.DATASET
     },
     {
-        title: "Contact us",
-        onClick: () => { }
+        title: "contactUs",
+        link: null
     },
 ]
 
 const AboutUs = [
     {
-        title: "Open Data platform",
-        onClick: () => { }
+        title: "openDataPlatform",
+        link: null
     },
     {
-        title: "Success Stories",
-        onClick: () => { }
+        title: "successStories",
+        link: routes.SUCCESS_STOIRES
     },
     {
-        title: "Applications",
-        onClick: () => { }
+        title: "applications",
+        link: routes.APPLICATIONS
     },
 ]
 
 const Developers = [
     {
-        title: "Real Time API",
-        onClick: () => { }
+        title: "realTimeAPI",
+        link: null
     }
 ]
 
 const OurPlatforms = [
     {
-        title: "Abu Dhabi Government Data Management Standards",
-        onClick: () => { }
+        title: "GovtManagStandard",
+        link: null
     },
     {
-        title: "Abu Dhabi Government Data Management Policy",
-        onClick: () => { }
+        title: "GovtManagPolicy",
+        link: null
     },
 ]
 
-const MiddleFooter = memo((props) => {
+const MiddleFooter = memo(() => {
+
+    const { t, i18n } = useTranslation();
+    const navigate = useNavigate();
+
+    const [topics, setTopics] = useState();
+
+    useEffect(() => {
+        getFacets("theme", "themelear", setTopics)
+    }, [])
+
+    const onClick = useCallback((route, state) => route && navigate(route, { state }))
 
     return (
         <Container fluid className='bg-black p-3 d-none d-lg-block'>
             <div className='d-flex'>
                 <Col>
                     <div className='my-4'>
-                        <Heading size="sm" color="white" heading="Datasets" />
+                        <Heading size="sm" color="white" heading={t("datasets")} />
                     </div>
                     <div className='my-1'>
-                        <p className='text-white'>Economy</p>
-                        <p className='text-white'>Enviornment</p>
-                        <p className='text-white'>Agricultural</p>
-                        <p className='text-white'>Dubai</p>
-                        <p className='text-white'>Police</p>
-                        <p className='text-white'>Safety</p>
+                        {
+                            i18n.language === locales.AR ? (
+                                topics && topics.ar && topics.ar.length > 0 && topics.ar.map((item, index) => (
+                                    <Heading key={index} size='xxs' heading={item.title} color={colors.white} />
+                                ))
+                            ) : (
+                                topics && topics.en && topics.en.length > 0 && topics.en.map((item, index) => (
+                                    <Heading key={index} size='xxs' heading={item.title} color={colors.white} onClick={() => onClick(routes.DATASET, { listItem: item })} />
+                                ))
+                            )
+                        }
                     </div>
                 </Col>
                 <Col>
                     <div className='my-4'>
-                        <Heading size="sm" color="white" heading="Support" />
+                        <Heading size="sm" color="white" heading={t("supports")} />
                     </div>
                     <div className='my-1'>
                         {
                             Support.map((item, index) => (
-                                <p key={index} className='text-white'>{item.title}</p>
+                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} onClick={() => onClick(item.link)} />
                             ))
                         }
                     </div>
                 </Col>
                 <Col>
                     <div className='my-4'>
-                        <Heading size="sm" color="white" heading="About us" />
+                        <Heading size="sm" color="white" heading={t("aboutus")} />
                     </div>
                     <div className='my-1'>
                         {
                             AboutUs.map((item, index) => (
-                                <p key={index} className='text-white'>{item.title}</p>
+                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} onClick={() => onClick(item.link)} />
                             ))
                         }
                     </div>
                 </Col>
                 <Col>
                     <div className='my-4'>
-                        <Heading size="sm" color="white" heading="Developers" />
+                        <Heading size="sm" color="white" heading={t("developers")} />
                     </div>
                     <div className='my-1'>
                         {
                             Developers.map((item, index) => (
-                                <p key={index} className='text-white'>{item.title}</p>
+                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} onClick={() => onClick(item.link)} />
                             ))
                         }
                     </div>
                 </Col>
                 <Col>
                     <div className='my-4'>
-                        <Heading size="sm" color="white" heading="Our platforms" />
+                        <Heading size="sm" color="white" heading={t("ourPlatforms")} />
                     </div>
                     <div className='my-1'>
                         {
                             OurPlatforms.map((item, index) => (
-                                <p key={index} className='text-white'>{item.title}</p>
+                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} onClick={() => onClick(item.link)} />
                             ))
                         }
                     </div>

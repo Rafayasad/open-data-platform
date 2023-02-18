@@ -1,8 +1,14 @@
-import React, { memo, useCallback, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import React, { memo, useCallback, useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
+import { getAllDatasets } from "../../../../axios/api";
+import { locales, string } from "../../../../i18n/helper";
 import { colors } from "../../../../utils/colors";
 import Card from "../../../elements/Card";
+import Pagination from "../../../elements/Pagination";
+import Shimmer from "../../../elements/Shimmer";
 import Header from "../../Cards/Header";
+import Loader from "../../Loader";
+import { useTranslation } from "react-i18next";
 
 const data = [
     {
@@ -27,12 +33,12 @@ const data = [
         title: "Immunizations by Nationality, Type of Vaccine and Age Group",
         description: "Immunizations by Nationality, Type of Vaccine and Age Group",
         publisher: "Ministry of Health and Prevention",
-        tags: ['Social', 'Police',]
+        tags: ['Social', 'Police']
     },
     {
         title: "Licensed Social Care Professional 2021 - 2022 Immunizations by Nationality, Type of Vaccine and Age Group",
         description: "Immunizations by Nationality, Type of Vaccine and Age Group. Immunizations by Nationality, Type of Vaccine and Age Group. Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Ministry of Health and Prevention",
+        publisher: "Ministry of Health and Prevention"
     },
     {
         title: "List of applicants for participation in the school bus supervisors",
@@ -44,39 +50,69 @@ const data = [
 
 const DatasetList = memo((props) => {
 
-    // const { data } = props
+    const { onClick, datasets, totalCount, currentPage, rowsPerPage, loading, onChangePage, selectedValue, onSelectDropdown } = props
+
+    const { t, i18n } = useTranslation();
 
     const [currentHovered, setCurrentHovered] = useState(null);
 
-    const onHover = useCallback((index) => setCurrentHovered(index), [currentHovered])
-    const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered])
+    const onHover = useCallback((index) => setCurrentHovered(index), [currentHovered]);
+    const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered]);
+
+    const data = [
+        {
+            title: string("modified"),
+            onClick: onSelectDropdown,
+        },
+        {
+            title: string("title"),
+            onClick: onSelectDropdown,
+        }
+    ]
 
     return (
         <Container fluid>
-            <hr className="mt-5" style={{ color: 'lightgray', borderWidth: 2 }} />
-            <Header title={"3127 Datasets"} backgroundColor={colors.white} nobutton dropdown />
+            <hr className="mt-5" style={{ color: '#CFCFCF', borderWidth: 2 }} />
+            <Header
+                title={`${totalCount} ${t("datasets")}`}
+                backgroundColor={colors.white}
+                nobutton
+                dropdown={{
+                    title: t("sortBy"),
+                    options: data,
+                    selectedValue
+                }}
+            />
             {
-                data.map((item, index) => (
-                    <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
-                        {
-                            index > 0 &&
-                            <hr className="m-0" style={{ color: currentHovered === index || currentHovered != null && currentHovered + 1 === index ? 'white' : 'lightgray', borderWidth: 2 }} />
-                        }
-                        <Card
-                            size='sm'
-                            headingSize='lg'
-                            noborder
-                            hoverable="light"
-                            shortTitle
-                            title={item.title}
-                            publisher={item.publisher}
-                            description={item.description}
-                            tags={item.tags}
-                        />
-                    </div>
-                ))
+                !loading ?
+                    datasets && datasets.length > 0 && datasets.map((item, index) => (
+                        <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
+                            {
+                                index > 0 &&
+                                <hr className="m-0" style={{ color: currentHovered == index || currentHovered != null && currentHovered + 1 == index ? 'white' : '#CFCFCF', borderWidth: 2 }} />
+                            }
+                            <Card
+                                size='sm'
+                                headingSize='lg'
+                                noborder
+                                hoverable="light"
+                                shortTitle
+                                title={i18n.language === locales.AR ? item.title_ar : item.title}
+                                publisher={i18n.language === locales.AR ? item.publisher_ar : item.publisher}
+                                description={i18n.language === locales.AR ? item.description_ar : item.description}
+                                tags={i18n.language === locales.AR ? item.tags_ar : item.tags}
+                                onClick={() => onClick(item.id)}
+                            />
+                        </div>
+                    ))
+                    : <Loader type="full-width-max" />
             }
-        </Container>
+            <Pagination
+                currentPage={currentPage}
+                totalCount={Math.ceil(totalCount / rowsPerPage)}
+                onChange={onChangePage}
+            />
+        </Container >
     )
 });
 

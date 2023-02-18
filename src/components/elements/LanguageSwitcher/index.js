@@ -1,8 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import React, { memo } from "react";
 import { locales } from '../../../i18n/helper';
+import { colors } from '../../../utils/colors';
 
-const LanguageSwitcher = memo(() => {
+const LanguageSwitcher = memo((props) => {
+
+    const { theme } = props;
 
     const { i18n } = useTranslation();
 
@@ -14,9 +17,11 @@ const LanguageSwitcher = memo(() => {
     return (
         <div>
             <p
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer", color: theme === 'dark' ? colors.black : colors.white }}
                 onClick={handler}
-                className=''>{i18n.language === locales.AR ? "عربى" : "english"}
+                className={`m-0 ${i18n.language === locales.EN ? "ar-font" : "en-font"}`}
+            >
+                {i18n.language === locales.AR ? "English" : "عربى"}
             </p>
         </div>
     )

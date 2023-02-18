@@ -1,130 +1,159 @@
-import React, { useEffect, useState } from "react";
-import Drawer from 'react-modern-drawer'
-import 'react-modern-drawer/dist/index.css'
-import Heading from "../../elements/Heading";
+import React, { memo, useEffect, useState } from "react";
+import RMDrawer from 'react-modern-drawer'
 import { RxCross2 } from "react-icons/rx";
 import Accordion from 'react-bootstrap/Accordion';
-import './style.css';
+import { useTranslation } from "react-i18next";
+import Heading from "../../elements/Heading";
 import Tag from "../../elements/Tag";
 import Button from "../../elements/Button";
+import { getFacets } from '../../../axios/api/index';
+import { locales } from '../../../i18n/helper';
+import { useCallback } from "react";
+import { colors } from "../../../utils/colors";
+import { filter } from "lodash";
+import './style.css';
+import 'react-modern-drawer/dist/index.css'
 
-const MDrawer = (props) => {
+const Drawer = memo((props) => {
 
-    const { filtersHandler, filters } = props;
-    const [isOpen, setIsOpen] = React.useState(false)
-    const toggleDrawer = () => {
-        setIsOpen((prevState) => !prevState)
-    }
-    const [filtersData, setFiltersData] = useState([]);
+    const { t, i18n } = useTranslation()
 
+    const { open, setOpen, onClickApplyFilter, appliedFilters } = props;
 
-    const onFocusItems = (items) => {
-        if (filtersData?.some(item => item.name === items.name)) {
-            var a = filtersData.findIndex(item => item.name === items.name)
-            var b = filtersData
-            b.splice(a, 1);
-            setFiltersData([...b])
+    const [topics, setTopics] = useState();
+    const [tags, setTags] = useState();
+    const [publisher, setPublisher] = useState();
+
+    const [activeIndex, setActiveIndex] = useState();
+    const [filters, setFilters] = useState([]);
+
+    useEffect(() => {
+        getFacets("theme", "themelear", setTopics)
+        getFacets("keyword", "keywordlear", setTags)
+        getFacets("publisher__name", "publisherlear__name", setPublisher)
+    }, []);
+
+    useEffect(() => {
+        if (appliedFilters && appliedFilters.length > 0) {
+            setFilters([...appliedFilters])
         }
-        else {
-            setFiltersData([...filtersData, items])
-        }
-    }
+    }, [appliedFilters])
 
     const data = [
         {
-            title: "Categories",
-            tags: [
-                { name: "Education", type: "theme", count: "20" },
-                { name: "School", type: "theme", count: "20" },
-                { name: "Police", type: "theme", count: "20" },
-            ]
+            title: t("categories"),
+            tags: i18n.language === locales.AR ? publisher && publisher.ar : publisher && publisher.en
         },
         {
-            title: "Topics",
-            tags: [
-                { name: "Educatio", type: "topics", count: "20" },
-                { name: "Schoo", type: "topics", count: "20" },
-                { name: "Polie", type: "topics", count: "20" },
-            ]
+            title: t("topics"),
+            tags: i18n.language === locales.AR ? topics && topics.ar : topics && topics.en
         },
         {
-            title: "Tags",
-            tags: [
-                { name: "Eduation", type: "tags", count: "20" },
-                { name: "Schl", type: "tags", count: "20" },
-                { name: "Pice", type: "tags", count: "20" },
-            ]
+            title: t("tags"),
+            tags: i18n.language === locales.AR ? tags && tags.ar : tags && tags.en
         }
     ]
 
-    useEffect(() => {
-        setFiltersData(filters)
+    const toggleDrawer = useCallback(() => setOpen(!open), [open]);
+
+    const onClickItem = useCallback((item) => {
+
+        let filter = [...filters]
+
+        if (filters.some(el => el.title === item.title)) {
+
+            let index = filters.indexOf(item)
+            let temp = [...filter]
+
+            temp.splice(index, 1)
+
+            setFilters(temp)
+
+        } else {
+            filter.push(item)
+            setFilters(filter)
+        }
+
     }, [filters])
 
+    const onClickAccordian = useCallback((index) => activeIndex === index ? setActiveIndex(null) : setActiveIndex(index), [activeIndex]);
+
+    const onClickClear = useCallback(() => {
+        setFilters([])
+    });
+
     return (
-        <>
-            <button onClick={toggleDrawer}>Show</button>
-            <Drawer
-                size={"400px"}
-                open={isOpen}
-                onClose={toggleDrawer}
-                direction='right'
-                className=''
-            >
-                <div className="m-3 px-3">
-                    <div className="d-flex align-items-center justify-content-between mb-5">
-                        <Heading size="xxs" heading={"Filters"} nomargin />
-                        <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className={"mx-1"} size={20} />
-                    </div>
-                    {data?.map((item, index) => {
+        <RMDrawer
+            size={"400px"}
+            open={open}
+            onClose={toggleDrawer}
+            direction='right'
+            lockBackgroundScroll
+            style={{ overflow: "scroll", scrollBehavior: "smooth", overflowY: "scroll" }}
+        >
+            <div
+                style={{ minHeight: "80vh" }}
+                className="m-3 px-2">
+                <div className="d-flex align-items-center justify-content-between mb-5">
+                    <Heading size="xxs" heading={t("filter")} nomargin />
+                    <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="mx-1" size={20} />
+                </div>
+                {
+                    data?.map((item, index) => {
                         return (
                             <>
-                                <Accordion key={index} className="bg-transparent">
+                                <Accordion activeKey={activeIndex} key={index} className="bg-transparent">
                                     <Accordion.Item eventKey={index} className="border-0 my-2">
-                                        <Accordion.Header>
+                                        <Accordion.Header onClick={() => onClickAccordian(index)}>
                                             <div className="col-11" style={{ textAlign: "start" }}>
-                                                <Heading size="xs" heading={item.title} nomargin />
+                                                <Heading bold size="xs" heading={item.title} nomargin />
                                             </div>
                                         </Accordion.Header>
                                         <Accordion.Body>
                                             <div className="d-flex flex-wrap">
-                                                {item.tags?.map((item, index) => {
-                                                    return (
-                                                        <div className={`my-1`}>
-                                                            <Tag
-                                                                data={item}
-                                                                backgroundColor={filtersData?.some(items => items.name === item.name) ? "black" : "white"}
-                                                                textColor={filtersData?.some(items => items.name === item.name) ? "white" : "black"}
-                                                                borderColor={"1px solid grey"}
-                                                                title={item.name}
-                                                                onClick={() => onFocusItems(item)}
-                                                            />
-                                                        </div>
-                                                    )
-                                                })}
+                                                {
+                                                    item.tags?.map((items, index) => {
+                                                        return (
+                                                            <div className={`my-1`}>
+                                                                <Tag
+                                                                    backgroundColor={filters.some(el => el.title === items.title) ? colors.black : colors.white}
+                                                                    textColor={filters.some(el => el.title === items.title) ? colors.white : colors.black}
+                                                                    // backgroundColor={filtersData?.some(items => items.title === item.title) ? "black" : "white"}
+                                                                    // textColor={filtersData?.some(items => items.title === item.title) ? "white" : "black"}
+                                                                    borderColor={"1px solid grey"}
+                                                                    title={`${items.title} (${items.value})`}
+                                                                    onClick={() => onClickItem(items)}
+                                                                />
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
                                             </div>
                                         </Accordion.Body>
                                     </Accordion.Item>
                                 </Accordion>
-                                <hr />
+                                {
+                                    index != data.length - 1
+                                    && <hr className="" />
+                                }
                             </>
                         )
-                    })}
-                    <div className="fixed-bottom">
-                        <hr />
-                        <div className="m-3 d-flex justify-content-between align-items-center">
-                            <div className="">
-                                <Button onClick={() => setFiltersData([])} textColor={"#8207C9"} title={"Clear"} />
-                            </div>
-                            <div>
-                                <Button onClick={() => filtersHandler(filtersData)} title={`Apply ${filtersData?.length ? "(" + filtersData.length + ")" : ""}`} backgroundColor={"black"} textColor={"white"} />
-                            </div>
-                        </div>
+                    })
+                }
+            </div>
+            <div className="">
+                <hr />
+                <div className="m-3 d-flex justify-content-between align-items-center">
+                    <div className="">
+                        <Button onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} />
+                    </div>
+                    <div>
+                        <Button onClick={() => onClickApplyFilter(filters)} title={`${t("apply")} ${filters.length > 0 ? `(${filters.length})` : ""}`} backgroundColor={"black"} textColor={"white"} />
                     </div>
                 </div>
-            </Drawer>
-        </>
+            </div>
+        </RMDrawer>
     )
-}
+});
 
-export default MDrawer;
+export default Drawer;

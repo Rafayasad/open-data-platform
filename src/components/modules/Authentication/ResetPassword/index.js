@@ -4,8 +4,12 @@ import AuthBackground2 from "../../../../assets/images/recover-pass-Image.png";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import AuthCard from "../AuthCard";
+import { useTranslation } from "react-i18next";
 
 const ResetPassword = memo(() => {
+
+  const { t } = useTranslation()
+
   return (
     <div>
       <div

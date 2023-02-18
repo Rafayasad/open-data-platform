@@ -1,9 +1,14 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getDatasetById, getSimilarDatasets } from "../../axios/api";
 import Cards from "../../components/modules/Cards";
 import Main from "../../components/modules/DatasetDetail/Main";
+import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
 import LowerFooter from "../../components/modules/Footer/LowerFooter";
 import Navbar from "../../components/modules/Navbar";
+import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
+import { useTranslation } from "react-i18next";
 
 const data = [
     {
@@ -21,13 +26,43 @@ const data = [
 ]
 
 const DatasetDetail = memo(() => {
+
+    const { t } = useTranslation()
+
+    const navigate = useNavigate();
+    const { search } = useLocation();
+
+    const urlParams = new URLSearchParams(search);
+
+    const id = urlParams.get('id');
+
+    const [dataset, setDataset] = useState();
+    const [similarDataset, setSimilarDataset] = useState();
+
+    useEffect(() => {
+
+        if (!id) return navigate(routes.DATASET, { replace: true });
+
+        getDatasetById(id, setDataset);
+
+    }, [])
+
+    useEffect(() => {
+
+        if (dataset) {
+            getSimilarDatasets(dataset.topics[0], setSimilarDataset)
+        }
+
+    }, [dataset])
+
     return (
         <>
-            <Navbar theme="dark" />
+            <Navbar theme="dark" sticky />
             <div className="my-5 py-5">
-                <Main />
-                <Cards title="Similar Datasets" backgroundColor={colors.white} data={data} />
+                <Main data={dataset} />
+                <Cards title={t("similarDatasets")} backgroundColor={colors.white} data={similarDataset} />
             </div>
+            <MiddleFooter />
             <LowerFooter />
         </>
     )

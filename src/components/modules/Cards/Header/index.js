@@ -1,19 +1,16 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo } from "react";
 import { Container } from "react-bootstrap";
-import { string } from "../../../../i18n/helper";
 import { colors } from "../../../../utils/colors";
 import Button from "../../../elements/Button";
 import Dropdown from "../../../elements/DropDown";
 import Heading from "../../../elements/Heading";
-import { FaFileExcel } from "react-icons/fa";
-import { FaFileCsv } from "react-icons/fa";
-import { FaFilePdf } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const Header = memo((props) => {
 
-    const { title, backgroundColor, nobutton, size, dropdown } = props
+    const { t } = useTranslation()
 
-    const [selectedValue, setSelectedValue] = useState("");
+    const { title, backgroundColor, nobutton, size, dropdown } = props
 
     let color = colors.white;
     let headingSize;
@@ -26,41 +23,11 @@ const Header = memo((props) => {
         headingSize = 'xl'
     }
 
-    const handleSelect = useCallback((value) => setSelectedValue(value), [selectedValue]);
-
-    const data = [
-        {
-            title: string("modified"),
-            onClick: handleSelect,
-        },
-        {
-            title: string("title"),
-            onClick: handleSelect,
-        }
-    ]
-
-    const iconData = [
-        {
-            title: string("excel source texts ssssssss ssssssss sssssssssss sssssssssssssssss ssssssssss"),
-            onClick: handleSelect,
-            icon: <FaFileExcel size={25} />
-        },
-        {
-            title: string("csv source text"),
-            onClick: handleSelect,
-            icon: <FaFileCsv size={25} />
-        },
-        {
-            title: string("pdf source text"),
-            onClick: handleSelect,
-            icon: <FaFilePdf size={25} />
-        }
-    ]
-
     return (
         <Container fluid className="d-flex justify-content-between align-items-center py-4">
             <div>
                 <Heading
+                    bold
                     nomargin
                     size={headingSize}
                     color={color}
@@ -71,7 +38,7 @@ const Header = memo((props) => {
                 !nobutton ?
                     <div>
                         <Button
-                            title={"View All"}
+                            title={t("viewAll")}
                             textColor={color}
                             borderColor={color}
                             backgroundColor='transparent'
@@ -79,10 +46,9 @@ const Header = memo((props) => {
                     </div> :
                     dropdown ?
                         <Dropdown
-                            dropdownName={string("sortBy")}
-                            data={data}
-                            bgColor={"transparent"}
-                            selectedValue={selectedValue}
+                            name={dropdown.title}
+                            options={dropdown.options}
+                            selectedValue={dropdown.selectedValue}
                         /> :
                         null
             }

@@ -4,10 +4,13 @@ import Button from "../../../elements/Button";
 import Search from "../../../elements/Search";
 import Heading from "../../../elements/Heading";
 import background from '../../../../assets/images/BG.png';
-import LanguageSwitcher from "../../../elements/LanguageSwitcher";
-import { string } from "../../../../i18n/helper";
+import { useTranslation } from "react-i18next";
 
-const Main = memo(() => {
+const Main = memo((props) => {
+
+    const { onSearch } = props;
+
+    const { t } = useTranslation()
 
     return (
         <div className="d-flex" style={{
@@ -25,14 +28,14 @@ const Main = memo(() => {
                         <Row>
                             <Col />
                             <Col xs={10} md={6} style={{ textAlign: 'center' }} className="py-2">
-                                <Heading color="white" heading={string("dataAvailable")} />
+                                <Heading bold color="white" heading={t("dataAvailable")} />
                             </Col>
                             <Col />
                         </Row>
                         <Row>
                             <Col />
-                            <Col xs={12} md={8} className="py-3">
-                                <Search placeholder="Search keyword, dataset, topic or publisher" filter />
+                            <Col xs={12} md={10} lg={8} className="py-3">
+                                <Search placeholder={t("searchPlaceholder")} filter onPressEnter={onSearch} />
                             </Col>
                             <Col />
                         </Row>
@@ -40,7 +43,7 @@ const Main = memo(() => {
                             <Col />
                             <Col xs={12} md={6} className="py-2">
                                 <p style={{ textAlign: 'center', color: 'white' }}>
-                                    Popular: covid-19, CO2 emissions, Technology, Abu Dhabi police
+                                    {t("popular")}
                                 </p>
                             </Col>
                             <Col />
@@ -50,7 +53,7 @@ const Main = memo(() => {
                 <Row className="h-25 align-items-center">
                     <Col />
                     <Col xs={8} md={4} className='d-none d-lg-flex justify-content-center '>
-                        <Button title="Explore Topics" backgroundColor="#9159FF" textColor="white" />
+                        <Button title={t("explore")} backgroundColor="#9159FF" textColor="white" />
                     </Col>
                     <Col />
                 </Row>

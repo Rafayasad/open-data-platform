@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useEffect } from 'react';
 import Router from './router';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { locales } from './i18n/helper';
 
 function App() {
@@ -12,8 +12,10 @@ function App() {
     document.getElementsByTagName('html')[0].setAttribute("dir", i18n.language === locales.EN ? "ltr" : "rtl")
   }, [i18n.language])
 
-  return <Router />;
-  
+  return <div className={`${i18n.language === locales.AR && "ar-font"}`}>
+    <Router />
+  </div>
+
 }
 
 export default App;

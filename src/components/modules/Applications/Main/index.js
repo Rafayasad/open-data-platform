@@ -2,16 +2,20 @@ import React, { memo } from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import Application from '../../../../assets/images/Applications-1.png'
 import Heading from "../../../elements/Heading";
+import { useTranslation } from "react-i18next";
 
 const Main = memo(() => {
+
+    const { t } = useTranslation()
+
     return (
         <Container fluid className="my-4">
             <Row className="align-items-center">
                 <Col md={6} xs={12} className='py-2'>
-                    <Heading nomargin heading="Applications powered by Abu Dhabi Data" />
+                    <Heading bold nomargin heading={t("applicationTitle")} />
                 </Col>
                 <Col md={6} xs={12} className='py-2'>
-                    <Heading size='xxs' nomargin heading="We are the unified central government platform to access data available by Abu Dhabi Government Entities. Where government entities use the platform to publish data sets, documents, tools and applications for public use." />
+                    <Heading size='xxs' nomargin heading={t("applicationDiscription")} />
                 </Col>
             </Row>
             <Row className="py-2">

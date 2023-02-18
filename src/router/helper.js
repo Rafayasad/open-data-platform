@@ -1,12 +1,10 @@
-import { useNavigate } from "react-router-dom";
-
-// let navigateTo = useNavigate();
-
 export const routes = {
   HOME: "/",
   DATASET: "/dataset",
   DATASET_DETAIL: '/dataset/detail',
   SUPPORT: "/support",
+  SUPPORT_QUESTIONS: '/support/questions',
+  SUPPORT_QUESTIONS_DETAIL: '/support/questions/detail',
   ABOUTUS: "/about-us",
   APPLICATIONS: "/applications",
   AUTHENTICATION: "/authentication",
@@ -14,13 +12,9 @@ export const routes = {
   REGISTER: `/register`,
   RECOVER: `/recover-password`,
   RESET: `/reset-password`,
+  SUCCESS_STOIRES: '/success-stories',
+  SUCCESS_STOIRES_DETAIL:'/success-stories/detail',
   CHANGE: `/change-password`,
   POLICY: `/privacy-policy`,
   CONTACT: `/contact-us`,
 };
-
-// export const navigate = (route) => {
-
-//     return navigateTo(route)
-
-// }
