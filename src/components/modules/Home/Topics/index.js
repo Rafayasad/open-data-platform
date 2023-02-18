@@ -34,7 +34,7 @@ const Topics = memo((props) => {
                     <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave} >
                         {
                             index > 0 &&
-                            <hr className="m-0 mx-3" style={{ color: currentHovered === index || currentHovered !== null && currentHovered + 1 === index ? 'black' : 'lightgray', borderWidth: 2 }} />
+                            <hr className="m-0 mx-3" style={{ color: currentHovered === index || currentHovered != null && currentHovered + 1 === index ? 'black' : 'lightgray', borderWidth: 2 }} />
                         }
                         <ListItem title={item.title} value={item.value} image={currentHovered === index && Drone} onClick={() => onClickListItem(item)} />
                     </div>

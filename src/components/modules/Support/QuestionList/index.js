@@ -26,7 +26,7 @@ const QuestionList = memo((props) => {
                         <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
                             {
                                 index > 0 &&
-                                <hr className="m-0" style={{ color: currentHovered == index || currentHovered != null && currentHovered + 1 == index ? 'white' : 'lightgray', borderWidth: 2 }} />
+                                <hr className="m-0" style={{ color: currentHovered === index || currentHovered != null && currentHovered + 1 === index ? 'white' : 'lightgray', borderWidth: 2 }} />
                             }
                             <QuestionListItem
                                 title={i18n.language === locales.AR ? item.title_ar : item.title}
