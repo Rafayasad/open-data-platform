@@ -10,7 +10,7 @@ const Header = memo((props) => {
 
     const { t } = useTranslation()
 
-    const { title, backgroundColor, nobutton, size, dropdown } = props
+    const { title, backgroundColor, nobutton, size, dropdown, onClickButton } = props
 
     let color = colors.white;
     let headingSize;
@@ -42,6 +42,7 @@ const Header = memo((props) => {
                             textColor={color}
                             borderColor={color}
                             backgroundColor='transparent'
+                            onClick={onClickButton}
                         />
                     </div> :
                     dropdown ?

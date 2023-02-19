@@ -41,7 +41,8 @@ const About = memo(() => {
         getSuccessStories(setStories);
     }, [])
 
-    const onClickCard = useCallback((id) => { navigate(`${routes.SUCCESS_STOIRES_DETAIL}?id=${id}`) }, []);
+    const onClickCard = useCallback((id) => { navigate(`${routes.SUCCESS_STOIRES_DETAIL}?id=${id}`) });
+    const onClickButton = useCallback(() => { navigate(routes.SUCCESS_STOIRES) });
 
     return (
         <>
@@ -49,7 +50,7 @@ const About = memo(() => {
             <div className="my-5 pt-5">
                 <Main data={aboutus} />
             </div>
-            <Cards backgroundColor={colors.white} title={t("successStories")} data={stories} size="md" hoverable="primary" onClick={onClickCard} />
+            <Cards backgroundColor={colors.white} title={t("successStories")} data={stories} size="md" hoverable="primary" onClick={onClickCard} onClickViewAll={onClickButton} />
             <AdLogo />
             <MiddleFooter />
             <LowerFooter />
