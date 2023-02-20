@@ -25,7 +25,15 @@ const Card = memo((props) => {
 
     if (hoverable) {
         ClassName = "card-hover-" + hoverable
-        hoverable === "primary" && description && !shortTitle ? ClassName = ClassName + " " + "hover-second" : ClassName = ClassName + " " + "hover-third"
+
+        if (hoverable === "primary") {
+            if (description && !shortTitle) {
+                ClassName = ClassName + " " + "hover-second"
+            } else {
+                ClassName = ClassName + " " + "hover-third"
+            }
+        }
+
     }
 
     return (
