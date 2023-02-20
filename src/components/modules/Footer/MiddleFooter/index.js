@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { colors } from '../../../../utils/colors';
 import { routes } from '../../../../router/helper';
 import { locales } from '../../../../i18n/helper';
+import { useSelector } from 'react-redux';
 
 const Support = [
     {
@@ -61,11 +62,14 @@ const MiddleFooter = memo(() => {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
 
-    const [topics, setTopics] = useState();
+    // const [topics, setTopics] = useState();
+    const topics = useSelector((state) => state.facets.topics);
 
-    useEffect(() => {
-        getFacets("theme", "themelear", setTopics)
-    }, [])
+    console.log("Topics from middle", topics)
+
+    // useEffect(() => {
+    //     getFacets("theme", "themelear", setTopics)
+    // }, [])
 
     const onClick = useCallback((route, state) => route && navigate(route, { state }))
 

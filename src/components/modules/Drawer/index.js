@@ -3,14 +3,13 @@ import RMDrawer from 'react-modern-drawer'
 import { RxCross2 } from "react-icons/rx";
 import Accordion from 'react-bootstrap/Accordion';
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import Heading from "../../elements/Heading";
 import Tag from "../../elements/Tag";
 import Button from "../../elements/Button";
-import { getFacets } from '../../../axios/api/index';
 import { locales } from '../../../i18n/helper';
 import { useCallback } from "react";
 import { colors } from "../../../utils/colors";
-import { filter } from "lodash";
 import './style.css';
 import 'react-modern-drawer/dist/index.css'
 
@@ -20,18 +19,12 @@ const Drawer = memo((props) => {
 
     const { open, setOpen, onClickApplyFilter, appliedFilters } = props;
 
-    const [topics, setTopics] = useState();
-    const [tags, setTags] = useState();
-    const [publisher, setPublisher] = useState();
+    const topics = useSelector((state) => state.facets.topics);
+    const publishers = useSelector((state) => state.facets.publishers);
+    const tags = useSelector((state) => state.facets.tags);
 
     const [activeIndex, setActiveIndex] = useState();
     const [filters, setFilters] = useState([]);
-
-    useEffect(() => {
-        getFacets("theme", "themelear", setTopics)
-        getFacets("keyword", "keywordlear", setTags)
-        getFacets("publisher__name", "publisherlear__name", setPublisher)
-    }, []);
 
     useEffect(() => {
         if (appliedFilters && appliedFilters.length > 0) {
@@ -42,7 +35,7 @@ const Drawer = memo((props) => {
     const data = [
         {
             title: t("categories"),
-            tags: i18n.language === locales.AR ? publisher && publisher.ar : publisher && publisher.en
+            tags: i18n.language === locales.AR ? publishers && publishers.ar : publishers && publishers.en
         },
         {
             title: t("topics"),

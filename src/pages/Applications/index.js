@@ -8,22 +8,18 @@ import Navbar from '../../components/modules/Navbar';
 import UpperFooter from "../../components/modules/Footer/UpperFooter";
 import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
 import LowerFooter from '../../components/modules/Footer/LowerFooter';
+import { useSelector } from "react-redux";
 
 const Applications = memo(() => {
 
     const { t } = useTranslation()
-
-    const [applications, setApplications] = useState();
+    const applications = useSelector(state => state.application.applications)
 
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
     const onChangePage = useCallback((page) => setCurrentPage(page), [])
-
-    useEffect(() => {
-        getAllApplications(setApplications);
-    }, [])
 
     return (
         <>
