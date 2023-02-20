@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 
 const Main = memo((props) => {
 
-    const { onSearch, onApplyFilter } = props;
+    const { onSearch, onClickExplore, onApplyFilter } = props;
 
     const { t } = useTranslation()
 
@@ -53,7 +53,7 @@ const Main = memo((props) => {
                 <Row className="h-25 align-items-center">
                     <Col />
                     <Col xs={8} md={4} className='d-none d-lg-flex justify-content-center '>
-                        <Button title={t("explore")} backgroundColor="#9159FF" textColor="white" />
+                        <Button title={t("explore")} backgroundColor="#9159FF" textColor="white" onClick={onClickExplore} />
                     </Col>
                     <Col />
                 </Row>

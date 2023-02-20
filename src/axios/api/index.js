@@ -294,15 +294,18 @@ export const getAllApplications = (dispatch, setData) => {
 
                     let { title, field_title_ar, field_application_description, field_application_description_ar, field_application_url } = item.attributes
 
+                    console.log("Chechhhhhhh appl", item)
+
                     return endpoints.getImages(item.relationships.field_image.links.related.href)
                         .then((res) => {
                             applications.push({
+                                id: item.id,
                                 title,
                                 title_ar: field_title_ar,
                                 description: field_application_description,
                                 description_ar: field_application_description_ar,
                                 image: `${process.env.REACT_APP_BASE_URL}${res.data.data.attributes.uri.url}`,
-                                applicationURL: field_application_url.title
+                                applicationURL: field_application_url.uri
                             })
                         }).catch((err) => {
                             console.log("Error Message While Getting Image", err)
@@ -737,4 +740,44 @@ export const getSuccessStoriesById = (id, setData) => {
         }).catch((err) => {
             console.log("Error message", err)
         })
+}
+
+export const login = async (dispatch, setData, setLoading, payload) => {
+
+    setLoading(true)
+
+    let { email, password } = payload;
+    let data = {
+        name: email,
+        pass: password
+    }
+
+    let token = await endpoints.getCRSFToken()
+        .then((res) => {
+
+            if (res.status === 200) {
+                return res.data
+            }
+
+        }).catch((err) => {
+            console.log("Error message", err)
+        })
+
+    let headers = {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': token,
+        Accept: 'application/json',
+    }
+
+    await endpoints.login(data, headers)
+        .then((res) => {
+            if (res.status === 200) {
+                dispatch(setData(res.data))
+            }
+            setLoading(false)
+        }).catch((err) => {
+            setLoading(false)
+            console.log("Error message", err)
+        })
+
 }

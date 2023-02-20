@@ -1,14 +1,39 @@
-import React, { memo } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import AuthBackground1 from "../../../../assets/images/Auth-Background-1.png";
+import { login } from "../../../../axios/api";
+import { handleLogin } from "../../../../redux/reducers/Authentication";
+import { routes } from "../../../../router/helper";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import AuthCard from "../AuthCard";
-import { useTranslation } from "react-i18next";
 
 const Login = memo(() => {
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { isLoggedIn } = useSelector(state => state.authentication);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate(routes.HOME, { replace: true })
+    }
+  }, [isLoggedIn])
+
+  const onClickLogin = useCallback(() => login(dispatch, handleLogin, setLoading, { email, password }));
+  const onClickForgetPassword = useCallback(() => navigate(routes.RECOVER));
+  const onClickRegister = useCallback(() => navigate(routes.REGISTER));
 
   return (
     <div>
@@ -22,13 +47,13 @@ const Login = memo(() => {
           backgroundSize: "100vw 100%",
         }}
       >
-        <Container fluid className="my-5">
+        <Container fluid className="my-5 pt-5">
           <Row>
             <Col>
               <Row className="p-4">
                 <Col md={8}>
                   <Heading
-                    heading="An Open Data experience that's tailored for you"
+                    heading={t("openDataTitle")}
                     color={colors.white}
                   />
                 </Col>
@@ -46,23 +71,24 @@ const Login = memo(() => {
               >
                 <AuthCard
                   view="dekstop"
-                  title="Log in"
-                  subtitle="Don't have an account?"
-                  linktext={{ display_text: "Request access", onClick: "" }}
+                  title={t("logIn")}
+                  subtitle={t("accDontExist")}
+                  linktext={{ display_text: t("requestAccess"), onClick: onClickRegister }}
                   inputFields={[
-                    { placeholder: "Government email", type: "email" },
-                    { placeholder: "Password", type: "password" },
+                    { placeholder: t("governmentEmail"), type: "email", onChange: (value) => setEmail(value) },
+                    { placeholder: t("password"), type: "password", onChange: (value) => setPassword(value) },
                   ]}
                   button={[
                     {
-                      title: "Log in",
-                      onClick: "",
+                      title: t("logIn"),
+                      onClick: onClickLogin,
                       backgroundColor: colors.black,
                       textColor: colors.white,
                       textSize: "",
+                      loading
                     },
                     {
-                      title: "Log in with UAE PASS",
+                      title: t("LoginWithUAE"),
                       onClick: "",
                       backgroundColor: colors.white,
                       textColor: colors.black,
@@ -70,7 +96,7 @@ const Login = memo(() => {
                       textSize: "",
                     },
                   ]}
-                  isForgetPassword
+                  onClickForgetPassword={onClickForgetPassword}
                 />
               </Card>
             </Col>
@@ -93,23 +119,23 @@ const Login = memo(() => {
               >
                 <AuthCard
                   view="mobile"
-                  title="Log in"
-                  subtitle="Don't have an account?"
-                  linktext={{ display_text: "Request access", onClick: "" }}
+                  title={t("logIn")}
+                  subtitle={t("accDontExist")}
+                  linktext={{ display_text: t("requestAccess"), onClick: onClickRegister }}
                   inputFields={[
-                    { placeholder: "Government email", type: "email" },
-                    { placeholder: "Password", type: "password" },
+                    { placeholder: t("governmentEmail"), type: "email" },
+                    { placeholder: t("password"), type: "password" },
                   ]}
                   button={[
                     {
-                      title: "Log in",
+                      title: t("logIn"),
                       onClick: "",
                       backgroundColor: colors.black,
                       textColor: colors.white,
                       textSize: "",
                     },
                     {
-                      title: "Log in with UAE PASS",
+                      title: t("LoginWithUAE"),
                       onClick: "",
                       backgroundColor: colors.white,
                       textColor: colors.black,
@@ -117,7 +143,7 @@ const Login = memo(() => {
                       textSize: "",
                     },
                   ]}
-                  isForgetPassword
+                  onClickForgetPassword={onClickForgetPassword}
                 />
               </Card>
             </Col>

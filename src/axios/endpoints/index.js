@@ -1,3 +1,4 @@
+import axios from "axios";
 import { client } from "../axios"
 
 export const endpoints = {
@@ -49,5 +50,11 @@ export const endpoints = {
     },
     getSuccessStoriesById: (id) => {
         return client.get(`/jsonapi/node/stories?filter[id]=${id}`)
+    },
+    getCRSFToken: () => {
+        return axios.get('http://10.241.40.69:30418/session/token')
+    },
+    login: (data, headers) => {
+        return axios.post('http://10.241.40.69:30418/user/login?_format=json', data, { headers })
     }
 } 
