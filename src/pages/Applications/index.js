@@ -21,12 +21,24 @@ const Applications = memo(() => {
 
     const onChangePage = useCallback((page) => setCurrentPage(page), [])
 
+    const onClickCard = useCallback((id) => {
+
+        if (id) {
+
+            let app = applications.find(item => item.id === id)
+
+            window.open(app.applicationURL, '_blank')
+
+        }
+
+    })
+
     return (
         <>
             <Navbar theme='dark' />
             <div className="my-5 pt-5">
                 <Main />
-                <Cards type="image-outer-text" data={applications} />
+                <Cards type="image-outer-text" data={applications} onClick={onClickCard} />
             </div>
             <UpperFooter title={t("GetMore")} button={t("registerNow")} />
             <MiddleFooter />

@@ -7,7 +7,7 @@ import Heading from "../Heading";
 
 const CardWithOuterText = memo((props) => {
 
-    const { title, description, image } = props
+    const { title, description, image, onClick } = props
 
     var height = "250px";
 
@@ -18,7 +18,7 @@ const CardWithOuterText = memo((props) => {
             </RBCard>
             <Row>
                 <Col className="d-flex py-3" xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                    <Heading bold nomargin size='sm' heading={title} />
+                    <Heading bold underline nomargin size='sm' heading={title} onClick={onClick} />
                     <sup className="mx-1 my-1">
                         {
                             i18n.language === locales.AR ? <FiArrowUpLeft size={24} /> : <FiArrowUpRight size={24} />

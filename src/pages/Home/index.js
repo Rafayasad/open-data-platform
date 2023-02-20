@@ -22,6 +22,8 @@ const Home = memo(() => {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
 
+    const topicsDiv = document.getElementById("topics");
+
     const [loading, setLoading] = useState(false)
 
     const [platformInsights, setPlatformInsights] = useState();
@@ -44,8 +46,10 @@ const Home = memo(() => {
     return (
         <>
             <Navbar sticky />
-            <Main onSearch={onSearch} />
-            <Topics onClickList={onClickList} data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en} />
+            <Main onSearch={onSearch} onClickExplore={() => topicsDiv.scrollIntoView()} />
+            <div id='topics'>
+                <Topics onClickList={onClickList} data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en} />
+            </div>
             <Images />
             <Cards title={t("mostViewedDatasets")} backgroundColor={colors.black} data={mostViewedDatasets} onClick={onClickCard} onClickViewAll={onClickButton} />
             <Cards title={t("recentlyAddedDatasets")} backgroundColor={colors.black} data={recentsDatasets} onClick={onClickCard} onClickViewAll={onClickButton} />
