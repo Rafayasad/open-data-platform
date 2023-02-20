@@ -4,6 +4,7 @@ import aboutReducer from './reducers/About';
 import applicationReducer from './reducers/Applications';
 import successStoriesReducer from './reducers/SuccessStories';
 import supportReducer from './reducers/Support';
+import authenticationReducer from './reducers/Authentication';
 
 export const store = configureStore({
     reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
         about: aboutReducer,
         application: applicationReducer,
         stories: successStoriesReducer,
-        support: supportReducer
+        support: supportReducer,
+        authentication: authenticationReducer
     }
 });

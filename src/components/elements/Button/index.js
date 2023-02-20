@@ -1,15 +1,17 @@
 import React, { memo } from "react";
+import { Spinner } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
 const Button = memo((props) => {
 
     const { t } = useTranslation()
 
-    const { title, backgroundColor, textColor, width, borderColor, onClick } = props
+    const { title, backgroundColor, textColor, width, borderColor, loading, onClick } = props
 
     return (
         <button
             onClick={onClick ? onClick : () => { }}
+            disabled={loading}
             className="px-4 en-font-default"
             style={{
                 backgroundColor: backgroundColor ? backgroundColor : 'white',
@@ -23,7 +25,11 @@ const Button = memo((props) => {
                 justifyContent: 'center',
                 alignItems: 'center'
             }}>
-            {title}
+            {
+                loading ? (
+                    <Spinner animation="border" variant="light" size="sm" />
+                ) : title
+            }
         </button>
     )
 });

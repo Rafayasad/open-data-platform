@@ -741,3 +741,43 @@ export const getSuccessStoriesById = (id, setData) => {
             console.log("Error message", err)
         })
 }
+
+export const login = async (dispatch, setData, setLoading, payload) => {
+
+    setLoading(true)
+
+    let { email, password } = payload;
+    let data = {
+        name: email,
+        pass: password
+    }
+
+    let token = await endpoints.getCRSFToken()
+        .then((res) => {
+
+            if (res.status === 200) {
+                return res.data
+            }
+
+        }).catch((err) => {
+            console.log("Error message", err)
+        })
+
+    let headers = {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': token,
+        Accept: 'application/json',
+    }
+
+    await endpoints.login(data, headers)
+        .then((res) => {
+            if (res.status === 200) {
+                dispatch(setData(res.data))
+            }
+            setLoading(false)
+        }).catch((err) => {
+            setLoading(false)
+            console.log("Error message", err)
+        })
+
+}

@@ -51,7 +51,7 @@ const MiddleFooter = memo(() => {
             data: [
                 {
                     title: t("gettingStarted"),
-                    link: null
+                    link: routes.SUPPORT
                 },
                 {
                     title: t("usingOpenData"),
@@ -59,7 +59,7 @@ const MiddleFooter = memo(() => {
                 },
                 {
                     title: t("contactUs"),
-                    link: null
+                    link: routes.CONTACT
                 },
             ]
         },
@@ -68,7 +68,7 @@ const MiddleFooter = memo(() => {
             data: [
                 {
                     title: t("openDataPlatform"),
-                    link: null
+                    link: routes.ABOUTUS
                 },
                 {
                     title: t("successStories"),
@@ -174,7 +174,7 @@ const MiddleFooter = memo(() => {
                                 <Heading onClick={() => ScrollToTop()} nomargin size="xxs" heading={t("backToTop")} color={colors.white} />
                             </div>
                             <div className=''>
-                                <BsFillArrowUpCircleFill color='white' size={20} className={""} />
+                                <BsFillArrowUpCircleFill color='white' size={20} />
                             </div>
                         </div>
                     </Col>

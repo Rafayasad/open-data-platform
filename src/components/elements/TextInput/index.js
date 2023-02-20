@@ -4,7 +4,7 @@ import { colors } from "../../../utils/colors";
 
 const TextInput = memo((props) => {
 
-  const { placeholder, type } = props;
+  const { placeholder, type, onChange } = props;
 
   return (
     <Form.Floating
@@ -17,6 +17,7 @@ const TextInput = memo((props) => {
         id="floatingInputCustom"
         type={type}
         placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
         style={{
           border: 0,
           borderRadius: 0,

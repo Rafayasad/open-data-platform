@@ -12,7 +12,7 @@ const AuthCard = memo((props) => {
 
   const { t } = useTranslation()
 
-  const { title, subtitle, linktext, inputFields, button, checkbox, isForgetPassword } = props;
+  const { title, subtitle, linktext, inputFields, button, checkbox, onClickForgetPassword } = props;
 
   return (
     <Container fluid>
@@ -35,6 +35,7 @@ const AuthCard = memo((props) => {
                 size="xxs"
                 color={colors.purple}
                 underline
+                onClick={linktext.onClick}
               />
             </div>
           }
@@ -44,21 +45,22 @@ const AuthCard = memo((props) => {
         {
           inputFields.map((items, index) => (
             <Col key={index} md={12}>
-              <TextInput placeholder={items.placeholder} type={items.type} />
+              <TextInput placeholder={items.placeholder} type={items.type} onChange={items.onChange} />
             </Col>
           ))
         }
       </Row>
       {
-        isForgetPassword &&
+        onClickForgetPassword &&
         <Row>
           <Col className=" d-flex direction-row justify-content-end">
             <Heading
               nomargin
-              heading={"Forget password"}
+              heading={t("forgetPassword")}
               size="xxs"
               color={colors.purple}
               underline
+              onClick={onClickForgetPassword}
             />
           </Col>
         </Row>
@@ -99,11 +101,13 @@ const AuthCard = memo((props) => {
                   backgroundColor={items.backgroundColor}
                   textColor={items.textColor}
                   borderColor={items.borderColor && items.borderColor}
+                  onClick={items.onClick}
+                  loading={items.loading}
                 />
                 {
                   button.length - 1 != index &&
                   <StraigthLine
-                    label="or"
+                    label={t("or")}
                     textColor={colors.gray}
                     lineColor={colors.light_gray}
                   />
