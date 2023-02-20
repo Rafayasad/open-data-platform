@@ -211,9 +211,11 @@ const Navbar = memo((props) => {
                         <Col sm={11} xs={11} className="d-flex align-items-center justify-content-center py-4 bg-light" style={{ borderRadius: "20px" }}>
                             <p className="m-0 en-font-default" style={{ color: colors.black }}>
                                 {`${t("newUser")} ${i18n.language === locales.EN ? " ? " : " ؟ "}`}
-                                <span className="m-0 en-font-default" style={{ color: colors.purple }}>
-                                    {t("regHere")}
-                                </span>
+                                <Link style={{ textDecoration: 'none' }} to={routes.REGISTER}>
+                                    <span className="m-0 en-font-default" style={{ color: colors.purple }}>
+                                        {t("regHere")}
+                                    </span>
+                                </Link>
                             </p>
                         </Col>
                     </Row>

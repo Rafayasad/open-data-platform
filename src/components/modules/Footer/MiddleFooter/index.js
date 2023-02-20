@@ -3,17 +3,17 @@ import { Col, Container, Row, useAccordionButton } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { useSelector } from 'react-redux';
-import Heading from '../../../elements/Heading';
 import { useTranslation } from "react-i18next";
 import { colors } from '../../../../utils/colors';
 import { routes } from '../../../../router/helper';
-import Accordion from 'react-bootstrap/Accordion';
+import { locales } from '../../../../i18n/helper';
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
 import { ScrollToTop } from '../../../../utils';
+import Heading from '../../../elements/Heading';
+import Accordion from 'react-bootstrap/Accordion';
 import LanguageSwitcher from '../../../elements/LanguageSwitcher';
 import AbuDhabiLogo from "../../../../assets/images/Abu-Dhabi-Data-Logo.png";
 import './style.css';
-import { locales } from '../../../../i18n/helper';
 
 
 
@@ -44,7 +44,7 @@ const MiddleFooter = memo(() => {
     const data = [
         {
             heading: t("dataset"),
-            data: i18n.language === locales.AR ? topics?.ar?.map(item => { return ({ ...item, link: routes.DATASET, params: { listItem: item } }) }) : topics?.en?.map(item => { return ({ ...item, link: routes.DATASET, params: { listItem: item } }) })
+            data: i18n.language === locales.AR ? topics?.ar?.map(item => { return ({ ...item, link: routes.DATASET, params: { listItem: [item] } }) }) : topics?.en?.map(item => { return ({ ...item, link: routes.DATASET, params: { listItem: [item] } }) })
         },
         {
             heading: t("supports"),

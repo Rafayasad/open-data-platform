@@ -6,7 +6,7 @@ const Button = memo((props) => {
 
     const { t } = useTranslation()
 
-    const { title, backgroundColor, textColor, width, borderColor, loading, onClick } = props
+    const { title, icon, backgroundColor, textColor, width, borderColor, loading, onClick } = props
 
     return (
         <button
@@ -28,7 +28,10 @@ const Button = memo((props) => {
             {
                 loading ? (
                     <Spinner animation="border" variant="light" size="sm" />
-                ) : title
+                ) : <>
+                    {icon}
+                    {title}
+                </>
             }
         </button>
     )

@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 
 const Main = memo((props) => {
 
-    const { onSearch, onClickExplore } = props;
+    const { onSearch, onClickExplore, onApplyFilter } = props;
 
     const { t } = useTranslation()
 
@@ -35,7 +35,7 @@ const Main = memo((props) => {
                         <Row>
                             <Col />
                             <Col xs={12} md={10} lg={8} className="py-3">
-                                <Search placeholder={t("searchPlaceholder")} filter onPressEnter={onSearch} />
+                                <Search placeholder={t("searchPlaceholder")} filter onPressEnter={onSearch} onClickApplyFilter={onApplyFilter} />
                             </Col>
                             <Col />
                         </Row>
