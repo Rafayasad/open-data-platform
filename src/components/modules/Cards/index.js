@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import Header from "./Header";
 import Loader from "../Loader";
@@ -36,7 +36,7 @@ const Cards = memo((props) => {
 
     const { i18n } = useTranslation();
 
-    const { title, data, backgroundColor, hoverable, type, size, onClick, onClickViewAll } = props
+    const { title, data, backgroundColor, hoverable, type, size, onClick, onClickViewAll, buttonText } = props;
 
     const renderContent = () => {
         if (type === 'image-inner-text') {
@@ -107,7 +107,7 @@ const Cards = memo((props) => {
             {
                 title &&
                 <Row>
-                    <Header backgroundColor={backgroundColor} title={title} onClickButton={onClickViewAll} />
+                    <Header buttonText={buttonText} backgroundColor={backgroundColor} title={title} onClickButton={onClickViewAll} />
                 </Row>
             }
             <Row>{renderContent()}</Row>

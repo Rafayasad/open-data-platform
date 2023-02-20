@@ -5,7 +5,7 @@ const Button = memo((props) => {
 
     const { t } = useTranslation()
 
-    const { title, backgroundColor, textColor, width, borderColor, onClick } = props
+    const { title, icon, backgroundColor, textColor, width, borderColor, onClick } = props
 
     return (
         <button
@@ -23,6 +23,9 @@ const Button = memo((props) => {
                 justifyContent: 'center',
                 alignItems: 'center'
             }}>
+            {
+                icon
+            }
             {title}
         </button>
     )
