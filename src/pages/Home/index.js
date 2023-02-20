@@ -15,6 +15,7 @@ import Navbar from '../../components/modules/Navbar';
 import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
 import { locales } from "../../i18n/helper";
+import { useSelector } from "react-redux";
 
 const Home = memo(() => {
 
@@ -26,13 +27,13 @@ const Home = memo(() => {
     const [platformInsights, setPlatformInsights] = useState();
     const [mostViewedDatasets, setMostViewedDatasets] = useState();
     const [recentsDatasets, setRecentsDatasets] = useState();
-    const [topics, setTopics] = useState();
+
+    const topics = useSelector((state) => state.facets.topics);
 
     useEffect(() => {
         getPlatformInsights(setPlatformInsights, setLoading)
         getMostViewedDatasets(setMostViewedDatasets, setLoading)
         getRecentsDatasets(setRecentsDatasets, setLoading)
-        getFacets("theme", "themelear", setTopics)
     }, [])
 
     const onClickCard = useCallback((id) => { navigate(`${routes.DATASET_DETAIL}?id=${id}`) }, []);
