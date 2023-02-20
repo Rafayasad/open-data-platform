@@ -1,7 +1,8 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { Col, Container, Row, useAccordionButton } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-import { getFacets } from '../../../../axios/api';
+import { useNavigate } from 'react-router-dom';
+import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import { useSelector } from 'react-redux';
 import Heading from '../../../elements/Heading';
 import { useTranslation } from "react-i18next";
 import { colors } from '../../../../utils/colors';
@@ -11,8 +12,8 @@ import { BsFillArrowUpCircleFill } from "react-icons/bs";
 import { ScrollToTop } from '../../../../utils';
 import LanguageSwitcher from '../../../elements/LanguageSwitcher';
 import AbuDhabiLogo from "../../../../assets/images/Abu-Dhabi-Data-Logo.png";
-import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import './style.css';
+import { locales } from '../../../../i18n/helper';
 
 
 
@@ -21,7 +22,7 @@ const MiddleFooter = memo(() => {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
 
-    const [topics, setTopics] = useState();
+    const topics = useSelector((state) => state.facets.topics);
     const [activeIndex, setActiveIndex] = useState();
 
     function CustomToggle({ children, eventKey }) {
@@ -36,15 +37,15 @@ const MiddleFooter = memo(() => {
         );
     }
 
-    useEffect(() => {
-        getFacets("theme", "themelear", setTopics)
-    }, [])
-
     const onClick = useCallback((route, state) => route && navigate(route, { state }))
 
     const onClickAccordian = useCallback((index) => activeIndex === index ? setActiveIndex(null) : setActiveIndex(index), [activeIndex]);
 
     const data = [
+        {
+            heading: t("dataset"),
+            data: i18n.language === locales.AR ? topics?.ar?.map(item => { return ({ ...item, link: routes.DATASET, params: { listItem: item } }) }) : topics?.en?.map(item => { return ({ ...item, link: routes.DATASET, params: { listItem: item } }) })
+        },
         {
             heading: t("supports"),
             data: [
@@ -115,8 +116,8 @@ const MiddleFooter = memo(() => {
                                 </div>
                                 <div className='my-1'>
                                     {
-                                        item.data.map((item, index) => (
-                                            <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} onClick={() => onClick(item.link)} />
+                                        item.data?.map((item, index) => (
+                                            <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} onClick={() => onClick(item.link, item.params)} />
                                         ))
                                     }
                                 </div>
@@ -131,7 +132,7 @@ const MiddleFooter = memo(() => {
                 </div>
                 <hr className="text-white m-0 p-0" />
                 {
-                    data?.map((item, index) => {
+                    data.map((item, index) => {
                         return (
                             <>
                                 <Accordion className='bg-black' activeKey={activeIndex} key={index}>
@@ -139,8 +140,7 @@ const MiddleFooter = memo(() => {
                                         <Accordion.Header className='bg-black' onClick={() => onClickAccordian(index)}>
                                             <div className='w-100 bg-black d-flex justify-content-between' style={{ textAlign: 'start' }}>
                                                 <Heading bold size="xs" color={colors.white} nomargin heading={item.heading} />
-                                                <CustomToggle eventKey={index}>
-                                                </CustomToggle>
+                                                <CustomToggle eventKey={index} />
                                             </div>
                                         </Accordion.Header>
                                         <Accordion.Body className='bg-black'>

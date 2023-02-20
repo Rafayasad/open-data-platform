@@ -1,5 +1,4 @@
 import { convertHtmlToString } from "../../utils"
-import { client } from "../axios"
 import { endpoints } from "../endpoints"
 
 export const getPlatformInsights = (setData, setLoading) => {
@@ -133,7 +132,7 @@ export const getSimilarDatasets = (topic, setData, setLoading) => {
         })
 }
 
-export const getFacets = async (key_en, key_ar, setData) => {
+export const getFacets = async (key_en, key_ar, dispatch, setData) => {
 
     let en = await endpoints.
         getFacets(key_en).then((res) => {
@@ -173,7 +172,7 @@ export const getFacets = async (key_en, key_ar, setData) => {
 
     let facets = { en, ar }
 
-    setData(facets)
+    dispatch && dispatch(setData(facets))
 
 }
 
@@ -282,7 +281,7 @@ export const getDatasetById = (id, setData) => {
         })
 }
 
-export const getAllApplications = (setData) => {
+export const getAllApplications = (dispatch, setData) => {
     return endpoints.
         getAllApplications().then(async (res) => {
             if (res.status === 200) {
@@ -311,7 +310,7 @@ export const getAllApplications = (setData) => {
 
                 }));
 
-                setData(applications)
+                dispatch && dispatch(setData(applications));
 
             }
         }).catch((err) => {
@@ -319,7 +318,7 @@ export const getAllApplications = (setData) => {
         })
 }
 
-export const getAboutUs = (setData) => {
+export const getAboutUs = (dispatch, setData) => {
     return endpoints.
         getAboutUs().then(async (res) => {
             if (res.status === 200) {
@@ -398,9 +397,7 @@ export const getAboutUs = (setData) => {
                     })
                 )
 
-                console.log("here ia m", arr)
-
-                setData(arr)
+                dispatch && dispatch(setData(arr))
 
             }
         }).catch((err) => {
@@ -408,7 +405,7 @@ export const getAboutUs = (setData) => {
         })
 }
 
-export const getFaqsCategory = async (setData) => {
+export const getFaqsCategory = async (dispatch, setData) => {
 
     let en = await endpoints.getEnFaqsCategory().then((res) => {
 
@@ -468,11 +465,11 @@ export const getFaqsCategory = async (setData) => {
 
     let categories = { en, ar }
 
-    setData(categories)
+    dispatch && dispatch(setData(categories))
 
 }
 
-export const getPopularQuestions = (setData) => {
+export const getPopularQuestions = (dispatch, setData) => {
     return endpoints.
         getPopularQuestions().then((res) => {
 
@@ -500,7 +497,7 @@ export const getPopularQuestions = (setData) => {
 
                 })
 
-                setData(popularQuestions)
+                dispatch && dispatch(setData(popularQuestions))
 
             }
 
@@ -531,7 +528,7 @@ export const getQuestionById = (id, setData) => {
         })
 }
 
-export const getSuccessStories = (setData) => {
+export const getSuccessStories = (dispatch, setData) => {
     return endpoints.
         getSuccessStories().then(async (res) => {
 
@@ -597,7 +594,7 @@ export const getSuccessStories = (setData) => {
 
                 }))
 
-                setData(stories)
+                dispatch && dispatch(setData(stories))
 
             }
 

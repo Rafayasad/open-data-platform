@@ -9,7 +9,7 @@ const Button = memo((props) => {
 
     return (
         <button
-            onClick={onClick}
+            onClick={onClick ? onClick : () => { }}
             className="px-4 en-font-default"
             style={{
                 backgroundColor: backgroundColor ? backgroundColor : 'white',

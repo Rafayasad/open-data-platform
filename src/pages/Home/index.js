@@ -15,6 +15,7 @@ import Navbar from '../../components/modules/Navbar';
 import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
 import { locales } from "../../i18n/helper";
+import { useSelector } from "react-redux";
 
 const Home = memo(() => {
 
@@ -26,18 +27,19 @@ const Home = memo(() => {
     const [platformInsights, setPlatformInsights] = useState();
     const [mostViewedDatasets, setMostViewedDatasets] = useState();
     const [recentsDatasets, setRecentsDatasets] = useState();
-    const [topics, setTopics] = useState();
+
+    const topics = useSelector((state) => state.facets.topics);
 
     useEffect(() => {
         getPlatformInsights(setPlatformInsights, setLoading)
         getMostViewedDatasets(setMostViewedDatasets, setLoading)
         getRecentsDatasets(setRecentsDatasets, setLoading)
-        getFacets("theme", "themelear", setTopics)
     }, [])
 
-    const onClickCard = useCallback((id) => { navigate(`${routes.DATASET_DETAIL}?id=${id}`) }, []);
-    const onSearch = useCallback((value) => { navigate(routes.DATASET, { state: { search: value } }) }, []);
-    const onClickList = useCallback((item) => { navigate(routes.DATASET, { state: { listItem: item } }) }, []);
+    const onClickCard = useCallback((id) => { navigate(`${routes.DATASET_DETAIL}?id=${id}`) });
+    const onSearch = useCallback((value) => { navigate(routes.DATASET, { state: { search: value } }) });
+    const onClickList = useCallback((item) => { navigate(routes.DATASET, { state: { listItem: item } }) });
+    const onClickButton = useCallback(() => { navigate(routes.DATASET) });
 
     return (
         <>
@@ -45,8 +47,8 @@ const Home = memo(() => {
             <Main onSearch={onSearch} />
             <Topics onClickList={onClickList} data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en} />
             <Images />
-            <Cards title={t("mostViewedDatasets")} backgroundColor={colors.black} data={mostViewedDatasets} onClick={onClickCard} />
-            <Cards title={t("recentlyAddedDatasets")} backgroundColor={colors.black} data={recentsDatasets} onClick={onClickCard} />
+            <Cards title={t("mostViewedDatasets")} backgroundColor={colors.black} data={mostViewedDatasets} onClick={onClickCard} onClickViewAll={onClickButton} />
+            <Cards title={t("recentlyAddedDatasets")} backgroundColor={colors.black} data={recentsDatasets} onClick={onClickCard} onClickViewAll={onClickButton} />
             <PlatformInsights data={platformInsights} />
             <UpperFooter title={t("GetMore")} button={t("registerNow")} />
             <MiddleFooter />
