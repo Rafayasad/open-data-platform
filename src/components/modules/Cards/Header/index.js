@@ -10,7 +10,7 @@ const Header = memo((props) => {
 
     const { t } = useTranslation()
 
-    const { title, backgroundColor, nobutton, size, dropdown, onClickButton } = props
+    const { title, backgroundColor, nobutton, size, dropdown, onClickButton, buttonText } = props
 
     let color = colors.white;
     let headingSize;
@@ -38,7 +38,7 @@ const Header = memo((props) => {
                 !nobutton ?
                     <div>
                         <Button
-                            title={t("viewAll")}
+                            title={buttonText ? buttonText : t("viewAll")}
                             textColor={color}
                             borderColor={color}
                             backgroundColor='transparent'

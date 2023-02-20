@@ -44,7 +44,7 @@ export const getMostViewedDatasets = (setData, setLoading) => {
                     }
                 })
 
-                setData(transform.slice(0, 3))
+                setData(transform)
                 setLoading(false)
             }
         }).catch((err) => {
@@ -84,7 +84,7 @@ export const getRecentsDatasets = (setData, setLoading) => {
                     }
                 })
 
-                setData(transform.slice(0, 3))
+                setData(transform)
                 setLoading(false)
             }
         }).catch((err) => {
