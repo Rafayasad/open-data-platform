@@ -4,9 +4,10 @@ import Heading from "../../../elements/Heading";
 import GOADLogo from "../../../../assets/images/GOAD-Logo.png";
 import TAMMLogo from "../../../../assets/images/TAMM-Logo.png";
 import TELogo from "../../../../assets/images/TE-Logo.png";
+import ADDALogo from '../../../../assets/images/Abu-Dhabi-Data-Logo-Dark.png';
 import { useTranslation } from "react-i18next";
 
-let data = [GOADLogo, GOADLogo, TELogo, TAMMLogo]
+let data = [GOADLogo, ADDALogo, TELogo, TAMMLogo]
 
 const AdLogo = memo(() => {
 
