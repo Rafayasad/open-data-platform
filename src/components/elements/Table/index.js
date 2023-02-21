@@ -1,5 +1,7 @@
 import React, { memo } from "react";
+import { Spinner } from "react-bootstrap";
 import DataTable from "react-data-table-component";
+import Pagination from "../Pagination";
 
 const columns = (data) => {
 
@@ -9,34 +11,16 @@ const columns = (data) => {
 
         let key = item[0]
 
-
-        // if (key !== "id") {
-        //     console.log("hhahahha", key)
-            return (
-                {
-                    name: key.replace("_", " "),
-                    selector: row => row[key]
-                }
-            )
-        // }
-
+        return (
+            {
+                name: key.replace("_", " "),
+                selector: row => row[key]
+            }
+        )
     })
 
     return filtered;
 }
-
-// const data = [
-//     {
-//         id: 1,
-//         title: 'Beetlejuice',
-//         year: '1988',
-//     },
-//     {
-//         id: 2,
-//         title: 'Ghostbusters',
-//         year: '1984',
-//     },
-// ]
 
 const customStyles = {
     rows: {
@@ -66,14 +50,30 @@ const customStyles = {
 
 const Table = memo((props) => {
 
-    let { data } = props;
+    let { data, loading, currentPage, totalCount, onChange } = props;
 
     return (
-        <DataTable
-            columns={data && columns(data[0])}
-            data={data && data}
-            customStyles={customStyles}
-        />
+        loading ? (
+            <div className="d-flex align-items-center justify-content-center" >
+                <Spinner />
+            </div>
+        ) : (
+            <div>
+                <DataTable
+                    columns={data && columns(data[0])}
+                    data={data && data}
+                    customStyles={customStyles}
+                />
+                {
+                    currentPage && totalCount && onChange && data && data.length > 0 ?
+                        <Pagination
+                            currentPage={currentPage}
+                            totalCount={totalCount}
+                            onChange={onChange}
+                        /> : null
+                }
+            </div>
+        )
     )
 });
 

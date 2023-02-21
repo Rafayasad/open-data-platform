@@ -782,15 +782,7 @@ export const login = async (dispatch, setData, setLoading, payload) => {
 
 export const getInsightsReport = (setData, payload, setLoading) => {
 
-    const dd = {
-        enddate: "all",
-        startdate: "all",
-        datatype: "json",
-        date_type: 'updated',
-        publisher: ""
-    }
-
-    return endpoints.getInsightsReport(dd)
+    return endpoints.getInsightsReport(payload)
         .then((res) => {
             if (res.status === 200) {
 

@@ -11,7 +11,7 @@ const Tabs = memo((props) => {
         <Container fluid>
             <Row>
                 <Col>
-                    <div className="my-5 d-flex justify-content-center flex-wrap">
+                    <div className="py-4 d-flex justify-content-center flex-wrap">
                         {
                             data && data.length > 0 && data.map((item, index) => (
                                 <div key={index} className='mx-2' onClick={() => item.onClick(item.title)} style={{ cursor: 'pointer' }}>

@@ -1,11 +1,10 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useState, useCallback } from "react";
 import RMDrawer from 'react-modern-drawer'
-import { RxCross2 } from "react-icons/rx";
-import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { RxCross2 } from "react-icons/rx";
+import { useTranslation } from "react-i18next";
+import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { locales, string } from '../../../../i18n/helper';
-import { useCallback } from "react";
 import { colors } from "../../../../utils/colors";
 import Accordion from 'react-bootstrap/Accordion';
 import Heading from "../../../elements/Heading";
@@ -78,7 +77,12 @@ const ReportsFilter = memo((props) => {
 
     const onChangeFilter = useCallback((filter) => setFilters({ ...filters, ...filter }), [filters]);
 
-    const onClickApply = useCallback(() => toggleDrawer(), onApplyFilters && onApplyFilters(filters));
+    const onClickApply = useCallback(() => {
+        toggleDrawer()
+        if (onClickApply) {
+            onApplyFilters(filters)
+        }
+    });
 
     const onClickClear = useCallback(() => setFilters(initialFilters));
 
@@ -109,12 +113,12 @@ const ReportsFilter = memo((props) => {
                 </div>
                 <div className="d-flex my-3">
                     <div className="w-100">
-                        <DatePicker value={filters?.start_date} title={"Start Date"} onChange={(start_date) => onChangeFilter({ start_date })} />
+                        <DatePicker value={filters?.start_date} title={"Start Date"} onChange={(start_date) => onChangeFilter({ start_date })} maxDate={filters?.end_date} />
                     </div>
                 </div>
                 <div className="d-flex my-3">
                     <div className="w-100">
-                        <DatePicker value={filters?.end_date} title={"End Date"} onChange={(end_date) => onChangeFilter({ end_date })} />
+                        <DatePicker value={filters?.end_date} title={"End Date"} onChange={(end_date) => onChangeFilter({ end_date })} minDate={filters?.start_date} />
                     </div>
                 </div>
                 <div className="py-2">
