@@ -107,10 +107,18 @@ const Cards = memo((props) => {
             {
                 title &&
                 <Row>
-                    <Header backgroundColor={backgroundColor} title={title} />
+                    <Col >
+                        <Header backgroundColor={backgroundColor} title={title} />
+                    </Col>
                 </Row>
             }
-            <Row>{renderContent()}</Row>
+            <Row>
+                <Col className="px-4">
+                    <Row>
+                        {renderContent()}
+                    </Row>
+                </Col>
+            </Row>
         </Container>
     )
 });

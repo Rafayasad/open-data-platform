@@ -26,7 +26,7 @@ const Tabs = memo((props) => {
                     </Col>
                 </div>
                 <div className="d-flex py-3" style={{ borderBottom: '1.5px solid #CFCFCF' }}>
-                    <Col className="px-3">
+                    <Col>
                         <Tab.Content>
                             {
                                 data.map((item, index) => (

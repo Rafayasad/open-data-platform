@@ -15,7 +15,7 @@ const Images = memo(() => {
     return (
         <Container fluid style={{ backgroundColor: colors.black }}>
             <Row>
-                <Col className="my-3">
+                <Col className="my-3 px-4">
                     <div className="d-flex flex-column justify-content-center" style={{
                         height: '75vh',
                         backgroundImage: `url(${background})`,
@@ -43,56 +43,61 @@ const Images = memo(() => {
                 </Col>
             </Row>
             <Row>
-                <Col xs={12} md={12} lg={6} className="my-2">
-                    <div className="d-flex flex-column justify-content-center" style={{
-                        height: '60vh',
-                        backgroundImage: `url(${CardOne})`,
-                        backgroundRepeat: 'no-repeat',
-                        backgroundSize: 'cover',
-                        borderRadius: '30px',
-                        backgroundPosition: 'center'
-                    }}>
-                        <Row>
-                            <Col />
-                            <Col sm={12} md={8} className='text-center'>
-                                <Heading color='white' heading={t("areYouNewToOpenData")} />
-                            </Col>
-                            <Col />
-                        </Row>
-                        <Row>
-                            <Col />
-                            <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                <Button title={t("discover")} />
-                            </Col>
-                            <Col />
-                        </Row>
-                    </div>
+                <Col className="px-4">
+                    <Row>
+                        <Col xs={12} md={12} lg={6} className="my-2">
+                            <div className="d-flex flex-column justify-content-center" style={{
+                                height: '60vh',
+                                backgroundImage: `url(${CardOne})`,
+                                backgroundRepeat: 'no-repeat',
+                                backgroundSize: 'cover',
+                                borderRadius: '30px',
+                                backgroundPosition: 'center'
+                            }}>
+                                <Row>
+                                    <Col />
+                                    <Col sm={12} md={8} className='text-center'>
+                                        <Heading color='white' heading={t("areYouNewToOpenData")} />
+                                    </Col>
+                                    <Col />
+                                </Row>
+                                <Row>
+                                    <Col />
+                                    <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
+                                        <Button title={t("discover")} />
+                                    </Col>
+                                    <Col />
+                                </Row>
+                            </div>
+                        </Col>
+                        <Col xs={12} md={12} lg={6} className="my-2">
+                            <div className="d-flex flex-column justify-content-center" style={{
+                                height: '60vh',
+                                backgroundImage: `url(${CardTwo})`,
+                                backgroundRepeat: 'no-repeat',
+                                backgroundSize: 'cover',
+                                borderRadius: '30px',
+                                backgroundPosition: 'center'
+                            }}>
+                                <Row>
+                                    <Col />
+                                    <Col sm={10} md={8} className='d-flex justify-content-center align-items-center text-center'>
+                                        <Heading size='xlg' color='white' heading={t("joinUsRegisterWithUs")} />
+                                    </Col>
+                                    <Col />
+                                </Row>
+                                <Row>
+                                    <Col />
+                                    <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
+                                        <Button title={t("getStarted")} />
+                                    </Col>
+                                    <Col />
+                                </Row>
+                            </div>
+                        </Col>
+                    </Row>
                 </Col>
-                <Col xs={12} md={12} lg={6} className="my-2">
-                    <div className="d-flex flex-column justify-content-center" style={{
-                        height: '60vh',
-                        backgroundImage: `url(${CardTwo})`,
-                        backgroundRepeat: 'no-repeat',
-                        backgroundSize: 'cover',
-                        borderRadius: '30px',
-                        backgroundPosition: 'center'
-                    }}>
-                        <Row>
-                            <Col />
-                            <Col sm={10} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                <Heading size='xlg' color='white' heading={t("joinUsRegisterWithUs")} />
-                            </Col>
-                            <Col />
-                        </Row>
-                        <Row>
-                            <Col />
-                            <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                <Button title={t("getStarted")} />
-                            </Col>
-                            <Col />
-                        </Row>
-                    </div>
-                </Col>
+
             </Row>
 
         </Container>

@@ -12,7 +12,7 @@ const LowerFooter = memo((props) => {
     const { t } = useTranslation()
 
     return (
-        <Container fluid className='bg-black py-3'>
+        <Container fluid className='bg-black py-3 px-4'>
             <Col className='my-4'>
                 <Heading size="xs" color="white" heading={t("powered")} />
             </Col>
