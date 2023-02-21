@@ -545,8 +545,6 @@ export const getSuccessStories = (dispatch, setData) => {
                     let { title, titlear, short_description, short_descriptionar, created } = attributes;
                     let { banner, story_paragraph, story_tags, story_tagsar } = relationships;
 
-                    console.log("asa", attributes)
-
                     let image = await endpoints.getImages(banner.links.related.href).then((res) => {
                         if (res.status === 200) {
 
@@ -780,4 +778,31 @@ export const login = async (dispatch, setData, setLoading, payload) => {
             console.log("Error message", err)
         })
 
+}
+
+export const getInsightsReport = (setData, payload, setLoading) => {
+
+    const dd = {
+        enddate: "all",
+        startdate: "all",
+        datatype: "json",
+        date_type: 'updated',
+        publisher: ""
+    }
+
+    return endpoints.getInsightsReport(dd)
+        .then((res) => {
+            if (res.status === 200) {
+
+                let data = { ...res.data.data, id: 1 };
+
+                console.log("olalala", data)
+
+                setData(data);
+
+            }
+        }).catch((err) => {
+            setLoading(false)
+            console.log("Error message", err)
+        })
 }

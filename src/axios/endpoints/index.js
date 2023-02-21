@@ -56,5 +56,9 @@ export const endpoints = {
     },
     login: (data, headers) => {
         return axios.post('http://10.241.40.69:30418/user/login?_format=json', data, { headers })
+    },
+    getInsightsReport: (data) => {
+        // return client.post('/apis/reports/insight_report.php', data)
+        return axios.post('http://10.241.40.69:30418/apis/reports/insight_report.php', data)
     }
 } 
