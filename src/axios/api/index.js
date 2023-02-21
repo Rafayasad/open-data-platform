@@ -9,7 +9,7 @@ export const getPlatformInsights = (setData, setLoading) => {
                 setLoading(false)
             }
         }).catch((err) => {
-            console.log()
+            console.log("Error message", err)
         })
 }
 
@@ -48,7 +48,7 @@ export const getMostViewedDatasets = (setData, setLoading) => {
                 setLoading(false)
             }
         }).catch((err) => {
-            console.log()
+            console.log("Error message", err)
         })
 }
 
@@ -181,16 +181,17 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
     setLoading(true)
     setTotalCount(0)
 
-    console.log("FILTERS", filters);
     let finalFilters = []
     let themeArray = []
     let publisherArray = []
     let tagsArray = []
+
     filters?.filter((el, index) => {
         el.type == "theme" ? themeArray.push(el.title)
             : el.type == "publisher__name" ? publisherArray.push(el.title)
                 : el.type == "keyword" && tagsArray.push(el.title)
     })
+
     finalFilters.push(
         { key: "theme", values: themeArray },
         { key: "publisher__name", values: publisherArray },
@@ -293,8 +294,6 @@ export const getAllApplications = (dispatch, setData) => {
                 await Promise.all(data.map(item => {
 
                     let { title, field_title_ar, field_application_description, field_application_description_ar, field_application_url } = item.attributes
-
-                    console.log("Chechhhhhhh appl", item)
 
                     return endpoints.getImages(item.relationships.field_image.links.related.href)
                         .then((res) => {
@@ -545,8 +544,6 @@ export const getSuccessStories = (dispatch, setData) => {
                     let { title, titlear, short_description, short_descriptionar, created } = attributes;
                     let { banner, story_paragraph, story_tags, story_tagsar } = relationships;
 
-                    console.log("asa", attributes)
-
                     let image = await endpoints.getImages(banner.links.related.href).then((res) => {
                         if (res.status === 200) {
 
@@ -627,8 +624,6 @@ export const getSuccessStoriesById = (id, setData) => {
 
                             let rows = await Promise.all(data.map(async (item, index) => {
 
-                                console.log("cnana", item, index)
-
                                 let { field_paragraph_title, field__nwan_alfqrt, field_paragraph_description, field_wsf_alfqrt } = item.attributes;
                                 let { field_paragraph_image } = item.relationships;
 
@@ -699,21 +694,6 @@ export const getSuccessStoriesById = (id, setData) => {
                         }
                     }).catch((err) => {
                         console.log("Error Message While Getting Tags", err)
-                    })
-
-                    console.log({
-                        id,
-                        title,
-                        title_ar: titlear,
-                        short_description: short_description,
-                        short_description_ar: short_descriptionar,
-                        description,
-                        description_ar: descriptionar,
-                        tags,
-                        tags_ar,
-                        image,
-                        created: new Date(created).toLocaleDateString("en-US", { dateStyle: 'long' }),
-                        rows
                     })
 
                     return {
@@ -804,7 +784,6 @@ export const register = async (navigate, route, setLoading, payload) => {
         .then((res) => {
             if (res.status === 200) {
                 navigate(route, { replace: true });
-                console.log("Reg resp", res);
             }
             setLoading(false)
         }).catch((err) => {

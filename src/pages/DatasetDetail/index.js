@@ -55,8 +55,6 @@ const DatasetDetail = memo(() => {
 
     }, [dataset])
 
-    console.log("dataset",dataset);
-
     return (
         <>
             <Navbar theme="dark" sticky />

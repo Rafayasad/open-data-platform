@@ -6,10 +6,8 @@ const ReactRecaptcha = memo((props) => {
     const { callBack } = props;
 
     function onChange(value) {
-        console.log("Captcha value:", value);
         callBack(value);
     }
-
 
     return (
         <ReCAPTCHA

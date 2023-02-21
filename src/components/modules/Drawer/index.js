@@ -79,11 +79,7 @@ const Drawer = memo((props) => {
         setFilters([])
     });
 
-    function CustomToggle({ children, eventKey }) {
-        const decoratedOnClick = useAccordionButton(eventKey, () =>
-            console.log('totally custom!',),
-        );
-
+    function CustomToggle({ eventKey }) {
         return (
             activeIndex === eventKey ?
                 <IoIosArrowDown color='black' style={{}} className="" size={20} /> :
