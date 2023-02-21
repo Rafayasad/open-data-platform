@@ -8,11 +8,12 @@ const CheckBox = memo((props) => {
 
   return (
     <Form.Check.Input
+      onChange={(e) => callBack(e.target.checked)}
       type="checkbox"
+      className=""
       style={{
         minWidth: "16px",
         maxWidth: "16px",
-        marginRight:'10px',
         borderColor: borderColor,
       }}
     />

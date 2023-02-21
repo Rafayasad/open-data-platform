@@ -52,9 +52,12 @@ export const endpoints = {
         return client.get(`/jsonapi/node/stories?filter[id]=${id}`)
     },
     getCRSFToken: () => {
-        return axios.get('http://10.241.40.69:30418/session/token')
+        return axios.get('https://data.abudhabi/session/token')
     },
     login: (data, headers) => {
-        return axios.post('http://10.241.40.69:30418/user/login?_format=json', data, { headers })
+        return axios.post('https://data.abudhabi/user/login?_format=json', data, { headers })
+    },
+    register: (data, headers) => {
+        return axios.post('http://10.241.40.69:30418/apis/register.php', data, { headers })
     }
 } 
