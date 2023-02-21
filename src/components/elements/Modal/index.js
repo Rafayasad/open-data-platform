@@ -1,5 +1,7 @@
 import React, { memo, useState } from "react";
 import { Modal } from 'react-bootstrap';
+import { useNavigate } from "react-router";
+import { routes } from "../../../router/helper";
 import Heading from '../Heading'
 import './style.css';
 
@@ -7,12 +9,16 @@ const ModalEelment = memo((props) => {
 
   const { heading, size, backdrop } = props
   const [show, setShow] = useState(true)
+  const navigate = useNavigate();
 
   return (
     <Modal
       size={size}
       show={show}
-      onHide={() => setShow(false)}
+      onHide={() => {
+        setShow(false)
+        navigate(routes.REGISTER)
+      }}
       centered
       scrollable
       className="py-5 mt-4"

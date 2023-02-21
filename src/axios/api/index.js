@@ -781,3 +781,35 @@ export const login = async (dispatch, setData, setLoading, payload) => {
         })
 
 }
+
+export const register = async (navigate, route, setLoading, payload) => {
+
+    setLoading(true)
+
+    let { email, password, reEmail, name } = payload;
+    let data = {
+        name,
+        email,
+        conf_email: reEmail,
+        passw: password,
+        ipaddress: "192.168.0.222"
+    }
+
+    let headers = {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+    }
+
+    await endpoints.register(data, headers)
+        .then((res) => {
+            if (res.status === 200) {
+                navigate(route, { replace: true });
+                console.log("Reg resp", res);
+            }
+            setLoading(false)
+        }).catch((err) => {
+            setLoading(false)
+            console.log("Error message", err)
+        })
+
+}
