@@ -63,7 +63,7 @@ const SuccessStoriesDetail = memo(() => {
     return (
         <>
             <Navbar theme='dark' />
-            <div className="my-5 pt-5">
+            <div className="my-5 pt-5 px-0">
                 <StoriesDetails item={story} />
                 <hr className="m-0 mx-3" />
                 <Cards title={t("successStories")} backgroundColor={colors.white} data={datas} />

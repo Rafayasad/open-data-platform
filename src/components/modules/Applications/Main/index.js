@@ -9,7 +9,7 @@ const Main = memo(() => {
     const { t } = useTranslation()
 
     return (
-        <Container fluid className="my-4">
+        <Container fluid className="my-4 px-4">
             <Row className="align-items-center">
                 <Col md={6} xs={12} className='py-2'>
                     <Heading bold nomargin heading={t("applicationTitle")} />

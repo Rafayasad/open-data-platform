@@ -25,8 +25,8 @@ const Tabs = memo((props) => {
                         </Nav>
                     </Col>
                 </div>
-                <div className="d-flex py-3 row" style={{ borderBottom: '1.5px solid #CFCFCF' }}>
-                    <Col sm={12} lg={8} className="px-3">
+                <div className="d-flex py-3" style={{ borderBottom: '1.5px solid #CFCFCF' }}>
+                    <Col sm={12} lg={8}>
                         <Tab.Content>
                             {
                                 data.map((item, index) => (
