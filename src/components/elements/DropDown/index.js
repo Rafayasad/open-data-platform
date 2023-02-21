@@ -7,7 +7,7 @@ import Heading from '../Heading';
 
 const Dropdown = (props) => {
 
-    const { options, selectedValue, name, size, headerComponent } = props
+    const { options, selectedValue, name, size, headerComponent , padding } = props
 
     const [isOpen, setIsOpen] = useState(false);
     const [indexx, setIndexx] = useState();
@@ -15,8 +15,8 @@ const Dropdown = (props) => {
     const toggle = (e) => setIsOpen(e);
 
     return (
-        <div className='d-flex align-items-center'>
-            <div className='px-3 d-none d-lg-block'>
+        <div className='d-flex justify-content-between align-items-center'>
+            <div className={`d-none d-lg-block ${padding && padding}`}>
                 <Heading size="xxs" heading={name} nomargin />
             </div>
             <BSDropdown autoClose={true} onToggle={toggle}>

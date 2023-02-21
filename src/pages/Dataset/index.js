@@ -11,8 +11,6 @@ import { getAllDatasets, getRecentsDatasets } from "../../axios/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../router/helper";
 import { useTranslation } from "react-i18next";
-import i18n from "../../i18n/i18n";
-import { locales } from "../../i18n/helper";
 
 const Dataset = memo(() => {
 
