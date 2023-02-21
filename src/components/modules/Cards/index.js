@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import Header from "./Header";
 import Loader from "../Loader";
@@ -36,7 +36,7 @@ const Cards = memo((props) => {
 
     const { i18n } = useTranslation();
 
-    const { title, data, backgroundColor, hoverable, type, size, onClick } = props
+    const { title, data, backgroundColor, hoverable, type, size, onClick, onClickViewAll, buttonText } = props;
 
     const renderContent = () => {
         if (type === 'image-inner-text') {
@@ -69,7 +69,7 @@ const Cards = memo((props) => {
             )
         } else if (type === 'story-cards') {
             return (
-                data && data.length > 0 && data.map((item, index) => (
+                data && data.length > 0 ? data.map((item, index) => (
                     <Col key={index} md={4} className="py-2">
                         <CardStory
                             title={i18n.language === locales.AR ? item.title_ar : item.title}
@@ -81,7 +81,7 @@ const Cards = memo((props) => {
                             onClick={() => onClick(item.id)}
                         />
                     </Col>
-                ))
+                )) : <Loader type={type} backgroundColor={backgroundColor} />
             )
         } else {
             return (
@@ -107,8 +107,8 @@ const Cards = memo((props) => {
             {
                 title &&
                 <Row>
-                    <Col >
-                        <Header backgroundColor={backgroundColor} title={title} />
+                    <Col>
+                        <Header buttonText={buttonText} backgroundColor={backgroundColor} title={title} onClickButton={onClickViewAll} />
                     </Col>
                 </Row>
             }

@@ -30,9 +30,6 @@ const CardStory = memo((props) => {
                     <Heading size='sm' underline heading={title} onClick={onClick} />
                 </Col>
                 <Col>
-                    <Heading maxNumberOfLines={2} color={colors.gray} size='xxs' heading={description} />
-                </Col>
-                <Col>
                     <Heading color={colors.gray} size='xxs' heading={`Published on ${created}`} />
                 </Col>
                 <Col className="d-flex">

@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import background from '../../../../assets/images/Desktop.png';
 import CardOne from '../../../../assets/images/Card-One.png';
@@ -7,10 +7,17 @@ import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
 import { colors } from "../../../../utils/colors";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
+import { routes } from "../../../../router/helper";
 
 const Images = memo(() => {
 
-    const { t } = useTranslation()
+    const { t } = useTranslation();
+    const navigate = useNavigate();
+
+    const onClickFindOutMore = useCallback(() => navigate(routes.SUCCESS_STOIRES));
+    const onClickDiscover = useCallback(() => navigate(routes.DATASET));
+    const onClickRegister = useCallback(() => navigate(routes.REGISTER));
 
     return (
         <Container fluid style={{ backgroundColor: colors.black }}>
@@ -36,7 +43,7 @@ const Images = memo(() => {
                                 <Col />
                             </div>
                             <Col className='d-flex justify-content-center'>
-                                <Button title={t("find")} />
+                                <Button title={t("find")} onClick={onClickFindOutMore} />
                             </Col>
                         </Row>
                     </div>
@@ -97,9 +104,7 @@ const Images = memo(() => {
                         </Col>
                     </Row>
                 </Col>
-
             </Row>
-
         </Container>
     )
 });

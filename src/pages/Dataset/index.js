@@ -32,6 +32,7 @@ const Dataset = memo(() => {
     const [filters, setFilters] = useState([]);
 
     const [loading, setLoading] = useState(false);
+    const [viewAll, setViewAll] = useState(false);
 
     useEffect(() => {
 
@@ -40,13 +41,13 @@ const Dataset = memo(() => {
         if (state && state.search) {
             setSearch(state.search)
         }
-        if (state && state.listItem) {
-            setFilters([state.listItem])
+        if (state && state.listItem && state.listItem.length > 0) {
+            setFilters(state.listItem)
         }
 
         if (state) {
-            navigate(pathname, { replace: true, state: null },)
-            getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort.toLowerCase(), currentPage, rowsPerPage, state.listItem ? [state.listItem] : [])
+            navigate(pathname, { replace: true, state: null })
+            getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [])
         }
 
     }, []);
@@ -61,6 +62,8 @@ const Dataset = memo(() => {
         }
     }, [currentPage, search, sort, filters]);
 
+    const toggle = useCallback(() => setViewAll(!viewAll), [viewAll]);
+
     const onClickCard = useCallback((id) => { navigate(`${routes.DATASET_DETAIL}?id=${id}`) }, []);
 
     const onChangePage = useCallback((page) => setCurrentPage(page), []);
@@ -72,23 +75,21 @@ const Dataset = memo(() => {
     const onApplyFilter = useCallback((filters) => setFilters([...filters]), [filters])
 
     const onDeleteFilter = useCallback((filter) => {
-        if (filter) {
 
+        if (filter) {
             let arr = [...filters];
             let index = filters.findIndex(item => item.title === filter.title)
-
             arr.splice(index, 1)
-
             setFilters([...arr])
-
         }
+
     }, [filters])
 
     return (
         <>
             <Navbar theme={'dark'} />
             <Main search={search} onChangeSearch={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
-            <Cards title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={recentsDatasets} onClick={onClickCard} />
+            <Cards buttonText={viewAll && t("viewLess")} onClickViewAll={toggle} title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)} onClick={onClickCard} />
             <DatasetList totalCount={totalCount} rowsPerPage={rowsPerPage} datasets={datasets} currentPage={currentPage} loading={loading} onChangePage={onChangePage} selectedValue={sort} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue} />
             <UpperFooter title={t("GetMore")} button={t("registerNow")} />
             <MiddleFooter />

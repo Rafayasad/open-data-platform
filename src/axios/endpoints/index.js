@@ -1,3 +1,4 @@
+import axios from "axios";
 import { client } from "../axios"
 
 export const endpoints = {
@@ -49,5 +50,14 @@ export const endpoints = {
     },
     getSuccessStoriesById: (id) => {
         return client.get(`/jsonapi/node/stories?filter[id]=${id}`)
+    },
+    getCRSFToken: () => {
+        return axios.get('https://data.abudhabi/session/token')
+    },
+    login: (data, headers) => {
+        return axios.post('https://data.abudhabi/user/login?_format=json', data, { headers })
+    },
+    register: (data, headers) => {
+        return axios.post('http://10.241.40.69:30418/apis/register.php', data, { headers })
     }
 } 

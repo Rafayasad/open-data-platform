@@ -22,7 +22,7 @@ const RecoverPassword = memo(() => {
           backgroundSize: "100vw 100%",
         }}
       >
-        <Container fluid className="my-5">
+        <Container fluid className="my-5 pt-5">
           <Row>
             <Col>
               <Row className="p-4">

@@ -1,15 +1,18 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import Button from '../../../elements/Button';
+import { BsTwitter, BsInstagram } from 'react-icons/bs'
+import { useTranslation } from 'react-i18next';
 import Heading from '../../../elements/Heading';
 import Emirates from '../../../../assets/images/Emirates.png'
 import AbuDhabi from '../../../../assets/images/Abu-Dhabi-Govt.png'
-import { BsTwitter, BsInstagram } from 'react-icons/bs'
-import { useTranslation } from 'react-i18next';
+import { socialLinks } from '../../../../utils';
 
-const LowerFooter = memo((props) => {
+const LowerFooter = memo(() => {
 
     const { t } = useTranslation()
+
+    const onClickInstagram = useCallback(() => window.open(socialLinks.instagram));
+    const onClickTwitter = useCallback(() => window.open(socialLinks.twitter));
 
     return (
         <Container fluid className='bg-black py-3 px-4'>
@@ -31,8 +34,8 @@ const LowerFooter = memo((props) => {
                     </div>
                     <div>
                         <div className='text-start text-sm-end py-3'>
-                            <BsTwitter className='mx-2' color='white' size={28} />
-                            <BsInstagram className='mx-2' color='white' size={28} />
+                            <BsTwitter className='mx-2' color='white' size={28} onClick={onClickTwitter} style={{ cursor: 'pointer' }} />
+                            <BsInstagram className='mx-2' color='white' size={28} onClick={onClickInstagram} style={{ cursor: 'pointer' }} />
                         </div>
                         <div>
                             <p className='text-white m-0'>{t('allRights')}</p>

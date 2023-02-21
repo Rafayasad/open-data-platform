@@ -1,16 +1,17 @@
 import React, { memo, useEffect, useState } from "react";
 import RMDrawer from 'react-modern-drawer'
 import { RxCross2 } from "react-icons/rx";
-import Accordion from 'react-bootstrap/Accordion';
+import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { useTranslation } from "react-i18next";
-import Heading from "../../elements/Heading";
-import Tag from "../../elements/Tag";
-import Button from "../../elements/Button";
-import { getFacets } from '../../../axios/api/index';
+import { useSelector } from "react-redux";
 import { locales } from '../../../i18n/helper';
 import { useCallback } from "react";
 import { colors } from "../../../utils/colors";
-import { filter } from "lodash";
+import { useAccordionButton } from "react-bootstrap";
+import Accordion from 'react-bootstrap/Accordion';
+import Heading from "../../elements/Heading";
+import Tag from "../../elements/Tag";
+import Button from "../../elements/Button";
 import './style.css';
 import 'react-modern-drawer/dist/index.css'
 
@@ -20,29 +21,25 @@ const Drawer = memo((props) => {
 
     const { open, setOpen, onClickApplyFilter, appliedFilters } = props;
 
-    const [topics, setTopics] = useState();
-    const [tags, setTags] = useState();
-    const [publisher, setPublisher] = useState();
+    const topics = useSelector((state) => state.facets.topics);
+    const publishers = useSelector((state) => state.facets.publishers);
+    const tags = useSelector((state) => state.facets.tags);
 
     const [activeIndex, setActiveIndex] = useState();
     const [filters, setFilters] = useState([]);
 
     useEffect(() => {
-        getFacets("theme", "themelear", setTopics)
-        getFacets("keyword", "keywordlear", setTags)
-        getFacets("publisher__name", "publisherlear__name", setPublisher)
-    }, []);
-
-    useEffect(() => {
         if (appliedFilters && appliedFilters.length > 0) {
             setFilters([...appliedFilters])
+        } else {
+            setFilters([])
         }
     }, [appliedFilters])
 
     const data = [
         {
             title: t("categories"),
-            tags: i18n.language === locales.AR ? publisher && publisher.ar : publisher && publisher.en
+            tags: i18n.language === locales.AR ? publishers && publishers.ar : publishers && publishers.en
         },
         {
             title: t("topics"),
@@ -82,12 +79,24 @@ const Drawer = memo((props) => {
         setFilters([])
     });
 
+    function CustomToggle({ children, eventKey }) {
+        const decoratedOnClick = useAccordionButton(eventKey, () =>
+            console.log('totally custom!',),
+        );
+
+        return (
+            activeIndex === eventKey ?
+                <IoIosArrowDown color='black' style={{}} className="" size={20} /> :
+                <IoIosArrowUp color='black' style={{}} className="" size={20} />
+        );
+    }
+
     return (
         <RMDrawer
             size={"400px"}
             open={open}
             onClose={toggleDrawer}
-            direction='right'
+            direction={i18n.language === locales.AR ? 'left' : 'right'}
             lockBackgroundScroll
             style={{ overflow: "scroll", scrollBehavior: "smooth", overflowY: "scroll" }}
         >
@@ -105,8 +114,9 @@ const Drawer = memo((props) => {
                                 <Accordion activeKey={activeIndex} key={index} className="bg-transparent">
                                     <Accordion.Item eventKey={index} className="border-0 my-2">
                                         <Accordion.Header onClick={() => onClickAccordian(index)}>
-                                            <div className="col-11" style={{ textAlign: "start" }}>
+                                            <div className='w-100 d-flex justify-content-between' style={{ textAlign: 'start' }}>
                                                 <Heading bold size="xs" heading={item.title} nomargin />
+                                                <CustomToggle eventKey={index} />
                                             </div>
                                         </Accordion.Header>
                                         <Accordion.Body>
@@ -141,7 +151,7 @@ const Drawer = memo((props) => {
                     })
                 }
             </div>
-            <div className="">
+            <div className="fixed">
                 <hr />
                 <div className="m-3 d-flex justify-content-between align-items-center">
                     <div className="">

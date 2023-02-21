@@ -5,7 +5,7 @@ import { colors } from "../../../utils/colors";
 
 const Tabs = memo((props) => {
 
-    const { data, staticComponentOnRight } = props
+    const { data, staticComponentOnRight } = props;
 
     const [active, setActive] = useState(0)
 
@@ -26,7 +26,7 @@ const Tabs = memo((props) => {
                     </Col>
                 </div>
                 <div className="d-flex py-3" style={{ borderBottom: '1.5px solid #CFCFCF' }}>
-                    <Col>
+                    <Col sm={12} lg={8}>
                         <Tab.Content>
                             {
                                 data.map((item, index) => (
@@ -37,10 +37,10 @@ const Tabs = memo((props) => {
                             }
                         </Tab.Content>
                     </Col>
-                    <div className="mx-2" style={{ border: '1px solid #CFCFCF' }} />
                     {
                         staticComponentOnRight &&
-                        <Col md={4} className="px-3">
+                        <Col sm={12} lg={4} className="d-flex ">
+                            <div className="mx-4 d-none d-lg-block" style={{ border: '1px solid #CFCFCF' }} />
                             {staticComponentOnRight}
                         </Col>
                     }

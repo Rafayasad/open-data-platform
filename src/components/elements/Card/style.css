@@ -7,6 +7,10 @@
     color: #FFFFFF !important;
 }
 
-.card-hover-primary:hover div:nth-child(3) div p {
+.hover-second:hover div:nth-child(2) div p {
+    color: #FFFFFF !important;
+}
+
+.hover-third:hover div:nth-child(3) div p {
     color: #FFFFFF !important;
 }

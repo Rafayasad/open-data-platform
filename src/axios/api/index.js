@@ -1,5 +1,4 @@
 import { convertHtmlToString } from "../../utils"
-import { client } from "../axios"
 import { endpoints } from "../endpoints"
 
 export const getPlatformInsights = (setData, setLoading) => {
@@ -45,7 +44,7 @@ export const getMostViewedDatasets = (setData, setLoading) => {
                     }
                 })
 
-                setData(transform.slice(0, 3))
+                setData(transform)
                 setLoading(false)
             }
         }).catch((err) => {
@@ -85,7 +84,7 @@ export const getRecentsDatasets = (setData, setLoading) => {
                     }
                 })
 
-                setData(transform.slice(0, 3))
+                setData(transform)
                 setLoading(false)
             }
         }).catch((err) => {
@@ -133,7 +132,7 @@ export const getSimilarDatasets = (topic, setData, setLoading) => {
         })
 }
 
-export const getFacets = async (key_en, key_ar, setData) => {
+export const getFacets = async (key_en, key_ar, dispatch, setData) => {
 
     let en = await endpoints.
         getFacets(key_en).then((res) => {
@@ -173,7 +172,7 @@ export const getFacets = async (key_en, key_ar, setData) => {
 
     let facets = { en, ar }
 
-    setData(facets)
+    dispatch && dispatch(setData(facets))
 
 }
 
@@ -282,7 +281,7 @@ export const getDatasetById = (id, setData) => {
         })
 }
 
-export const getAllApplications = (setData) => {
+export const getAllApplications = (dispatch, setData) => {
     return endpoints.
         getAllApplications().then(async (res) => {
             if (res.status === 200) {
@@ -295,15 +294,18 @@ export const getAllApplications = (setData) => {
 
                     let { title, field_title_ar, field_application_description, field_application_description_ar, field_application_url } = item.attributes
 
+                    console.log("Chechhhhhhh appl", item)
+
                     return endpoints.getImages(item.relationships.field_image.links.related.href)
                         .then((res) => {
                             applications.push({
+                                id: item.id,
                                 title,
                                 title_ar: field_title_ar,
                                 description: field_application_description,
                                 description_ar: field_application_description_ar,
                                 image: `${process.env.REACT_APP_BASE_URL}${res.data.data.attributes.uri.url}`,
-                                applicationURL: field_application_url.title
+                                applicationURL: field_application_url.uri
                             })
                         }).catch((err) => {
                             console.log("Error Message While Getting Image", err)
@@ -311,7 +313,7 @@ export const getAllApplications = (setData) => {
 
                 }));
 
-                setData(applications)
+                dispatch && dispatch(setData(applications));
 
             }
         }).catch((err) => {
@@ -319,7 +321,7 @@ export const getAllApplications = (setData) => {
         })
 }
 
-export const getAboutUs = (setData) => {
+export const getAboutUs = (dispatch, setData) => {
     return endpoints.
         getAboutUs().then(async (res) => {
             if (res.status === 200) {
@@ -398,9 +400,7 @@ export const getAboutUs = (setData) => {
                     })
                 )
 
-                console.log("here ia m", arr)
-
-                setData(arr)
+                dispatch && dispatch(setData(arr))
 
             }
         }).catch((err) => {
@@ -408,7 +408,7 @@ export const getAboutUs = (setData) => {
         })
 }
 
-export const getFaqsCategory = async (setData) => {
+export const getFaqsCategory = async (dispatch, setData) => {
 
     let en = await endpoints.getEnFaqsCategory().then((res) => {
 
@@ -468,11 +468,11 @@ export const getFaqsCategory = async (setData) => {
 
     let categories = { en, ar }
 
-    setData(categories)
+    dispatch && dispatch(setData(categories))
 
 }
 
-export const getPopularQuestions = (setData) => {
+export const getPopularQuestions = (dispatch, setData) => {
     return endpoints.
         getPopularQuestions().then((res) => {
 
@@ -500,7 +500,7 @@ export const getPopularQuestions = (setData) => {
 
                 })
 
-                setData(popularQuestions)
+                dispatch && dispatch(setData(popularQuestions))
 
             }
 
@@ -531,7 +531,7 @@ export const getQuestionById = (id, setData) => {
         })
 }
 
-export const getSuccessStories = (setData) => {
+export const getSuccessStories = (dispatch, setData) => {
     return endpoints.
         getSuccessStories().then(async (res) => {
 
@@ -597,7 +597,7 @@ export const getSuccessStories = (setData) => {
 
                 }))
 
-                setData(stories)
+                dispatch && dispatch(setData(stories))
 
             }
 
@@ -740,4 +740,76 @@ export const getSuccessStoriesById = (id, setData) => {
         }).catch((err) => {
             console.log("Error message", err)
         })
+}
+
+export const login = async (dispatch, setData, setLoading, payload) => {
+
+    setLoading(true)
+
+    let { email, password } = payload;
+    let data = {
+        name: email,
+        pass: password
+    }
+
+    let token = await endpoints.getCRSFToken()
+        .then((res) => {
+
+            if (res.status === 200) {
+                return res.data
+            }
+
+        }).catch((err) => {
+            console.log("Error message", err)
+        })
+
+    let headers = {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': token,
+        Accept: 'application/json',
+    }
+
+    await endpoints.login(data, headers)
+        .then((res) => {
+            if (res.status === 200) {
+                dispatch(setData(res.data))
+            }
+            setLoading(false)
+        }).catch((err) => {
+            setLoading(false)
+            console.log("Error message", err)
+        })
+
+}
+
+export const register = async (navigate, route, setLoading, payload) => {
+
+    setLoading(true)
+
+    let { email, password, reEmail, name } = payload;
+    let data = {
+        name,
+        email,
+        conf_email: reEmail,
+        passw: password,
+        ipaddress: "192.168.0.222"
+    }
+
+    let headers = {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+    }
+
+    await endpoints.register(data, headers)
+        .then((res) => {
+            if (res.status === 200) {
+                navigate(route, { replace: true });
+                console.log("Reg resp", res);
+            }
+            setLoading(false)
+        }).catch((err) => {
+            setLoading(false)
+            console.log("Error message", err)
+        })
+
 }

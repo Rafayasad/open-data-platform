@@ -9,6 +9,8 @@ const DataCard = memo((props) => {
 
     const { data } = props
 
+    console.log("data",data);
+
     return (
         <Container fluid className="p-0">
             {
@@ -20,7 +22,7 @@ const DataCard = memo((props) => {
                         {
                             !item.tags ? (
                                 <div>
-                                    <Heading capitalize={item.capitalize} nomargin={data.length - 1 == index} color={item.color} underline={item.underline} heading={item.detail} size='xxs' onClick={item.onClick} />
+                                    <Heading maxNumberOfLines={0} capitalize={item.capitalize} color={item.color} underline={item.underline} heading={item.detail} size='xxs' onClick={item.onClick} />
                                 </div>
                             ) : (
                                 <div className="d-flex flex-wrap mb-3">

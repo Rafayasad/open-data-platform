@@ -25,6 +25,15 @@ const Card = memo((props) => {
 
     if (hoverable) {
         ClassName = "card-hover-" + hoverable
+
+        if (hoverable === "primary") {
+            if (description && !shortTitle) {
+                ClassName = ClassName + " " + "hover-second"
+            } else {
+                ClassName = ClassName + " " + "hover-third"
+            }
+        }
+
     }
 
     return (
@@ -62,7 +71,7 @@ const Card = memo((props) => {
                 {
                     description &&
                     <Col md={10}>
-                        <Heading maxNumberOfLines={shortTitle ? 2 : 3} color={'#404040'} size="xxs" heading={description} />
+                        <Heading maxNumberOfLines={shortTitle ? 2 : 3} color={'#404040'} size={shortTitle ? "xs" : "xxs"} heading={description} />
                     </Col>
                 }
             </Row>
