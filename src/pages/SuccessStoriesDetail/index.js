@@ -10,6 +10,8 @@ import LowerFooter from "../../components/modules/Footer/LowerFooter";
 import Navbar from "../../components/modules/Navbar";
 import { routes } from "../../router/helper";
 import { getSuccessStoriesById } from "../../axios/api";
+import BreadCrumb from "../../components/elements/BreadCrumb";
+import { Col, Container, Row } from "react-bootstrap";
 
 const SuccessStoriesDetail = memo(() => {
 
@@ -63,7 +65,10 @@ const SuccessStoriesDetail = memo(() => {
     return (
         <>
             <Navbar theme='dark' />
-            <div className="my-5 pt-5 px-0">
+            <div className="my-5 pt-5">
+                <div className="px-4 m-0">
+                    <BreadCrumb items={["About us", "Success stories"]} />
+                </div>
                 <StoriesDetails item={story} />
                 <hr className="m-0 mx-3" />
                 <Cards title={t("successStories")} backgroundColor={colors.white} data={datas} />

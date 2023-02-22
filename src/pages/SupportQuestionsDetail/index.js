@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../router/helper";
 import { useTranslation } from "react-i18next";
 import { locales } from "../../i18n/helper";
+import BreadCrumb from "../../components/elements/BreadCrumb";
 
 const SupportQuestionsDetail = memo(() => {
 
@@ -35,7 +36,12 @@ const SupportQuestionsDetail = memo(() => {
     return (
         <>
             <Navbar theme='dark' />
-            <Main title={i18n.language === locales.AR ? details && details.title_ar : details && details.title} description={i18n.language === locales.AR ? details && details.description_ar : details && details.description} />
+            <div className="my-5 pt-5">
+                <div className="px-4 m-0">
+                    <BreadCrumb items={["Support", "Getting Started"]} />
+                </div>
+                <Main title={i18n.language === locales.AR ? details && details.title_ar : details && details.title} description={i18n.language === locales.AR ? details && details.description_ar : details && details.description} />
+            </div>
             <UpperFooter title={t("stillNeedHelp")} description={t("footerPartText")} button={t("contactUs")} />
             <MiddleFooter />
             <LowerFooter />

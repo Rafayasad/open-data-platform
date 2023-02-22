@@ -48,6 +48,7 @@ const Card = memo((props) => {
                 </Col>
                 <Col md={2} className='d-flex justify-content-end'>
                     <Dropdown
+                        width={"12rem"}
                         options={
                             [
                                 {

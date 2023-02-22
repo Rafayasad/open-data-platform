@@ -7,7 +7,7 @@ import Heading from '../Heading';
 
 const Dropdown = (props) => {
 
-    const { options, selectedValue, name, size, headerComponent } = props
+    const { options, selectedValue, name, size, headerComponent, width } = props
 
     const [isOpen, setIsOpen] = useState(false);
     const [indexx, setIndexx] = useState();
@@ -16,13 +16,18 @@ const Dropdown = (props) => {
 
     return (
         <div className='d-flex align-items-center'>
-            <div className='px-3 d-none d-lg-block'>
-                <Heading size="xxs" heading={name} nomargin />
-            </div>
+            {
+                name &&
+                <div className='px-3'>
+                    <Heading size="xxs" heading={name} nomargin />
+                </div>
+            }
             <BSDropdown autoClose={true} onToggle={toggle}>
                 {
                     headerComponent ? (
-                        <BSDropdown.Toggle className='bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end' style={{ width: '12rem' }}>
+                        <BSDropdown.Toggle className='bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end'
+                            style={{ width: width && '12rem' }}
+                        >
                             {headerComponent}
                         </BSDropdown.Toggle>
                     ) : (
@@ -48,8 +53,10 @@ const Dropdown = (props) => {
                             options && options.length > 0 && options.map((item, index) => (
                                 <BSDropdown.Item
                                     onClick={() => {
-                                        setIndexx(index)
-                                        item.onClick(item.title)
+                                        !item.downloadLink && setIndexx(index)
+                                        item.onClick(
+                                            item.downloadLink ? item.downloadLink : item.title
+                                        )
                                     }}
                                     style={{ width: "auto" }}
                                     key={index} className={`d-flex rounded p-2 align-items-center ${indexx === index && "dropdown-items"} ${index > 0 && "mt-1"}`}>

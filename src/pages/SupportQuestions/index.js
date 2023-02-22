@@ -8,6 +8,7 @@ import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
 import { getPopularQuestions } from "../../axios/api";
 import { routes } from "../../router/helper";
 import { useTranslation } from "react-i18next";
+import BreadCrumb from "../../components/elements/BreadCrumb";
 
 const SupportQuestions = memo(() => {
 
@@ -39,6 +40,9 @@ const SupportQuestions = memo(() => {
         <>
             <Navbar theme='dark' />
             <div className="mt-5 pt-5">
+                <div className="px-4">
+                    <BreadCrumb items={["Support"]} />
+                </div>
                 <QuestionList title={t("gettingStarted")} data={questions} onClick={onClickQuestion} />
             </div>
             <UpperFooter title={t("stillNeedHelp")} description={t("footerPartText")} button={t("contactUs")} />

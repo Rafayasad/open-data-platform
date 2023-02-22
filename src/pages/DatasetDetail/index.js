@@ -9,6 +9,8 @@ import Navbar from "../../components/modules/Navbar";
 import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
 import { useTranslation } from "react-i18next";
+import BreadCrumb from "../../components/elements/BreadCrumb";
+import { Col, Container, Row } from "react-bootstrap";
 
 const data = [
     {
@@ -55,12 +57,15 @@ const DatasetDetail = memo(() => {
 
     }, [dataset])
 
-    console.log("dataset",dataset);
+    console.log("dataset", dataset);
 
     return (
         <>
             <Navbar theme="dark" sticky />
             <div className="my-5 py-5">
+                <div className="px-4">
+                    <BreadCrumb items={["Datasets", "Technology"]} />
+                </div>
                 <Main data={dataset} />
                 <Cards title={t("similarDatasets")} backgroundColor={colors.white} data={similarDataset} />
             </div>

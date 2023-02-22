@@ -234,7 +234,7 @@ export const getDatasetById = (id, setData) => {
             if (res.status === 200) {
 
                 let item = res.data;
-
+                
                 let data = {
                     id: item.identifier,
                     title: item.title,
@@ -256,15 +256,9 @@ export const getDatasetById = (id, setData) => {
                     resources: item.distribution.map(item => (
                         {
                             title: item.title,
+                            title_ar: item.titlelear,
                             description: item.description,
-                            format: item.format,
-                            downloadURL: item.downloadURL
-                        }
-                    )),
-                    resources_ar: item.distribution.map(item => (
-                        {
-                            title: item.titlelear,
-                            description: item.descriptionlear,
+                            description_ar: item.descriptionlear,
                             format: item.format,
                             downloadURL: item.downloadURL
                         }
