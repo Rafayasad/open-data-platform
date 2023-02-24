@@ -5,6 +5,7 @@
 .card-hover-primary:hover {
     background-color: #762FFF;
     color: #FFFFFF !important;
+    transition: .2s ease-in-out;
 }
 
 .hover-second:hover div:nth-child(2) div p {

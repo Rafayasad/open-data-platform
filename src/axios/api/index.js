@@ -234,7 +234,7 @@ export const getDatasetById = (id, setData) => {
             if (res.status === 200) {
 
                 let item = res.data;
-                
+
                 let data = {
                     id: item.identifier,
                     title: item.title,
@@ -259,7 +259,11 @@ export const getDatasetById = (id, setData) => {
                             title_ar: item.titlelear,
                             description: item.description,
                             description_ar: item.descriptionlear,
-                            format: item.format,
+                            format: item.format === "pdf" ? "pdf"
+                                : item.format === "esri rest" ? "excel"
+                                    : item.format === "xlsx" ? "excel"
+                                        : item.format === "xls" ? "excel"
+                                            : item.format === "csv" && "csv",
                             downloadURL: item.downloadURL
                         }
                     )),

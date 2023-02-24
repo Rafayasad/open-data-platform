@@ -86,8 +86,9 @@ const Drawer = memo((props) => {
 
         return (
             activeIndex === eventKey ?
-                <IoIosArrowDown color='black' style={{}} className="" size={20} /> :
                 <IoIosArrowUp color='black' style={{}} className="" size={20} />
+                :
+                <IoIosArrowDown color='black' style={{}} className="" size={20} />
         );
     }
 

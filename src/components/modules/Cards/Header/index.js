@@ -47,6 +47,8 @@ const Header = memo((props) => {
                     </div> :
                     dropdown ?
                         <Dropdown
+                            highlightableItem
+                            autoClose={true}
                             name={dropdown.title}
                             options={dropdown.options}
                             selectedValue={dropdown.selectedValue}

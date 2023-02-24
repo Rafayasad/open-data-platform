@@ -2,12 +2,14 @@ import React, { memo, useState } from "react";
 import { Col, Container, Nav, Tab } from "react-bootstrap";
 import './style.css';
 import { colors } from "../../../utils/colors";
+import { routes } from "../../../router/helper";
+import Heading from "../../elements/Heading";
 
 const Tabs = memo((props) => {
 
     const { data, staticComponentOnRight } = props;
 
-    const [active, setActive] = useState(0)
+    const [active, setActive] = useState(0);
 
     return (
         <Container fluid>
@@ -17,8 +19,8 @@ const Tabs = memo((props) => {
                         <Nav>
                             {
                                 data.map((item, index) => (
-                                    <Nav.Item onClick={() => setActive(index)}>
-                                        <Nav.Link className={`${active == index && "tab-underline"}`} style={{ color: active == index ? colors.black : colors.gray }} eventKey={index}>{item.name}</Nav.Link>
+                                    <Nav.Item className="mx-1" onClick={() => setActive(index)}>
+                                        <p className={`${active == index && "tab-underline"} m-0 ${item.name === "API Documentation" && "px-4"}`} style={{ color: active == index ? colors.black : colors.gray , cursor:"pointer" }} >{item.name}</p>
                                     </Nav.Item>
                                 ))
                             }

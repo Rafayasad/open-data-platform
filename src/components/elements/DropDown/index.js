@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import { Dropdown as BSDropdown } from 'react-bootstrap';
 import { MdKeyboardArrowDown } from "react-icons/md";
-import './style.css';
 import { colors } from '../../../utils/colors';
 import Heading from '../Heading';
+import './style.css';
 
 const Dropdown = (props) => {
 
-    const { options, selectedValue, name, size, headerComponent, width } = props
+    const { autoClose, options, setSelectedDropdownValue, selectedValue, name, size, headerComponent, highlightableItem, width, selectedDropdownValue } = props
 
     const [isOpen, setIsOpen] = useState(false);
     const [indexx, setIndexx] = useState();
 
-    const toggle = (e) => setIsOpen(e);
+    const toggle = (e) => {
+        setIsOpen(e)
+        selectedDropdownValue && setSelectedDropdownValue();
+    };
 
     return (
         <div className='d-flex align-items-center'>
@@ -22,16 +25,17 @@ const Dropdown = (props) => {
                     <Heading size="xxs" heading={name} nomargin />
                 </div>
             }
-            <BSDropdown autoClose={true} onToggle={toggle}>
+            <BSDropdown autoClose={autoClose} onToggle={toggle}>
                 {
                     headerComponent ? (
-                        <BSDropdown.Toggle className='bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end'
+                        <BSDropdown.Toggle href={null} className='bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end'
                             style={{ width: width && '12rem' }}
                         >
                             {headerComponent}
                         </BSDropdown.Toggle>
                     ) : (
                         <BSDropdown.Toggle
+                            href={null}
                             className={`bg-white my-1 d-flex align-items-center justify-content-between my-dropdown-toggle text-black border border-1 ${isOpen && "dropdown-hover"}`}
                             style={{ width: '12rem' }}
                         >
@@ -45,18 +49,17 @@ const Dropdown = (props) => {
                     )
                 }
                 {
-                    isOpen &&
+                    isOpen && options &&
                     <BSDropdown.Menu
                         className={`d-flex flex-column my-1 p-1`}
                         style={{ backgroundColor: "white", zIndex: 999, minWidth: "100%", width: size === "lg" ? "50vw" : size === "md" ? "30vw" : "10vw" }}>
                         {
                             options && options.length > 0 && options.map((item, index) => (
                                 <BSDropdown.Item
+                                    href={item.downloadLink && item.downloadLink}
                                     onClick={() => {
-                                        !item.downloadLink && setIndexx(index)
-                                        item.onClick(
-                                            item.downloadLink ? item.downloadLink : item.title
-                                        )
+                                        highlightableItem && setIndexx(index)
+                                        item.onClick(item.title)
                                     }}
                                     style={{ width: "auto" }}
                                     key={index} className={`d-flex rounded p-2 align-items-center ${indexx === index && "dropdown-items"} ${index > 0 && "mt-1"}`}>
@@ -75,6 +78,7 @@ const Dropdown = (props) => {
                     </BSDropdown.Menu>
                 }
             </BSDropdown>
+
         </div >
     );
 }
