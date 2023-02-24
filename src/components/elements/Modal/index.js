@@ -17,7 +17,7 @@ const ModalEelment = memo((props) => {
       show={show}
       onHide={() => {
         setShow(false)
-        navigate(routes.REGISTER)
+        navigate(-1);
       }}
       centered
       scrollable

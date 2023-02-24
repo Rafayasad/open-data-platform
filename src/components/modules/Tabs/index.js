@@ -19,9 +19,11 @@ const Tabs = memo((props) => {
                         <Nav>
                             {
                                 data.map((item, index) => (
-                                    <Nav.Item className="mx-1" onClick={() => setActive(index)}>
-                                        <p className={`${active == index && "tab-underline"} m-0 ${item.name === "API Documentation" && "px-4"}`} style={{ color: active == index ? colors.black : colors.gray , cursor:"pointer" }} >{item.name}</p>
-                                    </Nav.Item>
+                                    <div className={`${index === 1 && "mx-4"}`}>
+                                        <Nav.Item className={`m-0 ${active == index && "tab-underline"}`} onClick={() => setActive(index)}>
+                                            <p className={`mb-2 ${index === 1 && "mx-2"}  ${item.name === "API Documentation" && "px-1"}`} style={{ color: active == index ? colors.black : colors.gray, cursor: "pointer" }} >{item.name}</p>
+                                        </Nav.Item>
+                                    </div>
                                 ))
                             }
                         </Nav>

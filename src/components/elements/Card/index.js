@@ -1,6 +1,8 @@
 import React, { memo, useState } from "react";
 import { Card as RBCard, Col, Row } from "react-bootstrap";
 import { BsPerson, BsShare, BsThreeDots } from "react-icons/bs";
+import { FaFilePdf, FaFileExcel, FaFileCsv } from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { colors } from "../../../utils/colors";
 import { useCallback } from "react";
 import Dropdown from '../../elements/DropDown';
@@ -10,7 +12,7 @@ import './style.css';
 
 const Card = memo((props) => {
 
-    const { title, publisher, description, tags, size, noborder, hoverable, shortTitle, headingSize, onClick } = props
+    const { resources, title, publisher, description, tags, size, noborder, hoverable, shortTitle, headingSize, onClick } = props
 
     var height = "332px", border, ClassName;
 
@@ -43,6 +45,24 @@ const Card = memo((props) => {
 
     }
 
+    let shareOptions = [
+        {
+            title: "Facebook",
+            format: "facebook",
+            downloadURL: "...."
+        },
+        {
+            title: "LinkedIn",
+            format: "linkedin",
+            downloadURL: "...."
+        },
+        {
+            title: "Twitter",
+            format: "twitter",
+            downloadURL: "...."
+        }
+    ]
+
     const options = [
         {
             title: "Download",
@@ -56,23 +76,27 @@ const Card = memo((props) => {
         }
     ]
 
-    const specificDownloadOptions = [
+    const specificDownloadOptions = resources?.map((item, index) => (
         {
-            title: selectedDropdownValue === "Download" ? "Download resourcel one" : "Facebook",
+            title: item.title ? item.title : "No title found!",
             onClick: downloadResources,
-            downloadLink: "http://www.pdf995.com/samples/pdf.pdf",
-        },
-        {
-            title: selectedDropdownValue === "Download" ? "Download resourcel two" : "LinkedIn",
-            onClick: downloadResources,
-            downloadLink: "http://www.pdf995.com/samples/pdf.pdf",
-        },
-        {
-            title: selectedDropdownValue === "Download" ? "Download resourcel three" : "Twitter",
-            onClick: downloadResources,
-            downloadLink: "http://www.pdf995.com/samples/pdf.pdf",
+            downloadLink: item.downloadURL,
+            icon: item.format === "pdf" ? <FaFilePdf />
+                : item.format === "excel" ? <FaFileExcel />
+                    : item.format === "csv" && <FaFileCsv />
         }
-    ]
+    ))
+
+    const specificShareOptions = shareOptions?.map((item, index) => (
+        {
+            title: item.title,
+            onClick: downloadResources,
+            downloadLink: item.downloadURL,
+            icon: item.format === "facebook" ? <FaFacebookF />
+                : item.format === "linkedin" ? <FaLinkedinIn />
+                    : item.format === "twitter" && <FaTwitter />
+        }
+    ))
 
     return (
         <RBCard className={`p-4 ${ClassName}`} style={{ height: height, borderRadius: "30px", borderWidth: border }}>
@@ -89,7 +113,7 @@ const Card = memo((props) => {
                         autoClose={"outside"}
                         width={"12rem"}
                         size={selectedDropdownValue === "Download" && "md"}
-                        options={selectedDropdownValue ? specificDownloadOptions : options}
+                        options={selectedDropdownValue === "Download" ? specificDownloadOptions : selectedDropdownValue === "Share" ? specificShareOptions : options}
                         selectedDropdownValue={selectedDropdownValue}
                         setSelectedDropdownValue={setSelectedDropdownValue}
                         headerComponent={<BsThreeDots color={colors.black} size={28} style={{ cursor: 'pointer' }} />}

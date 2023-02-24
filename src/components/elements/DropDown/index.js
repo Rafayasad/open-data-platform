@@ -7,7 +7,7 @@ import './style.css';
 
 const Dropdown = (props) => {
 
-    const { autoClose, options, setSelectedDropdownValue, selectedValue, name, size, headerComponent, highlightableItem, width, selectedDropdownValue } = props
+    const { autoClose, options, setSelectedDropdownValue, selectedValue, name, size, headerComponent, highlightableItem, width, selectedDropdownValue } = props;
 
     const [isOpen, setIsOpen] = useState(false);
     const [indexx, setIndexx] = useState();
@@ -52,16 +52,17 @@ const Dropdown = (props) => {
                     isOpen && options &&
                     <BSDropdown.Menu
                         className={`d-flex flex-column my-1 p-1`}
-                        style={{ backgroundColor: "white", zIndex: 999, minWidth: "100%", width: size === "lg" ? "50vw" : size === "md" ? "30vw" : "10vw" }}>
+                        style={{ backgroundColor: "white", zIndex: 999, minWidth: "100%", width: size === "lg" ? "50vw" : size === "md" ? "30vw" : size === "sm" ? "15vw" : "10vw" }}>
                         {
                             options && options.length > 0 && options.map((item, index) => (
                                 <BSDropdown.Item
+                                    // target="_blank"
                                     href={item.downloadLink && item.downloadLink}
                                     onClick={() => {
                                         highlightableItem && setIndexx(index)
                                         item.onClick(item.title)
                                     }}
-                                    style={{ width: "auto" }}
+                                    style={{ width: "auto", alignItems: "center" }}
                                     key={index} className={`d-flex rounded p-2 align-items-center ${indexx === index && "dropdown-items"} ${index > 0 && "mt-1"}`}>
                                     {
                                         item.icon &&
@@ -70,7 +71,7 @@ const Dropdown = (props) => {
                                         </div>
                                     }
                                     <div className={`d-flex flex-wrap ${item.icon && "px-2"}`}>
-                                        <Heading color={colors.black} maxNumberOfLines={1} size="xxs" heading={item.title} nomargin />
+                                        <Heading nomargin color={colors.black} maxNumberOfLines={1} size="xxs" heading={item.title} />
                                     </div>
                                 </BSDropdown.Item>
                             ))

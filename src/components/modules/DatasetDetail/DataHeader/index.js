@@ -5,7 +5,7 @@ import { MdDownloadForOffline } from "react-icons/md"
 import { locales } from "../../../../i18n/helper";
 import { useCallback } from "react";
 import { colors } from "../../../../utils/colors";
-import { FaFilePdf, FaFileExcel, FaFileCsv } from "react-icons/fa";
+import { FaFilePdf, FaFileExcel, FaFileCsv, FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
 import Shimmer from "../../../elements/Shimmer";
@@ -28,8 +28,37 @@ const DataHeader = memo((props) => {
             onClick: downloadResources,
             downloadLink: item.downloadURL,
             icon: item.format === "pdf" ? <FaFilePdf />
-                : item.format === "excel" ? <FaFileExcel />
+                : item.format === "excel" ? <FaFileExcel size={20} />
                     : item.format === "csv" && <FaFileCsv />
+        }
+    ))
+
+    let shareData = [
+        {
+            title: "Facebook",
+            format: "facebook",
+            downloadURL: "...."
+        },
+        {
+            title: "LinkedIn",
+            format: "linkedin",
+            downloadURL: "...."
+        },
+        {
+            title: "Twitter",
+            format: "twitter",
+            downloadURL: "...."
+        }
+    ]
+
+    const shareOptions = shareData?.map((item, index) => (
+        {
+            title: item.title,
+            onClick: downloadResources,
+            downloadLink: item.downloadURL,
+            icon: item.format === "facebook" ? <FaFacebookF />
+                : item.format === "linkedin" ? <FaLinkedinIn />
+                    : item.format === "twitter" && <FaTwitter />
         }
     ))
 
@@ -61,7 +90,12 @@ const DataHeader = memo((props) => {
             </Col>
             <Col className="d-none d-lg-flex justify-content-end align-items-center">
                 <div className="d-flex align-items-center">
-                    <Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />
+                    <Dropdown
+                        autoClose={true}
+                        options={shareOptions}
+                        size={"sm"}
+                        headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}
+                    />
                 </div>
                 <div className="mx-1">
                     {/* <Button icon={<MdDownloadForOffline className="mx-1" size={20} />} title={"Download"} backgroundColor="black" textColor="white" /> */}
