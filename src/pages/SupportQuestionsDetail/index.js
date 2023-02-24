@@ -1,14 +1,11 @@
 import React, { memo, useEffect, useState } from "react";
-import Navbar from '../../components/modules/Navbar';
-import UpperFooter from "../../components/modules/Footer/UpperFooter";
-import LowerFooter from "../../components/modules/Footer/LowerFooter";
-import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { getQuestionById } from "../../axios/api";
 import Main from "../../components/modules/SupportQuestionsDetail/Main";
-import { useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../router/helper";
-import { useTranslation } from "react-i18next";
 import { locales } from "../../i18n/helper";
+import View from "../../components/modules/View";
 
 const SupportQuestionsDetail = memo(() => {
 
@@ -33,13 +30,9 @@ const SupportQuestionsDetail = memo(() => {
     }, [])
 
     return (
-        <>
-            <Navbar theme='dark' />
+        <View theme='dark' footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")}  >
             <Main title={i18n.language === locales.AR ? details && details.title_ar : details && details.title} description={i18n.language === locales.AR ? details && details.description_ar : details && details.description} />
-            <UpperFooter title={t("stillNeedHelp")} description={t("footerPartText")} button={t("contactUs")} />
-            <MiddleFooter />
-            <LowerFooter />
-        </>
+        </View>
     )
 });
 

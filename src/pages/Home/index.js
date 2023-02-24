@@ -16,6 +16,7 @@ import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
 import { locales } from "../../i18n/helper";
 import { useSelector } from "react-redux";
+import View from "../../components/modules/View";
 
 const Home = memo(() => {
 
@@ -46,8 +47,7 @@ const Home = memo(() => {
     const onApplyFilter = useCallback((filters) => { navigate(routes.DATASET, { state: { listItem: filters } }) })
 
     return (
-        <>
-            <Navbar sticky />
+        <View sticky footerTitle={t("GetMore")} footerButton={t("registerNow")} >
             <Main onSearch={onSearch} onClickExplore={() => topicsDiv.scrollIntoView()} onApplyFilter={onApplyFilter} />
             <div id='topics'>
                 <Topics onClickList={onClickList} data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en} />
@@ -56,10 +56,7 @@ const Home = memo(() => {
             <Cards title={t("mostViewedDatasets")} backgroundColor={colors.black} data={mostViewedDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={onClickButton} />
             <Cards title={t("recentlyAddedDatasets")} backgroundColor={colors.black} data={recentsDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={onClickButton} />
             <PlatformInsights data={platformInsights} />
-            <UpperFooter title={t("GetMore")} button={t("registerNow")} />
-            <MiddleFooter />
-            <LowerFooter />
-        </>
+        </View>
     )
 })
 
