@@ -1,13 +1,12 @@
 import React, { memo } from "react";
 import LoginComponent from "../../../components/modules/Authentication/Login";
-import Navbar from "../../../components/modules/Navbar";
+import View from "../../../components/modules/View";
 
 const Login = memo(() => {
   return (
-    <>
-      <Navbar nocontent />
+    <View nocontent>
       <LoginComponent />
-    </>
+    </View>
   )
 });
 

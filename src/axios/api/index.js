@@ -68,22 +68,52 @@ export const getRecentsDatasets = (setData, setLoading) => {
                     ar_obj.publisher_ar = ar_obj.publisherlear
                     ar_obj.title_ar = ar_obj.titlear
                     ar_obj.tags_ar = ar_obj.themelear
+                    ar_obj.resources_ar = ar_obj.distribution.map(item => {
+                        return (
+                            {
+                                title: item.titlelear,
+                                format: item.format === "pdf" ? "pdf"
+                                    : item.format === "esri rest" ? "excel"
+                                        : item.format === "xlsx" ? "excel"
+                                            : item.format === "xls" ? "excel"
+                                                : item.format === "csv" && "csv",
+                                downloadURL: item.url
+                            }
+
+                        )
+                    })
 
                     delete ar_obj.identifier
                     delete ar_obj.keywordlear
                     delete ar_obj.publisherlear
-                    delete ar_obj.titlear
+                    delete ar_obj.titlelear
                     delete ar_obj.themelear
+                    delete ar_obj.distribution
+
 
                     return {
                         id: item.identifier,
                         title: item.title,
                         publisher: item.publisher,
                         tags: item.theme,
+                        resources: item.distribution.map(item => {
+                            return (
+                                {
+                                    title: item.title,
+                                    format: item.format === "pdf" ? "pdf"
+                                        : item.format === "esri rest" ? "excel"
+                                            : item.format === "xlsx" ? "excel"
+                                                : item.format === "xls" ? "excel"
+                                                    : item.format === "csv" && "csv",
+                                    downloadURL: item.url
+                                }
+
+                            )
+                        }),
                         ...ar_obj
                     }
                 })
-
+                console.log("TRANSFORM", transform);
                 setData(transform)
                 setLoading(false)
             }
@@ -257,16 +287,14 @@ export const getDatasetById = (id, setData) => {
                     resources: item.distribution.map(item => (
                         {
                             title: item.title,
+                            title_ar: item.titlelear,
                             description: item.description,
-                            format: item.format,
-                            downloadURL: item.downloadURL
-                        }
-                    )),
-                    resources_ar: item.distribution.map(item => (
-                        {
-                            title: item.titlelear,
-                            description: item.descriptionlear,
-                            format: item.format,
+                            description_ar: item.descriptionlear,
+                            format: item.format === "pdf" ? "pdf"
+                                : item.format === "esri rest" ? "excel"
+                                    : item.format === "xlsx" ? "excel"
+                                        : item.format === "xls" ? "excel"
+                                            : item.format === "csv" && "csv",
                             downloadURL: item.downloadURL
                         }
                     )),

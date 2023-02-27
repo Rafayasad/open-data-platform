@@ -12,7 +12,7 @@ const Button = memo((props) => {
         <button
             onClick={onClick ? onClick : () => { }}
             disabled={loading}
-            className="px-4 en-font-default"
+            className="m-0 px-4 en-font-default"
             style={{
                 backgroundColor: backgroundColor ? backgroundColor : 'white',
                 color: textColor ? textColor : 'black',

@@ -8,9 +8,9 @@ import Cards from "../../components/modules/Cards";
 import LowerFooter from "../../components/modules/Footer/LowerFooter";
 import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
 import Navbar from "../../components/modules/Navbar";
+import View from "../../components/modules/View";
 import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
-
 
 const About = memo(() => {
 
@@ -24,16 +24,14 @@ const About = memo(() => {
     const onClickButton = useCallback(() => { navigate(routes.SUCCESS_STOIRES) });
 
     return (
-        <>
-            <Navbar theme='dark' />
+        <View theme='dark' noupperfooter>
             <div className="my-5 pt-5">
                 <Main data={aboutus} />
             </div>
+            <hr className="m-0 p-0 mx-4" />
             <Cards backgroundColor={colors.white} title={t("successStories")} data={stories} size="md" hoverable="primary" onClick={onClickCard} onClickViewAll={onClickButton} />
             <AdLogo />
-            <MiddleFooter />
-            <LowerFooter />
-        </>
+        </View>
     )
 })
 

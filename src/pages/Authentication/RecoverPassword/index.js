@@ -1,13 +1,13 @@
 import React, { memo } from "react";
 import RecoverPassComponent from "../../../components/modules/Authentication/RecoverPassword";
-import Navbar from "../../../components/modules/Navbar";
+import View from "../../../components/modules/View";
 
 const RecoverPassword = memo(() => {
   return (
-    <>
-      <Navbar nocontent />
+    <View nocontent>
       <RecoverPassComponent />
-    </>
+    </View>
+
   )
 });
 
