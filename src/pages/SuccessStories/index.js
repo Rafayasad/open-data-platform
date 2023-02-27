@@ -7,6 +7,7 @@ import { colors } from "../../utils/colors";
 import Pagination from "../../components/elements/Pagination";
 import { useTranslation } from "react-i18next";
 import { routes } from "../../router/helper";
+import BreadCrumb from "../../components/elements/BreadCrumb";
 import View from "../../components/modules/View";
 
 const SuccessStories = memo(() => {
@@ -27,6 +28,9 @@ const SuccessStories = memo(() => {
     return (
         <View theme="dark" noupperfooter>
             <div className="my-5 pt-5">
+                <div className="px-4">
+                    <BreadCrumb items={["About us"]} />
+                </div>
                 <Header title={t("successStories")} nobutton backgroundColor={colors.white} />
                 <Cards type="story-cards" data={stories} onClick={onClickCard} />
             </div>

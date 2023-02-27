@@ -6,6 +6,7 @@ import Main from "../../components/modules/DatasetDetail/Main";
 import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
 import { useTranslation } from "react-i18next";
+import BreadCrumb from "../../components/elements/BreadCrumb";
 import View from "../../components/modules/View";
 
 const data = [
@@ -56,6 +57,9 @@ const DatasetDetail = memo(() => {
     return (
         <View theme="dark" sticky>
             <div className="my-5 py-5">
+                <div className="px-4">
+                    <BreadCrumb items={["Datasets", "Technology"]} />
+                </div>
                 <Main data={dataset} />
                 <Cards title={t("similarDatasets")} backgroundColor={colors.white} data={similarDataset} />
             </div>

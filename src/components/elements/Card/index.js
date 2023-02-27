@@ -1,17 +1,26 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { Card as RBCard, Col, Row } from "react-bootstrap";
 import { BsPerson, BsShare, BsThreeDots } from "react-icons/bs";
-import './style.css';
-import Dropdown from '../../elements/DropDown';
+import { FaFilePdf, FaFileExcel, FaFileCsv } from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { colors } from "../../../utils/colors";
+import { useCallback } from "react";
+import Dropdown from '../../elements/DropDown';
 import Heading from "../Heading";
 import Tag from "../Tag";
+import './style.css';
 
 const Card = memo((props) => {
 
-    const { title, publisher, description, tags, size, noborder, hoverable, shortTitle, headingSize, onClick } = props
+    const { resources, title, publisher, description, tags, size, noborder, hoverable, shortTitle, headingSize, onClick } = props
 
     var height = "332px", border, ClassName;
+
+    const [selectedDropdownValue, setSelectedDropdownValue] = useState();
+    const [isDownloadLink, setIsDownloadLink] = useState(); // for linking url
+
+    const isClicked = useCallback((value) => { setSelectedDropdownValue(value) })
+    const downloadResources = useCallback((links) => { setIsDownloadLink(links) }); //callback for url redirect
 
     if (size === 'sm') {
         height = "332px"
@@ -36,6 +45,59 @@ const Card = memo((props) => {
 
     }
 
+    let shareOptions = [
+        {
+            title: "Facebook",
+            format: "facebook",
+            downloadURL: "...."
+        },
+        {
+            title: "LinkedIn",
+            format: "linkedin",
+            downloadURL: "...."
+        },
+        {
+            title: "Twitter",
+            format: "twitter",
+            downloadURL: "...."
+        }
+    ]
+
+    const options = [
+        {
+            title: "Download",
+            icon: <BsPerson />,
+            onClick: isClicked,
+        },
+        {
+            title: "Share",
+            icon: <BsShare />,
+            onClick: isClicked,
+        }
+    ]
+
+    const specificDownloadOptions = resources?.map((item, index) => (
+        {
+            title: item.title ? item.title : "No title found!",
+            onClick: downloadResources,
+            downloadLink: item.downloadURL,
+            icon: item.format === "pdf" ? <FaFilePdf />
+                : item.format === "excel" ? <FaFileExcel />
+                    : item.format === "csv" && <FaFileCsv />
+        }
+    ))
+
+    const specificShareOptions = shareOptions?.map((item, index) => (
+        {
+            title: item.title,
+            onClick: downloadResources,
+            downloadLink: item.downloadURL,
+            icon: item.format === "facebook" ? <FaFacebookF />
+                : item.format === "linkedin" ? <FaLinkedinIn />
+                    : item.format === "twitter" && <FaTwitter />
+        }
+    ))
+
     return (
         <RBCard className={`p-4 ${ClassName}`} style={{ height: height, borderRadius: "30px", borderWidth: border }}>
             <Row className="h-25 align-items-center">
@@ -48,18 +110,12 @@ const Card = memo((props) => {
                 </Col>
                 <Col md={2} className='d-flex justify-content-end'>
                     <Dropdown
-                        options={
-                            [
-                                {
-                                    title: "Download",
-                                    icon: <BsPerson />
-                                },
-                                {
-                                    title: "Share",
-                                    icon: <BsShare />
-                                }
-                            ]
-                        }
+                        autoClose={"outside"}
+                        width={"12rem"}
+                        size={selectedDropdownValue === "Download" && "md"}
+                        options={selectedDropdownValue === "Download" ? specificDownloadOptions : selectedDropdownValue === "Share" ? specificShareOptions : options}
+                        selectedDropdownValue={selectedDropdownValue}
+                        setSelectedDropdownValue={setSelectedDropdownValue}
                         headerComponent={<BsThreeDots color={colors.black} size={28} style={{ cursor: 'pointer' }} />}
                     />
                 </Col>

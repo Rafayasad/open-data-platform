@@ -1,9 +1,10 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import QuestionList from "../../components/modules/Support/QuestionList";
 import { getPopularQuestions } from "../../axios/api";
 import { routes } from "../../router/helper";
-import { useTranslation } from "react-i18next";
+import BreadCrumb from "../../components/elements/BreadCrumb";
 import View from "../../components/modules/View";
 
 const SupportQuestions = memo(() => {
@@ -35,6 +36,9 @@ const SupportQuestions = memo(() => {
     return (
         <View theme="dark" footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")}>
             <div className="mt-5 pt-5">
+                <div className="px-4">
+                    <BreadCrumb items={["Support"]} />
+                </div>
                 <QuestionList title={t("gettingStarted")} data={questions} onClick={onClickQuestion} />
             </div>
         </View>

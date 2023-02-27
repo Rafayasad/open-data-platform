@@ -10,16 +10,26 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './redux/store';
 import './i18n/i18n.js';
+import { ThemeProvider, createMuiTheme } from '@mui/material/styles';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const THEME = createMuiTheme({
+  typography: {
+    "fontFamily": `'CircularStd-Regular'`,
+    "fontFeatureSettings": `"normal"`
+  }
+});
 
 root.render(
   <React.StrictMode>
     <Router>
       <Suspense>
-        <Provider store={store}>
-          <App />
-        </Provider>
+        <ThemeProvider theme={THEME}>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </ThemeProvider>
       </Suspense>
     </Router>
   </React.StrictMode>

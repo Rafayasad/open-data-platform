@@ -5,6 +5,7 @@ import { getQuestionById } from "../../axios/api";
 import Main from "../../components/modules/SupportQuestionsDetail/Main";
 import { routes } from "../../router/helper";
 import { locales } from "../../i18n/helper";
+import BreadCrumb from "../../components/elements/BreadCrumb";
 import View from "../../components/modules/View";
 
 const SupportQuestionsDetail = memo(() => {
@@ -31,7 +32,12 @@ const SupportQuestionsDetail = memo(() => {
 
     return (
         <View theme='dark' footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")}  >
-            <Main title={i18n.language === locales.AR ? details && details.title_ar : details && details.title} description={i18n.language === locales.AR ? details && details.description_ar : details && details.description} />
+            <div className="my-5 pt-5">
+                <div className="px-4 m-0">
+                    <BreadCrumb items={["Support", "Getting Started"]} />
+                </div>
+                <Main title={i18n.language === locales.AR ? details && details.title_ar : details && details.title} description={i18n.language === locales.AR ? details && details.description_ar : details && details.description} />
+            </div>
         </View>
     )
 });

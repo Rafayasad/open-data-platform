@@ -24,7 +24,7 @@ const Header = memo((props) => {
     }
 
     return (
-        <Container fluid className="d-flex justify-content-between align-items-center py-4">
+        <Container fluid className="p-0 d-flex justify-content-between align-items-center py-4">
             <div>
                 <Heading
                     bold
@@ -47,6 +47,8 @@ const Header = memo((props) => {
                     </div> :
                     dropdown ?
                         <Dropdown
+                            highlightableItem
+                            autoClose={true}
                             name={dropdown.title}
                             options={dropdown.options}
                             selectedValue={dropdown.selectedValue}

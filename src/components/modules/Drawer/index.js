@@ -80,14 +80,11 @@ const Drawer = memo((props) => {
     });
 
     function CustomToggle({ children, eventKey }) {
-        const decoratedOnClick = useAccordionButton(eventKey, () =>
-            console.log('totally custom!',),
-        );
-
         return (
             activeIndex === eventKey ?
-                <IoIosArrowDown color='black' style={{}} className="" size={20} /> :
                 <IoIosArrowUp color='black' style={{}} className="" size={20} />
+                :
+                <IoIosArrowDown color='black' style={{}} className="" size={20} />
         );
     }
 
@@ -98,15 +95,13 @@ const Drawer = memo((props) => {
             onClose={toggleDrawer}
             direction={i18n.language === locales.AR ? 'left' : 'right'}
             lockBackgroundScroll
-            style={{ overflow: "scroll", scrollBehavior: "smooth", overflowY: "scroll" }}
         >
-            <div
-                style={{ minHeight: "80vh" }}
-                className="m-3 px-2">
-                <div className="d-flex align-items-center justify-content-between mb-5">
-                    <Heading size="xxs" heading={t("filter")} nomargin />
-                    <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="mx-1" size={20} />
-                </div>
+            <div className="p-4 bg-white d-flex align-items-center justify-content-between">
+                <Heading size="xxs" heading={t("filter")} nomargin />
+                <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="mx-1" size={20} />
+            </div>
+            <hr className="m-0 p-0" />
+            <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%" }} className={"p-4"}>
                 {
                     data?.map((item, index) => {
                         return (
@@ -151,9 +146,9 @@ const Drawer = memo((props) => {
                     })
                 }
             </div>
-            <div className="fixed">
-                <hr />
-                <div className="m-3 d-flex justify-content-between align-items-center">
+            <div className="h-20">
+                <hr className="m-0 p-0" />
+                <div className="p-2 d-flex justify-content-between align-items-center">
                     <div className="">
                         <Button onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} />
                     </div>

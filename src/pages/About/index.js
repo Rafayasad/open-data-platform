@@ -12,7 +12,6 @@ import View from "../../components/modules/View";
 import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
 
-
 const About = memo(() => {
 
     const { t } = useTranslation();
@@ -29,6 +28,7 @@ const About = memo(() => {
             <div className="my-5 pt-5">
                 <Main data={aboutus} />
             </div>
+            <hr className="m-0 p-0 mx-4" />
             <Cards backgroundColor={colors.white} title={t("successStories")} data={stories} size="md" hoverable="primary" onClick={onClickCard} onClickViewAll={onClickButton} />
             <AdLogo />
         </View>
