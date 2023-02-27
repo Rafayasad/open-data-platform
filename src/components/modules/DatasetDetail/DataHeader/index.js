@@ -1,9 +1,9 @@
-import React, { useEffect, useState, memo } from "react";
+import React, { useEffect, useState, useCallback, memo } from "react";
 import { Col, Container } from "react-bootstrap";
 import { SlShare } from "react-icons/sl";
 import { MdDownloadForOffline } from "react-icons/md"
+import { useTranslation } from "react-i18next";
 import { locales } from "../../../../i18n/helper";
-import { useCallback } from "react";
 import { colors } from "../../../../utils/colors";
 import { FaFilePdf, FaFileExcel, FaFileCsv, FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import Heading from "../../../elements/Heading";
@@ -11,19 +11,20 @@ import Button from "../../../elements/Button";
 import Shimmer from "../../../elements/Shimmer";
 import Dropdown from "../../../elements/DropDown";
 import i18n from "../../../../i18n/i18n";
-import { t } from "i18next";
 import { shareOptions } from "../../../../utils";
 
 const DataHeader = memo((props) => {
 
     const { title, resources } = props
 
+    const { t } = useTranslation();
+
     const [headerOnTop, setHeaderOnTop] = useState(false);
     const [downloadLink, setDownloadLink] = useState();
 
     const downloadResources = useCallback((links) => { console.log(links) });
 
-    const options = resources?.map((item, index) => (
+    const options = resources?.map(item => (
         {
             title: i18n.language === locales.AR ? item.title_ar : item.title,
             onClick: downloadResources,
@@ -34,9 +35,9 @@ const DataHeader = memo((props) => {
         }
     ))
 
-    const shareOption = shareOptions?.map((item, index) => (
+    const shareOption = shareOptions?.map(item => (
         {
-            title: item.title,
+            title: t(item.title),
             onClick: downloadResources,
             downloadLink: item.downloadURL,
             icon: item.format === "facebook" ? <FaFacebookF />
@@ -57,7 +58,6 @@ const DataHeader = memo((props) => {
 
     return (
         <Container id='main' fluid className={`d-flex justify-content-between align-items-center py-4 bg-white ${headerOnTop && "sticky-top"}`}>
-            {/* <Link to={downloadLink} download><p>download</p></Link> */}
             <Col md={12} lg={8}>
                 {
                     !title ? <><Shimmer rounded="xs" height={"32px"} className="my-2" /><Shimmer rounded="xs" height={"32px"} width="70%" className="my-2" /></> : (
@@ -81,7 +81,6 @@ const DataHeader = memo((props) => {
                     />
                 </div>
                 <div className="mx-1">
-                    {/* <Button icon={<MdDownloadForOffline className="mx-1" size={20} />} title={"Download"} backgroundColor="black" textColor="white" /> */}
                     <Dropdown
                         autoClose={true}
                         size={"md"}
