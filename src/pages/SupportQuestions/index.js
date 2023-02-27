@@ -1,14 +1,11 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Navbar from '../../components/modules/Navbar';
+import { useTranslation } from "react-i18next";
 import QuestionList from "../../components/modules/Support/QuestionList";
-import UpperFooter from "../../components/modules/Footer/UpperFooter";
-import LowerFooter from "../../components/modules/Footer/LowerFooter";
-import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
 import { getPopularQuestions } from "../../axios/api";
 import { routes } from "../../router/helper";
-import { useTranslation } from "react-i18next";
 import BreadCrumb from "../../components/elements/BreadCrumb";
+import View from "../../components/modules/View";
 
 const SupportQuestions = memo(() => {
 
@@ -37,18 +34,15 @@ const SupportQuestions = memo(() => {
     }, []);
 
     return (
-        <>
-            <Navbar theme='dark' />
+        <View theme="dark" footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")}>
             <div className="mt-5 pt-5">
                 <div className="px-4">
                     <BreadCrumb items={["Support"]} />
                 </div>
                 <QuestionList title={t("gettingStarted")} data={questions} onClick={onClickQuestion} />
             </div>
-            <UpperFooter title={t("stillNeedHelp")} description={t("footerPartText")} button={t("contactUs")} />
-            <MiddleFooter />
-            <LowerFooter />
-        </>
+        </View>
+
     )
 });
 

@@ -1,17 +1,12 @@
 import React, { memo } from "react";
 import Main from "../../components/modules/ContactUs/Main";
-import LowerFooter from "../../components/modules/Footer/LowerFooter";
-import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
-import Navbar from "../../components/modules/Navbar";
+import View from "../../components/modules/View";
 
 const ContactUs = memo(() => {
     return (
-        <>
-            <Navbar theme='dark' />
+        <View theme="dark" noupperfooter>
             <Main />
-            <MiddleFooter />
-            <LowerFooter />
-        </>
+        </View>
     )
 })
 
