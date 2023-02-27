@@ -29,7 +29,7 @@ const SuccessStories = memo(() => {
         <View theme="dark" noupperfooter>
             <div className="my-5 pt-5">
                 <div className="px-4">
-                    <BreadCrumb items={["About us"]} />
+                    <BreadCrumb items={[t("aboutus")]} />
                 </div>
                 <Header title={t("successStories")} nobutton backgroundColor={colors.white} />
                 <Cards type="story-cards" data={stories} onClick={onClickCard} />

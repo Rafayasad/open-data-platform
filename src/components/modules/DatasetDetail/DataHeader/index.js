@@ -12,6 +12,7 @@ import Shimmer from "../../../elements/Shimmer";
 import Dropdown from "../../../elements/DropDown";
 import i18n from "../../../../i18n/i18n";
 import { t } from "i18next";
+import { shareOptions } from "../../../../utils";
 
 const DataHeader = memo((props) => {
 
@@ -33,25 +34,7 @@ const DataHeader = memo((props) => {
         }
     ))
 
-    let shareData = [
-        {
-            title: "Facebook",
-            format: "facebook",
-            downloadURL: "...."
-        },
-        {
-            title: "LinkedIn",
-            format: "linkedin",
-            downloadURL: "...."
-        },
-        {
-            title: "Twitter",
-            format: "twitter",
-            downloadURL: "...."
-        }
-    ]
-
-    const shareOptions = shareData?.map((item, index) => (
+    const shareOption = shareOptions?.map((item, index) => (
         {
             title: item.title,
             onClick: downloadResources,
@@ -92,7 +75,7 @@ const DataHeader = memo((props) => {
                 <div className="d-flex align-items-center">
                     <Dropdown
                         autoClose={true}
-                        options={shareOptions}
+                        options={shareOption}
                         size={"sm"}
                         headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}
                     />

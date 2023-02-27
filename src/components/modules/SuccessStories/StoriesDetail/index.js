@@ -11,6 +11,7 @@ import Tag from "../../../elements/Tag";
 import Dropdown from "../../../elements/DropDown";
 import Button from "../../../elements/Button";
 import './style.css';
+import { shareOptions } from "../../../../utils";
 
 const StoriesDetails = memo((props) => {
 
@@ -53,25 +54,7 @@ const StoriesDetails = memo((props) => {
         }
     }, [])
 
-    let shareData = [
-        {
-            title: "Facebook",
-            format: "facebook",
-            downloadURL: "...."
-        },
-        {
-            title: "LinkedIn",
-            format: "linkedin",
-            downloadURL: "...."
-        },
-        {
-            title: "Twitter",
-            format: "twitter",
-            downloadURL: "...."
-        }
-    ]
-
-    const shareOptions = shareData?.map((item, index) => (
+    const shareOption = shareOptions?.map((item, index) => (
         {
             title: item.title,
             onClick: downloadResources,
@@ -95,7 +78,7 @@ const StoriesDetails = memo((props) => {
                             <div className="d-flex align-items-center">
                                 <Dropdown
                                     autoClose={true}
-                                    options={shareOptions}
+                                    options={shareOption}
                                     size={"sm"}
                                     headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}
                                 />
@@ -106,7 +89,7 @@ const StoriesDetails = memo((props) => {
                         <Col xl={12}>
                             <Dropdown
                                 autoClose={true}
-                                options={shareOptions}
+                                options={shareOption}
                                 size={"lg"}
                                 headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}
                             />

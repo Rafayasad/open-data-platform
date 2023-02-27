@@ -37,7 +37,7 @@ const SupportQuestions = memo(() => {
         <View theme="dark" footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")}>
             <div className="mt-5 pt-5">
                 <div className="px-4">
-                    <BreadCrumb items={["Support"]} />
+                    <BreadCrumb items={[t("supports")]} />
                 </div>
                 <QuestionList title={t("gettingStarted")} data={questions} onClick={onClickQuestion} />
             </div>

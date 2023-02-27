@@ -55,10 +55,10 @@ const DatasetDetail = memo(() => {
     }, [dataset])
 
     return (
-        <View theme="dark" sticky>
+        <View theme="dark" noupperfooter sticky>
             <div className="my-5 py-5">
                 <div className="px-4">
-                    <BreadCrumb items={["Datasets", "Technology"]} />
+                    <BreadCrumb items={[t("datasets"), t("technology")]} />
                 </div>
                 <Main data={dataset} />
                 <Cards title={t("similarDatasets")} backgroundColor={colors.white} data={similarDataset} />

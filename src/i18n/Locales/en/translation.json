@@ -212,5 +212,8 @@
     "application": "Application",
     "adda": "ADDA @ 2022",
     "openDataTitle": "An Open Data experience that's tailored for you",
-    "and":"and"
+    "and": "and",
+    "facebook":"Facebook",
+    "twitter":"Twitter",
+    "linkedin":"LinkedIn"
 }

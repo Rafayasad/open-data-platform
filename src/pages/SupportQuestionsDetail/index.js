@@ -23,18 +23,15 @@ const SupportQuestionsDetail = memo(() => {
     const [details, setDetails] = useState();
 
     useEffect(() => {
-
         if (!id) return navigate(url, { replace: true })
-
         getQuestionById(id, setDetails)
-
     }, [])
 
     return (
         <View theme='dark' footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")}  >
             <div className="my-5 pt-5">
                 <div className="px-4 m-0">
-                    <BreadCrumb items={["Support", "Getting Started"]} />
+                    <BreadCrumb items={[t("supports"), t("gettingStarted")]} />
                 </div>
                 <Main title={i18n.language === locales.AR ? details && details.title_ar : details && details.title} description={i18n.language === locales.AR ? details && details.description_ar : details && details.description} />
             </div>

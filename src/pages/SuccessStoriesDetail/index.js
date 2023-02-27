@@ -13,6 +13,7 @@ import BreadCrumb from "../../components/elements/BreadCrumb";
 import Button from "../../components/elements/Button";
 import Dropdown from "../../components/elements/DropDown";
 import View from "../../components/modules/View";
+import { shareOptions } from "../../utils";
 
 const SuccessStoriesDetail = memo(() => {
 
@@ -37,25 +38,7 @@ const SuccessStoriesDetail = memo(() => {
 
     }, [])
 
-    let shareData = [
-        {
-            title: "Facebook",
-            format: "facebook",
-            downloadURL: "...."
-        },
-        {
-            title: "LinkedIn",
-            format: "linkedin",
-            downloadURL: "...."
-        },
-        {
-            title: "Twitter",
-            format: "twitter",
-            downloadURL: "...."
-        }
-    ]
-
-    const shareOptions = shareData?.map((item, index) => (
+    const shareOption = shareOptions?.map((item, index) => (
         {
             title: item.title,
             onClick: downloadResources,
@@ -81,16 +64,16 @@ const SuccessStoriesDetail = memo(() => {
             publisher: "Telecommunication Regulatory Authority"
         }
     ]
-    
+
     return (
         <View theme="dark" noupperfooter>
             <div className="my-5 pt-5 px-0">
                 <div className="px-4 py-2 m-0 p-0 d-flex justify-content-between">
-                    <BreadCrumb items={["About us", "Success stories"]} />
+                    <BreadCrumb items={[t("aboutus"), t("successStories")]} />
                     <Dropdown
                         width={"12rem"}
                         autoClose={true}
-                        options={shareOptions}
+                        options={shareOption}
                         headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}
                     />
                 </div>
