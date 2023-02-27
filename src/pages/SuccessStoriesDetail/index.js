@@ -1,10 +1,11 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import StoriesDetails from "../../components/modules/SuccessStories/StoriesDetail";
 import demoImage from "../../assets/images/Desktop.png";
 import Cards from "../../components/modules/Cards";
 import { colors } from "../../utils/colors";
+import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
 import LowerFooter from "../../components/modules/Footer/LowerFooter";
 import Navbar from "../../components/modules/Navbar";
@@ -12,11 +13,16 @@ import { routes } from "../../router/helper";
 import { getSuccessStoriesById } from "../../axios/api";
 import BreadCrumb from "../../components/elements/BreadCrumb";
 import { Col, Container, Row } from "react-bootstrap";
+import Button from "../../components/elements/Button";
+import { SlShare } from "react-icons/sl";
+import Dropdown from "../../components/elements/DropDown";
 
 const SuccessStoriesDetail = memo(() => {
 
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const windowSize = useRef([window.innerWidth]);
+
     const { search } = useLocation();
 
     const urlParams = new URLSearchParams(search);
@@ -25,6 +31,8 @@ const SuccessStoriesDetail = memo(() => {
 
     const [story, setStory] = useState();
 
+    const downloadResources = useCallback((links) => { console.log(links) });
+
     useEffect(() => {
 
         if (!id) return navigate(routes.SUCCESS_STOIRES, { replace: true });
@@ -32,6 +40,38 @@ const SuccessStoriesDetail = memo(() => {
         getSuccessStoriesById(id, setStory);
 
     }, [])
+
+    console.log("===>", windowSize?.current[0]);
+
+    let shareData = [
+        {
+            title: "Facebook",
+            format: "facebook",
+            downloadURL: "...."
+        },
+        {
+            title: "LinkedIn",
+            format: "linkedin",
+            downloadURL: "...."
+        },
+        {
+            title: "Twitter",
+            format: "twitter",
+            downloadURL: "...."
+        }
+    ]
+
+    const shareOptions = shareData?.map((item, index) => (
+        {
+            title: item.title,
+            onClick: downloadResources,
+            downloadLink: item.downloadURL,
+            icon: item.format === "facebook" ? <FaFacebookF />
+                : item.format === "linkedin" ? <FaLinkedinIn />
+                    : item.format === "twitter" && <FaTwitter />
+        }
+    ))
+
 
     const data = {
         publisher: "ABU DHABI POLICE",
@@ -66,8 +106,17 @@ const SuccessStoriesDetail = memo(() => {
         <>
             <Navbar theme='dark' />
             <div className="my-5 pt-5">
-                <div className="px-4 m-0">
+                <div className="px-4 py-2 m-0 p-0 d-flex justify-content-between">
                     <BreadCrumb items={["About us", "Success stories"]} />
+                    <Dropdown
+                        width={"12rem"}
+                        autoClose={true}
+                        options={shareOptions}
+                        headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}
+                    />
+                </div>
+                <div className="px-4">
+                <hr />
                 </div>
                 <StoriesDetails item={story} />
                 <hr className="m-0 mx-3" />
