@@ -1,21 +1,51 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useState, useEffect, useRef, useLayoutEffect, useCallback } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { locales } from "../../../../i18n/helper";
+import { colors } from "../../../../utils/colors";
+import { SlShare } from "react-icons/sl";
+import { FaFilePdf, FaFileExcel, FaFileCsv, FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import Heading from "../../../elements/Heading";
 import Shimmer from "../../../elements/Shimmer";
 import Tag from "../../../elements/Tag";
+import Dropdown from "../../../elements/DropDown";
+import Button from "../../../elements/Button";
+import './style.css';
 
 const StoriesDetails = memo((props) => {
 
     const { item } = props;
     const { i18n } = useTranslation();
 
+    const stickyHeader = useRef()
+    const headingRef = useRef(null)
     const [headerOnTop, setHeaderOnTop] = useState(false);
+
+    const downloadResources = useCallback((links) => { console.log(links) });
+
+    // useEffect(() => {
+    //     const mainHeader = document?.getElementById('mainHeader')
+
+    //     let fixedTop = stickyHeader?.current?.offsetTop
+
+    //     let headingDiv = headingRef?.current?.getBoundingClientRect().top;
+
+    //     const fixedHeader = () => {
+    //         console.log("Check heading top", headingDiv)
+    //         // if (window.pageYOffset > fixedTop) {
+    //         //     mainHeader.classList.add('fixedTop')
+    //         //     setHeaderOnTop(true);
+    //         // } else {
+    //         //     mainHeader.classList.remove('fixedTop')
+    //         //     setHeaderOnTop(false);
+    //         // }
+    //     }
+    //     window.addEventListener('scroll', fixedHeader)
+    // }, [])
 
     useEffect(() => {
         window.onscroll = () => {
-            if (document?.getElementById("main")?.getBoundingClientRect().top <= 40) {
+            if (document?.getElementById("main")?.getBoundingClientRect().top <= 0) {
                 setHeaderOnTop(true)
             } else {
                 setHeaderOnTop(false)
@@ -23,17 +53,75 @@ const StoriesDetails = memo((props) => {
         }
     }, [])
 
+    let shareData = [
+        {
+            title: "Facebook",
+            format: "facebook",
+            downloadURL: "...."
+        },
+        {
+            title: "LinkedIn",
+            format: "linkedin",
+            downloadURL: "...."
+        },
+        {
+            title: "Twitter",
+            format: "twitter",
+            downloadURL: "...."
+        }
+    ]
+
+    const shareOptions = shareData?.map((item, index) => (
+        {
+            title: item.title,
+            onClick: downloadResources,
+            downloadLink: item.downloadURL,
+            icon: item.format === "facebook" ? <FaFacebookF />
+                : item.format === "linkedin" ? <FaLinkedinIn />
+                    : item.format === "twitter" && <FaTwitter />
+        }
+    ))
+
     return (
         <>
+            {
+                headerOnTop &&
+                <Container fluid className={`transition sticky-top m-0 bg-white p-1 shadow-sm`} style={{ zIndex: 1 }}>
+                    <Row className="d-none d-lg-flex m-0 p-0 w-100 align-items-center">
+                        <Col className="px-4 py-2 m-0" lg={6}>
+                            <Heading nomargin maxNumberOfLines={2} bold size={"md"} heading={i18n.language === locales.AR ? item?.title_ar : item?.title} />
+                        </Col>
+                        <Col lg={6} sm={0} xs={0} className={"d-flex justify-content-end"}>
+                            <div className="d-flex align-items-center">
+                                <Dropdown
+                                    autoClose={true}
+                                    options={shareOptions}
+                                    size={"sm"}
+                                    headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}
+                                />
+                            </div>
+                        </Col>
+                    </Row>
+                    <div className="d-flex d-lg-none justify-content-end fixed-bottom bg-white p-1 bottom-0">
+                        <Col xl={12}>
+                            <Dropdown
+                                autoClose={true}
+                                options={shareOptions}
+                                size={"lg"}
+                                headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}
+                            />
+                        </Col>
+                    </div>
+                </Container>
+            }
             <Container>
                 <Row className="d-flex align-items-center justify-content-center">
                     <Col lg={8}>
                         {
                             item ? (
                                 <div className="py-3">
-                                    {/* <Heading color={colors.darker_gray} size={"xxs"} heading={item.publisher} /> */}
-                                    <div id="main" className={`${headerOnTop && `sticky-top`}`} style={{}}>
-                                        <Heading bold size={headerOnTop ? "md" : "xl"} heading={i18n.language === locales.AR ? item?.title_ar : item?.title} />
+                                    <div id="main">
+                                        <Heading bold size={"xl"} heading={i18n.language === locales.AR ? item?.title_ar : item?.title} />
                                     </div>
                                     <Heading size={"xs"} heading={i18n.language === locales.AR ? item?.short_description_ar : item?.short_description} />
                                     <div className="py-2">
