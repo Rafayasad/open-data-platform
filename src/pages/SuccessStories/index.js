@@ -4,12 +4,10 @@ import { useSelector } from "react-redux";
 import Cards from "../../components/modules/Cards";
 import Header from "../../components/modules/Cards/Header";
 import { colors } from "../../utils/colors";
-import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
-import LowerFooter from "../../components/modules/Footer/LowerFooter";
-import Navbar from "../../components/modules/Navbar";
 import Pagination from "../../components/elements/Pagination";
 import { useTranslation } from "react-i18next";
 import { routes } from "../../router/helper";
+import View from "../../components/modules/View";
 
 const SuccessStories = memo(() => {
 
@@ -27,8 +25,7 @@ const SuccessStories = memo(() => {
     const onClickCard = useCallback((id) => { navigate(`${routes.SUCCESS_STOIRES_DETAIL}?id=${id}`) }, []);
 
     return (
-        <>
-            <Navbar theme='dark' />
+        <View theme="dark" noupperfooter>
             <div className="my-5 pt-5">
                 <Header title={t("successStories")} nobutton backgroundColor={colors.white} />
                 <Cards type="story-cards" data={stories} onClick={onClickCard} />
@@ -38,9 +35,8 @@ const SuccessStories = memo(() => {
                 totalCount={totalCount}
                 onChange={onChangePage}
             />
-            <MiddleFooter />
-            <LowerFooter />
-        </>
+        </View>
+
     )
 })
 

@@ -13,6 +13,7 @@ import { routes } from "../../router/helper";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n/i18n";
 import { locales } from "../../i18n/helper";
+import View from "../../components/modules/View";
 
 const Dataset = memo(() => {
 
@@ -86,15 +87,12 @@ const Dataset = memo(() => {
     }, [filters])
 
     return (
-        <>
-            <Navbar theme={'dark'} />
+        <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
             <Main search={search} onChangeSearch={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
             <Cards buttonText={viewAll && t("viewLess")} onClickViewAll={toggle} title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)} onClick={onClickCard} />
             <DatasetList totalCount={totalCount} rowsPerPage={rowsPerPage} datasets={datasets} currentPage={currentPage} loading={loading} onChangePage={onChangePage} selectedValue={sort} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue} />
-            <UpperFooter title={t("GetMore")} button={t("registerNow")} />
-            <MiddleFooter />
-            <LowerFooter />
-        </>
+        </View>
+
     )
 })
 

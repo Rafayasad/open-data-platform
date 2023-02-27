@@ -10,6 +10,7 @@ import LowerFooter from "../../components/modules/Footer/LowerFooter";
 import Navbar from "../../components/modules/Navbar";
 import { routes } from "../../router/helper";
 import { getSuccessStoriesById } from "../../axios/api";
+import View from "../../components/modules/View";
 
 const SuccessStoriesDetail = memo(() => {
 
@@ -61,16 +62,14 @@ const SuccessStoriesDetail = memo(() => {
         }
     ]
     return (
-        <>
-            <Navbar theme='dark' />
+        <View theme="dark" noupperfooter>
             <div className="my-5 pt-5 px-0">
                 <StoriesDetails item={story} />
                 <hr className="m-0 mx-3" />
                 <Cards title={t("successStories")} backgroundColor={colors.white} data={datas} />
             </div>
-            <MiddleFooter />
-            <LowerFooter />
-        </>
+        </View>
+
     )
 })
 
