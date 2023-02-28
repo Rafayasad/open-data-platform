@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback } from "react";
 import { useNavigate } from "react-router";
 import Cards from "../../components/modules/Cards";
 import LowerFooter from "../../components/modules/Footer/LowerFooter";
@@ -9,13 +9,16 @@ import { colors } from "../../utils/colors";
 
 const data = [
     {
-        title: "Insights"
+        title: "Insights",
+        id: routes.REPORTS_INSIGHTS
     },
     {
-        title: "Datasets"
+        title: "Datasets",
+        id: routes.REPORTS_DATASETS
     },
     {
-        title: "Publisher"
+        title: "Publisher",
+        id: routes.REPORTS_PUBLISHERS
     }
 ]
 
@@ -23,7 +26,7 @@ const Reports = memo(() => {
 
     const navigate = useNavigate();
 
-    const onClickCard = useCallback(() => navigate(routes.REPORTS_INSIGHTS))
+    const onClickCard = useCallback((route) => navigate(route))
 
     return (
         <>

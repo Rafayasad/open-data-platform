@@ -3,6 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import { MdDownloading, MdOutlineFilterAlt } from "react-icons/md";
 import { colors } from "../../../../utils/colors";
 import Button from "../../../elements/Button";
+import Dropdown from "../../../elements/DropDown";
 import Heading from "../../../elements/Heading";
 
 const Header = memo((props) => {
@@ -24,7 +25,25 @@ const Header = memo((props) => {
                     <Button icon={<MdOutlineFilterAlt size={20} />} borderColor={colors.black} onClick={onClickFilter} />
                 </div>
                 <div className="mx-1">
-                    <Button icon={<MdDownloading className="mx-1" size={18} />} title="Download" backgroundColor={colors.black} textColor={colors.white} />
+                    <Dropdown
+                        options={
+                            [
+                                {
+                                    title: "PDF",
+                                    onClick: () => { }
+                                },
+                                {
+                                    title: "CSV",
+                                    onClick: () => { }
+                                },
+                                {
+                                    title: "Excel",
+                                    onClick: () => { }
+                                }
+                            ]
+                        }
+                        headerComponent={<Button icon={<MdDownloading className="mx-1" size={18} />} title="Download" backgroundColor={colors.black} textColor={colors.white} />} />
+
                 </div>
             </Col >
         </Row >
