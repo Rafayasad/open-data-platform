@@ -19,6 +19,7 @@ const SuccessStoriesDetail = lazy(() => import('../pages/SuccessStoriesDetail'))
 const PrivacyPolicy = lazy(() => import('../pages/Authentication/PrivacyPolicy'))
 const ChangePassword = lazy(() => import('../pages/Authentication/ChangePassword'))
 const ContactUs = lazy(() => import('../pages/ContactUs'))
+const RealTimeApis = lazy(() => import('../pages/RealTimeApis'))
 
 const Router = () => {
     return (
@@ -40,6 +41,7 @@ const Router = () => {
             <Route path={routes.POLICY} element={<PrivacyPolicy />} />
             <Route path={routes.CHANGE} element={<ChangePassword />} />
             <Route path={routes.CONTACT} element={<ContactUs />} />
+            <Route path={routes.REAL_TIME_APIS} element={<RealTimeApis />} />
         </Routes>
     )
 };
