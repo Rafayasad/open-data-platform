@@ -1,5 +1,7 @@
 import { convertHtmlToString } from "../../utils"
 import { endpoints } from "../endpoints"
+import { locales } from "../../i18n/helper"
+import i18n from "../../i18n/i18n"
 
 export const getPlatformInsights = (setData, setLoading) => {
     return endpoints.
@@ -229,8 +231,21 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
     )
 
     return endpoints.
-        getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then((res) => {
+        getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then(async (res) => {
             if (res.status === 200) {
+
+                if (res.data.total > 0) {
+                    let obj = {
+                        keyword: search,
+                        ip: "192.168.0.44",
+                        lang: "en"
+                    }
+                    await endpoints.
+                        postSearch(obj).then((res) => {
+                        }).catch((err) => {
+                            console.log("Error Message", err)
+                        })
+                }
 
                 setTotalCount(res.data.total)
 
@@ -820,3 +835,29 @@ export const register = async (navigate, route, setLoading, payload) => {
         })
 
 }
+
+export const getSearch = (setData) => {
+    return endpoints.
+        getSearch().then((res) => {
+
+            if (res.status === 200) {
+                setData(res.data.data);
+            }
+
+        }).catch((err) => {
+            console.log("Error Message", err)
+        })
+}
+
+// export const postSearch = (data,setData) => {
+//     return endpoints.
+//         postSearch().then((res) => {
+
+//             if (res.status === 200) {
+//                 setData(res.data.data);
+//             }
+
+//         }).catch((err) => {
+//             console.log("Error Message", err)
+//         })
+// }

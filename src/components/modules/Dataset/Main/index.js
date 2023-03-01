@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { RxCross2 } from "react-icons/rx";
 import { useTranslation } from "react-i18next";
@@ -6,10 +6,11 @@ import Heading from "../../../elements/Heading";
 import Search from "../../../elements/Search";
 import Tag from "../../../elements/Tag";
 import { colors } from "../../../../utils/colors";
+import './style.css'
 
 const Main = memo((props) => {
 
-    const { search, onChangeSearch, filter, onApplyFilter, onDeleteFilter } = props
+    const { search, onChangeSearch, filter, onApplyFilter, onDeleteFilter, searchData } = props
 
     const { t } = useTranslation();
 
@@ -34,6 +35,7 @@ const Main = memo((props) => {
                         <Col />
                         <Col xs={12} md={10} lg={8} className="py-3">
                             <Search
+                                searchData={searchData}
                                 placeholder={t("searchKeywords")}
                                 onChange={onChangeSearch}
                                 value={search}
@@ -46,7 +48,7 @@ const Main = memo((props) => {
                     </Row>
                     {
                         filter && filter.length > 0 &&
-                        <Row className="pb-3">
+                        <Row className="pb-3 m-0">
                             <Col className="d-flex flex-wrap justify-content-center align-items-center">
                                 {
                                     filter && filter.length > 0 && filter.map((item, index) =>
@@ -54,7 +56,7 @@ const Main = memo((props) => {
                                         <div className="py-1">
                                             <Tag
                                                 backgroundColor={colors.black}
-                                                textColor={"white"}
+                                                textColor={colors.white}
                                                 title={item.title}
                                                 crossIcon={<RxCross2 size={20} onClick={() => onDeleteFilter(item)} />} />
                                         </div>

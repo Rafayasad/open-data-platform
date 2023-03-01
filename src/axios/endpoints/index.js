@@ -59,5 +59,11 @@ export const endpoints = {
     },
     register: (data, headers) => {
         return axios.post('http://10.241.40.69:30418/apis/register.php', data, { headers })
-    }
+    },
+    getSearch: () => {
+        return axios.get('https://data.abudhabi/apis/search.php')
+    },
+    postSearch: (data) => {
+        return axios.post('https://data.abudhabi/apis/search.php', data)
+    },
 } 
