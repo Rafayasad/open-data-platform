@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Col, Row } from "react-bootstrap";
-import { MdDownloading, MdOutlineFilterAlt } from "react-icons/md";
+import { MdDownloadForOffline, MdOutlineFilterAlt } from "react-icons/md";
 import { colors } from "../../../../utils/colors";
 import Button from "../../../elements/Button";
 import Dropdown from "../../../elements/DropDown";
@@ -42,7 +42,7 @@ const Header = memo((props) => {
                                 }
                             ]
                         }
-                        headerComponent={<Button width={"12rem"} icon={<MdDownloading className="mx-1" size={18} />} title="Download" backgroundColor={colors.black} textColor={colors.white} />} />
+                        headerComponent={<Button width={"12rem"} icon={<MdDownloadForOffline className="mx-1" size={20} />} title="Download" backgroundColor={colors.black} textColor={colors.white} />} />
                 </div>
             </Col >
         </Row >
