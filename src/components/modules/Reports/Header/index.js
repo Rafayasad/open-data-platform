@@ -20,7 +20,7 @@ const Header = memo((props) => {
                     heading={title}
                 />
             </Col>
-            <Col md={3} className=" m-0 p-0 d-flex justify-content-end">
+            <Col md={3} className=" m-0 p-0 d-flex justify-content-end align-items-center">
                 <div className="mx-1">
                     <Button icon={<MdOutlineFilterAlt size={20} />} borderColor={colors.black} onClick={onClickFilter} />
                 </div>
@@ -42,8 +42,7 @@ const Header = memo((props) => {
                                 }
                             ]
                         }
-                        headerComponent={<Button icon={<MdDownloading className="mx-1" size={18} />} title="Download" backgroundColor={colors.black} textColor={colors.white} />} />
-
+                        headerComponent={<Button width={"12rem"} icon={<MdDownloading className="mx-1" size={18} />} title="Download" backgroundColor={colors.black} textColor={colors.white} />} />
                 </div>
             </Col >
         </Row >
