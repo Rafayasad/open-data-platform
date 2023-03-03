@@ -11,8 +11,9 @@ function TextArea(props) {
             <Form.Control
                 onChange={(e) => onChange(e.target.value)}
                 as="textarea"
+                className='shadow-none'
                 placeholder="Leave a comment here"
-                style={{ minHeight: "50%", maxHeight: "100%", fontSize: '13px', color: colors.grey, border: "solid rgb(112, 112, 112)", borderWidth: '1.5px' }}
+                style={{ minHeight: "50%", maxHeight: "100%", fontSize: '13px', color: colors.grey, border: "1px solid #9F9F9F", borderWidth: '1.5px' }}
             />
         </FloatingLabel>
     );
