@@ -13,8 +13,12 @@ export const routes = {
   RECOVER: `/recover-password`,
   RESET: `/reset-password`,
   SUCCESS_STOIRES: '/success-stories',
-  SUCCESS_STOIRES_DETAIL:'/success-stories/detail',
+  SUCCESS_STOIRES_DETAIL: '/success-stories/detail',
   CHANGE: `/change-password`,
   POLICY: `/privacy-policy`,
   CONTACT: `/contact-us`,
+  REPORTS: '/reports',
+  REPORTS_INSIGHTS: '/reports/insights',
+  REPORTS_PUBLISHERS: '/reports/publisher',
+  REPORTS_DATASETS: '/reports/dataset',
 };

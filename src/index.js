@@ -16,8 +16,6 @@ import { locales } from './i18n/helper';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-console.log("ssssssssssss",i18n);
-
 const THEME = createMuiTheme({
   typography: {
     "fontFamily": `${i18n.language === locales.EN ? 'CircularAr-Regular' : 'CircularStd-Regular'}`

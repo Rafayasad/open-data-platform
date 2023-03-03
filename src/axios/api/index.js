@@ -817,6 +817,21 @@ export const login = async (dispatch, setData, setLoading, payload) => {
 
 }
 
+export const getInsightsReport = (setData, payload, setLoading) => {
+
+    return endpoints.getInsightsReport(payload)
+        .then((res) => {
+            if (res.status === 200) {
+
+                let data = { ...res.data.data, id: 1 };
+
+                setData(data);
+
+            }
+
+        })
+}
+
 export const register = async (navigate, route, setLoading, payload) => {
 
     setLoading(true)
@@ -872,7 +887,6 @@ export const recoverPassword = async (navigate, route, setLoading, payload) => {
         mail: email,
     }
 
-    console.log("payload", data);
     let headers = {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -880,8 +894,6 @@ export const recoverPassword = async (navigate, route, setLoading, payload) => {
 
     return await endpoints.
         recoverPassword(data, headers).then((res) => {
-
-            console.log("RES", res);
 
             navigate(route, { replace: true });
             setLoading(false)
