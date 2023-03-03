@@ -8,10 +8,10 @@ import { locales } from '../../../i18n/helper';
 
 const BreadCrumb = memo((props) => {
 
-    const { items } = props;
+    const { items, textcolor, iconColor } = props;
 
     const breadcrumbs = [
-        items?.map((item, index) => <Typography className='m-0 p-0' style={{ color: colors.gray }} key={index} color="text.primary">{item}</Typography>)
+        items?.map((item, index) => <Typography className='m-0 p-0' style={{ color: textcolor ? textcolor : colors.gray }} key={index} color="text.primary">{item}</Typography>)
     ];
 
     return (
@@ -19,7 +19,7 @@ const BreadCrumb = memo((props) => {
             <Breadcrumbs className='m-0 p-0' separator={i18n.language === locales.EN ? <MdArrowForwardIos color={colors.gray} /> : <MdArrowBackIos color={colors.gray} />} aria-label="breadcrumb">
                 {breadcrumbs}
             </Breadcrumbs>
-            {i18n.language === locales.EN ? <MdArrowForwardIos className='mx-2' color={colors.gray} /> : <MdArrowBackIos className='mx-2' color={colors.gray} />}
+            {i18n.language === locales.EN ? <MdArrowForwardIos className={`mx-2`} color={iconColor ? colors.white : colors.gray} /> : <MdArrowBackIos className={`${iconColor && iconColor} mx-2`} color={iconColor ? colors.white : colors.gray} />}
         </div>
     );
 })

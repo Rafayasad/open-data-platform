@@ -1,21 +1,22 @@
 import React, { memo } from "react";
 import { Spinner } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { colors } from "../../../utils/colors";
 
 const Button = memo((props) => {
 
     const { t } = useTranslation()
 
-    const { title, icon, backgroundColor, textColor, width, borderColor, loading, onClick } = props
+    const { title, icon, backgroundColor, textColor, width, borderColor, loading, onClick, disable } = props
 
     return (
         <button
             onClick={onClick ? onClick : () => { }}
-            disabled={loading}
+            disabled={disable ? disable : loading}
             className="m-0 px-4 en-font-default"
             style={{
-                backgroundColor: backgroundColor ? backgroundColor : 'white',
-                color: textColor ? textColor : 'black',
+                backgroundColor: disable ? colors.lighter_gray : backgroundColor ? backgroundColor : 'white',
+                color: disable ? "black" : textColor ? textColor : 'black',
                 height: 52,
                 width: width ? width : 'auto',
                 borderRadius: 100,

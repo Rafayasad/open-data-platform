@@ -97,7 +97,8 @@ const Card = memo((props) => {
                         ))
                     }
                 </Col>
-                {!nodropdown &&
+                {
+                    !nodropdown &&
                     <Col md={2} className='d-flex justify-content-end'>
                         <Dropdown
                             autoClose={"outside"}

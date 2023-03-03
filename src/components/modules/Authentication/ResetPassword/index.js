@@ -22,14 +22,14 @@ const ResetPassword = memo(() => {
           backgroundSize: "100vw 100%",
         }}
       >
-        <Container fluid className="my-5">
+        <Container fluid className="my-5 pt-5">
           <Row>
             <Col>
-              <Row className="p-4">
+              <Row className="px-3 py-5">
                 <Col md={8}>
-                  <Heading heading="You're almost there!" color={colors.white} />
+                  <Heading heading={t("almostThere")} color={colors.white} />
                   <Heading
-                    heading="Password must be different from your previous there."
+                    heading={t("passwordValidation")}
                     color={colors.white}
                     size="xs"
                   />
@@ -48,15 +48,15 @@ const ResetPassword = memo(() => {
               >
                 <AuthCard
                   view="dekstop"
-                  title="Reset password"
-                  subtitle="Create a strong password to ensure account safety"
+                  title={t("resetPassword")}
+                  subtitle={t("strongPassword")}
                   inputFields={[
-                    { placeholder: "Government email", type: "email" },
-                    { placeholder: "Password", type: "password" },
-                    { placeholder: "Re-enter password", type: "password" },
+                    { placeholder: t("governmentEmail"), type: "email" },
+                    { placeholder: t("password"), type: "password" },
+                    { placeholder: t("rePwd"), type: "password" },
                   ]}
                   checkbox={{
-                    label: "I agree to Abu Dhabi Open Data",
+                    label: t("agreeCond"),
                     linktext: "terms and privacy policy",
                     borderColor: colors.light_gray,
                     linktextColor: colors.purple,
@@ -64,7 +64,7 @@ const ResetPassword = memo(() => {
                   }}
                   button={[
                     {
-                      title: "Login",
+                      title: t("login"),
                       onClick: "",
                       backgroundColor: colors.black,
                       textColor: colors.white,
