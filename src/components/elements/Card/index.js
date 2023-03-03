@@ -18,7 +18,8 @@ const Card = memo((props) => {
 
     const { t } = useTranslation();
 
-    const { resources, title, publisher, description, tags, size, noborder, hoverable, shortTitle, headingSize, onClick } = props
+    const { resources, title, publisher, description, tags, size, noborder,
+        hoverable, shortTitle, headingSize, onClick, nodropdown } = props;
 
     var height = "332px", border, ClassName;
 
@@ -96,16 +97,20 @@ const Card = memo((props) => {
                         ))
                     }
                 </Col>
-                <Col md={2} className='d-flex justify-content-end'>
-                    <Dropdown
-                        autoClose={"outside"}
-                        size={selectedDropdownValue === "Download" && "md"}
-                        options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
-                        selectedDropdownValue={selectedDropdownValue}
-                        setSelectedDropdownValue={setSelectedDropdownValue}
-                        headerComponent={<BsThreeDots color={colors.black} size={28} style={{ cursor: 'pointer' }} />}
-                    />
-                </Col>
+                {
+                    !nodropdown &&
+                    <Col md={2} className='d-flex justify-content-end'>
+                        <Dropdown
+                            autoClose={"outside"}
+                            width={"12rem"}
+                            size={selectedDropdownValue === "Download" && "md"}
+                            options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
+                            selectedDropdownValue={selectedDropdownValue}
+                            setSelectedDropdownValue={setSelectedDropdownValue}
+                            headerComponent={<BsThreeDots color={colors.black} size={28} style={{ cursor: 'pointer' }} />}
+                        />
+                    </Col>
+                }
             </Row>
             <Row className={`${publisher ? "h-50" : "h-75"}`}>
                 <Col md={shortTitle ? 8 : 12}>

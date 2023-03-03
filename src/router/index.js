@@ -19,6 +19,7 @@ const SuccessStoriesDetail = lazy(() => import('../pages/SuccessStoriesDetail'))
 const PrivacyPolicy = lazy(() => import('../pages/Authentication/PrivacyPolicy'))
 const ChangePassword = lazy(() => import('../pages/Authentication/ChangePassword'))
 const ContactUs = lazy(() => import('../pages/ContactUs'))
+const RealTimeApis = lazy(() => import('../pages/RealTimeApis'))
 const Reports = lazy(() => import('../pages/Reports'))
 const InsightsReports = lazy(() => import('../pages/Reports/Insights'))
 const PublishersReports = lazy(() => import('../pages/Reports/Publishers'))
@@ -44,6 +45,7 @@ const Router = () => {
             <Route path={routes.POLICY} element={<PrivacyPolicy />} />
             <Route path={routes.CHANGE} element={<ChangePassword />} />
             <Route path={routes.CONTACT} element={<ContactUs />} />
+            <Route path={routes.REAL_TIME_APIS} element={<RealTimeApis />} />
             <Route path={routes.REPORTS} element={<Reports />} />
             <Route path={routes.REPORTS_INSIGHTS} element={<InsightsReports />} />
             <Route path={routes.REPORTS_PUBLISHERS} element={<PublishersReports />} />

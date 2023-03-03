@@ -17,6 +17,7 @@ export const routes = {
   CHANGE: `/change-password`,
   POLICY: `/privacy-policy`,
   CONTACT: `/contact-us`,
+  REAL_TIME_APIS: `/real-time-apis`,
   REPORTS: '/reports',
   REPORTS_INSIGHTS: '/reports/insights',
   REPORTS_PUBLISHERS: '/reports/publisher',
