@@ -3,8 +3,11 @@ import { Container, Row, Col } from "react-bootstrap";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import Background from '../../../../assets/images/Contact-Us.png'
+// import BackgroundAr from '../../../../assets/images/Contact-Us-ar.png'
 import BreadCrumb from "../../../elements/BreadCrumb";
 import { useTranslation } from "react-i18next";
+import i18n from "../../../../i18n/i18n";
+import { locales } from "../../../../i18n/helper";
 
 const ImageComponent = memo(() => {
     const { t } = useTranslation();
@@ -13,7 +16,7 @@ const ImageComponent = memo(() => {
             style={{
                 height: "100%",
                 width: "100%",
-                backgroundImage: `url(${Background})`,
+                backgroundImage: i18n.language === locales.EN ? `url(${Background})` : `url(${Background})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "100% 100%",
             }}

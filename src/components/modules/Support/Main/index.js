@@ -21,7 +21,7 @@ const Main = memo(() => {
                     </Row>
                     <Row>
                         <Col />
-                        <Col xs={12} md={8} className="py-3">
+                        <Col xs={12} md={10} lg={8} className="py-3" style={{zIndex:1000}}>
                             <Search placeholder={t("searchKeywords")} />
                         </Col>
                         <Col />

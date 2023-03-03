@@ -16,10 +16,10 @@ const BreadCrumb = memo((props) => {
 
     return (
         <div className='d-flex justify-content-start align-items-center m-0 p-0'>
-            <Breadcrumbs className='m-0 p-0' separator={i18n.language === locales.EN ? <MdArrowForwardIos color={colors.gray} /> : <MdArrowBackIos color={colors.gray} />} aria-label="breadcrumb">
+            <Breadcrumbs className='m-0 p-0' separator={i18n.language === locales.EN ? <MdArrowForwardIos size={12} color={colors.gray} /> : <MdArrowBackIos size={12} color={colors.gray} />} aria-label="breadcrumb">
                 {breadcrumbs}
             </Breadcrumbs>
-            {i18n.language === locales.EN ? <MdArrowForwardIos className={`mx-2`} color={iconColor ? colors.white : colors.gray} /> : <MdArrowBackIos className={`${iconColor && iconColor} mx-2`} color={iconColor ? colors.white : colors.gray} />}
+            {i18n.language === locales.EN ? <MdArrowForwardIos size={12} className={`mx-2`} color={iconColor ? colors.white : colors.gray} /> : <MdArrowBackIos size={12} className={`${iconColor && iconColor} mx-2`} color={iconColor ? colors.white : colors.gray} />}
         </div>
     );
 })

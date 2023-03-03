@@ -16,7 +16,7 @@ const Search = memo((props) => {
 
     const { t } = useTranslation();
 
-    const { placeholder, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter, searchData } = props;
+    const { nofocuseffect, placeholder, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter, searchData } = props;
 
     const [filterOpen, setFilterOpen] = useState(false);
 
@@ -70,7 +70,7 @@ const Search = memo((props) => {
                     setShow={() => setOpenModal(false)} />
             }
             <Container id="cont" fluid ref={wrapperRef}>
-                <Row id="main" className={` ${toggler ? "search-box-active input-focused" : "search-box"}`}>
+                <Row id="main" className={`${toggler && !nofocuseffect ? "search-box-active input-focused" : "search-box"}`}>
                     <Col xs={2} md={1} className='d-flex justify-content-center align-items-center'>
                         <IoIosSearch color="gray" size={24} />
                     </Col>
@@ -87,7 +87,7 @@ const Search = memo((props) => {
                     {
                         value?.length > 1 ?
                             <Col md={1} lg={1} xs={2}>
-                                <MdCancel onClick={() => onChangeSearch({ target: { value: "" } })} size={24} />
+                                <MdCancel color="#9f9f9f" onClick={() => onChangeSearch({ target: { value: "" } })} size={24} />
                             </Col>
                             :
                             filter &&
@@ -112,7 +112,7 @@ const Search = memo((props) => {
                     }
                 </Row>
                 {
-                    toggler &&
+                    toggler && !nofocuseffect &&
                     <Row className="search-box-extend d-none d-lg-block" style={{ width: toggler && document?.getElementById("main")?.offsetWidth }}>
                         <Col className="m-0">
                             <hr className="m-0 p-0" style={{ borderWidth: "2px", borderColor: colors.purple }} />

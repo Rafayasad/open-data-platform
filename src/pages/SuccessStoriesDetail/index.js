@@ -14,6 +14,7 @@ import Button from "../../components/elements/Button";
 import Dropdown from "../../components/elements/DropDown";
 import View from "../../components/modules/View";
 import { shareOptions } from "../../utils";
+import { useSelector } from "react-redux";
 
 const SuccessStoriesDetail = memo(() => {
 
@@ -30,6 +31,11 @@ const SuccessStoriesDetail = memo(() => {
 
     const downloadResources = useCallback((links) => { console.log(links) });
 
+    const stories = useSelector(state => state.stories.stories);
+
+    const onClickCard = useCallback((id) => { navigate(`${routes.SUCCESS_STOIRES_DETAIL}?id=${id}`) });
+    const onClickButton = useCallback(() => { navigate(routes.SUCCESS_STOIRES) });
+
     useEffect(() => {
 
         if (!id) return navigate(routes.SUCCESS_STOIRES, { replace: true });
@@ -37,6 +43,8 @@ const SuccessStoriesDetail = memo(() => {
         getSuccessStoriesById(id, setStory);
 
     }, [])
+
+    console.log(story);
 
     const shareOption = shareOptions?.map((item, index) => (
         {
@@ -68,7 +76,7 @@ const SuccessStoriesDetail = memo(() => {
     return (
         <View theme="dark" noupperfooter>
             <div className="my-5 pt-5 px-0">
-                <div className="px-4 py-2 m-0 p-0 d-flex justify-content-between">
+                <div className="px-4 pt-5 m-0 p-0 d-flex justify-content-between">
                     <BreadCrumb items={[t("aboutus"), t("successStories")]} />
                     <Dropdown
                         width={"12rem"}
@@ -82,7 +90,7 @@ const SuccessStoriesDetail = memo(() => {
                 </div>
                 <StoriesDetails item={story} />
                 <hr className="m-0 mx-3" />
-                <Cards title={t("successStories")} backgroundColor={colors.white} data={datas} />
+                <Cards noheadercomponent backgroundColor={colors.white} title={t("successStories")} data={stories} size="md" onClick={onClickCard} onClickViewAll={onClickButton} />
             </div>
         </View>
 

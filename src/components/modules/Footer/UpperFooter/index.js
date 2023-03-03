@@ -34,7 +34,7 @@ const UpperFooter = memo((props) => {
                     </Row>
                 }
                 <Row>
-                    <Col xs={8} md={4} className={i18n.language === locales.AR && "py-3"}>
+                    <Col xs={8} md={4} className={i18n.language === locales.AR ? "py-3" : "py-3"}>
                         <Button backgroundColor={i18n.language === locales.AR && "transparent"}
                         borderColor={i18n.language === locales.AR && "white"}
                         textColor={i18n.language === locales.AR && "white"}

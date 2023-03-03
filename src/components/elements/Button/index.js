@@ -8,11 +8,11 @@ const Button = memo((props) => {
     const { t } = useTranslation()
 
     const { isFilled, title, icon, backgroundColor, textColor, width, borderColor, loading, onClick, disable } = props
-
+    console.log("button ka disable", loading);
     return (
         <button
             onClick={onClick ? onClick : () => { }}
-            disabled={disable ? disable : loading}
+            disabled={loading}
             className="m-0 px-4 en-font-default"
             style={{
                 backgroundColor: backgroundColor ? backgroundColor : 'white',
