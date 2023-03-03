@@ -1,18 +1,12 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
-import Navbar from '../../components/modules/Navbar';
 import Cards from "../../components/modules/Cards";
 import Main from "../../components/modules/Dataset/Main";
-import UpperFooter from '../../components/modules/Footer/UpperFooter';
-import MiddleFooter from '../../components/modules/Footer/MiddleFooter';
-import LowerFooter from '../../components/modules/Footer/LowerFooter';
 import DatasetList from "../../components/modules/Dataset/DatasetList";
 import { colors } from "../../utils/colors";
 import { getAllDatasets, getRecentsDatasets } from "../../axios/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../router/helper";
 import { useTranslation } from "react-i18next";
-import i18n from "../../i18n/i18n";
-import { locales } from "../../i18n/helper";
 import View from "../../components/modules/View";
 
 const Dataset = memo(() => {
