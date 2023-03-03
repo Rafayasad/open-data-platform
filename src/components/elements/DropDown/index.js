@@ -7,7 +7,7 @@ import './style.css';
 
 const Dropdown = (props) => {
 
-    const { autoClose, options, setSelectedDropdownValue, selectedValue, name, size, headerComponent, highlightableItem, width, selectedDropdownValue } = props;
+    const { autoClose, options, setSelectedDropdownValue, selectedValue, name, size, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
 
     const [isOpen, setIsOpen] = useState(false);
     const [indexx, setIndexx] = useState();
@@ -25,19 +25,18 @@ const Dropdown = (props) => {
                     <Heading size="xxs" heading={name} nomargin />
                 </div>
             }
-            <BSDropdown autoClose={autoClose} onToggle={toggle}>
+            <BSDropdown style={{ width: dropdownWidth }} autoClose={autoClose} onToggle={toggle}>
                 {
                     headerComponent ? (
                         <BSDropdown.Toggle href={null} className='bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end'
-                            style={{ width: width && '12rem' }}
+                            style={{ width: width }}
                         >
                             {headerComponent}
                         </BSDropdown.Toggle>
                     ) : (
                         <BSDropdown.Toggle
                             href={null}
-                            className={`bg-white my-1 d-flex align-items-center justify-content-between my-dropdown-toggle text-black border border-1 ${isOpen && "dropdown-hover"}`}
-                            style={{ width: '12rem' }}
+                            className={`w-100 bg-white my-1 d-flex align-items-center justify-content-between my-dropdown-toggle text-black border border-1 ${isOpen && "dropdown-hover"}`}
                         >
                             <div className=''>
                                 <Heading size="xxs" nomargin heading={selectedValue} />

@@ -9,6 +9,7 @@ import { routes } from "../../router/helper";
 import { useTranslation } from "react-i18next";
 import { locales } from "../../i18n/helper";
 import View from "../../components/modules/View";
+import ExpandSearchBarModal from "../../components/elements/Search/ExpandSearchBarModal";
 
 const Dataset = memo(() => {
 
@@ -81,6 +82,8 @@ const Dataset = memo(() => {
         }
 
     }, [filters])
+
+    console.log("search",search);
 
     return (
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>

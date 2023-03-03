@@ -1,56 +1,69 @@
-import React from "react";
-import { memo } from "react";
-import Button from 'react-bootstrap/Button';
+import React, { useCallback, useState } from "react";
+import { memo } from "react"
+import { Col } from "react-bootstrap";
+import { colors } from "../../../../utils/colors";
+import { useTranslation } from "react-i18next";
+import { IoIosSearch } from 'react-icons/io';
 import Modal from 'react-bootstrap/Modal';
+import Heading from "../../Heading";
+import "./style.css";
 
 const ExpandSearchBarModal = memo((props) => {
-    const { show, onHide } = props;
-    console.log("SHOW", show, onHide);
+
+    const { show, setShow, searchData, value, placeholder, onChangeSearch, onKeyDown } = props;
+    const { t } = useTranslation();
+
+    // const onKeyDown = useCallback((e) => e.key === "Enter" && onPressEnter && onPressEnter(e.target.value));
+
     return (
-        // <Modal
-        //     show={show}
-        //     onHide={() => onHide(false)}
-        //     size="md"
-        //     aria-labelledby="contained-modal-title-vcenter"
-        //     centered
-        // >
-        //     <Modal.Header closeButton>
-        //         <Modal.Title id="contained-modal-title-vcenter">
-        //             Modal heading
-        //         </Modal.Title>
-        //     </Modal.Header>
-        //     <Modal.Body>
-        //         <h4>Centered Modal</h4>
-        //         <p>
-        //             Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-        //             dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-        //             consectetur ac, vestibulum at eros.
-        //         </p>
-        //     </Modal.Body>
-        //     <Modal.Footer>
-        //         <Button onClick={onHide}>Close</Button>
-        //     </Modal.Footer>
-        // </Modal>
-        // <Sheet>Holy sheet!</Sheet>
-        <></>
+        <Modal show={show} fullscreen={true} onHide={setShow}>
+            <Modal.Header>
+                <Modal.Title className="d-flex align-items-center justify-content-around w-100">
+                    <Col xs={9} className='p-0 d-flex align-items-center'>
+                        <input
+                            value={value}
+                            onChange={onChangeSearch}
+                            type="text"
+                            className='input-field shadow-none py-2 px-4 bg-transparent w-100'
+                            placeholder={placeholder}
+                            onKeyDown={onKeyDown}
+                        />
+                    </Col>
+                    <Col xs={2}>
+                        <Heading
+                            nomargin heading={t("cancel")} size={"xxs"} color={colors.gray}
+                            onClick={() => {
+                                setShow()
+                                onChangeSearch({ target: { value: "" } })
+                            }}
+                        />
+                    </Col>
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="px-4">
+                <div>
+                    <Heading nomargin heading={t("popularsearches")} size={"xxs"} color={colors.gray} />
+                </div>
+                <div>
+                    {
+                        searchData?.map((item, index) => {
+                            return (
+                                <div className="d-flex py-3">
+                                    <IoIosSearch color={colors.gray} size={25} />
+                                    <div className="px-2">
+                                        <Heading heading={item} size="xs" nomargin onClick={() => {
+                                            setShow()
+                                            onChangeSearch({ target: { value: item } })
+                                        }} />
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            </Modal.Body>
+        </Modal>
     )
 })
 
 export default ExpandSearchBarModal;
-
-// function App() {
-//   const [modalShow, setModalShow] = React.useState(false);
-
-//   return (
-//     <>
-//       <Button variant="primary" onClick={() => setModalShow(true)}>
-//         Launch vertically centered modal
-//       </Button>
-
-//       <MyVerticallyCenteredModal
-//         show={modalShow}
-//         onHide={() => setModalShow(false)}
-//       />
-//     </>
-//   );
-// }

@@ -275,50 +275,62 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
 }
 
 export const getDatasetById = (id, setData) => {
+
     return endpoints.
-        getDatasetById(id).then((res) => {
+        getDatasetById(id).then(async (res) => {
             if (res.status === 200) {
 
-                let item = res.data;
-
-                let data = {
-                    id: item.identifier,
-                    title: item.title,
-                    title_ar: item.titlear,
-                    description: item.description,
-                    description_ar: item.description_ar,
-                    publisher: item.publisher?.name,
-                    publisher_ar: item.publisherlear?.name,
-                    frequency: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
-                    frequency_ar: item.accrualPeriodicity === "R/P1Y" ? "سنوي" : item.accrualPeriodicity === "auto/freq" ? "تلقائي" : "لا يوجد",
-                    access_level: item.accessLevel,
-                    access_level_ar: item.accessLevellear,
-                    license: item.license,
-                    license_ar: item.licenselear,
-                    topics: item.theme,
-                    topics_ar: item.themelear,
-                    tags: item.keyword,
-                    tags_ar: item.keywordlear,
-                    resources: item.distribution.map(item => (
-                        {
-                            title: item.title,
-                            title_ar: item.titlelear,
-                            description: item.description,
-                            description_ar: item.descriptionlear,
-                            format: item.format === "pdf" ? "pdf"
-                                : item.format === "esri rest" ? "excel"
-                                    : item.format === "xlsx" ? "excel"
-                                        : item.format === "xls" ? "excel"
-                                            : item.format === "csv" && "csv",
-                            downloadURL: item.downloadURL
-                        }
-                    )),
-                    created: item.issued,
-                    modified: item.modified,
+                const view_count_payload = {
+                    identifier: id,
+                    ip_address: "172.0.9.01"
                 }
 
-                setData(data)
+                //view count api CORS error
+                return await endpoints.viewCount(view_count_payload).then((res) => {
 
+                    let item = res.data;
+
+                    let data = {
+                        id: item.identifier,
+                        title: item.title,
+                        title_ar: item.titlear,
+                        description: item.description,
+                        description_ar: item.description_ar,
+                        publisher: item.publisher?.name,
+                        publisher_ar: item.publisherlear?.name,
+                        frequency: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
+                        frequency_ar: item.accrualPeriodicity === "R/P1Y" ? "سنوي" : item.accrualPeriodicity === "auto/freq" ? "تلقائي" : "لا يوجد",
+                        access_level: item.accessLevel,
+                        access_level_ar: item.accessLevellear,
+                        license: item.license,
+                        license_ar: item.licenselear,
+                        topics: item.theme,
+                        topics_ar: item.themelear,
+                        tags: item.keyword,
+                        tags_ar: item.keywordlear,
+                        resources: item.distribution.map(item => (
+                            {
+                                title: item.title,
+                                title_ar: item.titlelear,
+                                description: item.description,
+                                description_ar: item.descriptionlear,
+                                format: item.format === "pdf" ? "pdf"
+                                    : item.format === "esri rest" ? "excel"
+                                        : item.format === "xlsx" ? "excel"
+                                            : item.format === "xls" ? "excel"
+                                                : item.format === "csv" && "csv",
+                                downloadURL: item.downloadURL
+                            }
+                        )),
+                        created: item.issued,
+                        modified: item.modified,
+                    }
+
+                    setData(data)
+
+                }).catch((err) => {
+                    console.log("Error message", err)
+                })
             }
         }).catch((err) => {
             console.log("Error message", err)
@@ -849,15 +861,33 @@ export const getSearch = (setData) => {
         })
 }
 
-// export const postSearch = (data,setData) => {
-//     return endpoints.
-//         postSearch().then((res) => {
+export const recoverPassword = async (navigate, route, setLoading, payload) => {
 
-//             if (res.status === 200) {
-//                 setData(res.data.data);
-//             }
 
-//         }).catch((err) => {
-//             console.log("Error Message", err)
-//         })
-// }
+    setLoading(true)
+
+    let { email } = payload;
+
+    let data = {
+        mail: email,
+    }
+
+    console.log("payload", data);
+    let headers = {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+    }
+
+    return await endpoints.
+        recoverPassword(data, headers).then((res) => {
+
+            console.log("RES", res);
+
+            navigate(route, { replace: true });
+            setLoading(false)
+
+        }).catch((err) => {
+            setLoading(false)
+            console.log("Error Message", err)
+        })
+}
