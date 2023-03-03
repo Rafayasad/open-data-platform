@@ -1,8 +1,9 @@
 import React, { memo } from "react";
 import { Col, Row } from "react-bootstrap";
-import { MdDownloading, MdOutlineFilterAlt } from "react-icons/md";
+import { MdDownloadForOffline, MdOutlineFilterAlt } from "react-icons/md";
 import { colors } from "../../../../utils/colors";
 import Button from "../../../elements/Button";
+import Dropdown from "../../../elements/DropDown";
 import Heading from "../../../elements/Heading";
 
 const Header = memo((props) => {
@@ -19,12 +20,29 @@ const Header = memo((props) => {
                     heading={title}
                 />
             </Col>
-            <Col md={3} className=" m-0 p-0 d-flex justify-content-end">
+            <Col md={3} className=" m-0 p-0 d-flex justify-content-end align-items-center">
                 <div className="mx-1">
                     <Button icon={<MdOutlineFilterAlt size={20} />} borderColor={colors.black} onClick={onClickFilter} />
                 </div>
                 <div className="mx-1">
-                    <Button icon={<MdDownloading className="mx-1" size={18} />} title="Download" backgroundColor={colors.black} textColor={colors.white} />
+                    <Dropdown
+                        options={
+                            [
+                                {
+                                    title: "PDF",
+                                    onClick: () => { }
+                                },
+                                {
+                                    title: "CSV",
+                                    onClick: () => { }
+                                },
+                                {
+                                    title: "Excel",
+                                    onClick: () => { }
+                                }
+                            ]
+                        }
+                        headerComponent={<Button width={"12rem"} icon={<MdDownloadForOffline className="mx-1" size={20} />} title="Download" backgroundColor={colors.black} textColor={colors.white} />} />
                 </div>
             </Col >
         </Row >
