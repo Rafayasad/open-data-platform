@@ -3,15 +3,16 @@ import Cards from "../../components/modules/Cards";
 import Main from "../../components/modules/Dataset/Main";
 import DatasetList from "../../components/modules/Dataset/DatasetList";
 import { colors } from "../../utils/colors";
-import { getAllDatasets, getRecentsDatasets } from "../../axios/api";
+import { getAllDatasets, getRecentsDatasets, getSearch } from "../../axios/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../router/helper";
 import { useTranslation } from "react-i18next";
+import { locales } from "../../i18n/helper";
 import View from "../../components/modules/View";
 
 const Dataset = memo(() => {
 
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const navigate = useNavigate();
     const { state, pathname } = useLocation();
@@ -23,6 +24,7 @@ const Dataset = memo(() => {
     const [recentsDatasets, setRecentsDatasets] = useState();
     const [datasets, setDatasets] = useState();
     const [search, setSearch] = useState("");
+    const [searchData, setSearchData] = useState();
     const [sort, setSort] = useState("Title");
     const [filters, setFilters] = useState([]);
 
@@ -30,7 +32,7 @@ const Dataset = memo(() => {
     const [viewAll, setViewAll] = useState(false);
 
     useEffect(() => {
-
+        getSearch(setSearchData);
         getRecentsDatasets(setRecentsDatasets);
 
         if (state && state.search) {
@@ -80,9 +82,11 @@ const Dataset = memo(() => {
 
     }, [filters])
 
+    console.log("search",search);
+
     return (
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
-            <Main search={search} onChangeSearch={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
+            <Main searchData={i18n.language === locales.EN ? searchData?.en : searchData?.ar} search={search} onChangeSearch={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
             <Cards buttonText={viewAll && t("viewLess")} onClickViewAll={toggle} title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)} onClick={onClickCard} />
             <DatasetList totalCount={totalCount} rowsPerPage={rowsPerPage} datasets={datasets} currentPage={currentPage} loading={loading} onChangePage={onChangePage} selectedValue={sort} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue} />
         </View>

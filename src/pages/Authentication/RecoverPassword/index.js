@@ -4,7 +4,7 @@ import View from "../../../components/modules/View";
 
 const RecoverPassword = memo(() => {
   return (
-    <View nocontent>
+    <View nocontent noupperfooter nomiddlefooter nolowerfooter>
       <RecoverPassComponent />
     </View>
 

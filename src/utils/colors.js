@@ -4,9 +4,10 @@ export const colors = {
     dark_gray: "#404040",
     gray: "#707070",
     light_gray: "#9F9F9F",
+    lighter_gray: "#E7E7E7",
     white: "#FFFFFF",
     pearl_white: "#B7B7B7",
     purple: "#8207C9",
     light_purple: "#F3E6FA",
-    red:"#EA3F2E"
+    red: "#EA3F2E"
 }

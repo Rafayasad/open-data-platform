@@ -83,7 +83,7 @@
     "LastPara": "This email has been sent to you by Abu Dhabi Data up to 1 line",
     "secPara": "@Abu Dhabi Data. all rights reserved, 2022",
     "thanksScreen": "If you did not request to reset password, please ignore this email.",
-    "screenone": "Please note that this is a one-time use link and will expire in 48 hours",
+    "note": "Please note that this is a one-time use link and will expire in 48 hours. If you did not request to reset password, please ignore this email.",
     "changePwd": "Change Password",
     "powered": "Powered by",
     "abuDhabiDataLogo": "Abu Dhabi Data Program logo",
@@ -213,7 +213,8 @@
     "adda": "ADDA @ 2022",
     "openDataTitle": "An Open Data experience that's tailored for you",
     "and": "and",
-    "facebook":"Facebook",
-    "twitter":"Twitter",
-    "linkedin":"LinkedIn"
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "linkedin": "LinkedIn",
+    "popularsearches": "POPULAR SEARCHES"
 }

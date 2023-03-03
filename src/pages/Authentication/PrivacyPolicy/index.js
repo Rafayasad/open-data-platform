@@ -1,8 +1,9 @@
-import React, { memo, useRef} from "react";
+import React, { memo, useRef } from "react";
 import Modal from "../../../components/elements/Modal/index";
 import AuthBackground1 from "../../../assets/images/Auth-Background-1.png";
 import Navbar from '../../../components/modules/Navbar'
 import useIsFocused from "../../../utils/hooks/useIsFocused";
+import View from "../../../components/modules/View";
 
 const PrivacyPolicy = memo(() => {
 
@@ -11,11 +12,11 @@ const PrivacyPolicy = memo(() => {
     return (
         <>
             <div ref={ref1} className="d-none d-lg-block" style={{ height: "100vh", width: "100vw", backgroundImage: `url(${AuthBackground1})`, backgroundRepeat: "no-repeat", backgroundSize: "100vw 100vh" }}>
-                <Navbar />
+                <View nocontent noupperfooter nomiddlefooter nolowerfooter />
             </div>
 
             <div className="d-block d-lg-none" style={{ height: "100vh", width: "100vw" }}>
-                <Navbar />
+                <View nocontent noupperfooter nomiddlefooter nolowerfooter />
             </div>
 
             <Modal backdrop={useIsFocused(ref1)} heading="Terms and conditions" size="lg" />

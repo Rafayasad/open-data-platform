@@ -52,6 +52,7 @@ const Header = memo((props) => {
                             name={dropdown.title}
                             options={dropdown.options}
                             selectedValue={dropdown.selectedValue}
+                            dropdownWidth={"12rem"}
                         /> :
                         null
             }
