@@ -11,3 +11,20 @@ export const socialLinks = {
 export const ScrollToTop = () => {
     window.scrollTo(0, 0)
 }
+
+export const shareOptions = [
+    {
+        title: "facebook",
+        format: "facebook",
+        downloadURL: "...."
+    },
+    {
+        title: "linkedin",
+        format: "linkedin",
+        downloadURL: "...."
+    },
+    {
+        title: "twitter",
+        format: "twitter",
+        downloadURL: "...."
+    }]

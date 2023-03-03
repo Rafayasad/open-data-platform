@@ -13,7 +13,7 @@ const Main = memo((props) => {
     const { data } = props;
 
     const renderLoader = () => (
-        <Container fluid>
+        <Container fluid className="px-4">
             <Row className="align-items-center">
                 <Col md={6} xs={12} className='py-2'>
                     <Shimmer height={41} rounded='xs' />
@@ -34,7 +34,7 @@ const Main = memo((props) => {
     return (
         data && data.length > 0 ? data.map((item, index) => (
             <Fragment key={index}>
-                <Container fluid className="my-4">
+                <Container fluid className="my-4 px-4">
                     <Row className="align-items-center">
                         <Col md={6} xs={12} className='py-2'>
                             <Heading bold nomargin heading={i18n.language === locales.AR ? item.title_ar : item.title} />

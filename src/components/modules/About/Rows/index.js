@@ -7,7 +7,7 @@ const Rows = memo((props) => {
     const { title, description, image } = props;
 
     return (
-        <Container fluid className="my-4">
+        <Container fluid className="my-4 px-4">
             <Row className='d-flex justify-content-between'>
                 <Col md={5} xs={12} className='py-2'>
                     <Row className="py-3">

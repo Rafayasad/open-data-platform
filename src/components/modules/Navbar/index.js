@@ -75,7 +75,7 @@ const Navbar = memo((props) => {
 
     return (
         <>
-            <Container fluid className="p-3 d-none d-lg-block" style={{ position: 'absolute', top: 0, right: 0, left: 0 }}>
+            <Container fluid className="px-4 py-3 d-none d-lg-block" style={{ position: 'absolute', top: 0, right: 0, left: 0 }}>
                 <Row>
                     <Col className="d-flex align-items-center">
                         <Link to={routes.HOME}>
@@ -135,7 +135,7 @@ const Navbar = memo((props) => {
                     </Col>
                 </Row>
             </Container>
-            <Container fluid className={`p-3 d-block d-lg-none ${scroll && "sticky bg-white transition"}`} style={{ position: !scroll && 'absolute', top: 0, left: 0, right: 0, zIndex: 1 }}>
+            <Container fluid className={`px-4 py-3 d-block d-lg-none ${scroll && "sticky bg-white transition"}`} style={{ position: !scroll && 'absolute', top: 0, left: 0, right: 0, zIndex: 1 }}>
                 <Row className="d-flex justify-content-between align-items-center" >
                     <Col className="d-flex align-items-center justify-content-start">
                         <Link to={routes.HOME}>

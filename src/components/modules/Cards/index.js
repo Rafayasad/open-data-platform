@@ -94,6 +94,7 @@ const Cards = memo((props) => {
                             description={item.description && item.description_ar && i18n.language === locales.AR ? item.description_ar : item.description}
                             publisher={item.publisher && item.publisher_ar && i18n.language === locales.AR ? item.publisher_ar : item.publisher}
                             tags={i18n.language === locales.AR ? item.tags && item.tags_ar.slice(0, 2) : item.tags && item.tags.slice(0, 2)}
+                            resources={i18n.language === locales.AR ? item.resources_ar : item.resources}
                             onClick={() => onClick(item.id)}
                         />
                     </Col>
@@ -107,10 +108,18 @@ const Cards = memo((props) => {
             {
                 title &&
                 <Row>
-                    <Header buttonText={buttonText} backgroundColor={backgroundColor} title={title} onClickButton={onClickViewAll} />
+                    <Col>
+                        <Header buttonText={buttonText} backgroundColor={backgroundColor} title={title} onClickButton={onClickViewAll} />
+                    </Col>
                 </Row>
             }
-            <Row>{renderContent()}</Row>
+            <Row>
+                <Col className="px-4">
+                    <Row>
+                        {renderContent()}
+                    </Row>
+                </Col>
+            </Row>
         </Container>
     )
 });

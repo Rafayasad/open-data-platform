@@ -9,14 +9,14 @@ const UpperFooter = memo((props) => {
     const { title, description, button } = props
 
     return (
-        <div className="d-flex flex-column py-5 px-3" style={{
+        <div className="d-flex flex-column py-5 px-4" style={{
             height: '75vh',
             backgroundImage: `url(${FooterImage})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             backgroundPosition: 'center'
         }}>
-            <Container fluid className=''>
+            <Container fluid className='p-0'>
                 <Row>
                     <Col xs={8} md={4}>
                         <Heading color='white' heading={title} />

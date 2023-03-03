@@ -9,8 +9,6 @@ const DataCard = memo((props) => {
 
     const { data } = props
 
-    console.log("data",data);
-
     return (
         <Container fluid className="p-0">
             {

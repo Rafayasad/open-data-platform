@@ -9,7 +9,7 @@ export const getPlatformInsights = (setData, setLoading) => {
                 setLoading(false)
             }
         }).catch((err) => {
-            console.log()
+            console.log("Error message", err)
         })
 }
 
@@ -48,7 +48,7 @@ export const getMostViewedDatasets = (setData, setLoading) => {
                 setLoading(false)
             }
         }).catch((err) => {
-            console.log()
+            console.log("Error message", err)
         })
 }
 
@@ -68,22 +68,52 @@ export const getRecentsDatasets = (setData, setLoading) => {
                     ar_obj.publisher_ar = ar_obj.publisherlear
                     ar_obj.title_ar = ar_obj.titlear
                     ar_obj.tags_ar = ar_obj.themelear
+                    ar_obj.resources_ar = ar_obj.distribution.map(item => {
+                        return (
+                            {
+                                title: item.titlelear,
+                                format: item.format === "pdf" ? "pdf"
+                                    : item.format === "esri rest" ? "excel"
+                                        : item.format === "xlsx" ? "excel"
+                                            : item.format === "xls" ? "excel"
+                                                : item.format === "csv" && "csv",
+                                downloadURL: item.url
+                            }
+
+                        )
+                    })
 
                     delete ar_obj.identifier
                     delete ar_obj.keywordlear
                     delete ar_obj.publisherlear
-                    delete ar_obj.titlear
+                    delete ar_obj.titlelear
                     delete ar_obj.themelear
+                    delete ar_obj.distribution
+
 
                     return {
                         id: item.identifier,
                         title: item.title,
                         publisher: item.publisher,
                         tags: item.theme,
+                        resources: item.distribution.map(item => {
+                            return (
+                                {
+                                    title: item.title,
+                                    format: item.format === "pdf" ? "pdf"
+                                        : item.format === "esri rest" ? "excel"
+                                            : item.format === "xlsx" ? "excel"
+                                                : item.format === "xls" ? "excel"
+                                                    : item.format === "csv" && "csv",
+                                    downloadURL: item.url
+                                }
+
+                            )
+                        }),
                         ...ar_obj
                     }
                 })
-
+                console.log("TRANSFORM", transform);
                 setData(transform)
                 setLoading(false)
             }
@@ -181,16 +211,17 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
     setLoading(true)
     setTotalCount(0)
 
-    console.log("FILTERS", filters);
     let finalFilters = []
     let themeArray = []
     let publisherArray = []
     let tagsArray = []
+
     filters?.filter((el, index) => {
         el.type == "theme" ? themeArray.push(el.title)
             : el.type == "publisher__name" ? publisherArray.push(el.title)
                 : el.type == "keyword" && tagsArray.push(el.title)
     })
+
     finalFilters.push(
         { key: "theme", values: themeArray },
         { key: "publisher__name", values: publisherArray },
@@ -256,16 +287,14 @@ export const getDatasetById = (id, setData) => {
                     resources: item.distribution.map(item => (
                         {
                             title: item.title,
+                            title_ar: item.titlelear,
                             description: item.description,
-                            format: item.format,
-                            downloadURL: item.downloadURL
-                        }
-                    )),
-                    resources_ar: item.distribution.map(item => (
-                        {
-                            title: item.titlelear,
-                            description: item.descriptionlear,
-                            format: item.format,
+                            description_ar: item.descriptionlear,
+                            format: item.format === "pdf" ? "pdf"
+                                : item.format === "esri rest" ? "excel"
+                                    : item.format === "xlsx" ? "excel"
+                                        : item.format === "xls" ? "excel"
+                                            : item.format === "csv" && "csv",
                             downloadURL: item.downloadURL
                         }
                     )),
@@ -293,8 +322,6 @@ export const getAllApplications = (dispatch, setData) => {
                 await Promise.all(data.map(item => {
 
                     let { title, field_title_ar, field_application_description, field_application_description_ar, field_application_url } = item.attributes
-
-                    console.log("Chechhhhhhh appl", item)
 
                     return endpoints.getImages(item.relationships.field_image.links.related.href)
                         .then((res) => {
@@ -625,8 +652,6 @@ export const getSuccessStoriesById = (id, setData) => {
 
                             let rows = await Promise.all(data.map(async (item, index) => {
 
-                                console.log("cnana", item, index)
-
                                 let { field_paragraph_title, field__nwan_alfqrt, field_paragraph_description, field_wsf_alfqrt } = item.attributes;
                                 let { field_paragraph_image } = item.relationships;
 
@@ -697,21 +722,6 @@ export const getSuccessStoriesById = (id, setData) => {
                         }
                     }).catch((err) => {
                         console.log("Error Message While Getting Tags", err)
-                    })
-
-                    console.log({
-                        id,
-                        title,
-                        title_ar: titlear,
-                        short_description: short_description,
-                        short_description_ar: short_descriptionar,
-                        description,
-                        description_ar: descriptionar,
-                        tags,
-                        tags_ar,
-                        image,
-                        created: new Date(created).toLocaleDateString("en-US", { dateStyle: 'long' }),
-                        rows
                     })
 
                     return {
@@ -788,11 +798,37 @@ export const getInsightsReport = (setData, payload, setLoading) => {
 
                 let data = { ...res.data.data, id: 1 };
 
-                console.log("olalala", data)
-
                 setData(data);
 
             }
+
+        })
+}
+
+export const register = async (navigate, route, setLoading, payload) => {
+
+    setLoading(true)
+
+    let { email, password, reEmail, name } = payload;
+    let data = {
+        name,
+        email,
+        conf_email: reEmail,
+        passw: password,
+        ipaddress: "192.168.0.222"
+    }
+
+    let headers = {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+    }
+
+    await endpoints.register(data, headers)
+        .then((res) => {
+            if (res.status === 200) {
+                navigate(route, { replace: true });
+            }
+            setLoading(false)
         }).catch((err) => {
             setLoading(false)
             console.log("Error message", err)

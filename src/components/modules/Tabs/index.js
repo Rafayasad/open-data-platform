@@ -2,12 +2,14 @@ import React, { memo, useState } from "react";
 import { Col, Container, Nav, Tab } from "react-bootstrap";
 import './style.css';
 import { colors } from "../../../utils/colors";
+import { routes } from "../../../router/helper";
+import Heading from "../../elements/Heading";
 
 const Tabs = memo((props) => {
 
     const { data, staticComponentOnRight } = props;
 
-    const [active, setActive] = useState(0)
+    const [active, setActive] = useState(0);
 
     return (
         <Container fluid>
@@ -17,16 +19,18 @@ const Tabs = memo((props) => {
                         <Nav>
                             {
                                 data.map((item, index) => (
-                                    <Nav.Item onClick={() => setActive(index)}>
-                                        <Nav.Link className={`${active == index && "tab-underline"}`} style={{ color: active == index ? colors.black : colors.gray }} eventKey={index}>{item.name}</Nav.Link>
-                                    </Nav.Item>
+                                    <div className={`${index === 1 && "mx-4"}`}>
+                                        <Nav.Item className={`m-0 ${active == index && "tab-underline"}`} onClick={() => setActive(index)}>
+                                            <p className={`mb-2 ${index === 1 && "mx-2"}  ${item.name === "API Documentation" && "px-1"}`} style={{ color: active == index ? colors.black : colors.gray, cursor: "pointer" }} >{item.name}</p>
+                                        </Nav.Item>
+                                    </div>
                                 ))
                             }
                         </Nav>
                     </Col>
                 </div>
-                <div className="d-flex py-3 row" style={{ borderBottom: '1.5px solid #CFCFCF' }}>
-                    <Col sm={12} lg={8} className="px-3">
+                <div className="d-flex py-3" style={{ borderBottom: '1.5px solid #CFCFCF' }}>
+                    <Col sm={12} lg={8}>
                         <Tab.Content>
                             {
                                 data.map((item, index) => (

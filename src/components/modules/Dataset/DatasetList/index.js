@@ -71,7 +71,7 @@ const DatasetList = memo((props) => {
     ]
 
     return (
-        <Container fluid>
+        <Container fluid className="px-4">
             <hr className="mt-5" style={{ color: '#CFCFCF', borderWidth: 2 }} />
             <Header
                 title={`${totalCount} ${t("datasets")}`}
