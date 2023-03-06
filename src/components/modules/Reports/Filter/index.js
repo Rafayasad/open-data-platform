@@ -104,7 +104,8 @@ const ReportsFilter = memo((props) => {
                 <div className="">
                     <div className="w-100">
                         <Dropdown
-                            padding={"px-1"}
+                            dropdownWidth={"100%"}
+                            padding={""}
                             name={"Date type"}
                             options={SortbyData}
                             selectedValue={filters?.date_type}

@@ -60,6 +60,12 @@ export const endpoints = {
     getInsightsReport: (data) => {
         return axios.post('http://10.241.40.69:30418/apis/reports/insight_report.php', data)
     },
+    getPublishersReport: (data) => {
+        return axios.post('http://10.241.40.69:30418/apis/reports/publisher_report.php', data)
+    },
+    getDatasetsReport: (data) => {
+        return axios.post('http://10.241.40.69:30418/apis/reports/dataset_report.php', data)
+    },
     register: (data, headers) => {
         return axios.post('http://10.241.40.69:30418/apis/register.php', data, { headers })
     },

@@ -832,6 +832,36 @@ export const getInsightsReport = (setData, payload, setLoading) => {
         })
 }
 
+export const getPublishersReport = (setData, payload, setLoading) => {
+
+    return endpoints.getPublishersReport(payload)
+        .then((res) => {
+            if (res.status === 200) {
+
+                let data = { ...res.data.data, id: 1 };
+
+                setData(data);
+
+            }
+
+        })
+}
+
+export const getDatasetsReport = (setData, payload, setLoading) => {
+
+    return endpoints.getDatasetsReport(payload)
+        .then((res) => {
+            if (res.status === 200) {
+
+                let data = { ...res.data.data, id: 1 };
+
+                setData(data);
+
+            }
+
+        })
+}
+
 export const register = async (navigate, route, setLoading, payload) => {
 
     setLoading(true)

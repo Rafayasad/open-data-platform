@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { getInsightsReport } from "../../../axios/api";
+import { getDatasetsReport } from "../../../axios/api";
 import Table from "../../../components/elements/Table";
 import LowerFooter from "../../../components/modules/Footer/LowerFooter";
 import MiddleFooter from "../../../components/modules/Footer/MiddleFooter";
@@ -14,7 +14,7 @@ import dayjs from "dayjs";
 
 const Datasets = memo(() => {
 
-    const [insights, setInsights] = useState();
+    const [datasets, setDatasets] = useState();
     const [filters, setFilters] = useState();
     const [selectedTab, setSelectedTab] = useState("All");
 
@@ -55,7 +55,7 @@ const Datasets = memo(() => {
     ]
 
     useEffect(() => {
-        getInsightsReport(setInsights, {
+        getDatasetsReport(setDatasets, {
             enddate: "all",
             startdate: "all",
             datatype: "json",
@@ -79,7 +79,7 @@ const Datasets = memo(() => {
                 <AppliedFilters filters={filters}
                 />
                 <Table
-                    data={insights && [insights]}
+                    data={datasets && [datasets]}
                     currentPage={currentPage}
                     totalCount={Math.ceil(totalCount / rowsPerPage)}
                     onChange={onChangePage}
