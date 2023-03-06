@@ -1,5 +1,7 @@
 import { convertHtmlToString } from "../../utils"
 import { endpoints } from "../endpoints"
+import { generateFile } from "../../utils/generic.js";
+
 
 export const getPlatformInsights = (setData, setLoading) => {
     return endpoints.
@@ -792,7 +794,60 @@ export const login = async (dispatch, setData, setLoading, payload) => {
 
 export const getInsightsReport = (setData, payload, setLoading) => {
 
-    return endpoints.getInsightsReport(payload)
+    console.log("payload", payload);
+
+    const headers = {
+        responseType: payload.datatype == "pdf" ? "blob" : "json"
+    }
+
+    return endpoints.getInsightsReport(payload, headers)
+        .then((res) => {
+            if (res.status === 200) {
+
+                console.log("RES", res.data);
+
+                if (payload?.datatype === "csv" || payload?.datatype === "excel") {
+                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'insights_report', [{ name: "alishan" }])
+                } else if (payload?.datatype === 'pdf') {
+                    console.log("hello");
+                    const href = window.URL.createObjectURL(res.data);
+                    const link = document.createElement('a');
+                    link.href = href;
+                    link.setAttribute('download', 'insight_report.pdf'); //or any other extension
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(href)
+                }
+
+
+                let data = { ...res.data.data, id: 1 };
+
+                setData(data);
+
+            }
+
+        })
+}
+
+export const getPublishersReport = (setData, payload, setLoading) => {
+
+    return endpoints.getPublishersReport(payload)
+        .then((res) => {
+            if (res.status === 200) {
+
+                let data = { ...res.data.data, id: 1 };
+
+                setData(data);
+
+            }
+
+        })
+}
+
+export const getDatasetsReport = (setData, payload, setLoading) => {
+
+    return endpoints.getDatasetsReport(payload)
         .then((res) => {
             if (res.status === 200) {
 

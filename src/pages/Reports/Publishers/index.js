@@ -11,10 +11,18 @@ import Tabs from "../../../components/modules/Reports/Tabs";
 import ReportsFilter from '../../../components/modules/Reports/Filter';
 import Reports from "..";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
+import { locales } from "../../../i18n/helper";
+import { useSelector } from "react-redux";
 
 const Publishers = memo(() => {
 
-    const [insights, setInsights] = useState();
+    const { t, i18n } = useTranslation();
+
+    const topics = useSelector((state) => state.facets.topics);
+    const publishers = useSelector((state) => state.facets.publishers);
+
+    const [publisherData, setPublishersData] = useState();
     const [filters, setFilters] = useState();
     const [selectedTab, setSelectedTab] = useState("All");
 
@@ -37,20 +45,31 @@ const Publishers = memo(() => {
         {
             title: "Users",
             onClick: (val) => {
+                setFilters({ type: "user" })
                 setSelectedTab(val)
             }
         }
     ]
 
+    const AccordinData = [
+        {
+            title: t("publisher"),
+            tags: i18n.language === locales.AR ? publishers && publishers.ar : publishers && publishers.en
+        }
+    ]
+
     useEffect(() => {
-        getInsightsReport(setInsights, {
-            enddate: "all",
-            startdate: "all",
-            datatype: "json",
-            date_type: 'updated',
-            publisher: ""
+        getInsightsReport(setPublishersData, {
+            startdate: filters?.start_date ? filters.start_date : "all",
+            enddate: filters?.end_date ? filters.end_date : "all",
+            datatype: filters?.datatype ? filters.datatype : "json",
+            date_type: filters?.date_type ? filters.date_type : "modified",
+            type: filters?.type ? filters.type : "all",
+            publisher: filters?.publisher ? filters.publisher : "",
+            perpage: "10",
+            pagenumber: "1"
         }, setLoading)
-    }, []);
+    }, [tabs]);
 
     const onChangePage = useCallback((page) => setCurrentPage(page), [currentPage]);
 
@@ -60,14 +79,14 @@ const Publishers = memo(() => {
     return (
         <>
             <Navbar theme='dark' />
-            <ReportsFilter open={filterOpen} setOpen={setFilterOpen} appliedFilters={filters} onApplyFilters={onApplyFilters} />
+            <ReportsFilter accordinData={AccordinData} open={filterOpen} setOpen={setFilterOpen} appliedFilters={filters} onApplyFilters={onApplyFilters} />
             <Container className="my-5 pt-5">
                 <Header title="Publishers Reports" onClickFilter={onClickFilter} />
                 <Tabs data={tabs} selected={selectedTab} />
                 <AppliedFilters filters={filters}
                 />
                 <Table
-                    data={insights && [insights]}
+                    data={publisherData && [publisherData]}
                     currentPage={currentPage}
                     totalCount={Math.ceil(totalCount / rowsPerPage)}
                     onChange={onChangePage}
