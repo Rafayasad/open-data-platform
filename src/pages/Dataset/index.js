@@ -46,7 +46,6 @@ const Dataset = memo(() => {
             setSearch(state.search)
         }
         if (state && state.listItem && state.listItem.length > 0) {
-            console.log("========>", state.listItem);
             setFilters(state.listItem)
         }
 

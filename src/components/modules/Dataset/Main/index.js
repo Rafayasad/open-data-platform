@@ -47,7 +47,6 @@ const Main = memo((props) => {
                         </Col>
                         <Col />
                     </Row>
-                    {console.log("search compo==>",filter)}
                     {
                         filter && filter.length > 0 &&
                         <Row className="pb-3 m-0">

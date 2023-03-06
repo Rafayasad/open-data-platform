@@ -67,7 +67,7 @@ const Card = memo((props) => {
 
     const specificDownloadOptions = resources?.map((item, index) => (
         {
-            title: item.title ? item.title : "No title found!",
+            title: item.title && item.title,
             onClick: downloadResources,
             downloadLink: item.downloadURL,
             icon: item.format === "pdf" ? <FaFilePdf />
@@ -104,7 +104,7 @@ const Card = memo((props) => {
                             width={"12rem"}
                             noheadercomponent={noheadercomponent}
                             autoClose={"outside"}
-                            size={selectedDropdownValue === "Download" && "md"}
+                            size={selectedDropdownValue === t("download") && "md"}
                             options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
                             selectedDropdownValue={selectedDropdownValue}
                             setSelectedDropdownValue={setSelectedDropdownValue}
