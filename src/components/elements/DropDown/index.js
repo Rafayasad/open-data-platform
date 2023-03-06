@@ -71,7 +71,13 @@ const Dropdown = (props) => {
                                         </div>
                                     }
                                     <div className={`d-flex flex-wrap ${item.icon && "px-2"}`}>
-                                        <Heading nomargin color={colors.black} maxNumberOfLines={1} size="xxs" heading={item.title} />
+                                        <span className='m-0 p-0 multine-ellipsis-1'
+                                            style={{
+                                                color: colors.black
+                                            }}>
+                                            {item.title}
+                                        </span>
+                                        {/* <Heading nomargin color={colors.black} maxNumberOfLines={1} size="xxs" heading={item.title} /> */}
                                     </div>
                                 </BSDropdown.Item>
                             ))

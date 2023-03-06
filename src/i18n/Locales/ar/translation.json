@@ -218,5 +218,7 @@
     "linkedin": "لينكدين",
     "openData":"أبو ظبي للبيانات المفتوحة APIs الوقت الحقيقي",
     "openDataDescription":"نود إبلاغكم بأن لدينا على متن السفينة Garden Booking & Wedding Hall Booking APIs على مسرح ADConect. يرجى الاطلاع على التفاصيل التالية",
-    "popularsearches": "عمليات البحث الشائعة"
+    "popularsearches": "عمليات البحث الشائعة",
+    "fieldFullName": "اسمك الكامل",
+    "fieldEmail": "بريدك الإلكتروني"
 }

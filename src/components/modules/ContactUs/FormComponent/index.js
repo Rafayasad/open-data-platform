@@ -16,7 +16,7 @@ const FormComponent = memo(() => {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [selectedValue, setSelectedValue] = useState("Select a subject");
+    const [selectedValue, setSelectedValue] = useState(t("selectsubject"));
     const [message, setMessage] = useState("");
     const [disable, setDisable] = useState(true);
 
@@ -41,28 +41,28 @@ const FormComponent = memo(() => {
         <Container className="my-5 py-5" fluid>
             <Row className="d-flex justify-content-center d-lg-none zindex-modal">
                 <Col md={10}>
-                    <Heading heading="Contact us" size="xxl" />
+                    <Heading heading={t("contactUs")} size="xxl" />
                 </Col>
                 <Col md={10}>
-                    <Heading nomargin heading="Send us a message using the contact form and someone from the team will get back to you." size="xxs" color={colors.gray} />
+                    <Heading nomargin heading={t("footerPartText")} size="xxs" color={colors.gray} />
                 </Col>
             </Row>
             <Row className="d-flex justify-content-center py-3">
                 <Col md={10}>
-                    <TextInput value={name} placeholder="Your Full Name" type="text" onChange={(value) => setName(value)} />
+                    <TextInput value={name} placeholder={t("fieldFullName")} type="text" onChange={(value) => setName(value)} />
                 </Col>
             </Row>
 
             <Row className="d-flex justify-content-center py-3">
                 <Col md={10}>
-                    <TextInput value={email} placeholder="Your Email" type="email" onChange={(value) => setEmail(value)} />
+                    <TextInput placeholder={t("fieldEmail")} value={email} placeholder="Your Email" type="email" onChange={(value) => setEmail(value)} />
                 </Col>
             </Row>
 
             <Row className="d-flex justify-content-center py-3">
                 <Col md={10}>
                     <div className="">
-                        <Heading heading={"Subject of your query"} size={"xxs"} color={colors.gray} nomargin />
+                        <Heading heading={t("subjectquery")} size={"xxs"} color={colors.gray} nomargin />
                     </div>
                     <Dropdown
                         borderColor={"black"}

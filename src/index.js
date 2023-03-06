@@ -13,6 +13,7 @@ import './i18n/i18n.js';
 import { ThemeProvider, createMuiTheme } from '@mui/material/styles';
 import i18n from './i18n/i18n.js';
 import { locales } from './i18n/helper';
+import ScrollToTop from './router/ScrollToTop';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -25,6 +26,7 @@ const THEME = createMuiTheme({
 root.render(
   <React.StrictMode>
     <Router>
+      <ScrollToTop />
       <Suspense>
         <ThemeProvider theme={THEME}>
           <Provider store={store}>

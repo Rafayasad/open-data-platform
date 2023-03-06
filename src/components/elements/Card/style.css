@@ -8,6 +8,14 @@
     transition: .2s ease-in-out;
 }
 
+.card-hover-primary:hover .btn-primary {
+    filter: invert(1);
+}
+
+.card-hover-primary:hover .tag-primary {
+    filter:brightness(100%);
+}
+
 .hover-second:hover div:nth-child(2) div p {
     color: #FFFFFF !important;
 }
