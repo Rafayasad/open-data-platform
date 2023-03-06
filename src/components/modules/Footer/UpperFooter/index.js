@@ -6,9 +6,12 @@ import Button from '../../../elements/Button';
 import Heading from '../../../elements/Heading';
 import i18n from '../../../../i18n/i18n';
 import { locales } from '../../../../i18n/helper';
+import { routes } from '../../../../router/helper';
+import { useNavigate } from 'react-router';
 
 const UpperFooter = memo((props) => {
 
+    const navigate = useNavigate();
     const { title, description, button } = props
 
     return (
@@ -35,10 +38,10 @@ const UpperFooter = memo((props) => {
                 }
                 <Row>
                     <Col xs={8} md={4} className={i18n.language === locales.AR && "py-3"}>
-                        <Button backgroundColor={i18n.language === locales.AR && "transparent"}
-                        borderColor={i18n.language === locales.AR && "white"}
-                        textColor={i18n.language === locales.AR && "white"}
-                        title={button} />
+                        <Button onClick={() => navigate(routes.REGISTER)} backgroundColor={i18n.language === locales.AR && "transparent"}
+                            borderColor={i18n.language === locales.AR && "white"}
+                            textColor={i18n.language === locales.AR && "white"}
+                            title={button} />
                     </Col>
                 </Row>
             </Container>

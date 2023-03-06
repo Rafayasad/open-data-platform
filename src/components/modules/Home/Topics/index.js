@@ -11,7 +11,7 @@ const Topics = memo((props) => {
 
     const { t } = useTranslation()
 
-    const { data, onClickList } = props;
+    const { data, onClickList, onClickViewless } = props;
 
     const [currentHovered, setCurrentHovered] = useState(null);
     const [all, setAll] = useState(false);
@@ -19,7 +19,10 @@ const Topics = memo((props) => {
 
     const onHover = useCallback((index) => setCurrentHovered(index), [currentHovered])
     const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered])
-    const onClick = useCallback(() => setAll(!all))
+    const onClick = useCallback(() => {
+        setAll(!all)
+        all && onClickViewless()
+    })
     const onClickListItem = useCallback((item) => onClickList(item), [])
 
     return (
@@ -42,7 +45,8 @@ const Topics = memo((props) => {
             }
             <Row className="py-3 m-0">
                 <Col className="px-4 d-flex justify-content-end">
-                    <Button borderColor='white' backgroundColor='black' textColor='white' title={all ? t("viewLess") : t("viewAll")} onClick={onClick} />
+                    <Button borderColor='white' backgroundColor='black' textColor='white' title={all ? t("viewLess") : t("viewAll")}
+                        onClick={onClick} />
                 </Col>
             </Row>
         </Container>

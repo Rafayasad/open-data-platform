@@ -24,12 +24,12 @@ const ImageComponent = memo(() => {
                         <div className="py-4 p-0">
                             <BreadCrumb textcolor={colors.white} iconColor={colors.white} items={[t("aboutus")]} />
                         </div>
-                        <Heading heading="Contact us" size="xl" bold color={colors.white} />
+                        <Heading heading={t("contactUs")} size="xl" bold color={colors.white} />
                     </Col>
                 </Row>
                 <Row className="px-0">
                     <Col md={7} className={""}>
-                        <Heading nomargin heading="Send us a message using the contact form and someone from the team will get back to you." size="xs" color={colors.white} />
+                        <Heading nomargin heading={t("footerPartText")} size="xs" color={colors.white} />
                     </Col>
                 </Row>
             </Container>

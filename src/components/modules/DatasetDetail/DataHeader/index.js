@@ -57,7 +57,7 @@ const DataHeader = memo((props) => {
     }, [])
 
     return (
-        <Container id='main' fluid className={`d-flex justify-content-between align-items-center py-4 bg-white ${headerOnTop && "sticky-top shadow-sm w-100 m-0"}`}>
+        <Container id='main' fluid className={`d-flex justify-content-between align-items-center py-4 bg-white ${headerOnTop && "sticky-top w-100 m-0"}`}>
             <Col md={12} lg={8}>
                 {
                     !title ? <><Shimmer rounded="xs" height={"32px"} className="my-2" /><Shimmer rounded="xs" height={"32px"} width="70%" className="my-2" /></> : (

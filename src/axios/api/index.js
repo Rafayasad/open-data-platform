@@ -280,13 +280,13 @@ export const getDatasetById = (id, setData) => {
         getDatasetById(id).then(async (res) => {
             if (res.status === 200) {
 
-                const view_count_payload = {
-                    identifier: id,
-                    ip_address: "172.0.9.01"
-                }
+                // const view_count_payload = {
+                //     identifier: id,
+                //     ip_address: "172.0.9.01"
+                // }
 
                 //view count api CORS error
-                return await endpoints.viewCount(view_count_payload).then((res) => {
+                // return await endpoints.viewCount(view_count_payload).then((res) => {
 
                     let item = res.data;
 
@@ -328,9 +328,9 @@ export const getDatasetById = (id, setData) => {
 
                     setData(data)
 
-                }).catch((err) => {
-                    console.log("Error message", err)
-                })
+                // }).catch((err) => {
+                //     console.log("Error message", err)
+                // })
             }
         }).catch((err) => {
             console.log("Error message", err)
