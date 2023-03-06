@@ -101,6 +101,7 @@ const Card = memo((props) => {
                     !nodropdown &&
                     <Col md={2} className='d-flex justify-content-end'>
                         <Dropdown
+                            width={"12rem"}
                             noheadercomponent={noheadercomponent}
                             autoClose={"outside"}
                             size={selectedDropdownValue === "Download" && "md"}

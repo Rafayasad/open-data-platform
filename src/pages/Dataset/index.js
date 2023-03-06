@@ -32,8 +32,12 @@ const Dataset = memo(() => {
     const [viewAll, setViewAll] = useState(false);
 
     useEffect(() => {
+        sort && setSort("");
+        setFilters();
+    }, [i18n.language])
 
 
+    useEffect(() => {
 
         getSearch(setSearchData);
         getRecentsDatasets(setRecentsDatasets);
@@ -42,6 +46,7 @@ const Dataset = memo(() => {
             setSearch(state.search)
         }
         if (state && state.listItem && state.listItem.length > 0) {
+            console.log("========>", state.listItem);
             setFilters(state.listItem)
         }
 
@@ -63,11 +68,7 @@ const Dataset = memo(() => {
 
     }, [currentPage, search, sort, filters]);
 
-    useEffect(() => {
-        sort && setSort("");
-        i18n.language === locales.AR && setFilters();
-        i18n.language === locales.EN && setFilters();
-    }, [i18n.language])
+
 
     const toggle = useCallback(() => setViewAll(!viewAll), [viewAll]);
 
@@ -92,6 +93,8 @@ const Dataset = memo(() => {
 
     }, [filters])
 
+
+    console.log("main component", filters);
 
     return (
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
