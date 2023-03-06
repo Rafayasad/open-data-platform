@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 
 const Main = memo((props) => {
 
-    const { onSearch, onClickExplore, onApplyFilter } = props;
+    const { onSearch, onClickExplore, onApplyFilter } = props
 
     const { t } = useTranslation()
 
