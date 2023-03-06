@@ -43,7 +43,7 @@ const Images = memo(() => {
                                 <Col />
                             </div>
                             <Col className='d-flex justify-content-center'>
-                                <Button title={t("find")} onClick={onClickFindOutMore} />
+                                <Button textColor={"#101010"} title={t("find")} onClick={onClickFindOutMore} />
                             </Col>
                         </Row>
                     </div>

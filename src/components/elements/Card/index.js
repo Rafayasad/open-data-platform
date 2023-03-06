@@ -19,7 +19,7 @@ const Card = memo((props) => {
     const { t } = useTranslation();
 
     const { resources, title, publisher, description, tags, size, noborder,
-        hoverable, shortTitle, headingSize, onClick, nodropdown } = props;
+        hoverable, shortTitle, headingSize, onClick, nodropdown, noheadercomponent } = props;
 
     var height = "332px", border, ClassName;
 
@@ -101,8 +101,8 @@ const Card = memo((props) => {
                     !nodropdown &&
                     <Col md={2} className='d-flex justify-content-end'>
                         <Dropdown
+                            noheadercomponent={noheadercomponent}
                             autoClose={"outside"}
-                            width={"12rem"}
                             size={selectedDropdownValue === "Download" && "md"}
                             options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
                             selectedDropdownValue={selectedDropdownValue}

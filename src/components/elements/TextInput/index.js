@@ -10,12 +10,12 @@ const TextInput = memo((props) => {
 
   return (
     <Form.Floating
-      className="mb-2 p-0 s"
+      className="my-2"
       label={placeholder}
       style={{ color: colors.gray, fontSize: '13px' }}
     >
       <Form.Control
-        className="px-0 focus-field"
+        className="px-0 m-0"
         id="floatingInputCustom"
         type={type}
         placeholder={placeholder}
@@ -31,7 +31,7 @@ const TextInput = memo((props) => {
           margin: 0
         }}
       />
-      <label className="px-0" htmlFor="floatingInputCustom">
+      <label className="px-0 pt-4" htmlFor="floatingInputCustom">
         {placeholder}
       </label>
     </Form.Floating>

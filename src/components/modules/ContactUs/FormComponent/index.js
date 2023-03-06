@@ -55,7 +55,7 @@ const FormComponent = memo(() => {
 
             <Row className="d-flex justify-content-center py-3">
                 <Col md={10}>
-                    <TextInput placeholder={t("fieldEmail")} type="email" onChange={(value) => setEmail(value)} />
+                    <TextInput placeholder={t("fieldEmail")} value={email} placeholder="Your Email" type="email" onChange={(value) => setEmail(value)} />
                 </Col>
             </Row>
 
@@ -65,6 +65,7 @@ const FormComponent = memo(() => {
                         <Heading heading={t("subjectquery")} size={"xxs"} color={colors.gray} nomargin />
                     </div>
                     <Dropdown
+                        borderColor={"black"}
                         autoClose={true}
                         dropdownWidth={"100%"}
                         options={options}
@@ -79,15 +80,17 @@ const FormComponent = memo(() => {
                     <Heading heading="Your message" size="xxs" nomargin color={colors.gray} />
                 </Col>
                 <Col md={10} className="mt-1">
-                    <TextArea label="Type your message here" onChange={(value) => setMessage(value)} />
+                    <TextArea value={message} label="Type your message here" onChange={(value) => setMessage(value)} />
                 </Col>
             </Row>
 
             <Row className="d-flex justify-content-center">
                 <Col md={10} className="d-flex justify-content-end">
                     <Button
-                        disable={disable}
-                        title="Submit" backgroundColor={colors.black} textColor={colors.white} />
+                        disable={name && email && selectedValue && message ? disable : false}
+                        title="Submit"
+                        backgroundColor={name && email && selectedValue && message ? colors.black : colors.lighter_gray}
+                        textColor={name && email && selectedValue && message ? colors.white : colors.gray} />
                 </Col>
             </Row>
         </Container>

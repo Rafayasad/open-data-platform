@@ -25,13 +25,16 @@ const Dataset = memo(() => {
     const [datasets, setDatasets] = useState();
     const [search, setSearch] = useState("");
     const [searchData, setSearchData] = useState();
-    const [sort, setSort] = useState("Title");
+    const [sort, setSort] = useState("");
     const [filters, setFilters] = useState([]);
 
     const [loading, setLoading] = useState(false);
     const [viewAll, setViewAll] = useState(false);
 
     useEffect(() => {
+
+
+
         getSearch(setSearchData);
         getRecentsDatasets(setRecentsDatasets);
 
@@ -57,7 +60,14 @@ const Dataset = memo(() => {
             }
 
         }
+
     }, [currentPage, search, sort, filters]);
+
+    useEffect(() => {
+        sort && setSort("");
+        i18n.language === locales.AR && setFilters();
+        i18n.language === locales.EN && setFilters();
+    }, [i18n.language])
 
     const toggle = useCallback(() => setViewAll(!viewAll), [viewAll]);
 
@@ -82,13 +92,12 @@ const Dataset = memo(() => {
 
     }, [filters])
 
-    console.log("search",search);
 
     return (
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
             <Main searchData={i18n.language === locales.EN ? searchData?.en : searchData?.ar} search={search} onChangeSearch={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
             <Cards buttonText={viewAll && t("viewLess")} onClickViewAll={toggle} title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)} onClick={onClickCard} />
-            <DatasetList totalCount={totalCount} rowsPerPage={rowsPerPage} datasets={datasets} currentPage={currentPage} loading={loading} onChangePage={onChangePage} selectedValue={sort} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue} />
+            <DatasetList totalCount={totalCount} rowsPerPage={rowsPerPage} datasets={datasets} currentPage={currentPage} loading={loading} onChangePage={onChangePage} selectedValue={sort ? sort : i18n.language === locales.EN ? "Title" : "العنوان"} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue} />
         </View>
 
     )

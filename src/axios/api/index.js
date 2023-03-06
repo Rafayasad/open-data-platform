@@ -219,15 +219,15 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
     let tagsArray = []
 
     filters?.filter((el, index) => {
-        el.type == "theme" ? themeArray.push(el.title)
-            : el.type == "publisher__name" ? publisherArray.push(el.title)
-                : el.type == "keyword" && tagsArray.push(el.title)
+        el.type == "theme" ? themeArray.push(el.title) : el.type == "themelear" ? themeArray.push(el.title)
+            : el.type == "publisher__name" ? publisherArray.push(el.title) : el.type == "publisherlear__name" ? publisherArray.push(el.title)
+                : el.type == "keyword" ? tagsArray.push(el.title) : el.type == "keywordlear" && tagsArray.push(el.title)
     })
 
     finalFilters.push(
-        { key: "theme", values: themeArray },
-        { key: "publisher__name", values: publisherArray },
-        { key: "keyword", values: tagsArray }
+        { key: i18n.language === locales.EN ? "theme" : "themelear", values: themeArray },
+        { key: i18n.language === locales.EN ? "publisher__name" : "publisherlear__name", values: publisherArray },
+        { key: i18n.language === locales.EN ? "keyword" : "keywordlear", values: tagsArray }
     )
 
     return endpoints.
@@ -288,45 +288,45 @@ export const getDatasetById = (id, setData) => {
                 //view count api CORS error
                 // return await endpoints.viewCount(view_count_payload).then((res) => {
 
-                    let item = res.data;
+                let item = res.data;
 
-                    let data = {
-                        id: item.identifier,
-                        title: item.title,
-                        title_ar: item.titlear,
-                        description: item.description,
-                        description_ar: item.description_ar,
-                        publisher: item.publisher?.name,
-                        publisher_ar: item.publisherlear?.name,
-                        frequency: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
-                        frequency_ar: item.accrualPeriodicity === "R/P1Y" ? "سنوي" : item.accrualPeriodicity === "auto/freq" ? "تلقائي" : "لا يوجد",
-                        access_level: item.accessLevel,
-                        access_level_ar: item.accessLevellear,
-                        license: item.license,
-                        license_ar: item.licenselear,
-                        topics: item.theme,
-                        topics_ar: item.themelear,
-                        tags: item.keyword,
-                        tags_ar: item.keywordlear,
-                        resources: item.distribution.map(item => (
-                            {
-                                title: item.title,
-                                title_ar: item.titlelear,
-                                description: item.description,
-                                description_ar: item.descriptionlear,
-                                format: item.format === "pdf" ? "pdf"
-                                    : item.format === "esri rest" ? "excel"
-                                        : item.format === "xlsx" ? "excel"
-                                            : item.format === "xls" ? "excel"
-                                                : item.format === "csv" && "csv",
-                                downloadURL: item.downloadURL
-                            }
-                        )),
-                        created: item.issued,
-                        modified: item.modified,
-                    }
+                let data = {
+                    id: item.identifier,
+                    title: item.title,
+                    title_ar: item.titlear,
+                    description: item.description,
+                    description_ar: item.description_ar,
+                    publisher: item.publisher?.name,
+                    publisher_ar: item.publisherlear?.name,
+                    frequency: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
+                    frequency_ar: item.accrualPeriodicity === "R/P1Y" ? "سنوي" : item.accrualPeriodicity === "auto/freq" ? "تلقائي" : "لا يوجد",
+                    access_level: item.accessLevel,
+                    access_level_ar: item.accessLevellear,
+                    license: item.license,
+                    license_ar: item.licenselear,
+                    topics: item.theme,
+                    topics_ar: item.themelear,
+                    tags: item.keyword,
+                    tags_ar: item.keywordlear,
+                    resources: item.distribution.map(item => (
+                        {
+                            title: item.title,
+                            title_ar: item.titlelear,
+                            description: item.description,
+                            description_ar: item.descriptionlear,
+                            format: item.format === "pdf" ? "pdf"
+                                : item.format === "esri rest" ? "excel"
+                                    : item.format === "xlsx" ? "excel"
+                                        : item.format === "xls" ? "excel"
+                                            : item.format === "csv" && "csv",
+                            downloadURL: item.downloadURL
+                        }
+                    )),
+                    created: item.issued,
+                    modified: item.modified,
+                }
 
-                    setData(data)
+                setData(data)
 
                 // }).catch((err) => {
                 //     console.log("Error message", err)

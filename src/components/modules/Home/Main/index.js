@@ -18,7 +18,7 @@ const Main = memo((props) => {
             width: '100vw',
             backgroundImage: `url(${background})`,
             backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover'
+            backgroundSize: "cover"
         }}>
             <Container>
                 <Row className="h-25">
@@ -35,7 +35,7 @@ const Main = memo((props) => {
                         <Row>
                             <Col />
                             <Col xs={12} md={10} lg={8} className="py-3">
-                                <Search onClickApplyFilter={onApplyFilter} placeholder={t("searchPlaceholder")} filter onPressEnter={onSearch} />
+                                <Search nofocuseffect onClickApplyFilter={onApplyFilter} placeholder={t("searchPlaceholder")} filter onPressEnter={onSearch} />
                             </Col>
                             <Col />
                         </Row>

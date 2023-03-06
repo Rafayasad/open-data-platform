@@ -9,14 +9,14 @@ const Rows = memo((props) => {
     return (
         <Container fluid className="my-4 px-4">
             <Row className='d-flex justify-content-between'>
-                <Col md={5} xs={12} className='py-2'>
-                    <Row className="py-3">
-                        <Col>
+                <Col md={5} xs={12} className='py-2 m-0'>
+                    <Row>
+                        <Col md={8} lg={2} xl={11}className={""}>
                             <Heading bold size='xl' nomargin heading={title} />
                         </Col>
                     </Row>
-                    <Row>
-                        <Col>
+                    <Row className='py-4'>
+                        <Col md={8} lg={10} xl={11} className={""}>
                             <Heading size='xxs' nomargin heading={description} />
                         </Col>
                     </Row>

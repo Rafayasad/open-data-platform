@@ -9,10 +9,12 @@ import { routes } from '../../../../router/helper';
 import { locales } from '../../../../i18n/helper';
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
 import { ScrollToTop } from '../../../../utils';
+import { Link } from "react-router-dom";
 import Heading from '../../../elements/Heading';
 import Accordion from 'react-bootstrap/Accordion';
 import LanguageSwitcher from '../../../elements/LanguageSwitcher';
 import AbuDhabiLogo from "../../../../assets/images/Abu-Dhabi-Data-Logo.png";
+
 import './style.css';
 
 
@@ -81,7 +83,7 @@ const MiddleFooter = memo(() => {
             data: [
                 {
                     title: t("realTimeAPI"),
-                    link: null
+                    link: routes.REAL_TIME_APIS
                 }
             ]
         },
@@ -90,11 +92,13 @@ const MiddleFooter = memo(() => {
             data: [
                 {
                     title: t("GovtManagStandard"),
-                    link: null
+                    link: "https://data.abudhabi/sites/default/files/AD-Gov-Data-Management-Standards-EN-v1.0.pdf",
+                    downloadURL: "https://data.abudhabi/sites/default/files/AD-Gov-Data-Management-Standards-EN-v1.0.pdf"
                 },
                 {
                     title: t("GovtManagPolicy"),
-                    link: null
+                    link: "https://data.abudhabi/sites/default/files/AD-Gov-Data-Management-Policy-EN-v1.0.pdf",
+                    downloadURL: "https://data.abudhabi/sites/default/files/AD-Gov-Data-Management-Policy-EN-v1.0.pdf"
                 },
             ]
         }
@@ -105,7 +109,7 @@ const MiddleFooter = memo(() => {
             <Container fluid className='bg-black p-3 px-4 d-none d-lg-block'>
                 <div className='d-flex'>
                     {
-                        data.map((item, index) => (
+                        data?.map((item, index) => (
                             <Col key={index}>
                                 <div className='my-4'>
                                     <Heading size="sm" color="white" heading={item.heading} />
@@ -113,7 +117,9 @@ const MiddleFooter = memo(() => {
                                 <div className='my-1'>
                                     {
                                         item.data?.map((item, index) => (
-                                            <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} onClick={() => onClick(item.link, item.params)} />
+                                            <Link style={{textDecoration:"none"}} to={item.link}>
+                                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} downloadURL={item.downloadURL} onClick={() => onClick(item.link, item.params)} />
+                                            </Link>
                                         ))
                                     }
                                 </div>

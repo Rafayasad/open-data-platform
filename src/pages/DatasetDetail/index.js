@@ -56,8 +56,8 @@ const DatasetDetail = memo(() => {
 
     return (
         <View theme="dark" noupperfooter sticky>
-            <div className="my-5 py-5">
-                <div className="px-4">
+            <div className="my-5 pt-5">
+                <div className="px-4 pt-5">
                     <BreadCrumb items={[t("datasets"), t("technology")]} />
                 </div>
                 <Main data={dataset} />

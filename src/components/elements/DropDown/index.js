@@ -7,7 +7,7 @@ import './style.css';
 
 const Dropdown = (props) => {
 
-    const { autoClose, options, setSelectedDropdownValue, selectedValue, name, size, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
+    const { autoClose, options, setSelectedDropdownValue, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
 
     const [isOpen, setIsOpen] = useState(false);
     const [indexx, setIndexx] = useState();
@@ -27,25 +27,26 @@ const Dropdown = (props) => {
             }
             <BSDropdown style={{ width: dropdownWidth }} autoClose={autoClose} onToggle={toggle}>
                 {
-                    headerComponent ? (
-                        <BSDropdown.Toggle href={null} className='bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end'
-                            style={{ width: width }}
-                        >
-                            {headerComponent}
-                        </BSDropdown.Toggle>
-                    ) : (
-                        <BSDropdown.Toggle
-                            href={null}
-                            className={`w-100 bg-white my-1 d-flex align-items-center justify-content-between my-dropdown-toggle text-black border border-1 ${isOpen && "dropdown-hover"}`}
-                        >
-                            <div className=''>
-                                <Heading size="xxs" nomargin heading={selectedValue} />
-                            </div>
-                            <div className='my-1'>
-                                <MdKeyboardArrowDown />
-                            </div>
-                        </BSDropdown.Toggle>
-                    )
+                    noheadercomponent ? null :
+                        headerComponent ? (
+                            <BSDropdown.Toggle href={null} className='bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end'
+                                style={{ width: width }}
+                            >
+                                {headerComponent}
+                            </BSDropdown.Toggle>
+                        ) : (
+                            <BSDropdown.Toggle
+                                href={null}
+                                className={`w-100 bg-white my-1 d-flex align-items-center justify-content-between my-dropdown-toggle text-black border border-1 ${isOpen && "dropdown-hover"}`}
+                            >
+                                <div className=''>
+                                    <Heading size="xxs" nomargin heading={selectedValue} />
+                                </div>
+                                <div className='my-1'>
+                                    <MdKeyboardArrowDown />
+                                </div>
+                            </BSDropdown.Toggle>
+                        )
                 }
                 {
                     isOpen && options &&

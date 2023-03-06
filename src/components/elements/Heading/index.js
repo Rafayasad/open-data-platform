@@ -4,7 +4,7 @@ import "./style.css";
 
 const Heading = memo((props) => {
 
-  const { heading, color, size, underline, maxNumberOfLines, nomargin, capitalize, bold, onClick } = props;
+  const { heading, color, size, underline, maxNumberOfLines, nomargin, capitalize, bold, onClick, downloadURL } = props;
 
   var Tag,
     ClassName = "";
@@ -56,11 +56,13 @@ const Heading = memo((props) => {
       className={ClassName}
       style={{
         color: color ? color : "#00000",
-        cursor: onClick && "pointer"
+        cursor: onClick && "pointer",
+        // maxWidth: "30%"
       }}
       onClick={onClick ? onClick : () => { }}
     >
-      {heading}
+      {downloadURL && <a style={{ textDecoration: "none", color: "white" }} target={"_blank"} href={downloadURL}>{heading}</a>}
+      {!downloadURL && heading}
     </Tag>
   );
 });

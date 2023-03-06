@@ -7,16 +7,16 @@ const Button = memo((props) => {
 
     const { t } = useTranslation()
 
-    const { title, icon, backgroundColor, textColor, width, borderColor, loading, onClick, disable } = props
-
+    const { isFilled, title, icon, backgroundColor, textColor, width, borderColor, loading, onClick, disable } = props
+    console.log("button ka disable", loading);
     return (
         <button
             onClick={onClick ? onClick : () => { }}
-            disabled={disable ? disable : loading}
+            disabled={loading}
             className="m-0 px-4 en-font-default"
             style={{
-                backgroundColor: disable ? colors.lighter_gray : backgroundColor ? backgroundColor : 'white',
-                color: disable ? "black" : textColor ? textColor : 'black',
+                backgroundColor: backgroundColor ? backgroundColor : 'white',
+                color: textColor ? textColor : 'black',
                 height: 52,
                 width: width ? width : 'auto',
                 borderRadius: 100,
