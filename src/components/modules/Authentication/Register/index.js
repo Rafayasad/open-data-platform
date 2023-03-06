@@ -1,14 +1,41 @@
-import React, { memo } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import AuthBackground1 from "../../../../assets/images/Auth-Background-1.png";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import AuthCard from "../AuthCard";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
+import { register } from "../../../../axios/api";
+import { routes } from "../../../../router/helper";
 
 const Register = memo(() => {
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [reEmail, setReEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [isChecked, setIsChecked] = useState(false);
+  const [isRecaptcha, setIsRecaptcha] = useState();
+
+  const onClickRegister = useCallback(() => {
+    if (isChecked && isRecaptcha != null && name && email && reEmail && password) {
+      register(navigate, routes.HOME, setLoading, { email, password, reEmail, name })
+    } else {
+      alert("sorry");
+    }
+  });
+
+  const checked = useCallback((check) => setIsChecked(check), [isChecked]);
+  const recaptcha = useCallback((value) => setIsRecaptcha(value));
+  const onClickLogin = useCallback(() => navigate(routes.LOGIN));
+  const onClickTermsAndPolicy = useCallback(() => navigate(routes.POLICY));
 
   return (
     <div>
@@ -22,13 +49,13 @@ const Register = memo(() => {
           backgroundSize: "100vw 100%",
         }}
       >
-        <Container fluid className="my-5">
+        <Container fluid className="my-5 pt-5">
           <Row>
             <Col>
               <Row className="p-4">
                 <Col md={8}>
                   <Heading
-                    heading="An Open Data experience that's tailored for you"
+                    heading={t("openDataTitle")}
                     color={colors.white}
                   />
                 </Col>
@@ -46,29 +73,33 @@ const Register = memo(() => {
               >
                 <AuthCard
                   view="dekstop"
-                  title="Register"
-                  subtitle="Already have an account?"
-                  linktext={{ display_text: "Login", onClick: "" }}
+                  title={t("register")}
+                  recaptcha={recaptcha}
+                  subtitle={t("accExist")}
+                  linktext={{ display_text: t("login"), onClick: onClickLogin }}
                   inputFields={[
-                    { placeholder: "Full name", type: "text" },
-                    { placeholder: "Email", type: "email" },
-                    { placeholder: "Re-enter email", type: "email" },
-                    { placeholder: "Password", type: "password" },
+                    { placeholder: t("fullName"), type: "text", onChange: (value) => setName(value) },
+                    { placeholder: t("pwdEmail"), type: "email", onChange: (value) => setEmail(value) },
+                    { placeholder: t("reEmail"), type: "email", onChange: (value) => setReEmail(value) },
+                    { placeholder: t("password"), type: "password", onChange: (value) => setPassword(value) },
                   ]}
                   button={[{
-                    title: "Register",
-                    onClick: "",
+                    title: t("register"),
+                    onClick: onClickRegister,
                     backgroundColor: colors.black,
                     textColor: colors.white,
                     textSize: '',
-                    borderColor: colors.black
+                    borderColor: colors.black,
+                    loading
                   }]}
                   checkbox={{
-                    label: 'I agree to Abu Dhabi Open Data',
-                    linktext: 'terms and privacy policy',
+                    onClick: checked,
+                    naviagte: onClickTermsAndPolicy,
+                    label: <p>{t("agreeCond")} <span onClick={() => navigate(routes.POLICY)} style={{ color: colors.purple, cursor: "pointer" }}> {t("terms")} </span > {t("and")} <span onClick={() => navigate(routes.POLICY)} style={{ color: colors.purple, cursor: "pointer" }}> {t("policy")} </span></p>,
                     borderColor: colors.light_gray,
                     linktextColor: colors.purple,
-                    labelColor: colors.black
+                    labelColor: colors.black,
+
                   }}
                 />
               </Card>
@@ -95,23 +126,24 @@ const Register = memo(() => {
                   title="Register"
                   subtitle="Already have an account?"
                   linktext={{ display_text: "Login", onClick: "" }}
+                  recaptcha={recaptcha}
                   inputFields={[
-                    { placeholder: "Full name", type: "text" },
-                    { placeholder: "Email", type: "email" },
-                    { placeholder: "Re-enter email", type: "email" },
-                    { placeholder: "Password", type: "password" },
+                    { placeholder: "Full name", type: "text", onChange: (value) => setName(value) },
+                    { placeholder: "Email", type: "email", onChange: (value) => setEmail(value) },
+                    { placeholder: "Re-enter email", type: "email", onChange: (value) => setReEmail(value) },
+                    { placeholder: "Password", type: "password", onChange: (value) => setPassword(value) },
                   ]}
                   button={[{
                     title: "Register",
-                    onClick: "",
+                    onClick: onClickRegister,
                     backgroundColor: colors.black,
                     textColor: colors.white,
                     textSize: '',
                     borderColor: colors.black
                   }]}
                   checkbox={{
-                    label: 'I agree to Abu Dhabi Open Data',
-                    linktext: 'terms and privacy policy',
+                    onClick: checked,
+                    label: <p>{t("agreeCond")} <span onClick={() => navigate(routes.POLICY)} style={{ color: colors.purple, cursor: "pointer" }}> {t("terms")} </span > {t("and")} <span style={{ color: colors.purple, cursor: "pointer" }}> {t("policy")} </span></p>,
                     borderColor: colors.light_gray,
                     linktextColor: colors.purple,
                     labelColor: colors.black

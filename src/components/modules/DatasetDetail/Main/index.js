@@ -107,7 +107,9 @@ const Main = memo((props) => {
 
     return (
         <Container fluid>
-            <DataHeader title={i18n.language === locales.AR ? data && data.title_ar : data && data.title} />
+            <DataHeader
+                resources={data && data.resources}
+                title={i18n.language === locales.AR ? data && data.title_ar : data && data.title} />
             <Tabs data={tabs} staticComponentOnRight={<DataCard data={f} />} />
         </Container>
     )

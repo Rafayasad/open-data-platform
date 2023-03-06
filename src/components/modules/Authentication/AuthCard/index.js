@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
@@ -7,12 +7,15 @@ import TextInput from "../../../elements/TextInput";
 import StraigthLine from "../../../elements/StraigthLine";
 import CheckBox from "../../../elements/CheckBox";
 import { useTranslation } from "react-i18next";
+import Recaptcha from "../../../elements/Recaptcha";
 
 const AuthCard = memo((props) => {
 
   const { t } = useTranslation()
 
-  const { title, subtitle, linktext, inputFields, button, checkbox, onClickForgetPassword } = props;
+  const { title, subtitle, linktext, inputFields, button, checkbox, recaptcha, onClickForgetPassword } = props;
+
+  const recaptchaCallback = useCallback((value) => recaptcha(value));
 
   return (
     <Container fluid>
@@ -69,30 +72,25 @@ const AuthCard = memo((props) => {
         checkbox &&
         <Row className="py-2">
           <Col className="d-flex">
-            <CheckBox borderColor={checkbox.boxColor} callBack={""} />
-            <div className="d-flex">
+            <CheckBox borderColor={checkbox.boxColor} callBack={checkbox.onClick} />
+            <Col xs={8} className="d-flex mx-2">
               <Heading
                 nomargin
                 heading={checkbox.label}
                 size="xxs"
                 color={checkbox.labelColor}
               />
-              <div>
-                <Heading
-                  nomargin
-                  heading={checkbox.linktext}
-                  size="xxs"
-                  color={checkbox.linktextColor}
-                  underline
-                />
-              </div>
-            </div>
+            </Col>
           </Col>
         </Row>
       }
       <Row className="py-2">
-        {title === "Register" && <Col sm={8} md={8}>i'm not a robot</Col>}
-        <Col sm="12" md={title === "Register" ? 4 : 12}>
+        {title === t("register") &&
+          <Col sm={8} md={8}>
+            <Recaptcha callBack={recaptchaCallback} />
+          </Col>
+        }
+        <Col sm={12} md={title === t("register") ? 4 : 12}>
           {
             button.map((items, index) => (
               <div key={index} className="d-flex flex-column align-items-center">

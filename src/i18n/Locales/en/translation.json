@@ -167,8 +167,8 @@
     "notMatchEmail": "Your email do not match",
     "twoFactorAuth": "Two Factor Authorization",
     "agreeCond": "I agree to Abu Dhabi Open Data",
-    "termsAndPolicy": "terms and privacy policy",
-    "accExist": "Already have an account?",
+    "policy": "privacy policy",
+    "accExist": "Already have an account ?",
     "fullName": "Full name",
     "accDontExist": "Don't have an account?",
     "governmentEmail": "Government Email",
@@ -211,5 +211,9 @@
     "noTopicsFound": "No Topics Found",
     "application": "Application",
     "adda": "ADDA @ 2022",
-    "openDataTitle": "An Open Data experience that's tailored for you"
+    "openDataTitle": "An Open Data experience that's tailored for you",
+    "and": "and",
+    "facebook":"Facebook",
+    "twitter":"Twitter",
+    "linkedin":"LinkedIn"
 }

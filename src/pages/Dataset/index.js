@@ -1,16 +1,13 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
-import Navbar from '../../components/modules/Navbar';
 import Cards from "../../components/modules/Cards";
 import Main from "../../components/modules/Dataset/Main";
-import UpperFooter from '../../components/modules/Footer/UpperFooter';
-import MiddleFooter from '../../components/modules/Footer/MiddleFooter';
-import LowerFooter from '../../components/modules/Footer/LowerFooter';
 import DatasetList from "../../components/modules/Dataset/DatasetList";
 import { colors } from "../../utils/colors";
 import { getAllDatasets, getRecentsDatasets } from "../../axios/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../router/helper";
 import { useTranslation } from "react-i18next";
+import View from "../../components/modules/View";
 
 const Dataset = memo(() => {
 
@@ -84,15 +81,12 @@ const Dataset = memo(() => {
     }, [filters])
 
     return (
-        <>
-            <Navbar theme={'dark'} />
+        <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
             <Main search={search} onChangeSearch={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
             <Cards buttonText={viewAll && t("viewLess")} onClickViewAll={toggle} title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)} onClick={onClickCard} />
             <DatasetList totalCount={totalCount} rowsPerPage={rowsPerPage} datasets={datasets} currentPage={currentPage} loading={loading} onChangePage={onChangePage} selectedValue={sort} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue} />
-            <UpperFooter title={t("GetMore")} button={t("registerNow")} />
-            <MiddleFooter />
-            <LowerFooter />
-        </>
+        </View>
+
     )
 })
 

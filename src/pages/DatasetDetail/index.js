@@ -3,12 +3,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { getDatasetById, getSimilarDatasets } from "../../axios/api";
 import Cards from "../../components/modules/Cards";
 import Main from "../../components/modules/DatasetDetail/Main";
-import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
-import LowerFooter from "../../components/modules/Footer/LowerFooter";
-import Navbar from "../../components/modules/Navbar";
 import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
 import { useTranslation } from "react-i18next";
+import BreadCrumb from "../../components/elements/BreadCrumb";
+import View from "../../components/modules/View";
 
 const data = [
     {
@@ -55,18 +54,17 @@ const DatasetDetail = memo(() => {
 
     }, [dataset])
 
-    console.log("dataset",dataset);
-
     return (
-        <>
-            <Navbar theme="dark" sticky />
+        <View theme="dark" noupperfooter sticky>
             <div className="my-5 py-5">
+                <div className="px-4">
+                    <BreadCrumb items={[t("datasets"), t("technology")]} />
+                </div>
                 <Main data={dataset} />
                 <Cards title={t("similarDatasets")} backgroundColor={colors.white} data={similarDataset} />
             </div>
-            <MiddleFooter />
-            <LowerFooter />
-        </>
+        </View>
+
     )
 });
 

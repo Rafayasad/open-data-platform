@@ -11,12 +11,14 @@ import reportWebVitals from './reportWebVitals';
 import { store } from './redux/store';
 import './i18n/i18n.js';
 import { ThemeProvider, createMuiTheme } from '@mui/material/styles';
+import i18n from './i18n/i18n.js';
+import { locales } from './i18n/helper';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const THEME = createMuiTheme({
   typography: {
-    "fontFamily": `'CircularStd-Regular'`
+    "fontFamily": `${i18n.language === locales.EN ? 'CircularAr-Regular' : 'CircularStd-Regular'}`
   }
 });
 

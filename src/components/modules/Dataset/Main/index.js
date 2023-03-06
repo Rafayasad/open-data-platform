@@ -14,16 +14,22 @@ const Main = memo((props) => {
     const { t } = useTranslation();
 
     return (
-        <Container className="pt-5 my-5">
-            <Row className="pt-5 pb-2">
-                <Col className="d-flex flex-column justify-content-center">
-                    <Row>
-                        <Col />
-                        <Col xs={10} md={6} style={{ textAlign: 'center' }} className="py-2">
-                            <Heading bold color={colors.black} heading={t("datasetTitle")} />
-                        </Col>
-                        <Col />
-                    </Row>
+        <>
+            <Container className="pt-5 mt-5">
+                <Row className="pt-5 pb-2">
+                    <Col className="d-flex flex-column justify-content-center">
+                        <Row>
+                            <Col />
+                            <Col xs={10} md={6} style={{ textAlign: 'center' }} className="py-2">
+                                <Heading bold color={colors.black} heading={t("datasetTitle")} />
+                            </Col>
+                            <Col />
+                        </Row>
+                    </Col>
+                </Row>
+            </Container >
+            <Container fluid className="sticky-top bg-white mb-5">
+                <Container>
                     <Row>
                         <Col />
                         <Col xs={12} md={10} lg={8} className="py-3">
@@ -38,27 +44,27 @@ const Main = memo((props) => {
                         </Col>
                         <Col />
                     </Row>
-                </Col>
-            </Row>
-            {
-                filter && filter.length > 0 &&
-                <Row className="">
-                    <Col className="d-flex flex-wrap justify-content-center align-items-center">
-                        {
-                            filter && filter.length > 0 && filter.map((item, index) =>
-                            (
-                                <div className="py-1">
-                                    <Tag
-                                        backgroundColor={colors.black}
-                                        textColor={"white"}
-                                        title={item.title}
-                                        crossIcon={<RxCross2 size={20} onClick={() => onDeleteFilter(item)} />} />
-                                </div>
-                            ))}
-                    </Col>
-                </Row>
-            }
-        </Container >
+                    {
+                        filter && filter.length > 0 &&
+                        <Row className="pb-3">
+                            <Col className="d-flex flex-wrap justify-content-center align-items-center">
+                                {
+                                    filter && filter.length > 0 && filter.map((item, index) =>
+                                    (
+                                        <div className="py-1">
+                                            <Tag
+                                                backgroundColor={colors.black}
+                                                textColor={"white"}
+                                                title={item.title}
+                                                crossIcon={<RxCross2 size={20} onClick={() => onDeleteFilter(item)} />} />
+                                        </div>
+                                    ))}
+                            </Col>
+                        </Row>
+                    }
+                </Container>
+            </Container>
+        </>
     )
 });
 

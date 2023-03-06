@@ -23,6 +23,10 @@
     background-color: #e9ecef !important;
 }
 
+.dropdown-item:focus{
+    background-color: white !important;
+}
+
 .dropdown-item:hover {
     color: #1e2125 !important;
     background-color: #e9ecef !important;

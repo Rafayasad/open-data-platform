@@ -9,6 +9,7 @@ import UpperFooter from "../../components/modules/Footer/UpperFooter";
 import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
 import LowerFooter from '../../components/modules/Footer/LowerFooter';
 import { useSelector } from "react-redux";
+import View from "../../components/modules/View";
 
 const Applications = memo(() => {
 
@@ -34,16 +35,13 @@ const Applications = memo(() => {
     })
 
     return (
-        <>
+        <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
             <Navbar theme='dark' />
             <div className="my-5 pt-5">
                 <Main />
                 <Cards type="image-outer-text" data={applications} onClick={onClickCard} />
             </div>
-            <UpperFooter title={t("GetMore")} button={t("registerNow")} />
-            <MiddleFooter />
-            <LowerFooter />
-        </>
+        </View>
     )
 })
 
