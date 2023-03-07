@@ -90,7 +90,7 @@ const Insights = memo(() => {
             date_type: filters?.date_type ? filters.date_type : "updated",
             publisher: filters?.publisher ? filters.publisher : ""
         }, setLoading)
-    }, [selectedTab, filters?.datatype, filters?.date_type, filters?.publisher]);
+    }, [filters]);
 
     console.log("insights", insights);
 
