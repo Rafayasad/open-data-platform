@@ -1,6 +1,9 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { getPublishersReport } from "../../../axios/api";
+import { useTranslation } from "react-i18next";
+import { locales } from "../../../i18n/helper";
+import { useSelector } from "react-redux";
 import Table from "../../../components/elements/Table";
 import LowerFooter from "../../../components/modules/Footer/LowerFooter";
 import MiddleFooter from "../../../components/modules/Footer/MiddleFooter";
@@ -9,23 +12,18 @@ import AppliedFilters from "../../../components/modules/Reports/AppliedFilters";
 import Header from "../../../components/modules/Reports/Header";
 import Tabs from "../../../components/modules/Reports/Tabs";
 import ReportsFilter from '../../../components/modules/Reports/Filter';
-import Reports from "..";
-import dayjs from "dayjs";
-import { useTranslation } from "react-i18next";
-import { locales } from "../../../i18n/helper";
-import { useSelector } from "react-redux";
 
 const Publishers = memo(() => {
 
     const { t, i18n } = useTranslation();
-
-    const topics = useSelector((state) => state.facets.topics);
+    
     const publishers = useSelector((state) => state.facets.publishers);
 
     const [publisherData, setPublishersData] = useState();
     const [filters, setFilters] = useState();
     const [selectedTab, setSelectedTab] = useState("All");
 
+    const [datatype, setDatatype] = useState();
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -58,18 +56,22 @@ const Publishers = memo(() => {
         }
     ]
 
+    const datatypeCallback = (datatype) => {
+        setDatatype(datatype)
+    }
+
     useEffect(() => {
         getPublishersReport(setPublishersData, {
             startdate: filters?.start_date ? filters.start_date : "all",
             enddate: filters?.end_date ? filters.end_date : "all",
-            datatype: filters?.datatype ? filters.datatype : "json",
             date_type: filters?.date_type ? filters.date_type : "modified",
+            datatype: datatype ? datatype : "json",
             type: filters?.type ? filters.type : "all",
             publisher: filters?.publisher ? filters.publisher : "",
-            perpage: "10",
-            pagenumber: "1"
-        }, setLoading)
-    }, [tabs]);
+            perpage: rowsPerPage,
+            pagenumber: currentPage
+        }, setLoading, setTotalCount, datatype, setDatatype)
+    }, [filters, currentPage, datatype]);
 
     const onChangePage = useCallback((page) => setCurrentPage(page), [currentPage]);
 
@@ -81,12 +83,12 @@ const Publishers = memo(() => {
             <Navbar theme='dark' />
             <ReportsFilter accordinData={AccordinData} open={filterOpen} setOpen={setFilterOpen} appliedFilters={filters} onApplyFilters={onApplyFilters} />
             <Container className="my-5 pt-5">
-                <Header title="Publishers Reports" onClickFilter={onClickFilter} />
+                <Header title="Publishers Reports" onClickFilter={onClickFilter} datatypeCallback={datatypeCallback} />
                 <Tabs data={tabs} selected={selectedTab} />
                 <AppliedFilters filters={filters}
                 />
                 <Table
-                    data={publisherData && [publisherData]}
+                    data={publisherData}
                     currentPage={currentPage}
                     totalCount={Math.ceil(totalCount / rowsPerPage)}
                     onChange={onChangePage}

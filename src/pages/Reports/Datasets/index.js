@@ -10,8 +10,6 @@ import AppliedFilters from "../../../components/modules/Reports/AppliedFilters";
 import Header from "../../../components/modules/Reports/Header";
 import Tabs from "../../../components/modules/Reports/Tabs";
 import ReportsFilter from '../../../components/modules/Reports/Filter';
-import Reports from "..";
-import dayjs from "dayjs";
 import { locales } from "../../../i18n/helper";
 import { useSelector } from "react-redux";
 
@@ -26,6 +24,7 @@ const Datasets = memo(() => {
     const [filters, setFilters] = useState();
     const [selectedTab, setSelectedTab] = useState("All");
 
+    const [datatype, setDatatype] = useState();
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -84,7 +83,7 @@ const Datasets = memo(() => {
     ]
 
     const datatypeCallback = (datatype) => {
-        setFilters({ datatype: datatype })
+        setDatatype(datatype)
     }
 
     useEffect(() => {
@@ -92,16 +91,16 @@ const Datasets = memo(() => {
             date_type: filters?.date_type ? filters.date_type : "created",
             startdate: filters?.start_date ? filters.start_date : "all",
             enddate: filters?.end_date ? filters.end_date : "all",
-            datatype: filters?.datatype ? filters.datatype : "json",
+            datatype: datatype ? datatype : "json",
             publisher: filters?.publisher ? filters.publisher : "",
             kpi: filters?.kpi ? filters.kpi : "",
             topic: filters?.topics ? filters.topics : "",
-            perpage: "50",
-            pagenumber: "1",
+            perpage: rowsPerPage,
+            pagenumber: currentPage,
             type: filters?.type ? filters.type : "all"
 
-        }, setLoading)
-    }, [tabs]);
+        }, setLoading, setTotalCount, datatype, setDatatype)
+    }, [filters, currentPage, datatype]);
 
     const onChangePage = useCallback((page) => setCurrentPage(page), [currentPage]);
 
@@ -118,7 +117,7 @@ const Datasets = memo(() => {
                 <AppliedFilters filters={filters}
                 />
                 <Table
-                    data={datasets && [datasets]}
+                    data={datasets}
                     currentPage={currentPage}
                     totalCount={Math.ceil(totalCount / rowsPerPage)}
                     onChange={onChangePage}

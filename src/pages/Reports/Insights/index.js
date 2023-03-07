@@ -1,6 +1,9 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { getInsightsReport } from "../../../axios/api";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { locales } from "../../../i18n/helper";
 import Table from "../../../components/elements/Table";
 import LowerFooter from "../../../components/modules/Footer/LowerFooter";
 import MiddleFooter from "../../../components/modules/Footer/MiddleFooter";
@@ -11,16 +14,11 @@ import Tabs from "../../../components/modules/Reports/Tabs";
 import ReportsFilter from '../../../components/modules/Reports/Filter';
 import Reports from "..";
 import dayjs from "dayjs";
-import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
-import { locales } from "../../../i18n/helper";
-// import { generateFile } from '../../../../src/utils/generic';
 
 const Insights = memo(() => {
 
     const { t, i18n } = useTranslation();
 
-    const topics = useSelector((state) => state.facets.topics);
     const publishers = useSelector((state) => state.facets.publishers);
 
     const [insights, setInsights] = useState();
