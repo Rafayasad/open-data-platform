@@ -37,10 +37,9 @@ const Dataset = memo(() => {
         setFilters();
     }, [i18n.language])
 
-    console.log("EEEEEEEEEe", state)
-
-
     useEffect(() => {
+
+        console.log("State getting from params", state)
 
         getSearch(setSearchData);
         getRecentsDatasets(setRecentsDatasets);
@@ -54,7 +53,7 @@ const Dataset = memo(() => {
         }
 
         if (state) {
-            // navigate(pathname, { replace: true, state: null })
+            navigate(pathname, { replace: true, state: null })
             getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [])
         }
 
@@ -62,7 +61,6 @@ const Dataset = memo(() => {
 
     useEffect(() => {
         if (currentPage || search || sort || filters) {
-
             if (!state?.search && !state?.listItem) {
                 getAllDatasets(setDatasets, setTotalCount, setLoading, search, sort.toLowerCase(), currentPage, rowsPerPage, filters)
             }
@@ -70,8 +68,6 @@ const Dataset = memo(() => {
         }
 
     }, [currentPage, search, sort, filters]);
-
-
 
     const toggle = useCallback(() => setViewAll(!viewAll), [viewAll]);
 
@@ -81,7 +77,12 @@ const Dataset = memo(() => {
 
     const onChangeSearch = useCallback((e) => {
         setSearch(e)
-        e && datasetsDiv.scrollIntoView();
+        if (e) {
+            datasetsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => {
+                window.scrollBy(0, -8)
+            }, 500);
+        }
     }, [search, datasetsDiv])
 
     const onChangeDropdownValue = useCallback((e) => setSort(e), [sort])

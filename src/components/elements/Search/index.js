@@ -23,6 +23,12 @@ const Search = memo((props) => {
     const [toggler, setToggler] = useState(false)
     const [inputText, setInputText] = useState('');
 
+    useEffect(() => {
+        if (value) {
+            setInputText(value)
+        }
+    }, [value])
+
     const toggle = useCallback(() => {
         setToggler(false)
         setFilterOpen(!filterOpen)

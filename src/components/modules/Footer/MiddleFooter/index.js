@@ -35,7 +35,9 @@ const MiddleFooter = memo(() => {
         );
     }
 
-    const onClick = useCallback((route, state) => route && navigate(route, { state: { listItem: [{ title: "alsijam" }] } }))
+    const onClick = useCallback((route, state) => {
+        if (route) navigate(route, { state })
+    }, [])
 
     const onClickAccordian = useCallback((index) => activeIndex === index ? setActiveIndex(null) : setActiveIndex(index), [activeIndex]);
 
