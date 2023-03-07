@@ -15,6 +15,7 @@ const Register = memo(() => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
+  const [disable, setDisable] = useState(true);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -50,9 +51,9 @@ const Register = memo(() => {
         }}
       >
         <Container fluid className="my-5 pt-5">
-          <Row>
-            <Col>
-              <Row className="p-4">
+          <Row className="p-0">
+            <Col className="pt-2 m-0">
+              <Row className="px-3 py-5">
                 <Col md={8}>
                   <Heading
                     heading={t("openDataTitle")}
@@ -78,18 +79,18 @@ const Register = memo(() => {
                   subtitle={t("accExist")}
                   linktext={{ display_text: t("login"), onClick: onClickLogin }}
                   inputFields={[
-                    { placeholder: t("fullName"), type: "text", onChange: (value) => setName(value) },
-                    { placeholder: t("pwdEmail"), type: "email", onChange: (value) => setEmail(value) },
-                    { placeholder: t("reEmail"), type: "email", onChange: (value) => setReEmail(value) },
-                    { placeholder: t("password"), type: "password", onChange: (value) => setPassword(value) },
+                    { placeholder: t("fullName"), type: "text", onChange: (value) => setName(value), value: name },
+                    { placeholder: t("pwdEmail"), type: "email", onChange: (value) => setEmail(value), value: email },
+                    { placeholder: t("reEmail"), type: "email", onChange: (value) => setReEmail(value), value: reEmail },
+                    { placeholder: t("password"), type: "password", onChange: (value) => setPassword(value), value: password },
                   ]}
                   button={[{
                     title: t("register"),
                     onClick: onClickRegister,
-                    backgroundColor: colors.black,
-                    textColor: colors.white,
+                    backgroundColor: name && email && reEmail && password && isChecked && isRecaptcha ? colors.black : colors.lighter_gray,
+                    textColor: name && email && reEmail && password && isChecked && isRecaptcha ? colors.white : colors.gray,
                     textSize: '',
-                    borderColor: colors.black,
+                    borderColor: name && email && reEmail && password && isChecked && isRecaptcha && colors.black,
                     loading
                   }]}
                   checkbox={{

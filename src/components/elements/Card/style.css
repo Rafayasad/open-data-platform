@@ -13,6 +13,10 @@
     color: #FFFFFF !important;
 }
 
+.card-hover-primary:hover .btn-primary {
+    filter: invert(1);
+}
+
 .hover-second:hover div:nth-child(2) div p {
     color: #FFFFFF !important;
 }

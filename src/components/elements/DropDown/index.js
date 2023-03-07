@@ -7,7 +7,7 @@ import './style.css';
 
 const Dropdown = (props) => {
 
-    const { autoClose, options, setSelectedDropdownValue, selectedValue, name, size, headerComponent, highlightableItem, width, selectedDropdownValue } = props;
+    const { autoClose, options, setSelectedDropdownValue, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
 
     const [isOpen, setIsOpen] = useState(false);
     const [indexx, setIndexx] = useState();
@@ -21,32 +21,32 @@ const Dropdown = (props) => {
         <div className='d-flex align-items-center'>
             {
                 name &&
-                <div className='px-3'>
+                <div className='w-100'>
                     <Heading size="xxs" heading={name} nomargin />
                 </div>
             }
-            <BSDropdown autoClose={autoClose} onToggle={toggle}>
+            <BSDropdown style={{ width: dropdownWidth }} autoClose={autoClose} onToggle={toggle}>
                 {
-                    headerComponent ? (
-                        <BSDropdown.Toggle href={null} className='bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end'
-                            style={{ width: width && '12rem' }}
-                        >
-                            {headerComponent}
-                        </BSDropdown.Toggle>
-                    ) : (
-                        <BSDropdown.Toggle
-                            href={null}
-                            className={`bg-white my-1 d-flex align-items-center justify-content-between my-dropdown-toggle text-black border border-1 ${isOpen && "dropdown-hover"}`}
-                            style={{ width: '12rem' }}
-                        >
-                            <div className=''>
-                                <Heading size="xxs" nomargin heading={selectedValue} />
-                            </div>
-                            <div className='my-1'>
-                                <MdKeyboardArrowDown />
-                            </div>
-                        </BSDropdown.Toggle>
-                    )
+                    noheadercomponent ? null :
+                        headerComponent ? (
+                            <BSDropdown.Toggle href={null} className='bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end'
+                                style={{ width: width }}
+                            >
+                                {headerComponent}
+                            </BSDropdown.Toggle>
+                        ) : (
+                            <BSDropdown.Toggle
+                                href={null}
+                                className={`w-100 bg-white my-1 d-flex align-items-center justify-content-between my-dropdown-toggle text-black border border-1 ${isOpen && "dropdown-hover"}`}
+                            >
+                                <div className=''>
+                                    <Heading size="xxs" nomargin heading={selectedValue} />
+                                </div>
+                                <div className='my-1'>
+                                    <MdKeyboardArrowDown />
+                                </div>
+                            </BSDropdown.Toggle>
+                        )
                 }
                 {
                     isOpen && options &&
@@ -71,7 +71,13 @@ const Dropdown = (props) => {
                                         </div>
                                     }
                                     <div className={`d-flex flex-wrap ${item.icon && "px-2"}`}>
-                                        <Heading nomargin color={colors.black} maxNumberOfLines={1} size="xxs" heading={item.title} />
+                                        <span className='m-0 p-0 multine-ellipsis-1'
+                                            style={{
+                                                color: colors.black
+                                            }}>
+                                            {item.title}
+                                        </span>
+                                        {/* <Heading nomargin color={colors.black} maxNumberOfLines={1} size="xxs" heading={item.title} /> */}
                                     </div>
                                 </BSDropdown.Item>
                             ))

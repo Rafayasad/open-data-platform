@@ -48,7 +48,7 @@ const AuthCard = memo((props) => {
         {
           inputFields.map((items, index) => (
             <Col key={index} md={12}>
-              <TextInput placeholder={items.placeholder} type={items.type} onChange={items.onChange} />
+              <TextInput value={items.value} placeholder={items.placeholder} type={items.type} onChange={items.onChange} />
             </Col>
           ))
         }
@@ -93,29 +93,31 @@ const AuthCard = memo((props) => {
         <Col sm={12} md={title === t("register") ? 4 : 12}>
           {
             button.map((items, index) => (
-              <div key={index} className="d-flex flex-column align-items-center">
-                <Button
-                  title={items.title}
-                  backgroundColor={items.backgroundColor}
-                  textColor={items.textColor}
-                  borderColor={items.borderColor && items.borderColor}
-                  onClick={items.onClick}
-                  loading={items.loading}
-                />
-                {
-                  button.length - 1 != index &&
+              < div key = { index } className = "d-flex flex-column align-items-center" >
+                { console.log("disable", items.disable) }
+              <Button
+                disable={items.disable}
+                title={items.title}
+                backgroundColor={items.backgroundColor}
+                textColor={items.textColor}
+                borderColor={items.borderColor && items.borderColor}
+                onClick={items.onClick}
+                loading={items.loading}
+              />
+            {
+                button.length - 1 != index &&
                   <StraigthLine
                     label={t("or")}
                     textColor={colors.gray}
                     lineColor={colors.light_gray}
                   />
-                }
-              </div>
-            ))
+              }
+          </div>
+        ))
           }
-        </Col>
-      </Row>
-    </Container>
+      </Col>
+    </Row>
+    </Container >
   );
 });
 

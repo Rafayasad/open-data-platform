@@ -50,7 +50,7 @@ const Home = memo(() => {
         <View sticky footerTitle={t("GetMore")} footerButton={t("registerNow")} >
             <Main onSearch={onSearch} onClickExplore={() => topicsDiv.scrollIntoView()} onApplyFilter={onApplyFilter} />
             <div id='topics'>
-                <Topics onClickList={onClickList} data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en} />
+                <Topics onClickViewless={() => topicsDiv.scrollIntoView()} onClickList={onClickList} data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en} />
             </div>
             <Images />
             <Cards title={t("mostViewedDatasets")} backgroundColor={colors.black} data={mostViewedDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={onClickButton} />

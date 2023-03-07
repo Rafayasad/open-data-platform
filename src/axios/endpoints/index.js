@@ -68,5 +68,20 @@ export const endpoints = {
     },
     getDatasetsReport: (data, options) => {
         return axios.post('http://192.168.0.23:82/apis/reports/dataset_report.php', data, options)
+    },
+    getSearch: () => {
+        return axios.get('https://data.abudhabi/apis/search.php')
+    },
+    postSearch: (data) => {
+        return axios.post('https://data.abudhabi/apis/search.php', data)
+    },
+    recoverPassword: (mail, headers) => {
+        return axios.post('https://data.abudhabi/user/password?_format=json', mail, { headers })
+    },
+    viewCount: (data) => {
+        return axios.post('https://data.abudhabi/apis/view_count.php', data);
+    },
+    realTimeApis: (data) => {
+        return axios.get('https://api.abudhabi.ae/gateway/GardenBooking/3.0/searchFacilities', data);
     }
 } 

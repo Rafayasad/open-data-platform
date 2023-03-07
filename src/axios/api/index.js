@@ -1,7 +1,8 @@
 import { convertHtmlToString } from "../../utils"
 import { endpoints } from "../endpoints"
 import { generateFile } from "../../utils/generic.js";
-
+import { locales } from "../../i18n/helper"
+import i18n from "../../i18n/i18n"
 
 export const getPlatformInsights = (setData, setLoading) => {
     return endpoints.
@@ -219,20 +220,33 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
     let tagsArray = []
 
     filters?.filter((el, index) => {
-        el.type == "theme" ? themeArray.push(el.title)
-            : el.type == "publisher__name" ? publisherArray.push(el.title)
-                : el.type == "keyword" && tagsArray.push(el.title)
+        el.type == "theme" ? themeArray.push(el.title) : el.type == "themelear" ? themeArray.push(el.title)
+            : el.type == "publisher__name" ? publisherArray.push(el.title) : el.type == "publisherlear__name" ? publisherArray.push(el.title)
+                : el.type == "keyword" ? tagsArray.push(el.title) : el.type == "keywordlear" && tagsArray.push(el.title)
     })
 
     finalFilters.push(
-        { key: "theme", values: themeArray },
-        { key: "publisher__name", values: publisherArray },
-        { key: "keyword", values: tagsArray }
+        { key: i18n.language === locales.EN ? "theme" : "themelear", values: themeArray },
+        { key: i18n.language === locales.EN ? "publisher__name" : "publisherlear__name", values: publisherArray },
+        { key: i18n.language === locales.EN ? "keyword" : "keywordlear", values: tagsArray }
     )
 
     return endpoints.
-        getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then((res) => {
+        getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then(async (res) => {
             if (res.status === 200) {
+
+                if (res.data.total > 0) {
+                    let obj = {
+                        keyword: search,
+                        ip: "192.168.0.44",
+                        lang: "en"
+                    }
+                    await endpoints.
+                        postSearch(obj).then((res) => {
+                        }).catch((err) => {
+                            console.log("Error Message", err)
+                        })
+                }
 
                 setTotalCount(res.data.total)
 
@@ -262,9 +276,18 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
 }
 
 export const getDatasetById = (id, setData) => {
+
     return endpoints.
-        getDatasetById(id).then((res) => {
+        getDatasetById(id).then(async (res) => {
             if (res.status === 200) {
+
+                // const view_count_payload = {
+                //     identifier: id,
+                //     ip_address: "172.0.9.01"
+                // }
+
+                //view count api CORS error
+                // return await endpoints.viewCount(view_count_payload).then((res) => {
 
                 let item = res.data;
 
@@ -306,6 +329,9 @@ export const getDatasetById = (id, setData) => {
 
                 setData(data)
 
+                // }).catch((err) => {
+                //     console.log("Error message", err)
+                // })
             }
         }).catch((err) => {
             console.log("Error message", err)
@@ -910,6 +936,36 @@ export const getDatasetsReport = (setData, payload, setLoading, setTotalCount, d
         })
 }
 
+export const getPublishersReport = (setData, payload, setLoading) => {
+
+    return endpoints.getPublishersReport(payload)
+        .then((res) => {
+            if (res.status === 200) {
+
+                let data = { ...res.data.data, id: 1 };
+
+                setData(data);
+
+            }
+
+        })
+}
+
+export const getDatasetsReport = (setData, payload, setLoading) => {
+
+    return endpoints.getDatasetsReport(payload)
+        .then((res) => {
+            if (res.status === 200) {
+
+                let data = { ...res.data.data, id: 1 };
+
+                setData(data);
+
+            }
+
+        })
+}
+
 export const register = async (navigate, route, setLoading, payload) => {
 
     setLoading(true)
@@ -937,5 +993,61 @@ export const register = async (navigate, route, setLoading, payload) => {
         }).catch((err) => {
             setLoading(false)
             console.log("Error message", err)
+        })
+
+}
+
+export const getSearch = (setData) => {
+    return endpoints.
+        getSearch().then((res) => {
+
+            if (res.status === 200) {
+                setData(res.data.data);
+            }
+
+        }).catch((err) => {
+            console.log("Error Message", err)
+        })
+}
+
+export const recoverPassword = async (navigate, route, setLoading, payload) => {
+
+
+    setLoading(true)
+
+    let { email } = payload;
+
+    let data = {
+        mail: email,
+    }
+
+    let headers = {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+    }
+
+    return await endpoints.
+        recoverPassword(data, headers).then((res) => {
+
+            navigate(route, { replace: true });
+            setLoading(false)
+
+        }).catch((err) => {
+            setLoading(false)
+            console.log("Error Message", err)
+        })
+}
+
+export const realTimeApis = (setData, payload, setLoading) => {
+    return endpoints.
+        realTimeApis(payload).then((res) => {
+
+            console.log("res,,,,,,",res);
+            if (res.status === 200) {
+                setData(res.data);
+            }
+
+        }).catch((err) => {
+            console.log("Error Message", err)
         })
 }

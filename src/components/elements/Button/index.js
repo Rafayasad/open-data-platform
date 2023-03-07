@@ -1,13 +1,14 @@
 import React, { memo } from "react";
 import { Spinner } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { colors } from "../../../utils/colors";
 
 const Button = memo((props) => {
 
     const { t } = useTranslation()
 
-    const { title, icon, backgroundColor, textColor, width, borderColor, loading, onClick } = props
-
+    const { isFilled, title, icon, backgroundColor, textColor, width, borderColor, loading, onClick, disable } = props
+    console.log("button ka disable", loading);
     return (
         <button
             onClick={onClick ? onClick : () => { }}

@@ -112,6 +112,7 @@ const ReportsFilter = memo((props) => {
                 {kpi &&
                     <div className="w-100">
                         <Dropdown
+                            dropdownWidth={"100%"}
                             padding={"px-1"}
                             name={"KPI"}
                             options={SortbyKPI}

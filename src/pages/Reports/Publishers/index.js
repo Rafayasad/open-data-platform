@@ -16,7 +16,7 @@ import ReportsFilter from '../../../components/modules/Reports/Filter';
 const Publishers = memo(() => {
 
     const { t, i18n } = useTranslation();
-    
+
     const publishers = useSelector((state) => state.facets.publishers);
 
     const [publisherData, setPublishersData] = useState();

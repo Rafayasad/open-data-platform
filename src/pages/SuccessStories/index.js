@@ -28,10 +28,12 @@ const SuccessStories = memo(() => {
     return (
         <View theme="dark" noupperfooter>
             <div className="my-5 pt-5">
-                <div className="px-4">
+                <div className="px-4 pt-5">
                     <BreadCrumb items={[t("aboutus")]} />
                 </div>
-                <Header title={t("successStories")} nobutton backgroundColor={colors.white} />
+                <div className="px-2">
+                    <Header title={t("successStories")} nobutton backgroundColor={colors.white} />
+                </div>
                 <Cards type="story-cards" data={stories} onClick={onClickCard} />
             </div>
             <Pagination
