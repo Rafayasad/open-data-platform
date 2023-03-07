@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { getInsightsReport } from "../../../axios/api";
+import { getPublishersReport } from "../../../axios/api";
 import Table from "../../../components/elements/Table";
 import LowerFooter from "../../../components/modules/Footer/LowerFooter";
 import MiddleFooter from "../../../components/modules/Footer/MiddleFooter";
@@ -59,7 +59,7 @@ const Publishers = memo(() => {
     ]
 
     useEffect(() => {
-        getInsightsReport(setPublishersData, {
+        getPublishersReport(setPublishersData, {
             startdate: filters?.start_date ? filters.start_date : "all",
             enddate: filters?.end_date ? filters.end_date : "all",
             datatype: filters?.datatype ? filters.datatype : "json",

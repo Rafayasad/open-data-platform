@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { getDatasetsReport, getInsightsReport } from "../../../axios/api";
+import { getDatasetsReport } from "../../../axios/api";
 import { useTranslation } from "react-i18next";
 import Table from "../../../components/elements/Table";
 import LowerFooter from "../../../components/modules/Footer/LowerFooter";

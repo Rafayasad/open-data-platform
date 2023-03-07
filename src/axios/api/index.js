@@ -796,15 +796,13 @@ export const getInsightsReport = (setData, payload, setLoading) => {
 
     console.log("payload", payload);
 
-    const headers = {
+    const options = {
         responseType: payload.datatype == "pdf" ? "blob" : "json"
     }
 
-    return endpoints.getInsightsReport(payload, headers)
+    return endpoints.getInsightsReport(payload, options)
         .then((res) => {
             if (res.status === 200) {
-
-                console.log("RES", res.data);
 
                 if (payload?.datatype === "csv" || payload?.datatype === "excel") {
                     generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'insights_report', [{ name: "alishan" }])
@@ -820,11 +818,10 @@ export const getInsightsReport = (setData, payload, setLoading) => {
                     window.URL.revokeObjectURL(href)
                 }
 
-
-                let data = { ...res.data.data, id: 1 };
-
-                setData(data);
-
+                if (payload?.datatype !== "pdf" && payload?.datatype !== "excel" && payload?.datatype !== "csv") {
+                    let data = { ...res.data.data, id: 1 };
+                    setData(data);
+                }
             }
 
         })
@@ -834,6 +831,7 @@ export const getPublishersReport = (setData, payload, setLoading) => {
 
     return endpoints.getPublishersReport(payload)
         .then((res) => {
+            console.log("log", res.data);
             if (res.status === 200) {
 
                 let data = { ...res.data.data, id: 1 };
