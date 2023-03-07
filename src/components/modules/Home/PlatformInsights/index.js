@@ -11,6 +11,14 @@ const PlatformInsights = memo((props) => {
 
     const { data } = props
 
+    function numberWithCommas(x) {
+        x = x.toString();
+        var pattern = /(-?\d+)(\d{3})/;
+        while (pattern.test(x))
+            x = x.replace(pattern, "$1,$2");
+        return x;
+    }
+
     function nFormatter(num, digits) {
         const lookup = [
             { value: 1, symbol: "" },
@@ -41,7 +49,10 @@ const PlatformInsights = memo((props) => {
                         data && data.length > 0 && data.map((item, index) => (
                             <Col key={index} xs={6} md={6} lg={2} className='text-center'>
                                 <Col>
-                                    <Heading color="white" heading={nFormatter(item.value, 2)} />
+                                    <Heading color="white"
+                                        heading={item.label === "Datasets" ? numberWithCommas(item.value) :
+                                            item.label === "APIS" ? numberWithCommas(item.value) :
+                                                nFormatter(item.value, 2)} />
                                 </Col>
                                 <Col>
                                     <Heading size='xxs' color={colors.pearl_white} heading={i18n.language === locales.AR ? item.label_ar : item.label} />
