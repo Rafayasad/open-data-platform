@@ -933,3 +933,17 @@ export const recoverPassword = async (navigate, route, setLoading, payload) => {
             console.log("Error Message", err)
         })
 }
+
+export const realTimeApis = (setData, payload, setLoading) => {
+    return endpoints.
+        realTimeApis(payload).then((res) => {
+
+            console.log("res,,,,,,",res);
+            if (res.status === 200) {
+                setData(res.data);
+            }
+
+        }).catch((err) => {
+            console.log("Error Message", err)
+        })
+}

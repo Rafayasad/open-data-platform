@@ -80,5 +80,8 @@ export const endpoints = {
     },
     viewCount: (data) => {
         return axios.post('https://data.abudhabi/apis/view_count.php', data);
+    },
+    realTimeApis: (data) => {
+        return axios.get('https://api.abudhabi.ae/gateway/GardenBooking/3.0/searchFacilities', data);
     }
 } 
