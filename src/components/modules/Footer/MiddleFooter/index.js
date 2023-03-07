@@ -35,7 +35,7 @@ const MiddleFooter = memo(() => {
         );
     }
 
-    const onClick = useCallback((route, state) => route && navigate(route, { state }))
+    const onClick = useCallback((route, state) => route && navigate(route, { state: { listItem: [{ title: "alsijam" }] } }))
 
     const onClickAccordian = useCallback((index) => activeIndex === index ? setActiveIndex(null) : setActiveIndex(index), [activeIndex]);
 
@@ -117,7 +117,7 @@ const MiddleFooter = memo(() => {
                                 <div className='my-1'>
                                     {
                                         item.data?.map((item, index) => (
-                                            <Link style={{textDecoration:"none"}} to={item.link}>
+                                            <Link style={{ textDecoration: "none" }} to={item.link}>
                                                 <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} downloadURL={item.downloadURL} onClick={() => onClick(item.link, item.params)} />
                                             </Link>
                                         ))

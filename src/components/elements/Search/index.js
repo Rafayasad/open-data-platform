@@ -21,19 +21,24 @@ const Search = memo((props) => {
     const [filterOpen, setFilterOpen] = useState(false);
 
     const [toggler, setToggler] = useState(false)
+    const [inputText, setInputText] = useState('');
 
     const toggle = useCallback(() => {
         setToggler(false)
         setFilterOpen(!filterOpen)
     });
 
-    const onChangeSearch = useCallback((e) => onChange && onChange(e.target.value));
+    const onChangeSearch = useCallback((e) => {
+        setInputText(e.target.value);
+    });
 
     const onKeyDown = useCallback((e) => {
-        e?.key === "Enter" && onPressEnter &&
+        if (e.key === "Enter") {
+            e.key === "Enter" && setToggler(false)
+            e.key === "Enter" && onPressEnter && onPressEnter(e.target.value)
             setOpenModal(false)
-        onPressEnter(e.target.value)
-    })
+        }
+    }, [toggler, openModal])
 
     const onClickApply = useCallback((filters) => {
         setFilterOpen(!filterOpen)
@@ -82,12 +87,15 @@ const Search = memo((props) => {
                                     :
                                     setToggler(true)
                             }}
-                            type="text" className='border-0 bg-transparent w-100' value={value} placeholder={placeholder} onChange={onChangeSearch} onKeyDown={onKeyDown} />
+                            type="text" className='border-0 bg-transparent w-100' value={inputText} placeholder={placeholder} onChange={onChangeSearch} onKeyDown={onKeyDown} />
                     </Col>
                     {
-                        value?.length > 1 ?
+                        inputText?.length > 0 ?
                             <Col md={1} lg={1} xs={2}>
-                                <MdCancel color="#9f9f9f" onClick={() => onChangeSearch({ target: { value: "" } })} size={24} />
+                                <MdCancel color="#9f9f9f" onClick={() => {
+                                    setInputText('');
+                                    onPressEnter('');
+                                }} size={24} />
                             </Col>
                             :
                             filter &&

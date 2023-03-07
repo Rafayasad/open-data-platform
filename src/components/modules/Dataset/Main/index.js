@@ -10,7 +10,7 @@ import './style.css'
 
 const Main = memo((props) => {
 
-    const { search, onChangeSearch, filter, onApplyFilter, onDeleteFilter, searchData } = props
+    const { search, onChangeSearchEnter, filter, onApplyFilter, onDeleteFilter, searchData } = props
 
     const { t } = useTranslation();
 
@@ -37,9 +37,7 @@ const Main = memo((props) => {
                             <Search
                                 searchData={searchData}
                                 placeholder={t("searchKeywords")}
-                                onChange={onChangeSearch}
-                                value={search}
-                                onPressEnter={onChangeSearch}
+                                onPressEnter={onChangeSearchEnter}
                                 filter
                                 appliedFilters={filter}
                                 onClickApplyFilter={onApplyFilter}

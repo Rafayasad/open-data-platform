@@ -21,7 +21,7 @@ const Dropdown = (props) => {
         <div className='d-flex align-items-center'>
             {
                 name &&
-                <div className='w-100'>
+                <div className='px-3'>
                     <Heading size="xxs" heading={name} nomargin />
                 </div>
             }
