@@ -1,5 +1,6 @@
 import { convertHtmlToString } from "../../utils"
 import { endpoints } from "../endpoints"
+import { generateFile } from "../../utils/generic.js";
 import { locales } from "../../i18n/helper"
 import i18n from "../../i18n/i18n"
 
@@ -819,16 +820,119 @@ export const login = async (dispatch, setData, setLoading, payload) => {
 
 export const getInsightsReport = (setData, payload, setLoading) => {
 
-    return endpoints.getInsightsReport(payload)
+    const options = {
+        responseType: payload.datatype == "pdf" ? "blob" : "json"
+    }
+
+    return endpoints.getInsightsReport(payload, options)
         .then((res) => {
             if (res.status === 200) {
 
-                let data = { ...res.data.data, id: 1 };
+                if (payload?.datatype === "csv" || payload?.datatype === "excel") {
+                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'insights_report', [{ name: "alishan" }])
+                } else if (payload?.datatype === 'pdf') {
+                    console.log("hello");
+                    const href = window.URL.createObjectURL(res.data);
+                    const link = document.createElement('a');
+                    link.href = href;
+                    link.setAttribute('download', 'insight_report.pdf'); //or any other extension
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(href)
+                }
 
-                setData(data);
+                if (payload?.datatype !== "pdf" && payload?.datatype !== "excel" && payload?.datatype !== "csv") {
+                    let data = { ...res.data.data, id: 1 };
+                    setData(data);
+                }
+            }
+
+        })
+        .catch((err) => {
+            setLoading(false)
+            console.log("Error message", err)
+        })
+}
+
+export const getPublishersReport = (setData, payload, setLoading, setTotalCount, datatype, setDatatype) => {
+
+    const options = {
+        responseType: payload?.datatype == "pdf" ? "blob" : "json"
+    }
+
+    return endpoints.getPublishersReport(payload, options)
+        .then((res) => {
+
+            if (res.data.status === 200) {
+
+                if (payload?.datatype === "csv" || payload?.datatype === "excel") {
+                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'insights_report', [{ name: "alishan" }])
+                } else if (payload?.datatype === 'pdf') {
+                    console.log("hello");
+                    const href = window.URL.createObjectURL(res.data);
+                    const link = document.createElement('a');
+                    link.href = href;
+                    link.setAttribute('download', 'insight_report.pdf'); //or any other extension
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(href);
+                    setDatatype();
+                }
+
+                if (payload?.datatype !== "pdf" && payload?.datatype !== "excel" && payload?.datatype !== "csv") {
+                    setData(res.data.data);
+                    setTotalCount(res.data.total_count);
+                }
 
             }
 
+        })
+        .catch((err) => {
+            setLoading(false)
+            console.log("Error message", err)
+        })
+}
+
+export const getDatasetsReport = (setData, payload, setLoading, setTotalCount, datatype, setDatatype) => {
+
+    const options = {
+        responseType: payload?.datatype == "pdf" ? "blob" : "json"
+    }
+
+    return endpoints.getDatasetsReport(payload, options)
+        .then((res) => {
+
+            if (res.data.status === 200) {
+
+                if (payload?.datatype === "csv" || payload?.datatype === "excel") {
+                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'insights_report', [{ name: "alishan" }])
+                } else if (payload?.datatype === 'pdf') {
+                    console.log("hello");
+                    const href = window.URL.createObjectURL(res.data);
+                    const link = document.createElement('a');
+                    link.href = href;
+                    link.setAttribute('download', 'insight_report.pdf'); //or any other extension
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(href);
+                    setDatatype();
+                }
+
+                if (payload?.datatype !== "pdf" && payload?.datatype !== "excel" && payload?.datatype !== "csv") {
+                    console.log("res", res.data);
+                    setData(res.data.data);
+                    setTotalCount(res.data.total_count);
+                }
+
+            }
+
+        })
+        .catch((err) => {
+            setLoading(false)
+            console.log("Error message", err)
         })
 }
 

@@ -18,14 +18,11 @@ import 'react-modern-drawer/dist/index.css';
 const ReportsFilter = memo((props) => {
 
     const { t, i18n } = useTranslation();
-    const { open, setOpen, appliedFilters, onApplyFilters } = props;
+    const { open, setOpen, appliedFilters, onApplyFilters, accordinData, kpi } = props;
 
     const initialFilters = {
         date_type: "Modified"
     }
-
-    const topics = useSelector((state) => state.facets.topics);
-    const publishers = useSelector((state) => state.facets.publishers);
 
     const [activeIndex, setActiveIndex] = useState();
     const [filters, setFilters] = useState(initialFilters);
@@ -52,16 +49,18 @@ const ReportsFilter = memo((props) => {
         }
     ]
 
-    const AccordinData = [
+    const SortbyKPI = [
         {
-            title: t("publisher"),
-            tags: i18n.language === locales.AR ? publishers && publishers.ar : publishers && publishers.en
+            title: t("yes"),
+            onClick: (kpi) => onChangeFilter({ kpi }),
         },
         {
-            title: t("topics"),
-            tags: i18n.language === locales.AR ? topics && topics.ar : topics && topics.en
+            title: t("no"),
+            onClick: (kpi) => onChangeFilter({ kpi }),
         }
     ]
+
+
 
     useEffect(() => {
         if (appliedFilters) {
@@ -101,17 +100,26 @@ const ReportsFilter = memo((props) => {
 
             <hr className="m-0 p-0" />
             <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%" }} className={"p-4"}>
-                <div className="">
+                <div className="w-100">
+                    <Dropdown
+                        dropdownWidth={"100%"}
+                        padding={"px-1"}
+                        name={"Date type"}
+                        options={SortbyData}
+                        selectedValue={filters?.date_type}
+                    />
+                </div>
+                {kpi &&
                     <div className="w-100">
                         <Dropdown
                             dropdownWidth={"100%"}
-                            padding={""}
-                            name={"Date type"}
-                            options={SortbyData}
-                            selectedValue={filters?.date_type}
+                            padding={"px-1"}
+                            name={"KPI"}
+                            options={SortbyKPI}
+                            selectedValue={filters?.kpi ? filters.kpi : "selectOption"}
                         />
                     </div>
-                </div>
+                }
                 <div className="d-flex my-3">
                     <div className="w-100">
                         <DatePicker value={filters?.start_date} title={"Start Date"} onChange={(start_date) => onChangeFilter({ start_date })} maxDate={filters?.end_date} />
@@ -124,7 +132,7 @@ const ReportsFilter = memo((props) => {
                 </div>
                 <div className="py-2">
                     {
-                        AccordinData?.map((item, index) => {
+                        accordinData?.map((item, index) => {
                             return (
                                 <>
                                     <Accordion activeKey={activeIndex} key={index} className="bg-transparent">
@@ -157,7 +165,7 @@ const ReportsFilter = memo((props) => {
                                         </Accordion.Item>
                                     </Accordion>
                                     {
-                                        index != AccordinData.length - 1
+                                        index != accordinData.length - 1
                                         && <hr className="" />
                                     }
                                 </>

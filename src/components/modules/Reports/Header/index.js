@@ -8,7 +8,7 @@ import Heading from "../../../elements/Heading";
 
 const Header = memo((props) => {
 
-    const { title, onClickFilter } = props;
+    const { title, onClickFilter, datatypeCallback } = props;
 
     return (
         <Row className="d-flex justify-content-between py-5">
@@ -30,15 +30,15 @@ const Header = memo((props) => {
                             [
                                 {
                                     title: "PDF",
-                                    onClick: () => { }
+                                    onClick: () => { datatypeCallback("pdf") }
                                 },
                                 {
                                     title: "CSV",
-                                    onClick: () => { }
+                                    onClick: () => { datatypeCallback("csv") }
                                 },
                                 {
                                     title: "Excel",
-                                    onClick: () => { }
+                                    onClick: () => { datatypeCallback("excel") }
                                 }
                             ]
                         }
