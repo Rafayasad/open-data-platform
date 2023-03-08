@@ -37,9 +37,14 @@ const Dataset = memo(() => {
         setFilters();
     }, [i18n.language])
 
-    useEffect(() => {
+    const focustoDatasets = () => {
+        datasetsDiv.scrollIntoView();
+        setTimeout(() => {
+            window.scrollBy(0, -8)
+        }, 500);
+    }
 
-        console.log("State getting from params", state)
+    useEffect(() => {
 
         getSearch(setSearchData);
         getRecentsDatasets(setRecentsDatasets);
@@ -73,15 +78,15 @@ const Dataset = memo(() => {
 
     const onClickCard = useCallback((id) => { navigate(`${routes.DATASET_DETAIL}?id=${id}`) }, []);
 
-    const onChangePage = useCallback((page) => setCurrentPage(page), []);
+    const onChangePage = useCallback((page) => {
+        datasetsDiv.scrollIntoView()
+        setCurrentPage(page)
+    }, [datasetsDiv]);
 
     const onChangeSearch = useCallback((e) => {
         setSearch(e)
         if (e) {
-            datasetsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            setTimeout(() => {
-                window.scrollBy(0, -8)
-            }, 500);
+            focustoDatasets()
         }
     }, [search, datasetsDiv])
 

@@ -26,10 +26,12 @@ const Support = memo(() => {
         navigate(`${routes.SUPPORT_QUESTIONS_DETAIL}?id=${id}`, { state: { backURL: routes.SUPPORT } })
     }, []);
 
+    console.log("CAT", categories);
+
     return (
         <View theme="dark" footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")}>
             <Main />
-            <Cards type='image-inner-text' data={i18n.language === locales.AR ? categories && categories.ar : categories && categories.en} onClick={onClickCard} />
+            <Cards type='image-inner-text' data={categories} onClick={onClickCard} />
             <QuestionList title={t("popularQues")} data={questions} onClick={onClickQuestion} />
         </View>
 

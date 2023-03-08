@@ -33,11 +33,11 @@ export const endpoints = {
     getAboutUs: () => {
         return client.get('/jsonapi/about_us');
     },
-    getEnFaqsCategory: () => {
+    getFaqsCategory: () => {
         return client.get('/jsonapi/taxonomy_term/faqs_category');
     },
-    getArFaqsCategory: () => {
-        return client.get('/jsonapi/taxonomy_term/faqs_category_in_arabic');
+    getQuestionByCategories: () => {
+        return client.get(`/jsonapi/node/faqs`)
     },
     getPopularQuestions: () => {
         return client.get('/jsonapi/node/faqs');

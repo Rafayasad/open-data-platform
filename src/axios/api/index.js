@@ -319,7 +319,8 @@ export const getDatasetById = (id, setData) => {
                                 : item.format === "esri rest" ? "excel"
                                     : item.format === "xlsx" ? "excel"
                                         : item.format === "xls" ? "excel"
-                                            : item.format === "csv" && "csv",
+                                            : item.format === "csv" ? "csv"
+                                                : item.format === "API" && "api",
                             downloadURL: item.downloadURL
                         }
                     )),
@@ -465,7 +466,7 @@ export const getAboutUs = (dispatch, setData) => {
 
 export const getFaqsCategory = async (dispatch, setData) => {
 
-    let en = await endpoints.getEnFaqsCategory().then((res) => {
+    let categories_arr = await endpoints.getFaqsCategory().then((res) => {
 
         let categories = []
 
@@ -473,15 +474,19 @@ export const getFaqsCategory = async (dispatch, setData) => {
 
             let data = res.data.data;
 
+            console.log("FQSSSSSSSSSSS", data);
+
             data.map((item) => {
 
                 const id = item.id
-                const { name, description } = item.attributes;
+                const { name, description, field_title_ar, field_alwsf } = item.attributes;
 
                 let obj = {
                     id,
                     title: name,
-                    description: convertHtmlToString(description.value)
+                    description: convertHtmlToString(description.value),
+                    title_ar: field_title_ar,
+                    description_ar: field_alwsf
                 }
 
                 categories.push(obj)
@@ -493,38 +498,49 @@ export const getFaqsCategory = async (dispatch, setData) => {
 
     })
 
-    let ar = await endpoints.getArFaqsCategory().then((res) => {
+    dispatch && dispatch(setData(categories_arr))
 
-        let categories = []
+}
 
-        if (res.status === 200) {
+export const getQuestionByCategories = (setData, questionID) => {
+    return endpoints.
+        getQuestionByCategories().then((res) => {
 
-            let data = res.data.data;
+            if (res.status === 200) {
 
-            data.map((item) => {
+                console.log("match", res.data.data);
 
-                const id = item.id
-                const { name, description } = item.attributes;
+                let data = res.data.data;
 
-                let obj = {
-                    id,
-                    title: name,
-                    description: convertHtmlToString(description.value)
-                }
+                let categoryQuestions = []
 
-                categories.push(obj)
+                data?.map(item => {
 
-            })
-        }
+                    const ID = item.id
 
-        return categories
+                    const { title, field_question_ar } = item.attributes;
+                    const { id } = item.relationships.field_fa.data;
 
-    })
+                    if (questionID == id) {
 
-    let categories = { en, ar }
+                        categoryQuestions.push({
+                            id: ID,
+                            title,
+                            title_ar: field_question_ar
+                        })
 
-    dispatch && dispatch(setData(categories))
+                        return;
+                    }
 
+                })
+
+                setData(categoryQuestions)
+
+            }
+
+        }).catch((err) => {
+            console.log("Error Message", err)
+        })
 }
 
 export const getPopularQuestions = (dispatch, setData) => {
@@ -532,6 +548,8 @@ export const getPopularQuestions = (dispatch, setData) => {
         getPopularQuestions().then((res) => {
 
             if (res.status === 200) {
+
+                console.log("popular", res.data);
 
                 let data = res.data.data;
 
@@ -1012,7 +1030,7 @@ export const realTimeApis = (setData, payload, setLoading) => {
     return endpoints.
         realTimeApis(payload).then((res) => {
 
-            console.log("res,,,,,,",res);
+            console.log("res,,,,,,", res);
             if (res.status === 200) {
                 setData(res.data);
             }

@@ -46,8 +46,8 @@ const Cards = memo((props) => {
                         <CardWithText
                             hoverable
                             noborder
-                            title={item.title}
-                            description={item.description}
+                            title={i18n.language === locales.AR ? item.title_ar : item.title}
+                            description={i18n.language === locales.AR ? item.description_ar : item.description}
                             image={images[Math.floor(Math.random() * images.length)]}
                             onClick={() => onClick(item.id)}
                         />

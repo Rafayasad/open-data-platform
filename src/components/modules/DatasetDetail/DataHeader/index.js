@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { locales } from "../../../../i18n/helper";
 import { colors } from "../../../../utils/colors";
 import { FaFilePdf, FaFileExcel, FaFileCsv, FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { AiFillApi } from "react-icons/ai";
 import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
 import Shimmer from "../../../elements/Shimmer";
@@ -31,7 +32,8 @@ const DataHeader = memo((props) => {
             downloadLink: item.downloadURL,
             icon: item.format === "pdf" ? <FaFilePdf />
                 : item.format === "excel" ? <FaFileExcel size={20} />
-                    : item.format === "csv" && <FaFileCsv />
+                    : item.format === "csv" ? <FaFileCsv />
+                        : item.format === "api" && <AiFillApi />
         }
     ))
 

@@ -98,7 +98,7 @@ const Search = memo((props) => {
                     {
                         inputText?.length > 0 ?
                             <Col md={1} lg={1} xs={2}>
-                                <MdCancel color="#9f9f9f" onClick={() => {
+                                <MdCancel color="#9f9f9f" style={{ cursor: "pointer" }} onClick={() => {
                                     setInputText('');
                                     onPressEnter('');
                                 }} size={24} />

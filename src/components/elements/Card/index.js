@@ -11,12 +11,14 @@ import Tag from "../Tag";
 import './style.css';
 import { shareOptions } from "../../../utils";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import i18n from "../../../i18n/i18n";
 import { locales } from "../../../i18n/helper";
 
 const Card = memo((props) => {
 
     const { t } = useTranslation();
+    const navigate = useNavigate();
 
     const { resources, title, publisher, description, tags, size, noborder,
         hoverable, shortTitle, headingSize, onClick, nodropdown, noheadercomponent } = props;
@@ -51,6 +53,10 @@ const Card = memo((props) => {
         }
 
     }
+
+    const onClickTag = useCallback((route, state) => {
+        if (route) navigate(route, { state })
+    }, [])
 
     const options = [
         {
@@ -93,7 +99,7 @@ const Card = memo((props) => {
                 <Col className="d-flex">
                     {
                         tags && tags.length > 0 && tags.map((item, index) => (
-                            <Tag key={index} title={item} />
+                            <Tag key={index} title={item} onClick={() => onClickTag("/dataset", { listItem: [{ title: item, type: "theme" }] })} />
                         ))
                     }
                 </Col>
@@ -101,10 +107,9 @@ const Card = memo((props) => {
                     !nodropdown &&
                     <Col md={2} className='d-flex justify-content-end'>
                         <Dropdown
-                            width={"12rem"}
                             noheadercomponent={noheadercomponent}
                             autoClose={"outside"}
-                            size={selectedDropdownValue === t("download") && "md"}
+                            size={selectedDropdownValue === t("download") ? "md" : "sm"}
                             options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
                             selectedDropdownValue={selectedDropdownValue}
                             setSelectedDropdownValue={setSelectedDropdownValue}

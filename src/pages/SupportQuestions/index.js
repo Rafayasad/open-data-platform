@@ -2,7 +2,7 @@ import React, { memo, useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import QuestionList from "../../components/modules/Support/QuestionList";
-import { getPopularQuestions } from "../../axios/api";
+import { getPopularQuestions, getQuestionByCategories } from "../../axios/api";
 import { routes } from "../../router/helper";
 import BreadCrumb from "../../components/elements/BreadCrumb";
 import View from "../../components/modules/View";
@@ -24,10 +24,11 @@ const SupportQuestions = memo(() => {
     useEffect(() => {
 
         if (!id) return navigate(url, { replace: true })
-
-        getPopularQuestions(setQuestions)
+        getQuestionByCategories(setQuestions, id)
 
     }, [])
+
+    console.log("QUES",questions);
 
     const onClickQuestion = useCallback((id) => {
         navigate(`${routes.SUPPORT_QUESTIONS_DETAIL}?id=${id}`, { state: { backURL: routes.SUPPORT } })
