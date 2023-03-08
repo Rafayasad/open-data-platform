@@ -84,7 +84,7 @@ const DataHeader = memo((props) => {
                         headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}
                     />
                 </div>
-                <div className="mx-1">
+                <div className="">
                     <Dropdown
                         autoClose={true}
                         size={"md"}

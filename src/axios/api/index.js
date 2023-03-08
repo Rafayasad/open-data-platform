@@ -836,18 +836,25 @@ export const login = async (dispatch, setData, setLoading, payload) => {
 
 }
 
-export const getInsightsReport = (setData, payload, setLoading) => {
+export const getInsightsReport = (setData, payload, setLoading, setDatatype) => {
+
+    let new_payload = { ...payload }
+
+    new_payload.datatype = new_payload.datatype === 'pdf' ? 'pdf' : "json"
+
+    payload?.datatype !== "pdf" && setLoading(true);
 
     const options = {
         responseType: payload.datatype == "pdf" ? "blob" : "json"
     }
 
-    return endpoints.getInsightsReport(payload, options)
+    return endpoints.getInsightsReport(new_payload, options)
         .then((res) => {
+            setLoading(false);
             if (res.status === 200) {
-
                 if (payload?.datatype === "csv" || payload?.datatype === "excel") {
-                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'insights_report', [{ name: "alishan" }])
+                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'insights_report', [res.data])
+                    setDatatype('');
                 } else if (payload?.datatype === 'pdf') {
                     console.log("hello");
                     const href = window.URL.createObjectURL(res.data);
@@ -857,7 +864,8 @@ export const getInsightsReport = (setData, payload, setLoading) => {
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
-                    window.URL.revokeObjectURL(href)
+                    window.URL.revokeObjectURL(href);
+                    setDatatype('');
                 }
 
                 if (payload?.datatype !== "pdf" && payload?.datatype !== "excel" && payload?.datatype !== "csv") {
@@ -874,6 +882,8 @@ export const getInsightsReport = (setData, payload, setLoading) => {
 }
 
 export const getPublishersReport = (setData, payload, setLoading, setTotalCount, datatype, setDatatype) => {
+
+    setLoading(true)
 
     const options = {
         responseType: payload?.datatype == "pdf" ? "blob" : "json"
@@ -902,6 +912,7 @@ export const getPublishersReport = (setData, payload, setLoading, setTotalCount,
                 if (payload?.datatype !== "pdf" && payload?.datatype !== "excel" && payload?.datatype !== "csv") {
                     setData(res.data.data);
                     setTotalCount(res.data.total_count);
+                    setLoading(false);
                 }
 
             }
@@ -914,6 +925,8 @@ export const getPublishersReport = (setData, payload, setLoading, setTotalCount,
 }
 
 export const getDatasetsReport = (setData, payload, setLoading, setTotalCount, datatype, setDatatype) => {
+
+    setLoading(true)
 
     const options = {
         responseType: payload?.datatype == "pdf" ? "blob" : "json"
@@ -943,6 +956,7 @@ export const getDatasetsReport = (setData, payload, setLoading, setTotalCount, d
                     console.log("res", res.data);
                     setData(res.data.data);
                     setTotalCount(res.data.total_count);
+                    setLoading(false);
                 }
 
             }

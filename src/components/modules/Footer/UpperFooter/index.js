@@ -25,7 +25,7 @@ const UpperFooter = memo((props) => {
             <Container fluid className='p-0'>
                 <Row>
                     <Col xs={8} md={4}>
-                        <Heading color='white' heading={title} />
+                        <Heading color='white' bold heading={title} />
                     </Col>
                 </Row>
                 {
@@ -36,7 +36,7 @@ const UpperFooter = memo((props) => {
                         </Col>
                     </Row>
                 }
-                <Row>
+                <Row className='my-2'>
                     <Col xs={8} md={4} className={i18n.language === locales.AR && "py-3"}>
                         <Button onClick={() => navigate(routes.REGISTER)} backgroundColor={i18n.language === locales.AR && "transparent"}
                             borderColor={i18n.language === locales.AR && "white"}

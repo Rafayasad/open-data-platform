@@ -231,6 +231,7 @@ export const getNumberOfDaysInMonth = (year, month) => {
 };
 
 export const generateFile = (fileType, filename, data) => {
+  console.log("ssdadas", fileType, filename, data)
   const worksheet = XLSX.utils.json_to_sheet(data)
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
