@@ -61,7 +61,7 @@ export const endpoints = {
         return axios.post('http://10.241.40.69:30418/apis/register.php', data, { headers })
     },
     getInsightsReport: (data, options) => {
-        return axios.post('http://10.241.40.69:30418/apis/reports/insight_report.php', data, options)
+        return axios.post('http://192.168.0.23:82/apis/reports/insight_report.php', data, options)
     },
     getPublishersReport: (data, options) => {
         return axios.post('http://192.168.0.23:82/apis/reports/publishers_report.php', data, options)

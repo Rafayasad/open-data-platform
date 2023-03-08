@@ -17,6 +17,7 @@ const columns = (data) => {
                 selector: row => row[key]
             }
         )
+
     })
 
     return filtered;

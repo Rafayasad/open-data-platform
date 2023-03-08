@@ -24,14 +24,15 @@ const ListCard = memo((props) => {
             {
                 !loading ?
                     datalist && datalist.length > 0 && datalist.map((item, index) => (
-                        <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
+                        <div className="p-2" onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
                             {
                                 index > 0 &&
                                 <hr className="m-0" style={{ color: currentHovered == index || currentHovered != null && currentHovered + 1 == index ? 'white' : '#CFCFCF', borderWidth: 2 }} />
                             }
                             <Card
                                 nodropdown
-                                size='sm'
+                                notags
+                                size='xs'
                                 headingSize='lg'
                                 noborder
                                 hoverable="light"

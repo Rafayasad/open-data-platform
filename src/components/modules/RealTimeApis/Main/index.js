@@ -11,12 +11,12 @@ const RealTimeApisHeader = memo((props) => {
 
     return (
         <div className="my-5 pt-5">
-            <div className="px-4">
+            <div className="px-4 pt-5">
                 <BreadCrumb items={[t("applications"), t("realTimeAPI")]} />
             </div>
             <div className="p-4 row">
                 <Col className="" lg={6}>
-                    <Heading heading={t("openData")} bold />
+                    <Heading size={"xl"} heading={t("openData")} bold />
                 </Col>
             </div>
             <div className="px-4 row">

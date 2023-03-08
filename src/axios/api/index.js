@@ -861,7 +861,7 @@ export const getInsightsReport = (setData, payload, setLoading) => {
                 }
 
                 if (payload?.datatype !== "pdf" && payload?.datatype !== "excel" && payload?.datatype !== "csv") {
-                    let data = { ...res.data.data, id: 1 };
+                    let data = { ...res.data.data };
                     setData(data);
                 }
             }

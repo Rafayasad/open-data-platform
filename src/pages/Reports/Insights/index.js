@@ -44,7 +44,7 @@ const Insights = memo(() => {
         {
             title: "Weekly",
             onClick: (val) => {
-                setFilters({ ...filters, end_date: dayjs().format('YYYY-MM-DD'), start_date: dayjs().subtract(1, 'week').format('YYYY-MM-DD') })
+                setFilters({ ...filters, end_date: dayjs().format('YYYY-MM-DD'), start_date: dayjs().subtract(6, 'days').format('YYYY-MM-DD') })
                 setSelectedTab(val)
             }
         },
@@ -102,7 +102,7 @@ const Insights = memo(() => {
     return (
         <>
             <Navbar theme='dark' />
-            <ReportsFilter accordinData={AccordinData} open={filterOpen} setOpen={setFilterOpen} appliedFilters={filters} onApplyFilters={onApplyFilters} />
+            <ReportsFilter selectedTab={selectedTab} accordinData={AccordinData} open={filterOpen} setOpen={setFilterOpen} appliedFilters={filters} onApplyFilters={onApplyFilters} />
             <Container className="my-5 pt-5">
                 <Header title="Insights Reports" onClickFilter={onClickFilter} datatypeCallback={datatypeCallback} />
                 <Tabs data={tabs} selected={selectedTab} />

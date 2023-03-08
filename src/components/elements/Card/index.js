@@ -21,7 +21,7 @@ const Card = memo((props) => {
     const navigate = useNavigate();
 
     const { resources, title, publisher, description, tags, size, noborder,
-        hoverable, shortTitle, headingSize, onClick, nodropdown, noheadercomponent } = props;
+        hoverable, shortTitle, headingSize, onClick, nodropdown, noheadercomponent, notags } = props;
 
     var height = "332px", border, ClassName;
 
@@ -31,7 +31,9 @@ const Card = memo((props) => {
     const isClicked = useCallback((value) => { setSelectedDropdownValue(value) })
     const downloadResources = useCallback((links) => { setIsDownloadLink(links) }); //callback for url redirect
 
-    if (size === 'sm') {
+    if (size === "xs") {
+        height = "225px"
+    } else if (size === 'sm') {
         height = "332px"
     } else if (size === 'md') {
         height = '290px'
@@ -95,30 +97,32 @@ const Card = memo((props) => {
 
     return (
         <RBCard className={`p-4 ${ClassName}`} style={{ height: height, borderRadius: "30px", borderWidth: border }}>
-            <Row className="h-25 align-items-center">
-                <Col className="d-flex">
-                    {
-                        tags && tags.length > 0 && tags.map((item, index) => (
-                            <Tag key={index} title={item} onClick={() => onClickTag("/dataset", { listItem: [{ title: item, type: "theme" }] })} />
-                        ))
-                    }
-                </Col>
-                {
-                    !nodropdown &&
-                    <Col md={2} className='d-flex justify-content-end'>
-                        <Dropdown
-                            noheadercomponent={noheadercomponent}
-                            autoClose={"outside"}
-                            size={selectedDropdownValue === t("download") ? "md" : "sm"}
-                            options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
-                            selectedDropdownValue={selectedDropdownValue}
-                            setSelectedDropdownValue={setSelectedDropdownValue}
-                            headerComponent={<BsThreeDots color={colors.black} size={28} style={{ cursor: 'pointer' }} />}
-                        />
+            {!notags &&
+                <Row className="h-25 align-items-center">
+                    <Col className="d-flex">
+                        {
+                            tags && tags.length > 0 && tags.map((item, index) => (
+                                <Tag key={index} title={item} onClick={() => onClickTag("/dataset", { listItem: [{ title: item, type: "theme" }] })} />
+                            ))
+                        }
                     </Col>
-                }
-            </Row>
-            <Row className={`${publisher ? "h-50" : "h-75"}`}>
+                    {
+                        !nodropdown &&
+                        <Col md={2} className='d-flex justify-content-end'>
+                            <Dropdown
+                                noheadercomponent={noheadercomponent}
+                                autoClose={"outside"}
+                                size={selectedDropdownValue === t("download") ? "md" : "sm"}
+                                options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
+                                selectedDropdownValue={selectedDropdownValue}
+                                setSelectedDropdownValue={setSelectedDropdownValue}
+                                headerComponent={<BsThreeDots color={colors.black} size={28} style={{ cursor: 'pointer' }} />}
+                            />
+                        </Col>
+                    }
+                </Row>
+            }
+            <Row className={`${publisher ? "h-0" : "h-75"}`}>
                 <Col md={shortTitle ? 8 : 12}>
                     <Heading bold underline maxNumberOfLines={shortTitle ? 2 : 3} size={headingSize ? headingSize : "md"} heading={title} onClick={onClick} />
                 </Col>
@@ -131,7 +135,7 @@ const Card = memo((props) => {
             </Row>
             {
                 publisher &&
-                <Row className="h-25 align-items-end" >
+                <Row className="h-50 align-items-end" >
                     <Col>
                         <Heading size='xxs' color={colors.gray} nomargin heading={publisher} />
                     </Col>

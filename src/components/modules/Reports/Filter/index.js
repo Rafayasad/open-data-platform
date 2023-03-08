@@ -14,11 +14,12 @@ import DatePicker from "../../../elements/DatePicker";
 import Dropdown from "../../../elements/DropDown";
 import '../../../modules/Drawer/style.css';
 import 'react-modern-drawer/dist/index.css';
+import dayjs from "dayjs";
 
 const ReportsFilter = memo((props) => {
 
     const { t, i18n } = useTranslation();
-    const { open, setOpen, appliedFilters, onApplyFilters, accordinData, kpi } = props;
+    const { open, setOpen, appliedFilters, onApplyFilters, accordinData, kpi, selectedTab } = props;
 
     const initialFilters = {
         date_type: "Modified"
@@ -69,6 +70,7 @@ const ReportsFilter = memo((props) => {
     }, [appliedFilters])
 
     const onClickItem = useCallback((item) => {
+        console.log("ITEMS", item);
         item.type === "publisher__name" && setFilters({ ...filters, publisher: item.title });
         item.type === "theme" && setFilters({ ...filters, topic: item.title });
 
@@ -122,12 +124,21 @@ const ReportsFilter = memo((props) => {
                 }
                 <div className="d-flex my-3">
                     <div className="w-100">
-                        <DatePicker value={filters?.start_date} title={"Start Date"} onChange={(start_date) => onChangeFilter({ start_date })} maxDate={filters?.end_date} />
+                        <DatePicker
+                            disabled={selectedTab === "Weekly" || selectedTab === "Monthly" || selectedTab === "Quarterly" || selectedTab === "Yearly"}
+                            value={filters?.start_date} title={"Start Date"} onChange={(start_date) => onChangeFilter({ start_date })} maxDate={filters?.end_date} />
                     </div>
                 </div>
                 <div className="d-flex my-3">
                     <div className="w-100">
-                        <DatePicker value={filters?.end_date} title={"End Date"} onChange={(end_date) => onChangeFilter({ end_date })} minDate={filters?.start_date} />
+                        <DatePicker value={filters?.end_date} title={"End Date"}
+                            onChange={(end_date) => onChangeFilter({
+                                end_date,
+                                start_date: selectedTab === "Weekly" ? dayjs(end_date).subtract(6, 'days').format('YYYY-MM-DD') :
+                                    selectedTab === "Monthly" ? dayjs(end_date).subtract(1, 'month').format('YYYY-MM-DD') :
+                                        selectedTab === "Quarterly" ? dayjs(end_date).subtract(3, 'month').format('YYYY-MM-DD') :
+                                            selectedTab === "Yearly" && dayjs(end_date).subtract(1, 'year').format('YYYY-MM-DD')
+                            })} minDate={filters?.start_date} />
                     </div>
                 </div>
                 <div className="py-2">

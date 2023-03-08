@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 
 const DatePicker = memo((props) => {
 
-    const { title, onChange, value, minDate, maxDate } = props;
+    const { title, onChange, value, minDate, maxDate, disabled } = props;
 
     const handleChange = (newValue) => {
         onChange(dayjs(newValue).format('YYYY-MM-DD'))
@@ -15,6 +15,7 @@ const DatePicker = memo((props) => {
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DesktopDatePicker
+                disabled={disabled}
                 label={title}
                 inputFormat="YYYY-MM-DD"
                 className='w-100'
