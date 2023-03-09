@@ -18,6 +18,7 @@ const AppliedFilters = memo((props) => {
                 <Row className="py-2">
                     {
                         filters && Object.entries(filters).map((item) => (
+                            item[0] !== "type" &&
                             <Col md={4}>
                                 <Row>
                                     <Heading size='xs' capitalize bold heading={item[0].replace("_", " ")} color={colors.dark_gray} />

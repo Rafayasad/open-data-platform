@@ -25,6 +25,11 @@ const DataHeader = memo((props) => {
 
     const downloadResources = useCallback((links) => { console.log(links) });
 
+    const [currentHovered, setCurrentHovered] = useState(null);
+
+    const onHover = useCallback(() => setCurrentHovered(true), [currentHovered])
+    const onLeave = useCallback(() => setCurrentHovered(false), [currentHovered])
+
     const options = resources?.map(item => (
         {
             title: i18n.language === locales.AR ? item.title_ar : item.title,
@@ -76,12 +81,12 @@ const DataHeader = memo((props) => {
                 }
             </Col>
             <Col className="d-none d-lg-flex justify-content-end align-items-center">
-                <div className="d-flex">
+                <div className="d-flex" onMouseOver={onHover} onMouseLeave={onLeave}>
                     <Dropdown
                         autoClose={true}
                         options={shareOption}
                         size={"sm"}
-                        headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}
+                        headerComponent={<Button backgroundColor="white" textColor="black" borderColor={currentHovered ? colors.purple : colors.black} icon={<SlShare size={20} color={currentHovered ? colors.purple : colors.black} />} />}
                     />
                 </div>
                 <div className="">

@@ -22,7 +22,7 @@ const DatePicker = memo((props) => {
                 value={value ? value : null}
                 onChange={handleChange}
                 renderInput={(params) => <TextField {...params} />}
-                minDate={minDate}
+                // minDate={minDate}
                 maxDate={maxDate}
             />
         </LocalizationProvider>

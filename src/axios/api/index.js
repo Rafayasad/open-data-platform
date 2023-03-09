@@ -890,22 +890,23 @@ export const getPublishersReport = (setData, payload, setLoading, setTotalCount,
     payload?.datatype !== "pdf" && setLoading(true);
 
     const options = {
-        responseType: payload?.datatype == "pdf" ? "blob" : "json"
+        responseType: payload.datatype == "pdf" ? "blob" : "json"
     }
 
-    return endpoints.getPublishersReport(payload, options)
+    return endpoints.getPublishersReport(new_payload, options)
         .then((res) => {
             setLoading(false)
-            if (res.data.status === 200) {
-
-                if (payload?.datatype === "csv" || payload?.datatype === "excel") {
-                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'insights_report', [{ name: "alishan" }])
-                } else if (payload?.datatype === 'pdf') {
+            console.log("paadddd", payload,);
+            if (res.status === 200) {
+                if (payload.datatype === "csv" || payload.datatype === "excel") {
+                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'publishers_report', [res.data])
+                    setDatatype('');
+                } else if (payload.datatype === 'pdf') {
                     console.log("hello");
                     const href = window.URL.createObjectURL(res.data);
                     const link = document.createElement('a');
                     link.href = href;
-                    link.setAttribute('download', 'insight_report.pdf'); //or any other extension
+                    link.setAttribute('download', 'publishers_report.pdf'); //or any other extension
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
@@ -927,41 +928,42 @@ export const getPublishersReport = (setData, payload, setLoading, setTotalCount,
         })
 }
 
-export const getDatasetsReport = (setData, payload, setLoading, setTotalCount, datatype, setDatatype) => {
+export const getDatasetsReport = (setData, payload, setLoading, setTotalCount, setDatatype) => {
 
-    setLoading(true)
+    let new_payload = { ...payload }
+
+    new_payload.datatype = new_payload.datatype === 'pdf' ? 'pdf' : "json"
+
+    payload?.datatype !== "pdf" && setLoading(true);
 
     const options = {
         responseType: payload?.datatype == "pdf" ? "blob" : "json"
     }
 
-    return endpoints.getDatasetsReport(payload, options)
+    return endpoints.getDatasetsReport(new_payload, options)
         .then((res) => {
-
-            if (res.data.status === 200) {
-
+            setLoading(false);
+            if (res.status === 200) {
                 if (payload?.datatype === "csv" || payload?.datatype === "excel") {
-                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'insights_report', [{ name: "alishan" }])
+                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'dataset_report', [res.data])
+                    setDatatype('');
                 } else if (payload?.datatype === 'pdf') {
                     console.log("hello");
                     const href = window.URL.createObjectURL(res.data);
                     const link = document.createElement('a');
                     link.href = href;
-                    link.setAttribute('download', 'insight_report.pdf'); //or any other extension
+                    link.setAttribute('download', 'dataset_report.pdf'); //or any other extension
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
                     window.URL.revokeObjectURL(href);
-                    setDatatype();
+                    setDatatype('');
                 }
 
                 if (payload?.datatype !== "pdf" && payload?.datatype !== "excel" && payload?.datatype !== "csv") {
-                    console.log("res", res.data);
                     setData(res.data.data);
                     setTotalCount(res.data.total_count);
-                    setLoading(false);
                 }
-
             }
 
         })
@@ -1023,7 +1025,7 @@ export const recoverPassword = async (navigate, route, setLoading, payload) => {
     let { email } = payload;
 
     let data = {
-        mail: email,
+        email
     }
 
     let headers = {

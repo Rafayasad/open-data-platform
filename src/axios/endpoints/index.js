@@ -75,8 +75,8 @@ export const endpoints = {
     postSearch: (data) => {
         return axios.post('https://data.abudhabi/apis/search.php', data)
     },
-    recoverPassword: (mail, headers) => {
-        return axios.post('https://data.abudhabi/user/password?_format=json', mail, { headers })
+    recoverPassword: (data, headers) => {
+        return axios.post('http://192.168.0.188/odp_apis/reset_email.php', data, { headers })
     },
     viewCount: (data) => {
         return axios.post('https://data.abudhabi/apis/view_count.php', data);

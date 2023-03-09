@@ -135,9 +135,9 @@ const ReportsFilter = memo((props) => {
                             onChange={(end_date) => onChangeFilter({
                                 end_date,
                                 start_date: selectedTab === "Weekly" ? dayjs(end_date).subtract(6, 'days').format('YYYY-MM-DD') :
-                                    selectedTab === "Monthly" ? dayjs(end_date).subtract(1, 'month').format('YYYY-MM-DD') :
-                                        selectedTab === "Quarterly" ? dayjs(end_date).subtract(3, 'month').format('YYYY-MM-DD') :
-                                            selectedTab === "Yearly" && dayjs(end_date).subtract(1, 'year').format('YYYY-MM-DD')
+                                    selectedTab === "Monthly" ? dayjs(end_date).subtract(1, 'month').add(1,'day').format('YYYY-MM-DD') :
+                                        selectedTab === "Quarterly" ? dayjs(end_date).subtract(3, 'month').add(1,'day').format('YYYY-MM-DD') :
+                                            selectedTab === "Yearly" && dayjs(end_date).subtract(1, 'year').add(1,'day').format('YYYY-MM-DD')
                             })} minDate={filters?.start_date} />
                     </div>
                 </div>
