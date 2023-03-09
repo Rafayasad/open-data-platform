@@ -93,8 +93,6 @@ const Insights = memo(() => {
         }, setLoading, setDataType)
     }, [filters, datatype]);
 
-    console.log("insights", insights);
-
     const onChangePage = useCallback((page) => setCurrentPage(page), [currentPage]);
 
     const onClickFilter = useCallback(() => setFilterOpen(!filterOpen), [filterOpen]);

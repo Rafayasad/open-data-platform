@@ -881,9 +881,13 @@ export const getInsightsReport = (setData, payload, setLoading, setDatatype) => 
         })
 }
 
-export const getPublishersReport = (setData, payload, setLoading, setTotalCount, datatype, setDatatype) => {
+export const getPublishersReport = (setData, payload, setLoading, setTotalCount, setDatatype) => {
 
-    setLoading(true)
+    let new_payload = { ...payload }
+
+    new_payload.datatype = new_payload.datatype === 'pdf' ? 'pdf' : "json"
+
+    payload?.datatype !== "pdf" && setLoading(true);
 
     const options = {
         responseType: payload?.datatype == "pdf" ? "blob" : "json"
@@ -891,7 +895,7 @@ export const getPublishersReport = (setData, payload, setLoading, setTotalCount,
 
     return endpoints.getPublishersReport(payload, options)
         .then((res) => {
-
+            setLoading(false)
             if (res.data.status === 200) {
 
                 if (payload?.datatype === "csv" || payload?.datatype === "excel") {
@@ -906,13 +910,12 @@ export const getPublishersReport = (setData, payload, setLoading, setTotalCount,
                     link.click();
                     document.body.removeChild(link);
                     window.URL.revokeObjectURL(href);
-                    setDatatype();
+                    setDatatype('');
                 }
 
                 if (payload?.datatype !== "pdf" && payload?.datatype !== "excel" && payload?.datatype !== "csv") {
                     setData(res.data.data);
                     setTotalCount(res.data.total_count);
-                    setLoading(false);
                 }
 
             }
