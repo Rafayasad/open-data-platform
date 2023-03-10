@@ -49,6 +49,7 @@
     "login": "Login",
     "logout": "Logout",
     "logIn": "Log in",
+    "LogIn": "Log In",
     "LoginWithUAE": "Log in with UAE PASS",
     "register": "Register",
     "applications": "Applications",
@@ -221,5 +222,6 @@
     "linkedin": "LinkedIn",
     "popularsearches": "POPULAR SEARCHES",
     "fieldFullName": "Your Full Name",
-    "fieldEmail": "Your Email"
+    "fieldEmail": "Your Email",
+    "detail": "Detail"
 }

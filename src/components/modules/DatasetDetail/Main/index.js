@@ -11,7 +11,9 @@ import Shimmer from '../../../elements/Shimmer';
 
 const Main = memo((props) => {
 
-    const { data } = props
+    const { data, url } = props;
+
+    console.log("Tim Tima 2", url)
 
     const { t, i18n } = useTranslation();
 
@@ -94,7 +96,7 @@ const Main = memo((props) => {
         }
     ]
 
-    console.log("data ID==>",data);
+    console.log("data ID==>", data);
 
     let tabs = [
         {
@@ -111,7 +113,9 @@ const Main = memo((props) => {
         <Container fluid>
             <DataHeader
                 resources={data && data.resources}
-                title={i18n.language === locales.AR ? data && data.title_ar : data && data.title} />
+                title={i18n.language === locales.AR ? data && data.title_ar : data && data.title}
+                url={url}
+            />
             <Tabs data={tabs} staticComponentOnRight={<DataCard data={f} />} />
         </Container>
     )

@@ -13,9 +13,6 @@ import './style.css';
 import { shareOptions } from "../../../utils";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import i18n from "../../../i18n/i18n";
-import { locales } from "../../../i18n/helper";
-import { AiFillApi } from "react-icons/ai";
 import pdfImage from '../../../assets/images/pdf_img.png';
 import excelImage from '../../../assets/images/excel_img.png';
 import csvImage from '../../../assets/images/csv_img.png';
@@ -27,7 +24,7 @@ const Card = memo((props) => {
     const navigate = useNavigate();
 
     const { resources, title, publisher, description, tags, size, noborder,
-        hoverable, shortTitle, headingSize, onClick, nodropdown, noheadercomponent, notags, notagsactive } = props;
+        hoverable, nopadding, shortTitle, headingSize, onClick, nodropdown, noheadercomponent, notags, notagsactive, url } = props;
 
     var height = "332px", border, ClassName;
 
@@ -95,8 +92,8 @@ const Card = memo((props) => {
     const specificShareOptions = shareOptions?.map((item, index) => (
         {
             title: t(item.title),
-            onClick: downloadResources,
-            downloadLink: item.downloadURL,
+            format: item.format,
+            url: url,
             icon: item.format === "facebook" ? <FaFacebookF />
                 : item.format === "linkedin" ? <FaLinkedinIn />
                     : item.format === "twitter" && <FaTwitter />
@@ -104,9 +101,10 @@ const Card = memo((props) => {
     ))
 
     return (
-        <RBCard className={`p-4 ${ClassName}`} style={{ height: height, borderRadius: "30px", borderWidth: border }}>
-            {!notags &&
-                <Row className="h-25 align-items-center">
+        <RBCard className={`${nopadding ? "py-4" : "p-4"} ${ClassName}`} style={{ height: height, borderRadius: "30px", borderWidth: border }}>
+            {
+                !notags &&
+                <Row className={`${nopadding && "m-0"} h-25 align-items-center`}>
                     <Col className="d-flex">
                         {
                             tags && tags.length > 0 && tags.map((item, index) => (
@@ -133,7 +131,7 @@ const Card = memo((props) => {
                     }
                 </Row>
             }
-            <Row className={`${publisher ? "h-50" : "h-75"}`}>
+            <Row className={`${nopadding && "m-0"} ${publisher && !notags ? "h-50" : "h-75"}`}>
                 <Col md={shortTitle ? 8 : 12}>
                     <Heading bold underline maxNumberOfLines={shortTitle ? 2 : 3} size={headingSize ? headingSize : "md"} heading={title} onClick={onClick} />
                 </Col>
@@ -146,7 +144,7 @@ const Card = memo((props) => {
             </Row>
             {
                 publisher &&
-                <Row className="h-25 align-items-end" >
+                <Row className={`${nopadding && "m-0"} h-25 align-items-end`} >
                     <Col>
                         <Heading size='xxs' color={colors.gray} nomargin heading={publisher} />
                     </Col>

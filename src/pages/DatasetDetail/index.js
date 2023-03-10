@@ -58,9 +58,9 @@ const DatasetDetail = memo(() => {
         <View theme="dark" noupperfooter sticky>
             <div className="my-5 pt-5">
                 <div className="px-4 pt-5">
-                    <BreadCrumb items={[t("datasets"), t("technology")]} />
+                    <BreadCrumb items={[t("datasets"), t("detail")]} />
                 </div>
-                <Main data={dataset} />
+                <Main data={dataset} url={`https://data.abudhabi/dataset/${id}`} />
                 <Cards title={t("similarDatasets")} backgroundColor={colors.white} data={similarDataset} />
             </div>
         </View>

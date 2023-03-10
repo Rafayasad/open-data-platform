@@ -71,32 +71,19 @@ const OTP = memo(() => {
                             >
                                 <AuthCard
                                     view="dekstop"
-                                    title={t("logIn")}
-                                    subtitle={t("accDontExist")}
-                                    linktext={{ display_text: t("requestAccess"), onClick: onClickRegister }}
-                                    inputFields={[
-                                        { placeholder: t("governmentEmail"), type: "email", onChange: (value) => setEmail(value) },
-                                        { placeholder: t("password"), type: "password", onChange: (value) => setPassword(value) },
-                                    ]}
+                                    title={"OTP Verification"}
+                                    subtitle={"An OTP has been sent to your entered email."}
+                                    hasOtp
                                     button={[
                                         {
-                                            title: t("logIn"),
+                                            title: "Done",
                                             onClick: onClickLogin,
                                             backgroundColor: colors.black,
                                             textColor: colors.white,
                                             textSize: "",
                                             loading
-                                        },
-                                        {
-                                            title: t("LoginWithUAE"),
-                                            onClick: "",
-                                            backgroundColor: colors.white,
-                                            textColor: colors.black,
-                                            borderColor: colors.black,
-                                            textSize: "",
-                                        },
+                                        }
                                     ]}
-                                    onClickForgetPassword={onClickForgetPassword}
                                 />
                             </Card>
                         </Col>

@@ -71,7 +71,7 @@ const Images = memo(() => {
                                 <Row>
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                        <Button bold title={t("discover")} />
+                                        <Button bold title={t("discover")} onClick={onClickDiscover} />
                                     </Col>
                                     <Col />
                                 </Row>
@@ -96,7 +96,7 @@ const Images = memo(() => {
                                 <Row>
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                        <Button title={t("getStarted")} />
+                                        <Button bold title={t("getStarted")} onClick={onClickRegister} />
                                     </Col>
                                     <Col />
                                 </Row>
