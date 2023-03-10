@@ -61,13 +61,13 @@ export const endpoints = {
         return axios.post('http://10.241.40.69:30418/apis/register.php', data, { headers })
     },
     getInsightsReport: (data, options) => {
-        return axios.post('http://192.168.0.23:82/apis/reports/insight_report.php', data, options)
+        return axios.post('http://10.241.40.69:30418/apis/reports/insight_report.php', data, options)
     },
     getPublishersReport: (data, options) => {
-        return axios.post('http://192.168.0.23:82/apis/reports/publishers_report.php', data, options)
+        return axios.post('http://10.241.40.69:30418/apis/reports/publishers_report.php', data, options)
     },
     getDatasetsReport: (data, options) => {
-        return axios.post('http://192.168.0.23:82/apis/reports/dataset_report.php', data, options)
+        return axios.post('http://10.241.40.69:30418/apis/reports/dataset_report.php', data, options)
     },
     getSearch: () => {
         return axios.get('https://data.abudhabi/apis/search.php')
@@ -76,7 +76,10 @@ export const endpoints = {
         return axios.post('https://data.abudhabi/apis/search.php', data)
     },
     recoverPassword: (data, headers) => {
-        return axios.post('http://192.168.0.188/odp_apis/reset_email.php', data, { headers })
+        return axios.post('http://10.241.40.69:30418/apis/reset_email.php', data, { headers })
+    },
+    resetPassword: (data, headers) => {
+        return axios.post('http://10.241.40.69:30418/xwordxssapx.php', data, { headers })
     },
     viewCount: (data) => {
         return axios.post('https://data.abudhabi/apis/view_count.php', data);

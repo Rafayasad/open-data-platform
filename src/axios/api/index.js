@@ -3,6 +3,7 @@ import { endpoints } from "../endpoints"
 import { generateFile } from "../../utils/generic.js";
 import { locales } from "../../i18n/helper"
 import i18n from "../../i18n/i18n"
+import { toast } from "react-toastify";
 
 export const getPlatformInsights = (setData, setLoading) => {
     return endpoints.
@@ -1019,7 +1020,6 @@ export const getSearch = (setData) => {
 
 export const recoverPassword = async (navigate, route, setLoading, payload) => {
 
-
     setLoading(true)
 
     let { email } = payload;
@@ -1036,7 +1036,52 @@ export const recoverPassword = async (navigate, route, setLoading, payload) => {
     return await endpoints.
         recoverPassword(data, headers).then((res) => {
 
-            navigate(route, { replace: true });
+            if (res.status === 200) {
+                if (res.data.status === 200) {
+                    navigate(route, { replace: true });
+                    toast(res.data.message, { type: 'success' })
+                } else if (res.data.status === 400) {
+                    toast(res.data.message, { type: 'error' })
+                }
+            }
+
+            setLoading(false)
+
+        }).catch((err) => {
+            setLoading(false)
+            console.log("Error Message", err)
+        })
+}
+
+export const resetPassword = async (navigate, route, setLoading, payload) => {
+
+    setLoading(true)
+
+    let { email, password, otp } = payload;
+
+    let data = {
+        email,
+        pass: password,
+        mstpx: otp
+    }
+
+    let headers = {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+    }
+
+    return await endpoints.
+        resetPassword(data, headers).then((res) => {
+
+            if (res.status === 200) {
+                if (res.data.status === 200) {
+                    navigate(route, { replace: true });
+                    toast(res.data.message, { type: 'success' })
+                } else if (res.data.status === 400) {
+                    toast(res.data.message, { type: 'error' })
+                }
+            }
+
             setLoading(false)
 
         }).catch((err) => {

@@ -15,6 +15,7 @@ export const routes = {
   SUCCESS_STOIRES: '/success-stories',
   SUCCESS_STOIRES_DETAIL: '/success-stories/detail',
   CHANGE: `/change-password`,
+  OTP: `/otp-verification`,
   POLICY: `/privacy-policy`,
   CONTACT: `/contact-us`,
   REAL_TIME_APIS: `/real-time-apis`,

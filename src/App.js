@@ -10,6 +10,8 @@ import { getAboutUs, getAllApplications, getFacets, getFaqsCategory, getPopularQ
 import { setApplications } from './redux/reducers/Applications';
 import { setStories } from './redux/reducers/SuccessStories';
 import { setCategories, setQuestions } from './redux/reducers/Support';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -33,6 +35,7 @@ function App() {
 
   return <div className={`${i18n.language === locales.AR && "ar-font"}`}>
     <Router />
+    <ToastContainer />
   </div>
 
 }

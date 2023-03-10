@@ -8,7 +8,7 @@ const Button = memo((props) => {
     const { t } = useTranslation()
 
     const { isFilled, title, icon, backgroundColor, textColor, width, borderColor, loading, onClick, disable } = props
-    console.log("button ka disable", loading);
+    
     return (
         <button
             onClick={onClick ? onClick : () => { }}
