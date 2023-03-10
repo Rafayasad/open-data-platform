@@ -19,6 +19,7 @@ const SupportQuestionsDetail = memo(() => {
 
     const id = urlParams.get('id');
     const url = state && state.backURL ? state.backURL : routes.SUPPORT
+    const breadCrumbName = state && state.breadCrumbName;
 
     const [details, setDetails] = useState();
 
@@ -31,7 +32,7 @@ const SupportQuestionsDetail = memo(() => {
         <View theme='dark' footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")}  >
             <div className="my-5 pt-5">
                 <div className="px-4 m-0">
-                    <BreadCrumb items={[t("supports"), t("gettingStarted")]} />
+                    <BreadCrumb items={[t("supports"), breadCrumbName]} />
                 </div>
                 <Main title={i18n.language === locales.AR ? details && details.title_ar : details && details.title} description={i18n.language === locales.AR ? details && details.description_ar : details && details.description} />
             </div>

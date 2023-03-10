@@ -239,10 +239,12 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                     let obj = {
                         keyword: search,
                         ip: "192.168.0.44",
-                        lang: "en"
+                        lang: "en",
+                        type: "dataset"
                     }
                     await endpoints.
                         postSearch(obj).then((res) => {
+                            console.log("helllo", res);
                         }).catch((err) => {
                             console.log("Error Message", err)
                         })
@@ -252,7 +254,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
 
                 let arr = []
 
-                arr = Object.values(res.data.results).map(item => (
+                arr = Object.values(res.data.results)?.map(item => (
                     {
                         id: item.identifier,
                         title: item.title,
@@ -262,7 +264,23 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                         publisher: item.publisher?.name,
                         publisher_ar: item.publisherlear?.name,
                         tags: item.theme,
-                        tags_ar: item.themelear
+                        tags_ar: item.themelear,
+                        resources: item.distribution.filter(item => (
+                            {
+                                title: item.title,
+                                title_ar: item.titlelear,
+                                description: item.description,
+                                description_ar: item.descriptionlear,
+                                format:
+                                    item.format === "pdf" ? "pdf"
+                                        : item.format === "esri rest" ? "excel"
+                                            : item.format === "xlsx" ? "excel"
+                                                : item.format === "xls" ? "excel"
+                                                    : item.format === "csv" ? "csv"
+                                                        : item.format === "API" && "api",
+                                downloadURL: item.downloadURL
+                            }
+                        )),
                     }
                 ))
 
@@ -320,7 +338,7 @@ export const getDatasetById = (id, setData) => {
                                     : item.format === "xlsx" ? "excel"
                                         : item.format === "xls" ? "excel"
                                             : item.format === "csv" ? "csv"
-                                                : item.format === "API" && "api",
+                                                : item.format === "API" && "API",
                             downloadURL: item.downloadURL
                         }
                     )),
@@ -508,7 +526,7 @@ export const getQuestionByCategories = (setData, questionID) => {
 
             if (res.status === 200) {
 
-                console.log("match", res.data.data);
+                console.log("match", res.data);
 
                 let data = res.data.data;
 
@@ -1007,7 +1025,6 @@ export const register = async (navigate, route, setLoading, payload) => {
 export const getSearch = (setData) => {
     return endpoints.
         getSearch().then((res) => {
-
             if (res.status === 200) {
                 setData(res.data.data);
             }
@@ -1058,3 +1075,39 @@ export const realTimeApis = (setData, payload, setLoading) => {
             console.log("Error Message", err)
         })
 }
+
+export const getPrivacyPolicy = (setData, setLoading) => {
+
+    setLoading(true);
+
+    return endpoints.
+        getPrivacyPolicy()
+        .then((res) => {
+
+            setLoading(false);
+
+            // if(res.data.data.length > 0)
+            
+            let arr = res.data.data.slice(-1).map(item => (
+                {
+                    title: item.attributes.title,
+                    title_ar: item.attributes.field_privacytitle_ar,
+                    description: item.attributes.field_body,
+                    description_ar: item.attributes.field_privacy_description_ar
+                }))
+
+            let obj = {
+                title: arr[0].title,
+                title_ar: arr[0].title_ar,
+                description: arr[0].description,
+                description_ar: arr[0].description_ar
+            }
+
+            setData(obj)
+
+        }).catch((err) => {
+            console.log("Error Message", err)
+            setLoading(false);
+        })
+}
+

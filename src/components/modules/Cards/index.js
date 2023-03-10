@@ -36,7 +36,7 @@ const Cards = memo((props) => {
 
     const { i18n } = useTranslation();
 
-    const { title, data, backgroundColor, hoverable, type, size, onClick, onClickViewAll, buttonText, noheadercomponent } = props;
+    const { title, data, backgroundColor, hoverable, type, size, onClick, onClickViewAll, buttonText, notagsactive, noheadercomponent } = props;
 
     const renderContent = () => {
         if (type === 'image-inner-text') {
@@ -49,7 +49,7 @@ const Cards = memo((props) => {
                             title={i18n.language === locales.AR ? item.title_ar : item.title}
                             description={i18n.language === locales.AR ? item.description_ar : item.description}
                             image={images[Math.floor(Math.random() * images.length)]}
-                            onClick={() => onClick(item.id)}
+                            onClick={() => onClick(item.id, i18n.language === locales.EN ? item.title : item.title_ar)}
                         />
                     </Col>
                 )) : <Loader type={type} backgroundColor={backgroundColor} />
@@ -88,6 +88,7 @@ const Cards = memo((props) => {
                 data && data.length > 0 ? data.map((item, index) => (
                     <Col key={index} md={4} className="py-2">
                         <Card
+                            notagsactive={notagsactive}
                             noheadercomponent={noheadercomponent}
                             size={size}
                             hoverable={hoverable}

@@ -237,3 +237,11 @@ export const generateFile = (fileType, filename, data) => {
   XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
   XLSX.writeFile(workbook, `${filename}.${fileType}`);
 }
+
+export const numberWithCommas = (x) => {
+  x = x.toString();
+  var pattern = /(-?\d+)(\d{3})/;
+  while (pattern.test(x))
+    x = x.replace(pattern, "$1,$2");
+  return x;
+}

@@ -87,12 +87,12 @@ const Navbar = memo((props) => {
                         <Col md={6} className="d-flex justify-content-center align-items-center">
                             <div className="mx-3">
                                 <Link to={routes.DATASET}>
-                                    <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("dataset")}</p>
+                                    <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("datasets")}</p>
                                 </Link>
                             </div>
                             <div className="mx-3">
-                                <Link to={routes.ABOUTUS}>
-                                    <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("aboutus")}</p>
+                                <Link to={routes.APPLICATIONS}>
+                                    <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("application")}</p>
                                 </Link>
                             </div>
                             <div className="mx-3">
@@ -101,8 +101,8 @@ const Navbar = memo((props) => {
                                 </Link>
                             </div>
                             <div className="mx-3">
-                                <Link to={routes.APPLICATIONS}>
-                                    <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("application")}</p>
+                                <Link to={routes.ABOUTUS}>
+                                    <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("aboutus")}</p>
                                 </Link>
                             </div>
                         </Col>
@@ -149,7 +149,7 @@ const Navbar = memo((props) => {
                 </Row>
             </Container>
             <Drawer
-                style={{ width: "100%", height: "100vh", scrollBehavior: "smooth", overflow: "auto", minHeight: "100vh", zIndex: 1050, backgroundColor: "red" }}
+                style={{ width: "100%", height: "100vh", scrollBehavior: "smooth", overflow: "auto", minHeight: "100vh", zIndex: 1050, backgroundColor: colors.white }}
                 open={isOpen}
                 direction='right'
                 className="p-3"

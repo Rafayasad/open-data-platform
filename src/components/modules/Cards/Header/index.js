@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { colors } from "../../../../utils/colors";
 import Button from "../../../elements/Button";
 import Dropdown from "../../../elements/DropDown";
@@ -25,38 +25,43 @@ const Header = memo((props) => {
 
     return (
         <Container fluid className="d-flex justify-content-between align-items-center py-4">
-            <div>
-                <Heading
-                    bold
-                    nomargin
-                    size={headingSize}
-                    color={color}
-                    heading={title} />
-
-            </div>
-            {
-                !nobutton ?
+            <Row className="w-100 p-0 m-0">
+                <Col className="">
                     <div>
-                        <Button
-                            title={buttonText ? buttonText : t("viewAll")}
-                            textColor={color}
-                            borderColor={color}
-                            backgroundColor='transparent'
-                            onClick={onClickButton}
-                        />
-                    </div> :
-                    dropdown ?
-                        <Dropdown
-                            highlightableItem
-                            autoClose={true}
-                            name={dropdown.title}
-                            options={dropdown.options}
-                            selectedValue={dropdown.selectedValue}
-                            dropdownWidth={"12rem"}
-                            width={"100%"}
-                        /> :
-                        null
-            }
+                        <Heading
+                            bold
+                            nomargin
+                            size={headingSize}
+                            color={color}
+                            heading={title} />
+                    </div>
+                </Col>
+                <Col md={3} className="d-flex justify-content-end align-items-center">
+                    {
+                        !nobutton ?
+                            <div>
+                                <Button
+                                    title={buttonText ? buttonText : t("viewAll")}
+                                    textColor={color}
+                                    borderColor={color}
+                                    backgroundColor='transparent'
+                                    onClick={onClickButton}
+                                />
+                            </div> :
+                            dropdown ?
+                                <Dropdown
+                                    highlightableItem
+                                    autoClose={true}
+                                    name={dropdown.title}
+                                    options={dropdown.options}
+                                    selectedValue={dropdown.selectedValue}
+                                    dropdownWidth={"100%"}
+                                    width={"100%"}
+                                /> :
+                                null
+                    }
+                </Col>
+            </Row>
         </Container >
     )
 });

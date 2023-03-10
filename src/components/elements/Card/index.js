@@ -1,6 +1,7 @@
 import React, { memo, useState } from "react";
 import { Card as RBCard, Col, Row } from "react-bootstrap";
 import { BsPerson, BsShare, BsThreeDots } from "react-icons/bs";
+import { MdOutlineFileDownload } from 'react-icons/md';
 import { FaFilePdf, FaFileExcel, FaFileCsv } from "react-icons/fa";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { colors } from "../../../utils/colors";
@@ -14,6 +15,11 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import i18n from "../../../i18n/i18n";
 import { locales } from "../../../i18n/helper";
+import { AiFillApi } from "react-icons/ai";
+import pdfImage from '../../../assets/images/pdf_img.png';
+import excelImage from '../../../assets/images/excel_img.png';
+import csvImage from '../../../assets/images/csv_img.png';
+import apiImage from '../../../assets/images/api_img.png';
 
 const Card = memo((props) => {
 
@@ -21,7 +27,7 @@ const Card = memo((props) => {
     const navigate = useNavigate();
 
     const { resources, title, publisher, description, tags, size, noborder,
-        hoverable, shortTitle, headingSize, onClick, nodropdown, noheadercomponent, notags } = props;
+        hoverable, shortTitle, headingSize, onClick, nodropdown, noheadercomponent, notags, notagsactive } = props;
 
     var height = "332px", border, ClassName;
 
@@ -63,12 +69,12 @@ const Card = memo((props) => {
     const options = [
         {
             title: t("download"),
-            icon: <BsPerson />,
+            icon: <MdOutlineFileDownload size={20} color="black" />,
             onClick: isClicked,
         },
         {
             title: t("share"),
-            icon: <BsShare />,
+            icon: <BsShare color="black" />,
             onClick: isClicked,
         }
     ]
@@ -78,9 +84,10 @@ const Card = memo((props) => {
             title: item.title && item.title,
             onClick: downloadResources,
             downloadLink: item.downloadURL,
-            icon: item.format === "pdf" ? <FaFilePdf />
-                : item.format === "excel" ? <FaFileExcel />
-                    : item.format === "csv" && <FaFileCsv />
+            icon: item.format === "pdf" ? <img src={pdfImage} />
+                : item.format === "excel" ? <img src={excelImage} />
+                    : item.format === "csv" ? <img src={csvImage} />
+                        : item.format === "API" && <img src={apiImage} />
         }
     ))
 
@@ -102,7 +109,8 @@ const Card = memo((props) => {
                     <Col className="d-flex">
                         {
                             tags && tags.length > 0 && tags.map((item, index) => (
-                                <Tag key={index} title={item} onClick={() => onClickTag("/dataset", { listItem: [{ title: item, type: "theme" }] })} />
+                                <Tag key={index} title={item}
+                                    onClick={() => !notagsactive && onClickTag("/dataset", { listItem: [{ title: item, type: "theme" }] })} />
                             ))
                         }
                     </Col>

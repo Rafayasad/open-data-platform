@@ -29,7 +29,7 @@ const About = memo(() => {
                 <Main data={aboutus} />
             </div>  
             <hr className="m-0 p-0 mx-4" />
-            <Cards noheadercomponent backgroundColor={colors.white} title={t("successStories")} data={stories} size="md" hoverable="primary" onClick={onClickCard} onClickViewAll={onClickButton} />
+            <Cards notagsactive noheadercomponent backgroundColor={colors.white} title={t("successStories")} data={stories} size="md" hoverable="primary" onClick={onClickCard} onClickViewAll={onClickButton} />
             <AdLogo />
         </View>
     )

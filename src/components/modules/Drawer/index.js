@@ -38,7 +38,7 @@ const Drawer = memo((props) => {
 
     const data = [
         {
-            title: t("categories"),
+            title: t("publisher"),
             tags: i18n.language === locales.AR ? publishers && publishers.ar : publishers && publishers.en
         },
         {
@@ -97,7 +97,7 @@ const Drawer = memo((props) => {
             lockBackgroundScroll
         >
             <div className="p-4 bg-white d-flex align-items-center justify-content-between">
-                <Heading size="xxs" heading={t("filter")} nomargin />
+                <Heading size="xxs" heading={t("filters")} nomargin />
                 <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="mx-1" size={20} />
             </div>
             <hr className="m-0 p-0" />

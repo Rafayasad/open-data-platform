@@ -21,11 +21,11 @@ const Dropdown = (props) => {
         <div className='d-flex align-items-center'>
             {
                 name &&
-                <div className='px-3'>
+                <div className='px-3 d-none d-lg-block w-50'>
                     <Heading size="xxs" heading={name} nomargin />
                 </div>
             }
-            <BSDropdown style={{ width: dropdownWidth }} autoClose={autoClose} onToggle={toggle}>
+            <BSDropdown style={{ width: '100%' }} autoClose={autoClose} onToggle={toggle}>
                 {
                     noheadercomponent ? null :
                         headerComponent ? (

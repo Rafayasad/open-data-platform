@@ -4,20 +4,13 @@ import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import { useTranslation } from "react-i18next";
 import { locales } from "../../../../i18n/helper";
+import { numberWithCommas } from "../../../../utils/generic";
 
 const PlatformInsights = memo((props) => {
 
     const { t, i18n } = useTranslation()
 
     const { data } = props
-
-    function numberWithCommas(x) {
-        x = x.toString();
-        var pattern = /(-?\d+)(\d{3})/;
-        while (pattern.test(x))
-            x = x.replace(pattern, "$1,$2");
-        return x;
-    }
 
     function nFormatter(num, digits) {
         const lookup = [
