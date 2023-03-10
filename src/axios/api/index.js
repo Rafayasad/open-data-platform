@@ -1,9 +1,10 @@
+import _ from 'lodash';
+import { toast } from "react-toastify";
 import { convertHtmlToString } from "../../utils"
 import { endpoints } from "../endpoints"
 import { generateFile } from "../../utils/generic.js";
 import { locales } from "../../i18n/helper"
 import i18n from "../../i18n/i18n"
-import { toast } from "react-toastify";
 
 export const getPlatformInsights = (setData, setLoading) => {
     return endpoints.
@@ -44,6 +45,7 @@ export const getMostViewedDatasets = (setData, setLoading) => {
                         title: item.title,
                         publisher: item.publisher,
                         tags: item.theme,
+                        url: `${process.env.REACT_APP_BASE_URL}/dataset/${item.identifier}`,
                         ...ar_obj
                     }
                 })
@@ -100,6 +102,7 @@ export const getRecentsDatasets = (setData, setLoading) => {
                         title: item.title,
                         publisher: item.publisher,
                         tags: item.theme,
+                        url: `${process.env.REACT_APP_BASE_URL}/dataset/${item.identifier}`,
                         resources: item.distribution.map(item => {
                             return (
                                 {
@@ -117,7 +120,6 @@ export const getRecentsDatasets = (setData, setLoading) => {
                         ...ar_obj
                     }
                 })
-                console.log("TRANSFORM", transform);
                 setData(transform)
                 setLoading(false)
             }
@@ -154,6 +156,7 @@ export const getSimilarDatasets = (topic, setData, setLoading) => {
                         title: item.title,
                         publisher: item.publisher,
                         tags: item.theme,
+                        url: `${process.env.REACT_APP_BASE_URL}/dataset/${item.identifier}`,
                         ...ar_obj
                     }
                 })
@@ -179,7 +182,9 @@ export const getFacets = async (key_en, key_ar, dispatch, setData) => {
                     type: item.type
                 }))
 
-                return transform
+                let sorted = _.sortBy(transform, 'title');
+
+                return sorted
 
             }
 
@@ -197,7 +202,9 @@ export const getFacets = async (key_en, key_ar, dispatch, setData) => {
                     type: item.type
                 }))
 
-                return transform
+                let sorted = _.sortBy(transform, 'title');
+
+                return sorted
 
             }
         }).catch((err) => {
@@ -266,6 +273,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                         publisher_ar: item.publisherlear?.name,
                         tags: item.theme,
                         tags_ar: item.themelear,
+                        url: `${process.env.REACT_APP_BASE_URL}/dataset/${item.identifier}`,
                         resources: item.distribution.filter(item => (
                             {
                                 title: item.title,
@@ -315,7 +323,7 @@ export const getDatasetById = (id, setData) => {
                     title: item.title,
                     title_ar: item.titlear,
                     description: item.description,
-                    description_ar: item.description_ar,
+                    description_ar: item.descriptionlear,
                     publisher: item.publisher?.name,
                     publisher_ar: item.publisherlear?.name,
                     frequency: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
@@ -635,7 +643,7 @@ export const getSuccessStories = (dispatch, setData) => {
 
                     let { id, attributes, relationships } = item;
                     let { title, titlear, short_description, short_descriptionar, created } = attributes;
-                    let { banner, story_paragraph, story_tags, story_tagsar } = relationships;
+                    let { banner, story_paragraph, story_tags } = relationships;
 
                     let image = await endpoints.getImages(banner.links.related.href).then((res) => {
                         if (res.status === 200) {
@@ -661,10 +669,10 @@ export const getSuccessStories = (dispatch, setData) => {
                         console.log("Error Message While Getting Tags", err)
                     })
 
-                    let tags_ar = await endpoints.getImages(story_tagsar.links.related.href).then((res) => {
+                    let tags_ar = await endpoints.getImages(story_tags.links.related.href).then((res) => {
                         if (res.status === 200) {
 
-                            let tag = res.data.data.attributes.name
+                            let tag = res.data.data.attributes.field_story_tag_namear
 
                             return [tag]
 
@@ -708,7 +716,7 @@ export const getSuccessStoriesById = (id, setData) => {
 
                     let { id, attributes, relationships } = item;
                     let { title, titlear, short_description, short_descriptionar, description, descriptionar, created } = attributes;
-                    let { banner, story_paragraph, story_tags, story_tagsar } = relationships;
+                    let { banner, story_paragraph, story_tags } = relationships;
 
                     let rows = await endpoints.getImages(story_paragraph.links.related.href).then(async (res) => {
                         if (res.status === 200) {
@@ -777,10 +785,10 @@ export const getSuccessStoriesById = (id, setData) => {
                         console.log("Error Message While Getting Tags", err)
                     })
 
-                    let tags_ar = await endpoints.getImages(story_tagsar.links.related.href).then((res) => {
+                    let tags_ar = await endpoints.getImages(story_tags.links.related.href).then((res) => {
                         if (res.status === 200) {
 
-                            let tag = res.data.data.attributes.name
+                            let tag = res.data.data.attributes.field_story_tag_namear
 
                             return [tag]
 
@@ -1132,7 +1140,7 @@ export const getPrivacyPolicy = (setData, setLoading) => {
             setLoading(false);
 
             // if(res.data.data.length > 0)
-            
+
             let arr = res.data.data.slice(-1).map(item => (
                 {
                     title: item.attributes.title,

@@ -28,21 +28,23 @@ const ModalEelment = memo((props) => {
       fullscreen='lg-down'
       backdrop={backdrop}
     >
-
-      <Modal.Header className="px-4 py-4" closeButton>
-        <Heading nomargin heading={title} size="lg" />
-      </Modal.Header>
-
-      <Modal.Body className="px-4 py-1">
-        {
-          loading ?
-            <div className="d-flex align-items-center justify-content-center">
-              <Spinner />
-            </div> :
-            <Heading nomargin heading={description} size="xxs" />
-        }
-      </Modal.Body>
-
+      {
+        loading ? (
+          <div className="d-flex align-items-center justify-content-center">
+            <Spinner />
+          </div>
+        ) : (
+          <>
+            <Modal.Header className="px-4 py-4" closeButton>
+              <Heading nomargin bold heading={title} size="lg" />
+            </Modal.Header>
+            <Modal.Body className="px-4 py-1">
+              <Heading nomargin heading={description} size="xxs" />
+            </Modal.Body>
+            <Modal.Footer className="border-0" />
+          </>
+        )
+      }
     </Modal>
   )
 })

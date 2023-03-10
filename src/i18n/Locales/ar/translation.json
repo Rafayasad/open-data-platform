@@ -9,7 +9,7 @@
     "find": "اكتشف المزيد",
     "GetMore": "احصل على المزيد من بيانات أبوظبي",
     "getsupport": "العودة إلى الدعم",
-    "datasetTitle": "مجموعات البيانات لإثارة فضولك",
+    "datasetTitle": "مجموعات البيانات التي تثير فضولك",
     "featuredDatasets": "مجموعات البيانات المميزة",
     "sortBy": "صنف حسب",
     "datasets": "مجموعات البيانات",
@@ -19,7 +19,7 @@
     "overview": "نظرة عامة",
     "APIDocumentation": "وثائق API",
     "bookmark": "المرجعية",
-    "share": "شارك",
+    "share": "مشاركة",
     "filters": "المرشحات",
     "filter": "المرشحات",
     "tags": "العلامات",
@@ -62,6 +62,7 @@
     "recovery": "استعادة",
     "pwdopendata": "تجربة بيانات مفتوحة مخصصة لك",
     "logIn": "تسجيل الدخول",
+    "LogIn": "تسجيل الدخول",
     "username": "اسم المستخدم",
     "password": "كلمة المرور",
     "forgot": "نسيت كلمة المرور",
@@ -161,7 +162,7 @@
     "selectsubject": "اختر موضوعا",
     "textarea": "منطقة النص",
     "submit": "إرسال",
-    "registerNow": "التسجيل الآن",
+    "registerNow": "سجل الان",
     "validEmail": "يجب أن يكون بريدا إلكترونيا صالحا",
     "requiredEmail": "البريد الإلكتروني مطلوب",
     "enterPassword": "الرجاء إدخال كلمة المرور الخاصة بك",
@@ -221,5 +222,6 @@
     "openDataDescription": "نود إبلاغكم بأن لدينا على متن السفينة Garden Booking & Wedding Hall Booking APIs على مسرح ADConect. يرجى الاطلاع على التفاصيل التالية",
     "popularsearches": "عمليات البحث الشائعة",
     "fieldFullName": "اسمك الكامل",
-    "fieldEmail": "بريدك الإلكتروني"
+    "fieldEmail": "بريدك الإلكتروني",
+    "detail": "التفاصيل"
 }

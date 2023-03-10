@@ -49,8 +49,6 @@ const Dataset = memo(() => {
         getSearch(setSearchData);
         getRecentsDatasets(setRecentsDatasets);
 
-
-
         if (state && state.search) {
             setSearch(state.search)
         }
@@ -65,8 +63,6 @@ const Dataset = memo(() => {
         }
 
     }, []);
-
-    console.log("sss",searchData);
 
     useEffect(() => {
         if (currentPage || search || sort || filters) {

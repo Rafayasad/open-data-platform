@@ -5,8 +5,7 @@ import { MdDownloadForOffline } from "react-icons/md"
 import { useTranslation } from "react-i18next";
 import { locales } from "../../../../i18n/helper";
 import { colors } from "../../../../utils/colors";
-import { FaFilePdf, FaFileExcel, FaFileCsv, FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
-import { AiFillApi } from "react-icons/ai";
+import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
 import Shimmer from "../../../elements/Shimmer";
@@ -21,7 +20,7 @@ import apiImage from '../../../../assets/images/api_img.png';
 
 const DataHeader = memo((props) => {
 
-    const { title, resources } = props
+    const { title, resources, url } = props
 
     const { t } = useTranslation();
 
@@ -50,11 +49,11 @@ const DataHeader = memo((props) => {
     const shareOption = shareOptions?.map(item => (
         {
             title: t(item.title),
-            onClick: downloadResources,
-            downloadLink: item.downloadURL,
+            format: item.format,
+            url: url,
             icon: item.format === "facebook" ? <FaFacebookF />
                 : item.format === "linkedin" ? <FaLinkedinIn />
-                    : item.format === "twitter" && <FaTwitter />
+                    : item.format === "twitter" && <FaTwitter />,
         }
     ))
 

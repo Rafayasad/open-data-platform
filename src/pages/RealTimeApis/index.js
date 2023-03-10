@@ -6,6 +6,7 @@ import ListCard from "../../components/modules/RealTimeApis/Main/ListCard";
 import { useState } from "react";
 import { useEffect } from "react";
 import { realTimeApis } from "../../axios/api";
+import DatasetList from "../../components/modules/Dataset/DatasetList";
 
 const RealTimeApis = memo((props) => {
 
@@ -43,7 +44,8 @@ const RealTimeApis = memo((props) => {
     return (
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
             <RealTimeApisHeader />
-            <ListCard loading={loading} datalist={data} />
+            <DatasetList datasets={data} loading={loading} notags cardSize="xs" noheader />
+            {/* <ListCard loading={loading} datalist={data} /> */}
         </View>
     )
 })

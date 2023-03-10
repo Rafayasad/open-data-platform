@@ -75,7 +75,7 @@ const Navbar = memo((props) => {
 
     return (
         <>
-            <Container fluid className="px-4 py-3 d-none d-lg-block" style={{ position: 'absolute', top: (document?.getElementById('toolbar-bar')?.offsetHeight) + (document?.getElementById('toolbar-item-administration-tray')?.offsetHeight) + 16, right: 0, left: 0 }}>
+            <Container fluid className="px-4 py-3 d-none d-lg-block" style={{ position: 'absolute', top: 0, right: 0, left: 0 }}>
                 <Row>
                     <Col className="d-flex align-items-center">
                         <Link to={routes.HOME}>
@@ -125,7 +125,7 @@ const Navbar = memo((props) => {
                                             <Button backgroundColor={color} textColor={color === colors.black && colors.white} title={t("logout")} onClick={onClickLogout} />
                                         ) : (
                                             <Link style={{ textDecoration: 'none' }} to={routes.LOGIN}>
-                                                <Button backgroundColor={color} textColor={color === colors.black && colors.white} title={t("login")} />
+                                                <Button backgroundColor={color} textColor={color === colors.black && colors.white} title={t("LogIn")} />
                                             </Link>
                                         )
                                     }
@@ -201,7 +201,7 @@ const Navbar = memo((props) => {
                                     <Button width={"100%"} borderColor={""} backgroundColor='black' textColor={"white"} title={t("logout")} onClick={onClickLogout} />
                                 ) : (
                                     <Link style={{ textDecoration: 'none' }} to={routes.LOGIN}>
-                                        <Button width={"100%"} borderColor={""} backgroundColor='black' textColor={"white"} title={t("logIn")} />
+                                        <Button width={"100%"} borderColor={""} backgroundColor='black' textColor={"white"} title={t("LogIn")} />
                                     </Link>
                                 )
                             }
