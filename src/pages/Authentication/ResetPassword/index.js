@@ -5,6 +5,7 @@ import { resetPassword } from "../../../axios/api";
 import ResetPassComponent from "../../../components/modules/Authentication/ResetPassword";
 import View from "../../../components/modules/View";
 import { routes } from "../../../router/helper";
+import { isStrongPassword, validateEmail } from "../../../utils/generic";
 
 const ResetPassword = memo(() => {
 
@@ -29,11 +30,15 @@ const ResetPassword = memo(() => {
   const onClickButton = useCallback(() => {
 
     if (email === '' || password === '' || rePassword === '') {
-      toast("Please fill all the fields")
+      toast("Please fill all the fields.", { type: "error" })
+    } else if (validateEmail(email) === false) {
+      toast("Please provide a valid email address.", { type: "error" })
+    } else if (isStrongPassword(password) === false) {
+      toast("Password isn't matching validation requiremnts.", { type: "error" })
     } else if (rePassword !== password) {
-      toast("Both passwords doesn't match")
+      toast("Both passwords doesn't match.", { type: "error" })
     } else if (!policyCheck) {
-      toast("Please check policy")
+      toast("Please check Abu dhabi policy.", { type: "error" })
     } else {
       resetPassword(navigate, routes.LOGIN, setLoading, { email, password, otp })
     }

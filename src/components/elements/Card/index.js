@@ -83,8 +83,9 @@ const Card = memo((props) => {
             downloadLink: item.downloadURL,
             icon: item.format === "pdf" ? <img src={pdfImage} />
                 : item.format === "excel" ? <img src={excelImage} />
-                    : item.format === "csv" ? <img src={csvImage} />
-                        : item.format === "API" && <img src={apiImage} />
+                    : item.format === "xlsx" ? <img src={excelImage} />
+                        : item.format === "csv" ? <img src={csvImage} height={20} width={20} />
+                            : item.format === "API" && <img src={apiImage} />
         }
     ))
 
@@ -114,11 +115,13 @@ const Card = memo((props) => {
                     </Col>
                     {
                         !nodropdown &&
-                        <Col md={2} className='d-flex justify-content-end'>
+                        <Col md={3} xs={3} className='d-flex justify-content-end'>
                             <Dropdown
+                                dropdownWidth={"100%"}
+                                width={"100%"}
                                 noheadercomponent={noheadercomponent}
                                 autoClose={"outside"}
-                                size={selectedDropdownValue === t("download") ? "md" : "sm"}
+                                size={selectedDropdownValue === t("download") ? window.innerWidth >= 768 ? "sm" : "xl" : window.innerWidth >= 768 ? "sm" : "lg"}
                                 options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
                                 selectedDropdownValue={selectedDropdownValue}
                                 setSelectedDropdownValue={setSelectedDropdownValue}

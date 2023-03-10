@@ -8,20 +8,24 @@ import { useTranslation } from "react-i18next";
 import { recoverPassword } from "../../../../axios/api";
 import { routes } from "../../../../router/helper";
 import { useNavigate } from "react-router-dom";
+import { validateEmail } from "../../../../utils/generic";
+import { toast } from "react-toastify";
 
 const RecoverPassword = memo(() => {
 
   const { t } = useTranslation()
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState();
   const [loading, setLoading] = useState(false);
 
   const onClickRecoverPassword = useCallback(() => {
-    if (email) {
-      recoverPassword(navigate, routes.HOME, setLoading, { email })
+    if (email == '') {
+      toast("Email is empty, Please enter your email.", { type: "error" })
+    } else if (validateEmail(email) === false) {
+      toast("Please provide a valid email address.", { type: "error" })
     } else {
-      alert("please enter your email");
+      recoverPassword(navigate, routes.HOME, setLoading, { email })
     }
   });
 
@@ -106,11 +110,11 @@ const RecoverPassword = memo(() => {
                   view="mobile"
                   title="Recover password"
                   subtitle="Enter the email you use for Abu Dhabi Data. We'll send you instructions there."
-                  inputFields={[{ placeholder: "Registered email", type: "email" }]}
+                  inputFields={[{ placeholder: "Registered email", type: "email", onChange: (value) => setEmail(value) }]}
                   button={[
                     {
                       title: "Send code",
-                      onClick: "",
+                      onClick: onClickRecoverPassword,
                       backgroundColor: colors.black,
                       textColor: colors.white,
                       textSize: "",

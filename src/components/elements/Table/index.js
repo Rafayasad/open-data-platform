@@ -66,7 +66,7 @@ const Table = memo((props) => {
                     customStyles={customStyles}
                 />
                 {
-                    currentPage && totalCount && onChange && data && data.length > 0 ?
+                    currentPage && totalCount && onChange && data && data?.length > 0 ?
                         <Pagination
                             currentPage={currentPage}
                             totalCount={totalCount}

@@ -98,9 +98,9 @@ const ResetPassword = memo((props) => {
                   title="Reset password"
                   subtitle="Create a strong password to ensure account safety"
                   inputFields={[
-                    { placeholder: "Government email", type: "email" },
-                    { placeholder: "Password", type: "password" },
-                    { placeholder: "Re-enter password", type: "password" },
+                    { placeholder: "Government email", type: "email", onChange: (val) => setEmail(val) },
+                    { placeholder: "Password", type: "password", onChange: (val) => setPassword(val) },
+                    { placeholder: "Re-enter password", type: "password", onChange: (val) => setRePassword(val) },
                   ]}
                   checkbox={{
                     label: "I agree to Abu Dhabi Open Data",

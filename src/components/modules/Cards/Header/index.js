@@ -25,8 +25,8 @@ const Header = memo((props) => {
 
     return (
         <Container fluid className="d-flex justify-content-between align-items-center py-4">
-            <Row className="w-100 p-0 m-0">
-                <Col className="">
+            <Row className="w-100 p-0 m-0 align-items-center">
+                <Col className="px-0">
                     <div>
                         <Heading
                             bold
@@ -36,7 +36,7 @@ const Header = memo((props) => {
                             heading={title} />
                     </div>
                 </Col>
-                <Col md={3} className="d-flex justify-content-end align-items-center">
+                <Col md={3} xs={6} className="px-0 d-flex justify-content-end align-items-center">
                     {
                         !nobutton ?
                             <div>
