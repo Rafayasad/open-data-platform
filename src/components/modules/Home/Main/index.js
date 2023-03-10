@@ -5,6 +5,8 @@ import Search from "../../../elements/Search";
 import Heading from "../../../elements/Heading";
 import background from '../../../../assets/images/BG.png';
 import { useTranslation } from "react-i18next";
+import i18n from "../../../../i18n/i18n";
+import { locales } from "../../../../i18n/helper";
 
 const Main = memo((props) => {
 
@@ -43,7 +45,7 @@ const Main = memo((props) => {
                             <Col />
                             <Col xs={12} md={6} className="py-2">
                                 <p style={{ textAlign: 'center', color: 'white' }}>
-                                    {t("popular")}
+                                    <span className={`${i18n.language === locales.EN ? "en-font-bold" : "ar-font-bold"}`}>{t("popular")}</span> {t("populartext")}
                                 </p>
                             </Col>
                             <Col />

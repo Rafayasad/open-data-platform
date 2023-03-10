@@ -119,9 +119,11 @@ const MiddleFooter = memo(() => {
                                 <div className='my-1'>
                                     {
                                         item.data?.map((item, index) => (
-                                            <Link style={{ textDecoration: "none" }} to={item.link}>
-                                                <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} downloadURL={item.downloadURL} onClick={() => onClick(item.link, item.params)} />
-                                            </Link>
+                                            <div className='d-flex'>
+                                                <Link style={{ textDecoration: "none" }} to={item.link} state={item.params} className={""}>
+                                                    <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} downloadURL={item.downloadURL} />
+                                                </Link>
+                                            </div>
                                         ))
                                     }
                                 </div>

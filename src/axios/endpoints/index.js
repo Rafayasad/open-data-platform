@@ -86,5 +86,8 @@ export const endpoints = {
     },
     realTimeApis: (data) => {
         return axios.get('https://api.abudhabi.ae/gateway/GardenBooking/3.0/searchFacilities', data);
+    },
+    getPrivacyPolicy: () => {
+        return axios.get("https://data.abudhabi/jsonapi/node/privacy_policy");
     }
 } 

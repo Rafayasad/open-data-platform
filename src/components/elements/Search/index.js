@@ -72,7 +72,7 @@ const Search = memo((props) => {
             {
                 openModal &&
                 <ExpandSearchBarModal
-                    value={value}
+                    value={inputText}
                     onChangeSearch={onChangeSearch}
                     onKeyDown={onKeyDown}
                     placeholder={placeholder}
@@ -93,7 +93,7 @@ const Search = memo((props) => {
                                     :
                                     setToggler(true)
                             }}
-                            type="text" className='border-0 bg-transparent w-100' value={inputText} placeholder={placeholder} onChange={onChangeSearch} onKeyDown={onKeyDown} />
+                            type="text" className='border-0 bg-transparent w-100 placeholder-color' value={inputText} placeholder={placeholder} onChange={onChangeSearch} onKeyDown={onKeyDown} />
                     </Col>
                     {
                         inputText?.length > 0 ?

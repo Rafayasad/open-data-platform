@@ -13,7 +13,7 @@ const QuestionList = memo((props) => {
 
     const { title, data, onClick } = props
 
-    console.log("datatatatata",data);
+    console.log("datatatatata", data);
 
     const [currentHovered, setCurrentHovered] = useState(null);
 
@@ -21,7 +21,7 @@ const QuestionList = memo((props) => {
     const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered])
 
     return (
-        <Container fluid className="my-5 px-4">
+        <Container fluid className="my-2 px-4">
             <div className="py-2">
                 <Heading heading={title} size={"lg"} bold backgroundColor={colors.white} />
             </div>
@@ -35,7 +35,7 @@ const QuestionList = memo((props) => {
                             }
                             <QuestionListItem
                                 title={i18n.language === locales.AR ? item.title_ar : item.title}
-                                onClick={() => onClick(item.id)}
+                                onClick={() => onClick(item.id, title)}
                                 icon={currentHovered === index}
                             />
                         </div>

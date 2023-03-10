@@ -1,8 +1,9 @@
 import React, { memo } from "react";
-import { Form } from "react-bootstrap";
+import { Form, InputGroup } from "react-bootstrap";
 import { locales } from "../../../i18n/helper";
 import i18n from "../../../i18n/i18n";
 import { colors } from "../../../utils/colors";
+import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 
 const TextInput = memo((props) => {
 
@@ -31,10 +32,13 @@ const TextInput = memo((props) => {
           margin: 0
         }}
       />
+
       <label className="px-0 pt-4" htmlFor="floatingInputCustom">
         {placeholder}
       </label>
+
     </Form.Floating>
+
   );
 });
 
