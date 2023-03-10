@@ -7,6 +7,7 @@ import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from "
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './style.css';
 import { locales } from "../../../i18n/helper";
+import { getBreakpoint } from "../../../utils/generic";
 
 const theme = createTheme(
     {
@@ -33,6 +34,8 @@ const Pagination = memo((props) => {
                             showFirstButton
                             showLastButton
                             page={currentPage || 1}
+                            size={window.innerWidth >= 768 ? "medium" : "small"}
+                            siblingCount={window.innerWidth >= 768 ? 1 : 0}
                             count={totalCount || 1}
                             color="neutral"
                             onChange={(_, value) => {

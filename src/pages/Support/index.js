@@ -18,8 +18,8 @@ const Support = memo(() => {
     const categories = useSelector(state => state.support.categories)
     const questions = useSelector(state => state.support.questions)
 
-    const onClickCard = useCallback((id) => {
-        navigate(`${routes.SUPPORT_QUESTIONS}?id=${id}`, { state: { backURL: routes.SUPPORT } })
+    const onClickCard = useCallback((id, name) => {
+        navigate(`${routes.SUPPORT_QUESTIONS}?id=${id}`, { state: { backURL: routes.SUPPORT, name } })
     }, []);
 
     const onClickQuestion = useCallback((id) => {

@@ -6,6 +6,7 @@ body {
   font-feature-settings: 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scrollbar-width: none;
 }
 
 body::-webkit-scrollbar {

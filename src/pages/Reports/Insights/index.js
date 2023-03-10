@@ -24,7 +24,7 @@ const Insights = memo(() => {
     const [insights, setInsights] = useState();
     const [filters, setFilters] = useState({ date_type: "Modified" });
     const [selectedTab, setSelectedTab] = useState("All");
-    const [datatype, setDataType] = useState();
+    const [datatype, setDataType] = useState('json');
 
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
@@ -52,21 +52,21 @@ const Insights = memo(() => {
         {
             title: "Monthly",
             onClick: (val) => {
-                setFilters({ ...filters, end_date: dayjs().format('YYYY-MM-DD'), start_date: dayjs().subtract(1, 'month').format('YYYY-MM-DD') })
+                setFilters({ ...filters, end_date: dayjs().format('YYYY-MM-DD'), start_date: dayjs().subtract(1, 'month').add(1,'day').format('YYYY-MM-DD') })
                 setSelectedTab(val)
             }
         },
         {
             title: "Quarterly",
             onClick: (val) => {
-                setFilters({ ...filters, end_date: dayjs().format('YYYY-MM-DD'), start_date: dayjs().subtract(3, 'month').format('YYYY-MM-DD') })
+                setFilters({ ...filters, end_date: dayjs().format('YYYY-MM-DD'), start_date: dayjs().subtract(3, 'month').add(1,'day').format('YYYY-MM-DD') })
                 setSelectedTab(val)
             }
         },
         {
             title: "Yearly",
             onClick: (val) => {
-                setFilters({ ...filters, end_date: dayjs().format('YYYY-MM-DD'), start_date: dayjs().subtract(1, 'year').format('YYYY-MM-DD') })
+                setFilters({ ...filters, end_date: dayjs().format('YYYY-MM-DD'), start_date: dayjs().subtract(1, 'year').add(1,'day').format('YYYY-MM-DD') })
                 setSelectedTab(val)
             }
         }
@@ -92,8 +92,6 @@ const Insights = memo(() => {
             publisher: filters?.publisher ? filters.publisher : ""
         }, setLoading, setDataType)
     }, [filters, datatype]);
-
-    console.log("insights", insights);
 
     const onChangePage = useCallback((page) => setCurrentPage(page), [currentPage]);
 

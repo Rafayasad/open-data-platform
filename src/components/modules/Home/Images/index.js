@@ -43,7 +43,7 @@ const Images = memo(() => {
                                 <Col />
                             </div>
                             <Col className='d-flex justify-content-center'>
-                                <Button textColor={"#101010"} title={t("find")} onClick={onClickFindOutMore} />
+                                <Button bold textColor={"#101010"} title={t("find")} onClick={onClickFindOutMore} />
                             </Col>
                         </Row>
                     </div>
@@ -64,14 +64,14 @@ const Images = memo(() => {
                                 <Row>
                                     <Col />
                                     <Col sm={12} md={8} className='text-center'>
-                                        <Heading color='white' heading={t("areYouNewToOpenData")} />
+                                        <Heading bold color='white' heading={t("areYouNewToOpenData")} />
                                     </Col>
                                     <Col />
                                 </Row>
                                 <Row>
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                        <Button title={t("discover")} />
+                                        <Button bold title={t("discover")} onClick={onClickDiscover} />
                                     </Col>
                                     <Col />
                                 </Row>
@@ -96,7 +96,7 @@ const Images = memo(() => {
                                 <Row>
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                        <Button title={t("getStarted")} />
+                                        <Button bold title={t("getStarted")} onClick={onClickRegister} />
                                     </Col>
                                     <Col />
                                 </Row>

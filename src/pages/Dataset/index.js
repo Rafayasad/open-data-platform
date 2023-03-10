@@ -25,7 +25,7 @@ const Dataset = memo(() => {
     const [recentsDatasets, setRecentsDatasets] = useState();
     const [datasets, setDatasets] = useState();
     const [search, setSearch] = useState("");
-    const [searchData, setSearchData] = useState();
+    const [searchData, setSearchData] = useState([]);
     const [sort, setSort] = useState("");
     const [filters, setFilters] = useState([]);
 

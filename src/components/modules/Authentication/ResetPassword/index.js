@@ -6,9 +6,11 @@ import Heading from "../../../elements/Heading";
 import AuthCard from "../AuthCard";
 import { useTranslation } from "react-i18next";
 
-const ResetPassword = memo(() => {
+const ResetPassword = memo((props) => {
 
   const { t } = useTranslation()
+
+  const { setEmail, setPassword, setRePassword, setPolicyCheck, onClickButton } = props;
 
   return (
     <div>
@@ -51,9 +53,9 @@ const ResetPassword = memo(() => {
                   title={t("resetPassword")}
                   subtitle={t("strongPassword")}
                   inputFields={[
-                    { placeholder: t("governmentEmail"), type: "email" },
-                    { placeholder: t("password"), type: "password" },
-                    { placeholder: t("rePwd"), type: "password" },
+                    { placeholder: t("governmentEmail"), type: "email", onChange: (val) => setEmail(val) },
+                    { placeholder: t("password"), type: "password", onChange: (val) => setPassword(val) },
+                    { placeholder: t("rePwd"), type: "password", onChange: (val) => setRePassword(val) },
                   ]}
                   checkbox={{
                     label: t("agreeCond"),
@@ -65,7 +67,7 @@ const ResetPassword = memo(() => {
                   button={[
                     {
                       title: t("login"),
-                      onClick: "",
+                      onClick: onClickButton,
                       backgroundColor: colors.black,
                       textColor: colors.white,
                       textSize: "",
@@ -96,9 +98,9 @@ const ResetPassword = memo(() => {
                   title="Reset password"
                   subtitle="Create a strong password to ensure account safety"
                   inputFields={[
-                    { placeholder: "Government email", type: "email" },
-                    { placeholder: "Password", type: "password" },
-                    { placeholder: "Re-enter password", type: "password" },
+                    { placeholder: "Government email", type: "email", onChange: (val) => setEmail(val) },
+                    { placeholder: "Password", type: "password", onChange: (val) => setPassword(val) },
+                    { placeholder: "Re-enter password", type: "password", onChange: (val) => setRePassword(val) },
                   ]}
                   checkbox={{
                     label: "I agree to Abu Dhabi Open Data",
@@ -110,7 +112,7 @@ const ResetPassword = memo(() => {
                   button={[
                     {
                       title: "Login",
-                      onClick: "",
+                      onClick: onClickButton,
                       backgroundColor: colors.black,
                       textColor: colors.white,
                       textSize: "",

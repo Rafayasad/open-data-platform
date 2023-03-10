@@ -19,11 +19,14 @@ const Publishers = memo(() => {
 
     const publishers = useSelector((state) => state.facets.publishers);
 
+    const tableDiv = document.getElementById("table");
+    const headerDiv = document.getElementById("header");
+
     const [publisherData, setPublishersData] = useState();
-    const [filters, setFilters] = useState();
+    const [filters, setFilters] = useState({ date_type: "Modified" });
     const [selectedTab, setSelectedTab] = useState("All");
 
-    const [datatype, setDatatype] = useState();
+    const [datatype, setDatatype] = useState('json');
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -36,14 +39,14 @@ const Publishers = memo(() => {
         {
             title: "All",
             onClick: (val) => {
-                setFilters({ date_type: "Modified" })
+                setFilters({ ...filters, date_type: "Modified", type: "all" })
                 setSelectedTab(val)
             }
         },
         {
             title: "Users",
             onClick: (val) => {
-                setFilters({ type: "user" })
+                setFilters({ ...filters, type: "user" })
                 setSelectedTab(val)
             }
         }
@@ -65,15 +68,18 @@ const Publishers = memo(() => {
             startdate: filters?.start_date ? filters.start_date : "all",
             enddate: filters?.end_date ? filters.end_date : "all",
             date_type: filters?.date_type ? filters.date_type : "modified",
-            datatype: datatype ? datatype : "json",
+            datatype: datatype,
             type: filters?.type ? filters.type : "all",
             publisher: filters?.publisher ? filters.publisher : "",
             perpage: rowsPerPage,
             pagenumber: currentPage
-        }, setLoading, setTotalCount, datatype, setDatatype)
+        }, setLoading, setTotalCount, setDatatype)
     }, [filters, currentPage, datatype]);
 
-    const onChangePage = useCallback((page) => setCurrentPage(page), [currentPage]);
+    const onChangePage = useCallback((page) => {
+        tableDiv.scrollIntoView();
+        setCurrentPage(page)
+    }, [currentPage, tableDiv]);
 
     const onClickFilter = useCallback(() => setFilterOpen(!filterOpen), [filterOpen]);
     const onApplyFilters = useCallback((obj) => setFilters(obj), []);
@@ -82,17 +88,20 @@ const Publishers = memo(() => {
         <>
             <Navbar theme='dark' />
             <ReportsFilter accordinData={AccordinData} open={filterOpen} setOpen={setFilterOpen} appliedFilters={filters} onApplyFilters={onApplyFilters} />
-            <Container className="my-5 pt-5">
+            <Container id="header" fluid className="my-5 pt-5 px-4">
                 <Header title="Publishers Reports" onClickFilter={onClickFilter} datatypeCallback={datatypeCallback} />
                 <Tabs data={tabs} selected={selectedTab} />
                 <AppliedFilters filters={filters}
                 />
-                <Table
-                    data={publisherData}
-                    currentPage={currentPage}
-                    totalCount={Math.ceil(totalCount / rowsPerPage)}
-                    onChange={onChangePage}
-                />
+                <div id="table">
+                    <Table
+                        data={publisherData}
+                        currentPage={currentPage}
+                        totalCount={Math.ceil(totalCount / rowsPerPage)}
+                        onChange={onChangePage}
+                        loading={loading}
+                    />
+                </div>
             </Container>
             <MiddleFooter />
             <LowerFooter />

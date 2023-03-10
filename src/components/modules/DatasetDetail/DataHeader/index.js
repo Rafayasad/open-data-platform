@@ -5,18 +5,22 @@ import { MdDownloadForOffline } from "react-icons/md"
 import { useTranslation } from "react-i18next";
 import { locales } from "../../../../i18n/helper";
 import { colors } from "../../../../utils/colors";
-import { FaFilePdf, FaFileExcel, FaFileCsv, FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
-import { AiFillApi } from "react-icons/ai";
+import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
 import Shimmer from "../../../elements/Shimmer";
 import Dropdown from "../../../elements/DropDown";
 import i18n from "../../../../i18n/i18n";
 import { shareOptions } from "../../../../utils";
+import pdfImage from '../../../../assets/images/pdf_img.png';
+import excelImage from '../../../../assets/images/excel_img.png';
+import csvImage from '../../../../assets/images/csv_img.png';
+import apiImage from '../../../../assets/images/api_img.png';
+
 
 const DataHeader = memo((props) => {
 
-    const { title, resources } = props
+    const { title, resources, url } = props
 
     const { t } = useTranslation();
 
@@ -25,26 +29,31 @@ const DataHeader = memo((props) => {
 
     const downloadResources = useCallback((links) => { console.log(links) });
 
+    const [currentHovered, setCurrentHovered] = useState(null);
+
+    const onHover = useCallback(() => setCurrentHovered(true), [currentHovered])
+    const onLeave = useCallback(() => setCurrentHovered(false), [currentHovered])
+
     const options = resources?.map(item => (
         {
             title: i18n.language === locales.AR ? item.title_ar : item.title,
             onClick: downloadResources,
             downloadLink: item.downloadURL,
-            icon: item.format === "pdf" ? <FaFilePdf />
-                : item.format === "excel" ? <FaFileExcel size={20} />
-                    : item.format === "csv" ? <FaFileCsv />
-                        : item.format === "api" && <AiFillApi />
+            icon: item.format === "pdf" ? <img src={pdfImage} />
+                : item.format === "excel" ? <img src={excelImage} />
+                    : item.format === "csv" ? <img src={csvImage} height={20} width={20} />
+                        : item.format === "API" && <img src={apiImage} />
         }
     ))
 
     const shareOption = shareOptions?.map(item => (
         {
             title: t(item.title),
-            onClick: downloadResources,
-            downloadLink: item.downloadURL,
+            format: item.format,
+            url: url,
             icon: item.format === "facebook" ? <FaFacebookF />
                 : item.format === "linkedin" ? <FaLinkedinIn />
-                    : item.format === "twitter" && <FaTwitter />
+                    : item.format === "twitter" && <FaTwitter />,
         }
     ))
 
@@ -76,12 +85,12 @@ const DataHeader = memo((props) => {
                 }
             </Col>
             <Col className="d-none d-lg-flex justify-content-end align-items-center">
-                <div className="d-flex">
+                <div className="d-flex" onMouseOver={onHover} onMouseLeave={onLeave}>
                     <Dropdown
                         autoClose={true}
                         options={shareOption}
                         size={"sm"}
-                        headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}
+                        headerComponent={<Button backgroundColor="white" textColor="black" borderColor={currentHovered ? colors.purple : colors.black} icon={<SlShare size={20} color={currentHovered ? colors.purple : colors.black} />} />}
                     />
                 </div>
                 <div className="">

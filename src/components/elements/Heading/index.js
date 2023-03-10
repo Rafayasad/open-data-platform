@@ -1,6 +1,9 @@
 import React, { memo } from "react";
+import { RxArrowTopRight, RxArrowTopLeft } from "react-icons/rx";
 import i18next from "i18next";
 import "./style.css";
+import i18n from "../../../i18n/i18n";
+import { locales } from "../../../i18n/helper";
 
 const Heading = memo((props) => {
 
@@ -61,7 +64,7 @@ const Heading = memo((props) => {
       }}
       onClick={onClick ? onClick : () => { }}
     >
-      {downloadURL && <a style={{ textDecoration: "none", color: "white" }} target={"_blank"} href={downloadURL}>{heading}</a>}
+      {downloadURL && <a style={{ textDecoration: "none", color: "white" }} target={"_blank"} href={downloadURL}>{heading} {i18n.language === locales.EN ? <RxArrowTopRight size={25} color='white' className='mx-2' /> : <RxArrowTopLeft size={25} color='white' className='mx-2' />}</a>}
       {!downloadURL && heading}
     </Tag>
   );

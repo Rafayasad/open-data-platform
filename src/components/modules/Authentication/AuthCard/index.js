@@ -8,14 +8,19 @@ import StraigthLine from "../../../elements/StraigthLine";
 import CheckBox from "../../../elements/CheckBox";
 import { useTranslation } from "react-i18next";
 import Recaptcha from "../../../elements/Recaptcha";
+import OtpInput from "react18-input-otp";
 
 const AuthCard = memo((props) => {
 
   const { t } = useTranslation()
 
-  const { title, subtitle, linktext, inputFields, button, checkbox, recaptcha, onClickForgetPassword } = props;
+  const { title, subtitle, linktext, inputFields, button, checkbox, recaptcha, onClickForgetPassword, hasOtp } = props;
+
+  const [otp, setOtp] = useState("");
 
   const recaptchaCallback = useCallback((value) => recaptcha(value));
+
+  const otpCallbackk = useCallback((val) => setOtp(val))
 
   return (
     <Container fluid>
@@ -44,15 +49,26 @@ const AuthCard = memo((props) => {
           }
         </Col>
       </Row>
-      <Row className="py-2">
-        {
-          inputFields.map((items, index) => (
-            <Col key={index} md={12}>
-              <TextInput value={items.value} placeholder={items.placeholder} type={items.type} onChange={items.onChange} />
-            </Col>
-          ))
-        }
-      </Row>
+      {
+        inputFields &&
+        <Row className="py-2">
+          {
+            inputFields.length > 0 && inputFields.map((items, index) => (
+              <Col key={index} md={12}>
+                <TextInput value={items.value} placeholder={items.placeholder} type={items.type} onChange={items.onChange} />
+              </Col>
+            ))
+          }
+        </Row>
+      }
+      {
+        hasOtp &&
+        <Row className="py-2">
+          <Col>
+            <OtpInput className="w-100" value={otp} onChange={otpCallbackk} numInputs={6} inputStyle={{ width: '100%', height: '100%', margin: '5px' }} containerStyle={{ width: "auto", height: '50px', margin: '5px' }} />
+          </Col>
+        </Row>
+      }
       {
         onClickForgetPassword &&
         <Row>
@@ -93,30 +109,30 @@ const AuthCard = memo((props) => {
         <Col sm={12} md={title === t("register") ? 4 : 12}>
           {
             button.map((items, index) => (
-              < div key = { index } className = "d-flex flex-column align-items-center" >
-                { console.log("disable", items.disable) }
-              <Button
-                disable={items.disable}
-                title={items.title}
-                backgroundColor={items.backgroundColor}
-                textColor={items.textColor}
-                borderColor={items.borderColor && items.borderColor}
-                onClick={items.onClick}
-                loading={items.loading}
-              />
-            {
-                button.length - 1 != index &&
+              <div key={index} className="d-flex flex-column align-items-center" >
+                {console.log("check", items.onClick)}
+                <Button
+                  disable={items.disable}
+                  title={items.title}
+                  backgroundColor={items.backgroundColor}
+                  textColor={items.textColor}
+                  borderColor={items.borderColor && items.borderColor}
+                  onClick={() => items.onClick()}
+                  loading={items.loading}
+                />
+                {
+                  button.length - 1 != index &&
                   <StraigthLine
                     label={t("or")}
                     textColor={colors.gray}
                     lineColor={colors.light_gray}
                   />
-              }
-          </div>
-        ))
+                }
+              </div>
+            ))
           }
-      </Col>
-    </Row>
+        </Col>
+      </Row>
     </Container >
   );
 });

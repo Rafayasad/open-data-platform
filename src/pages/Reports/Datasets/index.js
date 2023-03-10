@@ -21,7 +21,7 @@ const Datasets = memo(() => {
     const { t, i18n } = useTranslation();
 
     const [datasets, setDatasets] = useState();
-    const [filters, setFilters] = useState();
+    const [filters, setFilters] = useState({ date_type: "modified" });
     const [selectedTab, setSelectedTab] = useState("All");
 
     const [datatype, setDatatype] = useState();
@@ -91,7 +91,7 @@ const Datasets = memo(() => {
             date_type: filters?.date_type ? filters.date_type : "created",
             startdate: filters?.start_date ? filters.start_date : "all",
             enddate: filters?.end_date ? filters.end_date : "all",
-            datatype: datatype ? datatype : "json",
+            datatype: datatype,
             publisher: filters?.publisher ? filters.publisher : "",
             kpi: filters?.kpi ? filters.kpi : "",
             topic: filters?.topics ? filters.topics : "",
@@ -99,7 +99,7 @@ const Datasets = memo(() => {
             pagenumber: currentPage,
             type: filters?.type ? filters.type : "all"
 
-        }, setLoading, setTotalCount, datatype, setDatatype)
+        }, setLoading, setTotalCount, setDatatype)
     }, [filters, currentPage, datatype]);
 
     const onChangePage = useCallback((page) => setCurrentPage(page), [currentPage]);
@@ -111,7 +111,7 @@ const Datasets = memo(() => {
         <>
             <Navbar theme='dark' />
             <ReportsFilter kpi={filters?.type === "kpi"} accordinData={filters?.type === "kpi" ? AccordinDataWithoutTopics : AccordinData} open={filterOpen} setOpen={setFilterOpen} appliedFilters={filters} onApplyFilters={onApplyFilters} />
-            <Container className="my-5 pt-5">
+            <Container fluid className="my-5 pt-5 px-4">
                 <Header title="Datasets Reports" onClickFilter={onClickFilter} datatypeCallback={datatypeCallback} />
                 <Tabs data={tabs} selected={selectedTab} />
                 <AppliedFilters filters={filters}
@@ -121,6 +121,7 @@ const Datasets = memo(() => {
                     currentPage={currentPage}
                     totalCount={Math.ceil(totalCount / rowsPerPage)}
                     onChange={onChangePage}
+                    loading={loading}
                 />
             </Container>
             <MiddleFooter />

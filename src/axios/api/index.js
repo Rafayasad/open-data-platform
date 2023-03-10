@@ -1,3 +1,5 @@
+import _ from 'lodash';
+import { toast } from "react-toastify";
 import { convertHtmlToString } from "../../utils"
 import { endpoints } from "../endpoints"
 import { generateFile } from "../../utils/generic.js";
@@ -20,6 +22,7 @@ export const getMostViewedDatasets = (setData, setLoading) => {
     return endpoints.
         getMostViewedDatasets().then((res) => {
             if (res.status === 200) {
+                console.log("hello", res.data.data);
                 let data = res.data.data;
                 let transform = data.en.map(item => {
 
@@ -31,18 +34,50 @@ export const getMostViewedDatasets = (setData, setLoading) => {
                     ar_obj.publisher_ar = ar_obj.publisherlear
                     ar_obj.title_ar = ar_obj.titlear
                     ar_obj.tags_ar = ar_obj.themelear
+                    ar_obj.resources_ar = ar_obj.distributionlear.map(item => {
+                        return (
+                            {
+                                title: item.titlelear,
+                                format: item.format === "pdf" ? "pdf"
+                                    : item.format === "excel" ? "excel"
+                                        : item.format === "esri rest" ? "excel"
+                                            : item.format === "xlsx" ? "excel"
+                                                : item.format === "xls" ? "excel"
+                                                    : item.format === "csv" && "csv",
+                                downloadURL: item.url
+                            }
+
+                        )
+                    })
 
                     delete ar_obj.identifier
                     delete ar_obj.keywordlear
                     delete ar_obj.publisherlear
                     delete ar_obj.titlear
                     delete ar_obj.themelear
+                    delete ar_obj.distributionlear
 
                     return {
                         id: item.identifier,
                         title: item.title,
                         publisher: item.publisher,
                         tags: item.theme,
+                        url: `${process.env.REACT_APP_BASE_URL}/dataset/${item.identifier}`,
+                        resources: item.distribution.map(item => {
+                            return (
+                                {
+                                    title: item.title,
+                                    format: item.format === "pdf" ? "pdf"
+                                        : item.format === "excel" ? "excel"
+                                            : item.format === "esri rest" ? "excel"
+                                                : item.format === "xlsx" ? "excel"
+                                                    : item.format === "xls" ? "excel"
+                                                        : item.format === "csv" && "csv",
+                                    downloadURL: item.url
+                                }
+
+                            )
+                        }),
                         ...ar_obj
                     }
                 })
@@ -59,6 +94,7 @@ export const getRecentsDatasets = (setData, setLoading) => {
     return endpoints.
         getRecentsDatasets().then((res) => {
             if (res.status === 200) {
+                console.log("dtatdatdatda", res.data);
                 let data = res.data.data;
 
                 let transform = data.en.map(item => {
@@ -99,6 +135,7 @@ export const getRecentsDatasets = (setData, setLoading) => {
                         title: item.title,
                         publisher: item.publisher,
                         tags: item.theme,
+                        url: `${process.env.REACT_APP_BASE_URL}/dataset/${item.identifier}`,
                         resources: item.distribution.map(item => {
                             return (
                                 {
@@ -116,7 +153,6 @@ export const getRecentsDatasets = (setData, setLoading) => {
                         ...ar_obj
                     }
                 })
-                console.log("TRANSFORM", transform);
                 setData(transform)
                 setLoading(false)
             }
@@ -141,18 +177,48 @@ export const getSimilarDatasets = (topic, setData, setLoading) => {
                     ar_obj.publisher_ar = ar_obj.publisherlear
                     ar_obj.title_ar = ar_obj.titlear
                     ar_obj.tags_ar = ar_obj.themelear
+                    ar_obj.resources_ar = ar_obj.distribution.map(item => {
+                        return (
+                            {
+                                title: item.titlelear,
+                                format: item.format === "pdf" ? "pdf"
+                                    : item.format === "esri rest" ? "excel"
+                                        : item.format === "xlsx" ? "excel"
+                                            : item.format === "xls" ? "excel"
+                                                : item.format === "csv" && "csv",
+                                downloadURL: item.url
+                            }
+
+                        )
+                    })
 
                     delete ar_obj.identifier
                     delete ar_obj.keywordlear
                     delete ar_obj.publisherlear
                     delete ar_obj.titlear
                     delete ar_obj.themelear
+                    delete ar_obj.distribution
 
                     return {
                         id: item.identifier,
                         title: item.title,
                         publisher: item.publisher,
                         tags: item.theme,
+                        url: `${process.env.REACT_APP_BASE_URL}/dataset/${item.identifier}`,
+                        resources: item.distribution.map(item => {
+                            return (
+                                {
+                                    title: item.title,
+                                    format: item.format === "pdf" ? "pdf"
+                                        : item.format === "esri rest" ? "excel"
+                                            : item.format === "xlsx" ? "excel"
+                                                : item.format === "xls" ? "excel"
+                                                    : item.format === "csv" && "csv",
+                                    downloadURL: item.url
+                                }
+
+                            )
+                        }),
                         ...ar_obj
                     }
                 })
@@ -178,7 +244,9 @@ export const getFacets = async (key_en, key_ar, dispatch, setData) => {
                     type: item.type
                 }))
 
-                return transform
+                let sorted = _.sortBy(transform, 'title');
+
+                return sorted
 
             }
 
@@ -196,7 +264,9 @@ export const getFacets = async (key_en, key_ar, dispatch, setData) => {
                     type: item.type
                 }))
 
-                return transform
+                let sorted = _.sortBy(transform, 'title');
+
+                return sorted
 
             }
         }).catch((err) => {
@@ -239,10 +309,12 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                     let obj = {
                         keyword: search,
                         ip: "192.168.0.44",
-                        lang: "en"
+                        lang: "en",
+                        type: "dataset"
                     }
                     await endpoints.
                         postSearch(obj).then((res) => {
+                            console.log("helllo", res);
                         }).catch((err) => {
                             console.log("Error Message", err)
                         })
@@ -252,7 +324,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
 
                 let arr = []
 
-                arr = Object.values(res.data.results).map(item => (
+                arr = Object.values(res.data.results)?.map(item => (
                     {
                         id: item.identifier,
                         title: item.title,
@@ -262,7 +334,24 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                         publisher: item.publisher?.name,
                         publisher_ar: item.publisherlear?.name,
                         tags: item.theme,
-                        tags_ar: item.themelear
+                        tags_ar: item.themelear,
+                        url: `${process.env.REACT_APP_BASE_URL}/dataset/${item.identifier}`,
+                        resources: item.distribution.filter(item => (
+                            {
+                                title: item.title,
+                                title_ar: item.titlelear,
+                                description: item.description,
+                                description_ar: item.descriptionlear,
+                                format:
+                                    item.format === "pdf" ? "pdf"
+                                        : item.format === "esri rest" ? "excel"
+                                            : item.format === "xlsx" ? "excel"
+                                                : item.format === "xls" ? "excel"
+                                                    : item.format === "csv" ? "csv"
+                                                        : item.format === "API" && "api",
+                                downloadURL: item.downloadURL
+                            }
+                        )),
                     }
                 ))
 
@@ -296,7 +385,7 @@ export const getDatasetById = (id, setData) => {
                     title: item.title,
                     title_ar: item.titlear,
                     description: item.description,
-                    description_ar: item.description_ar,
+                    description_ar: item.descriptionlear,
                     publisher: item.publisher?.name,
                     publisher_ar: item.publisherlear?.name,
                     frequency: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
@@ -320,7 +409,7 @@ export const getDatasetById = (id, setData) => {
                                     : item.format === "xlsx" ? "excel"
                                         : item.format === "xls" ? "excel"
                                             : item.format === "csv" ? "csv"
-                                                : item.format === "API" && "api",
+                                                : item.format === "API" && "API",
                             downloadURL: item.downloadURL
                         }
                     )),
@@ -508,7 +597,7 @@ export const getQuestionByCategories = (setData, questionID) => {
 
             if (res.status === 200) {
 
-                console.log("match", res.data.data);
+                console.log("match", res.data);
 
                 let data = res.data.data;
 
@@ -555,7 +644,7 @@ export const getPopularQuestions = (dispatch, setData) => {
 
                 let popularQuestions = []
 
-                data.map(item => {
+                data.slice(-5).map(item => {
 
                     const id = item.id
                     const { title, field_question_ar, field_popular_faqs } = item.attributes;
@@ -616,7 +705,7 @@ export const getSuccessStories = (dispatch, setData) => {
 
                     let { id, attributes, relationships } = item;
                     let { title, titlear, short_description, short_descriptionar, created } = attributes;
-                    let { banner, story_paragraph, story_tags, story_tagsar } = relationships;
+                    let { banner, story_paragraph, story_tags } = relationships;
 
                     let image = await endpoints.getImages(banner.links.related.href).then((res) => {
                         if (res.status === 200) {
@@ -642,10 +731,10 @@ export const getSuccessStories = (dispatch, setData) => {
                         console.log("Error Message While Getting Tags", err)
                     })
 
-                    let tags_ar = await endpoints.getImages(story_tagsar.links.related.href).then((res) => {
+                    let tags_ar = await endpoints.getImages(story_tags.links.related.href).then((res) => {
                         if (res.status === 200) {
 
-                            let tag = res.data.data.attributes.name
+                            let tag = res.data.data.attributes.field_story_tag_namear
 
                             return [tag]
 
@@ -689,7 +778,7 @@ export const getSuccessStoriesById = (id, setData) => {
 
                     let { id, attributes, relationships } = item;
                     let { title, titlear, short_description, short_descriptionar, description, descriptionar, created } = attributes;
-                    let { banner, story_paragraph, story_tags, story_tagsar } = relationships;
+                    let { banner, story_paragraph, story_tags } = relationships;
 
                     let rows = await endpoints.getImages(story_paragraph.links.related.href).then(async (res) => {
                         if (res.status === 200) {
@@ -758,10 +847,10 @@ export const getSuccessStoriesById = (id, setData) => {
                         console.log("Error Message While Getting Tags", err)
                     })
 
-                    let tags_ar = await endpoints.getImages(story_tagsar.links.related.href).then((res) => {
+                    let tags_ar = await endpoints.getImages(story_tags.links.related.href).then((res) => {
                         if (res.status === 200) {
 
-                            let tag = res.data.data.attributes.name
+                            let tag = res.data.data.attributes.field_story_tag_namear
 
                             return [tag]
 
@@ -881,38 +970,42 @@ export const getInsightsReport = (setData, payload, setLoading, setDatatype) => 
         })
 }
 
-export const getPublishersReport = (setData, payload, setLoading, setTotalCount, datatype, setDatatype) => {
+export const getPublishersReport = (setData, payload, setLoading, setTotalCount, setDatatype) => {
 
-    setLoading(true)
+    let new_payload = { ...payload }
+
+    new_payload.datatype = new_payload.datatype === 'pdf' ? 'pdf' : "json"
+
+    payload?.datatype !== "pdf" && setLoading(true);
 
     const options = {
-        responseType: payload?.datatype == "pdf" ? "blob" : "json"
+        responseType: payload.datatype == "pdf" ? "blob" : "json"
     }
 
-    return endpoints.getPublishersReport(payload, options)
+    return endpoints.getPublishersReport(new_payload, options)
         .then((res) => {
-
-            if (res.data.status === 200) {
-
-                if (payload?.datatype === "csv" || payload?.datatype === "excel") {
-                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'insights_report', [{ name: "alishan" }])
-                } else if (payload?.datatype === 'pdf') {
+            setLoading(false)
+            console.log("paadddd", payload,);
+            if (res.status === 200) {
+                if (payload.datatype === "csv" || payload.datatype === "excel") {
+                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'publishers_report', [res.data])
+                    setDatatype('');
+                } else if (payload.datatype === 'pdf') {
                     console.log("hello");
                     const href = window.URL.createObjectURL(res.data);
                     const link = document.createElement('a');
                     link.href = href;
-                    link.setAttribute('download', 'insight_report.pdf'); //or any other extension
+                    link.setAttribute('download', 'publishers_report.pdf'); //or any other extension
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
                     window.URL.revokeObjectURL(href);
-                    setDatatype();
+                    setDatatype('');
                 }
 
                 if (payload?.datatype !== "pdf" && payload?.datatype !== "excel" && payload?.datatype !== "csv") {
                     setData(res.data.data);
                     setTotalCount(res.data.total_count);
-                    setLoading(false);
                 }
 
             }
@@ -924,41 +1017,44 @@ export const getPublishersReport = (setData, payload, setLoading, setTotalCount,
         })
 }
 
-export const getDatasetsReport = (setData, payload, setLoading, setTotalCount, datatype, setDatatype) => {
+export const getDatasetsReport = (setData, payload, setLoading, setTotalCount, setDatatype) => {
 
-    setLoading(true)
+    let new_payload = { ...payload }
+
+    new_payload.datatype = new_payload.datatype === 'pdf' ? 'pdf' : "json"
+
+    payload?.datatype !== "pdf" && setLoading(true);
 
     const options = {
         responseType: payload?.datatype == "pdf" ? "blob" : "json"
     }
 
-    return endpoints.getDatasetsReport(payload, options)
+    return endpoints.getDatasetsReport(new_payload, options)
         .then((res) => {
-
-            if (res.data.status === 200) {
-
+            setLoading(false);
+            if (res.status === 200) {
                 if (payload?.datatype === "csv" || payload?.datatype === "excel") {
-                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'insights_report', [{ name: "alishan" }])
+                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'dataset_report', [res.data])
+                    setDatatype('');
                 } else if (payload?.datatype === 'pdf') {
                     console.log("hello");
                     const href = window.URL.createObjectURL(res.data);
                     const link = document.createElement('a');
                     link.href = href;
-                    link.setAttribute('download', 'insight_report.pdf'); //or any other extension
+                    link.setAttribute('download', 'dataset_report.pdf'); //or any other extension
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
                     window.URL.revokeObjectURL(href);
-                    setDatatype();
+                    setDatatype('');
                 }
 
                 if (payload?.datatype !== "pdf" && payload?.datatype !== "excel" && payload?.datatype !== "csv") {
-                    console.log("res", res.data);
-                    setData(res.data.data);
-                    setTotalCount(res.data.total_count);
-                    setLoading(false);
+                    if (res.data.status === 200) {
+                        setData(res.data.data);
+                        setTotalCount(res.data.total_count);
+                    }
                 }
-
             }
 
         })
@@ -1002,7 +1098,6 @@ export const register = async (navigate, route, setLoading, payload) => {
 export const getSearch = (setData) => {
     return endpoints.
         getSearch().then((res) => {
-
             if (res.status === 200) {
                 setData(res.data.data);
             }
@@ -1014,13 +1109,12 @@ export const getSearch = (setData) => {
 
 export const recoverPassword = async (navigate, route, setLoading, payload) => {
 
-
     setLoading(true)
 
     let { email } = payload;
 
     let data = {
-        mail: email,
+        email
     }
 
     let headers = {
@@ -1031,7 +1125,52 @@ export const recoverPassword = async (navigate, route, setLoading, payload) => {
     return await endpoints.
         recoverPassword(data, headers).then((res) => {
 
-            navigate(route, { replace: true });
+            if (res.status === 200) {
+                if (res.data.status === 200) {
+                    navigate(route, { replace: true });
+                    toast(res.data.message, { type: 'success' })
+                } else if (res.data.status === 400) {
+                    toast(res.data.message, { type: 'error' })
+                }
+            }
+
+            setLoading(false)
+
+        }).catch((err) => {
+            setLoading(false)
+            console.log("Error Message", err)
+        })
+}
+
+export const resetPassword = async (navigate, route, setLoading, payload) => {
+
+    setLoading(true)
+
+    let { email, password, otp } = payload;
+
+    let data = {
+        email,
+        pass: password,
+        mstpx: otp
+    }
+
+    let headers = {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+    }
+
+    return await endpoints.
+        resetPassword(data, headers).then((res) => {
+
+            if (res.status === 200) {
+                if (res.data.status === 200) {
+                    navigate(route, { replace: true });
+                    toast(res.data.message, { type: 'success' })
+                } else if (res.data.status === 400) {
+                    toast(res.data.message, { type: 'error' })
+                }
+            }
+
             setLoading(false)
 
         }).catch((err) => {
@@ -1045,7 +1184,39 @@ export const realTimeApis = (setData, payload, setLoading) => {
         realTimeApis(payload).then((res) => {
 
             console.log("res,,,,,,", res);
+
             if (res.status === 200) {
+
+                let data = res.data.data;
+
+                let arr = [];
+
+                data?.map(item => {
+
+                    const {
+                        title,
+                        field_title_ar,
+                        field_description,
+                        field_description_ar,
+                        field_short_description,
+                        field_short_description_ar
+                    } = item.attributes;
+
+                    const { href } = item.links;
+
+                    arr.push({
+                        title,
+                        title_ar: field_title_ar,
+                        description: convertHtmlToString(field_description.value),
+                        description_ar: convertHtmlToString(field_description_ar.value),
+                        short_description: field_short_description,
+                        short_description_ar: field_short_description_ar
+                    })
+
+                }
+
+                )
+
                 setData(res.data);
             }
 
@@ -1053,3 +1224,39 @@ export const realTimeApis = (setData, payload, setLoading) => {
             console.log("Error Message", err)
         })
 }
+
+export const getPrivacyPolicy = (setData, setLoading) => {
+
+    setLoading(true);
+
+    return endpoints.
+        getPrivacyPolicy()
+        .then((res) => {
+
+            setLoading(false);
+
+            // if(res.data.data.length > 0)
+
+            let arr = res.data.data.slice(-1).map(item => (
+                {
+                    title: item.attributes.title,
+                    title_ar: item.attributes.field_privacytitle_ar,
+                    description: item.attributes.field_body,
+                    description_ar: item.attributes.field_privacy_description_ar
+                }))
+
+            let obj = {
+                title: arr[0].title,
+                title_ar: arr[0].title_ar,
+                description: arr[0].description,
+                description_ar: arr[0].description_ar
+            }
+
+            setData(obj)
+
+        }).catch((err) => {
+            console.log("Error Message", err)
+            setLoading(false);
+        })
+}
+

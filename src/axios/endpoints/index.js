@@ -61,13 +61,13 @@ export const endpoints = {
         return axios.post('http://10.241.40.69:30418/apis/register.php', data, { headers })
     },
     getInsightsReport: (data, options) => {
-        return axios.post('http://10.241.40.69:30418/apis/reports/insight_report.php', data, options)
+        return axios.post('http://192.168.0.23:82/apis/reports/insight_report.php', data, options)
     },
     getPublishersReport: (data, options) => {
-        return axios.post('http://10.241.40.69:30418/apis/reports/publishers_report.php', data, options)
+        return axios.post('http://192.168.0.23:82/apis/reports/publishers_report.php', data, options)
     },
     getDatasetsReport: (data, options) => {
-        return axios.post('http://10.241.40.69:30418/apis/reports/dataset_report.php', data, options)
+        return axios.post('http://192.168.0.23:82/apis/reports/dataset_report.php', data, options)
     },
     getSearch: () => {
         return axios.get('https://data.abudhabi/apis/search.php')
@@ -75,13 +75,19 @@ export const endpoints = {
     postSearch: (data) => {
         return axios.post('https://data.abudhabi/apis/search.php', data)
     },
-    recoverPassword: (mail, headers) => {
-        return axios.post('https://data.abudhabi/user/password?_format=json', mail, { headers })
+    recoverPassword: (data, headers) => {
+        return axios.post('http://10.241.40.69:30418/apis/reset_email.php', data, { headers })
+    },
+    resetPassword: (data, headers) => {
+        return axios.post('http://10.241.40.69:30418/xwordxssapx.php', data, { headers })
     },
     viewCount: (data) => {
         return axios.post('https://data.abudhabi/apis/view_count.php', data);
     },
     realTimeApis: (data) => {
-        return axios.get('https://api.abudhabi.ae/gateway/GardenBooking/3.0/searchFacilities', data);
+        return axios.get('https://data.abudhabi/jsonapi/node/real_time_apis', data);
+    },
+    getPrivacyPolicy: () => {
+        return axios.get("https://data.abudhabi/jsonapi/node/privacy_policy");
     }
 } 

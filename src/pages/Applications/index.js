@@ -36,7 +36,6 @@ const Applications = memo(() => {
 
     return (
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
-            <Navbar theme='dark' />
             <div className="my-5 pt-5">
                 <Main />
                 <Cards type="image-outer-text" data={applications} onClick={onClickCard} />

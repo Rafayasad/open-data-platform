@@ -1,6 +1,7 @@
 import React, { memo, useState } from "react";
 import { Card as RBCard, Col, Row } from "react-bootstrap";
 import { BsPerson, BsShare, BsThreeDots } from "react-icons/bs";
+import { MdOutlineFileDownload } from 'react-icons/md';
 import { FaFilePdf, FaFileExcel, FaFileCsv } from "react-icons/fa";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { colors } from "../../../utils/colors";
@@ -12,8 +13,10 @@ import './style.css';
 import { shareOptions } from "../../../utils";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import i18n from "../../../i18n/i18n";
-import { locales } from "../../../i18n/helper";
+import pdfImage from '../../../assets/images/pdf_img.png';
+import excelImage from '../../../assets/images/excel_img.png';
+import csvImage from '../../../assets/images/csv_img.png';
+import apiImage from '../../../assets/images/api_img.png';
 
 const Card = memo((props) => {
 
@@ -21,7 +24,7 @@ const Card = memo((props) => {
     const navigate = useNavigate();
 
     const { resources, title, publisher, description, tags, size, noborder,
-        hoverable, shortTitle, headingSize, onClick, nodropdown, noheadercomponent, notags } = props;
+        hoverable, nopadding, shortTitle, headingSize, onClick, nodropdown, noheadercomponent, notags, notagsactive, url } = props;
 
     var height = "332px", border, ClassName;
 
@@ -63,12 +66,12 @@ const Card = memo((props) => {
     const options = [
         {
             title: t("download"),
-            icon: <BsPerson />,
+            icon: <MdOutlineFileDownload size={20} color="black" />,
             onClick: isClicked,
         },
         {
             title: t("share"),
-            icon: <BsShare />,
+            icon: <BsShare color="black" />,
             onClick: isClicked,
         }
     ]
@@ -78,17 +81,19 @@ const Card = memo((props) => {
             title: item.title && item.title,
             onClick: downloadResources,
             downloadLink: item.downloadURL,
-            icon: item.format === "pdf" ? <FaFilePdf />
-                : item.format === "excel" ? <FaFileExcel />
-                    : item.format === "csv" && <FaFileCsv />
+            icon: item.format === "pdf" ? <img src={pdfImage} />
+                : item.format === "excel" ? <img src={excelImage} />
+                    : item.format === "xlsx" ? <img src={excelImage} />
+                        : item.format === "csv" ? <img src={csvImage} height={20} width={20} />
+                            : item.format === "API" && <img src={apiImage} />
         }
     ))
 
     const specificShareOptions = shareOptions?.map((item, index) => (
         {
             title: t(item.title),
-            onClick: downloadResources,
-            downloadLink: item.downloadURL,
+            format: item.format,
+            url: url,
             icon: item.format === "facebook" ? <FaFacebookF />
                 : item.format === "linkedin" ? <FaLinkedinIn />
                     : item.format === "twitter" && <FaTwitter />
@@ -96,23 +101,27 @@ const Card = memo((props) => {
     ))
 
     return (
-        <RBCard className={`p-4 ${ClassName}`} style={{ height: height, borderRadius: "30px", borderWidth: border }}>
-            {!notags &&
-                <Row className="h-25 align-items-center">
+        <RBCard className={`${nopadding ? "py-4" : "p-4"} ${ClassName}`} style={{ height: height, borderRadius: "30px", borderWidth: border }}>
+            {
+                !notags &&
+                <Row className={`${nopadding && "m-0"} h-25 align-items-center`}>
                     <Col className="d-flex">
                         {
                             tags && tags.length > 0 && tags.map((item, index) => (
-                                <Tag key={index} title={item} onClick={() => onClickTag("/dataset", { listItem: [{ title: item, type: "theme" }] })} />
+                                <Tag key={index} title={item}
+                                    onClick={() => !notagsactive && onClickTag("/dataset", { listItem: [{ title: item, type: "theme" }] })} />
                             ))
                         }
                     </Col>
                     {
                         !nodropdown &&
-                        <Col md={2} className='d-flex justify-content-end'>
+                        <Col md={3} xs={3} className='d-flex justify-content-end'>
                             <Dropdown
+                                dropdownWidth={"100%"}
+                                width={"100%"}
                                 noheadercomponent={noheadercomponent}
                                 autoClose={"outside"}
-                                size={selectedDropdownValue === t("download") ? "md" : "sm"}
+                                size={selectedDropdownValue === t("download") ? window.innerWidth >= 768 ? "sm" : "xl" : window.innerWidth >= 768 ? "sm" : "lg"}
                                 options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
                                 selectedDropdownValue={selectedDropdownValue}
                                 setSelectedDropdownValue={setSelectedDropdownValue}
@@ -122,7 +131,7 @@ const Card = memo((props) => {
                     }
                 </Row>
             }
-            <Row className={`${publisher ? "h-0" : "h-75"}`}>
+            <Row className={`${nopadding && "m-0"} ${publisher && !notags ? "h-50" : "h-75"}`}>
                 <Col md={shortTitle ? 8 : 12}>
                     <Heading bold underline maxNumberOfLines={shortTitle ? 2 : 3} size={headingSize ? headingSize : "md"} heading={title} onClick={onClick} />
                 </Col>
@@ -135,7 +144,7 @@ const Card = memo((props) => {
             </Row>
             {
                 publisher &&
-                <Row className="h-50 align-items-end" >
+                <Row className={`${nopadding && "m-0"} h-25 align-items-end`} >
                     <Col>
                         <Heading size='xxs' color={colors.gray} nomargin heading={publisher} />
                     </Col>

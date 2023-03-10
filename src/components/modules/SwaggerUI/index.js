@@ -8,7 +8,7 @@ const SwaggerUI = memo((props) => {
     const { url } = props
 
     return (
-        <SwaggerUi url={"https://api.abudhabi.ae/gateway/GardenBooking/3.0/searchFacilities"}
+        <SwaggerUi url={url}
             spec={{
                 "municipalityId": 1001
             }}
