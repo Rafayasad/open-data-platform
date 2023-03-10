@@ -86,8 +86,9 @@ const Card = memo((props) => {
             downloadLink: item.downloadURL,
             icon: item.format === "pdf" ? <img src={pdfImage} />
                 : item.format === "excel" ? <img src={excelImage} />
-                    : item.format === "csv" ? <img src={csvImage} />
-                        : item.format === "API" && <img src={apiImage} />
+                    : item.format === "xlsx" ? <img src={excelImage} />
+                        : item.format === "csv" ? <img src={csvImage} height={20} width={20} />
+                            : item.format === "API" && <img src={apiImage} />
         }
     ))
 
@@ -116,11 +117,13 @@ const Card = memo((props) => {
                     </Col>
                     {
                         !nodropdown &&
-                        <Col md={2} className='d-flex justify-content-end'>
+                        <Col md={3} xs={3} className='d-flex justify-content-end'>
                             <Dropdown
+                                dropdownWidth={"100%"}
+                                width={"100%"}
                                 noheadercomponent={noheadercomponent}
                                 autoClose={"outside"}
-                                size={selectedDropdownValue === t("download") ? "md" : "sm"}
+                                size={selectedDropdownValue === t("download") ? window.innerWidth >= 768 ? "sm" : "xl" : window.innerWidth >= 768 ? "sm" : "lg"}
                                 options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
                                 selectedDropdownValue={selectedDropdownValue}
                                 setSelectedDropdownValue={setSelectedDropdownValue}
@@ -130,7 +133,7 @@ const Card = memo((props) => {
                     }
                 </Row>
             }
-            <Row className={`${publisher ? "h-0" : "h-75"}`}>
+            <Row className={`${publisher ? "h-50" : "h-75"}`}>
                 <Col md={shortTitle ? 8 : 12}>
                     <Heading bold underline maxNumberOfLines={shortTitle ? 2 : 3} size={headingSize ? headingSize : "md"} heading={title} onClick={onClick} />
                 </Col>
@@ -143,7 +146,7 @@ const Card = memo((props) => {
             </Row>
             {
                 publisher &&
-                <Row className="h-50 align-items-end" >
+                <Row className="h-25 align-items-end" >
                     <Col>
                         <Heading size='xxs' color={colors.gray} nomargin heading={publisher} />
                     </Col>

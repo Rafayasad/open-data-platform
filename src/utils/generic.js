@@ -245,3 +245,17 @@ export const numberWithCommas = (x) => {
     x = x.replace(pattern, "$1,$2");
   return x;
 }
+
+export const validateEmail = (email) => {
+  let regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  return regex.test(String(email).toLowerCase())
+};
+
+export const isStrongPassword = (str) => {
+  var regex = /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]{15,30}$/;
+  return regex.test(str);
+}
+
+export const getBreakpoint = () => {
+  return window.getComputedStyle(document.body, ':before').content.replace(/\"/g, '');
+};

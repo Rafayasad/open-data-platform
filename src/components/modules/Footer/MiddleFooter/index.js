@@ -2,6 +2,7 @@ import React, { memo, useCallback, useState } from 'react';
 import { Col, Container, Row, useAccordionButton } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import { RxArrowTopRight,RxArrowTopLeft } from "react-icons/rx";
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { colors } from '../../../../utils/colors';
@@ -43,7 +44,7 @@ const MiddleFooter = memo(() => {
 
     const data = [
         {
-            heading: t("dataset"),
+            heading: t("datasets"),
             data: i18n.language === locales.AR ? topics?.ar?.map(item => { return ({ ...item, link: routes.DATASET, params: { listItem: [item] } }) }) : topics?.en?.map(item => { return ({ ...item, link: routes.DATASET, params: { listItem: [item] } }) })
         },
         {
@@ -113,7 +114,7 @@ const MiddleFooter = memo(() => {
                     {
                         data?.map((item, index) => (
                             <Col key={index}>
-                                <div className='my-4'>
+                                <div className='my-4 d-flex align-items-center'>
                                     <Heading size="sm" color="white" heading={item.heading} />
                                 </div>
                                 <div className='my-1'>

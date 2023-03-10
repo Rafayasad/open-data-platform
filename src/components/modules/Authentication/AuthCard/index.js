@@ -46,7 +46,7 @@ const AuthCard = memo((props) => {
       </Row>
       <Row className="py-2">
         {
-          inputFields.map((items, index) => (
+          inputFields?.map((items, index) => (
             <Col key={index} md={12}>
               <TextInput value={items.value} placeholder={items.placeholder} type={items.type} onChange={items.onChange} />
             </Col>

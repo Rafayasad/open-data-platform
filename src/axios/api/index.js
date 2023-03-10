@@ -21,6 +21,7 @@ export const getMostViewedDatasets = (setData, setLoading) => {
     return endpoints.
         getMostViewedDatasets().then((res) => {
             if (res.status === 200) {
+                console.log("hello", res.data.data);
                 let data = res.data.data;
                 let transform = data.en.map(item => {
 
@@ -32,18 +33,49 @@ export const getMostViewedDatasets = (setData, setLoading) => {
                     ar_obj.publisher_ar = ar_obj.publisherlear
                     ar_obj.title_ar = ar_obj.titlear
                     ar_obj.tags_ar = ar_obj.themelear
+                    ar_obj.resources_ar = ar_obj.distributionlear.map(item => {
+                        return (
+                            {
+                                title: item.titlelear,
+                                format: item.format === "pdf" ? "pdf"
+                                    : item.format === "excel" ? "excel"
+                                        : item.format === "esri rest" ? "excel"
+                                            : item.format === "xlsx" ? "excel"
+                                                : item.format === "xls" ? "excel"
+                                                    : item.format === "csv" && "csv",
+                                downloadURL: item.url
+                            }
+
+                        )
+                    })
 
                     delete ar_obj.identifier
                     delete ar_obj.keywordlear
                     delete ar_obj.publisherlear
                     delete ar_obj.titlear
                     delete ar_obj.themelear
+                    delete ar_obj.distributionlear
 
                     return {
                         id: item.identifier,
                         title: item.title,
                         publisher: item.publisher,
                         tags: item.theme,
+                        resources: item.distribution.map(item => {
+                            return (
+                                {
+                                    title: item.title,
+                                    format: item.format === "pdf" ? "pdf"
+                                        : item.format === "excel" ? "excel"
+                                            : item.format === "esri rest" ? "excel"
+                                                : item.format === "xlsx" ? "excel"
+                                                    : item.format === "xls" ? "excel"
+                                                        : item.format === "csv" && "csv",
+                                    downloadURL: item.url
+                                }
+
+                            )
+                        }),
                         ...ar_obj
                     }
                 })
@@ -60,6 +92,7 @@ export const getRecentsDatasets = (setData, setLoading) => {
     return endpoints.
         getRecentsDatasets().then((res) => {
             if (res.status === 200) {
+                console.log("dtatdatdatda", res.data);
                 let data = res.data.data;
 
                 let transform = data.en.map(item => {
@@ -142,18 +175,47 @@ export const getSimilarDatasets = (topic, setData, setLoading) => {
                     ar_obj.publisher_ar = ar_obj.publisherlear
                     ar_obj.title_ar = ar_obj.titlear
                     ar_obj.tags_ar = ar_obj.themelear
+                    ar_obj.resources_ar = ar_obj.distribution.map(item => {
+                        return (
+                            {
+                                title: item.titlelear,
+                                format: item.format === "pdf" ? "pdf"
+                                    : item.format === "esri rest" ? "excel"
+                                        : item.format === "xlsx" ? "excel"
+                                            : item.format === "xls" ? "excel"
+                                                : item.format === "csv" && "csv",
+                                downloadURL: item.url
+                            }
+
+                        )
+                    })
 
                     delete ar_obj.identifier
                     delete ar_obj.keywordlear
                     delete ar_obj.publisherlear
                     delete ar_obj.titlear
                     delete ar_obj.themelear
+                    delete ar_obj.distribution
 
                     return {
                         id: item.identifier,
                         title: item.title,
                         publisher: item.publisher,
                         tags: item.theme,
+                        resources: item.distribution.map(item => {
+                            return (
+                                {
+                                    title: item.title,
+                                    format: item.format === "pdf" ? "pdf"
+                                        : item.format === "esri rest" ? "excel"
+                                            : item.format === "xlsx" ? "excel"
+                                                : item.format === "xls" ? "excel"
+                                                    : item.format === "csv" && "csv",
+                                    downloadURL: item.url
+                                }
+
+                            )
+                        }),
                         ...ar_obj
                     }
                 })
@@ -574,7 +636,7 @@ export const getPopularQuestions = (dispatch, setData) => {
 
                 let popularQuestions = []
 
-                data.map(item => {
+                data.slice(-5).map(item => {
 
                     const id = item.id
                     const { title, field_question_ar, field_popular_faqs } = item.attributes;
@@ -980,8 +1042,10 @@ export const getDatasetsReport = (setData, payload, setLoading, setTotalCount, s
                 }
 
                 if (payload?.datatype !== "pdf" && payload?.datatype !== "excel" && payload?.datatype !== "csv") {
-                    setData(res.data.data);
-                    setTotalCount(res.data.total_count);
+                    if (res.data.status === 200) {
+                        setData(res.data.data);
+                        setTotalCount(res.data.total_count);
+                    }
                 }
             }
 
@@ -1112,7 +1176,39 @@ export const realTimeApis = (setData, payload, setLoading) => {
         realTimeApis(payload).then((res) => {
 
             console.log("res,,,,,,", res);
+
             if (res.status === 200) {
+
+                let data = res.data.data;
+
+                let arr = [];
+
+                data?.map(item => {
+
+                    const {
+                        title,
+                        field_title_ar,
+                        field_description,
+                        field_description_ar,
+                        field_short_description,
+                        field_short_description_ar
+                    } = item.attributes;
+
+                    const { href } = item.links;
+
+                    arr.push({
+                        title,
+                        title_ar: field_title_ar,
+                        description: convertHtmlToString(field_description.value),
+                        description_ar: convertHtmlToString(field_description_ar.value),
+                        short_description: field_short_description,
+                        short_description_ar: field_short_description_ar
+                    })
+
+                }
+
+                )
+
                 setData(res.data);
             }
 
@@ -1132,7 +1228,7 @@ export const getPrivacyPolicy = (setData, setLoading) => {
             setLoading(false);
 
             // if(res.data.data.length > 0)
-            
+
             let arr = res.data.data.slice(-1).map(item => (
                 {
                     title: item.attributes.title,

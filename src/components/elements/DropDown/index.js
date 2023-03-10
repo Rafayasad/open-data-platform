@@ -18,20 +18,18 @@ const Dropdown = (props) => {
     };
 
     return (
-        <div className='d-flex align-items-center'>
+        <div className='d-flex align-items-center w-100 justify-content-end'>
             {
                 name &&
                 <div className='px-3 d-none d-lg-block w-50'>
                     <Heading size="xxs" heading={name} nomargin />
                 </div>
             }
-            <BSDropdown style={{ width: '100%' }} autoClose={autoClose} onToggle={toggle}>
+            <BSDropdown style={{ width: dropdownWidth }} autoClose={autoClose} onToggle={toggle}>
                 {
                     noheadercomponent ? null :
                         headerComponent ? (
-                            <BSDropdown.Toggle href={null} className='bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end'
-                                style={{ width: width }}
-                            >
+                            <BSDropdown.Toggle href={null} className='w-100 bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end'>
                                 {headerComponent}
                             </BSDropdown.Toggle>
                         ) : (
@@ -52,7 +50,7 @@ const Dropdown = (props) => {
                     isOpen && options &&
                     <BSDropdown.Menu
                         className={`d-flex flex-column my-1 p-1`}
-                        style={{ backgroundColor: "white", zIndex: 999, minWidth: "100%", width: size === "lg" ? "50vw" : size === "md" ? "30vw" : size === "sm" ? "15vw" : "10vw" }}>
+                        style={{ backgroundColor: "white", zIndex: 999, minWidth: "100%", width: size === "xl" ? "75vw" : size === "lg" ? "50vw" : size === "md" ? "30vw" : size === "sm" ? "15vw" : "10vw" }}>
                         {
                             options && options.length > 0 && options.map((item, index) => (
                                 <BSDropdown.Item
