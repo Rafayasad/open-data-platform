@@ -23,4 +23,5 @@ export const routes = {
   REPORTS_INSIGHTS: '/reports/insights',
   REPORTS_PUBLISHERS: '/reports/publisher',
   REPORTS_DATASETS: '/reports/dataset',
+  CONFIRMATION: '/confirmation'
 };

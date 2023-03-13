@@ -36,7 +36,7 @@ const Cards = memo((props) => {
 
     const { i18n } = useTranslation();
 
-    const { title, data, backgroundColor, hoverable, type, size, onClick, onClickViewAll, buttonText, notagsactive, noheadercomponent } = props;
+    const { title, notitlebutton, data, backgroundColor, hoverable, type, size, onClick, onClickViewAll, buttonText, notagsactive, noheadercomponent } = props;
 
     const renderContent = () => {
         if (type === 'image-inner-text') {
@@ -88,7 +88,6 @@ const Cards = memo((props) => {
             return (
                 data && data.length > 0 ? data.map((item, index) => (
                     < Col key={index} md={4} className="py-2" >
-                        {console.log("kekekekeke2", item.url)}
                         <Card
                             notagsactive={notagsactive}
                             noheadercomponent={noheadercomponent}
@@ -114,7 +113,7 @@ const Cards = memo((props) => {
                 title &&
                 <Row>
                     <Col>
-                        <Header buttonText={buttonText} backgroundColor={backgroundColor} title={title} onClickButton={onClickViewAll} />
+                        <Header nobutton={notitlebutton && true} buttonText={buttonText} backgroundColor={backgroundColor} title={title} onClickButton={onClickViewAll} />
                     </Col>
                 </Row>
             }

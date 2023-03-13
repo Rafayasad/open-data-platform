@@ -1,10 +1,10 @@
 import _ from 'lodash';
-import { toast } from "react-toastify";
 import { convertHtmlToString } from "../../utils"
 import { endpoints } from "../endpoints"
 import { generateFile } from "../../utils/generic.js";
 import { locales } from "../../i18n/helper"
 import i18n from "../../i18n/i18n"
+import { toast } from "react-toastify";
 
 export const getPlatformInsights = (setData, setLoading) => {
     return endpoints.
@@ -916,11 +916,17 @@ export const login = async (dispatch, setData, setLoading, payload) => {
         .then((res) => {
             if (res.status === 200) {
                 dispatch(setData(res.data))
+                toast(res.data.message, { type: 'success' })
+            } else if (res.data.status === 400) {
+                toast(res.data.message, { type: 'error' })
+            } else {
+                toast("Invalid username or password.", { type: "error" })
             }
             setLoading(false)
         }).catch((err) => {
             setLoading(false)
             console.log("Error message", err)
+            toast("Something went wrong.", { type: "error" })
         })
 
 }

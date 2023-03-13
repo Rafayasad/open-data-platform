@@ -8,7 +8,7 @@ import './style.css';
 
 const Dropdown = (props) => {
 
-    const { autoClose, options, setSelectedDropdownValue, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
+    const { autoClose, options, setSelectedDropdownValue, textColor, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
 
     const [isOpen, setIsOpen] = useState(false);
     const [indexx, setIndexx] = useState();
@@ -61,7 +61,7 @@ const Dropdown = (props) => {
                                 className={`w-100 bg-white my-1 d-flex align-items-center justify-content-between my-dropdown-toggle text-black border border-1 ${isOpen && "dropdown-hover"}`}
                             >
                                 <div className=''>
-                                    <Heading size="xxs" nomargin heading={selectedValue} />
+                                    <Heading size="xxs" color={textColor} nomargin heading={selectedValue} />
                                 </div>
                                 <div className='my-1'>
                                     <MdKeyboardArrowDown />

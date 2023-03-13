@@ -16,11 +16,29 @@ const Applications = memo(() => {
     const { t } = useTranslation()
     const applications = useSelector(state => state.application.applications)
 
+    const [displayApplications, setDisplayApplications] = useState();
+
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [rowsPerPage, setRowsPerPage] = useState(9);
 
-    const onChangePage = useCallback((page) => setCurrentPage(page), [])
+    useEffect(() => {
+            let arr = [...applications]
+            let x = arr.slice(0, rowsPerPage)
+            setDisplayApplications(x)
+    }, [])
+
+    const onChangePage = useCallback((page) => {
+
+        let start = (page - 1) * rowsPerPage
+        let end = (start + rowsPerPage)
+
+        let arr = [...applications]
+        let x = arr.slice(start, end)
+        setDisplayApplications(x)
+        setCurrentPage(page)
+        
+    }, [])
 
     const onClickCard = useCallback((id) => {
 
@@ -38,7 +56,12 @@ const Applications = memo(() => {
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
             <div className="my-5 pt-5">
                 <Main />
-                <Cards type="image-outer-text" data={applications} onClick={onClickCard} />
+                <Cards type="image-outer-text" data={displayApplications} onClick={onClickCard} />
+                <Pagination
+                    currentPage={currentPage}
+                    totalCount={Math.ceil(applications?.length / rowsPerPage)}
+                    onChange={onChangePage}
+                />
             </div>
         </View>
     )

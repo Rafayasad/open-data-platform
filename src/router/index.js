@@ -25,6 +25,7 @@ const Reports = lazy(() => import('../pages/Reports'))
 const InsightsReports = lazy(() => import('../pages/Reports/Insights'))
 const PublishersReports = lazy(() => import('../pages/Reports/Publishers'))
 const DatasetsReports = lazy(() => import('../pages/Reports/Datasets'))
+const Confirmation = lazy(() => import('../pages/Confirmation'))
 
 const Router = () => {
     return (
@@ -52,6 +53,7 @@ const Router = () => {
             <Route path={routes.REPORTS_INSIGHTS} element={<InsightsReports />} />
             <Route path={routes.REPORTS_PUBLISHERS} element={<PublishersReports />} />
             <Route path={routes.REPORTS_DATASETS} element={<DatasetsReports />} />
+            <Route path={routes.CONFIRMATION} element={<Confirmation />} />
         </Routes>
     )
 };

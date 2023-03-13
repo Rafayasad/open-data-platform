@@ -11,6 +11,7 @@ import { routes } from "../../../../router/helper";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import AuthCard from "../AuthCard";
+import { toast } from "react-toastify";
 
 const Login = memo(() => {
 
@@ -31,7 +32,15 @@ const Login = memo(() => {
     }
   }, [isLoggedIn])
 
-  const onClickLogin = useCallback(() => login(dispatch, handleLogin, setLoading, { email, password }));
+  const onClickLogin = useCallback(() => {
+
+    if (email && password) {
+      login(dispatch, handleLogin, setLoading, { email, password })
+    } else {
+      toast("All fields are required.", { type: "error" })
+    }
+
+  });
   const onClickForgetPassword = useCallback(() => navigate(routes.RECOVER));
   const onClickRegister = useCallback(() => navigate(routes.REGISTER));
 
