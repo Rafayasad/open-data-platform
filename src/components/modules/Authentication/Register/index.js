@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { register } from "../../../../axios/api";
 import { routes } from "../../../../router/helper";
+import { toast } from "react-toastify";
 
 const Register = memo(() => {
 
@@ -29,7 +30,7 @@ const Register = memo(() => {
     if (isChecked && isRecaptcha != null && name && email && reEmail && password) {
       register(navigate, routes.HOME, setLoading, { email, password, reEmail, name })
     } else {
-      alert("sorry");
+      toast("All fields are required.", { type: "error" })
     }
   });
 

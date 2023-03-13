@@ -26,15 +26,15 @@ const Dataset = memo(() => {
     const [datasets, setDatasets] = useState();
     const [search, setSearch] = useState("");
     const [searchData, setSearchData] = useState([]);
-    const [sort, setSort] = useState("");
+    const [sort, setSort] = useState("Modified");
     const [filters, setFilters] = useState([]);
 
     const [loading, setLoading] = useState(false);
     const [viewAll, setViewAll] = useState(false);
 
     useEffect(() => {
-        sort && setSort("");
         setFilters();
+        i18n.language === locales.AR ? setSort("تم التعديل") : setSort("Modified")
     }, [i18n.language])
 
     const focustoDatasets = () => {
@@ -59,7 +59,7 @@ const Dataset = memo(() => {
 
         if (state) {
             navigate(pathname, { replace: true, state: null })
-            getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [])
+            getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [])
         }
 
     }, []);
@@ -67,7 +67,7 @@ const Dataset = memo(() => {
     useEffect(() => {
         if (currentPage || search || sort || filters) {
             if (!state?.search && !state?.listItem) {
-                getAllDatasets(setDatasets, setTotalCount, setLoading, search, sort.toLowerCase(), currentPage, rowsPerPage, filters)
+                getAllDatasets(setDatasets, setTotalCount, setLoading, search, sort?.toLowerCase(), currentPage, rowsPerPage, filters)
             }
 
         }

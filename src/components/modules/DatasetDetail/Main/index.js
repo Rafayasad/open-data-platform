@@ -8,6 +8,7 @@ import DataCard from "../DataCard";
 import SwaggerUI from "../../SwaggerUI";
 import DataHeader from "../DataHeader";
 import Shimmer from '../../../elements/Shimmer';
+import Heading from "../../../elements/Heading";
 
 const Main = memo((props) => {
 
@@ -53,7 +54,10 @@ const Main = memo((props) => {
         },
         {
             title: "Source(s)",
-            detail: "Housing and Development Board"
+            detail: data ? (
+                i18n.language === locales.EN ? data.resources.map(item => item.title) :
+                data.resources.map(item => item.title_ar)
+            ) : <Shimmer rounded='xs' width="70%" className={"my-1"} />
         },
     ]
 
@@ -83,13 +87,13 @@ const Main = memo((props) => {
         },
         {
             title: t("sourceURL"),
-            detail: "https://developers.data.gov.sg/data-gov-sg-apis/apis/get/transport/carpark-availability",
+            detail: url,
             color: colors.purple,
             underline: true
         },
         {
             title: t("license"),
-            detail: data ? "Abu Dhabi Government Open Data License" : <Shimmer rounded='xs' width="70%" className={"my-1"} />,
+            detail: data ? i18n.language === locales.EN ? "Abu Dhabi Government Open Data License" : "حكومة أبو ظبي رخصة البيانات المفتوحة" : <Shimmer rounded='xs' width="70%" className={"my-1"} />,
             color: colors.purple,
             underline: true,
             onClick: () => data && window.open(data.license, '_blank')
