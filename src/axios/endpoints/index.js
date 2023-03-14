@@ -3,6 +3,10 @@ import { client } from "../axios"
 
 export const endpoints = {
     getImages: (image) => {
+        if (process.env.REACT_APP_ENVIORNMENT === 'dev') {
+            return client.get(image);
+        }
+
         let url = image.replace('http://', 'https://');
         return client.get(url);
     },
@@ -41,6 +45,9 @@ export const endpoints = {
     },
     getPopularQuestions: () => {
         return client.get('/jsonapi/node/faqs');
+    },
+    getQuestionBySearch: (text) => {
+        return client.get(`/jsonapi/node/faqs?filter[title][operator]=CONTAINS&filter[title][value]=${text}`);
     },
     getQuestionById: (id) => {
         return client.get(`/jsonapi/node/faqs/${id}`)

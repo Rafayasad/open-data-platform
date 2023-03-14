@@ -13,8 +13,6 @@ const QuestionList = memo((props) => {
 
     const { title, data, onClick } = props
 
-    console.log("datatatatata", data);
-
     const [currentHovered, setCurrentHovered] = useState(null);
 
     const onHover = useCallback((index) => setCurrentHovered(index), [currentHovered])

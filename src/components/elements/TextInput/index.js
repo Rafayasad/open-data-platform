@@ -1,11 +1,9 @@
 import React, { memo, useState } from "react";
-// import { Form, InputGroup } from "react-bootstrap";
-import { locales } from "../../../i18n/helper";
-import i18n from "../../../i18n/i18n";
 import { colors } from "../../../utils/colors";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useTranslation } from "react-i18next";
 import { FormControl, IconButton, Input, InputAdornment, InputLabel } from "@mui/material";
+import { useCallback } from "react";
 
 const TextInput = memo((props) => {
 
@@ -15,7 +13,7 @@ const TextInput = memo((props) => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowPassword = useCallback(() => setShowPassword((show) => !show), [showPassword]);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -64,11 +62,13 @@ const TextInput = memo((props) => {
       <InputLabel htmlFor="standard-adornment-password">{placeholder}</InputLabel>
       <Input
         id="standard-adornment-password"
-        type={placeholder === t("password") && !showPassword ? "password" : "text"}
+        type={type}
+        value={value}
         onChange={(e) => onChange(e.target.value)}
         endAdornment={
           <InputAdornment position="end">
-            {placeholder === t("password") &&
+            {
+              placeholder === t("password") &&
               <IconButton
                 aria-label="toggle password visibility"
                 onClick={handleClickShowPassword}

@@ -31,7 +31,11 @@ function App() {
     getSuccessStories(dispatch, setStories);
     getFaqsCategory(dispatch, setCategories);
     getPopularQuestions(dispatch, setQuestions);
-  }, [])
+  }, []);
+
+  if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
+    console.log = () => { }
+  }
 
   return <div className={`${i18n.language === locales.AR && "ar-font"}`}>
     <Router />
