@@ -14,9 +14,9 @@ const AuthCard = memo((props) => {
 
   const { t } = useTranslation()
 
-  const { title, subtitle, linktext, inputFields, button, checkbox, recaptcha, onClickForgetPassword, hasOtp } = props;
+  const { title, subtitle, linktext, inputFields, button, checkbox, recaptcha, onClickForgetPassword, hasOtp, otp, setOtp } = props;
 
-  const [otp, setOtp] = useState("");
+  // const [otp, setOtp] = useState("");
 
   const recaptchaCallback = useCallback((value) => recaptcha(value));
 

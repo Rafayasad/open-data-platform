@@ -26,7 +26,7 @@ export const endpoints = {
         return client.get(`/api/1/search/facets?fulltext=&page=1&page-size=10&sort=modified&sort-order=desc&facets=${key}`);
     },
     getAllDatasets: (search, sort, currentPage, rowsPerPage, filters) => {
-        return client.get(`/api/1/search/facets?fulltext=${search}&page=${currentPage}&page-size=${rowsPerPage}&sort-order=${sort === 'modified' ? "desc" : "aesc"}&sort=${sort}&facets=0&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
+        return client.get(`/api/1/search?fulltext=${search}&page=${currentPage}&page-size=${rowsPerPage}&sort-order=${sort === 'modified' ? "desc" : "aesc"}&sort=${sort}&facets=0&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
     },
     getDatasetById: (id) => {
         return client.get(`/api/1/metastore/schemas/dataset/items/${id}`);
@@ -66,6 +66,12 @@ export const endpoints = {
     // },
     login: (data, headers) => {
         return client.post('/user/login?_format=json', data, { headers })
+    },
+    validateUser: (data) => {
+        return client.post('/validate_user.php', data)
+    },
+    otp: (data) => {
+        return client.post('/apis/otp.php', data)
     },
     // login: (data, headers) => {
     //     return axios.post('http://10.241.40.69:30418/user/login?_format=json', data, { headers })
