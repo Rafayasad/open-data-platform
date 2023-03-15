@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { Spinner } from "react-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
 import DataTable from "react-data-table-component";
 import Pagination from "../Pagination";
 
@@ -14,7 +14,7 @@ const columns = (data) => {
         return (
             {
                 name: key.replace("_", " "),
-                selector: row => row[key]
+                selector: row => row[key],
             }
         )
 
@@ -41,10 +41,15 @@ const customStyles = {
             textTransform: "capitalize"
         },
     },
+    tableWrapper: {
+        style: {
+            display: 'table',
+        },
+    },
     cells: {
         style: {
-            paddingLeft: '8px', // override the cell padding for data cells
-            paddingRight: '8px',
+            padding: '12px', // override the cell padding for data cells
+            // paddingRight: '8px',
         },
     },
 };
@@ -53,17 +58,32 @@ const Table = memo((props) => {
 
     let { data, loading, currentPage, totalCount, onChange } = props;
 
+    let rowsPerPage = 10;
+
     return (
         loading ? (
             <div className="d-flex align-items-center justify-content-center" >
                 <Spinner />
             </div>
         ) : (
-            <div>
+            <div className="en-font-default">
+                <Row>
+                    <Col>
+                        <p style={{ fontSize: '16px' }}>
+                            Showing&nbsp;
+                            {(rowsPerPage * currentPage) - (rowsPerPage - (data && data.length)) > 0 ? (rowsPerPage * currentPage) - (rowsPerPage - (data && data.length)) - (data && data.length) + 1 : '0'}
+                            &nbsp;-&nbsp;
+                            {(rowsPerPage * currentPage) - (rowsPerPage - (data && data.length))}
+                            &nbsp;out of&nbsp;
+                            {totalCount}
+                        </p>
+                    </Col>
+                </Row>
                 <DataTable
                     columns={data && columns(data[0])}
                     data={data && data}
                     customStyles={customStyles}
+                    striped
                 />
                 {
                     currentPage && totalCount && onChange && data && data?.length > 0 ?

@@ -1,10 +1,10 @@
 import _ from 'lodash';
-import { toast } from "react-toastify";
 import { convertHtmlToString } from "../../utils"
 import { endpoints } from "../endpoints"
 import { generateFile } from "../../utils/generic.js";
 import { locales } from "../../i18n/helper"
 import i18n from "../../i18n/i18n"
+import { toast } from "react-toastify";
 
 export const getPlatformInsights = (setData, setLoading) => {
     return endpoints.
@@ -305,7 +305,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
         getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then(async (res) => {
             if (res.status === 200) {
 
-                if (res.data.total > 0) {
+                if (res.data.total > 0 && search && search !== "") {
                     let obj = {
                         keyword: search,
                         ip: "192.168.0.44",
@@ -314,7 +314,6 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                     }
                     await endpoints.
                         postSearch(obj).then((res) => {
-                            console.log("helllo", res);
                         }).catch((err) => {
                             console.log("Error Message", err)
                         })
@@ -563,8 +562,6 @@ export const getFaqsCategory = async (dispatch, setData) => {
 
             let data = res.data.data;
 
-            console.log("FQSSSSSSSSSSS", data);
-
             data.map((item) => {
 
                 const id = item.id
@@ -596,8 +593,6 @@ export const getQuestionByCategories = (setData, questionID) => {
         getQuestionByCategories().then((res) => {
 
             if (res.status === 200) {
-
-                console.log("match", res.data);
 
                 let data = res.data.data;
 
@@ -638,8 +633,6 @@ export const getPopularQuestions = (dispatch, setData) => {
 
             if (res.status === 200) {
 
-                console.log("popular", res.data);
-
                 let data = res.data.data;
 
                 let popularQuestions = []
@@ -663,6 +656,40 @@ export const getPopularQuestions = (dispatch, setData) => {
                 })
 
                 dispatch && dispatch(setData(popularQuestions))
+
+            }
+
+        }).catch((err) => {
+            console.log("Error Message", err)
+        })
+}
+
+export const getQuestionBySearch = (text, setData) => {
+    return endpoints.
+        getQuestionBySearch(text).then((res) => {
+
+            if (res.status === 200) {
+
+                let data = res.data.data;
+
+                let searchedQuestions = []
+
+                data.map(item => {
+
+                    const id = item.id
+                    const { title, field_question_ar } = item.attributes;
+
+                    searchedQuestions.push({
+                        id,
+                        title,
+                        title_ar: field_question_ar
+                    })
+
+                    return;
+
+                })
+
+                setData(searchedQuestions)
 
             }
 
@@ -916,11 +943,17 @@ export const login = async (dispatch, setData, setLoading, payload) => {
         .then((res) => {
             if (res.status === 200) {
                 dispatch(setData(res.data))
+                toast(res.data.message, { type: 'success' })
+            } else if (res.data.status === 400) {
+                toast(res.data.message, { type: 'error' })
+            } else {
+                toast("Invalid username or password.", { type: "error" })
             }
             setLoading(false)
         }).catch((err) => {
             setLoading(false)
             console.log("Error message", err)
+            toast("Something went wrong.", { type: "error" })
         })
 
 }

@@ -1,9 +1,7 @@
 import React, { memo, useCallback } from "react";
 import { useNavigate } from "react-router";
 import Cards from "../../components/modules/Cards";
-import LowerFooter from "../../components/modules/Footer/LowerFooter";
-import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
-import Navbar from "../../components/modules/Navbar";
+import View from "../../components/modules/View";
 import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
 
@@ -30,12 +28,11 @@ const Reports = memo(() => {
 
     return (
         <>
-            <Navbar theme='dark' />
-            <div className="my-5 pt-5">
-                <Cards title="Reports" backgroundColor={colors.white} type='image-inner-text' data={data} onClick={onClickCard} />
-            </div>
-            <MiddleFooter />
-            <LowerFooter />
+            <View theme={"dark"} noupperfooter>
+                <div className="my-5 pt-5">
+                    <Cards title="Reports" notitlebutton backgroundColor={colors.white} type='image-inner-text' data={data} onClick={onClickCard} />
+                </div>
+            </View>
         </>
     )
 });

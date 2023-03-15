@@ -7,7 +7,7 @@ import { locales } from "../../../i18n/helper";
 
 const Heading = memo((props) => {
 
-  const { heading, color, size, underline, maxNumberOfLines, nomargin, capitalize, bold, onClick, downloadURL } = props;
+  const { heading, color, size, underline, maxNumberOfLines, nomargin, capitalize, bold, onClick } = props;
 
   var Tag,
     ClassName = "";
@@ -64,8 +64,7 @@ const Heading = memo((props) => {
       }}
       onClick={onClick ? onClick : () => { }}
     >
-      {downloadURL && <a style={{ textDecoration: "none", color: "white" }} target={"_blank"} href={downloadURL}>{heading} {i18n.language === locales.EN ? <RxArrowTopRight size={25} color='white' className='mx-2' /> : <RxArrowTopLeft size={25} color='white' className='mx-2' />}</a>}
-      {!downloadURL && heading}
+      {heading}
     </Tag>
   );
 });

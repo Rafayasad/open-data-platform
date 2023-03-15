@@ -3,6 +3,10 @@ import { client } from "../axios"
 
 export const endpoints = {
     getImages: (image) => {
+        if (process.env.REACT_APP_ENVIORNMENT === 'dev') {
+            return client.get(image);
+        }
+
         let url = image.replace('http://', 'https://');
         return client.get(url);
     },
@@ -42,6 +46,9 @@ export const endpoints = {
     getPopularQuestions: () => {
         return client.get('/jsonapi/node/faqs');
     },
+    getQuestionBySearch: (text) => {
+        return client.get(`/jsonapi/node/faqs?filter[title][operator]=CONTAINS&filter[title][value]=${text}`);
+    },
     getQuestionById: (id) => {
         return client.get(`/jsonapi/node/faqs/${id}`)
     },
@@ -52,42 +59,81 @@ export const endpoints = {
         return client.get(`/jsonapi/node/stories?filter[id]=${id}`)
     },
     getCRSFToken: () => {
-        return axios.get('https://data.abudhabi/session/token')
+        return client.get('/session/token')
     },
+    // getCRSFToken: () => {
+    //     return axios.get('https://data.abudhabi/session/token')
+    // },
     login: (data, headers) => {
-        return axios.post('http://10.241.40.69:30418/user/login?_format=json', data, { headers })
+        return client.post('/user/login?_format=json', data, { headers })
     },
+    // login: (data, headers) => {
+    //     return axios.post('http://10.241.40.69:30418/user/login?_format=json', data, { headers })
+    // },
     register: (data, headers) => {
-        return axios.post('http://10.241.40.69:30418/apis/register.php', data, { headers })
+        return client.post('/apis/register.php', data, { headers })
     },
+    // register: (data, headers) => {
+    //     return axios.post('http://10.241.40.69:30418/apis/register.php', data, { headers })
+    // },
     getInsightsReport: (data, options) => {
-        return axios.post('http://192.168.0.23:82/apis/reports/insight_report.php', data, options)
+        return client.post('/apis/reports/insight_report.php', data, options)
     },
+    // getInsightsReport: (data, options) => {
+    //     return axios.post('http://192.168.0.23:82/apis/reports/insight_report.php', data, options)
+    // },
     getPublishersReport: (data, options) => {
-        return axios.post('http://192.168.0.23:82/apis/reports/publishers_report.php', data, options)
+        return client.post('/apis/reports/publishers_report.php', data, options)
     },
+    // getPublishersReport: (data, options) => {
+    //     return axios.post('http://192.168.0.23:82/apis/reports/publishers_report.php', data, options)
+    // },
     getDatasetsReport: (data, options) => {
-        return axios.post('http://192.168.0.23:82/apis/reports/dataset_report.php', data, options)
+        return client.post('/apis/reports/dataset_report.php', data, options)
     },
+    // getDatasetsReport: (data, options) => {
+    //     return axios.post('http://192.168.0.23:82/apis/reports/dataset_report.php', data, options)
+    // },
     getSearch: () => {
-        return axios.get('https://data.abudhabi/apis/search.php')
+        return client.get('/apis/search.php')
     },
+    // getSearch: () => {
+    //     return axios.get('https://data.abudhabi/apis/search.php')
+    // },
     postSearch: (data) => {
-        return axios.post('https://data.abudhabi/apis/search.php', data)
+        return client.post('/apis/search.php', data)
     },
+    // postSearch: (data) => {
+    //     return axios.post('https://data.abudhabi/apis/search.php', data)
+    // },
     recoverPassword: (data, headers) => {
-        return axios.post('http://10.241.40.69:30418/apis/reset_email.php', data, { headers })
+        return client.post('/apis/reset_email.php', data, { headers })
     },
+    // recoverPassword: (data, headers) => {
+    //     return axios.post('http://10.241.40.69:30418/apis/reset_email.php', data, { headers })
+    // },
     resetPassword: (data, headers) => {
-        return axios.post('http://10.241.40.69:30418/xwordxssapx.php', data, { headers })
+        return client.post('/xwordxssapx.php', data, { headers })
     },
+    // resetPassword: (data, headers) => {
+    //     return axios.post('http://10.241.40.69:30418/xwordxssapx.php', data, { headers })
+    // },
     viewCount: (data) => {
-        return axios.post('https://data.abudhabi/apis/view_count.php', data);
+        return client.post('/apis/view_count.php', data);
     },
+    // viewCount: (data) => {
+    //     return axios.post('https://data.abudhabi/apis/view_count.php', data);
+    // },
     realTimeApis: (data) => {
-        return axios.get('https://data.abudhabi/jsonapi/node/real_time_apis', data);
+        return client.get('/jsonapi/node/real_time_apis', data);
     },
+    // realTimeApis: (data) => {
+    //     return axios.get('https://data.abudhabi/jsonapi/node/real_time_apis', data);
+    // },
     getPrivacyPolicy: () => {
-        return axios.get("https://data.abudhabi/jsonapi/node/privacy_policy");
+        return client.get("/jsonapi/node/privacy_policy");
     }
+    // getPrivacyPolicy: () => {
+    //     return axios.get("https://data.abudhabi/jsonapi/node/privacy_policy");
+    // }
 } 

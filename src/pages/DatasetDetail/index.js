@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getDatasetById, getSimilarDatasets } from "../../axios/api";
 import Cards from "../../components/modules/Cards";
@@ -26,6 +26,8 @@ const data = [
 
 const DatasetDetail = memo(() => {
 
+    const mainDiv = document.getElementById("main");
+
     const { t } = useTranslation()
 
     const navigate = useNavigate();
@@ -38,13 +40,18 @@ const DatasetDetail = memo(() => {
     const [dataset, setDataset] = useState();
     const [similarDataset, setSimilarDataset] = useState();
 
+    const onClickCard = useCallback((id) => {
+        mainDiv.scrollIntoView();
+        navigate(`${routes.DATASET_DETAIL}?id=${id}`, { replace: true })
+    }, [id]);
+
     useEffect(() => {
 
         if (!id) return navigate(routes.DATASET, { replace: true });
 
         getDatasetById(id, setDataset);
 
-    }, [])
+    }, [id])
 
     useEffect(() => {
 
@@ -56,15 +63,14 @@ const DatasetDetail = memo(() => {
 
     return (
         <View theme="dark" noupperfooter sticky>
-            <div className="my-5 pt-5">
+            <div id="main" className="my-5 pt-5">
                 <div className="px-4 pt-5">
                     <BreadCrumb items={[t("datasets"), t("detail")]} />
                 </div>
                 <Main data={dataset} url={`https://data.abudhabi/dataset/${id}`} />
-                <Cards title={t("similarDatasets")} backgroundColor={colors.white} data={similarDataset} />
+                <Cards onClickViewAll={() => { navigate(routes.DATASET, { replace: true }) }} title={t("similarDatasets")} backgroundColor={colors.white} data={similarDataset} onClick={onClickCard} />
             </div>
         </View>
-
     )
 });
 

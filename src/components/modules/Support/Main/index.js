@@ -1,10 +1,12 @@
 import React, { memo } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import Heading from '../../../elements/Heading';
 import Search from '../../../elements/Search';
-import { useTranslation } from "react-i18next";
 
-const Main = memo(() => {
+const Main = memo((props) => {
+
+    const { onSearch } = props;
 
     const { t } = useTranslation()
 
@@ -21,8 +23,11 @@ const Main = memo(() => {
                     </Row>
                     <Row>
                         <Col />
-                        <Col xs={12} md={10} lg={8} className="py-3" style={{zIndex:1000}}>
-                            <Search placeholder={t("searchKeywords")} />
+                        <Col xs={12} md={10} lg={8} className="py-3" style={{ zIndex: 1000 }}>
+                            <Search
+                                onPressEnter={onSearch}
+                                placeholder={t("searchKeywords")}
+                            />
                         </Col>
                         <Col />
                     </Row>

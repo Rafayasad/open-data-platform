@@ -2,7 +2,7 @@ import React, { memo, useCallback, useState } from 'react';
 import { Col, Container, Row, useAccordionButton } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
-import { RxArrowTopRight,RxArrowTopLeft } from "react-icons/rx";
+import { RxArrowTopRight, RxArrowTopLeft } from "react-icons/rx";
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { colors } from '../../../../utils/colors';
@@ -121,8 +121,18 @@ const MiddleFooter = memo(() => {
                                     {
                                         item.data?.map((item, index) => (
                                             <div className='d-flex'>
-                                                <Link style={{ textDecoration: "none" }} to={item.link} state={item.params} className={""}>
-                                                    <Heading key={index} size='xxs' heading={t(item.title)} color={colors.white} downloadURL={item.downloadURL} />
+                                                <Link style={{ textDecoration: "none" }} to={item.link} state={item.params}>
+                                                    {
+                                                        item.downloadURL ? (
+                                                            <a style={{ display: 'flex', textDecoration: "none", color: "white" }} target={"_blank"} href={item.downloadURL}>
+                                                                <Heading size='xxs' heading={t(item.title)} color={colors.white} />
+                                                                {i18n.language === locales.EN ? <RxArrowTopRight size={25} color='white' className='mx-2' /> : <RxArrowTopLeft size={25} color='white' className='mx-2' />}
+                                                            </a>
+
+                                                        ) : (
+                                                            <Heading size='xxs' heading={t(item.title)} color={colors.white} />
+                                                        )
+                                                    }
                                                 </Link>
                                             </div>
                                         ))

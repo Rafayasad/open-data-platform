@@ -9,6 +9,9 @@ import Dropdown from "../../../elements/DropDown";
 import { BsShare, BsPerson } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
 import BreadCrumb from "../../../elements/BreadCrumb";
+import { toast } from "react-toastify";
+import { routes } from "../../../../router/helper";
+import { validateEmail } from "../../../../utils/generic";
 
 const FormComponent = memo(() => {
 
@@ -21,6 +24,18 @@ const FormComponent = memo(() => {
     const [disable, setDisable] = useState(true);
 
     const isClicked = useCallback((value) => { setSelectedValue(value) });
+
+    const onSubmitHandler = useCallback(() => {
+
+        if (name && email && selectedValue && message) {
+            toast("All fields are required.", { type: "error" })
+        } else if (validateEmail(email) === false) {
+            toast("Please provide a valid email address.", { type: "error" })
+        } else {
+            // recoverPassword(navigate, routes.HOME, setLoading, { email })
+        }
+
+    });
 
     const options = [
         {
@@ -69,6 +84,7 @@ const FormComponent = memo(() => {
                         autoClose={true}
                         dropdownWidth={"100%"}
                         options={options}
+                        textColor={selectedValue === t("selectsubject") ? "#707070" : "black"}
                         selectedValue={selectedValue}
                         placeholderColor={colors.gray}
                         shadow={"shadow"}
@@ -87,6 +103,7 @@ const FormComponent = memo(() => {
             <Row className="d-flex justify-content-center">
                 <Col md={10} className="d-flex justify-content-end">
                     <Button
+                        onClick={onSubmitHandler}
                         disable={name && email && selectedValue && message ? disable : false}
                         title="Submit"
                         backgroundColor={name && email && selectedValue && message ? colors.black : colors.lighter_gray}

@@ -63,8 +63,8 @@ const Images = memo(() => {
                             }}>
                                 <Row>
                                     <Col />
-                                    <Col sm={12} md={8} className='text-center'>
-                                        <Heading bold color='white' heading={t("areYouNewToOpenData")} />
+                                    <Col sm={12} md={6} className='text-center'>
+                                        <Heading size="xl" color='white' heading={t("areYouNewToOpenData")} />
                                     </Col>
                                     <Col />
                                 </Row>
@@ -88,8 +88,8 @@ const Images = memo(() => {
                             }}>
                                 <Row>
                                     <Col />
-                                    <Col sm={10} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                        <Heading size='xlg' color='white' heading={t("joinUsRegisterWithUs")} />
+                                    <Col sm={10} md={6} className='d-flex justify-content-center align-items-center text-center'>
+                                        <Heading size='xl' color='white' heading={t("joinUsRegisterWithUs")} />
                                     </Col>
                                     <Col />
                                 </Row>
