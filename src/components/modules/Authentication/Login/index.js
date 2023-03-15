@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import AuthBackground1 from "../../../../assets/images/Auth-Background-1.png";
-import { login } from "../../../../axios/api";
+import { login, validateUser } from "../../../../axios/api";
 import { handleLogin } from "../../../../redux/reducers/Authentication";
 import { routes } from "../../../../router/helper";
 import { colors } from "../../../../utils/colors";
@@ -35,7 +35,7 @@ const Login = memo(() => {
   const onClickLogin = useCallback(() => {
 
     if (email && password) {
-      login(dispatch, handleLogin, setLoading, { email, password })
+      validateUser(navigate, routes.OTP, setLoading, { email, password })
     } else {
       toast("All fields are required.", { type: "error" })
     }

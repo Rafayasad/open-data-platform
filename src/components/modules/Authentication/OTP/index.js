@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import AuthBackground1 from "../../../../assets/images/Auth-Background-1.png";
 import { login } from "../../../../axios/api";
 import { handleLogin } from "../../../../redux/reducers/Authentication";
@@ -17,11 +17,13 @@ const OTP = memo(() => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { state } = useLocation();
+
+    const { email, password } = state;
 
     const { isLoggedIn } = useSelector(state => state.authentication);
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [otp, setOtp] = useState('');
 
     const [loading, setLoading] = useState(false);
 
@@ -31,7 +33,7 @@ const OTP = memo(() => {
         }
     }, [isLoggedIn])
 
-    const onClickLogin = useCallback(() => login(dispatch, handleLogin, setLoading, { email, password }));
+    const onClickLogin = useCallback(() => login(dispatch, handleLogin, setLoading, { email, password, otp }));
     const onClickForgetPassword = useCallback(() => navigate(routes.RECOVER));
     const onClickRegister = useCallback(() => navigate(routes.REGISTER));
 
@@ -72,8 +74,10 @@ const OTP = memo(() => {
                                 <AuthCard
                                     view="dekstop"
                                     title={"OTP Verification"}
-                                    subtitle={"An OTP has been sent to your entered email."}
+                                    subtitle={"An OTP has been sent to associated email."}
                                     hasOtp
+                                    otp={otp}
+                                    setOtp={setOtp}
                                     button={[
                                         {
                                             title: "Done",

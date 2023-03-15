@@ -5,6 +5,7 @@ import { generateFile } from "../../utils/generic.js";
 import { locales } from "../../i18n/helper"
 import i18n from "../../i18n/i18n"
 import { toast } from "react-toastify";
+import { async } from 'q';
 
 export const getPlatformInsights = (setData, setLoading) => {
     return endpoints.
@@ -912,50 +913,96 @@ export const getSuccessStoriesById = (id, setData) => {
         })
 }
 
-export const login = async (dispatch, setData, setLoading, payload) => {
+export const validateUser = async (navigate, route, setLoading, payload) => {
 
     setLoading(true)
 
     let { email, password } = payload;
+
+    await endpoints.validateUser({ username: email, pass: password })
+        .then(async (res) => {
+            setLoading(false)
+            if (res.status === 200) {
+                if (res.data.status === 200) {
+
+                    await endpoints.otp({ type: "send", username: email })
+                        .then((res) => {
+                            if (res.status === 200) {
+                                if (res.data.status === 200) {
+                                    toast(res.data.message, { type: "success" })
+                                    navigate(route, { state: { email, password } })
+                                } else {
+                                    toast(res.data.message, { type: "error" })
+                                }
+                            }
+                        }).catch((err) => {
+                            console.log("Error message", err)
+                        })
+
+                } else {
+                    toast(res.data.message, { type: "error" })
+                }
+            }
+        }).catch((err) => {
+            console.log("Error message", err)
+        })
+}
+
+export const login = async (dispatch, setData, setLoading, payload) => {
+
+    setLoading(true)
+
+    let { email, password, otp } = payload;
     let data = {
         name: email,
         pass: password
     }
 
-    let token = await endpoints.getCRSFToken()
-        .then((res) => {
-
+    await endpoints.otp({ type: "verify", username: email, otp_v: otp })
+        .then(async (res) => {
             if (res.status === 200) {
-                return res.data
-            }
+                if (res.data.status === 200) {
+                    let token = await endpoints.getCRSFToken()
+                        .then((res) => {
+                            if (res.status === 200) {
+                                return res.data
+                            }
 
+                        }).catch((err) => {
+                            console.log("Error message", err)
+                        })
+
+                    let headers = {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': token,
+                        Accept: 'application/json',
+                    }
+
+                    await endpoints.login(data, headers)
+                        .then((res) => {
+                            if (res.status === 200) {
+                                toast(res.data.message, { type: 'success' })
+                                dispatch(setData(res.data))
+                                window.location.reload(true)
+                            } else if (res.data.status === 400) {
+                                toast(res.data.message, { type: 'error' })
+                            } else {
+                                toast("Invalid username or password.", { type: "error" })
+                            }
+                            setLoading(false)
+                        }).catch((err) => {
+                            setLoading(false)
+                            console.log("Error message", err)
+                            toast("Something went wrong.", { type: "error" })
+                        })
+                } else {
+                    setLoading(false)
+                    toast(res.data.message, { type: "error" })
+                }
+            }
         }).catch((err) => {
             console.log("Error message", err)
         })
-
-    let headers = {
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': token,
-        Accept: 'application/json',
-    }
-
-    await endpoints.login(data, headers)
-        .then((res) => {
-            if (res.status === 200) {
-                dispatch(setData(res.data))
-                toast(res.data.message, { type: 'success' })
-            } else if (res.data.status === 400) {
-                toast(res.data.message, { type: 'error' })
-            } else {
-                toast("Invalid username or password.", { type: "error" })
-            }
-            setLoading(false)
-        }).catch((err) => {
-            setLoading(false)
-            console.log("Error message", err)
-            toast("Something went wrong.", { type: "error" })
-        })
-
 }
 
 export const getInsightsReport = (setData, payload, setLoading, setDatatype) => {
