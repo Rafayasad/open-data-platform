@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dropdown as BSDropdown } from 'react-bootstrap';
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share';
+import i18n from '../../../i18n/i18n';
 import { colors } from '../../../utils/colors';
 import Heading from '../Heading';
 import './style.css';
@@ -17,6 +18,10 @@ const Dropdown = (props) => {
         setIsOpen(e)
         selectedDropdownValue && setSelectedDropdownValue();
     };
+
+    useEffect(() => {
+        setIndexx();
+    }, [i18n.language])
 
     const itemComponent = (icon, title) => {
         return (
@@ -61,7 +66,7 @@ const Dropdown = (props) => {
                                 className={`w-100 bg-white my-1 d-flex align-items-center justify-content-between my-dropdown-toggle text-black border border-1 ${isOpen && "dropdown-hover"}`}
                             >
                                 <div className=''>
-                                    <Heading size="xxs" color={textColor} nomargin heading={selectedValue} />
+                                    <Heading size="xxs" color={isOpen ? "#AD50F0" : textColor} nomargin heading={selectedValue} />
                                 </div>
                                 <div className='my-1'>
                                     <MdKeyboardArrowDown />

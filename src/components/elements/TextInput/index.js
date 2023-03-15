@@ -3,7 +3,13 @@ import { colors } from "../../../utils/colors";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useTranslation } from "react-i18next";
 import { FormControl, IconButton, Input, InputAdornment, InputLabel } from "@mui/material";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useCallback } from "react";
+import './style.css';
+
+const theme = createTheme({
+  direction: 'rtl', // Both here and <body dir="rtl">
+});
 
 const TextInput = memo((props) => {
 
@@ -58,11 +64,19 @@ const TextInput = memo((props) => {
     //     </div>
     //   }
     // </Form.Group>
+
     <FormControl sx={{ width: '100%' }} variant="standard" className="my-2">
+
       <InputLabel htmlFor="standard-adornment-password">{placeholder}</InputLabel>
+
       <Input
         id="standard-adornment-password"
-        type={type}
+        sx={{
+          ':before': { borderBottomColor: 'black' },
+          // underline when selected
+          ':after': { borderBottomColor: 'black' },
+        }}
+        type={showPassword && placeholder === t("password") ? "password" : placeholder != t("password") && type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         endAdornment={
@@ -81,6 +95,7 @@ const TextInput = memo((props) => {
         }
       />
     </FormControl>
+
   );
 });
 

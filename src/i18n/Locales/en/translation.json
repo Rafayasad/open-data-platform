@@ -223,5 +223,10 @@
     "popularsearches": "POPULAR SEARCHES",
     "fieldFullName": "Your Full Name",
     "fieldEmail": "Your Email",
-    "detail": "Detail"
+    "detail": "Detail",
+    "confirmation": "Keep an eye on your inbox. We’ll be in touch within 48h on ",
+    "typeMessage": "Type your message here",
+    "message":"Your message",
+    "technicalIssues":"Technical issues",
+    "generalInquiry":"General inquiry"
 }

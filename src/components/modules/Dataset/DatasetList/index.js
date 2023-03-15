@@ -49,7 +49,7 @@ const data = [
 
 const DatasetList = memo((props) => {
 
-    const { onClick, datasets, totalCount, currentPage, rowsPerPage, loading, onChangePage, selectedValue, onSelectDropdown, notags, noheader, cardSize } = props
+    const { onClick, datasets, totalCount, currentPage, rowsPerPage, loading, notagsactive, onChangePage, selectedValue, onSelectDropdown, notags, noheader, cardSize } = props
 
     const { t, i18n } = useTranslation();
 
@@ -96,6 +96,7 @@ const DatasetList = memo((props) => {
                                 <hr className="m-0" style={{ color: currentHovered == index || currentHovered != null && currentHovered + 1 == index ? 'white' : '#CFCFCF', borderWidth: 2 }} />
                             }
                             <Card
+                                notagsactive={notagsactive}
                                 size={cardSize ? cardSize : 'sm'}
                                 headingSize='lg'
                                 notags={notags}

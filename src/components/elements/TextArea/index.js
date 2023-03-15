@@ -6,16 +6,17 @@ import './style.css';
 
 function TextArea(props) {
 
-    const { label, onChange } = props
+    const { label, onChange } = props;
 
     return (
         <FloatingLabel style={{ color: colors.gray, fontSize: '13px', padding: 0 }} controlId="floatingTextarea2" label={""}>
             <TextField
-                className='w-100'
                 id="outlined-multiline-static"
+                onChange={(e) => onChange(e.target.value)}
+                className='w-100'
                 multiline
                 rows={4}
-                placeholder={"Type your message here"}
+                placeholder={label}
             />
             {/* <Form.Control
                 onChange={(e) => onChange(e.target.value)}

@@ -50,6 +50,7 @@ const Header = memo((props) => {
                             </div> :
                             dropdown ?
                                 <Dropdown
+                                    textColor={dropdown.selectedValue && "black"}
                                     highlightableItem
                                     autoClose={true}
                                     name={dropdown.title}

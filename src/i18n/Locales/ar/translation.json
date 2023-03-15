@@ -223,5 +223,10 @@
     "popularsearches": "عمليات البحث الشائعة",
     "fieldFullName": "اسمك الكامل",
     "fieldEmail": "بريدك الإلكتروني",
-    "detail": "التفاصيل"
+    "detail": "التفاصيل",
+    "confirmation": "راقب علبة الوارد الخاصة بك. سنكون على اتصال خلال 48 ساعة",
+    "typeMessage": "اكتب رسالتك هنا",
+    "message":"رسالتك",
+    "generalInquiry":"تحقيق عام",
+    "technicalIssues":"المسائل التقنية"
 }
