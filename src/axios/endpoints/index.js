@@ -132,6 +132,9 @@ export const endpoints = {
     // },
     getPrivacyPolicy: () => {
         return client.get("/jsonapi/node/privacy_policy");
+    },
+    contactUs: (data) => {
+        return client.post("/apis/contact.php", data);
     }
     // getPrivacyPolicy: () => {
     //     return axios.get("https://data.abudhabi/jsonapi/node/privacy_policy");

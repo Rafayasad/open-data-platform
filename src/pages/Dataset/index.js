@@ -38,7 +38,7 @@ const Dataset = memo(() => {
     }, [i18n.language])
 
     const focustoDatasets = () => {
-        datasetsDiv.scrollIntoView();
+        datasetsDiv?.scrollIntoView();
         setTimeout(() => {
             window.scrollBy(0, -8)
         }, 500);
@@ -67,30 +67,33 @@ const Dataset = memo(() => {
     useEffect(() => {
         if (currentPage || search || sort || filters) {
             if (!state?.search && !state?.listItem) {
-                getAllDatasets(setDatasets, setTotalCount, setLoading, search, sort?.toLowerCase(), currentPage, rowsPerPage, filters)
+                getAllDatasets(setDatasets, setTotalCount, setLoading, search, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, filters)
             }
-
         }
 
     }, [currentPage, search, sort, filters]);
 
     const toggle = useCallback(() => setViewAll(!viewAll), [viewAll]);
 
-    const onClickCard = useCallback((id) => { navigate(`${routes.DATASET_DETAIL}?id=${id}`) }, []);
+    const onClickCard = useCallback((id) => {
+        setFilters()
+        navigate(`${routes.DATASET_DETAIL}?id=${id}`)
+    }, []);
 
     const onChangePage = useCallback((page) => {
-        datasetsDiv.scrollIntoView()
-        setCurrentPage(page)
-    }, [datasetsDiv]);
+        setCurrentPage(page);
+    }, [currentPage]);
 
     const onChangeSearch = useCallback((e) => {
         setSearch(e)
         if (e) {
             focustoDatasets()
         }
-    }, [search, datasetsDiv])
+    }, [search])
 
-    const onChangeDropdownValue = useCallback((e) => setSort(e), [sort])
+    const onChangeDropdownValue = useCallback((e) => {
+        setSort(e)
+    }, [sort])
 
     const onApplyFilter = useCallback((filters) => setFilters([...filters]), [filters])
 
@@ -108,9 +111,9 @@ const Dataset = memo(() => {
     return (
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
             <Main searchData={i18n.language === locales.EN ? searchData?.en : searchData?.ar} search={search} onChangeSearchEnter={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
-            <Cards buttonText={viewAll && t("viewLess")} onClickViewAll={toggle} title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)} onClick={onClickCard} />
+            <Cards notagsactive buttonText={viewAll && t("viewLess")} onClickViewAll={toggle} title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)} onClick={onClickCard} />
             <div id="datasetsList">
-                <DatasetList totalCount={totalCount} rowsPerPage={rowsPerPage} datasets={datasets} currentPage={currentPage} loading={loading} onChangePage={onChangePage} selectedValue={sort ? sort : i18n.language === locales.EN ? "Title" : "العنوان"} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue} />
+                <DatasetList notagsactive totalCount={totalCount} rowsPerPage={rowsPerPage} datasets={datasets} currentPage={currentPage} loading={loading} onChangePage={onChangePage} selectedValue={sort} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue} />
             </div>
         </View>
 

@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Heading from "../../../elements/Heading";
 import TextInput from '../../../elements/TextInput'
@@ -6,48 +6,55 @@ import TextArea from "../../../elements/TextArea";
 import { colors } from "../../../../utils/colors";
 import Button from "../../../elements/Button";
 import Dropdown from "../../../elements/DropDown";
-import { BsShare, BsPerson } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
-import BreadCrumb from "../../../elements/BreadCrumb";
 import { toast } from "react-toastify";
 import { routes } from "../../../../router/helper";
 import { validateEmail } from "../../../../utils/generic";
+import { useNavigate } from "react-router-dom";
+import { contactUs } from "../../../../axios/api";
+import i18n from "../../../../i18n/i18n";
 
 const FormComponent = memo(() => {
 
     const { t } = useTranslation();
+    const navigate = useNavigate();
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [selectedValue, setSelectedValue] = useState(t("selectsubject"));
+    const [selectedValue, setSelectedValue] = useState();
     const [message, setMessage] = useState("");
     const [disable, setDisable] = useState(true);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setSelectedValue(t("selectsubject"))
+    }, [i18n.language])
 
     const isClicked = useCallback((value) => { setSelectedValue(value) });
 
     const onSubmitHandler = useCallback(() => {
 
-        if (name && email && selectedValue && message) {
+        if (!name && !email && !selectedValue && !message) {
             toast("All fields are required.", { type: "error" })
         } else if (validateEmail(email) === false) {
             toast("Please provide a valid email address.", { type: "error" })
         } else {
-            // recoverPassword(navigate, routes.HOME, setLoading, { email })
+            contactUs(navigate, routes.CONFIRMATION, setLoading, { name, email, selectedValue, message })
         }
 
     });
 
     const options = [
         {
-            title: t("Technical issues"),
+            title: t("technicalIssues"),
             onClick: isClicked,
         },
         {
-            title: t("Datasets"),
+            title: t("datasets"),
             onClick: isClicked,
         },
         {
-            title: t("General inquiry"),
+            title: t("generalInquiry"),
             onClick: isClicked,
         }
     ]
@@ -93,21 +100,19 @@ const FormComponent = memo(() => {
             </Row>
             <Row className="d-flex justify-content-center my-4">
                 <Col md={10}>
-                    <Heading heading="Your message" size="xxs" nomargin color={colors.gray} />
+                    <Heading heading={t("message")} size="xxs" nomargin color={colors.gray} />
                 </Col>
                 <Col md={10} className="mt-1">
-                    <TextArea value={message} label="Type your message here" onChange={(value) => setMessage(value)} />
+                    <TextArea value={message} label={t("typeMessage")} onChange={(value) => setMessage(value)} />
                 </Col>
             </Row>
-
             <Row className="d-flex justify-content-center">
                 <Col md={10} className="d-flex justify-content-end">
                     <Button
                         onClick={onSubmitHandler}
-                        disable={name && email && selectedValue && message ? disable : false}
-                        title="Submit"
-                        backgroundColor={name && email && selectedValue && message ? colors.black : colors.lighter_gray}
-                        textColor={name && email && selectedValue && message ? colors.white : colors.gray} />
+                        title={t("submit")}
+                        backgroundColor={name && email && selectedValue != t("selectsubject") && message ? colors.black : colors.lighter_gray}
+                        textColor={name && email && selectedValue != t("selectsubject") && message ? colors.white : colors.gray} />
                 </Col>
             </Row>
         </Container>

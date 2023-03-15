@@ -76,14 +76,19 @@ const SuccessStoriesDetail = memo(() => {
     return (
         <View theme="dark" noupperfooter>
             <div className="my-5 pt-5 px-0">
-                <div className="px-4 pt-5 m-0 p-0 d-flex justify-content-between">
-                    <BreadCrumb items={[t("aboutus"), t("successStories")]} />
-                    <Dropdown
-                        width={"12rem"}
-                        autoClose={true}
-                        options={shareOption}
-                        headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}
-                    />
+                <div className="px-4 pt-5 d-flex justify-content-between align-items-center">
+                    <div>
+                        <BreadCrumb items={[t("aboutus"), t("successStories")]} />
+                    </div>
+                    <div>
+                        <Dropdown
+                            width={"100%"}
+                            size={"sm"}
+                            autoClose={true}
+                            options={shareOption}
+                            headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}
+                        />
+                    </div>
                 </div>
                 <div className="px-4">
                     <hr />

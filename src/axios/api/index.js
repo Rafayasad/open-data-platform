@@ -666,11 +666,25 @@ export const getPopularQuestions = (dispatch, setData) => {
 
 export const getQuestionBySearch = (text, setData) => {
     return endpoints.
-        getQuestionBySearch(text).then((res) => {
+        getQuestionBySearch(text).then(async (res) => {
 
             if (res.status === 200) {
 
                 let data = res.data.data;
+
+                if (data.length > 0 && text && text !== "") {
+                    let obj = {
+                        keyword: text,
+                        ip: "192.168.0.44",
+                        lang: "en",
+                        type: "support"
+                    }
+                    await endpoints.
+                        postSearch(obj).then((res) => {
+                        }).catch((err) => {
+                            console.log("Error Message", err)
+                        })
+                }
 
                 let searchedQuestions = []
 
@@ -1289,6 +1303,30 @@ export const getPrivacyPolicy = (setData, setLoading) => {
 
         }).catch((err) => {
             console.log("Error Message", err)
+            setLoading(false);
+        })
+}
+
+export const contactUs = (navigate, route, setLoading, payload) => {
+
+    setLoading(true);
+
+    const { name, email, selectedValue, message } = payload;
+
+    const data = {
+        name,
+        email,
+        subject: selectedValue,
+        message,
+        ipaddress: "3.3.3:300"
+    }
+
+    return endpoints.contactUs(data)
+        .then((res) => {
+            setLoading(false);
+            navigate(route, { replace: true });
+        }).catch((err) => {
+            console.log("Error Message", err);
             setLoading(false);
         })
 }

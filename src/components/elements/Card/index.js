@@ -102,6 +102,7 @@ const Card = memo((props) => {
 
     return (
         <RBCard className={`${nopadding ? "py-4" : "p-4"} ${ClassName}`} style={{ height: height, borderRadius: "30px", borderWidth: border }}>
+            {console.log("tags==>", notagsactive)}
             {
                 !notags &&
                 <Row className={`${nopadding && "m-0"} h-25 align-items-center`}>
