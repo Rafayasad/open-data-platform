@@ -67,7 +67,7 @@ const RecoverPassword = memo(() => {
                   view="dekstop"
                   title={t("recoverPassword")}
                   subtitle={t("pwdrecovery")}
-                  inputFields={[{ placeholder: t("registeredEmail"), type: "email", onChange: (value) => setEmail(value) }]}
+                  inputFields={[{ placeholder: t("registeredEmail"), type: "text", onChange: (value) => setEmail(value) }]}
                   button={[
                     {
                       title: t("sendCode"),
@@ -110,7 +110,7 @@ const RecoverPassword = memo(() => {
                   view="mobile"
                   title="Recover password"
                   subtitle="Enter the email you use for Abu Dhabi Data. We'll send you instructions there."
-                  inputFields={[{ placeholder: "Registered email", type: "email", onChange: (value) => setEmail(value) }]}
+                  inputFields={[{ placeholder: "Registered email", type: "text", onChange: (value) => setEmail(value) }]}
                   button={[
                     {
                       title: "Send code",

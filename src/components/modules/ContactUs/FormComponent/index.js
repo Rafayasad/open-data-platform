@@ -77,7 +77,7 @@ const FormComponent = memo(() => {
 
             <Row className="d-flex justify-content-center py-3">
                 <Col md={10}>
-                    <TextInput placeholder={t("fieldEmail")} value={email} type="email" onChange={(value) => setEmail(value)} />
+                    <TextInput placeholder={t("fieldEmail")} value={email} type="text" onChange={(value) => setEmail(value)} />
                 </Col>
             </Row>
 

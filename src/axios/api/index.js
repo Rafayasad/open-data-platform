@@ -346,11 +346,12 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                                 description_ar: item.descriptionlear,
                                 format:
                                     item.format === "pdf" ? "pdf"
-                                        : item.format === "esri rest" ? "excel"
-                                            : item.format === "xlsx" ? "excel"
-                                                : item.format === "xls" ? "excel"
-                                                    : item.format === "csv" ? "csv"
-                                                        : item.format === "API" && "api",
+                                        : item.format === "excel" ? "excel"
+                                            : item.format === "esri rest" ? "excel"
+                                                : item.format === "xlsx" ? "excel"
+                                                    : item.format === "xls" ? "excel"
+                                                        : item.format === "csv" ? "csv"
+                                                            : item.format === "API" && "api",
                                 downloadURL: item.downloadURL
                             }
                         )),
@@ -392,11 +393,12 @@ export const getDatasetById = (id, setData) => {
                                 description: itemm.description,
                                 description_ar: itemm.descriptionlear,
                                 format: itemm.format === "pdf" ? "pdf"
-                                    : itemm.format === "esri rest" ? "excel"
-                                        : itemm.format === "xlsx" ? "excel"
-                                            : itemm.format === "xls" ? "excel"
-                                                : itemm.format === "csv" ? "csv"
-                                                    : itemm.format === "API" && "API",
+                                    : item.format === "excel" ? "excel"
+                                        : itemm.format === "esri rest" ? "excel"
+                                            : itemm.format === "xlsx" ? "excel"
+                                                : itemm.format === "xls" ? "excel"
+                                                    : itemm.format === "csv" ? "csv"
+                                                        : itemm.format === "API" && "API",
                                 downloadURL: itemm.downloadURL
                             }
                         )

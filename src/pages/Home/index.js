@@ -41,7 +41,9 @@ const Home = memo(() => {
 
     const onClickCard = useCallback((id) => { navigate(`${routes.DATASET_DETAIL}?id=${id}`) });
     const onSearch = useCallback((value) => { value != "" && navigate(routes.DATASET, { state: { search: value } }) });
-    const onClickList = useCallback((item) => { navigate(routes.DATASET, { state: { listItem: [item] } }) });
+    const onClickList = useCallback((item) => { 
+        navigate(routes.DATASET, { state: { listItem: [item] } })
+     });
     const onClickButton = useCallback(() => { navigate(routes.DATASET) });
 
     const onApplyFilter = useCallback((filters) => { navigate(routes.DATASET, { state: { listItem: filters } }) })

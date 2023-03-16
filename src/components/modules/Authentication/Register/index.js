@@ -81,8 +81,8 @@ const Register = memo(() => {
                   linktext={{ display_text: t("login"), onClick: onClickLogin }}
                   inputFields={[
                     { placeholder: t("fullName"), type: "text", onChange: (value) => setName(value), value: name },
-                    { placeholder: t("pwdEmail"), type: "email", onChange: (value) => setEmail(value), value: email },
-                    { placeholder: t("reEmail"), type: "email", onChange: (value) => setReEmail(value), value: reEmail },
+                    { placeholder: t("pwdEmail"), type: "text", onChange: (value) => setEmail(value), value: email },
+                    { placeholder: t("reEmail"), type: "text", onChange: (value) => setReEmail(value), value: reEmail },
                     { placeholder: t("password"), type: "password", onChange: (value) => setPassword(value), value: password },
                   ]}
                   button={[{
@@ -131,8 +131,8 @@ const Register = memo(() => {
                   recaptcha={recaptcha}
                   inputFields={[
                     { placeholder: "Full name", type: "text", onChange: (value) => setName(value) },
-                    { placeholder: "Email", type: "email", onChange: (value) => setEmail(value) },
-                    { placeholder: "Re-enter email", type: "email", onChange: (value) => setReEmail(value) },
+                    { placeholder: "Email", type: "text", onChange: (value) => setEmail(value) },
+                    { placeholder: "Re-enter email", type: "text", onChange: (value) => setReEmail(value) },
                     { placeholder: "Password", type: "password", onChange: (value) => setPassword(value) },
                   ]}
                   button={[{
