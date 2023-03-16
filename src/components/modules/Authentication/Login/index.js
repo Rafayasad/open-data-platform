@@ -1,12 +1,9 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import AuthBackground1 from "../../../../assets/images/Auth-Background-1.png";
-import { login, validateUser } from "../../../../axios/api";
-import { handleLogin } from "../../../../redux/reducers/Authentication";
+import { validateUser } from "../../../../axios/api";
 import { routes } from "../../../../router/helper";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
@@ -16,22 +13,12 @@ import { toast } from "react-toastify";
 const Login = memo(() => {
 
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const { isLoggedIn } = useSelector(state => state.authentication);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      window.location.replace(routes.HOME)
-      // navigate(routes.HOME, { replace: true })
-    }
-  }, [isLoggedIn])
 
   const onClickLogin = useCallback(() => {
 

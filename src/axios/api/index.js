@@ -5,6 +5,7 @@ import { generateFile } from "../../utils/generic.js";
 import { locales } from "../../i18n/helper"
 import i18n from "../../i18n/i18n"
 import { toast } from "react-toastify";
+import { routes } from '../../router/helper';
 
 var currentLanguage = i18n.language === locales.AR ? "ar" : "en";
 
@@ -970,7 +971,7 @@ export const validateUser = async (navigate, route, setLoading, payload) => {
         })
 }
 
-export const login = async (dispatch, setData, setLoading, payload) => {
+export const login = async (dispatch, setData, setLoading, payload, route) => {
 
     setLoading(true)
 
@@ -1003,8 +1004,8 @@ export const login = async (dispatch, setData, setLoading, payload) => {
                     await endpoints.login(data, headers)
                         .then((res) => {
                             if (res.status === 200) {
-                                toast(res.data.message, { type: 'success' })
-                                dispatch(setData(res.data))
+                                dispatch && dispatch(setData(res.data))
+                                window.location.assign(route);
                             } else if (res.data.status === 400) {
                                 toast(res.data.message, { type: 'error' })
                             } else {
@@ -1382,5 +1383,34 @@ export const contactUs = (navigate, route, setLoading, payload) => {
         }).catch((err) => {
             console.log("Error Message", err);
             setLoading(false);
+        })
+}
+
+export const checkUser = (dispatch, handleLogin, handleLogout) => {
+    return endpoints.checkUser()
+        .then((res) => {
+            if (res.status === 200) {
+                if (res.data.status === 200) {
+                    if (res.data.data === "1") {
+                        dispatch && dispatch(handleLogin(null))
+                    } else if (res.data.data === "0") {
+                        dispatch && dispatch(handleLogout())
+                    }
+                }
+            }
+        }).catch((err) => {
+            console.log("Error Message", err);
+        })
+}
+
+export const logout = (dispatch, handleLogout) => {
+    return endpoints.logout()
+        .then((res) => {
+            if (res.status === 200) {
+                dispatch && dispatch(handleLogout());
+                window.location.reload();
+            }
+        }).catch((err) => {
+            console.log("Error Message", err);
         })
 }

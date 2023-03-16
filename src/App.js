@@ -2,16 +2,17 @@ import './App.css';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Router from './router';
 import { locales } from './i18n/helper';
 import { setPublishers, setTags, setTopics } from './redux/reducers/Facets';
 import { setAboutus } from './redux/reducers/About';
-import { getAboutUs, getAllApplications, getFacets, getFaqsCategory, getPopularQuestions, getSuccessStories } from './axios/api';
+import { checkUser, getAboutUs, getAllApplications, getFacets, getFaqsCategory, getPopularQuestions, getSuccessStories } from './axios/api';
 import { setApplications } from './redux/reducers/Applications';
+import { handleLogin, handleLogout } from './redux/reducers/Authentication';
 import { setStories } from './redux/reducers/SuccessStories';
 import { setCategories, setQuestions } from './redux/reducers/Support';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
   }, [i18n.language])
 
   useEffect(() => {
+    checkUser(dispatch, handleLogin, handleLogout)
     getAboutUs(dispatch, setAboutus);
     getFacets("theme", "themelear", dispatch, setTopics);
     getFacets("keyword", "keywordlear", dispatch, setTags);
@@ -33,9 +35,9 @@ function App() {
     getPopularQuestions(dispatch, setQuestions);
   }, []);
 
-  // if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
-  //   console.log = () => { }
-  // }
+  if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
+    console.log = () => { }
+  }
 
   return <div className={`${i18n.language === locales.AR && "ar-font"}`}>
     <Router />

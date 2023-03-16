@@ -19,6 +19,7 @@ import Heading from "../../elements/Heading";
 import 'react-modern-drawer/dist/index.css';
 import './style.css';
 import { handleLogout } from "../../../redux/reducers/Authentication";
+import { logout } from "../../../axios/api";
 
 const Navbar = memo((props) => {
 
@@ -41,7 +42,7 @@ const Navbar = memo((props) => {
 
     const onClickDrawer = useCallback(() => setIsOpen(!isOpen), [isOpen]);
 
-    const onClickLogout = useCallback(() => dispatch(handleLogout()))
+    const onClickLogout = useCallback(() => logout(dispatch, handleLogout))
 
     const MobileRoutes = [
         {
@@ -75,7 +76,7 @@ const Navbar = memo((props) => {
 
     return (
         <>
-            <Container fluid className="px-4 py-3 d-none d-lg-block" style={{ position: 'absolute', top: 0, right: 0, left: 0 }}>
+            <Container fluid className="px-4 py-3 d-none d-lg-block" style={{ position: 'absolute', top: isLoggedIn ? '78px' : 0, right: 0, left: 0 }}>
                 <Row>
                     <Col className="d-flex align-items-center">
                         <Link to={routes.HOME}>
@@ -135,7 +136,7 @@ const Navbar = memo((props) => {
                     </Col>
                 </Row>
             </Container>
-            <Container fluid className={`px-4 py-3 d-block d-lg-none ${scroll && "sticky bg-white transition"}`} style={{ position: !scroll && 'absolute', top: 0, left: 0, right: 0, zIndex: 1000 }}>
+            <Container fluid className={`px-4 py-3 d-block d-lg-none ${scroll && "sticky bg-white transition"}`} style={{ position: !scroll && 'absolute', top: isLoggedIn ? '78px' : 0, left: 0, right: 0, zIndex: 1000 }}>
                 <Row className="d-flex justify-content-between align-items-center" >
                     <Col className="d-flex align-items-center justify-content-start">
                         <Link to={routes.HOME}>

@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from "react";
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getFacets, getMostViewedDatasets, getPlatformInsights, getRecentsDatasets } from "../../axios/api";
 import Cards from "../../components/modules/Cards";

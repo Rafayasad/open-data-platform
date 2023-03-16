@@ -1,7 +1,6 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import AuthBackground1 from "../../../../assets/images/Auth-Background-1.png";
@@ -21,19 +20,11 @@ const OTP = memo(() => {
 
     const { email, password } = state;
 
-    const { isLoggedIn } = useSelector(state => state.authentication);
-
     const [otp, setOtp] = useState('');
 
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        if (isLoggedIn) {
-            navigate(routes.HOME, { replace: true })
-        }
-    }, [isLoggedIn])
-
-    const onClickLogin = useCallback(() => login(dispatch, handleLogin, setLoading, { email, password, otp }));
+    const onClickLogin = useCallback(() => login(dispatch, handleLogin, setLoading, { email, password, otp }, routes.HOME));
     const onClickForgetPassword = useCallback(() => navigate(routes.RECOVER));
     const onClickRegister = useCallback(() => navigate(routes.REGISTER));
 
