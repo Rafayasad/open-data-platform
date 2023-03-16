@@ -44,34 +44,16 @@ const SuccessStoriesDetail = memo(() => {
 
     }, [])
 
-    console.log(story);
-
     const shareOption = shareOptions?.map((item, index) => (
         {
-            title: item.title,
-            onClick: downloadResources,
-            downloadLink: item.downloadURL,
+            title: t(item.title),
+            format: item.format,
+            url: `${process.env.REACT_APP_BASE_URL}/success-stories/detail?id=${id}`,
             icon: item.format === "facebook" ? <FaFacebookF />
                 : item.format === "linkedin" ? <FaLinkedinIn />
                     : item.format === "twitter" && <FaTwitter />
         }
     ))
-
-
-    const datas = [
-        {
-            title: "Immunizations by Nationality, Type of Vaccine and Age Group",
-            publisher: "Ministry of Health and Prevention"
-        },
-        {
-            title: "Licensed Social Care Professional 2021 - 2022",
-            publisher: "Ministry of Health and Prevention"
-        },
-        {
-            title: "List of applicants for participation in the school bus supervisors",
-            publisher: "Telecommunication Regulatory Authority"
-        }
-    ]
 
     return (
         <View theme="dark" noupperfooter>
@@ -93,7 +75,7 @@ const SuccessStoriesDetail = memo(() => {
                 <div className="px-4">
                     <hr />
                 </div>
-                <StoriesDetails item={story} />
+                <StoriesDetails item={story} shareOption={shareOption} />
                 <hr className="m-0 mx-3" />
                 <Cards noheadercomponent backgroundColor={colors.white} title={t("successStories")} data={stories} size="md" onClick={onClickCard} onClickViewAll={onClickButton} />
             </div>

@@ -37,14 +37,14 @@ const Publishers = memo(() => {
 
     let tabs = [
         {
-            title: "All",
+            title: t("all"),
             onClick: (val) => {
                 setFilters({ ...filters, date_type: "Modified", type: "all" })
                 setSelectedTab(val)
             }
         },
         {
-            title: "Users",
+            title: t("users"),
             onClick: (val) => {
                 setFilters({ ...filters, type: "user" })
                 setSelectedTab(val)
@@ -89,7 +89,7 @@ const Publishers = memo(() => {
             <Navbar theme='dark' />
             <ReportsFilter accordinData={AccordinData} open={filterOpen} setOpen={setFilterOpen} appliedFilters={filters} onApplyFilters={onApplyFilters} />
             <Container id="header" fluid className="my-5 pt-5 px-4">
-                <Header title="Publishers Reports" onClickFilter={onClickFilter} datatypeCallback={datatypeCallback} />
+                <Header title={t("publishersReports")} onClickFilter={onClickFilter} datatypeCallback={datatypeCallback} />
                 <Tabs data={tabs} selected={selectedTab} />
                 <AppliedFilters filters={filters}
                 />

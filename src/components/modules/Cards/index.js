@@ -37,7 +37,7 @@ const Cards = memo((props) => {
     const { i18n } = useTranslation();
 
     const { title, notitlebutton, data, backgroundColor, hoverable, type, size, onClick, onClickViewAll, buttonText, notagsactive, noheadercomponent } = props;
-
+    console.log("title",data);
     const renderContent = () => {
         if (type === 'image-inner-text') {
             return (

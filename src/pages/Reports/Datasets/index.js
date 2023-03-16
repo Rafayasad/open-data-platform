@@ -42,21 +42,21 @@ const Datasets = memo(() => {
             }
         },
         {
-            title: "Linked Resource",
+            title: t("linkedResource"),
             onClick: (val) => {
                 setFilters({ ...filters, type: "linked" })
                 setSelectedTab(val)
             }
         },
         {
-            title: "Physical Resource",
+            title: t("physicalResource"),
             onClick: (val) => {
                 setFilters({ ...filters, type: "physical" })
                 setSelectedTab(val)
             }
         },
         {
-            title: "KPI",
+            title: t("kpi"),
             onClick: (val) => {
                 setFilters({ ...filters, type: "kpi" })
                 setSelectedTab(val)
@@ -112,7 +112,7 @@ const Datasets = memo(() => {
             <Navbar theme='dark' />
             <ReportsFilter kpi={filters?.type === "kpi"} accordinData={filters?.type === "kpi" ? AccordinDataWithoutTopics : AccordinData} open={filterOpen} setOpen={setFilterOpen} appliedFilters={filters} onApplyFilters={onApplyFilters} />
             <Container fluid className="my-5 pt-5 px-4">
-                <Header title="Datasets Reports" onClickFilter={onClickFilter} datatypeCallback={datatypeCallback} />
+                <Header title={t("datasetsReports")} onClickFilter={onClickFilter} datatypeCallback={datatypeCallback} />
                 <Tabs data={tabs} selected={selectedTab} />
                 <AppliedFilters filters={filters}
                 />
