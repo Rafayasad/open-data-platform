@@ -28,6 +28,7 @@ const Login = memo(() => {
 
   useEffect(() => {
     if (isLoggedIn) {
+      // window.location.reload()
       navigate(routes.HOME, { replace: true })
     }
   }, [isLoggedIn])

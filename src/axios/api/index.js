@@ -997,7 +997,6 @@ export const login = async (dispatch, setData, setLoading, payload) => {
                             if (res.status === 200) {
                                 toast(res.data.message, { type: 'success' })
                                 dispatch(setData(res.data))
-                                window.location.reload(true)
                             } else if (res.data.status === 400) {
                                 toast(res.data.message, { type: 'error' })
                             } else {
