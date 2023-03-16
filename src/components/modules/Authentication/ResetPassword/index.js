@@ -53,7 +53,7 @@ const ResetPassword = memo((props) => {
                   title={t("resetPassword")}
                   subtitle={t("strongPassword")}
                   inputFields={[
-                    { placeholder: t("governmentEmail"), type: "email", onChange: (val) => setEmail(val) },
+                    { placeholder: t("governmentEmail"), type: "text", onChange: (val) => setEmail(val) },
                     { placeholder: t("password"), type: "password", onChange: (val) => setPassword(val) },
                     { placeholder: t("rePwd"), type: "password", onChange: (val) => setRePassword(val) },
                   ]}

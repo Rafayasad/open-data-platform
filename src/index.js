@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 // import "@fortawesome/fontawesome-free/css/all.min.css";
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -15,10 +15,25 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import i18n from './i18n/i18n.js';
 import { locales } from './i18n/helper';
 import ScrollToTop from './router/ScrollToTop';
+import rtlPlugin from 'stylis-plugin-rtl';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
+import { prefixer } from 'stylis';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+// Create rtl cache
+const cacheRtl = createCache({
+  key: 'muirtl',
+  stylisPlugins: [prefixer, rtlPlugin],
+});
+
+const emptyCache = createCache({
+  key: "muiltr",
+});
+
 const THEME = createTheme({
+  direction: i18n.language === locales.AR ? "rtl" : "ltr",
   typography: {
     "fontFamily": `${i18n.language === locales.EN ? 'CircularAr-Regular' : 'CircularStd-Regular'}`
   }
@@ -29,13 +44,15 @@ root.render(
     <Router>
       <ScrollToTop />
       <Suspense>
-        <ThemeProvider theme={THEME}>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <App />
-            </PersistGate>
-          </Provider>
-        </ThemeProvider>
+        <CacheProvider value={i18n.language === locales.AR ? cacheRtl : emptyCache}>
+          <ThemeProvider theme={THEME}>
+            <Provider store={store}>
+              <PersistGate loading={null} persistor={persistor}>
+                <App />
+              </PersistGate>
+            </Provider>
+          </ThemeProvider>
+        </CacheProvider>
       </Suspense>
     </Router>
   </React.StrictMode>
