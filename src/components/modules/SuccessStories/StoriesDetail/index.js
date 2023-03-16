@@ -15,34 +15,12 @@ import { shareOptions } from "../../../../utils";
 
 const StoriesDetails = memo((props) => {
 
-    const { item } = props;
+    const { item, shareOption } = props;
     const { i18n } = useTranslation();
 
-    const stickyHeader = useRef()
-    const headingRef = useRef(null)
     const [headerOnTop, setHeaderOnTop] = useState(false);
 
     const downloadResources = useCallback((links) => { console.log(links) });
-
-    // useEffect(() => {
-    //     const mainHeader = document?.getElementById('mainHeader')
-
-    //     let fixedTop = stickyHeader?.current?.offsetTop
-
-    //     let headingDiv = headingRef?.current?.getBoundingClientRect().top;
-
-    //     const fixedHeader = () => {
-    //         console.log("Check heading top", headingDiv)
-    //         // if (window.pageYOffset > fixedTop) {
-    //         //     mainHeader.classList.add('fixedTop')
-    //         //     setHeaderOnTop(true);
-    //         // } else {
-    //         //     mainHeader.classList.remove('fixedTop')
-    //         //     setHeaderOnTop(false);
-    //         // }
-    //     }
-    //     window.addEventListener('scroll', fixedHeader)
-    // }, [])
 
     useEffect(() => {
         window.onscroll = () => {
@@ -53,17 +31,6 @@ const StoriesDetails = memo((props) => {
             }
         }
     }, [])
-
-    const shareOption = shareOptions?.map((item, index) => (
-        {
-            title: item.title,
-            onClick: downloadResources,
-            downloadLink: item.downloadURL,
-            icon: item.format === "facebook" ? <FaFacebookF />
-                : item.format === "linkedin" ? <FaLinkedinIn />
-                    : item.format === "twitter" && <FaTwitter />
-        }
-    ))
 
     return (
         <>

@@ -226,7 +226,17 @@
     "detail": "التفاصيل",
     "confirmation": "راقب علبة الوارد الخاصة بك. سنكون على اتصال خلال 48 ساعة",
     "typeMessage": "اكتب رسالتك هنا",
-    "message":"رسالتك",
-    "generalInquiry":"تحقيق عام",
-    "technicalIssues":"المسائل التقنية"
+    "message": "رسالتك",
+    "generalInquiry": "تحقيق عام",
+    "technicalIssues": "المسائل التقنية",
+    "dateType": "نوع التاريخ",
+    "startDate": "تاريخ البدء",
+    "endDate": "تاريخ الانتهاء",
+    "appliedFilters": "عوامل التصفية المطبقة",
+    "datasetsReports": "تقارير مجموعات البيانات",
+    "publishersReports":"تقارير الناشرين",
+    "linkedResource": "مورد مرتبط",
+    "physicalResource": "المورد الفعلي",
+    "kpi": "KPI",
+    "users":"متعاطون"
 }

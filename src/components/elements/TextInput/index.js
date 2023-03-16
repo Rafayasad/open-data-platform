@@ -73,10 +73,9 @@ const TextInput = memo((props) => {
         id="standard-adornment-password"
         sx={{
           ':before': { borderBottomColor: 'black' },
-          // underline when selected
           ':after': { borderBottomColor: 'black' },
         }}
-        type={showPassword && placeholder === t("password") ? "password" : placeholder != t("password") && type}
+        type={!showPassword && placeholder === t("password") ? "password" : placeholder != t("password") && type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         endAdornment={

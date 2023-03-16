@@ -18,6 +18,7 @@ import ScrollToTop from './router/ScrollToTop';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const THEME = createMuiTheme({
+  direction:"rtl",
   typography: {
     "fontFamily": `${i18n.language === locales.EN ? 'CircularAr-Regular' : 'CircularStd-Regular'}`
   }

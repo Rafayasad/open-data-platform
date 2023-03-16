@@ -5,10 +5,13 @@ import { colors } from "../../../../utils/colors";
 import Button from "../../../elements/Button";
 import Dropdown from "../../../elements/DropDown";
 import Heading from "../../../elements/Heading";
+import { useTranslation } from "react-i18next";
 
 const Header = memo((props) => {
 
     const { title, onClickFilter, datatypeCallback } = props;
+
+    const { t } = useTranslation();
 
     return (
         <Row className="d-flex justify-content-between py-5">
@@ -42,7 +45,7 @@ const Header = memo((props) => {
                                 }
                             ]
                         }
-                        headerComponent={<Button width={"12rem"} icon={<MdDownloadForOffline className="mx-1" size={20} />} title="Download" backgroundColor={colors.black} textColor={colors.white} />} />
+                        headerComponent={<Button width={"12rem"} icon={<MdDownloadForOffline className="mx-1" size={20} />} title={t("download")} backgroundColor={colors.black} textColor={colors.white} />} />
                 </div>
             </Col >
         </Row >

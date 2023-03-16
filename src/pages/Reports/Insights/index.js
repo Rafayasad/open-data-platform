@@ -36,35 +36,35 @@ const Insights = memo(() => {
 
     let tabs = [
         {
-            title: "All",
+            title: t("all"),
             onClick: (val) => {
                 setFilters({ date_type: "Modified" })
                 setSelectedTab(val)
             }
         },
         {
-            title: "Weekly",
+            title: t("weekly"),
             onClick: (val) => {
                 setFilters({ ...filters, end_date: dayjs().format('YYYY-MM-DD'), start_date: dayjs().subtract(6, 'days').format('YYYY-MM-DD') })
                 setSelectedTab(val)
             }
         },
         {
-            title: "Monthly",
+            title: t("monthly"),
             onClick: (val) => {
                 setFilters({ ...filters, end_date: dayjs().format('YYYY-MM-DD'), start_date: dayjs().subtract(1, 'month').add(1,'day').format('YYYY-MM-DD') })
                 setSelectedTab(val)
             }
         },
         {
-            title: "Quarterly",
+            title: t("quarterly"),
             onClick: (val) => {
                 setFilters({ ...filters, end_date: dayjs().format('YYYY-MM-DD'), start_date: dayjs().subtract(3, 'month').add(1,'day').format('YYYY-MM-DD') })
                 setSelectedTab(val)
             }
         },
         {
-            title: "Yearly",
+            title: t("yearly"),
             onClick: (val) => {
                 setFilters({ ...filters, end_date: dayjs().format('YYYY-MM-DD'), start_date: dayjs().subtract(1, 'year').add(1,'day').format('YYYY-MM-DD') })
                 setSelectedTab(val)
@@ -103,7 +103,7 @@ const Insights = memo(() => {
             <Navbar theme='dark' />
             <ReportsFilter selectedTab={selectedTab} accordinData={AccordinData} open={filterOpen} setOpen={setFilterOpen} appliedFilters={filters} onApplyFilters={onApplyFilters} />
             <Container fluid className="my-5 pt-5 px-4">
-                <Header title="Insights Reports" onClickFilter={onClickFilter} datatypeCallback={datatypeCallback} />
+                <Header title={t("insightsReport")} onClickFilter={onClickFilter} datatypeCallback={datatypeCallback} />
                 <Tabs data={tabs} selected={selectedTab} />
                 <AppliedFilters filters={filters}
                 />

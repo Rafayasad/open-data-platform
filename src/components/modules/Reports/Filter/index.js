@@ -22,8 +22,12 @@ const ReportsFilter = memo((props) => {
     const { open, setOpen, appliedFilters, onApplyFilters, accordinData, kpi, selectedTab } = props;
 
     const initialFilters = {
-        date_type: "Modified"
+        date_type: t("modified")
     }
+
+    // useEffect(() => {
+    //     i18n.language === locales.AR && initialFilters.date_type == "تم التعديل"
+    // },[])
 
     const [activeIndex, setActiveIndex] = useState();
     const [filters, setFilters] = useState(initialFilters);
@@ -45,7 +49,7 @@ const ReportsFilter = memo((props) => {
             onClick: (date_type) => onChangeFilter({ date_type }),
         },
         {
-            title: string("created"),
+            title: string("createdAt"),
             onClick: (date_type) => onChangeFilter({ date_type }),
         }
     ]
@@ -71,6 +75,8 @@ const ReportsFilter = memo((props) => {
 
     const onClickItem = useCallback((item) => {
         console.log("ITEMS", item);
+        item.type === "publisherlear__name" && setFilters({ ...filters, publisher: item.title });
+        item.type === "themelear" && setFilters({ ...filters, topic: item.title });
         item.type === "publisher__name" && setFilters({ ...filters, publisher: item.title });
         item.type === "theme" && setFilters({ ...filters, topic: item.title });
 
@@ -104,9 +110,10 @@ const ReportsFilter = memo((props) => {
             <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%" }} className={"p-4"}>
                 <div className="w-100">
                     <Dropdown
+                        textColor={filters?.date_type && "black"}
                         dropdownWidth={"100%"}
                         padding={"px-1"}
-                        name={"Date type"}
+                        name={t("dateType")}
                         options={SortbyData}
                         selectedValue={filters?.date_type}
                     />
@@ -125,19 +132,20 @@ const ReportsFilter = memo((props) => {
                 <div className="d-flex my-3">
                     <div className="w-100">
                         <DatePicker
+
                             disabled={selectedTab === "Weekly" || selectedTab === "Monthly" || selectedTab === "Quarterly" || selectedTab === "Yearly"}
-                            value={filters?.start_date} title={"Start Date"} onChange={(start_date) => onChangeFilter({ start_date })} maxDate={filters?.end_date} />
+                            value={filters?.start_date} title={t("startDate")} onChange={(start_date) => onChangeFilter({ start_date })} maxDate={filters?.end_date} />
                     </div>
                 </div>
                 <div className="d-flex my-3">
                     <div className="w-100">
-                        <DatePicker value={filters?.end_date} title={"End Date"}
+                        <DatePicker value={filters?.end_date} title={t("endDate")}
                             onChange={(end_date) => onChangeFilter({
                                 end_date,
                                 start_date: selectedTab === "Weekly" ? dayjs(end_date).subtract(6, 'days').format('YYYY-MM-DD') :
-                                    selectedTab === "Monthly" ? dayjs(end_date).subtract(1, 'month').add(1,'day').format('YYYY-MM-DD') :
-                                        selectedTab === "Quarterly" ? dayjs(end_date).subtract(3, 'month').add(1,'day').format('YYYY-MM-DD') :
-                                            selectedTab === "Yearly" && dayjs(end_date).subtract(1, 'year').add(1,'day').format('YYYY-MM-DD')
+                                    selectedTab === "Monthly" ? dayjs(end_date).subtract(1, 'month').add(1, 'day').format('YYYY-MM-DD') :
+                                        selectedTab === "Quarterly" ? dayjs(end_date).subtract(3, 'month').add(1, 'day').format('YYYY-MM-DD') :
+                                            selectedTab === "Yearly" && dayjs(end_date).subtract(1, 'year').add(1, 'day').format('YYYY-MM-DD')
                             })} minDate={filters?.start_date} />
                     </div>
                 </div>
@@ -158,11 +166,22 @@ const ReportsFilter = memo((props) => {
                                                 <div className="d-flex flex-wrap">
                                                     {
                                                         item.tags?.map((items, index) => {
+                                                            console.log("filllllllllll", items);
                                                             return (
                                                                 <div className={`my-1`}>
                                                                     <Tag
-                                                                        backgroundColor={items.type === 'publisher__name' ? filters?.publisher === items.title ? colors.black : colors.white : items.type === 'theme' ? filters?.topic === items.title ? colors.black : colors.white : null}
-                                                                        textColor={items.type === 'publisher__name' ? filters?.publisher === items.title ? colors.white : colors.black : items.type === 'theme' ? filters?.topic === items.title ? colors.white : colors.black : null}
+                                                                        backgroundColor={
+                                                                            items.type === 'publisherlear__name' ? filters?.publisher === items.title ? colors.black : colors.white :
+                                                                                items.type === 'themelear' ? filters?.topic === items.title ? colors.black : colors.white :
+                                                                                    items.type === 'publisher__name' ? filters?.publisher === items.title ? colors.black : colors.white :
+                                                                                        items.type === 'theme' ? filters?.topic === items.title ? colors.black : colors.white : null
+                                                                        }
+                                                                        textColor={
+                                                                            items.type === 'publisherlear__name' ? filters?.publisher === items.title ? colors.white : colors.black :
+                                                                                items.type === 'themelear' ? filters?.topic === items.title ? colors.white : colors.black :
+                                                                                    items.type === 'publisher__name' ? filters?.publisher === items.title ? colors.white : colors.black :
+                                                                                        items.type === 'theme' ? filters?.topic === items.title ? colors.white : colors.black : null
+                                                                        }
                                                                         borderColor={"1px solid grey"}
                                                                         title={items.title}
                                                                         onClick={() => onClickItem(items)}

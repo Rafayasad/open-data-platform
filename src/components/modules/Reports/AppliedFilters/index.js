@@ -2,17 +2,19 @@ import React, { memo, useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
+import { useTranslation } from "react-i18next";
 
 const AppliedFilters = memo((props) => {
 
     const { filters } = props;
+    const { t } = useTranslation();
 
     return (
         <Row className="py-4 d-flex justify-content-center">
             <Col>
                 <Row className="py-4">
                     <Col>
-                        <Heading heading="Applied Filters" size='md' bold />
+                        <Heading heading={t("appliedFilters")} size='md' bold />
                     </Col>
                 </Row>
                 <Row className="py-2">
