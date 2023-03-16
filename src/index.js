@@ -8,17 +8,17 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { store } from './redux/store';
+import { persistor, store } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 import './i18n/i18n.js';
-import { ThemeProvider, createMuiTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import i18n from './i18n/i18n.js';
 import { locales } from './i18n/helper';
 import ScrollToTop from './router/ScrollToTop';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const THEME = createMuiTheme({
-  direction:"rtl",
+const THEME = createTheme({
   typography: {
     "fontFamily": `${i18n.language === locales.EN ? 'CircularAr-Regular' : 'CircularStd-Regular'}`
   }
@@ -31,7 +31,9 @@ root.render(
       <Suspense>
         <ThemeProvider theme={THEME}>
           <Provider store={store}>
-            <App />
+            <PersistGate loading={null} persistor={persistor}>
+              <App />
+            </PersistGate>
           </Provider>
         </ThemeProvider>
       </Suspense>

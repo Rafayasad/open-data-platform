@@ -46,7 +46,7 @@ const Dataset = memo(() => {
 
     useEffect(() => {
 
-        getSearch(setSearchData);
+        getSearch("dataset", setSearchData);
         getRecentsDatasets(setRecentsDatasets);
 
         if (state && state.search) {
@@ -110,10 +110,24 @@ const Dataset = memo(() => {
 
     return (
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
-            <Main searchData={i18n.language === locales.EN ? searchData?.en : searchData?.ar} search={search} onChangeSearchEnter={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
+            <Main searchData={i18n.language === locales.AR ? searchData?.ar : searchData?.en} search={search} onChangeSearchEnter={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
             <Cards notagsactive buttonText={viewAll && t("viewLess")} onClickViewAll={toggle} title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)} onClick={onClickCard} />
             <div id="datasetsList">
-                <DatasetList notagsactive totalCount={totalCount} rowsPerPage={rowsPerPage} datasets={datasets} currentPage={currentPage} loading={loading} onChangePage={onChangePage} selectedValue={sort} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue} />
+                <DatasetList
+                    notagsactive
+                    totalCount={totalCount}
+                    rowsPerPage={rowsPerPage}
+                    datasets={datasets}
+                    currentPage={currentPage}
+                    loading={loading}
+                    onChangePage={(page) => {
+                        setDatasets()
+                        datasetsDiv.scrollIntoView(true);
+                        onChangePage(page)
+
+                    }}
+                    selectedValue={sort} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue}
+                />
             </div>
         </View>
 

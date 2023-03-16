@@ -100,8 +100,6 @@ const Main = memo((props) => {
         }
     ]
 
-    console.log("data ID==>", data);
-
     let tabs = [
         {
             name: t("overview"),
