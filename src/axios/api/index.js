@@ -5,7 +5,8 @@ import { generateFile } from "../../utils/generic.js";
 import { locales } from "../../i18n/helper"
 import i18n from "../../i18n/i18n"
 import { toast } from "react-toastify";
-import { async } from 'q';
+
+var currentLanguage = i18n.language === locales.AR ? "ar" : "en";
 
 export const getPlatformInsights = (setData, setLoading) => {
     return endpoints.
@@ -306,11 +307,11 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
         getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then(async (res) => {
             if (res.status === 200) {
 
-                if (res.data.total > 0 && search && search !== "") {
+                if (res.data.total > 0 && search && search.trim() !== "") {
                     let obj = {
                         keyword: search,
                         ip: "192.168.0.44",
-                        lang: "en",
+                        lang: currentLanguage,
                         type: "dataset"
                     }
                     await endpoints.
@@ -380,39 +381,46 @@ export const getDatasetById = (id, setData) => {
 
                 let item = res.data;
 
+                let filteredResources = item.distribution.filter(item => {
+                    let itemm = item.data
+                    if (itemm.downloadURL && itemm.downloadURL !== "") {
+                        return (
+                            {
+                                title: itemm.title,
+                                title_ar: itemm.titlelear,
+                                description: itemm.description,
+                                description_ar: itemm.descriptionlear,
+                                format: itemm.format === "pdf" ? "pdf"
+                                    : itemm.format === "esri rest" ? "excel"
+                                        : itemm.format === "xlsx" ? "excel"
+                                            : itemm.format === "xls" ? "excel"
+                                                : itemm.format === "csv" ? "csv"
+                                                    : itemm.format === "API" && "API",
+                                downloadURL: itemm.downloadURL
+                            }
+                        )
+                    }
+                })
+
                 let data = {
                     id: item.identifier,
                     title: item.title,
                     title_ar: item.titlear,
                     description: item.description,
                     description_ar: item.descriptionlear,
-                    publisher: item.publisher?.name,
-                    publisher_ar: item.publisherlear?.name,
+                    publisher: item.publisher?.data.name,
+                    publisher_ar: item.publisherlear?.data.name,
                     frequency: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
                     frequency_ar: item.accrualPeriodicity === "R/P1Y" ? "سنوي" : item.accrualPeriodicity === "auto/freq" ? "تلقائي" : "لا يوجد",
                     access_level: item.accessLevel,
                     access_level_ar: item.accessLevellear,
                     license: item.license,
                     license_ar: item.licenselear,
-                    topics: item.theme,
-                    topics_ar: item.themelear,
-                    tags: item.keyword,
-                    tags_ar: item.keywordlear,
-                    resources: item.distribution.map(item => (
-                        {
-                            title: item.title,
-                            title_ar: item.titlelear,
-                            description: item.description,
-                            description_ar: item.descriptionlear,
-                            format: item.format === "pdf" ? "pdf"
-                                : item.format === "esri rest" ? "excel"
-                                    : item.format === "xlsx" ? "excel"
-                                        : item.format === "xls" ? "excel"
-                                            : item.format === "csv" ? "csv"
-                                                : item.format === "API" && "API",
-                            downloadURL: item.downloadURL
-                        }
-                    )),
+                    topics: item.theme.map(item => item.data),
+                    topics_ar: item.themelear.map(item => item.data),
+                    tags: item.keyword.map(item => item.data),
+                    tags_ar: item.keywordlear.map(item => item.data),
+                    resources: filteredResources.map(item => item.data),
                     created: item.issued,
                     modified: item.modified,
                 }
@@ -673,11 +681,11 @@ export const getQuestionBySearch = (text, setData) => {
 
                 let data = res.data.data;
 
-                if (data.length > 0 && text && text !== "") {
+                if (data.length > 0 && text && text.trim() !== "") {
                     let obj = {
                         keyword: text,
                         ip: "192.168.0.44",
-                        lang: "en",
+                        lang: currentLanguage,
                         type: "support"
                     }
                     await endpoints.
@@ -1188,9 +1196,9 @@ export const register = async (navigate, route, setLoading, payload) => {
 
 }
 
-export const getSearch = (setData) => {
+export const getSearch = (type, setData) => {
     return endpoints.
-        getSearch().then((res) => {
+        getSearch(type).then((res) => {
             if (res.status === 200) {
                 setData(res.data.data);
             }
@@ -1376,4 +1384,3 @@ export const contactUs = (navigate, route, setLoading, payload) => {
             setLoading(false);
         })
 }
-

@@ -34,7 +34,7 @@ const DataHeader = memo((props) => {
     const onHover = useCallback(() => setCurrentHovered(true), [currentHovered])
     const onLeave = useCallback(() => setCurrentHovered(false), [currentHovered])
 
-    const options = resources?.map(item => (
+    const options = resources && resources.length > 0 && resources.map(item => (
         {
             title: i18n.language === locales.AR ? item.title_ar : item.title,
             onClick: downloadResources,

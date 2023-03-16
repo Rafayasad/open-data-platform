@@ -8,7 +8,7 @@ import QuestionList from "../../components/modules/Support/QuestionList";
 import { routes } from "../../router/helper";
 import { locales } from "../../i18n/helper";
 import View from "../../components/modules/View";
-import { getQuestionBySearch } from "../../axios/api";
+import { getQuestionBySearch, getSearch } from "../../axios/api";
 
 const Support = memo(() => {
 
@@ -21,6 +21,11 @@ const Support = memo(() => {
 
     const [searchText, setSearchText] = useState('');
     const [searchedData, setSearchedData] = useState();
+    const [popularSearch, setPopularSearch] = useState();
+
+    useEffect(() => {
+        getSearch("support", setPopularSearch)
+    }, [])
 
     useEffect(() => {
         if (searchText !== '') {
@@ -40,7 +45,7 @@ const Support = memo(() => {
 
     return (
         <View theme="dark" footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")}>
-            <Main onSearch={onSearch} />
+            <Main popularSearch={i18n.language === locales.AR ? popularSearch?.ar : popularSearch?.en} onSearch={onSearch} />
             {
                 searchText === '' &&
                 <Cards type='image-inner-text' data={categories} onClick={onClickCard} />

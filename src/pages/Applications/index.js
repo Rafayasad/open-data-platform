@@ -27,23 +27,24 @@ const Applications = memo(() => {
     useEffect(() => {
         if (applications) {
             let arr = [...applications]
-            let x = arr?.slice(0, rowsPerPage)
+            let x = arr.slice(0, rowsPerPage)
             setDisplayApplications(x)
         }
     }, [applications])
 
     const onChangePage = useCallback((page) => {
 
-        cardsDiv.scrollIntoView();
-        let start = (page - 1) * rowsPerPage
-        let end = (start + rowsPerPage)
+        if (page) {
+            let start = (page - 1) * rowsPerPage
+            let end = (start + rowsPerPage)
 
-        let arr = [...applications]
-        let x = arr.slice(start, end)
-        setDisplayApplications(x)
-        setCurrentPage(page)
+            let arr = [...applications]
+            let x = arr.slice(start, end);
+            setDisplayApplications(x);
+            setCurrentPage(page)
+        }
 
-    }, [])
+    }, [currentPage, displayApplications])
 
     const onClickCard = useCallback((id) => {
 
@@ -67,7 +68,10 @@ const Applications = memo(() => {
                 <Pagination
                     currentPage={currentPage}
                     totalCount={Math.ceil(applications?.length / rowsPerPage)}
-                    onChange={onChangePage}
+                    onChange={(page) => {
+                        cardsDiv.scrollIntoView(true)
+                        onChangePage(page)
+                    }}
                 />
             </div>
         </View>

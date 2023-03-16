@@ -6,7 +6,7 @@ import Search from '../../../elements/Search';
 
 const Main = memo((props) => {
 
-    const { onSearch } = props;
+    const { popularSearch, onSearch } = props;
 
     const { t } = useTranslation()
 
@@ -25,6 +25,7 @@ const Main = memo((props) => {
                         <Col />
                         <Col xs={12} md={10} lg={8} className="py-3" style={{ zIndex: 1000 }}>
                             <Search
+                                searchData={popularSearch}
                                 onPressEnter={onSearch}
                                 placeholder={t("searchKeywords")}
                             />

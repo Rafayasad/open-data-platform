@@ -29,7 +29,7 @@ export const endpoints = {
         return client.get(`/api/1/search?fulltext=${search}&page=${currentPage}&page-size=${rowsPerPage}&sort-order=${sort === 'modified' ? "desc" : "aesc"}&sort=${sort}&facets=0&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
     },
     getDatasetById: (id) => {
-        return client.get(`/api/1/metastore/schemas/dataset/items/${id}`);
+        return client.get(`/api/1/metastore/schemas/dataset/items/${id}?show-reference-ids`);
     },
     getAllApplications: () => {
         return client.get('/jsonapi/node/applications');
@@ -100,14 +100,14 @@ export const endpoints = {
     // getDatasetsReport: (data, options) => {
     //     return axios.post('http://192.168.0.23:82/apis/reports/dataset_report.php', data, options)
     // },
-    getSearch: () => {
-        return client.get('/apis/search.php')
+    getSearch: (data) => {
+        return client.get(`/apis/search.php?type=${data}`)
     },
     // getSearch: () => {
     //     return axios.get('https://data.abudhabi/apis/search.php')
     // },
     postSearch: (data) => {
-        return client.post('/apis/search.php', data)
+        return client.post(`/apis/search.php`, data)
     },
     // postSearch: (data) => {
     //     return axios.post('https://data.abudhabi/apis/search.php', data)
@@ -141,6 +141,9 @@ export const endpoints = {
     },
     contactUs: (data) => {
         return client.post("/apis/contact.php", data);
+    },
+    getIpAddress: () => {
+        return axios.get("https://api.db-ip.com/v2/free/self");
     }
     // getPrivacyPolicy: () => {
     //     return axios.get("https://data.abudhabi/jsonapi/node/privacy_policy");
