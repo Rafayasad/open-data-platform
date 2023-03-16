@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from "react";
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getFacets, getMostViewedDatasets, getPlatformInsights, getRecentsDatasets } from "../../axios/api";
 import Cards from "../../components/modules/Cards";
@@ -41,7 +41,9 @@ const Home = memo(() => {
 
     const onClickCard = useCallback((id) => { navigate(`${routes.DATASET_DETAIL}?id=${id}`) });
     const onSearch = useCallback((value) => { value != "" && navigate(routes.DATASET, { state: { search: value } }) });
-    const onClickList = useCallback((item) => { navigate(routes.DATASET, { state: { listItem: [item] } }) });
+    const onClickList = useCallback((item) => { 
+        navigate(routes.DATASET, { state: { listItem: [item] } })
+     });
     const onClickButton = useCallback(() => { navigate(routes.DATASET) });
 
     const onApplyFilter = useCallback((filters) => { navigate(routes.DATASET, { state: { listItem: filters } }) })

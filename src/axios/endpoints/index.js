@@ -61,9 +61,6 @@ export const endpoints = {
     getCRSFToken: () => {
         return client.get('/session/token')
     },
-    // getCRSFToken: () => {
-    //     return axios.get('https://data.abudhabi/session/token')
-    // },
     login: (data, headers) => {
         return client.post('/user/login?_format=json', data, { headers })
     },
@@ -73,79 +70,49 @@ export const endpoints = {
     otp: (data) => {
         return client.post('/apis/otp.php', data)
     },
-    // login: (data, headers) => {
-    //     return axios.post('http://10.241.40.69:30418/user/login?_format=json', data, { headers })
-    // },
     register: (data, headers) => {
         return client.post('/apis/register.php', data, { headers })
     },
-    // register: (data, headers) => {
-    //     return axios.post('http://10.241.40.69:30418/apis/register.php', data, { headers })
-    // },
     getInsightsReport: (data, options) => {
         return client.post('/apis/reports/insight_report.php', data, options)
     },
-    // getInsightsReport: (data, options) => {
-    //     return axios.post('http://192.168.0.23:82/apis/reports/insight_report.php', data, options)
-    // },
     getPublishersReport: (data, options) => {
         return client.post('/apis/reports/publishers_report.php', data, options)
     },
-    // getPublishersReport: (data, options) => {
-    //     return axios.post('http://192.168.0.23:82/apis/reports/publishers_report.php', data, options)
-    // },
     getDatasetsReport: (data, options) => {
         return client.post('/apis/reports/dataset_report.php', data, options)
     },
-    // getDatasetsReport: (data, options) => {
-    //     return axios.post('http://192.168.0.23:82/apis/reports/dataset_report.php', data, options)
-    // },
     getSearch: (data) => {
         return client.get(`/apis/search.php?type=${data}`)
     },
-    // getSearch: () => {
-    //     return axios.get('https://data.abudhabi/apis/search.php')
-    // },
     postSearch: (data) => {
         return client.post(`/apis/search.php`, data)
     },
-    // postSearch: (data) => {
-    //     return axios.post('https://data.abudhabi/apis/search.php', data)
-    // },
     recoverPassword: (data, headers) => {
         return client.post('/apis/reset_email.php', data, { headers })
     },
-    // recoverPassword: (data, headers) => {
-    //     return axios.post('http://10.241.40.69:30418/apis/reset_email.php', data, { headers })
-    // },
     resetPassword: (data, headers) => {
         return client.post('/xwordxssapx.php', data, { headers })
     },
-    // resetPassword: (data, headers) => {
-    //     return axios.post('http://10.241.40.69:30418/xwordxssapx.php', data, { headers })
-    // },
     viewCount: (data) => {
         return client.post('/apis/view_count.php', data);
     },
-    // viewCount: (data) => {
-    //     return axios.post('https://data.abudhabi/apis/view_count.php', data);
-    // },
     realTimeApis: (data) => {
         return client.get('/jsonapi/node/real_time_apis', data);
     },
-    // realTimeApis: (data) => {
-    //     return axios.get('https://data.abudhabi/jsonapi/node/real_time_apis', data);
-    // },
     getPrivacyPolicy: () => {
         return client.get("/jsonapi/node/privacy_policy");
     },
     contactUs: (data) => {
         return client.post("/apis/contact.php", data);
     },
+    checkUser: () => {
+        return client.get('/checkuser')
+    },
+    logout: () => {
+        return client.get('/user/logout')
+    },
     getIpAddress: () => {
         return axios.get("https://api.db-ip.com/v2/free/self");
     }
-    // getPrivacyPolicy: () => {
-    //     return axios.get("https://data.abudhabi/jsonapi/node/privacy_policy");
-    // }
 } 

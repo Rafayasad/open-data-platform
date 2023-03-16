@@ -9,10 +9,16 @@ import { routes } from "../../router/helper";
 import { useTranslation } from "react-i18next";
 import { locales } from "../../i18n/helper";
 import View from "../../components/modules/View";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilter } from "../../redux/reducers/Facets";
 
 const Dataset = memo(() => {
 
     const { t, i18n } = useTranslation();
+    const dispatch = useDispatch();
+    const storedFilters = useSelector((state) => state.facets.filter);
+
+    console.log("filterssSss", storedFilters);
 
     const navigate = useNavigate();
     const { state, pathname } = useLocation();
@@ -32,6 +38,9 @@ const Dataset = memo(() => {
     const [loading, setLoading] = useState(false);
     const [viewAll, setViewAll] = useState(false);
 
+
+    console.log("filters", filters);
+
     useEffect(() => {
         setFilters();
         i18n.language === locales.AR ? setSort("تم التعديل") : setSort("Modified")
@@ -43,6 +52,13 @@ const Dataset = memo(() => {
             window.scrollBy(0, -8)
         }, 500);
     }
+
+
+    useEffect(() => {
+        if (storedFilters) {
+            setFilters(storedFilters)
+        }
+    }, [])
 
     useEffect(() => {
 
@@ -67,7 +83,8 @@ const Dataset = memo(() => {
     useEffect(() => {
         if (currentPage || search || sort || filters) {
             if (!state?.search && !state?.listItem) {
-                getAllDatasets(setDatasets, setTotalCount, setLoading, search, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, filters)
+                console.log("api wala filters", filters);
+                getAllDatasets(setDatasets, setTotalCount, setLoading, search, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, storedFilters)
             }
         }
 
@@ -76,7 +93,6 @@ const Dataset = memo(() => {
     const toggle = useCallback(() => setViewAll(!viewAll), [viewAll]);
 
     const onClickCard = useCallback((id) => {
-        setFilters()
         navigate(`${routes.DATASET_DETAIL}?id=${id}`)
     }, []);
 
@@ -95,7 +111,11 @@ const Dataset = memo(() => {
         setSort(e)
     }, [sort])
 
-    const onApplyFilter = useCallback((filters) => setFilters([...filters]), [filters])
+    const onApplyFilter = useCallback((filters) => {
+        setCurrentPage(1)
+        dispatch(setFilter([...filters]))
+        setFilters([...filters])
+    }, [filters])
 
     const onDeleteFilter = useCallback((filter) => {
 
@@ -104,6 +124,7 @@ const Dataset = memo(() => {
             let index = filters.findIndex(item => item.title === filter.title)
             arr.splice(index, 1)
             setFilters([...arr])
+            dispatch(setFilter([...arr]))
         }
 
     }, [filters])
