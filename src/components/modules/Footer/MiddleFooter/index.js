@@ -26,6 +26,8 @@ const MiddleFooter = memo(() => {
     const navigate = useNavigate();
 
     const topics = useSelector((state) => state.facets.topics);
+    const { isLoggedIn } = useSelector(state => state.authentication);
+
     const [activeIndex, setActiveIndex] = useState();
 
     function CustomToggle({ eventKey }) {
@@ -83,7 +85,16 @@ const MiddleFooter = memo(() => {
         },
         {
             heading: t("developers"),
-            data: [
+            data: isLoggedIn ? [
+                {
+                    title: t("realTimeAPI"),
+                    link: routes.REAL_TIME_APIS
+                },
+                {
+                    title: t("reports"),
+                    link: routes.REPORTS
+                }
+            ] : [
                 {
                     title: t("realTimeAPI"),
                     link: routes.REAL_TIME_APIS
