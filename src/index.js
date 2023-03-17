@@ -32,8 +32,9 @@ const emptyCache = createCache({
   key: "muiltr",
 });
 
+console.log("i81n",i18n.language);
+
 const THEME = createTheme({
-  direction: i18n.language === locales.AR ? "rtl" : "ltr",
   typography: {
     "fontFamily": `${i18n.language === locales.EN ? 'CircularAr-Regular' : 'CircularStd-Regular'}`
   }
@@ -44,7 +45,7 @@ root.render(
     <Router>
       <ScrollToTop />
       <Suspense>
-        <CacheProvider value={i18n.language === locales.AR ? cacheRtl : emptyCache}>
+        {/* <CacheProvider value={cacheRtl}> */}
           <ThemeProvider theme={THEME}>
             <Provider store={store}>
               <PersistGate loading={null} persistor={persistor}>
@@ -52,7 +53,7 @@ root.render(
               </PersistGate>
             </Provider>
           </ThemeProvider>
-        </CacheProvider>
+        {/* </CacheProvider> */}
       </Suspense>
     </Router>
   </React.StrictMode>

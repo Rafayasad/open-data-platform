@@ -41,10 +41,10 @@ const Home = memo(() => {
 
     const onClickCard = useCallback((id) => { navigate(`${routes.DATASET_DETAIL}?id=${id}`) });
     const onSearch = useCallback((value) => { value != "" && navigate(routes.DATASET, { state: { search: value } }) });
-    const onClickList = useCallback((item) => { 
+    const onClickList = useCallback((item) => {
         navigate(routes.DATASET, { state: { listItem: [item] } })
-     });
-    const onClickButton = useCallback(() => { navigate(routes.DATASET) });
+    });
+    const onClickButton = useCallback((title) => { navigate(`${routes.DATASET}?id=${title === "mostvieweddatasets" ? "most_viewed_datasets" : "recently_added_datasets"}`) });
 
     const onApplyFilter = useCallback((filters) => { navigate(routes.DATASET, { state: { listItem: filters } }) })
 
@@ -55,8 +55,8 @@ const Home = memo(() => {
                 <Topics onClickViewless={() => topicsDiv.scrollIntoView()} onClickList={onClickList} data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en} />
             </div>
             <Images />
-            <Cards title={t("mostViewedDatasets")} backgroundColor={colors.black} data={mostViewedDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={onClickButton} />
-            <Cards title={t("recentlyAddedDatasets")} backgroundColor={colors.black} data={recentsDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={onClickButton} />
+            <Cards title={t("mostViewedDatasets")} backgroundColor={colors.black} data={mostViewedDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={() => onClickButton("mostvieweddatasets")} />
+            <Cards title={t("recentlyAddedDatasets")} backgroundColor={colors.black} data={recentsDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={() => onClickButton("recentlyaddeddatasets")} />
             <PlatformInsights data={platformInsights} />
         </View>
     )

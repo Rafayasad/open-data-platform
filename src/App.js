@@ -6,9 +6,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Router from './router';
 import { locales } from './i18n/helper';
-import { setPublishers, setTags, setTopics } from './redux/reducers/Facets';
+import { setPublishers, setStoriesTags, setTags, setTopics } from './redux/reducers/Facets';
 import { setAboutus } from './redux/reducers/About';
-import { checkUser, getAboutUs, getAllApplications, getFacets, getFaqsCategory, getPopularQuestions, getSuccessStories } from './axios/api';
+import { checkUser, getAboutUs, getAllApplications, getFacets, getFaqsCategory, getPopularQuestions, getStoriesTags, getSuccessStories } from './axios/api';
 import { setApplications } from './redux/reducers/Applications';
 import { handleLogin, handleLogout } from './redux/reducers/Authentication';
 import { setStories } from './redux/reducers/SuccessStories';
@@ -33,11 +33,12 @@ function App() {
     getSuccessStories(dispatch, setStories);
     getFaqsCategory(dispatch, setCategories);
     getPopularQuestions(dispatch, setQuestions);
+    getStoriesTags(dispatch, setStoriesTags);
   }, []);
 
-  if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
-    console.log = () => { }
-  }
+  // if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
+  //   console.log = () => { }
+  // }
 
   return <div className={`${i18n.language === locales.AR && "ar-font"}`}>
     <Router />

@@ -13,8 +13,8 @@ export const endpoints = {
     getPlatformInsights: () => {
         return client.get("/apis/platform_insights-2.php");
     },
-    getMostViewedDatasets: () => {
-        return client.get("/apis/most_view_datasets-2.php");
+    getMostViewedDatasets: (perPage, pageNumber) => {
+        return client.get(`/apis/most_view_datasets-2.php?perpage=${perPage}&pagenumber=${pageNumber}`);
     },
     getRecentsDatasets: () => {
         return client.get("/apis/recently_added_datasets-2.php");
@@ -114,5 +114,8 @@ export const endpoints = {
     },
     getIpAddress: () => {
         return axios.get("https://api.db-ip.com/v2/free/self");
+    },
+    getStoriesTags: () => {
+        return client.get("/jsonapi/taxonomy_term/story_tags");
     }
 } 

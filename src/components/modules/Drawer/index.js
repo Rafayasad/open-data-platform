@@ -14,16 +14,13 @@ import Tag from "../../elements/Tag";
 import Button from "../../elements/Button";
 import './style.css';
 import 'react-modern-drawer/dist/index.css'
+import CheckBox from "../../elements/CheckBox";
 
 const Drawer = memo((props) => {
 
     const { t, i18n } = useTranslation()
 
-    const { open, setOpen, onClickApplyFilter, appliedFilters } = props;
-
-    const topics = useSelector((state) => state.facets.topics);
-    const publishers = useSelector((state) => state.facets.publishers);
-    const tags = useSelector((state) => state.facets.tags);
+    const { open, setOpen, onClickApplyFilter, appliedFilters, data } = props;
 
     const [activeIndex, setActiveIndex] = useState();
     const [filters, setFilters] = useState([]);
@@ -35,21 +32,6 @@ const Drawer = memo((props) => {
             setFilters([])
         }
     }, [appliedFilters])
-
-    const data = [
-        {
-            title: t("publisher"),
-            tags: i18n.language === locales.AR ? publishers && publishers.ar : publishers && publishers.en
-        },
-        {
-            title: t("topics"),
-            tags: i18n.language === locales.AR ? topics && topics.ar : topics && topics.en
-        },
-        {
-            title: t("tags"),
-            tags: i18n.language === locales.AR ? tags && tags.ar : tags && tags.en
-        }
-    ]
 
     const toggleDrawer = useCallback(() => setOpen(!open), [open]);
 
@@ -126,7 +108,7 @@ const Drawer = memo((props) => {
                                                                     // backgroundColor={filtersData?.some(items => items.title === item.title) ? "black" : "white"}
                                                                     // textColor={filtersData?.some(items => items.title === item.title) ? "white" : "black"}
                                                                     borderColor={"1px solid grey"}
-                                                                    title={`${items.title} (${items.value})`}
+                                                                    title={`${items.title} ${items.value ? `(${items.value})` : ""}`}
                                                                     onClick={() => onClickItem(items)}
                                                                 />
                                                             </div>
@@ -134,6 +116,25 @@ const Drawer = memo((props) => {
                                                     })
                                                 }
                                             </div>
+                                            {
+                                                item.data &&
+                                                <div className="">
+                                                    {
+                                                        item.data?.map((items, index) => {
+                                                            return (
+                                                                <div className="d-flex justify-content-between align-items-center">
+                                                                    <div className="py-2">
+                                                                        <Heading nomargin heading={items.value} size={"xs"} />
+                                                                    </div>
+                                                                    <div>
+                                                                        <CheckBox checked={items.selectedValue === items.value} callBack={() => items.onclick(items.value)} borderColor={colors.black} />
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        })
+                                                    }
+                                                </div>
+                                            }
                                         </Accordion.Body>
                                     </Accordion.Item>
                                 </Accordion>

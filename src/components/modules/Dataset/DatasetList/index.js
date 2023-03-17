@@ -49,7 +49,7 @@ const data = [
 
 const DatasetList = memo((props) => {
 
-    const { onClick, datasets, totalCount, currentPage, rowsPerPage, loading, notagsactive, onChangePage, selectedValue, onSelectDropdown, notags, noheader, cardSize } = props
+    const { title, onClick, datasets, totalCount, currentPage, rowsPerPage, loading, notagsactive, onChangePage, selectedValue, onSelectDropdown, notags, noheader, cardSize, nodropdown } = props
 
     const { t, i18n } = useTranslation();
 
@@ -76,10 +76,10 @@ const DatasetList = memo((props) => {
                 <>
                     <hr className="mt-5" style={{ color: '#CFCFCF', borderWidth: 2 }} />
                     <Header
-                        title={`${numberWithCommas(totalCount)} ${t("datasets")}`}
+                        title={`${numberWithCommas(totalCount)} ${title}`}
                         backgroundColor={colors.white}
                         nobutton
-                        dropdown={{
+                        dropdown={!nodropdown && {
                             title: t("sortBy"),
                             options: data,
                             selectedValue

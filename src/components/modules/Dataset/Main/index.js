@@ -10,7 +10,7 @@ import './style.css'
 
 const Main = memo((props) => {
 
-    const { search, onChangeSearchEnter, filter, onApplyFilter, onDeleteFilter, searchData } = props
+    const { search, onChangeSearchEnter, filter, onApplyFilter, onDeleteFilter, searchData, filterData } = props
 
     const { t } = useTranslation();
 
@@ -35,6 +35,7 @@ const Main = memo((props) => {
                         <Col />
                         <Col xs={12} md={10} lg={8} className="py-3" style={{ zIndex: 1000 }}>
                             <Search
+                                filterData={filterData}
                                 value={search}
                                 searchData={searchData}
                                 placeholder={t("searchKeywords")}

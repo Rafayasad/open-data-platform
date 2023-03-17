@@ -1,16 +1,30 @@
-import React, { memo } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { colors } from "../../../../utils/colors";
 import Button from "../../../elements/Button";
 import Dropdown from "../../../elements/DropDown";
 import Heading from "../../../elements/Heading";
 import { useTranslation } from "react-i18next";
+import { MdOutlineFilterAlt, MdCancel } from 'react-icons/md';
+import Drawer from "../../Drawer";
+import './style.css';
 
 const Header = memo((props) => {
 
     const { t } = useTranslation()
 
-    const { title, backgroundColor, nobutton, size, dropdown, onClickButton, buttonText } = props
+    const { title, backgroundColor, nobutton, size, dropdown, onClickButton, buttonText, filterbutton,
+        appliedFilters, onClickApplyFilter, filterData, selectedYear, selectedSortBy
+    } = props;
+
+    const onClickApply = useCallback((filters) => {
+        setFilterOpen(!filterOpen)
+        onClickApplyFilter(filters)
+    });
+
+    const [filterOpen, setFilterOpen] = useState(false);
+
+    const toggle = useCallback(() => { setFilterOpen(!filterOpen) });
 
     let color = colors.white;
     let headingSize;
@@ -59,7 +73,18 @@ const Header = memo((props) => {
                                     dropdownWidth={"100%"}
                                     width={"100%"}
                                 /> :
-                                null
+                                filterbutton ?
+                                    <>
+                                        <div onClick={toggle} className='d-flex align-items-center justify-content-center filter py-2 px-2' style={{ borderRadius: '30px' }}>
+                                            <MdOutlineFilterAlt size={24} />
+                                            <div className="d-none d-lg-flex align-items-center justify-content-center">
+                                                <p className='m-0'>{t("filters")}</p>
+                                            </div>
+                                        </div>
+                                        <Drawer data={filterData} open={filterOpen} setOpen={setFilterOpen} onClickApplyFilter={onClickApply} appliedFilters={appliedFilters} />
+                                    </>
+                                    :
+                                    null
                     }
                 </Col>
             </Row>

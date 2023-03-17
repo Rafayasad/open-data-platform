@@ -23,7 +23,7 @@ export const getPlatformInsights = (setData, setLoading) => {
 
 export const getMostViewedDatasets = (setData, setLoading) => {
     return endpoints.
-        getMostViewedDatasets().then((res) => {
+        getMostViewedDatasets(3,1).then((res) => {
             if (res.status === 200) {
                 console.log("hello", res.data.data);
                 let data = res.data.data;
@@ -1414,5 +1414,33 @@ export const logout = (dispatch, handleLogout) => {
             }
         }).catch((err) => {
             console.log("Error Message", err);
+        })
+}
+
+export const getStoriesTags = (dispatch, setStoriesTags) => {
+    return endpoints.getStoriesTags()
+        .then((res) => {
+            if (res.status == 200) {
+
+
+                let tags = res.data.data?.map((item) => (
+                    {
+                        title: item.attributes.name
+                    }))
+
+                let tags_ar = res.data.data?.map((item) => (
+                    {
+                        title: item.attributes.field_story_tag_namear
+                    }))
+
+                let data = {
+                    tags,
+                    tags_ar
+                }
+
+                dispatch(setStoriesTags(data));
+            }
+        }).catch((err) => {
+            console.log("error", err);
         })
 }

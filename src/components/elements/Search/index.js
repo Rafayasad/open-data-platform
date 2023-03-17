@@ -16,7 +16,7 @@ const Search = memo((props) => {
 
     const { t } = useTranslation();
 
-    const { nofocuseffect, placeholder, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter, searchData } = props;
+    const { filterData, nofocuseffect, placeholder, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter, searchData } = props;
 
     const [filterOpen, setFilterOpen] = useState(false);
 
@@ -121,7 +121,7 @@ const Search = memo((props) => {
                                 </sup>
                             </div> */}
                                 </div>
-                                <Drawer open={filterOpen} setOpen={setFilterOpen} onClickApplyFilter={onClickApply} appliedFilters={appliedFilters} />
+                                <Drawer data={filterData} open={filterOpen} setOpen={setFilterOpen} onClickApplyFilter={onClickApply} appliedFilters={appliedFilters} />
                             </Col>
                     }
                 </Row>
