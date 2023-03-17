@@ -3,25 +3,25 @@ import { Col, Row, Spinner } from "react-bootstrap";
 import DataTable from "react-data-table-component";
 import Pagination from "../Pagination";
 
-const columns = (data) => {
+// const columns = (data) => {
 
-    let entries = Object.entries(data)
+//     let entries = Object.entries(data)
 
-    let filtered = entries.map(item => {
+//     let filtered = entries.map(item => {
 
-        let key = item[0]
+//         let key = item[0]
 
-        return (
-            {
-                name: key.replace("_", " "),
-                selector: row => row[key],
-            }
-        )
+//         return (
+//             {
+//                 name: key.replace("_", " "),
+//                 selector: row => row[key]
+//             }
+//         )
 
-    })
+//     })
 
-    return filtered;
-}
+//     return filtered;
+// }
 
 const customStyles = {
     rows: {
@@ -56,7 +56,7 @@ const customStyles = {
 
 const Table = memo((props) => {
 
-    let { data, loading, currentPage, totalCount, onChange } = props;
+    let { data, column, loading, currentPage, totalCount, onChange } = props;
 
     let rowsPerPage = 10;
 
@@ -80,10 +80,11 @@ const Table = memo((props) => {
                     </Col>
                 </Row>
                 <DataTable
-                    columns={data && columns(data[0])}
+                    columns={data && column}
                     data={data && data}
                     customStyles={customStyles}
                     striped
+                    responsive
                 />
                 {
                     currentPage && totalCount && onChange && data && data?.length > 0 ?

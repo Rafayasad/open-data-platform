@@ -14,8 +14,6 @@ const Main = memo((props) => {
 
     const { data, url } = props;
 
-    console.log("Tim Tima 2", url)
-
     const { t, i18n } = useTranslation();
 
     let option = { dateStyle: 'long' };
@@ -53,10 +51,10 @@ const Main = memo((props) => {
             capitalize: true
         },
         {
-            title: "Source(s)",
+            title: t("source"),
             detail: data ? (
                 i18n.language === locales.EN ? data.resources.map(item => item.title) :
-                data.resources.map(item => item.title_ar)
+                    data.resources.map(item => item.title_ar)
             ) : <Shimmer rounded='xs' width="70%" className={"my-1"} />
         },
     ]

@@ -1,50 +1,49 @@
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import View from "../../components/modules/View";
 import { useTranslation } from "react-i18next";
 import RealTimeApisHeader from "../../components/modules/RealTimeApis/Main";
 import ListCard from "../../components/modules/RealTimeApis/Main/ListCard";
 import { useState } from "react";
 import { useEffect } from "react";
-import { realTimeApis } from "../../axios/api";
+import { getAllRealTimeApis } from "../../axios/api";
 import DatasetList from "../../components/modules/Dataset/DatasetList";
+import { routes } from "../../router/helper";
+import { useNavigate } from "react-router-dom";
 
 const RealTimeApis = memo((props) => {
 
     const { t } = useTranslation();
+    const navigate = useNavigate();
+
+    const [totalCount, setTotalCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
 
     const [loading, setLoading] = useState(false);
     const [realTimeApisData, setRealTimeApisData] = useState();
 
     useEffect(() => {
-        realTimeApis(setRealTimeApisData, {
-            "municipalityId": 1001
-        }, setLoading)
-    }, [])
+        getAllRealTimeApis(setRealTimeApisData, setLoading)
+    }, []);
 
-
-
-    const data = [
-        {
-            title: "Internal Gateway",
-            description: "Truncated description to provide context in terms of details with 190chars limit with rest of the ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ik...",
-            publisher: "Name of the authority",
-        },
-        {
-            title: "Internal Gateway",
-            description: "Truncated description to provide context in terms of details with 190chars limit with rest of the ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ik...",
-            publisher: "Name of the authority",
-        },
-        {
-            title: "Internal Gateway",
-            description: "Truncated description to provide context in terms of details with 190chars limit with rest of the ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ik...",
-            publisher: "Name of the authority",
-        }
-    ]
+    const onClickCard = useCallback((id) => {
+        navigate(`${routes.REAL_TIME_APIS_DETAIL}?id=${id}`)
+    }, []);
 
     return (
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
             <RealTimeApisHeader />
-            <DatasetList datasets={data} loading={loading} notags cardSize="xs" noheader />
+            <DatasetList
+                datasets={realTimeApisData}
+                loading={loading}
+                totalCount={totalCount}
+                rowsPerPage={rowsPerPage}
+                currentPage={currentPage}
+                notags
+                cardSize="xs"
+                noheader
+                onClick={onClickCard}
+            />
             {/* <ListCard loading={loading} datalist={data} /> */}
         </View>
     )

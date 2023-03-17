@@ -12,6 +12,7 @@ import AppliedFilters from "../../../components/modules/Reports/AppliedFilters";
 import Header from "../../../components/modules/Reports/Header";
 import Tabs from "../../../components/modules/Reports/Tabs";
 import ReportsFilter from '../../../components/modules/Reports/Filter';
+import { PublisherAllColumns, PublisherUsersColumns } from "../../../components/modules/Columns/PublisherColumns";
 
 const Publishers = memo(() => {
 
@@ -96,6 +97,7 @@ const Publishers = memo(() => {
                 <div id="table">
                     <Table
                         data={publisherData}
+                        column={selectedTab === t("users") ? PublisherUsersColumns : PublisherAllColumns}
                         currentPage={currentPage}
                         totalCount={Math.ceil(totalCount / rowsPerPage)}
                         onChange={onChangePage}

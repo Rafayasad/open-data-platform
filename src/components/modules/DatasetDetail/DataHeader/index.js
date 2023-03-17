@@ -20,7 +20,7 @@ import apiImage from '../../../../assets/images/api_img.png';
 
 const DataHeader = memo((props) => {
 
-    const { title, resources, url } = props
+    const { title, resources, url, nooptions } = props
 
     const { t } = useTranslation();
 
@@ -84,35 +84,42 @@ const DataHeader = memo((props) => {
                     )
                 }
             </Col>
-            <Col className="d-none d-lg-flex justify-content-end align-items-center">
-                <div className="d-flex" onMouseOver={onHover} onMouseLeave={onLeave}>
-                    <Dropdown
-                        autoClose={true}
-                        options={shareOption}
-                        size={"sm"}
-                        headerComponent={<Button backgroundColor="white" textColor="black" borderColor={currentHovered ? colors.purple : colors.black} icon={<SlShare size={20} color={currentHovered ? colors.purple : colors.black} />} />}
-                    />
-                </div>
-                <div className="">
-                    <Dropdown
-                        autoClose={true}
-                        size={"md"}
-                        options={options}
-                        headerComponent={<Button icon={<MdDownloadForOffline className="mx-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" />}
-                    />
-                </div>
-            </Col>
-            <div className="d-flex d-lg-none justify-content-between align-items-center fixed-bottom bg-white p-3">
-                <Col>
-                    <Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />
-                </Col>
-                <Col xs={4} className="d-flex justify-content-center align-items-center px-3 text-end">
-                    <Heading size='xxs' nomargin heading="135 downloads" />
-                </Col>
-                <Col className="d-flex justify-content-end">
-                    <Button title={"Download"} backgroundColor="black" textColor="white" />
-                </Col>
-            </div>
+            {
+                !nooptions &&
+                (
+                    <>
+                        <Col className="d-none d-lg-flex justify-content-end align-items-center">
+                            <div className="d-flex" onMouseOver={onHover} onMouseLeave={onLeave}>
+                                <Dropdown
+                                    autoClose={true}
+                                    options={shareOption}
+                                    size={"sm"}
+                                    headerComponent={<Button backgroundColor="white" textColor="black" borderColor={currentHovered ? colors.purple : colors.black} icon={<SlShare size={20} color={currentHovered ? colors.purple : colors.black} />} />}
+                                />
+                            </div>
+                            <div className="">
+                                <Dropdown
+                                    autoClose={true}
+                                    size={"md"}
+                                    options={options}
+                                    headerComponent={<Button icon={<MdDownloadForOffline className="mx-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" />}
+                                />
+                            </div>
+                        </Col>
+                        <div className="d-flex d-lg-none justify-content-between align-items-center fixed-bottom bg-white p-3">
+                            <Col>
+                                <Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />
+                            </Col>
+                            <Col xs={4} className="d-flex justify-content-center align-items-center px-3 text-end">
+                                <Heading size='xxs' nomargin heading="135 downloads" />
+                            </Col>
+                            <Col className="d-flex justify-content-end">
+                                <Button title={"Download"} backgroundColor="black" textColor="white" />
+                            </Col>
+                        </div>
+                    </>
+                )
+            }
         </Container >
     )
 });

@@ -1,5 +1,6 @@
 import React, { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
+import RealTimeApisDetail from "../pages/RealTimeApisDetail";
 import { routes } from "./helper";
 
 const Home = lazy(() => import('../pages/Home'))
@@ -49,6 +50,7 @@ const Router = () => {
             <Route path={routes.CHANGE} element={<ChangePassword />} />
             <Route path={routes.CONTACT} element={<ContactUs />} />
             <Route path={routes.REAL_TIME_APIS} element={<RealTimeApis />} />
+            <Route path={routes.REAL_TIME_APIS_DETAIL} element={<RealTimeApisDetail />} />
             <Route path={routes.REPORTS} element={<Reports />} />
             <Route path={routes.REPORTS_INSIGHTS} element={<InsightsReports />} />
             <Route path={routes.REPORTS_PUBLISHERS} element={<PublishersReports />} />

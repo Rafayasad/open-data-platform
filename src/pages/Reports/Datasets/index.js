@@ -12,6 +12,7 @@ import Tabs from "../../../components/modules/Reports/Tabs";
 import ReportsFilter from '../../../components/modules/Reports/Filter';
 import { locales } from "../../../i18n/helper";
 import { useSelector } from "react-redux";
+import { DatasetAllColumns } from "../../../components/modules/Columns/DatasetsColumns";
 
 const Datasets = memo(() => {
 
@@ -118,6 +119,7 @@ const Datasets = memo(() => {
                 />
                 <Table
                     data={datasets}
+                    column={DatasetAllColumns}
                     currentPage={currentPage}
                     totalCount={Math.ceil(totalCount / rowsPerPage)}
                     onChange={onChangePage}

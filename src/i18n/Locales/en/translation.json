@@ -136,6 +136,7 @@
     "lastUpdated": "Last updated",
     "coverage": "Coverage",
     "sourceURL": "Source URL",
+    "source": "Source(s)",
     "licence": "Licence",
     "chartButton": "Embed Chart",
     "apiDocs": "API Documentation",
@@ -234,9 +235,10 @@
     "endDate": "End Date",
     "appliedFilters": "Applied Filters",
     "datasetsReports": "Datasets Reports",
-    "publishersReports":"Publishers Reports",
+    "publishersReports": "Publishers Reports",
     "linkedResource": "Linked Resource",
     "physicalResource": "Physical Resource",
     "kpi": "KPI",
-    "users":"Users"
+    "users": "Users",
+    "realTime": "Real Time"
 }

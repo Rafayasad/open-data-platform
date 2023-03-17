@@ -775,9 +775,9 @@ export const getSuccessStories = (dispatch, setData) => {
                     let tags = await endpoints.getImages(story_tags.links.related.href).then((res) => {
                         if (res.status === 200) {
 
-                            let tag = res.data.data.attributes.name
+                            let tags = res.data.data.map((item) => item.attributes.name)
 
-                            return [tag]
+                            return tags
 
                         }
                     }).catch((err) => {
@@ -787,9 +787,9 @@ export const getSuccessStories = (dispatch, setData) => {
                     let tags_ar = await endpoints.getImages(story_tags.links.related.href).then((res) => {
                         if (res.status === 200) {
 
-                            let tag = res.data.data.attributes.field_story_tag_namear
+                            let tags = res.data.data.map((item) => item.attributes.field_story_tag_namear)
 
-                            return [tag]
+                            return tags
 
                         }
                     }).catch((err) => {
@@ -891,9 +891,9 @@ export const getSuccessStoriesById = (id, setData) => {
                     let tags = await endpoints.getImages(story_tags.links.related.href).then((res) => {
                         if (res.status === 200) {
 
-                            let tag = res.data.data.attributes.name
+                            let tags = res.data.data.map((item) => item.attributes.name)
 
-                            return [tag]
+                            return tags
 
                         }
                     }).catch((err) => {
@@ -903,9 +903,9 @@ export const getSuccessStoriesById = (id, setData) => {
                     let tags_ar = await endpoints.getImages(story_tags.links.related.href).then((res) => {
                         if (res.status === 200) {
 
-                            let tag = res.data.data.attributes.field_story_tag_namear
+                            let tags = res.data.data.map((item) => item.attributes.field_story_tag_namear)
 
-                            return [tag]
+                            return tags
 
                         }
                     }).catch((err) => {
@@ -946,10 +946,8 @@ export const validateUser = async (navigate, route, setLoading, payload) => {
 
     await endpoints.validateUser({ username: email, pass: password })
         .then(async (res) => {
-            setLoading(false)
             if (res.status === 200) {
                 if (res.data.status === 200) {
-
                     await endpoints.otp({ type: "send", username: email })
                         .then((res) => {
                             if (res.status === 200) {
@@ -960,7 +958,9 @@ export const validateUser = async (navigate, route, setLoading, payload) => {
                                     toast(res.data.message, { type: "error" })
                                 }
                             }
+                            setLoading(false)
                         }).catch((err) => {
+                            setLoading(false)
                             console.log("Error message", err)
                         })
 
@@ -969,6 +969,7 @@ export const validateUser = async (navigate, route, setLoading, payload) => {
                 }
             }
         }).catch((err) => {
+            setLoading(false)
             console.log("Error message", err)
         })
 }
@@ -1049,7 +1050,6 @@ export const getInsightsReport = (setData, payload, setLoading, setDatatype) => 
                     generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'insights_report', [res.data])
                     setDatatype('');
                 } else if (payload?.datatype === 'pdf') {
-                    console.log("hello");
                     const href = window.URL.createObjectURL(res.data);
                     const link = document.createElement('a');
                     link.href = href;
@@ -1063,6 +1063,7 @@ export const getInsightsReport = (setData, payload, setLoading, setDatatype) => 
 
                 if (payload?.datatype !== "pdf" && payload?.datatype !== "excel" && payload?.datatype !== "csv") {
                     let data = { ...res.data.data };
+                    console.log("Insights Reports", data)
                     setData(data);
                 }
             }
@@ -1089,7 +1090,6 @@ export const getPublishersReport = (setData, payload, setLoading, setTotalCount,
     return endpoints.getPublishersReport(new_payload, options)
         .then((res) => {
             setLoading(false)
-            console.log("paadddd", payload,);
             if (res.status === 200) {
                 if (payload.datatype === "csv" || payload.datatype === "excel") {
                     generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'publishers_report', [res.data])
@@ -1108,7 +1108,8 @@ export const getPublishersReport = (setData, payload, setLoading, setTotalCount,
                 }
 
                 if (payload?.datatype !== "pdf" && payload?.datatype !== "excel" && payload?.datatype !== "csv") {
-                    setData(res.data.data);
+                    let data = res.data.data;
+                    setData(data);
                     setTotalCount(res.data.total_count);
                 }
 
@@ -1283,45 +1284,103 @@ export const resetPassword = async (navigate, route, setLoading, payload) => {
         })
 }
 
-export const realTimeApis = (setData, payload, setLoading) => {
-    return endpoints.
-        realTimeApis(payload).then((res) => {
+export const getAllRealTimeApis = (setData, setLoading) => {
 
-            console.log("res,,,,,,", res);
+    setLoading(true)
+
+    return endpoints.
+        getAllRealTimeApis().then((res) => {
 
             if (res.status === 200) {
+                setLoading(false)
 
                 let data = res.data.data;
 
-                let arr = [];
-
-                data?.map(item => {
-
+                let arr = data.map(item => {
                     const {
                         title,
                         field_title_ar,
                         field_description,
                         field_description_ar,
-                        field_short_description,
-                        field_short_description_ar
+                        field_name_of_authority,
+                        field_name_of_authorityar
                     } = item.attributes;
 
-                    const { href } = item.links;
-
-                    arr.push({
+                    return ({
+                        id: item.id,
                         title,
                         title_ar: field_title_ar,
                         description: convertHtmlToString(field_description.value),
                         description_ar: convertHtmlToString(field_description_ar.value),
-                        short_description: field_short_description,
-                        short_description_ar: field_short_description_ar
+                        publisher: field_name_of_authority,
+                        publisher_ar: field_name_of_authorityar
                     })
 
+                })
+
+                setData(arr);
+            }
+
+        }).catch((err) => {
+            console.log("Error Message", err)
+        })
+}
+
+export const getRealTimeApiById = (id, setData, setLoading) => {
+
+    setLoading(true)
+
+    return endpoints.
+        getRealTimeApiById(id).then(async (res) => {
+
+            if (res.status === 200) {
+                setLoading(false)
+
+                const {
+                    title,
+                    field_title_ar,
+                    field_description,
+                    field_description_ar,
+                    field_name_of_authority,
+                    field_name_of_authorityar,
+                    created,
+                    changed,
+                    field_api_url
+                } = res.data.data[0].attributes;
+
+                const { field_api_file } = res.data.data[0].relationships;
+
+                let fileUrl = await endpoints.getImages(field_api_file.links.related.href).then((res) => {
+
+                    if (res.status === 200) {
+
+                        if (res.data.data) {
+                            let url = res.data.data.attributes.uri.url;
+
+                            return `${process.env.REACT_APP_BASE_URL}${url}`;
+                        }
+
+                        return null;
+
+                    }
+
+                });
+
+                let data = {
+                    id: res.data.data[0].id,
+                    title,
+                    title_ar: field_title_ar,
+                    description: convertHtmlToString(field_description.value),
+                    description_ar: convertHtmlToString(field_description_ar.value),
+                    publisher: field_name_of_authority,
+                    publisher_ar: field_name_of_authorityar,
+                    created,
+                    modified: changed,
+                    url: field_api_url.uri,
+                    fileUrl
                 }
 
-                )
-
-                setData(res.data);
+                setData(data);
             }
 
         }).catch((err) => {

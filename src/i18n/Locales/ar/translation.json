@@ -142,6 +142,7 @@
     "lastUpdated": "آخر تحديث",
     "coverage": "تغطية",
     "sourceURL": "مصدر URL",
+    "source": "المصدر",
     "licence": "رخصة",
     "chartButton": "تضمين المخطط",
     "apiDocs": "وثائق API",
@@ -238,5 +239,6 @@
     "linkedResource": "مورد مرتبط",
     "physicalResource": "المورد الفعلي",
     "kpi": "KPI",
-    "users":"متعاطون"
+    "users":"متعاطون",
+    "realTime": "الوقت الحقيقي"
 }

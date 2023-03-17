@@ -38,9 +38,6 @@ const Dataset = memo(() => {
     const [loading, setLoading] = useState(false);
     const [viewAll, setViewAll] = useState(false);
 
-
-    console.log("filters", filters);
-
     useEffect(() => {
         setFilters();
         i18n.language === locales.AR ? setSort("تم التعديل") : setSort("Modified")
@@ -83,7 +80,6 @@ const Dataset = memo(() => {
     useEffect(() => {
         if (currentPage || search || sort || filters) {
             if (!state?.search && !state?.listItem) {
-                console.log("api wala filters", filters);
                 getAllDatasets(setDatasets, setTotalCount, setLoading, search, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, storedFilters)
             }
         }
@@ -147,7 +143,9 @@ const Dataset = memo(() => {
                         onChangePage(page)
 
                     }}
-                    selectedValue={sort} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue}
+                    selectedValue={sort}
+                    onClick={onClickCard}
+                    onSelectDropdown={onChangeDropdownValue}
                 />
             </div>
         </View>
