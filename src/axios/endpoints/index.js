@@ -97,8 +97,11 @@ export const endpoints = {
     viewCount: (data) => {
         return client.post('/apis/view_count.php', data);
     },
-    realTimeApis: (data) => {
-        return client.get('/jsonapi/node/real_time_apis', data);
+    getAllRealTimeApis: () => {
+        return client.get('/jsonapi/node/real_time_apis');
+    },
+    getRealTimeApiById: (id) => {
+        return client.get(`/jsonapi/node/real_time_apis?filter[id][value]=${id}`);
     },
     getPrivacyPolicy: () => {
         return client.get("/jsonapi/node/privacy_policy");

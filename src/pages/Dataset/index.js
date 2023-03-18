@@ -168,7 +168,9 @@ const Dataset = memo(() => {
                         onChangePage(page)
 
                     }}
-                    selectedValue={sort} onClick={onClickCard} onSelectDropdown={onChangeDropdownValue}
+                    selectedValue={sort}
+                    onClick={onClickCard}
+                    onSelectDropdown={onChangeDropdownValue}
                 />
             </div>
         </View>

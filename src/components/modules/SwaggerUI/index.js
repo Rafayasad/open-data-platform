@@ -8,11 +8,7 @@ const SwaggerUI = memo((props) => {
     const { url } = props
 
     return (
-        <SwaggerUi url={url}
-            spec={{
-                "municipalityId": 1001
-            }}
-        />
+        <SwaggerUi url={url} />
     )
 });
 

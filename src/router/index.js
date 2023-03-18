@@ -1,5 +1,8 @@
 import React, { lazy } from "react";
+import { Fragment } from "react";
+import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import RealTimeApisDetail from "../pages/RealTimeApisDetail";
 import { routes } from "./helper";
 
 const Home = lazy(() => import('../pages/Home'))
@@ -28,6 +31,9 @@ const DatasetsReports = lazy(() => import('../pages/Reports/Datasets'))
 const Confirmation = lazy(() => import('../pages/Confirmation'))
 
 const Router = () => {
+
+    const { isLoggedIn } = useSelector(state => state.authentication);
+
     return (
         <Routes>
             <Route path={routes.HOME} element={<Home />} />
@@ -49,11 +55,17 @@ const Router = () => {
             <Route path={routes.CHANGE} element={<ChangePassword />} />
             <Route path={routes.CONTACT} element={<ContactUs />} />
             <Route path={routes.REAL_TIME_APIS} element={<RealTimeApis />} />
-            <Route path={routes.REPORTS} element={<Reports />} />
-            <Route path={routes.REPORTS_INSIGHTS} element={<InsightsReports />} />
-            <Route path={routes.REPORTS_PUBLISHERS} element={<PublishersReports />} />
-            <Route path={routes.REPORTS_DATASETS} element={<DatasetsReports />} />
+            <Route path={routes.REAL_TIME_APIS_DETAIL} element={<RealTimeApisDetail />} />
             <Route path={routes.CONFIRMATION} element={<Confirmation />} />
+            {
+                isLoggedIn &&
+                <Fragment>
+                    <Route path={routes.REPORTS} element={<Reports />} />
+                    <Route path={routes.REPORTS_INSIGHTS} element={<InsightsReports />} />
+                    <Route path={routes.REPORTS_PUBLISHERS} element={<PublishersReports />} />
+                    <Route path={routes.REPORTS_DATASETS} element={<DatasetsReports />} />
+                </Fragment>
+            }
         </Routes>
     )
 };

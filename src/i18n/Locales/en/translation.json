@@ -136,6 +136,7 @@
     "lastUpdated": "Last updated",
     "coverage": "Coverage",
     "sourceURL": "Source URL",
+    "source": "Source(s)",
     "licence": "Licence",
     "chartButton": "Embed Chart",
     "apiDocs": "API Documentation",
@@ -239,5 +240,10 @@
     "linkedResource": "Linked Resource",
     "physicalResource": "Physical Resource",
     "kpi": "KPI",
+<<<<<<< HEAD
     "users": "Users"
+=======
+    "users": "Users",
+    "realTime": "Real Time"
+>>>>>>> 623144ab14134e32e62133788d5a2e4762dca48a
 }

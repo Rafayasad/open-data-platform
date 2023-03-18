@@ -7,6 +7,10 @@
   pointer-events: none;
 }
 
+.Toastify__toast {
+  font-family: 'CircularStd-Regular' !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -37,4 +41,3 @@
     transform: rotate(360deg);
   }
 }
-

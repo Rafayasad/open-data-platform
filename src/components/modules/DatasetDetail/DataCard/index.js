@@ -19,8 +19,8 @@ const DataCard = memo((props) => {
                         </div>
                         {
                             !item.tags ? (
-                                <div>
-                                    <Heading maxNumberOfLines={0} capitalize={item.capitalize} color={item.color} underline={item.underline} heading={item.detail} size='xxs' onClick={item.onClick} />
+                                <div className="">
+                                    <Heading capitalize={item.capitalize} color={item.color} underline={item.underline} heading={item.detail} size='xxs' onClick={item.onClick} />
                                 </div>
                             ) : (
                                 <div className="d-flex flex-wrap mb-3">

@@ -33,7 +33,8 @@ const PrivacyPolicy = memo(() => {
                 backdrop={useIsFocused(ref1)}
                 title={i18n.language === locales.EN ? data?.title : data?.title_ar}
                 description={i18n.language === locales.EN ? data?.description : data?.description_ar}
-                size="lg" />
+                size="lg"
+            />
         </>
     )
 })
