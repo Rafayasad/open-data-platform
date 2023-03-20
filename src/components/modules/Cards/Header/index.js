@@ -100,7 +100,7 @@ const Header = memo((props) => {
                 filters && filters.length > 0 &&
                 <Row className="pt-4">
                     <Col className="d-flex align-items-center">
-                        <Heading nomargin bold size={"lg"} heading={`${count} Results`} />
+                        <Heading nomargin bold size={"lg"} heading={`${count} ${t("results")}`} />
                     </Col>
                     <Col className="d-flex flex-wrap justify-content-end py-2 align-items-center">
                         {
@@ -117,7 +117,7 @@ const Header = memo((props) => {
                         }
                         <div onClick={onClickClearAll}
                             style={{ cursor: "pointer" }}
-                            className="px-2 d-flex align-items-center"><Heading color={colors.purple} heading={"Clear all"} size={"xxs"} nomargin /></div>
+                            className="px-2 d-flex align-items-center"><Heading color={colors.purple} heading={t("clearall")} size={"xxs"} nomargin /></div>
                     </Col>
                 </Row>
             }

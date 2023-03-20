@@ -50,7 +50,7 @@ const Support = memo(() => {
                 searchText === '' &&
                 <Cards type='image-inner-text' data={categories} onClick={onClickCard} />
             }
-            <QuestionList title={searchText !== '' ? t("Results") : t("popularQues")} data={searchText !== '' ? searchedData : questions} onClick={onClickQuestion} />
+            <QuestionList title={searchText !== '' ? t("results") : t("popularQues")} data={searchText !== '' ? searchedData : questions} onClick={onClickQuestion} />
         </View>
 
     )

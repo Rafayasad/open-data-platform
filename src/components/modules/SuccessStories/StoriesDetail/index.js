@@ -16,7 +16,7 @@ import { shareOptions } from "../../../../utils";
 const StoriesDetails = memo((props) => {
 
     const { item, shareOption } = props;
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const [headerOnTop, setHeaderOnTop] = useState(false);
 
@@ -75,7 +75,7 @@ const StoriesDetails = memo((props) => {
                                     </div>
                                     <Heading size={"xs"} heading={i18n.language === locales.AR ? item?.short_description_ar : item?.short_description} />
                                     <div className="py-2">
-                                        <Heading size={"xxs"} heading={"Published on " + item?.created} />
+                                        <Heading size={"xxs"} heading={`${t("publishedOn")}` + item?.created} />
                                     </div>
                                     <div className="py-3">
                                         <img src={item?.image} width='100%' style={{ borderRadius: "30px" }} />

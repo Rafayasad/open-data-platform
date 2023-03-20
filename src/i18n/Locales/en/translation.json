@@ -241,5 +241,8 @@
     "linkedResource": "Linked Resource",
     "physicalResource": "Physical Resource",
     "kpi": "KPI",
-    "users": "Users"
+    "users": "Users",
+    "results":"Results",
+    "clearall":"Clear All",
+    "publishedOn":"Published on"
 }
