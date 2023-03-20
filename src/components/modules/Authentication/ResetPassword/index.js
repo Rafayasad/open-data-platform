@@ -1,16 +1,22 @@
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import AuthBackground2 from "../../../../assets/images/recover-pass-Image.png";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import AuthCard from "../AuthCard";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../../../router/helper";
 
 const ResetPassword = memo((props) => {
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
-  const { setEmail, setPassword, setRePassword, setPolicyCheck, onClickButton } = props;
+  const { setEmail, setPassword, setRePassword, setPolicyCheck, onClickButton, loading } = props;
+
+  const checked = useCallback((check) => setPolicyCheck(check));
+  const onClickTermsAndPolicy = useCallback(() => navigate(routes.POLICY));
 
   return (
     <div>
@@ -58,8 +64,14 @@ const ResetPassword = memo((props) => {
                     { placeholder: t("rePwd"), type: "password", onChange: (val) => setRePassword(val) },
                   ]}
                   checkbox={{
-                    label: t("agreeCond"),
-                    linktext: "terms and privacy policy",
+                    // label: t("agreeCond"),
+                    // linktext: "terms and privacy policy",
+                    // borderColor: colors.light_gray,
+                    // linktextColor: colors.purple,
+                    // labelColor: colors.black,
+                    onClick: checked,
+                    naviagte: onClickTermsAndPolicy,
+                    label: <p>{t("agreeCond")} <span onClick={() => navigate(routes.POLICY)} style={{ color: colors.purple, cursor: "pointer" }}> {t("terms")} </span > {t("and")} <span onClick={() => navigate(routes.POLICY)} style={{ color: colors.purple, cursor: "pointer" }}> {t("policy")} </span></p>,
                     borderColor: colors.light_gray,
                     linktextColor: colors.purple,
                     labelColor: colors.black,
@@ -71,6 +83,7 @@ const ResetPassword = memo((props) => {
                       backgroundColor: colors.black,
                       textColor: colors.white,
                       textSize: "",
+                      loading
                     },
                   ]}
                 />
@@ -111,11 +124,12 @@ const ResetPassword = memo((props) => {
                   }}
                   button={[
                     {
-                      title: "Login",
+                      title: t("login"),
                       onClick: onClickButton,
                       backgroundColor: colors.black,
                       textColor: colors.white,
                       textSize: "",
+                      loading
                     },
                   ]}
                 />

@@ -41,7 +41,14 @@ const Support = memo(() => {
         navigate(`${routes.SUPPORT_QUESTIONS_DETAIL}?id=${id}`, { state: { backURL: routes.SUPPORT } })
     }, []);
 
-    const onSearch = useCallback((value) => value && value !== '' ? setSearchText(value) : setSearchText(''), [searchText])
+    const onSearch = useCallback((value) => {
+        setSearchedData();
+        if (value && value !== '') {
+            setSearchText(value)
+        } else {
+            setSearchText('')
+        }
+    }, [searchText])
 
     return (
         <View theme="dark" footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")}>

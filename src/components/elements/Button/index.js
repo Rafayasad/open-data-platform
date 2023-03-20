@@ -28,7 +28,7 @@ const Button = memo((props) => {
             }}>
             {
                 loading ? (
-                    <Spinner animation="border" variant="light" size="sm" />
+                    <Spinner animation="border" size="sm" color={textColor} />
                 ) : <>
                     {icon}
                     {title}

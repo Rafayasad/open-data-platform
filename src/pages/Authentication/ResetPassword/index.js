@@ -53,6 +53,7 @@ const ResetPassword = memo(() => {
         setRePassword={setRePassword}
         setPolicyCheck={setPolicyCheck}
         onClickButton={onClickButton}
+        loading={loading}
       />
     </View>
   )

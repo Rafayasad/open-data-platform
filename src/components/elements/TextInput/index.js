@@ -71,13 +71,13 @@ const TextInput = memo((props) => {
             ':before': { borderBottomColor: 'black' },
             ':after': { borderBottomColor: 'black' },
           }}
-          type={!showPassword && placeholder === t("password") ? "password" : placeholder != t("password") && type}
+          type={!showPassword && (placeholder === t("password") || placeholder === t("rePwd")) ? "password" : placeholder != t("password") && type}
           value={value}
           onChange={(e) => onChange(e.target.value)}
           endAdornment={
             <InputAdornment position="end">
               {
-                placeholder === t("password") &&
+                (placeholder === t("password") || placeholder === t("rePwd")) &&
                 <IconButton
                   aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}

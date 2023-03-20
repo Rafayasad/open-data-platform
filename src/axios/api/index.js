@@ -1299,7 +1299,6 @@ export const resetPassword = async (navigate, route, setLoading, payload) => {
 
     return await endpoints.
         resetPassword(data, headers).then((res) => {
-
             if (res.status === 200) {
                 if (res.data.status === 200) {
                     navigate(route, { replace: true });
@@ -1497,9 +1496,11 @@ export const checkUser = (dispatch, handleLogin, handleLogout) => {
         })
 }
 
-export const logout = (dispatch, handleLogout) => {
+export const logout = (dispatch, setLoading, handleLogout) => {
+    setLoading(true)
     return endpoints.logout()
         .then((res) => {
+            setLoading(false)
             if (res.status === 200) {
                 dispatch && dispatch(handleLogout());
                 window.location.reload();
