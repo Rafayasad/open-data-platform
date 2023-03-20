@@ -1,7 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    stories: null
+    stories: null,
+    filters: [
+        {
+            type: "Sort By",
+            title: "recent"
+        }
+    ]
 }
 
 export const storiesSlice = createSlice({
@@ -10,10 +16,13 @@ export const storiesSlice = createSlice({
     reducers: {
         setStories: (state, action) => {
             state.stories = action.payload
+        },
+        setStoriesFilters: (state, action) => {
+            state.filters = action.payload
         }
     },
 })
 
-export const { setStories } = storiesSlice.actions
+export const { setStories, setStoriesFilters } = storiesSlice.actions
 
 export default storiesSlice.reducer

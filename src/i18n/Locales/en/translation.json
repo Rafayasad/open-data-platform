@@ -25,7 +25,7 @@
     "filter": "Filter",
     "searchPlaceholder": "Search keyword, dataset, topic or publisher",
     "searchKeywords": "Search Keywords",
-    "popular": "Popular:",
+    "popular": "Popular",
     "populartext": "covid-19, CO2 emissions, Technology, Abu Dhabi police",
     "tags": "Tags",
     "publisher": "Publisher",
@@ -42,7 +42,9 @@
     "customiseYourDashboard": "Customise your dashboard, save your datasets, follow publishers",
     "viewAll": "View All",
     "viewLess": "View Less",
-    "recents": "Recents",
+    "recents": "recents",
+    "recent":"recent",
+    "alphabetically":"alphabetically",
     "recentlyAddedDatasets": "Recently Added Datasets",
     "mostViewedDatasets": "Most Viewed Datasets",
     "abuDhabiDataInNumbers": "Abu Dhabi Data in numbers",
@@ -136,7 +138,6 @@
     "lastUpdated": "Last updated",
     "coverage": "Coverage",
     "sourceURL": "Source URL",
-    "source": "Source(s)",
     "licence": "Licence",
     "chartButton": "Embed Chart",
     "apiDocs": "API Documentation",
@@ -240,10 +241,5 @@
     "linkedResource": "Linked Resource",
     "physicalResource": "Physical Resource",
     "kpi": "KPI",
-<<<<<<< HEAD
     "users": "Users"
-=======
-    "users": "Users",
-    "realTime": "Real Time"
->>>>>>> 623144ab14134e32e62133788d5a2e4762dca48a
 }

@@ -48,6 +48,7 @@ const SuccessStoriesDetail = memo(() => {
         {
             title: t(item.title),
             format: item.format,
+            downloadLink: "null",
             url: `${process.env.REACT_APP_BASE_URL}/success-stories/detail?id=${id}`,
             icon: item.format === "facebook" ? <FaFacebookF />
                 : item.format === "linkedin" ? <FaLinkedinIn />

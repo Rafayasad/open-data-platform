@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { convertHtmlToString } from "../../utils"
 import { endpoints } from "../endpoints"
-import { generateFile } from "../../utils/generic.js";
+import { generateFile, getUnixTime, getYears } from "../../utils/generic.js";
 import { locales } from "../../i18n/helper"
 import i18n from "../../i18n/i18n"
 import { toast } from "react-toastify";
@@ -21,10 +21,13 @@ export const getPlatformInsights = (setData, setLoading) => {
         })
 }
 
-export const getMostViewedDatasets = (setData, setLoading) => {
+export const getMostViewedDatasets = (setData, setTotalCount, searchValue, setLoading, perPage, pageNumber) => {
+    setLoading(true);
     return endpoints.
-        getMostViewedDatasets(3,1).then((res) => {
+        getMostViewedDatasets(perPage, pageNumber, searchValue).then((res) => {
             if (res.status === 200) {
+                setLoading(false);
+                setTotalCount(res.data.total_count);
                 console.log("hello", res.data.data);
                 let data = res.data.data;
                 let transform = data.en.map(item => {
@@ -89,6 +92,7 @@ export const getMostViewedDatasets = (setData, setLoading) => {
                 setLoading(false)
             }
         }).catch((err) => {
+            setLoading(false);
             console.log("Error message", err)
         })
 }
@@ -746,9 +750,38 @@ export const getQuestionById = (id, setData) => {
         })
 }
 
-export const getSuccessStories = (dispatch, setData) => {
+export const getSuccessStories = (dispatch, setData, filters) => {
+
+    let category = filters.filter((item) => item.type === "Categories")[0];
+    let year = filters.filter((item) => item.type === "Year")[0];
+    let sort = filters.filter((item) => item.type === "Sort By")[0];
+
+    console.log("lalala", category, year, sort, getYears());
+
+    let data = {}
+
+    if (sort) {
+        if (sort.title === "recent") {
+            data.sort = "-created"
+        }else if (sort.title === "alphabetically"){
+            data.sort = "title"
+        }
+    }
+
+    if (year) {
+        let start_date = getUnixTime(year.title + '-01-01')
+        let end_date = getUnixTime(year.title + '-12-31')
+        data.year = { start_date, end_date }
+    }
+
+    if (category) {
+        data.category = category.id
+    }
+
+    console.log("sasad", data);
+
     return endpoints.
-        getSuccessStories().then(async (res) => {
+        getSuccessStories(data).then(async (res) => {
 
             if (res.status === 200) {
 
@@ -1481,15 +1514,18 @@ export const getStoriesTags = (dispatch, setStoriesTags) => {
         .then((res) => {
             if (res.status == 200) {
 
+                console.log("sasaasdsad", res.data);
 
                 let tags = res.data.data?.map((item) => (
                     {
-                        title: item.attributes.name
+                        title: item.attributes.name,
+                        id: item.attributes.drupal_internal__tid
                     }))
 
                 let tags_ar = res.data.data?.map((item) => (
                     {
-                        title: item.attributes.field_story_tag_namear
+                        title: item.attributes.field_story_tag_namear,
+                        id: item.attributes.drupal_internal__tid
                     }))
 
                 let data = {

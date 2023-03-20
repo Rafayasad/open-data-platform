@@ -3,7 +3,7 @@ import Cards from "../../components/modules/Cards";
 import Main from "../../components/modules/Dataset/Main";
 import DatasetList from "../../components/modules/Dataset/DatasetList";
 import { colors } from "../../utils/colors";
-import { getAllDatasets, getRecentsDatasets, getSearch } from "../../axios/api";
+import { getAllDatasets, getMostViewedDatasets, getRecentsDatasets, getSearch } from "../../axios/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../router/helper";
 import { useTranslation } from "react-i18next";
@@ -28,6 +28,7 @@ const Dataset = memo(() => {
 
     const [recentsDatasets, setRecentsDatasets] = useState();
     const [datasets, setDatasets] = useState();
+    const [mostViewdDatasets, setMostViewdDatasets] = useState();
     const [searchValue, setSearchValue] = useState("");
     const [searchData, setSearchData] = useState([]);
     const [sort, setSort] = useState("Modified");
@@ -80,8 +81,12 @@ const Dataset = memo(() => {
 
     useEffect(() => {
 
+        if (!most_viewed_datasets) {
+            setDatasets()
+            getRecentsDatasets(setRecentsDatasets);
+        }
+
         getSearch("dataset", setSearchData);
-        getRecentsDatasets(setRecentsDatasets);
 
         if (state && state.search) {
             setSearchValue(state.search)
@@ -91,21 +96,32 @@ const Dataset = memo(() => {
             setFilters(state.listItem)
         }
 
-        if (state) {
-            navigate(pathname, { replace: true, state: null })
-            getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [])
-        }
-
-    }, []);
-
-    useEffect(() => {
-        if (currentPage || searchValue || sort || filters) {
-            if (!state?.search && !state?.listItem) {
-                getAllDatasets(setDatasets, setTotalCount, setLoading, searchValue, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, storedFilters)
+        if (!most_viewed_datasets) {
+            if (state) {
+                navigate(pathname, { replace: true, state: null })
+                getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [])
             }
         }
 
-    }, [currentPage, searchValue, sort, filters]);
+    }, [!most_viewed_datasets]);
+
+    useEffect(() => {
+        if (most_viewed_datasets) {
+            getMostViewedDatasets(setDatasets, setTotalCount, searchValue, setLoading, rowsPerPage, currentPage)
+        }
+    }, [currentPage])
+
+    useEffect(() => {
+        if (!most_viewed_datasets) {
+            if (currentPage || searchValue || sort || filters) {
+                if (!state?.search && !state?.listItem) {
+                    getAllDatasets(setDatasets, setTotalCount, setLoading, searchValue, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, storedFilters)
+                }
+            }
+        }
+    }, [currentPage, searchValue, sort, filters,!most_viewed_datasets]);
+
+
 
     const toggle = useCallback(() => setViewAll(!viewAll), [viewAll]);
 
@@ -163,7 +179,6 @@ const Dataset = memo(() => {
                     loading={loading}
                     nodropdown={most_viewed_datasets}
                     onChangePage={(page) => {
-                        setDatasets()
                         datasetsDiv.scrollIntoView(true);
                         onChangePage(page)
 

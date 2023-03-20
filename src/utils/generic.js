@@ -36,3 +36,20 @@ export const isStrongPassword = (str) => {
 export const getBreakpoint = () => {
   return window.getComputedStyle(document.body, ':before').content.replace(/\"/g, '');
 };
+
+export const getUnixTime = (date) => {
+  return parseInt((new Date(date).getTime() / 1000).toFixed(0))
+}
+
+export const getYears = () => {
+  let years = []
+  let start_year = 2020
+  let end_year = new Date().getFullYear()
+
+  for (let i = start_year; i <= end_year; i++) {
+    years.push(i)
+  }
+
+  return years;
+
+}

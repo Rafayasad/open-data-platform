@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Cards from "../../components/modules/Cards";
 import Header from "../../components/modules/Cards/Header";
 import { colors } from "../../utils/colors";
@@ -12,32 +12,26 @@ import View from "../../components/modules/View";
 import i18n from "../../i18n/i18n";
 import { locales } from "../../i18n/helper";
 import { getStoriesTags } from "../../axios/api";
+import dayjs from "dayjs";
+import { setStoriesFilters } from "../../redux/reducers/SuccessStories";
+import { getYears } from "../../utils/generic";
 
 const SuccessStories = memo(() => {
 
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const stories = useSelector(state => state.stories.stories);
-    const topics = useSelector((state) => state.facets.topics);
     const storiesTags = useSelector((state) => state.facets.storiesTags);
+    const storiesFilters = useSelector((state) => state.stories.filters);
 
 
-    console.log("topics", storiesTags);
+    console.log("topics", storiesFilters);
 
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    const [isYearSelected, setIsYearSelected] = useState();
-    const [isSortBySelected, setIsSortBySelected] = useState();
-
-    const yearChecked = useCallback((check) => {
-        setIsYearSelected(check);
-    }, [isYearSelected]);
-
-    const sortByChecked = useCallback((check) => {
-        setIsSortBySelected(check);
-    }, [isSortBySelected]);
 
     const data = [
         {
@@ -46,51 +40,47 @@ const SuccessStories = memo(() => {
         },
         {
             title: t("year"),
-            data: [
-                {
-                    value: '2020',
-                    onclick: yearChecked,
-                    selectedValue: isYearSelected
-                },
-                {
-                    value: '2021',
-                    onclick: yearChecked,
-                    selectedValue: isYearSelected
-                },
-                {
-                    value: '2022',
-                    onclick: yearChecked,
-                    selectedValue: isYearSelected
-                },
-                {
-                    value: '2023',
-                    onclick: yearChecked,
-                    selectedValue: isYearSelected
-                }
-            ]
+            data: getYears().map(item => ({ type: t("year"), title: item }))
         },
         {
             title: t("sortBy"),
             data: [
                 {
-                    value: t('recent'),
-                    onclick: sortByChecked,
-                    selectedValue: isSortBySelected
+                    title: t('recent'),
+                    type: t("sortBy")
                 },
                 {
-                    value: t('popular'),
-                    onclick: sortByChecked,
-                    selectedValue: isSortBySelected
+                    title: t('alphabetically'),
+                    type: t("sortBy")
                 }
             ]
         }
     ]
 
-    console.log("daad", data);
-
     const onChangePage = useCallback((page) => setCurrentPage(page), [])
 
     const onClickCard = useCallback((id) => { navigate(`${routes.SUCCESS_STOIRES_DETAIL}?id=${id}`) }, []);
+
+    const onApplyFilter = useCallback((filters) => {
+        setCurrentPage(1)
+        dispatch(setStoriesFilters(filters))
+    })
+
+    const onDeleteFilter = useCallback((filter) => {
+        if (filter) {
+            let arr = [...storiesFilters];
+            let newArr = arr.filter((item) => item.type !== filter.type)
+            dispatch(setStoriesFilters(newArr))
+        }
+
+    })
+
+    const onClickClearAll = () => {
+        dispatch(setStoriesFilters([{
+            type: "Sort By",
+            title: "recent"
+        }]))
+    }
 
     return (
         <View theme="dark" noupperfooter>
@@ -99,7 +89,7 @@ const SuccessStories = memo(() => {
                     <BreadCrumb items={[t("aboutus")]} />
                 </div>
                 <div className="px-2">
-                    <Header filterData={data} title={t("successStories")} nobutton backgroundColor={colors.white} filterbutton />
+                    <Header count={stories?.length} onClickClearAll={onClickClearAll} filterData={data} title={t("successStories")} nobutton backgroundColor={colors.white} filterbutton filters={storiesFilters} onClickApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} appliedFilters={storiesFilters} />
                 </div>
                 <Cards type="story-cards" data={stories} onClick={onClickCard} />
             </div>

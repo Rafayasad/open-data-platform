@@ -31,11 +31,16 @@ const Home = memo(() => {
     const [mostViewedDatasets, setMostViewedDatasets] = useState();
     const [recentsDatasets, setRecentsDatasets] = useState();
 
+    const [perPage, setPerPage] = useState(3);
+    const [pageNumber, setPageNumber] = useState(1);
+    const [count, setCount] = useState();
+    const [search, setSearch] = useState();
+
     const topics = useSelector((state) => state.facets.topics);
 
     useEffect(() => {
         getPlatformInsights(setPlatformInsights, setLoading)
-        getMostViewedDatasets(setMostViewedDatasets, setLoading)
+        getMostViewedDatasets(setMostViewedDatasets, setCount, search, setLoading, perPage, pageNumber)
         getRecentsDatasets(setRecentsDatasets, setLoading)
     }, [])
 

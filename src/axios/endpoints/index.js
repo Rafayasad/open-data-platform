@@ -13,8 +13,8 @@ export const endpoints = {
     getPlatformInsights: () => {
         return client.get("/apis/platform_insights-2.php");
     },
-    getMostViewedDatasets: (perPage, pageNumber) => {
-        return client.get(`/apis/most_view_datasets-2.php?perpage=${perPage}&pagenumber=${pageNumber}`);
+    getMostViewedDatasets: (perPage, pageNumber, searchValue) => {
+        return client.get(`/apis/most_view_datasets-2.php?perpage=${perPage}&pagenumber=${pageNumber}&search=${searchValue}`);
     },
     getRecentsDatasets: () => {
         return client.get("/apis/recently_added_datasets-2.php");
@@ -52,8 +52,8 @@ export const endpoints = {
     getQuestionById: (id) => {
         return client.get(`/jsonapi/node/faqs/${id}`)
     },
-    getSuccessStories: () => {
-        return client.get('/jsonapi/node/stories')
+    getSuccessStories: (data) => {
+        return client.get(`/jsonapi/node/stories?sort=${data?.sort}${data.category ? `&filter[story_tags.meta.drupal_internal__target_id]=${data.category}` : ""}${data?.year ? `&filter[datefilter][condition][path]=created&filter[datefilter][condition][operator]=BETWEEN&filter[datefilter][condition][value][1]=${data.year.start_date}&filter[datefilter][condition][value][2]=${data.year.end_date}` : ""}`)
     },
     getSuccessStoriesById: (id) => {
         return client.get(`/jsonapi/node/stories?filter[id]=${id}`)

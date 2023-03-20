@@ -32,7 +32,7 @@ const emptyCache = createCache({
   key: "muiltr",
 });
 
-console.log("i81n",i18n.language);
+console.log("i81n", i18n.language);
 
 const THEME = createTheme({
   typography: {
@@ -41,22 +41,20 @@ const THEME = createTheme({
 });
 
 root.render(
-  <React.StrictMode>
-    <Router>
-      <ScrollToTop />
-      <Suspense>
-        {/* <CacheProvider value={cacheRtl}> */}
-          <ThemeProvider theme={THEME}>
-            <Provider store={store}>
-              <PersistGate loading={null} persistor={persistor}>
-                <App />
-              </PersistGate>
-            </Provider>
-          </ThemeProvider>
-        {/* </CacheProvider> */}
-      </Suspense>
-    </Router>
-  </React.StrictMode>
+  <Router>
+    <ScrollToTop />
+    <Suspense>
+      {/* <CacheProvider value={cacheRtl}> */}
+      <ThemeProvider theme={THEME}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <App />
+          </PersistGate>
+        </Provider>
+      </ThemeProvider>
+      {/* </CacheProvider> */}
+    </Suspense>
+  </Router>
 );
 
 // document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");

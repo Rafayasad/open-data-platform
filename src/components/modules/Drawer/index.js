@@ -20,7 +20,8 @@ const Drawer = memo((props) => {
 
     const { t, i18n } = useTranslation()
 
-    const { open, setOpen, onClickApplyFilter, appliedFilters, data } = props;
+    const { open, setOpen, onClickApplyFilter, appliedFilters, data, year } = props;
+
 
     const [activeIndex, setActiveIndex] = useState();
     const [filters, setFilters] = useState([]);
@@ -32,8 +33,40 @@ const Drawer = memo((props) => {
             setFilters([])
         }
     }, [appliedFilters])
+    console.log("sssssssss", filters, appliedFilters);
 
     const toggleDrawer = useCallback(() => setOpen(!open), [open]);
+
+    const onClickStoriesItem = useCallback((items) => {
+
+
+        console.log("itemmmms", items);
+
+        const temp = [...filters]
+
+        if ((items.type === t("categories"))) {
+
+            let index = temp.findIndex(el => el.type == t("categories"))
+            if (index > -1) {
+                temp.splice(index, 1)
+            }
+        }
+        else if ((items.type === t("year"))) {
+            let index = temp.findIndex(el => el.type == t("year"))
+            if (index > -1) {
+                temp.splice(index, 1)
+            }
+        }
+        else if ((items.type === t("sortBy"))) {
+            let index = temp.findIndex(el => el.type == t("sortBy"))
+            if (index > -1) {
+                temp.splice(index, 1)
+            }
+        }
+        temp.push(items)
+        setFilters(temp)
+
+    })
 
     const onClickItem = useCallback((item) => {
 
@@ -109,7 +142,13 @@ const Drawer = memo((props) => {
                                                                     // textColor={filtersData?.some(items => items.title === item.title) ? "white" : "black"}
                                                                     borderColor={"1px solid grey"}
                                                                     title={`${items.title} ${items.value ? `(${items.value})` : ""}`}
-                                                                    onClick={() => onClickItem(items)}
+                                                                    onClick={() => item.title === t("categories") ?
+                                                                        onClickStoriesItem({
+                                                                            type: t("categories"),
+                                                                            title: items.title,
+                                                                            id: items.id
+                                                                        })
+                                                                        : onClickItem(items)}
                                                                 />
                                                             </div>
                                                         )
@@ -124,10 +163,15 @@ const Drawer = memo((props) => {
                                                             return (
                                                                 <div className="d-flex justify-content-between align-items-center">
                                                                     <div className="py-2">
-                                                                        <Heading nomargin heading={items.value} size={"xs"} />
+                                                                        <Heading nomargin heading={items.title} size={"xs"} />
                                                                     </div>
                                                                     <div>
-                                                                        <CheckBox checked={items.selectedValue === items.value} callBack={() => items.onclick(items.value)} borderColor={colors.black} />
+                                                                        <CheckBox
+                                                                            checked={filters?.some(el => items.type === el.type && el.title === items.title)}
+                                                                            callBack={() => {
+                                                                                onClickStoriesItem(items)
+                                                                                items.onclick(items.title)
+                                                                            }} borderColor={colors.black} />
                                                                     </div>
                                                                 </div>
                                                             )

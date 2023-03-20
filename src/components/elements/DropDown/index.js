@@ -82,13 +82,18 @@ const Dropdown = (props) => {
                         {
                             options && options.length > 0 && options.map((item, index) => (
                                 <BSDropdown.Item
-                                    // target="_blank"
-                                    href={item.downloadLink && item.downloadLink}
-                                    onClick={() => {
+                                    as={"div"}
+                                    onClick={(e) => {
+                                        e.preventDefault();
                                         if (item.onClick) {
                                             highlightableItem && setIndexx(index)
                                             item.onClick(item.title)
                                         }
+
+                                        if (item.downloadLink) {
+                                            window.open(item.downloadLink, "_self")
+                                        }
+
                                     }}
                                     style={{ width: "auto", alignItems: "center" }}
                                     key={index} className={`d-flex rounded p-2 align-items-center ${indexx === index && "dropdown-items"} ${index > 0 && "mt-1"}`}
