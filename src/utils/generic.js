@@ -53,3 +53,7 @@ export const getYears = () => {
   return years;
 
 }
+
+export const isEmptyString = (str) => {
+  return str.trim() === '';
+}

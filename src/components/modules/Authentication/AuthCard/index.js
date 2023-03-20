@@ -12,6 +12,8 @@ import OtpInput from "react18-input-otp";
 
 const AuthCard = memo((props) => {
 
+  
+
   const { t } = useTranslation()
 
   const { title, subtitle, linktext, inputFields, button, checkbox, recaptcha, onClickForgetPassword, hasOtp, otp, setOtp } = props;

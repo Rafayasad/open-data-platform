@@ -91,7 +91,7 @@ const Dropdown = (props) => {
                                         }
 
                                         if (item.downloadLink) {
-                                            window.open(item.downloadLink, "_self")
+                                            window.open(item.downloadLink)
                                         }
 
                                     }}
