@@ -89,7 +89,7 @@ const DataHeader = memo((props) => {
                 (
                     <>
                         <Col className="d-none d-lg-flex justify-content-end align-items-center">
-                            <div className="d-flex" onMouseOver={onHover} onMouseLeave={onLeave}>
+                            <div className="d-flex"onClick={() => setCurrentHovered(false)} onMouseOver={onHover} onMouseLeave={onLeave}>
                                 <Dropdown
                                     autoClose={true}
                                     options={shareOption}

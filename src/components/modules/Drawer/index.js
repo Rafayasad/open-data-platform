@@ -14,16 +14,14 @@ import Tag from "../../elements/Tag";
 import Button from "../../elements/Button";
 import './style.css';
 import 'react-modern-drawer/dist/index.css'
+import CheckBox from "../../elements/CheckBox";
 
 const Drawer = memo((props) => {
 
     const { t, i18n } = useTranslation()
 
-    const { open, setOpen, onClickApplyFilter, appliedFilters } = props;
+    const { open, setOpen, onClickApplyFilter, appliedFilters, data, year } = props;
 
-    const topics = useSelector((state) => state.facets.topics);
-    const publishers = useSelector((state) => state.facets.publishers);
-    const tags = useSelector((state) => state.facets.tags);
 
     const [activeIndex, setActiveIndex] = useState();
     const [filters, setFilters] = useState([]);
@@ -35,23 +33,40 @@ const Drawer = memo((props) => {
             setFilters([])
         }
     }, [appliedFilters])
-
-    const data = [
-        {
-            title: t("publisher"),
-            tags: i18n.language === locales.AR ? publishers && publishers.ar : publishers && publishers.en
-        },
-        {
-            title: t("topics"),
-            tags: i18n.language === locales.AR ? topics && topics.ar : topics && topics.en
-        },
-        {
-            title: t("tags"),
-            tags: i18n.language === locales.AR ? tags && tags.ar : tags && tags.en
-        }
-    ]
+    console.log("sssssssss", filters, appliedFilters);
 
     const toggleDrawer = useCallback(() => setOpen(!open), [open]);
+
+    const onClickStoriesItem = useCallback((items) => {
+
+
+        console.log("itemmmms", items);
+
+        const temp = [...filters]
+
+        if ((items.type === t("categories"))) {
+
+            let index = temp.findIndex(el => el.type == t("categories"))
+            if (index > -1) {
+                temp.splice(index, 1)
+            }
+        }
+        else if ((items.type === t("year"))) {
+            let index = temp.findIndex(el => el.type == t("year"))
+            if (index > -1) {
+                temp.splice(index, 1)
+            }
+        }
+        else if ((items.type === t("sortBy"))) {
+            let index = temp.findIndex(el => el.type == t("sortBy"))
+            if (index > -1) {
+                temp.splice(index, 1)
+            }
+        }
+        temp.push(items)
+        setFilters(temp)
+
+    })
 
     const onClickItem = useCallback((item) => {
 
@@ -126,14 +141,44 @@ const Drawer = memo((props) => {
                                                                     // backgroundColor={filtersData?.some(items => items.title === item.title) ? "black" : "white"}
                                                                     // textColor={filtersData?.some(items => items.title === item.title) ? "white" : "black"}
                                                                     borderColor={"1px solid grey"}
-                                                                    title={`${items.title} (${items.value})`}
-                                                                    onClick={() => onClickItem(items)}
+                                                                    title={`${items.title} ${items.value ? `(${items.value})` : ""}`}
+                                                                    onClick={() => item.title === t("categories") ?
+                                                                        onClickStoriesItem({
+                                                                            type: t("categories"),
+                                                                            title: items.title,
+                                                                            id: items.id
+                                                                        })
+                                                                        : onClickItem(items)}
                                                                 />
                                                             </div>
                                                         )
                                                     })
                                                 }
                                             </div>
+                                            {
+                                                item.data &&
+                                                <div className="">
+                                                    {
+                                                        item.data?.map((items, index) => {
+                                                            return (
+                                                                <div className="d-flex justify-content-between align-items-center">
+                                                                    <div className="py-2">
+                                                                        <Heading nomargin heading={items.title} size={"xs"} />
+                                                                    </div>
+                                                                    <div>
+                                                                        <CheckBox
+                                                                            checked={filters?.some(el => items.type === el.type && el.title === items.title)}
+                                                                            callBack={() => {
+                                                                                onClickStoriesItem(items)
+                                                                                items.onclick(items.title)
+                                                                            }} borderColor={colors.black} />
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        })
+                                                    }
+                                                </div>
+                                            }
                                         </Accordion.Body>
                                     </Accordion.Item>
                                 </Accordion>

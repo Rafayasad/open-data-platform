@@ -38,6 +38,8 @@
     "viewAll": "مشاهدة الكل",
     "viewLess": "عرض أقل",
     "recents": "استراحة",
+    "recent":"حديث",
+    "alphabetically":"ألفبائي",
     "recentlyAddedDatasets": "مجموعات البيانات المضافة مؤخرا",
     "mostViewedDatasets": "معظم مجموعات البيانات المعروضة",
     "abuDhabiDataInNumbers": "بيانات أبو ظبي بالأرقام",
@@ -202,6 +204,7 @@
     "monthly": "شهري",
     "quarterly": "ربع سنوي",
     "yearly": "سنويا",
+    "year": "السنة",
     "selectDate": "تحديد التاريخ",
     "selectPublisher": "تحديد الناشر",
     "selectTopics": "تحديد الموضوعات",
@@ -240,5 +243,8 @@
     "physicalResource": "المورد الفعلي",
     "kpi": "KPI",
     "users":"متعاطون",
-    "realTime": "الوقت الحقيقي"
+    "realTime": "الوقت الحقيقي",
+    "results":"النتائج",
+    "clearall":"مسح الكل",
+    "publishedOn":"تم النشر في"
 }

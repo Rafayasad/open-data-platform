@@ -4,10 +4,11 @@ import './style.css';
 
 const CheckBox = memo((props) => {
 
-  const { borderColor, callBack } = props
+  const { checked, borderColor, callBack } = props
 
   return (
     <Form.Check.Input
+      checked={checked}
       onChange={(e) => callBack(e.target.checked)}
       type="checkbox"
       className=""

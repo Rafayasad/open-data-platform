@@ -7,10 +7,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useCallback } from "react";
 import './style.css';
 
-const theme = createTheme({
-  direction: 'rtl', // Both here and <body dir="rtl">
-});
-
 const TextInput = memo((props) => {
 
   const { t } = useTranslation();
@@ -65,35 +61,36 @@ const TextInput = memo((props) => {
     //   }
     // </Form.Group>
 
-    <FormControl sx={{ width: '100%' }} variant="standard" className="my-2">
-
-      <InputLabel htmlFor="standard-adornment-password">{placeholder}</InputLabel>
-
-      <Input
-        id="standard-adornment-password"
-        sx={{
-          ':before': { borderBottomColor: 'black' },
-          ':after': { borderBottomColor: 'black' },
-        }}
-        type={!showPassword && (placeholder === t("password") || placeholder === t("rePwd")) ? "password" : placeholder != t("password") && type}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        endAdornment={
-          <InputAdornment position="end">
-            {
-              (placeholder === t("password") || placeholder === t("rePwd")) &&
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-              >
-                {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-              </IconButton>
-            }
-          </InputAdornment>
-        }
-      />
-    </FormControl>
+    <div dir="rtl">
+      <FormControl sx={{ width: '100%' }} variant="standard" className="my-2">
+        <InputLabel htmlFor="standard-adornment-password">{placeholder}</InputLabel>
+        <Input
+          dir="rtl"
+          id="standard-adornment-password"
+          sx={{
+            ':before': { borderBottomColor: 'black' },
+            ':after': { borderBottomColor: 'black' },
+          }}
+          type={!showPassword && (placeholder === t("password") || placeholder === t("rePwd")) ? "password" : placeholder != t("password") && type}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          endAdornment={
+            <InputAdornment position="end">
+              {
+                (placeholder === t("password") || placeholder === t("rePwd")) &&
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                </IconButton>
+              }
+            </InputAdornment>
+          }
+        />
+      </FormControl>
+    </div>
 
   );
 });

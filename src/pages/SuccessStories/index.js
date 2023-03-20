@@ -1,6 +1,6 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Cards from "../../components/modules/Cards";
 import Header from "../../components/modules/Cards/Header";
 import { colors } from "../../utils/colors";
@@ -9,21 +9,78 @@ import { useTranslation } from "react-i18next";
 import { routes } from "../../router/helper";
 import BreadCrumb from "../../components/elements/BreadCrumb";
 import View from "../../components/modules/View";
+import i18n from "../../i18n/i18n";
+import { locales } from "../../i18n/helper";
+import { getStoriesTags } from "../../axios/api";
+import dayjs from "dayjs";
+import { setStoriesFilters } from "../../redux/reducers/SuccessStories";
+import { getYears } from "../../utils/generic";
 
 const SuccessStories = memo(() => {
 
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const stories = useSelector(state => state.stories.stories);
+    const storiesTags = useSelector((state) => state.facets.storiesTags);
+    const storiesFilters = useSelector((state) => state.stories.filters);
+
+
+    console.log("topics", storiesFilters);
 
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
+    const data = [
+        {
+            title: t("categories"),
+            tags: i18n.language === locales.AR ? storiesTags && storiesTags.tags_ar : storiesTags && storiesTags.tags
+        },
+        {
+            title: t("year"),
+            data: getYears().map(item => ({ type: t("year"), title: item }))
+        },
+        {
+            title: t("sortBy"),
+            data: [
+                {
+                    title: t('recent'),
+                    type: t("sortBy")
+                },
+                {
+                    title: t('alphabetically'),
+                    type: t("sortBy")
+                }
+            ]
+        }
+    ]
+
     const onChangePage = useCallback((page) => setCurrentPage(page), [])
 
     const onClickCard = useCallback((id) => { navigate(`${routes.SUCCESS_STOIRES_DETAIL}?id=${id}`) }, []);
+
+    const onApplyFilter = useCallback((filters) => {
+        setCurrentPage(1)
+        dispatch(setStoriesFilters(filters))
+    })
+
+    const onDeleteFilter = useCallback((filter) => {
+        if (filter) {
+            let arr = [...storiesFilters];
+            let newArr = arr.filter((item) => item.type !== filter.type)
+            dispatch(setStoriesFilters(newArr))
+        }
+
+    })
+
+    const onClickClearAll = () => {
+        dispatch(setStoriesFilters([{
+            type: "Sort By",
+            title: "recent"
+        }]))
+    }
 
     return (
         <View theme="dark" noupperfooter>
@@ -32,7 +89,7 @@ const SuccessStories = memo(() => {
                     <BreadCrumb items={[t("aboutus")]} />
                 </div>
                 <div className="px-2">
-                    <Header title={t("successStories")} nobutton backgroundColor={colors.white} />
+                    <Header count={stories?.length} onClickClearAll={onClickClearAll} filterData={data} title={t("successStories")} nobutton backgroundColor={colors.white} filterbutton filters={storiesFilters} onClickApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} appliedFilters={storiesFilters} />
                 </div>
                 <Cards type="story-cards" data={stories} onClick={onClickCard} />
             </div>

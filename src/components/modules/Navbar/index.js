@@ -88,22 +88,22 @@ const Navbar = memo((props) => {
                         !nocontent &&
                         <Col md={6} className="d-flex justify-content-center align-items-center">
                             <div className="mx-3">
-                                <Link to={routes.DATASET}>
+                                <Link to={routes.DATASET} replace={true}>
                                     <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("datasets")}</p>
                                 </Link>
                             </div>
                             <div className="mx-3">
-                                <Link to={routes.APPLICATIONS}>
+                                <Link to={routes.APPLICATIONS} replace={true}>
                                     <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("application")}</p>
                                 </Link>
                             </div>
                             <div className="mx-3">
-                                <Link to={routes.SUPPORT}>
+                                <Link to={routes.SUPPORT} replace={true}>
                                     <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("supports")}</p>
                                 </Link>
                             </div>
                             <div className="mx-3">
-                                <Link to={routes.ABOUTUS}>
+                                <Link to={routes.ABOUTUS} replace={true}>
                                     <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("aboutus")}</p>
                                 </Link>
                             </div>
@@ -181,7 +181,7 @@ const Navbar = memo((props) => {
                                 return (
                                     <Fragment>
                                         <Col className="d-flex align-items-center py-2" xs={12}>
-                                            <Link style={{ textDecoration: "none" }} to={item.route}>
+                                            <Link style={{ textDecoration: "none" }} to={item.route} replace={true}>
                                                 <Heading size={"xl"} color={colors.black} nomargin heading={item.name} />
                                             </Link>
                                         </Col>

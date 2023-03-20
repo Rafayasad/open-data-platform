@@ -37,6 +37,8 @@ const DatasetDetail = memo(() => {
 
     const id = urlParams.get('id');
 
+    console.log("iiiid",id);
+
     const [dataset, setDataset] = useState();
     const [similarDataset, setSimilarDataset] = useState();
 

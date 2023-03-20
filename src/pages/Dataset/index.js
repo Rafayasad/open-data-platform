@@ -3,7 +3,7 @@ import Cards from "../../components/modules/Cards";
 import Main from "../../components/modules/Dataset/Main";
 import DatasetList from "../../components/modules/Dataset/DatasetList";
 import { colors } from "../../utils/colors";
-import { getAllDatasets, getRecentsDatasets, getSearch } from "../../axios/api";
+import { getAllDatasets, getMostViewedDatasets, getRecentsDatasets, getSearch } from "../../axios/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../router/helper";
 import { useTranslation } from "react-i18next";
@@ -18,10 +18,8 @@ const Dataset = memo(() => {
     const dispatch = useDispatch();
     const storedFilters = useSelector((state) => state.facets.filter);
 
-    console.log("filterssSss", storedFilters);
-
     const navigate = useNavigate();
-    const { state, pathname } = useLocation();
+    const { state, pathname, search } = useLocation();
     const datasetsDiv = document.getElementById("datasetsList");
 
     const [totalCount, setTotalCount] = useState(0);
@@ -30,13 +28,37 @@ const Dataset = memo(() => {
 
     const [recentsDatasets, setRecentsDatasets] = useState();
     const [datasets, setDatasets] = useState();
-    const [search, setSearch] = useState("");
+    const [mostViewdDatasets, setMostViewdDatasets] = useState();
+    const [searchValue, setSearchValue] = useState("");
     const [searchData, setSearchData] = useState([]);
     const [sort, setSort] = useState("Modified");
     const [filters, setFilters] = useState([]);
 
     const [loading, setLoading] = useState(false);
     const [viewAll, setViewAll] = useState(false);
+
+    const topics = useSelector((state) => state.facets.topics);
+    const publishers = useSelector((state) => state.facets.publishers);
+    const tags = useSelector((state) => state.facets.tags);
+
+    const data = [
+        {
+            title: t("publisher"),
+            tags: i18n.language === locales.AR ? publishers && publishers.ar : publishers && publishers.en
+        },
+        {
+            title: t("topics"),
+            tags: i18n.language === locales.AR ? topics && topics.ar : topics && topics.en
+        },
+        {
+            title: t("tags"),
+            tags: i18n.language === locales.AR ? tags && tags.ar : tags && tags.en
+        }
+    ]
+
+    const urlParams = new URLSearchParams(search);
+
+    const most_viewed_datasets = urlParams.get('id');
 
     useEffect(() => {
         setFilters();
@@ -59,32 +81,47 @@ const Dataset = memo(() => {
 
     useEffect(() => {
 
+        if (!most_viewed_datasets) {
+            setDatasets()
+            getRecentsDatasets(setRecentsDatasets);
+        }
+
         getSearch("dataset", setSearchData);
-        getRecentsDatasets(setRecentsDatasets);
 
         if (state && state.search) {
-            setSearch(state.search)
+            setSearchValue(state.search)
         }
 
         if (state && state.listItem && state.listItem.length > 0) {
             setFilters(state.listItem)
         }
 
-        if (state) {
-            navigate(pathname, { replace: true, state: null })
-            getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [])
-        }
-
-    }, []);
-
-    useEffect(() => {
-        if (currentPage || search || sort || filters) {
-            if (!state?.search && !state?.listItem) {
-                getAllDatasets(setDatasets, setTotalCount, setLoading, search, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, storedFilters)
+        if (!most_viewed_datasets) {
+            if (state) {
+                navigate(pathname, { replace: true, state: null })
+                getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [])
             }
         }
 
-    }, [currentPage, search, sort, filters]);
+    }, [!most_viewed_datasets]);
+
+    useEffect(() => {
+        if (most_viewed_datasets) {
+            getMostViewedDatasets(setDatasets, setTotalCount, searchValue, setLoading, rowsPerPage, currentPage)
+        }
+    }, [currentPage])
+
+    useEffect(() => {
+        if (!most_viewed_datasets) {
+            if (currentPage || searchValue || sort || filters) {
+                if (!state?.search && !state?.listItem) {
+                    getAllDatasets(setDatasets, setTotalCount, setLoading, searchValue, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, storedFilters)
+                }
+            }
+        }
+    }, [currentPage, searchValue, sort, filters,!most_viewed_datasets]);
+
+
 
     const toggle = useCallback(() => setViewAll(!viewAll), [viewAll]);
 
@@ -97,11 +134,11 @@ const Dataset = memo(() => {
     }, [currentPage]);
 
     const onChangeSearch = useCallback((e) => {
-        setSearch(e)
+        setSearchValue(e)
         if (e) {
             focustoDatasets()
         }
-    }, [search])
+    }, [searchValue])
 
     const onChangeDropdownValue = useCallback((e) => {
         setSort(e)
@@ -127,18 +164,21 @@ const Dataset = memo(() => {
 
     return (
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
-            <Main searchData={i18n.language === locales.AR ? searchData?.ar : searchData?.en} search={search} onChangeSearchEnter={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
-            <Cards notagsactive buttonText={viewAll && t("viewLess")} onClickViewAll={toggle} title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)} onClick={onClickCard} />
+            <Main filterData={data} searchData={i18n.language === locales.AR ? searchData?.ar : searchData?.en} search={searchValue} onChangeSearchEnter={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
+            {!most_viewed_datasets &&
+                <Cards notagsactive buttonText={viewAll && t("viewLess")} onClickViewAll={toggle} title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)} onClick={onClickCard} />
+            }
             <div id="datasetsList">
                 <DatasetList
+                    title={most_viewed_datasets ? t("mostViewedDatasets") : t("datasets")}
                     notagsactive
                     totalCount={totalCount}
                     rowsPerPage={rowsPerPage}
                     datasets={datasets}
                     currentPage={currentPage}
                     loading={loading}
+                    nodropdown={most_viewed_datasets}
                     onChangePage={(page) => {
-                        setDatasets()
                         datasetsDiv.scrollIntoView(true);
                         onChangePage(page)
 

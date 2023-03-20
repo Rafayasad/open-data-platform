@@ -6,18 +6,20 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Router from './router';
 import { locales } from './i18n/helper';
-import { setPublishers, setTags, setTopics } from './redux/reducers/Facets';
+import { setPublishers, setStoriesTags, setTags, setTopics } from './redux/reducers/Facets';
 import { setAboutus } from './redux/reducers/About';
-import { checkUser, getAboutUs, getAllApplications, getFacets, getFaqsCategory, getPopularQuestions, getSuccessStories } from './axios/api';
+import { checkUser, getAboutUs, getAllApplications, getFacets, getFaqsCategory, getPopularQuestions, getStoriesTags, getSuccessStories } from './axios/api';
 import { setApplications } from './redux/reducers/Applications';
 import { handleLogin, handleLogout } from './redux/reducers/Authentication';
 import { setStories } from './redux/reducers/SuccessStories';
 import { setCategories, setQuestions } from './redux/reducers/Support';
+import { useSelector } from 'react-redux';
 
 function App() {
 
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
+  const storiesFilters = useSelector((state) => state.stories.filters);
 
   useEffect(() => {
     document.getElementsByTagName('html')[0].setAttribute("dir", i18n.language === locales.EN ? "ltr" : "rtl")
@@ -30,14 +32,18 @@ function App() {
     getFacets("keyword", "keywordlear", dispatch, setTags);
     getFacets("publisher__name", "publisherlear__name", dispatch, setPublishers);
     getAllApplications(dispatch, setApplications);
-    getSuccessStories(dispatch, setStories);
     getFaqsCategory(dispatch, setCategories);
     getPopularQuestions(dispatch, setQuestions);
+    getStoriesTags(dispatch, setStoriesTags);
   }, []);
 
-  // if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
-  //   console.log = () => { }
-  // }
+  useEffect(() => {
+    getSuccessStories(dispatch, setStories, storiesFilters);
+  }, [storiesFilters])
+
+  if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
+    console.log = () => { }
+  }
 
   return <div className={`${i18n.language === locales.AR && "ar-font"}`}>
     <Router />
