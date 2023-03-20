@@ -1,5 +1,6 @@
 import React, { useRef, memo, useState, useCallback, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import _ from 'lodash';
 import { IoIosSearch } from 'react-icons/io';
 import { MdOutlineFilterAlt, MdCancel } from 'react-icons/md';
 import { useTranslation } from "react-i18next";
@@ -8,6 +9,7 @@ import Drawer from '../../modules/Drawer';
 import Heading from "../Heading";
 import './style.css'
 import ExpandSearchBarModal from "./ExpandSearchBarModal";
+import { isEmptyString } from "../../../utils/generic";
 
 const Search = memo((props) => {
 
@@ -39,10 +41,14 @@ const Search = memo((props) => {
     });
 
     const onKeyDown = useCallback((e) => {
-        if (e.key === "Enter") {
-            e.key === "Enter" && setToggler(false)
-            e.key === "Enter" && onPressEnter && onPressEnter(e.target.value)
+
+        let value = e.target.value;
+
+        if (e.key === "Enter" && !isEmptyString(value)) {
+            onPressEnter && onPressEnter((value).trim())
+            setInputText(value.trim())
             setOpenModal(false)
+            setToggler(false)
         }
     }, [toggler, openModal])
 
@@ -93,7 +99,9 @@ const Search = memo((props) => {
                                     :
                                     setToggler(true)
                             }}
-                            type="text" className='border-0 bg-transparent w-100 placeholder-color' value={inputText} placeholder={placeholder} onChange={onChangeSearch} onKeyDown={onKeyDown} />
+                            type="text"
+                            className='border-0 bg-transparent w-100 placeholder-color'
+                            value={inputText} placeholder={placeholder} onChange={onChangeSearch} onKeyDown={onKeyDown} />
                     </Col>
                     {
                         inputText?.length > 0 ?
