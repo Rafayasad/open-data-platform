@@ -6,9 +6,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Router from './router';
 import { locales } from './i18n/helper';
-import { setPublishers, setStoriesTags, setTags, setTopics } from './redux/reducers/Facets';
+import { setDatasetsSuggestion, setPublishers, setStoriesTags, setSupportSuggestion, setTags, setTopics } from './redux/reducers/Facets';
 import { setAboutus } from './redux/reducers/About';
-import { checkUser, getAboutUs, getAllApplications, getFacets, getFaqsCategory, getPopularQuestions, getStoriesTags, getSuccessStories } from './axios/api';
+import { checkUser, getAboutUs, getAllApplications, getFacets, getFaqsCategory, getPopularQuestions, getSearch, getStoriesTags, getSuccessStories } from './axios/api';
 import { setApplications } from './redux/reducers/Applications';
 import { handleLogin, handleLogout } from './redux/reducers/Authentication';
 import { setStories } from './redux/reducers/SuccessStories';
@@ -35,6 +35,8 @@ function App() {
     getFaqsCategory(dispatch, setCategories);
     getPopularQuestions(dispatch, setQuestions);
     getStoriesTags(dispatch, setStoriesTags);
+    getSearch("datasets", dispatch, setDatasetsSuggestion)
+    getSearch("support", dispatch, setSupportSuggestion)
   }, []);
 
   useEffect(() => {

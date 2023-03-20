@@ -37,6 +37,23 @@ const Home = memo(() => {
     const [search, setSearch] = useState();
 
     const topics = useSelector((state) => state.facets.topics);
+    const publishers = useSelector((state) => state.facets.publishers);
+    const tags = useSelector((state) => state.facets.tags);
+
+    const data = [
+        {
+            title: t("publisher"),
+            tags: i18n.language === locales.AR ? publishers && publishers.ar : publishers && publishers.en
+        },
+        {
+            title: t("topics"),
+            tags: i18n.language === locales.AR ? topics && topics.ar : topics && topics.en
+        },
+        {
+            title: t("tags"),
+            tags: i18n.language === locales.AR ? tags && tags.ar : tags && tags.en
+        }
+    ]
 
     useEffect(() => {
         getPlatformInsights(setPlatformInsights, setLoading)
@@ -55,7 +72,7 @@ const Home = memo(() => {
 
     return (
         <View sticky footerTitle={t("GetMore")} footerButton={t("registerNow")} >
-            <Main onSearch={onSearch} onClickExplore={() => topicsDiv.scrollIntoView()} onApplyFilter={onApplyFilter} />
+            <Main filterData={data} onSearch={onSearch} onClickExplore={() => topicsDiv.scrollIntoView()} onApplyFilter={onApplyFilter} />
             <div id='topics'>
                 <Topics onClickViewless={() => topicsDiv.scrollIntoView()} onClickList={onClickList} data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en} />
             </div>

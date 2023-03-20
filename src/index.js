@@ -5,12 +5,9 @@ import React, { Suspense, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { persistor, store } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
-import './i18n/i18n.js';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import i18n from './i18n/i18n.js';
 import { locales } from './i18n/helper';
@@ -19,6 +16,9 @@ import rtlPlugin from 'stylis-plugin-rtl';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import { prefixer } from 'stylis';
+import App from './App';
+import './index.css';
+import './i18n/i18n.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -32,9 +32,10 @@ const emptyCache = createCache({
   key: "muiltr",
 });
 
-console.log("i81n", i18n.language);
+
 
 const THEME = createTheme({
+  direction: "rtl",
   typography: {
     "fontFamily": `${i18n.language === locales.EN ? 'CircularAr-Regular' : 'CircularStd-Regular'}`
   }
@@ -43,21 +44,20 @@ const THEME = createTheme({
 root.render(
   <Router>
     <ScrollToTop />
-    <Suspense>
-      {/* <CacheProvider value={cacheRtl}> */}
-      <ThemeProvider theme={THEME}>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <App />
-          </PersistGate>
-        </Provider>
-      </ThemeProvider>
-      {/* </CacheProvider> */}
-    </Suspense>
+    <CacheProvider>
+      <Suspense>
+        <ThemeProvider theme={THEME}>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <App />
+            </PersistGate>
+          </Provider>
+        </ThemeProvider>
+      </Suspense>
+    </CacheProvider>
   </Router>
 );
 
-// document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

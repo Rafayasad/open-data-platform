@@ -17,6 +17,7 @@ const Dataset = memo(() => {
     const { t, i18n } = useTranslation();
     const dispatch = useDispatch();
     const storedFilters = useSelector((state) => state.facets.filter);
+    const { datasetsSuggestion } = useSelector((state) => state.facets);
 
     const navigate = useNavigate();
     const { state, pathname, search } = useLocation();
@@ -30,7 +31,6 @@ const Dataset = memo(() => {
     const [datasets, setDatasets] = useState();
     const [mostViewdDatasets, setMostViewdDatasets] = useState();
     const [searchValue, setSearchValue] = useState("");
-    const [searchData, setSearchData] = useState([]);
     const [sort, setSort] = useState("Modified");
     const [filters, setFilters] = useState([]);
 
@@ -86,8 +86,6 @@ const Dataset = memo(() => {
             getRecentsDatasets(setRecentsDatasets);
         }
 
-        getSearch("dataset", setSearchData);
-
         if (state && state.search) {
             setSearchValue(state.search)
         }
@@ -113,13 +111,13 @@ const Dataset = memo(() => {
 
     useEffect(() => {
         if (!most_viewed_datasets) {
-            if (currentPage || searchValue || sort || filters) {
+            if (currentPage || searchValue || sort || storedFilters) {
                 if (!state?.search && !state?.listItem) {
                     getAllDatasets(setDatasets, setTotalCount, setLoading, searchValue, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, storedFilters)
                 }
             }
         }
-    }, [currentPage, searchValue, sort, filters,!most_viewed_datasets]);
+    }, [currentPage, searchValue, sort, storedFilters, !most_viewed_datasets]);
 
 
 
@@ -164,7 +162,7 @@ const Dataset = memo(() => {
 
     return (
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
-            <Main filterData={data} searchData={i18n.language === locales.AR ? searchData?.ar : searchData?.en} search={searchValue} onChangeSearchEnter={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
+            <Main filterData={data} searchData={i18n.language === locales.AR ? datasetsSuggestion?.ar : datasetsSuggestion?.en} search={searchValue} onChangeSearchEnter={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
             {!most_viewed_datasets &&
                 <Cards notagsactive buttonText={viewAll && t("viewLess")} onClickViewAll={toggle} title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)} onClick={onClickCard} />
             }

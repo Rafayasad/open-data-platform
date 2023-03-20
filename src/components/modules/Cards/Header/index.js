@@ -7,9 +7,9 @@ import Heading from "../../../elements/Heading";
 import { useTranslation } from "react-i18next";
 import { MdOutlineFilterAlt, MdCancel } from 'react-icons/md';
 import Drawer from "../../Drawer";
-import './style.css';
 import { RxCross2 } from "react-icons/rx";
 import Tag from "../../../elements/Tag";
+import './style.css';
 
 const Header = memo((props) => {
 
