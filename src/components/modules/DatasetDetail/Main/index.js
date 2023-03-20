@@ -53,8 +53,12 @@ const Main = memo((props) => {
         {
             title: t("source"),
             detail: data ? (
-                i18n.language === locales.EN ? data.resources.map(item => item.title) :
-                    data.resources.map(item => item.title_ar)
+                i18n.language === locales.EN ? data.resources.map(item => (
+                    <Heading size="xxs" heading={item.title} />
+                )) :
+                    data.resources.map(item => (
+                        <Heading size="xxs" heading={item.title_ar} />
+                    ))
             ) : <Shimmer rounded='xs' width="70%" className={"my-1"} />
         },
     ]
@@ -85,7 +89,7 @@ const Main = memo((props) => {
         },
         {
             title: t("sourceURL"),
-            detail: url,
+            detail: data ? url : <Shimmer rounded='xs' width="100%" className={"my-1"} />,
             color: colors.purple,
             underline: true
         },

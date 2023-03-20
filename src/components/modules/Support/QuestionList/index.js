@@ -5,8 +5,6 @@ import i18n from "../../../../i18n/i18n";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import QuestionListItem from "../../../elements/QuestionListItem";
-import Shimmer from "../../../elements/Shimmer";
-import Header from '../../Cards/Header';
 import Loader from "../../Loader";
 
 const QuestionList = memo((props) => {
@@ -25,7 +23,7 @@ const QuestionList = memo((props) => {
             </div>
             <Row>
                 {
-                    data && data.length > 0 ? data.map((item, index) => (
+                    data ? data.length > 0 ? data.map((item, index) => (
                         <div className="p-0" onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
                             {
                                 index > 0 &&
@@ -37,7 +35,8 @@ const QuestionList = memo((props) => {
                                 icon={currentHovered === index}
                             />
                         </div>
-                    )) : <Loader type='full-width-min' />
+                    )) : <Heading size="md" bold nomargin heading="No Result Found!" />
+                        : <Loader type='full-width-min' />
                 }
             </Row>
         </Container>

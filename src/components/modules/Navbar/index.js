@@ -33,6 +33,7 @@ const Navbar = memo((props) => {
     const [isOpen, setIsOpen] = useState(false);
     const [scroll, setScrolling] = useState();
 
+    const [loading, setLoading] = useState(false);
 
     let color = colors.white;
 
@@ -42,7 +43,7 @@ const Navbar = memo((props) => {
 
     const onClickDrawer = useCallback(() => setIsOpen(!isOpen), [isOpen]);
 
-    const onClickLogout = useCallback(() => logout(dispatch, handleLogout))
+    const onClickLogout = useCallback(() => logout(dispatch, setLoading, handleLogout))
 
     const MobileRoutes = [
         {
@@ -123,7 +124,7 @@ const Navbar = memo((props) => {
                                 <div className="d-flex justify-content-center mx-1">
                                     {
                                         isLoggedIn ? (
-                                            <Button backgroundColor={color} textColor={color === colors.black && colors.white} title={t("logout")} onClick={onClickLogout} />
+                                            <Button backgroundColor={color} textColor={color === colors.black && colors.white} title={t("logout")} loading={loading} onClick={onClickLogout} />
                                         ) : (
                                             <Link style={{ textDecoration: 'none' }} to={routes.LOGIN}>
                                                 <Button backgroundColor={color} textColor={color === colors.black && colors.white} title={t("LogIn")} />
@@ -199,7 +200,7 @@ const Navbar = memo((props) => {
                         <Col>
                             {
                                 isLoggedIn ? (
-                                    <Button width={"100%"} borderColor={""} backgroundColor='black' textColor={"white"} title={t("logout")} onClick={onClickLogout} />
+                                    <Button width={"100%"} borderColor={""} backgroundColor='black' textColor={"white"} title={t("logout")} loading={loading} onClick={onClickLogout} />
                                 ) : (
                                     <Link style={{ textDecoration: 'none' }} to={routes.LOGIN}>
                                         <Button width={"100%"} borderColor={""} backgroundColor='black' textColor={"white"} title={t("LogIn")} />
