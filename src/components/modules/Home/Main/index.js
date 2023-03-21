@@ -52,9 +52,9 @@ const Main = memo((props) => {
                         </Row>
                     </Col>
                 </Row>
-                <Row className="h-25 align-items-center">
+                <Row className="h-25 align-items-end py-3">
                     <Col />
-                    <Col xs={8} md={4} className='d-none d-lg-flex justify-content-center '>
+                    <Col xs={8} md={4} className='d-none d-lg-flex justify-content-center'>
                         <Button onClick={onClickExplore} title={t("explore")} backgroundColor="#9159FF" textColor="white" />
                     </Col>
                     <Col />

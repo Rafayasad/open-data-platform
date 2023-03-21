@@ -42,7 +42,7 @@ const Images = memo(() => {
                                 </Col>
                                 <Col />
                             </div>
-                            <Col className='d-flex justify-content-center'>
+                            <Col className='d-flex justify-content-center py-2'>
                                 <Button bold textColor={"#101010"} title={t("find")} onClick={onClickFindOutMore} />
                             </Col>
                         </Row>
@@ -61,14 +61,14 @@ const Images = memo(() => {
                                 borderRadius: '30px',
                                 backgroundPosition: 'center'
                             }}>
-                                <Row>
+                                <Row className="py-1">
                                     <Col />
                                     <Col sm={12} md={6} className='text-center'>
                                         <Heading size="xl" color='white' heading={t("areYouNewToOpenData")} />
                                     </Col>
                                     <Col />
                                 </Row>
-                                <Row>
+                                <Row className="py-1">
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
                                         <Button bold title={t("discover")} onClick={onClickDiscover} />
@@ -86,14 +86,14 @@ const Images = memo(() => {
                                 borderRadius: '30px',
                                 backgroundPosition: 'center'
                             }}>
-                                <Row>
+                                <Row className="py-1">
                                     <Col />
                                     <Col sm={10} md={6} className='d-flex justify-content-center align-items-center text-center'>
                                         <Heading size='xl' color='white' heading={t("joinUsRegisterWithUs")} />
                                     </Col>
                                     <Col />
                                 </Row>
-                                <Row>
+                                <Row className="py-1">
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
                                         <Button bold title={t("getStarted")} onClick={onClickRegister} />

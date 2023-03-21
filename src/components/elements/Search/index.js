@@ -88,10 +88,12 @@ const Search = memo((props) => {
             }
             <Container id="cont" fluid ref={wrapperRef}>
                 <Row id="main" className={`${toggler && !nofocuseffect ? "search-box-active input-focused" : "search-box"}`}>
-                    <Col xs={2} md={1} className='d-flex justify-content-center align-items-center'>
-                        <IoIosSearch color="gray" size={24} />
-                    </Col>
+                    {/* <Col xs={2} md={1} className='d-flex justify-content-center align-items-center'>
+                    </Col> */}
                     <Col className='p-0 d-flex align-items-center'>
+                        <div className="ms-3 me-1"> 
+                            <IoIosSearch color="gray" size={24} />
+                        </div>
                         <input
                             onClick={() => {
                                 document?.getElementById("cont")?.offsetWidth <= 540 ?
