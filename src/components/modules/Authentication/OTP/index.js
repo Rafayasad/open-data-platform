@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -16,13 +16,22 @@ const OTP = memo(() => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { state } = useLocation();
+    const location = useLocation();
 
-    const { email, password } = state;
+    if (location && location.state) {
+        var { email, password } = location.state;
+    }
+
 
     const [otp, setOtp] = useState('');
 
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if (!email || !password) {
+            navigate(routes.LOGIN, { replace: true })
+        }
+    }, [])
 
     const onClickLogin = useCallback(() => login(dispatch, handleLogin, setLoading, { email, password, otp }, routes.HOME));
     const onClickForgetPassword = useCallback(() => navigate(routes.RECOVER));
@@ -64,14 +73,14 @@ const OTP = memo(() => {
                             >
                                 <AuthCard
                                     view="dekstop"
-                                    title={"OTP Verification"}
-                                    subtitle={"An OTP has been sent to associated email."}
+                                    title={t("otpTitle")}
+                                    subtitle={t("otpMessage")}
                                     hasOtp
                                     otp={otp}
                                     setOtp={setOtp}
                                     button={[
                                         {
-                                            title: "Done",
+                                            title: t("done"),
                                             onClick: onClickLogin,
                                             backgroundColor: colors.black,
                                             textColor: colors.white,
@@ -101,31 +110,21 @@ const OTP = memo(() => {
                             >
                                 <AuthCard
                                     view="mobile"
-                                    title={t("logIn")}
-                                    subtitle={t("accDontExist")}
-                                    linktext={{ display_text: t("requestAccess"), onClick: onClickRegister }}
-                                    inputFields={[
-                                        { placeholder: t("governmentEmail"), type: "email" },
-                                        { placeholder: t("password"), type: "password" },
-                                    ]}
+                                    title={t("otpTitle")}
+                                    subtitle={t("otpMessage")}
+                                    hasOtp
+                                    otp={otp}
+                                    setOtp={setOtp}
                                     button={[
                                         {
-                                            title: t("logIn"),
-                                            onClick: "",
+                                            title: t("done"),
+                                            onClick: onClickLogin,
                                             backgroundColor: colors.black,
                                             textColor: colors.white,
                                             textSize: "",
-                                        },
-                                        {
-                                            title: t("LoginWithUAE"),
-                                            onClick: "",
-                                            backgroundColor: colors.white,
-                                            textColor: colors.black,
-                                            borderColor: colors.black,
-                                            textSize: "",
-                                        },
+                                            loading
+                                        }
                                     ]}
-                                    onClickForgetPassword={onClickForgetPassword}
                                 />
                             </Card>
                         </Col>

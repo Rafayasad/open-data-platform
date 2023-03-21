@@ -12,7 +12,7 @@ import OtpInput from "react18-input-otp";
 
 const AuthCard = memo((props) => {
 
-  
+
 
   const { t } = useTranslation()
 
@@ -57,7 +57,7 @@ const AuthCard = memo((props) => {
           {
             inputFields.length > 0 && inputFields.map((items, index) => (
               <Col key={index} md={12}>
-                <TextInput value={items.value} placeholder={items.placeholder} type={items.type} onChange={items.onChange} />
+                <TextInput title={title} value={items.value} placeholder={items.placeholder} type={items.type} onChange={items.onChange} />
               </Col>
             ))
           }
@@ -112,8 +112,8 @@ const AuthCard = memo((props) => {
           {
             button.map((items, index) => (
               <div key={index} className="d-flex flex-column align-items-center" >
-                {console.log("check", items.onClick)}
                 <Button
+                  width={title === t("register") ? "auto" : "70%"}
                   disable={items.disable}
                   title={items.title}
                   backgroundColor={items.backgroundColor}

@@ -41,6 +41,8 @@ const Dataset = memo(() => {
     const publishers = useSelector((state) => state.facets.publishers);
     const tags = useSelector((state) => state.facets.tags);
 
+    console.log("momo",datasets);
+
     const data = [
         {
             title: t("publisher"),

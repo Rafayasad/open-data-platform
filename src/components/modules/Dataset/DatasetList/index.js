@@ -107,7 +107,7 @@ const DatasetList = memo((props) => {
                                 url={item.url}
                                 title={i18n.language === locales.AR ? item.title_ar : item.title}
                                 publisher={i18n.language === locales.AR ? item.publisher_ar : item.publisher}
-                                description={i18n.language === locales.AR ? item.description_ar : item.description}
+                                description={item.Views ? `${item.Views + ` ${t("viewCount")}`}` : i18n.language === locales.AR ? item.description_ar : item.description}
                                 tags={i18n.language === locales.AR ? item.tags_ar : item.tags}
                                 resources={i18n.language === locales.AR ? item.resources_ar : item.resources}
                                 onClick={() => onClick(item.id)}

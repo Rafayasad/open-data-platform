@@ -68,6 +68,7 @@
     "pwd": "Password recovery",
     "sendCode": "Send code",
     "registeredEmail": "Registered email",
+    "viewCount":"View Count",
     "pwdrecovery": "Enter the email you use for Abu Dhabi Data. We’ll send you instructions there.",
     "pwdBack": "Back to Login",
     "pwdEmail": "Email",
@@ -245,5 +246,8 @@
     "users": "Users",
     "results": "Results",
     "clearall": "Clear All",
-    "publishedOn": "Published on"
+    "publishedOn": "Published on",
+    "otpTitle":"OTP Verification",
+    "otpMessage":"An OTP has been sent to associated email.",
+    "done":"Done"
 }

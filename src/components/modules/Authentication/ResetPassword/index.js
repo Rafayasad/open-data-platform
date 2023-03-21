@@ -5,13 +5,14 @@ import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import AuthCard from "../AuthCard";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { routes } from "../../../../router/helper";
 
 const ResetPassword = memo((props) => {
 
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const { setEmail, setPassword, setRePassword, setPolicyCheck, onClickButton, loading } = props;
 
