@@ -12,30 +12,30 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import i18n from './i18n/i18n.js';
 import { locales } from './i18n/helper';
 import ScrollToTop from './router/ScrollToTop';
-import rtlPlugin from 'stylis-plugin-rtl';
+// import rtlPlugin from 'stylis-plugin-rtl';
+// import createCache from '@emotion/cache';
+// import { prefixer } from 'stylis';
 import { CacheProvider } from '@emotion/react';
-import createCache from '@emotion/cache';
-import { prefixer } from 'stylis';
 import App from './App';
 import './index.css';
 import './i18n/i18n.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-// Create rtl cache
-const cacheRtl = createCache({
-  key: 'muirtl',
-  stylisPlugins: [prefixer, rtlPlugin],
-});
+// // Create rtl cache
+// const cacheRtl = createCache({
+//   key: 'muirtl',
+//   stylisPlugins: [prefixer, rtlPlugin],
+// });
 
-const emptyCache = createCache({
-  key: "muiltr",
-});
+// const emptyCache = createCache({
+//   key: "muiltr",
+// });
 
 
 
 const THEME = createTheme({
-  direction: "rtl",
+  // direction: "rtl",
   typography: {
     "fontFamily": `${i18n.language === locales.EN ? 'CircularAr-Regular' : 'CircularStd-Regular'}`
   }
@@ -44,17 +44,17 @@ const THEME = createTheme({
 root.render(
   <Router>
     <ScrollToTop />
-    <CacheProvider>
-      <Suspense>
-        <ThemeProvider theme={THEME}>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <App />
-            </PersistGate>
-          </Provider>
-        </ThemeProvider>
-      </Suspense>
-    </CacheProvider>
+    {/* <CacheProvider> */}
+    <Suspense>
+      <ThemeProvider theme={THEME}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <App />
+          </PersistGate>
+        </Provider>
+      </ThemeProvider>
+    </Suspense>
+    {/* </CacheProvider> */}
   </Router>
 );
 

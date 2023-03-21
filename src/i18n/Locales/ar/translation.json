@@ -121,6 +121,7 @@
     "resetPassword": "إعادة تعيين كلمة المرور",
     "strongPassword": "أنشئ كلمة مرور قوية لضمان أمان الحساب",
     "registeredEmail": "بريد الكتروني مسجل",
+    "viewCount": "عرض العدد",
     "sendCode": "أرسل الرمز",
     "fullName": "الاسم الكامل",
     "LoginWithUAE": "تسجيل الدخول عبر بطاقة المرور الإماراتية",
@@ -246,5 +247,8 @@
     "realTime": "الوقت الحقيقي",
     "results": "النتائج",
     "clearall": "مسح الكل",
-    "publishedOn": "تم النشر في"
+    "publishedOn": "تم النشر في",
+    "otpTitle": "التحقق من OTP",
+    "otpMessage": "تم إرسال OTP إلى البريد الإلكتروني المقترن.",
+    "done":"تم"
 }

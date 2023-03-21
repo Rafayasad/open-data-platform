@@ -24,7 +24,8 @@ const Card = memo((props) => {
     const navigate = useNavigate();
 
     const { resources, title, publisher, description, tags, size, noborder,
-        hoverable, nopadding, shortTitle, headingSize, onClick, nodropdown, noheadercomponent, notags, notagsactive, url } = props;
+        hoverable, nopadding, shortTitle, headingSize, onClick, nodropdown,
+        noheadercomponent, notags, notagsactive, url, views } = props;
 
     var height = "332px", border, ClassName;
 

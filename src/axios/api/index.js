@@ -28,7 +28,6 @@ export const getMostViewedDatasets = (setData, setTotalCount, searchValue, setLo
             if (res.status === 200) {
                 setLoading(false);
                 setTotalCount(res.data.total_count);
-                console.log("hello", res.data.data);
                 let data = res.data.data;
                 let transform = data.en.map(item => {
 
@@ -36,6 +35,7 @@ export const getMostViewedDatasets = (setData, setTotalCount, searchValue, setLo
                     let ar_obj = {
                         ...data.ar[index]
                     }
+
 
                     ar_obj.publisher_ar = ar_obj.publisherlear
                     ar_obj.title_ar = ar_obj.titlear
@@ -87,7 +87,6 @@ export const getMostViewedDatasets = (setData, setTotalCount, searchValue, setLo
                         ...ar_obj
                     }
                 })
-
                 setData(transform)
                 setLoading(false)
             }
@@ -787,7 +786,7 @@ export const getSuccessStories = (dispatch, setData, filters) => {
 
                 let data = res.data.data;
 
-                console.log("ss",data);
+                console.log("ss", data);
 
                 let stories = await Promise.all(data.map(async item => {
 

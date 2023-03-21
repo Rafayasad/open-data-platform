@@ -9,12 +9,13 @@ import './style.css';
 import Heading from "../Heading";
 import i18n from "../../../i18n/i18n";
 import { locales } from "../../../i18n/helper";
+import { isStrongPassword } from "../../../utils/generic";
 
 const TextInput = memo((props) => {
 
   const { t } = useTranslation();
 
-  const { placeholder, type, onChange, value } = props;
+  const { placeholder, type, onChange, value, title } = props;
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -27,9 +28,9 @@ const TextInput = memo((props) => {
   const passwordValidationText = [
     i18n.language === locales.AR ? 'تضمين حرف كبير واحد على الأقل' : 'Include at least 1 uppercase letter',
     i18n.language === locales.AR ? "تضمين حرف صغير واحد على الأقل " : 'Include at least 1 lowercase letter',
-    i18n.language === locales.AR ? "يجب أن يكون طوله 8 أرقام على الأقل" : 'Must be at least 8 digits long',
+    i18n.language === locales.AR ? "يجب أن يكون طوله 8 أرقام على الأقل" : 'Must be at least 15 digits long',
     i18n.language === locales.AR ? "تضمين حرف خاص واحد على الأقل (!@#$٪^&*)" : 'Include at least 1 special character (!@#$%^&*)',
-    i18n.language === locales.AR ? "يجب أن يكون الحد الأقصى للطول 20 رقما" : 'Maximum length must be 20 digits',
+    i18n.language === locales.AR ? "يجب أن يكون الحد الأقصى للطول 20 رقما" : 'Maximum length must be 30 digits',
     i18n.language === locales.AR ? "يجب ألا يحتوي على اسم المستخدم أو كلمات القاموس" : 'Must not contain your username or dictionary words'
   ]
   const [onFocusPassword, setOnFocusPassword] = useState(false);
@@ -84,7 +85,11 @@ const TextInput = memo((props) => {
         id="standard-adornment-password"
         sx={{
           ':before': { borderBottomColor: 'black' },
-          ':after': { borderBottomColor: 'black' },
+          ':after': {
+            borderBottomColor:
+              placeholder === t("password") && type === t("password") && isStrongPassword(value) === true ? '#2C9C2E'
+                : 'black'
+          },
         }}
         type={!showPassword && (placeholder === t("password") || placeholder === t("rePwd")) ? "password" : placeholder != t("password") && type}
         value={value}
@@ -105,11 +110,12 @@ const TextInput = memo((props) => {
         }
       />
       {onFocusPassword && placeholder === t("password") &&
-        <div className="mt-3">
+        title !== t("logIn") &&
+        < div className="mt-3">
           {passwordValidationText?.map(item => <p className="m-0" style={{ color: colors.green }}><small>{item}</small></p>)}
         </div>
       }
-    </FormControl>
+    </FormControl >
 
 
 

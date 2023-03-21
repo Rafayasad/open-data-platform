@@ -9,6 +9,7 @@ import { useNavigate } from "react-router";
 import { register } from "../../../../axios/api";
 import { routes } from "../../../../router/helper";
 import { toast } from "react-toastify";
+import { isStrongPassword, validateEmail } from "../../../../utils/generic";
 
 const Register = memo(() => {
 
@@ -27,10 +28,18 @@ const Register = memo(() => {
   const [isRecaptcha, setIsRecaptcha] = useState();
 
   const onClickRegister = useCallback(() => {
-    if (isChecked && isRecaptcha != null && name && email && reEmail && password) {
+    if (email === '' || reEmail === '' || password === '' || name === '' || isRecaptcha == null || !isChecked) {
+      toast("Please fill all the fields.", { type: "error" })
+    } else if (validateEmail(email) === false) {
+      toast("Please provide a valid email address.", { type: "error" })
+    } else if (isStrongPassword(password) === false) {
+      toast("Password isn't matching validation requiremnts.", { type: "error" })
+    } else if (email !== reEmail) {
+      toast("Both email doesn't match.", { type: "error" })
+    } else if (!isChecked) {
+      toast("Please check the Abu Dhabi Open Data terms and policy.", { type: "error" })
+    } else if (isChecked && isRecaptcha != null && name && email && reEmail && password) {
       register(navigate, routes.HOME, setLoading, { email, password, reEmail, name })
-    } else {
-      toast("All fields are required.", { type: "error" })
     }
   });
 
