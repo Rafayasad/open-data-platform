@@ -7,6 +7,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useCallback } from "react";
 import './style.css';
 import Heading from "../Heading";
+import i18n from "../../../i18n/i18n";
+import { locales } from "../../../i18n/helper";
 
 const TextInput = memo((props) => {
 
@@ -23,12 +25,12 @@ const TextInput = memo((props) => {
   };
 
   const passwordValidationText = [
-    'Include at least 1 uppercase letter',
-    'Include at least 1 lowercase letter',
-    'Must be at least 8 digits long',
-    'Include at least 1 special character (!@#$%^&*)',
-    'Maximum length must be 20 digits',
-    'Must not contain your username or dictionary words'
+    i18n.language === locales.AR ? 'تضمين حرف كبير واحد على الأقل' : 'Include at least 1 uppercase letter',
+    i18n.language === locales.AR ? "تضمين حرف صغير واحد على الأقل " : 'Include at least 1 lowercase letter',
+    i18n.language === locales.AR ? "يجب أن يكون طوله 8 أرقام على الأقل" : 'Must be at least 8 digits long',
+    i18n.language === locales.AR ? "تضمين حرف خاص واحد على الأقل (!@#$٪^&*)" : 'Include at least 1 special character (!@#$%^&*)',
+    i18n.language === locales.AR ? "يجب أن يكون الحد الأقصى للطول 20 رقما" : 'Maximum length must be 20 digits',
+    i18n.language === locales.AR ? "يجب ألا يحتوي على اسم المستخدم أو كلمات القاموس" : 'Must not contain your username or dictionary words'
   ]
   const [onFocusPassword, setOnFocusPassword] = useState(false);
   const toggle = useCallback(() => setOnFocusPassword(!onFocusPassword));
@@ -75,7 +77,7 @@ const TextInput = memo((props) => {
 
 
     <FormControl sx={{ width: '100%' }} variant="standard" className="my-2">
-      <InputLabel htmlFor="standard-adornment-password">{placeholder}</InputLabel>
+      <InputLabel position="right" htmlFor="standard-adornment-password">{placeholder}</InputLabel>
       <Input
         onFocus={toggle}
         onBlur={toggle}

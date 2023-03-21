@@ -10,7 +10,7 @@ import { locales } from "../../../../i18n/helper";
 
 const Main = memo((props) => {
 
-    const { onSearch, onClickExplore, onApplyFilter } = props
+    const { onSearch, onClickExplore, onApplyFilter, filterData } = props
 
     const { t } = useTranslation()
 
@@ -37,7 +37,7 @@ const Main = memo((props) => {
                         <Row>
                             <Col />
                             <Col xs={12} md={10} lg={8} className="py-3">
-                                <Search nofocuseffect onClickApplyFilter={onApplyFilter} placeholder={t("searchPlaceholder")} filter onPressEnter={onSearch} />
+                                <Search filterData={filterData} nofocuseffect onClickApplyFilter={onApplyFilter} placeholder={t("searchPlaceholder")} filter onPressEnter={onSearch} />
                             </Col>
                             <Col />
                         </Row>

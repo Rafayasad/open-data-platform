@@ -763,7 +763,7 @@ export const getSuccessStories = (dispatch, setData, filters) => {
     if (sort) {
         if (sort.title === "recent") {
             data.sort = "-created"
-        }else if (sort.title === "alphabetically"){
+        } else if (sort.title === "alphabetically") {
             data.sort = "title"
         }
     }
@@ -786,6 +786,8 @@ export const getSuccessStories = (dispatch, setData, filters) => {
             if (res.status === 200) {
 
                 let data = res.data.data;
+
+                console.log("ss",data);
 
                 let stories = await Promise.all(data.map(async item => {
 
@@ -1233,11 +1235,11 @@ export const register = async (navigate, route, setLoading, payload) => {
 
 }
 
-export const getSearch = (type, setData) => {
+export const getSearch = (type, dispatch, setData) => {
     return endpoints.
         getSearch(type).then((res) => {
             if (res.status === 200) {
-                setData(res.data.data);
+                dispatch && dispatch(setData(res.data.data));
             }
 
         }).catch((err) => {
