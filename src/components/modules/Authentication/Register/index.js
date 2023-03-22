@@ -118,17 +118,17 @@ const Register = memo(() => {
           </Row>
         </Container>
       </div>
-      <div style={{ width: '100vw', height: '100vh' }} className="d-flex justify-content-center align-items-end d-lg-none">
+      <div style={{ width: '100vw', height: '' }} className="mt-5 pt-5 d-flex justify-content-center align-items-end d-lg-none">
         <Container fluid>
           <Row>
-            <Col className="d-flex justify-content-center align-items-center">
+            <Col className="d-flex my-3 justify-content-center align-items-center">
               <Card
-                className="p-0 mt-5"
+                className="p-0"
                 style={{
                   width: "100vw",
                   backgroundColor: colors.white,
-                  borderRadius: "30px",
-                  height: "100%",
+                  // borderRadius: "30px",
+                  // height: "80%",
                   borderColor: 'transparent'
                 }}
               >

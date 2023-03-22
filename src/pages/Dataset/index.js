@@ -41,7 +41,7 @@ const Dataset = memo(() => {
     const publishers = useSelector((state) => state.facets.publishers);
     const tags = useSelector((state) => state.facets.tags);
 
-    console.log("momo",datasets);
+    console.log("momo", datasets);
 
     const data = [
         {
@@ -84,6 +84,13 @@ const Dataset = memo(() => {
     useEffect(() => {
 
         if (!most_viewed_datasets) {
+            if (state) {
+                navigate(pathname, { replace: true, state: null })
+                getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [])
+            }
+        }
+
+        if (!most_viewed_datasets) {
             setDatasets()
             getRecentsDatasets(setRecentsDatasets);
         }
@@ -93,17 +100,11 @@ const Dataset = memo(() => {
         }
 
         if (state && state.listItem && state.listItem.length > 0) {
+            dispatch(setFilter(state.listItem))
             setFilters(state.listItem)
         }
 
-        if (!most_viewed_datasets) {
-            if (state) {
-                navigate(pathname, { replace: true, state: null })
-                getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [])
-            }
-        }
-
-    }, [!most_viewed_datasets]);
+    }, [!most_viewed_datasets, sort]);
 
     useEffect(() => {
         if (most_viewed_datasets) {

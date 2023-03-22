@@ -87,7 +87,7 @@ const Cards = memo((props) => {
 
             return (
                 data && data.length > 0 ? data.map((item, index) => (
-                    < Col key={index} md={4} className="py-2" >
+                    <Col key={index} md={4} sm={4} className="py-2">
                         <Card
                             notagsactive={notagsactive}
                             noheadercomponent={noheadercomponent}
@@ -101,7 +101,7 @@ const Cards = memo((props) => {
                             url={item.url}
                             onClick={() => onClick(item.id)}
                         />
-                    </Col >
+                    </Col>
                 )) : <Loader backgroundColor={backgroundColor} />
             )
         }

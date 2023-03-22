@@ -4,7 +4,7 @@ import View from "../../../components/modules/View";
 
 const Register = memo(() => {
   return (
-    <View nocontent noupperfooter nomiddlefooter nolowerfooter>
+    <View theme={window.innerWidth <= 768 ? "dark" : "light"} nocontent noupperfooter nomiddlefooter nolowerfooter>
       <RegisterComponent />
     </View>
   )

@@ -58,6 +58,8 @@ const DatasetList = memo((props) => {
     const onHover = useCallback((index) => setCurrentHovered(index), [currentHovered]);
     const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered]);
 
+    console.log("dadadadad",datasets);
+
     const data = [
         {
             title: string("modified"),
@@ -109,7 +111,8 @@ const DatasetList = memo((props) => {
                                 publisher={i18n.language === locales.AR ? item.publisher_ar : item.publisher}
                                 description={item.Views ? `${item.Views + ` ${t("viewCount")}`}` : i18n.language === locales.AR ? item.description_ar : item.description}
                                 tags={i18n.language === locales.AR ? item.tags_ar : item.tags}
-                                resources={i18n.language === locales.AR ? item.resources_ar : item.resources}
+                                resources={item.resources}
+                                // resources={i18n.language === locales.AR ? item.resources : item.resources}
                                 onClick={() => onClick(item.id)}
                             />
                         </div>

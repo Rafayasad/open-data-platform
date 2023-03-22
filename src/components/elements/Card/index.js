@@ -17,6 +17,8 @@ import pdfImage from '../../../assets/images/pdf_img.png';
 import excelImage from '../../../assets/images/excel_img.png';
 import csvImage from '../../../assets/images/csv_img.png';
 import apiImage from '../../../assets/images/api_img.png';
+import i18n from "../../../i18n/i18n";
+import { locales } from "../../../i18n/helper";
 
 const Card = memo((props) => {
 
@@ -79,14 +81,14 @@ const Card = memo((props) => {
 
     const specificDownloadOptions = resources?.map((item, index) => (
         {
-            title: item.title && item.title,
+            title: i18n.language === locales.AR ? item.title_ar : item.title,
             onClick: downloadResources,
             downloadLink: item.downloadURL,
             icon: item.format === "pdf" ? <img src={pdfImage} />
                 : item.format === "excel" ? <img src={excelImage} />
                     : item.format === "xlsx" ? <img src={excelImage} />
                         : item.format === "csv" ? <img src={csvImage} height={20} width={20} />
-                            : item.format === "API" && <img src={apiImage} />
+                            : item.format === "api" && <img src={apiImage} />
         }
     ))
 

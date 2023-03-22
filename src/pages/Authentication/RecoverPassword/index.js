@@ -18,7 +18,7 @@ const RecoverPassword = memo(() => {
   // }, [])
 
   return (
-    <View nocontent noupperfooter nomiddlefooter nolowerfooter>
+    <View theme={window.innerWidth <= 768 ? "dark" : "light"} nocontent noupperfooter nomiddlefooter nolowerfooter>
       <RecoverPassComponent />
     </View>
 

@@ -92,35 +92,34 @@ const RecoverPassword = memo(() => {
           </Row>
         </Container>
       </div>
-      <div style={{ width: '100vw', height: '100vh' }} className="d-flex justify-content-center align-items-end d-lg-none">
-        <Container>
+      <div style={{ width: '100vw', height: '100vh' }} className="my-5 py-5 d-flex justify-content-center align-items-start d-lg-none">
+        <Container fluid>
           <Row>
             <Col className="d-flex justify-content-center align-items-center">
               <Card
-                className="p-0 mt-5"
+                className="p-0"
                 style={{
                   width: "100vw",
                   backgroundColor: colors.white,
-                  borderRadius: "30px",
                   height: "100%",
                   borderColor: 'transparent'
                 }}
               >
                 <AuthCard
                   view="mobile"
-                  title="Recover password"
-                  subtitle="Enter the email you use for Abu Dhabi Data. We'll send you instructions there."
-                  inputFields={[{ placeholder: "Registered email", type: "text", onChange: (value) => setEmail(value) }]}
+                  title={t("passwordRecovery")}
+                  subtitle={t("pwdrecovery")}
+                  inputFields={[{ placeholder: t("registeredEmail"), type: "text", onChange: (value) => setEmail(value) }]}
                   button={[
                     {
-                      title: "Send code",
+                      title: t("sendCode"),
                       onClick: onClickRecoverPassword,
                       backgroundColor: colors.black,
                       textColor: colors.white,
                       textSize: "",
                     },
                     {
-                      title: "Log in with UAE PASS",
+                      title: t("LoginWithUAE"),
                       onClick: "",
                       backgroundColor: colors.white,
                       textColor: colors.black,

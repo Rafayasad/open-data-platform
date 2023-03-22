@@ -105,8 +105,6 @@ const ReportsFilter = memo((props) => {
                 <Heading size="xxs" heading={t("filter")} nomargin />
                 <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="mx-1" size={20} />
             </div>
-
-            <hr className="m-0 p-0" />
             <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%" }} className={"p-4"}>
                 <div className="w-100">
                     <Dropdown

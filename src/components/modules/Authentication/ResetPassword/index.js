@@ -93,7 +93,7 @@ const ResetPassword = memo((props) => {
           </Row>
         </Container>
       </div>
-      <div style={{ width: '100vw', height: '100vh' }} className="d-flex justify-content-center align-items-end d-lg-none">
+      <div style={{ width: '100vw', height: '90vh' }} className="d-flex justify-content-center align-items-start d-lg-none mt-5 pt-5">
         <Container>
           <Row>
             <Col className="d-flex justify-content-center align-items-center">
@@ -109,16 +109,17 @@ const ResetPassword = memo((props) => {
               >
                 <AuthCard
                   view="mobile"
-                  title="Reset password"
-                  subtitle="Create a strong password to ensure account safety"
+                  title={t("changePassword")}
+                  subtitle={t("strongPassword")}
                   inputFields={[
-                    { placeholder: "Government email", type: "email", onChange: (val) => setEmail(val) },
-                    { placeholder: "Password", type: "password", onChange: (val) => setPassword(val) },
-                    { placeholder: "Re-enter password", type: "password", onChange: (val) => setRePassword(val) },
+                    { placeholder: t("governmentEmail"), type: "text", onChange: (val) => setEmail(val) },
+                    { placeholder: t("password"), type: "password", onChange: (val) => setPassword(val) },
+                    { placeholder: t("rePwd"), type: "password", onChange: (val) => setRePassword(val) },
                   ]}
                   checkbox={{
-                    label: "I agree to Abu Dhabi Open Data",
-                    linktext: "terms and privacy policy",
+                    onClick: checked,
+                    naviagte: onClickTermsAndPolicy,
+                    label: <p>{t("agreeCond")} <span onClick={() => navigate(routes.POLICY)} style={{ color: colors.purple, cursor: "pointer" }}> {t("terms")} </span > {t("and")} <span onClick={() => navigate(routes.POLICY)} style={{ color: colors.purple, cursor: "pointer" }}> {t("policy")} </span></p>,
                     borderColor: colors.light_gray,
                     linktextColor: colors.purple,
                     labelColor: colors.black,

@@ -63,6 +63,8 @@ const DatasetDetail = memo(() => {
 
     }, [dataset])
 
+    console.log("dada",dataset);
+
     return (
         <View theme="dark" noupperfooter sticky>
             <div id="main" className="my-5 pt-5">
