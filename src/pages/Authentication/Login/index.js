@@ -4,7 +4,7 @@ import View from "../../../components/modules/View";
 
 const Login = memo(() => {
   return (
-    <View nocontent nomiddlefooter noupperfooter nolowerfooter>
+    <View theme={window.innerWidth <= 768 ? "dark" : "light"} nocontent nomiddlefooter noupperfooter nolowerfooter>
       <LoginComponent />
     </View>
   )

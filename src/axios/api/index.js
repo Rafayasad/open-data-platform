@@ -341,7 +341,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                         tags: item.theme,
                         tags_ar: item.themelear,
                         url: `${process.env.REACT_APP_BASE_URL}/dataset/${item.identifier}`,
-                        resources: item.distribution.filter(item => (
+                        resources: item.distribution.map(item => (
                             {
                                 title: item.title,
                                 title_ar: item.titlelear,
@@ -360,7 +360,6 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                         )),
                     }
                 ))
-
                 setLoading(false)
                 setData(arr)
 
@@ -389,23 +388,23 @@ export const getDatasetById = (id, setData) => {
                 let filteredResources = item.distribution.filter(item => {
                     let itemm = item.data
                     if (itemm.downloadURL && itemm.downloadURL !== "") {
-                        return (
-                            {
-                                title: itemm.title,
-                                title_ar: itemm.titlelear,
-                                description: itemm.description,
-                                description_ar: itemm.descriptionlear,
-                                format: itemm.format === "pdf" ? "pdf"
-                                    : item.format === "excel" ? "excel"
-                                        : itemm.format === "esri rest" ? "excel"
-                                            : itemm.format === "xlsx" ? "excel"
-                                                : itemm.format === "xls" ? "excel"
-                                                    : itemm.format === "csv" ? "csv"
-                                                        : itemm.format === "API" && "API",
-                                downloadURL: itemm.downloadURL
-                            }
-                        )
+                        return item
                     }
+                }).map(item => {
+                    let itemm = item.data
+                    return (
+                        {
+                            title: itemm.title,
+                            title_ar: itemm.titlelear,
+                            description: itemm.description,
+                            description_ar: itemm.descriptionlear,
+                            format: itemm.format === "pdf" ? "pdf"
+                                : item.format === "excel" || itemm.format === "xlsx" || itemm.format === "esri rest" || itemm.format == "xls" ? "excel"
+                                    : itemm.format === "csv" ? "csv"
+                                        : itemm.format === "API" && "API",
+                            downloadURL: itemm.downloadURL
+                        }
+                    )
                 })
 
                 let data = {
@@ -426,7 +425,7 @@ export const getDatasetById = (id, setData) => {
                     topics_ar: item.themelear.map(item => item.data),
                     tags: item.keyword.map(item => item.data),
                     tags_ar: item.keywordlear.map(item => item.data),
-                    resources: filteredResources.map(item => item.data),
+                    resources: filteredResources,
                     created: item.issued,
                     modified: item.modified,
                 }
@@ -1021,6 +1020,7 @@ export const login = async (dispatch, setData, setLoading, payload, route) => {
     await endpoints.otp({ type: "verify", username: email, otp_v: otp })
         .then(async (res) => {
             if (res.status === 200) {
+                setLoading(false)
                 if (res.data.status === 200) {
                     let token = await endpoints.getCRSFToken()
                         .then((res) => {
@@ -1040,6 +1040,7 @@ export const login = async (dispatch, setData, setLoading, payload, route) => {
 
                     await endpoints.login(data, headers)
                         .then((res) => {
+                            setLoading(false)
                             if (res.status === 200) {
                                 dispatch && dispatch(setData(res.data))
                                 window.location.assign(route);
@@ -1048,7 +1049,6 @@ export const login = async (dispatch, setData, setLoading, payload, route) => {
                             } else {
                                 toast("Invalid username or password.", { type: "error" })
                             }
-                            setLoading(false)
                         }).catch((err) => {
                             setLoading(false)
                             console.log("Error message", err)
@@ -1368,7 +1368,6 @@ export const getRealTimeApiById = (id, setData, setLoading) => {
 
             if (res.status === 200) {
                 setLoading(false)
-
                 const {
                     title,
                     field_title_ar,
@@ -1380,7 +1379,8 @@ export const getRealTimeApiById = (id, setData, setLoading) => {
                     changed,
                     field_api_url
                 } = res.data.data[0].attributes;
-
+                
+                console.log("url",res.data.data[0].attributes);
                 const { field_api_file } = res.data.data[0].relationships;
 
                 let fileUrl = await endpoints.getImages(field_api_file.links.related.href).then((res) => {
@@ -1409,9 +1409,11 @@ export const getRealTimeApiById = (id, setData, setLoading) => {
                     publisher_ar: field_name_of_authorityar,
                     created,
                     modified: changed,
-                    url: field_api_url.uri,
+                    url: field_api_url,
                     fileUrl
                 }
+
+                console.log("data",data);
 
                 setData(data);
             }

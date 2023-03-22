@@ -16,7 +16,7 @@ const AuthCard = memo((props) => {
 
   const { t } = useTranslation()
 
-  const { title, subtitle, linktext, inputFields, button, checkbox, recaptcha, onClickForgetPassword, hasOtp, otp, setOtp } = props;
+  const { view, title, subtitle, linktext, inputFields, button, checkbox, recaptcha, onClickForgetPassword, hasOtp, otp, setOtp } = props;
 
   // const [otp, setOtp] = useState("");
 
@@ -28,7 +28,7 @@ const AuthCard = memo((props) => {
     <Container fluid>
       <Row className="py-2">
         <Col>
-          <Heading nomargin heading={title} size="lg" />
+          <Heading bold={view === "mobile"} nomargin heading={title} size="lg" />
         </Col>
       </Row>
       <Row className="py-2">

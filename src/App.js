@@ -1,10 +1,7 @@
-import './App.css';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Router from './router';
 import { locales } from './i18n/helper';
 import { setDatasetsSuggestion, setPublishers, setStoriesTags, setSupportSuggestion, setTags, setTopics } from './redux/reducers/Facets';
 import { setAboutus } from './redux/reducers/About';
@@ -14,12 +11,29 @@ import { handleLogin, handleLogout } from './redux/reducers/Authentication';
 import { setStories } from './redux/reducers/SuccessStories';
 import { setCategories, setQuestions } from './redux/reducers/Support';
 import { useSelector } from 'react-redux';
+import { prefixer } from 'stylis';
+import { CacheProvider } from '@emotion/react';
+import rtlPlugin from 'stylis-plugin-rtl';
+import createCache from '@emotion/cache';
+import Router from './router';
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
 function App() {
 
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
   const storiesFilters = useSelector((state) => state.stories.filters);
+
+  // Create rtl cache
+  const cacheRtl = createCache({
+    key: 'muirtl',
+    stylisPlugins: [prefixer, rtlPlugin],
+  });
+
+  const emptyCache = createCache({
+    key: "muiltr",
+  });
 
   useEffect(() => {
     document.getElementsByTagName('html')[0].setAttribute("dir", i18n.language === locales.EN ? "ltr" : "rtl")
@@ -43,15 +57,18 @@ function App() {
     getSuccessStories(dispatch, setStories, storiesFilters);
   }, [storiesFilters])
 
-  if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
-    console.log = () => { }
-  }
+  // if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
+  //   console.log = () => { }
+  // }
 
-  return <div className={`${i18n.language === locales.AR && "ar-font"}`}>
-    <Router />
-    <ToastContainer />
-  </div>
-
+  return (
+    <CacheProvider value={i18n.language === locales.AR ? cacheRtl : emptyCache}>
+      <div className={`${i18n.language === locales.AR && "ar-font"}`}>
+        <Router />
+        <ToastContainer />
+      </div>
+    </CacheProvider>
+  )
 }
 
 export default App;

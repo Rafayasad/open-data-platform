@@ -34,6 +34,8 @@ const DataHeader = memo((props) => {
     const onHover = useCallback(() => setCurrentHovered(true), [currentHovered])
     const onLeave = useCallback(() => setCurrentHovered(false), [currentHovered])
 
+    console.log("sslslsl", resources);
+
     const options = resources && resources.length > 0 && resources.map(item => (
         {
             title: i18n.language === locales.AR ? item.title_ar : item.title,
@@ -89,7 +91,7 @@ const DataHeader = memo((props) => {
                 (
                     <>
                         <Col className="d-none d-lg-flex justify-content-end align-items-center">
-                            <div className="d-flex"onClick={() => setCurrentHovered(false)} onMouseOver={onHover} onMouseLeave={onLeave}>
+                            <div className="d-flex" onClick={() => setCurrentHovered(false)} onMouseOver={onHover} onMouseLeave={onLeave}>
                                 <Dropdown
                                     autoClose={true}
                                     options={shareOption}

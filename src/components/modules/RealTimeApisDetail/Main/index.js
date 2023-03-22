@@ -58,7 +58,7 @@ const Main = memo((props) => {
         },
         {
             title: t("sourceURL"),
-            detail: data ? data.url.split("3.0")[0] : <Shimmer rounded='xs' width="40%" className={"my-1"} />,
+            detail: data ? data?.url?.split("3.0")[0] : <Shimmer rounded='xs' width="40%" className={"my-1"} />,
             color: colors.purple,
             underline: true
         }

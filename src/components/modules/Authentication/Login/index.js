@@ -100,7 +100,7 @@ const Login = memo(() => {
           </Row>
         </Container>
       </div>
-      <div style={{ width: '100vw', height: '100vh' }} className="d-flex justify-content-center align-items-end d-lg-none">
+      <div style={{ width: '100vw', height: '100vh' }} className="my-5 py-5 d-flex justify-content-center align-items-start d-lg-none">
         <Container fluid>
           <Row>
             <Col className="d-flex justify-content-center align-items-center">
@@ -120,7 +120,7 @@ const Login = memo(() => {
                   subtitle={t("accDontExist")}
                   linktext={{ display_text: t("requestAccess"), onClick: onClickRegister }}
                   inputFields={[
-                    { placeholder: t("governmentEmail"), type: "email" },
+                    { placeholder: t("governmentEmail"), type: "text" },
                     { placeholder: t("password"), type: "password" },
                   ]}
                   button={[
