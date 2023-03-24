@@ -171,6 +171,7 @@ const Dataset = memo(() => {
             }
             <div id="datasetsList">
                 <DatasetList
+                    nocount
                     title={most_viewed_datasets ? t("mostViewedDatasets") : t("datasets")}
                     notagsactive
                     totalCount={totalCount}

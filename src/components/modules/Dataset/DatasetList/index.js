@@ -49,7 +49,7 @@ const data = [
 
 const DatasetList = memo((props) => {
 
-    const { title, onClick, datasets, totalCount, currentPage, rowsPerPage, loading, notagsactive, onChangePage, selectedValue, onSelectDropdown, notags, noheader, cardSize, nodropdown } = props
+    const { nocount, title, onClick, datasets, totalCount, currentPage, rowsPerPage, loading, notagsactive, onChangePage, selectedValue, onSelectDropdown, notags, noheader, cardSize, nodropdown } = props
 
     const { t, i18n } = useTranslation();
 
@@ -58,7 +58,7 @@ const DatasetList = memo((props) => {
     const onHover = useCallback((index) => setCurrentHovered(index), [currentHovered]);
     const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered]);
 
-    console.log("dadadadad",datasets);
+    console.log("dadadadad", datasets);
 
     const data = [
         {
@@ -81,6 +81,7 @@ const DatasetList = memo((props) => {
                         title={`${numberWithCommas(totalCount)} ${title}`}
                         backgroundColor={colors.white}
                         nobutton
+                        nocount={nocount}
                         dropdown={!nodropdown && {
                             title: t("sortBy"),
                             options: data,

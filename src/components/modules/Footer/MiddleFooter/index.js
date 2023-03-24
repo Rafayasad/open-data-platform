@@ -177,7 +177,9 @@ const MiddleFooter = memo(() => {
                                                     return (
 
                                                         <Col xs={10} key={index} className="py-3">
-                                                            <Heading nomargin size="xs" heading={items.title} color={colors.white} />
+                                                            <Link style={{ textDecoration: "none" }} to={items.link} state={items.params}>
+                                                                <Heading nomargin size="xs" heading={items.title} color={colors.white} />
+                                                            </Link>
                                                         </Col>
                                                     )
                                                 })

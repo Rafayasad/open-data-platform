@@ -16,7 +16,7 @@ const Header = memo((props) => {
     const { t } = useTranslation()
 
     const { title, backgroundColor, nobutton, size, dropdown, onClickButton, buttonText, filterbutton,
-        appliedFilters, onClickApplyFilter, filterData, year, filters, onDeleteFilter, onClickClearAll, count
+        appliedFilters, onClickApplyFilter, filterData, year, filters, onDeleteFilter, onClickClearAll, count, nocount
     } = props;
 
     const onClickApply = useCallback((filters) => {
@@ -42,7 +42,7 @@ const Header = memo((props) => {
     return (
         <Container fluid className=" py-4">
             <Row className="w-100 d-flex p-0 m-0 align-items-center justify-content-between">
-                <Col md={12} lg={6} xs={6} className="px-0">
+                <Col md={12} lg={6} xs={!dropdown && nobutton ? 12 : 6} className="px-0">
                     <div>
                         <Heading
                             bold
@@ -52,7 +52,7 @@ const Header = memo((props) => {
                             heading={title} />
                     </div>
                 </Col>
-                {count &&
+                {!dropdown && nobutton && !nocount &&
                     <Col xs={6} sm={6} className={"p-0 d-flex d-lg-none pt-3"}>
                         <Heading nomargin bold size={"lg"} heading={`${count ? count : 0} ${t("results")}`} />
                     </Col>
