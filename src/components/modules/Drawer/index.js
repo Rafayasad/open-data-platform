@@ -21,7 +21,7 @@ const Drawer = memo((props) => {
     const { t, i18n } = useTranslation()
 
     const { open, setOpen, onClickApplyFilter, appliedFilters, data, year } = props;
-
+    const { isLoggedIn } = useSelector(state => state.authentication);
 
     const [activeIndex, setActiveIndex] = useState();
     const [filters, setFilters] = useState([]);
@@ -38,9 +38,6 @@ const Drawer = memo((props) => {
     const toggleDrawer = useCallback(() => setOpen(!open), [open]);
 
     const onClickStoriesItem = useCallback((items) => {
-
-
-        console.log("itemmmms", items);
 
         const temp = [...filters]
 
@@ -72,16 +69,22 @@ const Drawer = memo((props) => {
 
         let filter = [...filters]
 
+        console.log("itemms", item);
+
         if (filters.some(el => el.title === item.title)) {
 
             let index = filters.indexOf(item)
             let temp = [...filter]
-
             temp.splice(index, 1)
-
             setFilters(temp)
 
         } else {
+            if (i18n.language === locales.EN ? item.type === 'publisher__name' : i18n.language === locales.AR && item.type === 'publisherlear__name') {
+                let index = filter.findIndex(el => i18n.language === locales.EN ? el.type == 'publisher__name' : i18n.language === locales.AR && el.type === "publisherlear__name")
+                if (index > -1) {
+                    filter.splice(index, 1)
+                }
+            }
             filter.push(item)
             setFilters(filter)
         }
@@ -110,90 +113,93 @@ const Drawer = memo((props) => {
             onClose={toggleDrawer}
             direction={i18n.language === locales.AR ? 'left' : 'right'}
             lockBackgroundScroll
+            style={{zIndex:1000}}
+        // className="mt-5"
         >
-            <div className="p-4 bg-white d-flex align-items-center justify-content-between">
-                <Heading size="xxs" heading={t("filters")} nomargin />
-                <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="mx-1" size={20} />
-            </div>
-            <hr className="m-0 p-0" />
-            <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%" }} className={"p-4"}>
-                {
-                    data?.map((item, index) => {
-                        return (
-                            <>
-                                <Accordion activeKey={activeIndex} key={index} className="bg-transparent">
-                                    <Accordion.Item eventKey={index} className="border-0 my-2">
-                                        <Accordion.Header onClick={() => onClickAccordian(index)}>
-                                            <div className='w-100 d-flex justify-content-between' style={{ textAlign: 'start' }}>
-                                                <Heading bold size="xs" heading={item.title} nomargin />
-                                                <CustomToggle eventKey={index} />
-                                            </div>
-                                        </Accordion.Header>
-                                        <Accordion.Body>
-                                            <div className="d-flex flex-wrap">
-                                                {
-                                                    item.tags?.map((items, index) => {
-                                                        return (
-                                                            <div className={`my-1`}>
-                                                                <Tag
-                                                                    backgroundColor={filters.some(el => el.title === items.title) ? colors.black : colors.white}
-                                                                    textColor={filters.some(el => el.title === items.title) ? colors.white : colors.black}
-                                                                    // backgroundColor={filtersData?.some(items => items.title === item.title) ? "black" : "white"}
-                                                                    // textColor={filtersData?.some(items => items.title === item.title) ? "white" : "black"}
-                                                                    borderColor={"1px solid grey"}
-                                                                    title={`${items.title} ${items.value ? `(${items.value})` : ""}`}
-                                                                    onClick={() => item.title === t("categories") ?
-                                                                        onClickStoriesItem({
-                                                                            type: t("categories"),
-                                                                            title: items.title,
-                                                                            id: items.id
-                                                                        })
-                                                                        : onClickItem(items)}
-                                                                />
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
-                                            </div>
-                                            {
-                                                item.data &&
-                                                <div className="">
+            <div style={{ height: "100%" }} className={""}>
+                <div style={{ top: isLoggedIn ? 55 : 0, position: "relative", left: 0, right: 0, zIndex: 1000 }} className="p-4 bg-white d-flex align-items-center justify-content-between">
+                    <Heading size="xxs" heading={t("filters")} nomargin />
+                    <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="" size={20} />
+                </div>
+                <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%" }} className={`p-4 ${isLoggedIn && "my-4"}`}>
+                    {
+                        data?.map((item, index) => {
+                            return (
+                                <>
+                                    <Accordion activeKey={activeIndex} key={index} className="bg-transparent">
+                                        <Accordion.Item eventKey={index} className="border-0 my-2">
+                                            <Accordion.Header onClick={() => onClickAccordian(index)}>
+                                                <div className='w-100 d-flex justify-content-between' style={{ textAlign: 'start' }}>
+                                                    <Heading bold size="xs" heading={item.title} nomargin />
+                                                    <CustomToggle eventKey={index} />
+                                                </div>
+                                            </Accordion.Header>
+                                            <Accordion.Body>
+                                                <div className="d-flex flex-wrap">
                                                     {
-                                                        item.data?.map((items, index) => {
+                                                        item.tags?.map((items, index) => {
                                                             return (
-                                                                <div className="d-flex justify-content-between align-items-center">
-                                                                    <div className="py-2">
-                                                                        <Heading nomargin heading={items.title} size={"xs"} />
-                                                                    </div>
-                                                                    <div>
-                                                                        <CheckBox
-                                                                            checked={filters?.some(el => items.type === el.type && el.title === items.title)}
-                                                                            callBack={() => {
-                                                                                onClickStoriesItem(items)
-                                                                                items.onclick(items.title)
-                                                                            }} borderColor={colors.black} />
-                                                                    </div>
+                                                                <div className={``} style={{paddingTop:"5px",paddingBottom:"5px"}}>
+                                                                    <Tag
+                                                                        backgroundColor={filters.some(el => el.title === items.title) ? colors.black : colors.white}
+                                                                        textColor={filters.some(el => el.title === items.title) ? colors.white : colors.black}
+                                                                        // backgroundColor={filtersData?.some(items => items.title === item.title) ? "black" : "white"}
+                                                                        // textColor={filtersData?.some(items => items.title === item.title) ? "white" : "black"}
+                                                                        borderColor={"1px solid #cfcfcf"}
+                                                                        title={`${items.title} ${items.value ? `(${items.value})` : ""}`}
+                                                                        onClick={() => item.title === t("categories") ?
+                                                                            onClickStoriesItem({
+                                                                                type: t("categories"),
+                                                                                title: items.title,
+                                                                                id: items.id
+                                                                            })
+                                                                            : onClickItem(items)}
+                                                                    />
                                                                 </div>
                                                             )
                                                         })
                                                     }
                                                 </div>
-                                            }
-                                        </Accordion.Body>
-                                    </Accordion.Item>
-                                </Accordion>
-                                {
-                                    index != data.length - 1
-                                    && <hr className="" />
-                                }
-                            </>
-                        )
-                    })
-                }
+                                                {
+                                                    item.data &&
+                                                    <div className="">
+                                                        {
+                                                            item.data?.map((items, index) => {
+                                                                return (
+                                                                    <div className="d-flex justify-content-between align-items-center">
+                                                                        <div className="py-2">
+                                                                            <Heading nomargin heading={items.title} size={"xs"} />
+                                                                        </div>
+                                                                        <div>
+                                                                            <CheckBox
+                                                                                checked={filters?.some(el => items.type === el.type && el.title === items.title)}
+                                                                                callBack={() => {
+                                                                                    onClickStoriesItem(items)
+                                                                                    items.onclick(items.title)
+                                                                                }} borderColor={colors.black} />
+                                                                        </div>
+                                                                    </div>
+                                                                )
+                                                            })
+                                                        }
+                                                    </div>
+                                                }
+                                            </Accordion.Body>
+                                        </Accordion.Item>
+                                    </Accordion>
+                                    {
+                                        index != data.length - 1
+                                        && <hr className="" />
+                                    }
+                                </>
+                            )
+                        })
+                    }
+                </div>
             </div>
-            <div className="h-20">
+            <div className="fixed-bottom d-flex align-items-end">
                 <hr className="m-0 p-0" />
-                <div className="p-2 d-flex justify-content-between align-items-center">
+                <div className="w-100 p-2 bg-white d-flex justify-content-between align-items-center">
                     <div className="">
                         <Button onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} />
                     </div>

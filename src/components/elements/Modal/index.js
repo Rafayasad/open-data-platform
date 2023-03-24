@@ -12,8 +12,6 @@ const ModalEelment = memo((props) => {
   const [show, setShow] = useState(true)
   const navigate = useNavigate();
 
-  console.log("Checkkkkkkkkkkkkk", description)
-
   return (
     <Modal
       size={size}

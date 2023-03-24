@@ -45,7 +45,7 @@
     "abuDhabiDataInNumbers": "بيانات أبو ظبي بالأرقام",
     "login": "تسجيل الدخول",
     "logout": "تسجيل الخروج",
-    "register": "يسجل",
+    "register": "تسجيل",
     "applications": "طلب",
     "supports": "يدعم",
     "contactUs": "اتصل بنا",
@@ -251,5 +251,8 @@
     "publishedOn": "تم النشر في",
     "otpTitle": "التحقق من OTP",
     "otpMessage": "تم إرسال OTP إلى البريد الإلكتروني المقترن.",
-    "done":"تم"
+    "done":"تم",
+    "yes": "نعم",
+    "no": "لا",
+    "selectOption": "تحديد الخيار"
 }

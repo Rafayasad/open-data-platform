@@ -14,6 +14,7 @@ import CardWithOuterText from "../../elements/CardWithOuterText";
 import CardStory from "../../elements/CardStory";
 import { useTranslation } from "react-i18next";
 import { locales } from "../../../i18n/helper";
+import Heading from "../../elements/Heading";
 
 let images = [
     {
@@ -37,7 +38,7 @@ const Cards = memo((props) => {
     const { i18n } = useTranslation();
 
     const { title, notitlebutton, data, backgroundColor, hoverable, type, size, onClick, onClickViewAll, buttonText, notagsactive, noheadercomponent } = props;
-    console.log("title",data);
+    console.log("title", data);
     const renderContent = () => {
         if (type === 'image-inner-text') {
             return (
@@ -69,19 +70,21 @@ const Cards = memo((props) => {
             )
         } else if (type === 'story-cards') {
             return (
-                data && data.length > 0 ? data.map((item, index) => (
-                    <Col key={index} md={4} className="py-2">
-                        <CardStory
-                            title={i18n.language === locales.AR ? item.title_ar : item.title}
-                            description={item.description && item.description_ar && i18n.language === locales.AR ? item.description_ar : item.description}
-                            tags={i18n.language === locales.AR ? item.tags && item.tags_ar.slice(0, 2) : item.tags && item.tags.slice(0, 2)}
-                            created={item.created}
-                            image={item.image}
-                            height={sizes[Math.floor(Math.random() * sizes.length)]}
-                            onClick={() => onClick(item.id)}
-                        />
-                    </Col>
-                )) : <Loader type={type} backgroundColor={backgroundColor} />
+                data ? (
+                    data.length > 0 ? data.map((item, index) => (
+                        <Col key={index} md={4} className="py-2">
+                            <CardStory
+                                title={i18n.language === locales.AR ? item.title_ar : item.title}
+                                description={item.description && item.description_ar && i18n.language === locales.AR ? item.description_ar : item.description}
+                                tags={i18n.language === locales.AR ? item.tags && item.tags_ar.slice(0, 2) : item.tags && item.tags.slice(0, 2)}
+                                created={item.created}
+                                image={item.image}
+                                height={sizes[Math.floor(Math.random() * sizes.length)]}
+                                onClick={() => onClick(item.id)}
+                            />
+                        </Col>
+                    )) : <Heading size="md" bold nomargin heading="No Result Found!" />
+                ) : <Loader type={type} backgroundColor={backgroundColor} />
             )
         } else {
 

@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router';
 const UpperFooter = memo((props) => {
 
     const navigate = useNavigate();
-    const { title, description, button } = props
+    const { title, description, button, navigateTo } = props
 
     return (
         <div className="d-flex flex-column py-5 px-4" style={{
@@ -38,7 +38,7 @@ const UpperFooter = memo((props) => {
                 }
                 <Row className='my-2'>
                     <Col xs={8} md={4} className={i18n.language === locales.AR && "py-3"}>
-                        <Button onClick={() => navigate(routes.REGISTER)} backgroundColor={i18n.language === locales.AR && "transparent"}
+                        <Button onClick={() => navigate(navigateTo ? navigateTo : routes.REGISTER)} backgroundColor={i18n.language === locales.AR && "transparent"}
                             borderColor={i18n.language === locales.AR && "white"}
                             textColor={i18n.language === locales.AR && "white"}
                             title={button} />

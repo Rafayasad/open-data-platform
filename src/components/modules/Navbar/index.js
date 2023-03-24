@@ -23,7 +23,7 @@ import { logout } from "../../../axios/api";
 
 const Navbar = memo((props) => {
 
-    const { theme, sticky, nocontent } = props;
+    const { theme, sticky, nocontent, nolanguageswitcher } = props;
 
     const { t, i18n } = useTranslation();
     const dispatch = useDispatch();
@@ -110,9 +110,11 @@ const Navbar = memo((props) => {
                         </Col>
                     }
                     <Col className="d-flex justify-content-end align-items-center">
-                        <div className="d-flex justify-content-center mx-2">
-                            <LanguageSwitcher theme={theme} />
-                        </div>
+                        {!nolanguageswitcher &&
+                            <div className="d-flex justify-content-center mx-2">
+                                <LanguageSwitcher theme={theme} />
+                            </div>
+                        }
                         {
                             !nocontent &&
                             <>

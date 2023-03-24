@@ -47,7 +47,7 @@ const Support = memo(() => {
     }, [searchText])
 
     return (
-        <View theme="dark" footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")}>
+        <View theme="dark" footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")} onClickFooterButton={routes.CONTACT}>
             <Main popularSearch={i18n.language === locales.AR ? supportSuggestion?.ar : supportSuggestion?.en} onSearch={onSearch} />
             {
                 searchText === '' &&

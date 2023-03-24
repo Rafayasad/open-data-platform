@@ -759,9 +759,9 @@ export const getSuccessStories = (dispatch, setData, filters) => {
     let data = {}
 
     if (sort) {
-        if (sort.title === "recent") {
+        if (sort.title === "Recent") {
             data.sort = "-created"
-        } else if (sort.title === "alphabetically") {
+        } else if (sort.title === "Alphabetically") {
             data.sort = "title"
         }
     }
@@ -1379,8 +1379,8 @@ export const getRealTimeApiById = (id, setData, setLoading) => {
                     changed,
                     field_api_url
                 } = res.data.data[0].attributes;
-                
-                console.log("url",res.data.data[0].attributes);
+
+                console.log("url", res.data.data[0].attributes);
                 const { field_api_file } = res.data.data[0].relationships;
 
                 let fileUrl = await endpoints.getImages(field_api_file.links.related.href).then((res) => {
@@ -1413,7 +1413,7 @@ export const getRealTimeApiById = (id, setData, setLoading) => {
                     fileUrl
                 }
 
-                console.log("data",data);
+                console.log("data", data);
 
                 setData(data);
             }
@@ -1475,7 +1475,7 @@ export const contactUs = (navigate, route, setLoading, payload) => {
     return endpoints.contactUs(data)
         .then((res) => {
             setLoading(false);
-            navigate(route, { replace: true });
+            navigate(route, { state: { email } }, { replace: true });
         }).catch((err) => {
             console.log("Error Message", err);
             setLoading(false);

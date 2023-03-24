@@ -78,7 +78,7 @@ const SuccessStories = memo(() => {
     const onClickClearAll = () => {
         dispatch(setStoriesFilters([{
             type: "Sort By",
-            title: "recent"
+            title: t('recent')
         }]))
     }
 
