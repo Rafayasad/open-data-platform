@@ -58,7 +58,7 @@ const Router = () => {
             <Route path={routes.REAL_TIME_APIS_DETAIL} element={<RealTimeApisDetail />} />
             <Route path={routes.CONFIRMATION} element={<Confirmation />} />
             {
-                !isLoggedIn &&
+                isLoggedIn &&
                 <Fragment>
                     <Route path={routes.REPORTS} element={<Reports />} />
                     <Route path={routes.REPORTS_INSIGHTS} element={<InsightsReports />} />

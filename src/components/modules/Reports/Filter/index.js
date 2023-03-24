@@ -92,8 +92,9 @@ const ReportsFilter = memo((props) => {
     });
 
     const onClickClear = useCallback(() => {
-        
-        setFilters(initialFilters)});
+
+        setFilters(initialFilters)
+    });
 
     return (
         <RMDrawer
@@ -184,7 +185,7 @@ const ReportsFilter = memo((props) => {
                                                                                     items.type === 'publisher__name' ? filters?.publisher === items.title ? colors.white : colors.black :
                                                                                         items.type === 'theme' ? filters?.topic === items.title ? colors.white : colors.black : null
                                                                         }
-                                                                        borderColor={"1px solid grey"}
+                                                                        borderColor={"1px solid #cfcfcf"}
                                                                         title={items.title}
                                                                         onClick={() => onClickItem(items)}
                                                                     />
