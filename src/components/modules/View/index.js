@@ -6,18 +6,18 @@ import LowerFooter from '../Footer/LowerFooter';
 
 const View = memo((props) => {
 
-    const { nonavbar, noupperfooter, nomiddlefooter, nolowerfooter, children, theme, nocontent, sticky, footerTitle, footerButton, footerDescription } = props;
+    const { onClickFooterButton, nolanguageswitcher, nonavbar, noupperfooter, nomiddlefooter, nolowerfooter, children, theme, nocontent, sticky, footerTitle, footerButton, footerDescription } = props;
 
     return (
         <>
             {
-                !nonavbar && <Navbar theme={theme} nocontent={nocontent} sticky={sticky} />
+                !nonavbar && <Navbar nolanguageswitcher={nolanguageswitcher} theme={theme} nocontent={nocontent} sticky={sticky} />
             }
             {
                 children
             }
             {
-                !noupperfooter && <UpperFooter title={footerTitle} button={footerButton} description={footerDescription} />
+                !noupperfooter && <UpperFooter navigateTo={onClickFooterButton} title={footerTitle} button={footerButton} description={footerDescription} />
             }
             {
                 !nomiddlefooter && <MiddleFooter />

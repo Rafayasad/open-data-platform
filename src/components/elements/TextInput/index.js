@@ -91,8 +91,7 @@ const TextInput = memo((props) => {
                 : 'black'
           },
         }}
-        type={!showPassword && (placeholder === t("password") || placeholder === t("rePwd")) ? "password" : placeholder != t("password") && type}
-        value={value}
+        type={!showPassword && type === "password" ? "password" : "text"} value={value}
         onChange={(e) => onChange(e.target.value)}
         endAdornment={
           <InputAdornment>

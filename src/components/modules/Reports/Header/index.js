@@ -1,6 +1,9 @@
 import React, { memo } from "react";
 import { Col, Row } from "react-bootstrap";
 import { MdDownloadForOffline, MdOutlineFilterAlt } from "react-icons/md";
+import pdfImage from '../../../../assets/images/pdf_img.png';
+import excelImage from '../../../../assets/images/excel_img.png';
+import csvImage from '../../../../assets/images/csv_img.png';
 import { colors } from "../../../../utils/colors";
 import Button from "../../../elements/Button";
 import Dropdown from "../../../elements/DropDown";
@@ -33,14 +36,17 @@ const Header = memo((props) => {
                             [
                                 {
                                     title: "PDF",
+                                    icon: <img src={pdfImage} />,
                                     onClick: () => { datatypeCallback("pdf") }
                                 },
                                 {
                                     title: "CSV",
+                                    icon: <img src={csvImage} height={20} width={20} />,
                                     onClick: () => { datatypeCallback("csv") }
                                 },
                                 {
                                     title: "Excel",
+                                    icon: <img src={excelImage} />,
                                     onClick: () => { datatypeCallback("excel") }
                                 }
                             ]

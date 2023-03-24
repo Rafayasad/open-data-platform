@@ -91,7 +91,9 @@ const ReportsFilter = memo((props) => {
         }
     });
 
-    const onClickClear = useCallback(() => setFilters(initialFilters));
+    const onClickClear = useCallback(() => {
+        
+        setFilters(initialFilters)});
 
     return (
         <RMDrawer
@@ -111,6 +113,7 @@ const ReportsFilter = memo((props) => {
                         textColor={filters?.date_type && "black"}
                         dropdownWidth={"100%"}
                         padding={"px-1"}
+                        reportsFilter
                         name={t("dateType")}
                         options={SortbyData}
                         selectedValue={filters?.date_type}
@@ -122,8 +125,9 @@ const ReportsFilter = memo((props) => {
                             dropdownWidth={"100%"}
                             padding={"px-1"}
                             name={"KPI"}
+                            reportsFilter
                             options={SortbyKPI}
-                            selectedValue={filters?.kpi ? filters.kpi : "selectOption"}
+                            selectedValue={filters?.kpi ? filters.kpi : t("selectOption")}
                         />
                     </div>
                 }
@@ -204,7 +208,6 @@ const ReportsFilter = memo((props) => {
             </div>
 
             <div className="h-25">
-                <hr className="m-0 p-0" />
                 <div className="d-flex justify-content-between align-items-center p-2">
                     <div className="">
                         <Button onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} />

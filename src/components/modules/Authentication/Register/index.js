@@ -136,7 +136,7 @@ const Register = memo(() => {
                   view="mobile"
                   title="Register"
                   subtitle="Already have an account?"
-                  linktext={{ display_text: "Login", onClick: "" }}
+                  linktext={{ display_text: t("login"), onClick: onClickLogin }}
                   recaptcha={recaptcha}
                   inputFields={[
                     { placeholder: "Full name", type: "text", onChange: (value) => setName(value) },
@@ -154,7 +154,7 @@ const Register = memo(() => {
                   }]}
                   checkbox={{
                     onClick: checked,
-                    label: <p>{t("agreeCond")} <span onClick={() => navigate(routes.POLICY)} style={{ color: colors.purple, cursor: "pointer" }}> {t("terms")} </span > {t("and")} <span style={{ color: colors.purple, cursor: "pointer" }}> {t("policy")} </span></p>,
+                    label: <p>{t("agreeCond")} <span onClick={() => navigate(routes.POLICY)} style={{ color: colors.purple, cursor: "pointer" }}> {t("terms")} </span > {t("and")} <span onClick={() => navigate(routes.POLICY)} style={{ color: colors.purple, cursor: "pointer" }}> {t("policy")} </span></p>,
                     borderColor: colors.light_gray,
                     linktextColor: colors.purple,
                     labelColor: colors.black

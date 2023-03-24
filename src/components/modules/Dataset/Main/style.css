@@ -4,5 +4,5 @@
 
 
 .input-focused {
-  box-shadow: 0 0 0 9999px #000000b0;
+  box-shadow: 0 0 0 9999px rgba(11, 0, 31, 0.5);
 }

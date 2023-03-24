@@ -3,7 +3,7 @@
 }
 
 .card-hover-primary:hover {
-    background-color: #762FFF;
+    background-color: #762fff;
     color: #FFFFFF !important;
     transition: .2s ease-in-out;
 }

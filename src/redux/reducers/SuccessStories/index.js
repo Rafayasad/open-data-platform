@@ -5,7 +5,7 @@ const initialState = {
     filters: [
         {
             type: "Sort By",
-            title: "recent"
+            title: 'Recent'
         }
     ]
 }

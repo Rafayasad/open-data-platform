@@ -90,8 +90,8 @@ const DataHeader = memo((props) => {
                 !nooptions &&
                 (
                     <>
-                        <Col className="d-none d-lg-flex justify-content-end align-items-center">
-                            <div className="d-flex" onClick={() => setCurrentHovered(false)} onMouseOver={onHover} onMouseLeave={onLeave}>
+                        <Col className="d-none d-lg-flex justify-content-end">
+                            <div className="" onClick={() => setCurrentHovered(false)} onMouseOver={onHover} onMouseLeave={onLeave}>
                                 <Dropdown
                                     autoClose={true}
                                     options={shareOption}
@@ -99,13 +99,18 @@ const DataHeader = memo((props) => {
                                     headerComponent={<Button backgroundColor="white" textColor="black" borderColor={currentHovered ? colors.purple : colors.black} icon={<SlShare size={20} color={currentHovered ? colors.purple : colors.black} />} />}
                                 />
                             </div>
-                            <div className="">
-                                <Dropdown
-                                    autoClose={true}
-                                    size={"md"}
-                                    options={options}
-                                    headerComponent={<Button icon={<MdDownloadForOffline className="mx-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" />}
-                                />
+                            <div className="d-flex flex-column align-items-center">
+                                <div className="d-flex">
+                                    <Dropdown
+                                        autoClose={true}
+                                        size={"md"}
+                                        options={options}
+                                        headerComponent={<Button icon={<MdDownloadForOffline className="mx-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" />}
+                                    />
+                                </div>
+                                <div className="d-none d-lg-flex">
+                                    <p className="m-0 px-1">1356</p><span style={{ color: colors.light_gray }}>downloads</span>
+                                </div>
                             </div>
                         </Col>
                         <div className="d-flex d-lg-none justify-content-between align-items-center fixed-bottom bg-white p-3">

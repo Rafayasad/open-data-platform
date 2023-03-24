@@ -41,8 +41,8 @@ const Header = memo((props) => {
 
     return (
         <Container fluid className=" py-4">
-            <Row className="w-100 p-0 m-0 align-items-center">
-                <Col className="px-0">
+            <Row className="w-100 d-flex p-0 m-0 align-items-center justify-content-between">
+                <Col md={12} lg={6} xs={6} className="px-0">
                     <div>
                         <Heading
                             bold
@@ -52,7 +52,12 @@ const Header = memo((props) => {
                             heading={title} />
                     </div>
                 </Col>
-                <Col md={3} xs={6} className="px-0 d-flex justify-content-end align-items-center">
+                {count &&
+                    <Col xs={6} sm={6} className={"p-0 d-flex d-lg-none pt-3"}>
+                        <Heading nomargin bold size={"lg"} heading={`${count ? count : 0} ${t("results")}`} />
+                    </Col>
+                }
+                <Col md={dropdown ? 3 : 6} sm={6} xs={4} className={`px-0 ${count && "pt-3"} d-flex justify-content-end align-items-center`}>
                     {
                         !nobutton ?
                             <div>
@@ -98,26 +103,35 @@ const Header = memo((props) => {
             </Row>
             {
                 filters && filters.length > 0 &&
-                <Row className="pt-4">
-                    <Col className="d-flex align-items-center">
-                        <Heading nomargin bold size={"lg"} heading={`${count} ${t("results")}`} />
+                <Row className="pt-3">
+                    <Col lg={6} className="d-none d-lg-flex align-items-center">
+                        <Heading nomargin bold size={"lg"} heading={`${count ? count : 0} ${t("results")}`} />
                     </Col>
-                    <Col className="d-flex flex-wrap justify-content-end py-2 align-items-center">
-                        {
-                            filters?.map((item, index) => {
-                                return (
-                                    <Tag
-                                        key={index}
-                                        backgroundColor={colors.black}
-                                        textColor={colors.white}
-                                        title={item.title}
-                                        crossIcon={<RxCross2 size={20} onClick={() => onDeleteFilter(item)} />} />
-                                )
-                            })
-                        }
-                        <div onClick={onClickClearAll}
-                            style={{ cursor: "pointer" }}
-                            className="px-2 d-flex align-items-center"><Heading color={colors.purple} heading={t("clearall")} size={"xxs"} nomargin /></div>
+                    <Col lg={6} className="d-flex px-4 justify-content-end">
+                        <Row className="d-flex align-items-center">
+                            <Col className={""}>
+                                <div className="d-flex scroll">
+                                    {
+                                        filters?.map((item, index) => {
+                                            return (
+                                                <Tag
+                                                    key={index}
+                                                    backgroundColor={colors.black}
+                                                    textColor={colors.white}
+                                                    title={item.title}
+                                                    crossIcon={<RxCross2 size={20} onClick={() => onDeleteFilter(item)} />} />
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </Col>
+                            <Col className="p-0 m-0">
+                                <div onClick={onClickClearAll}
+                                    style={{ cursor: "pointer" }}
+                                    className="mx-1 d-flex align-items-center"><Heading color={colors.purple} heading={t("clearall")} size={"xxs"} nomargin />
+                                </div>
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             }

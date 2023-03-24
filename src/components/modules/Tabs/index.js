@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
-import { Col, Container, Nav, Tab } from "react-bootstrap";
+import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
 import './style.css';
 import { colors } from "../../../utils/colors";
 import { routes } from "../../../router/helper";
@@ -29,8 +29,8 @@ const Tabs = memo((props) => {
                         </Nav>
                     </Col>
                 </div>
-                <div className="d-flex py-3" style={{ borderBottom: '1.5px solid #CFCFCF' }}>
-                    <Col sm={12} lg={8}>
+                <Row className="d-flex py-3" style={{ borderBottom: '1.5px solid #CFCFCF' }}>
+                    <Col xs={12} sm={12} lg={8}>
                         <Tab.Content>
                             {
                                 data.map((item, index) => (
@@ -41,14 +41,15 @@ const Tabs = memo((props) => {
                             }
                         </Tab.Content>
                     </Col>
+                    <div className="mb-3 w-100 d-block d-lg-none" style={{ border: '1px solid #CFCFCF' }} />
                     {
                         staticComponentOnRight &&
-                        <Col sm={12} lg={4} className="d-flex ">
+                        <Col xs={12} sm={12} lg={4} className="d-flex ">
                             <div className="mx-4 d-none d-lg-block" style={{ border: '1px solid #CFCFCF' }} />
                             {staticComponentOnRight}
                         </Col>
                     }
-                </div>
+                </Row>
             </Tab.Container>
         </Container>
     )

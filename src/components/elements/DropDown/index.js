@@ -9,7 +9,7 @@ import './style.css';
 
 const Dropdown = (props) => {
 
-    const { autoClose, options, setSelectedDropdownValue, textColor, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
+    const { reportsFilter, autoClose, options, setSelectedDropdownValue, textColor, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
 
     const [isOpen, setIsOpen] = useState(false);
     const [indexx, setIndexx] = useState();
@@ -49,7 +49,7 @@ const Dropdown = (props) => {
         <div className='d-flex align-items-center w-100 justify-content-end'>
             {
                 name &&
-                <div className='px-3 d-none d-lg-block w-50 text-end'>
+                <div className={`${reportsFilter ? 'p-0' : 'px-3'} d-none d-lg-block w-50 ${reportsFilter ? "text-start" : "text-end"}`}>
                     <Heading size="xxs" heading={name} nomargin />
                 </div>
             }
