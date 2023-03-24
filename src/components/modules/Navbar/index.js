@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { AiOutlineSearch } from "react-icons/ai";
 import Drawer from 'react-modern-drawer';
+import 'react-modern-drawer/dist/index.css';
 import { useSelector, useDispatch } from "react-redux";
 import { routes } from '../../../router/helper';
 import { colors } from "../../../utils/colors";
@@ -16,7 +17,6 @@ import AbuDhabiLogoMobile from '../../../assets/images/Abu-Dhabi-Data-Logo-Mobil
 import AbuDhabiLogoDarkMobile from '../../../assets/images/Abu-Dhabi-Data-Logo-Mobile-Dark.png';
 import Button from "../../elements/Button";
 import Heading from "../../elements/Heading";
-import 'react-modern-drawer/dist/index.css';
 import './style.css';
 import { handleLogout } from "../../../redux/reducers/Authentication";
 import { logout } from "../../../axios/api";
