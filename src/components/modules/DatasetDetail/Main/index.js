@@ -114,13 +114,16 @@ const Main = memo((props) => {
     ]
 
     return (
-        <Container fluid>
+        <Container fluid className="px-0">
             <DataHeader
                 resources={data && data.resources}
                 title={i18n.language === locales.AR ? data && data.title_ar : data && data.title}
                 url={url}
+                downloadCount={data && data.downloadCount}
             />
-            <Tabs data={tabs} staticComponentOnRight={<DataCard data={f} />} />
+            <div className="px-2">
+                <Tabs data={tabs} staticComponentOnRight={<DataCard data={f} />} />
+            </div>
         </Container>
     )
 });

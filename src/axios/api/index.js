@@ -23,6 +23,7 @@ export const getPlatformInsights = (setData, setLoading) => {
 
 export const getMostViewedDatasets = (setData, setTotalCount, searchValue, setLoading, perPage, pageNumber) => {
     setLoading(true);
+    setTotalCount(0)
     return endpoints.
         getMostViewedDatasets(perPage, pageNumber, searchValue).then((res) => {
             if (res.status === 200) {
@@ -35,7 +36,6 @@ export const getMostViewedDatasets = (setData, setTotalCount, searchValue, setLo
                     let ar_obj = {
                         ...data.ar[index]
                     }
-
 
                     ar_obj.publisher_ar = ar_obj.publisherlear
                     ar_obj.title_ar = ar_obj.titlear
@@ -407,6 +407,15 @@ export const getDatasetById = (id, setData) => {
                     )
                 })
 
+                let downloadCount = await endpoints.getDownloadCountById(id)
+                    .then((res) => {
+                        if (res.status === 200) {
+                            return res.data.data["Download Count"]
+                        }
+                    }).catch((err) => {
+                        console.log("Error message", err)
+                    })
+
                 let data = {
                     id: item.identifier,
                     title: item.title,
@@ -428,6 +437,7 @@ export const getDatasetById = (id, setData) => {
                     resources: filteredResources,
                     created: item.issued,
                     modified: item.modified,
+                    downloadCount
                 }
 
                 setData(data)
@@ -651,7 +661,7 @@ export const getPopularQuestions = (dispatch, setData) => {
 
                 let popularQuestions = []
 
-                data.slice(-5).map(item => {
+                data.map(item => {
 
                     const id = item.id
                     const { title, field_question_ar, field_popular_faqs } = item.attributes;
@@ -669,7 +679,7 @@ export const getPopularQuestions = (dispatch, setData) => {
 
                 })
 
-                dispatch && dispatch(setData(popularQuestions))
+                dispatch && dispatch(setData(popularQuestions.slice(-5)))
 
             }
 
@@ -748,13 +758,13 @@ export const getQuestionById = (id, setData) => {
         })
 }
 
-export const getSuccessStories = (dispatch, setData, filters) => {
+export const getSuccessStories = (dispatch, setData, toggleLoading, filters) => {
+
+    dispatch && dispatch(toggleLoading());
 
     let category = filters.filter((item) => item.type === "Categories")[0];
     let year = filters.filter((item) => item.type === "Year")[0];
     let sort = filters.filter((item) => item.type === "Sort By")[0];
-
-    console.log("lalala", category, year, sort, getYears());
 
     let data = {}
 
@@ -776,16 +786,12 @@ export const getSuccessStories = (dispatch, setData, filters) => {
         data.category = category.id
     }
 
-    console.log("sasad", data);
-
     return endpoints.
         getSuccessStories(data).then(async (res) => {
 
             if (res.status === 200) {
 
                 let data = res.data.data;
-
-                console.log("ss", data);
 
                 let stories = await Promise.all(data.map(async item => {
 
@@ -843,7 +849,8 @@ export const getSuccessStories = (dispatch, setData, filters) => {
 
                 }))
 
-                dispatch && dispatch(setData(stories))
+                dispatch && dispatch(setData(stories));
+                dispatch && dispatch(toggleLoading());
 
             }
 
@@ -980,6 +987,7 @@ export const validateUser = async (navigate, route, setLoading, payload) => {
     await endpoints.validateUser({ username: email, pass: password })
         .then(async (res) => {
             if (res.status === 200) {
+                setLoading(false)
                 if (res.data.status === 200) {
                     await endpoints.otp({ type: "send", username: email })
                         .then((res) => {
@@ -1019,8 +1027,8 @@ export const login = async (dispatch, setData, setLoading, payload, route) => {
 
     await endpoints.otp({ type: "verify", username: email, otp_v: otp })
         .then(async (res) => {
+            setLoading(false)
             if (res.status === 200) {
-                setLoading(false)
                 if (res.data.status === 200) {
                     let token = await endpoints.getCRSFToken()
                         .then((res) => {
@@ -1380,7 +1388,6 @@ export const getRealTimeApiById = (id, setData, setLoading) => {
                     field_api_url
                 } = res.data.data[0].attributes;
 
-                console.log("url", res.data.data[0].attributes);
                 const { field_api_file } = res.data.data[0].relationships;
 
                 let fileUrl = await endpoints.getImages(field_api_file.links.related.href).then((res) => {
@@ -1409,11 +1416,9 @@ export const getRealTimeApiById = (id, setData, setLoading) => {
                     publisher_ar: field_name_of_authorityar,
                     created,
                     modified: changed,
-                    url: field_api_url,
+                    url: field_api_url.uri,
                     fileUrl
                 }
-
-                console.log("data", data);
 
                 setData(data);
             }
@@ -1509,6 +1514,7 @@ export const logout = (dispatch, setLoading, handleLogout) => {
                 window.location.reload();
             }
         }).catch((err) => {
+            setLoading(false)
             console.log("Error Message", err);
         })
 }

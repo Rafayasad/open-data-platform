@@ -20,7 +20,7 @@ import apiImage from '../../../../assets/images/api_img.png';
 
 const DataHeader = memo((props) => {
 
-    const { title, resources, url, nooptions } = props
+    const { title, resources, url, nooptions, downloadCount } = props
 
     const { t } = useTranslation();
 
@@ -33,8 +33,6 @@ const DataHeader = memo((props) => {
 
     const onHover = useCallback(() => setCurrentHovered(true), [currentHovered])
     const onLeave = useCallback(() => setCurrentHovered(false), [currentHovered])
-
-    console.log("sslslsl", resources);
 
     const options = resources && resources.length > 0 && resources.map(item => (
         {
@@ -70,7 +68,7 @@ const DataHeader = memo((props) => {
     }, [])
 
     return (
-        <Container id='main' fluid className={`d-flex justify-content-between align-items-start py-4 bg-white shadow-none ${headerOnTop && "sticky-top shadow-sm w-100 m-0"}`}>
+        <Container id='main' fluid className={`d-flex justify-content-between align-items-center py-4 px-4 bg-white shadow-none ${headerOnTop && "sticky-top shadow-sm w-100 m-0"}`}>
             <Col md={12} lg={8}>
                 {
                     !title ? <><Shimmer rounded="xs" height={"32px"} className="my-2" /><Shimmer rounded="xs" height={"32px"} width="70%" className="my-2" /></> : (
@@ -108,9 +106,12 @@ const DataHeader = memo((props) => {
                                         headerComponent={<Button icon={<MdDownloadForOffline className="mx-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" />}
                                     />
                                 </div>
-                                <div className="d-none d-lg-flex">
-                                    <p className="m-0 px-1">1356</p><span style={{ color: colors.light_gray }}>downloads</span>
-                                </div>
+                                {
+                                    downloadCount &&
+                                    <div className="d-flex">
+                                        <p className="m-0 px-1">{downloadCount}</p><span style={{ color: colors.light_gray }}>{t("download")}</span>
+                                    </div>
+                                }
                             </div>
                         </Col>
                         <div className="d-flex d-lg-none justify-content-between align-items-center fixed-bottom bg-white p-3">
@@ -118,10 +119,10 @@ const DataHeader = memo((props) => {
                                 <Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />
                             </Col>
                             <Col xs={4} className="d-flex justify-content-center align-items-center px-3 text-end">
-                                <Heading size='xxs' nomargin heading="135 downloads" />
+                                <Heading size='xxs' nomargin heading={`${downloadCount} ${t("download")}`} />
                             </Col>
                             <Col className="d-flex justify-content-end">
-                                <Button title={"Download"} backgroundColor="black" textColor="white" />
+                                <Button title={t("download")} backgroundColor="black" textColor="white" />
                             </Col>
                         </div>
                     </>

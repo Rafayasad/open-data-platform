@@ -26,9 +26,6 @@ const SuccessStories = memo(() => {
     const storiesTags = useSelector((state) => state.facets.storiesTags);
     const storiesFilters = useSelector((state) => state.stories.filters);
 
-
-    console.log("topics", storiesFilters);
-
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);

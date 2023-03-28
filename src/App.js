@@ -8,7 +8,7 @@ import { setAboutus } from './redux/reducers/About';
 import { checkUser, getAboutUs, getAllApplications, getFacets, getFaqsCategory, getPopularQuestions, getSearch, getStoriesTags, getSuccessStories } from './axios/api';
 import { setApplications } from './redux/reducers/Applications';
 import { handleLogin, handleLogout } from './redux/reducers/Authentication';
-import { setStories } from './redux/reducers/SuccessStories';
+import { setStories, toggleLoading } from './redux/reducers/SuccessStories';
 import { setCategories, setQuestions } from './redux/reducers/Support';
 import { useSelector } from 'react-redux';
 import { prefixer } from 'stylis';
@@ -54,7 +54,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getSuccessStories(dispatch, setStories, storiesFilters);
+    dispatch(setStories())
+    getSuccessStories(dispatch, setStories, toggleLoading, storiesFilters);
   }, [storiesFilters])
 
   if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {

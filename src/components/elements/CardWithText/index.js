@@ -5,7 +5,7 @@ import Heading from "../Heading";
 
 const CardWithText = memo((props) => {
 
-    const { title, description, image, noborder, hoverable, onClick } = props
+    const { title, description, image, noborder, hoverable, maxNumberOfLines, onClick } = props
 
     const [currentHovered, setCurrentHovered] = useState(null);
 
@@ -38,7 +38,7 @@ const CardWithText = memo((props) => {
                 <Row>
                     <Col />
                     <Col md={8} className="d-flex text-center">
-                        <Heading nomargin size='xxs' heading={description} />
+                        <Heading nomargin size='xxs' heading={description} maxNumberOfLines={maxNumberOfLines} />
                     </Col>
                     <Col />
                 </Row>

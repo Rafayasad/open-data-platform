@@ -41,8 +41,6 @@ const Dataset = memo(() => {
     const publishers = useSelector((state) => state.facets.publishers);
     const tags = useSelector((state) => state.facets.tags);
 
-    console.log("momo", datasets);
-
     const data = [
         {
             title: t("publisher"),
@@ -83,6 +81,15 @@ const Dataset = memo(() => {
 
     useEffect(() => {
 
+        if (state && state.search) {
+            setSearchValue(state.search)
+        }
+
+        if (state && state.listItem && state.listItem.length > 0) {
+            dispatch(setFilter(state.listItem))
+            setFilters(state.listItem)
+        }
+
         if (!most_viewed_datasets) {
             if (state) {
                 navigate(pathname, { replace: true, state: null })
@@ -95,22 +102,13 @@ const Dataset = memo(() => {
             getRecentsDatasets(setRecentsDatasets);
         }
 
-        if (state && state.search) {
-            setSearchValue(state.search)
-        }
-
-        if (state && state.listItem && state.listItem.length > 0) {
-            dispatch(setFilter(state.listItem))
-            setFilters(state.listItem)
-        }
-
     }, [!most_viewed_datasets, sort]);
 
     useEffect(() => {
         if (most_viewed_datasets) {
             getMostViewedDatasets(setDatasets, setTotalCount, searchValue, setLoading, rowsPerPage, currentPage)
         }
-    }, [currentPage])
+    }, [currentPage, searchValue])
 
     useEffect(() => {
         if (!most_viewed_datasets) {
@@ -121,8 +119,6 @@ const Dataset = memo(() => {
             }
         }
     }, [currentPage, searchValue, sort, storedFilters, !most_viewed_datasets]);
-
-
 
     const toggle = useCallback(() => setViewAll(!viewAll), [viewAll]);
 
@@ -166,7 +162,8 @@ const Dataset = memo(() => {
     return (
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
             <Main filterData={data} searchData={i18n.language === locales.AR ? datasetsSuggestion?.ar : datasetsSuggestion?.en} search={searchValue} onChangeSearchEnter={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
-            {!most_viewed_datasets &&
+            {
+                !most_viewed_datasets &&
                 <Cards notagsactive buttonText={viewAll && t("viewLess")} onClickViewAll={toggle} title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)} onClick={onClickCard} />
             }
             <div id="datasetsList">

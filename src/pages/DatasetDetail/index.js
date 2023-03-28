@@ -37,7 +37,7 @@ const DatasetDetail = memo(() => {
 
     const id = urlParams.get('id');
 
-    console.log("iiiid",id);
+    console.log("iiiid", id);
 
     const [dataset, setDataset] = useState();
     const [similarDataset, setSimilarDataset] = useState();
@@ -63,8 +63,6 @@ const DatasetDetail = memo(() => {
 
     }, [dataset])
 
-    console.log("dada",dataset);
-
     return (
         <View theme="dark" noupperfooter sticky>
             <div id="main" className="my-5 pt-5">
@@ -72,7 +70,15 @@ const DatasetDetail = memo(() => {
                     <BreadCrumb items={[t("datasets"), t("detail")]} />
                 </div>
                 <Main data={dataset} url={`https://data.abudhabi/dataset/${id}`} />
-                <Cards onClickViewAll={() => { navigate(routes.DATASET, { replace: true }) }} title={t("similarDatasets")} backgroundColor={colors.white} data={similarDataset} onClick={onClickCard} />
+                <Cards onClickViewAll={() => {
+                    navigate(routes.DATASET, {
+                        replace: true, state: {
+                            listItem: [{
+                                title: dataset.topics[0]
+                            }]
+                        }
+                    })
+                }} title={t("similarDatasets")} backgroundColor={colors.white} data={similarDataset} onClick={onClickCard} />
             </div>
         </View>
     )
