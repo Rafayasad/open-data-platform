@@ -8,6 +8,7 @@ import AbuDhabi from '../../../../assets/images/Abu-Dhabi-Govt.png'
 import { socialLinks } from '../../../../utils';
 import { useNavigate } from 'react-router';
 import { routes } from '../../../../router/helper';
+import { colors } from '../../../../utils/colors';
 
 const LowerFooter = memo(() => {
 
@@ -19,22 +20,24 @@ const LowerFooter = memo(() => {
 
     return (
         <Container fluid className='bg-black py-3 px-4'>
-            <hr className='text-white' />
-            <Col className='my-4'>
-                <Heading size="xs" color="white" heading={t("powered")} />
-            </Col>
+            <div className='d-none d-lg-block'>
+                <hr className='text-white' />
+                <Col className='my-4'>
+                    <Heading size="xs" color="white" heading={t("powered")} />
+                </Col>
+            </div>
             <Row className='d-flex justify-content-between'>
-                <div className='col-12 col-md-6 d-flex'>
-                    <div className='px-2'>
+                <div className={`p-0 col-12 col-md-6 d-flex ${window.innerWidth >= 768 ? "justify-content-start" : "justify-content-end"}`}>
+                    <div className={`${window.innerWidth >= 768 ? "px-2" : "px-4"}`}>
                         <img height={"100px"} width={"auto"} src={AbuDhabi} />
                     </div>
-                    <div className='px-2'>
+                    <div className={`${window.innerWidth >= 768 ? "px-2" : "px-0"}`}>
                         <img height={"100px"} width={"auto"} src={Emirates} />
                     </div>
                 </div>
-                <div className='col-sm-12 col-md-6 d-flex flex-row-reverse flex-sm-row justify-content-between align-items-end'>
-                    <div className='w-25 d-flex justify-content-around align-items-center'>
-                        <p className='text-white m-0' style={{ cursor: "pointer" }} onClick={() => { navigate(routes.POLICY) }}>
+                <div className={`p-0 col-12 col-sm-12 col-md-6 d-flex flex-row-reverse flex-sm-row justify-content-between ${window.innerWidth >= 768 ? "align-items-end" : "align-items-center py-3"}`}>
+                    <div className={`d-flex justify-content-between align-items-center`}>
+                        <p className='text-white m-0 px-4' style={{ cursor: "pointer" }} onClick={() => { navigate(routes.POLICY) }}>
                             {`${t("privacy")}`}
                         </p>
                         <span className='text-white m-0' style={{ cursor: "pointer" }} onClick={() => { navigate(routes.POLICY) }}>
@@ -46,10 +49,13 @@ const LowerFooter = memo(() => {
                             <BsTwitter className='mx-2' color='white' size={28} onClick={onClickTwitter} style={{ cursor: 'pointer' }} />
                             <BsInstagram className='mx-2' color='white' size={28} onClick={onClickInstagram} style={{ cursor: 'pointer' }} />
                         </div>
-                        <div>
+                        <div className='d-none d-lg-block'>
                             <p className='text-white m-0'>{t('allRights')}</p>
                         </div>
                     </div>
+                </div>
+                <div className='d-lg-none col-12'>
+                    <Heading nomargin size={"xxs"} color={colors.white} heading={t('allRights')} />
                 </div>
             </Row>
         </Container>

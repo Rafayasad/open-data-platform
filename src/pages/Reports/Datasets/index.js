@@ -21,7 +21,7 @@ const Datasets = memo(() => {
     const { t, i18n } = useTranslation();
 
     const [datasets, setDatasets] = useState();
-    const [filters, setFilters] = useState({ date_type: "modified" });
+    const [filters, setFilters] = useState({ date_type: "Modified" });
     const [selectedTab, setSelectedTab] = useState("All");
 
     const [datatype, setDatatype] = useState();
@@ -39,6 +39,7 @@ const Datasets = memo(() => {
             onClick: (val) => {
                 setFilters({ date_type: "Modified" })
                 setSelectedTab(val)
+                setCurrentPage(1);
             }
         },
         {
@@ -46,6 +47,7 @@ const Datasets = memo(() => {
             onClick: (val) => {
                 setFilters({ ...filters, type: "linked" })
                 setSelectedTab(val)
+                setCurrentPage(1);
             }
         },
         {
@@ -53,6 +55,7 @@ const Datasets = memo(() => {
             onClick: (val) => {
                 setFilters({ ...filters, type: "physical" })
                 setSelectedTab(val)
+                setCurrentPage(1);
             }
         },
         {
@@ -60,6 +63,7 @@ const Datasets = memo(() => {
             onClick: (val) => {
                 setFilters({ ...filters, type: "kpi" })
                 setSelectedTab(val)
+                setCurrentPage(1);
             }
         }
     ]

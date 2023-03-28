@@ -58,8 +58,6 @@ const DatasetList = memo((props) => {
     const onHover = useCallback((index) => setCurrentHovered(index), [currentHovered]);
     const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered]);
 
-    console.log("dadadadad", datasets);
-
     const data = [
         {
             title: string("modified"),

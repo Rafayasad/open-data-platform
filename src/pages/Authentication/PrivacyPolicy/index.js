@@ -25,7 +25,7 @@ const PrivacyPolicy = memo(() => {
             </div>
 
             <div className="d-block d-lg-none" style={{ height: "100vh", width: "100vw" }}>
-                <View nolanguageswitcher nocontent noupperfooter nomiddlefooter nolowerfooter />
+                <View theme={"dark"} nolanguageswitcher nocontent noupperfooter nomiddlefooter nolowerfooter />
             </div>
 
             <Modal
