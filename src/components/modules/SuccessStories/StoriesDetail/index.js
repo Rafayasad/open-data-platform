@@ -36,7 +36,7 @@ const StoriesDetails = memo((props) => {
         <>
             {
                 headerOnTop &&
-                <Container fluid className={`transition sticky-top m-0 bg-white p-1 shadow-sm`} style={{ zIndex: 1 }}>
+                <Container fluid className={`transition sticky-top m-0 bg-white shadow-sm`} style={{ zIndex: 1 }}>
                     <Row className="d-none d-lg-flex m-0 p-0 w-100 align-items-center">
                         <Col className="px-4 py-2 m-0" lg={6}>
                             <Heading nomargin maxNumberOfLines={2} bold size={"md"} heading={i18n.language === locales.AR ? item?.title_ar : item?.title} />
