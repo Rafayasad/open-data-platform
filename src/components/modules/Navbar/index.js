@@ -147,9 +147,11 @@ const Navbar = memo((props) => {
                                 src={theme === 'dark' || scroll ? AbuDhabiLogoDarkMobile : AbuDhabiLogoMobile} />
                         </Link>
                     </Col>
-                    <Col className="d-flex align-items-center justify-content-end">
-                        <RxHamburgerMenu size={25} color={theme === 'dark' || scroll ? colors.black : colors.white} onClick={onClickDrawer} />
-                    </Col>
+                    {!nolanguageswitcher &&
+                        <Col className="d-flex align-items-center justify-content-end">
+                            <RxHamburgerMenu size={25} color={theme === 'dark' || scroll ? colors.black : colors.white} onClick={onClickDrawer} />
+                        </Col>
+                    }
                 </Row>
             </Container>
             <Drawer
@@ -224,7 +226,7 @@ const Navbar = memo((props) => {
                         </Col>
                     </Row>
                 </div>
-                <Row className="">
+                <Row className="fixed-bottom p-4">
                     <Col className="d-flex align-items-center">
                         <LanguageSwitcher theme={"dark"} />
                     </Col>

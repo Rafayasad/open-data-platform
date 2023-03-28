@@ -105,15 +105,15 @@ const Drawer = memo((props) => {
 
     return (
         <RMDrawer
-            size={"400px"}
+            // size={"400px"}
             open={open}
             onClose={toggleDrawer}
             direction={i18n.language === locales.AR ? 'left' : 'right'}
             lockBackgroundScroll
-            style={{ zIndex: 1000 }}
+            style={{ zIndex: 1000, height: "100%", width: "100%" }}
         // className="mt-5"
         >
-            <div style={{ height: "100%" }} className={""}>
+            <div style={{ height: "100%" }}>
                 <div style={{ top: 0, position: "relative", left: 0, right: 0, zIndex: 1000 }} className="p-4 bg-white d-flex align-items-center justify-content-between">
                     <Heading size="xxs" heading={t("filters")} nomargin />
                     <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="" size={20} />
@@ -194,7 +194,7 @@ const Drawer = memo((props) => {
                     }
                 </div>
             </div>
-            <div className="fixed-bottom d-flex align-items-end">
+            <div className="fixed-bottom d-flex align-items-center justify-content-between">
                 <hr className="m-0 p-0" />
                 <div className="w-100 p-2 bg-white d-flex justify-content-between align-items-center">
                     <div className="">

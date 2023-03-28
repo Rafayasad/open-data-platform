@@ -204,7 +204,7 @@ const MiddleFooter = memo(() => {
                                 <Heading onClick={() => ScrollToTop()} nomargin size="xxs" heading={t("backToTop")} color={colors.white} />
                             </div>
                             <div className=''>
-                                <BsFillArrowUpCircleFill color='white' size={20} />
+                                <BsFillArrowUpCircleFill onClick={() => ScrollToTop()} color='white' size={20} />
                             </div>
                         </div>
                     </Col>
