@@ -11,9 +11,8 @@ import BreadCrumb from "../../components/elements/BreadCrumb";
 import View from "../../components/modules/View";
 import i18n from "../../i18n/i18n";
 import { locales } from "../../i18n/helper";
-import { getStoriesTags } from "../../axios/api";
-import dayjs from "dayjs";
-import { setStoriesFilters } from "../../redux/reducers/SuccessStories";
+import { getStoriesTags, getSuccessStories } from "../../axios/api";
+import { setStories, setStoriesFilters } from "../../redux/reducers/SuccessStories";
 import { getYears } from "../../utils/generic";
 
 const SuccessStories = memo(() => {
@@ -26,12 +25,13 @@ const SuccessStories = memo(() => {
     const storiesTags = useSelector((state) => state.facets.storiesTags);
     const storiesFilters = useSelector((state) => state.stories.filters);
 
-
-    console.log("topics", storiesFilters);
-
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
+
+    useEffect(() => {
+        getSuccessStories(dispatch, setStories, storiesFilters);
+      }, [storiesFilters])
 
     const data = [
         {
@@ -65,6 +65,8 @@ const SuccessStories = memo(() => {
         setCurrentPage(1)
         dispatch(setStoriesFilters(filters))
     })
+
+    console.log("topics", storiesFilters);
 
     const onDeleteFilter = useCallback((filter) => {
         if (filter) {

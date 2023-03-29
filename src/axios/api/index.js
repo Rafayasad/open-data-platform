@@ -776,8 +776,6 @@ export const getSuccessStories = (dispatch, setData, filters) => {
         data.category = category.id
     }
 
-    console.log("sasad", data);
-
     return endpoints.
         getSuccessStories(data).then(async (res) => {
 

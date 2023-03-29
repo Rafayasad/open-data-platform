@@ -176,14 +176,13 @@ const Dataset = memo(() => {
                     notagsactive
                     totalCount={totalCount}
                     rowsPerPage={rowsPerPage}
-                    datasets={datasets}
+                    datasets={datasets} 
                     currentPage={currentPage}
                     loading={loading}
                     nodropdown={most_viewed_datasets}
                     onChangePage={(page) => {
                         datasetsDiv.scrollIntoView(true);
                         onChangePage(page)
-
                     }}
                     selectedValue={sort}
                     onClick={onClickCard}

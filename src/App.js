@@ -53,9 +53,11 @@ function App() {
     getSearch("support", dispatch, setSupportSuggestion)
   }, []);
 
-  useEffect(() => {
-    getSuccessStories(dispatch, setStories, storiesFilters);
-  }, [storiesFilters])
+  // console.log("stoires filtersssss", storiesFilters);
+  // useEffect(() => {
+  //   getSuccessStories(dispatch, setStories, storiesFilters);
+  // }, [storiesFilters])
+
 
   // if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
   //   console.log = () => { }

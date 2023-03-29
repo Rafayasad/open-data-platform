@@ -16,6 +16,7 @@
     "ascending": "Ascending",
     "descending": "Descending",
     "download": "Download",
+    "downloadDatasets": "Download dataset",
     "overview": "Overview",
     "APIDocumentation": "API Documentation",
     "storyTitleDescription": "Title of success story with no truncation; text box can exceed to however many characters",

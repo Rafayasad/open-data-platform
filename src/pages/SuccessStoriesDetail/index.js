@@ -80,7 +80,7 @@ const SuccessStoriesDetail = memo(() => {
                     <hr />
                 </div>
                 <div>
-                    <StoriesDetails item={story} shareOption={shareOption} />
+                    <StoriesDetails url={`${process.env.REACT_APP_BASE_URL}/success-stories/detail?id=${id}`} item={story} shareOption={shareOption} />
                 </div>
                 <hr className="m-0 mx-3" />
                 <Cards noheadercomponent backgroundColor={colors.white} title={t("successStories")} data={stories} size="md" onClick={onClickCard} onClickViewAll={onClickButton} />

@@ -42,7 +42,7 @@ const Header = memo((props) => {
     return (
         <Container fluid className="py-4">
             <Row className="w-100 d-flex p-0 m-0 align-items-center justify-content-between">
-                <Col md={12} lg={6} xs={!dropdown && nobutton ? 12 : 6} className="px-0">
+                <Col md={8} lg={6} xs={!dropdown && nobutton ? 12 : 6} className="px-0">
                     <div>
                         <Heading
                             bold
@@ -57,7 +57,7 @@ const Header = memo((props) => {
                         <Heading nomargin bold size={"lg"} heading={`${count ? count : 0} ${t("results")}`} />
                     </Col>
                 }
-                <Col md={dropdown ? 3 : 6} sm={6} xs={6} className={`px-0 ${count && "pt-3"} d-flex justify-content-end align-items-center`}>
+                <Col md={dropdown ? 3 : 4} sm={6} xs={6} className={`px-0 ${count && "pt-3"} d-flex justify-content-end align-items-center`}>
                     {
                         !nobutton ?
                             <div>
@@ -104,12 +104,12 @@ const Header = memo((props) => {
             {
                 filters && filters.length > 0 &&
                 <Row className="pt-3">
-                    <Col lg={6} className="d-none d-lg-flex align-items-center">
+                    <Col lg={6}className="d-none d-lg-flex align-items-center">
                         <Heading nomargin bold size={"lg"} heading={`${count ? count : 0} ${t("results")}`} />
                     </Col>
                     <Col lg={6} className="d-flex px-4 justify-content-end">
                         <Row className="d-flex align-items-center">
-                            <Col className={""}>
+                            <Col xs={8} className={""}>
                                 <div className="d-flex scroll">
                                     {
                                         filters?.map((item, index) => {
@@ -125,7 +125,7 @@ const Header = memo((props) => {
                                     }
                                 </div>
                             </Col>
-                            <Col className="p-0 m-0">
+                            <Col xs={4} className="p-0 m-0">
                                 <div onClick={onClickClearAll}
                                     style={{ cursor: "pointer" }}
                                     className="mx-1 d-flex align-items-center"><Heading color={colors.purple} heading={t("clearall")} size={"xxs"} nomargin />

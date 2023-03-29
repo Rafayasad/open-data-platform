@@ -12,15 +12,28 @@ import Dropdown from "../../../elements/DropDown";
 import Button from "../../../elements/Button";
 import './style.css';
 import { shareOptions } from "../../../../utils";
+import BottomSheetBar from "../../BottomSheet";
 
 const StoriesDetails = memo((props) => {
 
-    const { item, shareOption } = props;
+    const { item, shareOption, url } = props;
     const { t, i18n } = useTranslation();
 
     const [headerOnTop, setHeaderOnTop] = useState(false);
+    const [openBottomSheet, setOpenBottomSheet] = useState(false)
 
-    const downloadResources = useCallback((links) => { console.log(links) });
+    // const downloadResources = useCallback((links) => { console.log(links) });
+
+    const options = shareOptions?.map((item, index) => (
+        {
+            title: t(item.title),
+            format: item.format,
+            url: url,
+            icon: item.format === "facebook" ? <FaFacebookF />
+                : item.format === "linkedin" ? <FaLinkedinIn />
+                    : item.format === "twitter" && <FaTwitter />
+        }
+    ))
 
     useEffect(() => {
         window.onscroll = () => {
@@ -37,6 +50,13 @@ const StoriesDetails = memo((props) => {
             {
                 headerOnTop &&
                 <Container fluid className={`transition sticky-top m-0 bg-white shadow-sm`} style={{ zIndex: 1 }}>
+                    {<BottomSheetBar
+                        open={openBottomSheet}
+                        setOpen={setOpenBottomSheet}
+                        selectedSheetValue={t("share")}
+                        heading={t("share")}
+                        options={options}
+                    />}
                     <Row className="d-none d-lg-flex m-0 p-0 w-100 align-items-center">
                         <Col className="px-4 py-2 m-0" lg={6}>
                             <Heading nomargin maxNumberOfLines={2} bold size={"md"} heading={i18n.language === locales.AR ? item?.title_ar : item?.title} />
@@ -54,12 +74,16 @@ const StoriesDetails = memo((props) => {
                     </Row>
                     <div className="d-flex d-lg-none justify-content-end fixed-bottom bg-white p-1 bottom-0">
                         <Col xl={12}>
-                            <Dropdown
-                                autoClose={true}
-                                options={shareOption}
-                                size={"lg"}
-                                headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}
-                            />
+                            {window.innerWidth <= 768 ?
+                                <Button onClick={() => setOpenBottomSheet(true)} backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />
+                                :
+                                <Dropdown
+                                    autoClose={true}
+                                    options={shareOption}
+                                    size={"lg"}
+                                    headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}
+                                />
+                            }
                         </Col>
                     </div>
                 </Container>

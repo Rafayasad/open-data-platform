@@ -29,11 +29,11 @@ const Main = memo((props) => {
                     </Col>
                 </Row>
             </Container >
-            <Container fluid className="sticky-top bg-white mb-5 ">
+            <Container fluid className="z-n1 sticky-top bg-white mb-5">
                 <Container>
                     <Row>
                         <Col />
-                        <Col xs={12} md={10} lg={8} className="py-3" style={{ zIndex: 1000 }}>
+                        <Col xs={12} md={10} lg={8} className="py-3">
                             <Search
                                 filterData={filterData}
                                 value={search}

@@ -33,6 +33,7 @@ input:focus {
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
 }
+
 .placeholder-color::placeholder{
     color: #9f9f9f;
 }

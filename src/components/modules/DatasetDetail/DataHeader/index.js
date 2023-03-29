@@ -99,7 +99,7 @@ const DataHeader = memo((props) => {
 
     return (
         <Container id='main' fluid className={`d-flex justify-content-between align-items-start py-4 bg-white shadow-none ${headerOnTop && "sticky-top shadow-sm w-100 m-0"}`}>
-            {<BottomSheetBar open={openBottomSheet} setOpen={setOpenBottomSheet} options={options} />}
+            {<BottomSheetBar selectedSheetValue={t("download")} open={openBottomSheet} setOpen={setOpenBottomSheet} options={options} />}
             <Col md={12} lg={8}>
                 {
                     !title ? <><Shimmer rounded="xs" height={"32px"} className="my-2" /><Shimmer rounded="xs" height={"32px"} width="70%" className="my-2" /></> : (
