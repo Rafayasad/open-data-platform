@@ -31,7 +31,14 @@ const SuccessStories = memo(() => {
 
     useEffect(() => {
         getSuccessStories(dispatch, setStories, storiesFilters);
-      }, [storiesFilters])
+    }, [storiesFilters])
+
+    useEffect(() => {
+        dispatch(setStoriesFilters([{
+            type: "Sort By",
+            title: t('recent')
+        }]))
+    }, [i18n.language])
 
     const data = [
         {
@@ -66,12 +73,10 @@ const SuccessStories = memo(() => {
         dispatch(setStoriesFilters(filters))
     })
 
-    console.log("topics", storiesFilters);
-
     const onDeleteFilter = useCallback((filter) => {
         if (filter) {
             let arr = [...storiesFilters];
-            let newArr = arr.filter((item) => item.type !== filter.type)
+            let newArr = arr.filter((item) => item.title !== filter.title)
             dispatch(setStoriesFilters(newArr))
         }
 

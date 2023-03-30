@@ -118,7 +118,7 @@ const Card = memo((props) => {
             {
                 !notags &&
                 <Row className={`${nopadding && "m-0"} h-25 align-items-center`}>
-                    <Col xs={10} lg={10} className="d-flex scroll">
+                    <Col xs={10} lg={8} md={8} className="d-flex scroll">
                         {
                             tags && tags.length > 0 && tags.map((item, index) => (
                                 <Tag key={index} title={item}
@@ -128,7 +128,7 @@ const Card = memo((props) => {
                     </Col>
                     {
                         !nodropdown &&
-                        <Col md={3} xs={2} lg={2} className='d-flex justify-content-end'>
+                        <Col md={4} xs={2} lg={4} className='d-flex justify-content-end'>
                             {window.innerWidth <= 768 ?
                                 <BsThreeDots onClick={() => setOpenBottomSheet(true)} color={colors.black} size={28} style={{ cursor: 'pointer' }} />
                                 :

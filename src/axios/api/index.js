@@ -750,7 +750,7 @@ export const getQuestionById = (id, setData) => {
 
 export const getSuccessStories = (dispatch, setData, filters) => {
 
-    let category = filters.filter((item) => item.type === "Categories")[0];
+    let category = filters.filter((item) => item.type === "Categories");
     let year = filters.filter((item) => item.type === "Year")[0];
     let sort = filters.filter((item) => item.type === "Sort By")[0];
 
@@ -773,7 +773,7 @@ export const getSuccessStories = (dispatch, setData, filters) => {
     }
 
     if (category) {
-        data.category = category.id
+        data.category = category
     }
 
     return endpoints.

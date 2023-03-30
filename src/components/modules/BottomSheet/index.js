@@ -63,7 +63,7 @@ const BottomSheetBar = (props) => {
                     {
                         options?.map((item, index) => {
                             return (
-                                <div key={index} className='px-4 py-3 d-flex col-12 align-items-center justify-content-between'>
+                                <div key={index} className='px-4 py-3 d-flex col-md-6 col-12 align-items-center justify-content-between'>
                                     {selectedSheetValue !== t("share")
                                         &&
                                         <div className='col-2'>

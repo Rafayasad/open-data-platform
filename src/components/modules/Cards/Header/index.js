@@ -103,32 +103,34 @@ const Header = memo((props) => {
             </Row>
             {
                 filters && filters.length > 0 &&
-                <Row className="pt-3">
-                    <Col lg={6}className="d-none d-lg-flex align-items-center">
+                <Row className="pt-3 justify-content-between">
+                    <Col lg={2} xs={6} className="d-none d-lg-flex align-items-center">
                         <Heading nomargin bold size={"lg"} heading={`${count ? count : 0} ${t("results")}`} />
                     </Col>
-                    <Col lg={6} className="d-flex px-4 justify-content-end">
-                        <Row className="d-flex align-items-center">
-                            <Col xs={8} className={""}>
-                                <div className="d-flex scroll">
+                    <Col lg={10} xs={12} className="d-flex justify-content-end p-0">
+                        <Row className="w-100 d-flex align-items-center p-0 m-0">
+                            <Col lg={11} md={10} xs={9} className={"p-0"}>
+                                <div className="d-flex justify-content-end flex-wrap">
                                     {
                                         filters?.map((item, index) => {
                                             return (
-                                                <Tag
-                                                    key={index}
-                                                    backgroundColor={colors.black}
-                                                    textColor={colors.white}
-                                                    title={item.title}
-                                                    crossIcon={<RxCross2 size={20} onClick={() => onDeleteFilter(item)} />} />
+                                                <div className="my-1">
+                                                    <Tag
+                                                        key={index}
+                                                        backgroundColor={colors.black}
+                                                        textColor={colors.white}
+                                                        title={item.title}
+                                                        crossIcon={<RxCross2 size={20} onClick={() => onDeleteFilter(item)} />} />
+                                                </div>
                                             )
                                         })
                                     }
                                 </div>
                             </Col>
-                            <Col xs={4} className="p-0 m-0">
+                            <Col lg={1} xs={3} md={2} className="p-0 m-0">
                                 <div onClick={onClickClearAll}
                                     style={{ cursor: "pointer" }}
-                                    className="mx-1 d-flex align-items-center"><Heading color={colors.purple} heading={t("clearall")} size={"xxs"} nomargin />
+                                    className="mx-1 d-flex align-items-center justify-content-center"><Heading color={colors.purple} heading={t("clearall")} size={"xxs"} nomargin />
                                 </div>
                             </Col>
                         </Row>

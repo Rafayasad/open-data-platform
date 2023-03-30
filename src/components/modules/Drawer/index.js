@@ -41,27 +41,30 @@ const Drawer = memo((props) => {
 
         const temp = [...filters]
 
-        if ((items.type === t("categories"))) {
+        if (filters.some(el => el.title === items.title)) {
 
-            let index = temp.findIndex(el => el.type == t("categories"))
-            if (index > -1) {
-                temp.splice(index, 1)
+            let index = filters.findIndex(el => el.title === items.title)
+            let tempArr = [...temp]
+            tempArr.splice(index,1)
+            setFilters(tempArr)
+
+        } else {
+
+            if ((items.type === t("year"))) {
+                let index = temp.findIndex(el => el.type == t("year"))
+                if (index > -1) {
+                    temp.splice(index, 1)
+                }
             }
-        }
-        else if ((items.type === t("year"))) {
-            let index = temp.findIndex(el => el.type == t("year"))
-            if (index > -1) {
-                temp.splice(index, 1)
+            else if ((items.type === t("sortBy"))) {
+                let index = temp.findIndex(el => el.type == t("sortBy"))
+                if (index > -1) {
+                    temp.splice(index, 1)
+                }
             }
+            temp.push(items)
+            setFilters(temp)
         }
-        else if ((items.type === t("sortBy"))) {
-            let index = temp.findIndex(el => el.type == t("sortBy"))
-            if (index > -1) {
-                temp.splice(index, 1)
-            }
-        }
-        temp.push(items)
-        setFilters(temp)
 
     })
 
@@ -113,7 +116,7 @@ const Drawer = memo((props) => {
             onClose={toggleDrawer}
             direction={i18n.language === locales.AR ? 'left' : 'right'}
             lockBackgroundScroll
-            style={{ zIndex: 1000, height: "100%", width: "100%" }}
+            style={{ zIndex: 1000, height: "100%", width: window.innerWidth >= 800 ? "30%" : "100%" }}
         // className="mt-5"
         >
             <div style={{ height: "100%" }}>
