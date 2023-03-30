@@ -120,16 +120,17 @@ const Login = memo(() => {
                   subtitle={t("accDontExist")}
                   linktext={{ display_text: t("requestAccess"), onClick: onClickRegister }}
                   inputFields={[
-                    { placeholder: t("governmentEmail"), type: "text" },
-                    { placeholder: t("password"), type: "password" },
+                    { placeholder: t("governmentEmail"), type: "text", onChange: (value) => setEmail(value) },
+                    { placeholder: t("password"), type: "password", onChange: (value) => setPassword(value) },
                   ]}
                   button={[
                     {
                       title: t("logIn"),
-                      onClick: "",
+                      onClick: onClickLogin,
                       backgroundColor: colors.black,
                       textColor: colors.white,
                       textSize: "",
+                      loading
                     },
                     {
                       title: t("LoginWithUAE"),

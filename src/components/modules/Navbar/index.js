@@ -170,9 +170,9 @@ const Navbar = memo((props) => {
                         </Col>
                         <Col className="d-flex justify-content-end align-items-center">
                             <div className="d-flex justify-content-center">
-                                <div className="px-4">
+                                {/* <div className="px-4">
                                     <AiOutlineSearch size={25} color="black" onClick={onClickDrawer} />
-                                </div>
+                                </div> */}
                                 <div className="">
                                     <RxHamburgerMenu size={25} color="black" onClick={onClickDrawer} />
                                 </div>

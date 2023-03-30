@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { memo } from "react"
 import { Col } from "react-bootstrap";
 import { colors } from "../../../../utils/colors";
@@ -13,6 +13,14 @@ const ExpandSearchBarModal = memo((props) => {
     const { show, setShow, searchData, value, placeholder, onChangeSearch, onKeyDown } = props;
     const { t } = useTranslation();
 
+    const emailInput = useRef(null);
+
+    useEffect(() => {
+        if (emailInput.current) {
+          emailInput.current.focus();
+        }
+      }, []);
+
     // const onKeyDown = useCallback((e) => e.key === "Enter" && onPressEnter && onPressEnter(e.target.value));
 
     return (
@@ -21,6 +29,7 @@ const ExpandSearchBarModal = memo((props) => {
                 <Modal.Title className="d-flex align-items-center justify-content-around w-100">
                     <Col xs={9} className='p-0 d-flex align-items-center'>
                         <input
+                            ref={emailInput}
                             value={value}
                             onChange={onChangeSearch}
                             type="text"
@@ -34,7 +43,7 @@ const ExpandSearchBarModal = memo((props) => {
                             nomargin heading={t("cancel")} size={"xxs"} color={colors.gray}
                             onClick={() => {
                                 setShow()
-                                onChangeSearch({ target: { value: "" } })
+                                onChangeSearch({ target: { value: null } })
                             }}
                         />
                     </Col>

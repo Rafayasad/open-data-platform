@@ -16,6 +16,9 @@ import pdfImage from '../../../../assets/images/pdf_img.png';
 import excelImage from '../../../../assets/images/excel_img.png';
 import csvImage from '../../../../assets/images/csv_img.png';
 import apiImage from '../../../../assets/images/api_img.png';
+import BottomSheetBar from "../../BottomSheet";
+import { RWebShare } from "react-web-share";
+import './style.css';
 
 
 const DataHeader = memo((props) => {
@@ -23,6 +26,7 @@ const DataHeader = memo((props) => {
     const { title, resources, url, nooptions, downloadCount } = props
 
     const { t } = useTranslation();
+    const [openBottomSheet, setOpenBottomSheet] = useState(false)
 
     const [headerOnTop, setHeaderOnTop] = useState(false);
     const [downloadLink, setDownloadLink] = useState();
@@ -57,6 +61,24 @@ const DataHeader = memo((props) => {
         }
     ))
 
+    const handleClick = async () => {
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: 'Example Title',
+                    text: 'Example Text',
+                    url: url,
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            // Fallback option for sharing via email or social media
+            const shareUrl = `mailto:?subject=${title}&body=${url}"`;
+            window.location.href = shareUrl;
+        }
+    }
+
     useEffect(() => {
         window.onscroll = () => {
             if (document?.getElementById("main")?.getBoundingClientRect().top <= 20) {
@@ -68,7 +90,8 @@ const DataHeader = memo((props) => {
     }, [])
 
     return (
-        <Container id='main' fluid className={`d-flex justify-content-between align-items-center py-4 px-4 bg-white shadow-none ${headerOnTop && "sticky-top shadow-sm w-100 m-0"}`}>
+        <Container id='main' fluid className={`d-flex justify-content-between align-items-start py-4 bg-white shadow-none ${headerOnTop && "sticky-top shadow-sm w-100 m-0"}`}>
+            <BottomSheetBar selectedSheetValue={t("download")} open={openBottomSheet} setOpen={setOpenBottomSheet} options={options} />
             <Col md={12} lg={8}>
                 {
                     !title ? <><Shimmer rounded="xs" height={"32px"} className="my-2" /><Shimmer rounded="xs" height={"32px"} width="70%" className="my-2" /></> : (
@@ -114,17 +137,32 @@ const DataHeader = memo((props) => {
                                 }
                             </div>
                         </Col>
-                        <div className="d-flex d-lg-none justify-content-between align-items-center fixed-bottom bg-white p-3">
-                            <Col>
-                                <Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />
-                            </Col>
-                            <Col xs={4} className="d-flex justify-content-center align-items-center px-3 text-end">
-                                <Heading size='xxs' nomargin heading={`${downloadCount} ${t("download")}`} />
-                            </Col>
-                            <Col className="d-flex justify-content-end">
-                                <Button title={t("download")} backgroundColor="black" textColor="white" />
-                            </Col>
-                        </div>
+                        {
+                            !openBottomSheet &&
+                            <div className="d-flex d-lg-none justify-content-between align-items-center fixed-bottom bg-white p-3">
+                                <Col>
+                                    {window.navigator.canShare ?
+                                        <Button onClick={handleClick} backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />
+                                        :
+                                        <RWebShare
+                                            data={{
+                                                url: url,
+                                                title: title
+                                            }}
+                                            onClick={() => console.log("shared successfully!")}
+                                        >
+                                            <Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />
+                                        </RWebShare>
+                                    }
+                                </Col>
+                                <Col xs={4} className="d-flex justify-content-center align-items-center px-3 text-end">
+                                    <Heading size='xxs' nomargin heading={`${downloadCount} ${t("download")}`} />
+                                </Col>
+                                <Col className="d-flex justify-content-end">
+                                    <Button onClick={() => setOpenBottomSheet(true)} title={t("download")} backgroundColor="black" textColor="white" />
+                                </Col>
+                            </div>
+                        }
                     </>
                 )
             }

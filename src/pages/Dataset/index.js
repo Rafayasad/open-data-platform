@@ -180,7 +180,6 @@ const Dataset = memo(() => {
                     onChangePage={(page) => {
                         datasetsDiv.scrollIntoView(true);
                         onChangePage(page)
-
                     }}
                     selectedValue={sort}
                     onClick={onClickCard}

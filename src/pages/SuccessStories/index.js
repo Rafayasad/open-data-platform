@@ -11,9 +11,8 @@ import BreadCrumb from "../../components/elements/BreadCrumb";
 import View from "../../components/modules/View";
 import i18n from "../../i18n/i18n";
 import { locales } from "../../i18n/helper";
-import { getStoriesTags } from "../../axios/api";
-import dayjs from "dayjs";
-import { setStoriesFilters } from "../../redux/reducers/SuccessStories";
+import { getStoriesTags, getSuccessStories } from "../../axios/api";
+import { setStories, setStoriesFilters } from "../../redux/reducers/SuccessStories";
 import { getYears } from "../../utils/generic";
 
 const SuccessStories = memo(() => {
@@ -29,6 +28,17 @@ const SuccessStories = memo(() => {
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
+
+    useEffect(() => {
+        getSuccessStories(dispatch, setStories, storiesFilters);
+    }, [storiesFilters])
+
+    useEffect(() => {
+        dispatch(setStoriesFilters([{
+            type: "Sort By",
+            title: t('recent')
+        }]))
+    }, [i18n.language])
 
     const data = [
         {
@@ -66,7 +76,7 @@ const SuccessStories = memo(() => {
     const onDeleteFilter = useCallback((filter) => {
         if (filter) {
             let arr = [...storiesFilters];
-            let newArr = arr.filter((item) => item.type !== filter.type)
+            let newArr = arr.filter((item) => item.title !== filter.title)
             dispatch(setStoriesFilters(newArr))
         }
 

@@ -53,7 +53,7 @@ export const endpoints = {
         return client.get(`/jsonapi/node/faqs/${id}`)
     },
     getSuccessStories: (data) => {
-        return client.get(`/jsonapi/node/stories?sort=${data?.sort}${data.category ? `&filter[story_tags.meta.drupal_internal__target_id]=${data.category}` : ""}${data?.year ? `&filter[datefilter][condition][path]=created&filter[datefilter][condition][operator]=BETWEEN&filter[datefilter][condition][value][1]=${data.year.start_date}&filter[datefilter][condition][value][2]=${data.year.end_date}` : ""}`)
+        return client.get(`/jsonapi/node/stories${data?.sort ? '?sort=' + data?.sort : ""}${data?.category?.length > 0 ? data?.category?.map(item => `&filter[story_tags.meta.drupal_internal__target_id]=${item.id}`).join("") : ""}${data?.year ? `&filter[datefilter][condition][path]=created&filter[datefilter][condition][operator]=BETWEEN&filter[datefilter][condition][value][1]=${data.year.start_date}&filter[datefilter][condition][value][2]=${data.year.end_date}` : ""}`)
     },
     getSuccessStoriesById: (id) => {
         return client.get(`/jsonapi/node/stories?filter[id]=${id}`)

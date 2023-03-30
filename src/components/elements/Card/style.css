@@ -24,3 +24,8 @@
 .hover-third:hover div:nth-child(3) div p {
     color: #FFFFFF !important;
 }
+
+.scroll{
+    overflow-x: scroll;
+    white-space: nowrap;
+}
