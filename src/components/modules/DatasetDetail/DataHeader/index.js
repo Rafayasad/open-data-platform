@@ -17,16 +17,13 @@ import excelImage from '../../../../assets/images/excel_img.png';
 import csvImage from '../../../../assets/images/csv_img.png';
 import apiImage from '../../../../assets/images/api_img.png';
 import BottomSheetBar from "../../BottomSheet";
-import { ShareButton } from 'react-share';
 import { RWebShare } from "react-web-share";
-import WebShareWrapper from "web-share-wrapper";
 import './style.css';
 
 
 const DataHeader = memo((props) => {
 
-    // const { loading, isSupported, share } = useWebShare();
-    const { title, resources, url, nooptions } = props
+    const { title, resources, url, nooptions, downloadCount } = props
 
     const { t } = useTranslation();
     const [openBottomSheet, setOpenBottomSheet] = useState(false)
@@ -40,11 +37,6 @@ const DataHeader = memo((props) => {
 
     const onHover = useCallback(() => setCurrentHovered(true), [currentHovered])
     const onLeave = useCallback(() => setCurrentHovered(false), [currentHovered])
-
-    console.log("sslslsl");
-    const shareUrl = url;
-    const titleUrl = 'Example Title';
-    const description = 'Example Text';
 
     const options = resources && resources.length > 0 && resources.map(item => (
         {
@@ -99,7 +91,7 @@ const DataHeader = memo((props) => {
 
     return (
         <Container id='main' fluid className={`d-flex justify-content-between align-items-start py-4 bg-white shadow-none ${headerOnTop && "sticky-top shadow-sm w-100 m-0"}`}>
-            {<BottomSheetBar selectedSheetValue={t("download")} open={openBottomSheet} setOpen={setOpenBottomSheet} options={options} />}
+            <BottomSheetBar selectedSheetValue={t("download")} open={openBottomSheet} setOpen={setOpenBottomSheet} options={options} />
             <Col md={12} lg={8}>
                 {
                     !title ? <><Shimmer rounded="xs" height={"32px"} className="my-2" /><Shimmer rounded="xs" height={"32px"} width="70%" className="my-2" /></> : (
@@ -137,9 +129,12 @@ const DataHeader = memo((props) => {
                                         headerComponent={<Button icon={<MdDownloadForOffline className="mx-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" />}
                                     />
                                 </div>
-                                <div className="d-none d-lg-flex">
-                                    <p className="m-0 px-1">1356</p><span style={{ color: colors.light_gray }}>downloads</span>
-                                </div>
+                                {
+                                    downloadCount &&
+                                    <div className="d-flex">
+                                        <p className="m-0 px-1">{downloadCount}</p><span style={{ color: colors.light_gray }}>{t("download")}</span>
+                                    </div>
+                                }
                             </div>
                         </Col>
                         {
@@ -161,7 +156,7 @@ const DataHeader = memo((props) => {
                                     }
                                 </Col>
                                 <Col xs={4} className="d-flex justify-content-center align-items-center px-3 text-end">
-                                    <Heading size='xxs' nomargin heading="135 downloads" />
+                                    <Heading size='xxs' nomargin heading={`${downloadCount} ${t("download")}`} />
                                 </Col>
                                 <Col className="d-flex justify-content-end">
                                     <Button onClick={() => setOpenBottomSheet(true)} title={t("download")} backgroundColor="black" textColor="white" />

@@ -1,10 +1,8 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getDatasetById, getRealTimeApiById, getSimilarDatasets } from "../../axios/api";
-import Cards from "../../components/modules/Cards";
+import { getRealTimeApiById } from "../../axios/api";
 import Main from "../../components/modules/RealTimeApisDetail/Main";
 import { routes } from "../../router/helper";
-import { colors } from "../../utils/colors";
 import { useTranslation } from "react-i18next";
 import BreadCrumb from "../../components/elements/BreadCrumb";
 import View from "../../components/modules/View";

@@ -22,7 +22,7 @@ const Main = memo((props) => {
         {
             title: t("about"),
             detail: data ? (
-                i18n.language === locales.AR ? data.description_ar : data.description
+                i18n.language === locales.AR ? data.description_ar : <p>{data.description.split(" - ").join("\r\n• ")}</p>
             ) : (
                 <>
                     <Shimmer rounded='xs' className={"my-1"} />
@@ -76,12 +76,14 @@ const Main = memo((props) => {
     ]
 
     return (
-        <Container fluid>
+        <Container fluid className="px-0">
             <DataHeader
                 nooptions
                 title={i18n.language === locales.AR ? data && data.title_ar : data && data.title}
             />
-            <Tabs data={tabs} staticComponentOnRight={<DataCard data={f} />} />
+            <div className="px-3">
+                <Tabs data={tabs} staticComponentOnRight={<DataCard data={f} />} />
+            </div>
         </Container>
     )
 });

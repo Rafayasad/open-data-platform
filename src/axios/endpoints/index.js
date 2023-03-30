@@ -14,7 +14,7 @@ export const endpoints = {
         return client.get("/apis/platform_insights-2.php");
     },
     getMostViewedDatasets: (perPage, pageNumber, searchValue) => {
-        return client.get(`/apis/most_view_datasets-2.php?perpage=${perPage}&pagenumber=${pageNumber}&search=${searchValue}`);
+        return client.get(`/apis/most_view_datasets-2.php?perpage=${perPage}&pagenumber=${pageNumber}&search=${searchValue ? searchValue : ""}`);
     },
     getRecentsDatasets: () => {
         return client.get("/apis/recently_added_datasets-2.php");
@@ -113,12 +113,15 @@ export const endpoints = {
         return client.get('/checkuser')
     },
     logout: () => {
-        return client.get('/user/logout')
+        return client.post(`/user/logout`)
     },
     getIpAddress: () => {
         return axios.get("https://api.db-ip.com/v2/free/self");
     },
     getStoriesTags: () => {
         return client.get("/jsonapi/taxonomy_term/story_tags");
+    },
+    getDownloadCountById: (id) => {
+        return client.get(`/apis/view_download.php?identifier=${id}`)
     }
 } 

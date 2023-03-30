@@ -7,7 +7,8 @@ const initialState = {
             type: "Sort By",
             title: 'Recent'
         }
-    ]
+    ],
+    loading: true
 }
 
 export const storiesSlice = createSlice({
@@ -19,10 +20,13 @@ export const storiesSlice = createSlice({
         },
         setStoriesFilters: (state, action) => {
             state.filters = action.payload
+        },
+        toggleLoading: (state, action) => {
+            state.loading = !state.loading
         }
     },
 })
 
-export const { setStories, setStoriesFilters } = storiesSlice.actions
+export const { setStories, setStoriesFilters, toggleLoading } = storiesSlice.actions
 
 export default storiesSlice.reducer

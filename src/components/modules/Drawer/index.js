@@ -21,7 +21,7 @@ const Drawer = memo((props) => {
     const { t, i18n } = useTranslation()
 
     const { open, setOpen, onClickApplyFilter, appliedFilters, data, year } = props;
-    const { isLoggedIn } = useSelector(state => state.authentication);
+    // const { isLoggedIn } = useSelector(state => state.authentication);
 
     const [activeIndex, setActiveIndex] = useState();
     const [filters, setFilters] = useState([]);
@@ -33,7 +33,6 @@ const Drawer = memo((props) => {
             setFilters([])
         }
     }, [appliedFilters])
-    console.log("sssssssss", filters, appliedFilters);
 
     const toggleDrawer = useCallback(() => setOpen(!open), [open]);
 
@@ -71,8 +70,6 @@ const Drawer = memo((props) => {
     const onClickItem = useCallback((item) => {
 
         let filter = [...filters]
-
-        console.log("itemms", item);
 
         if (filters.some(el => el.title === item.title)) {
 
@@ -120,11 +117,11 @@ const Drawer = memo((props) => {
         // className="mt-5"
         >
             <div style={{ height: "100%" }}>
-                <div style={{ top: isLoggedIn ? 55 : 0, position: "relative", left: 0, right: 0, zIndex: 1000 }} className="p-4 bg-white d-flex align-items-center justify-content-between">
+                <div style={{ top: 0, position: "relative", left: 0, right: 0, zIndex: 1000 }} className="p-4 bg-white d-flex align-items-center justify-content-between">
                     <Heading size="xxs" heading={t("filters")} nomargin />
                     <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="" size={20} />
                 </div>
-                <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%" }} className={`p-4 ${isLoggedIn && "my-4"}`}>
+                <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%" }} className={`p-4`}>
                     {
                         data?.map((item, index) => {
                             return (
