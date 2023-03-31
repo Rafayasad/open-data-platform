@@ -13,7 +13,6 @@ import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
 import { locales } from "../../i18n/helper";
 import View from "../../components/modules/View";
-import { topics as topicsData } from '../../utils/data';
 
 const Home = memo(() => {
 

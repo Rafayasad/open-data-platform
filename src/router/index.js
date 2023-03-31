@@ -18,8 +18,8 @@ const Login = lazy(() => import('../pages/Authentication/Login'))
 const RecoverPassword = lazy(() => import('../pages/Authentication/RecoverPassword'))
 const ResetPassword = lazy(() => import('../pages/Authentication/ResetPassword'))
 const OTP = lazy(() => import('../pages/Authentication/OTP'))
-const SuccessStories = lazy(() => import('../pages/SuccessStories'))
-const SuccessStoriesDetail = lazy(() => import('../pages/SuccessStoriesDetail'))
+// const SuccessStories = lazy(() => import('../pages/SuccessStories'))
+// const SuccessStoriesDetail = lazy(() => import('../pages/SuccessStoriesDetail'))
 const PrivacyPolicy = lazy(() => import('../pages/Authentication/PrivacyPolicy'))
 const ChangePassword = lazy(() => import('../pages/Authentication/ChangePassword'))
 const ContactUs = lazy(() => import('../pages/ContactUs'))
@@ -29,6 +29,8 @@ const InsightsReports = lazy(() => import('../pages/Reports/Insights'))
 const PublishersReports = lazy(() => import('../pages/Reports/Publishers'))
 const DatasetsReports = lazy(() => import('../pages/Reports/Datasets'))
 const Confirmation = lazy(() => import('../pages/Confirmation'))
+const Unauthorized = lazy(() => import('../pages/Error/Unauthorized'))
+const NotFound = lazy(() => import('../pages/Error/NotFound'))
 
 const Router = () => {
 
@@ -57,15 +59,11 @@ const Router = () => {
             <Route path={routes.REAL_TIME_APIS} element={<RealTimeApis />} />
             <Route path={routes.REAL_TIME_APIS_DETAIL} element={<RealTimeApisDetail />} />
             <Route path={routes.CONFIRMATION} element={<Confirmation />} />
-            {
-                !isLoggedIn &&
-                <Fragment>
-                    <Route path={routes.REPORTS} element={<Reports />} />
-                    <Route path={routes.REPORTS_INSIGHTS} element={<InsightsReports />} />
-                    <Route path={routes.REPORTS_PUBLISHERS} element={<PublishersReports />} />
-                    <Route path={routes.REPORTS_DATASETS} element={<DatasetsReports />} />
-                </Fragment>
-            }
+            <Route path={routes.REPORTS} element={isLoggedIn ? <Reports /> : <Unauthorized />} />
+            <Route path={routes.REPORTS_INSIGHTS} element={isLoggedIn ? <InsightsReports /> : <Unauthorized />} />
+            <Route path={routes.REPORTS_PUBLISHERS} element={isLoggedIn ? <PublishersReports /> : <Unauthorized />} />
+            <Route path={routes.REPORTS_DATASETS} element={isLoggedIn ? <DatasetsReports /> : <Unauthorized />} />
+            <Route path="*" element={<NotFound />} />
         </Routes>
     )
 };
