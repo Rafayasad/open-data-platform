@@ -165,7 +165,7 @@ const Dataset = memo(() => {
 
     return (
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
-            <Main filterData={data} searchData={i18n.language === locales.AR ? datasetsSuggestion?.ar : datasetsSuggestion?.en} search={searchValue} onChangeSearchEnter={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
+            <Main nofilter={most_viewed_datasets} filterData={data} searchData={i18n.language === locales.AR ? datasetsSuggestion?.ar : datasetsSuggestion?.en} search={searchValue} onChangeSearchEnter={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
             {
                 !most_viewed_datasets &&
                 <Cards
