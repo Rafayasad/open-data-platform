@@ -51,13 +51,8 @@ function App() {
     getStoriesTags(dispatch, setStoriesTags);
     getSearch("datasets", dispatch, setDatasetsSuggestion)
     getSearch("support", dispatch, setSupportSuggestion)
+    getSuccessStories(dispatch, setStories, toggleLoading, storiesFilters);
   }, []);
-
-  // console.log("stoires filtersssss", storiesFilters);
-  // useEffect(() => {
-  //   getSuccessStories(dispatch, setStories, storiesFilters);
-  // }, [storiesFilters])
-
 
   if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
     console.log = () => { }

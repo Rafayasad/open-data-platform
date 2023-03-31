@@ -23,7 +23,7 @@ export const endpoints = {
         return client.get(`/apis/similar_dataset.php?type=similar&topic=${topic}`);
     },
     getFacets: (key) => {
-        return client.get(`/api/1/search/facets?fulltext=&page=1&page-size=10&sort=modified&sort-order=desc&facets=${key}`);
+        return axios.get(`https://data.abudhabi/opendata/api/1/search/facets?fulltext=&page=1&page-size=10&sort=modified&sort-order=desc&facets=${key}`);
     },
     getAllDatasets: (search, sort, currentPage, rowsPerPage, filters) => {
         return client.get(`/api/1/search?fulltext=${search}&page=${currentPage}&page-size=${rowsPerPage}&sort-order=${sort === 'modified' ? "desc" : "aesc"}&sort=${sort}&facets=0&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
