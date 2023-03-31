@@ -49,8 +49,8 @@ const Router = () => {
             <Route path={routes.RECOVER} element={<RecoverPassword />} />
             <Route path={routes.RESET} element={<ResetPassword />} />
             <Route path={routes.OTP} element={<OTP />} />
-            <Route path={routes.SUCCESS_STOIRES} element={<SuccessStories />} />
-            <Route path={routes.SUCCESS_STOIRES_DETAIL} element={<SuccessStoriesDetail />} />
+            {/* <Route path={routes.SUCCESS_STOIRES} element={<SuccessStories />} />
+            <Route path={routes.SUCCESS_STOIRES_DETAIL} element={<SuccessStoriesDetail />} /> */}
             <Route path={routes.POLICY} element={<PrivacyPolicy />} />
             <Route path={routes.CHANGE} element={<ChangePassword />} />
             <Route path={routes.CONTACT} element={<ContactUs />} />

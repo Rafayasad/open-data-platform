@@ -18,8 +18,6 @@ import AbuDhabiLogo from "../../../../assets/images/Abu-Dhabi-Data-Logo.png";
 
 import './style.css';
 
-
-
 const MiddleFooter = memo(() => {
 
     const { t, i18n } = useTranslation();
@@ -73,10 +71,10 @@ const MiddleFooter = memo(() => {
                     title: t("openDataPlatform"),
                     link: routes.ABOUTUS
                 },
-                {
-                    title: t("successStories"),
-                    link: routes.SUCCESS_STOIRES
-                },
+                // {
+                //     title: t("successStories"),
+                //     link: routes.SUCCESS_STOIRES
+                // },
                 {
                     title: t("applications"),
                     link: routes.APPLICATIONS

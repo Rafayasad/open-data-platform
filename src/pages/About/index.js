@@ -14,14 +14,14 @@ import { colors } from "../../utils/colors";
 
 const About = memo(() => {
 
-    const { t } = useTranslation();
-    const navigate = useNavigate();
+    // const { t } = useTranslation();
+    // const navigate = useNavigate();
 
     const aboutus = useSelector(state => state.about.aboutus);
-    const stories = useSelector(state => state.stories.stories);
+    // const stories = useSelector(state => state.stories.stories);
 
-    const onClickCard = useCallback((id) => { navigate(`${routes.SUCCESS_STOIRES_DETAIL}?id=${id}`) });
-    const onClickButton = useCallback(() => { navigate(routes.SUCCESS_STOIRES) });
+    // const onClickCard = useCallback((id) => { navigate(`${routes.SUCCESS_STOIRES_DETAIL}?id=${id}`) });
+    // const onClickButton = useCallback(() => { navigate(routes.SUCCESS_STOIRES) });
 
     return (
         <View theme='dark' noupperfooter>
@@ -29,7 +29,7 @@ const About = memo(() => {
                 <Main data={aboutus} />
             </div>
             <hr className="m-0 p-0 mx-4" />
-            <Cards
+            {/* <Cards
                 notagsactive
                 noheadercomponent
                 backgroundColor={colors.white}
@@ -38,7 +38,8 @@ const About = memo(() => {
                 size="md"
                 hoverable="primary"
                 onClick={onClickCard}
-                onClickViewAll={onClickButton} />
+                onClickViewAll={onClickButton}
+            /> */}
             <AdLogo />
         </View>
     )
