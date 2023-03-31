@@ -112,7 +112,7 @@ const Cards = memo((props) => {
                     <div className="d-flex d-lg-none" style={{ overflowX: "scroll" }}>
                         {
                             data && data.length > 0 ? data.map((item, index) => (
-                                <div key={index} className="p-2 d-flex" style={{ minWidth: "290px" }}>
+                                <div key={index} className="py-2 col d-flex" style={{ minWidth: "290px" }}>
                                     <Card
                                         notagsactive={notagsactive}
                                         noheadercomponent={noheadercomponent}
@@ -127,7 +127,7 @@ const Cards = memo((props) => {
                                         onClick={() => onClick(item.id)}
                                     />
                                 </div>
-                            )) : <Loader backgroundColor={backgroundColor} />
+                            )) : <Loader type='image-inner-text' width={290} backgroundColor={backgroundColor} />
                         }
                     </div>
 

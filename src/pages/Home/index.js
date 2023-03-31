@@ -17,11 +17,14 @@ import { colors } from "../../utils/colors";
 import { locales } from "../../i18n/helper";
 import { useSelector } from "react-redux";
 import View from "../../components/modules/View";
+import { setFilter } from "../../redux/reducers/Facets";
+import { useDispatch } from "react-redux";
 
 const Home = memo(() => {
 
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const topicsDiv = document.getElementById("topics");
 
@@ -67,7 +70,14 @@ const Home = memo(() => {
         navigate(routes.DATASET, { state: { listItem: [item] } })
     });
 
-    const onClickButton = useCallback((title) => { navigate(`${routes.DATASET}${title === "mostvieweddatasets" ? "?id=most_viewed_datasets" : ""}`) });
+    const onClickButton = useCallback((title) => {
+        dispatch(setFilter());
+        if (title === "mostvieweddatasets") {
+            navigate(`${routes.DATASET}?id=most_viewed_datasets`)
+        } else {
+            navigate(`${routes.DATASET}`)
+        }
+    });
 
     const onApplyFilter = useCallback((filters) => { navigate(routes.DATASET, { state: { listItem: filters } }) })
 

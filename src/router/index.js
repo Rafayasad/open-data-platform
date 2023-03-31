@@ -1,7 +1,7 @@
 import React, { lazy } from "react";
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import RealTimeApisDetail from "../pages/RealTimeApisDetail";
 import { routes } from "./helper";
 
@@ -36,7 +36,7 @@ const Router = () => {
 
     return (
         <Routes>
-            {/* <Route path={'/'} element={} /> */}
+            <Route path={'/'} element={<Navigate to={routes.HOME} replace={true} />} />
             <Route path={routes.HOME} element={<Home />} />
             <Route path={routes.DATASET} element={<Dataset />} />
             <Route path={routes.DATASET_DETAIL} element={<DatasetDetail />} />

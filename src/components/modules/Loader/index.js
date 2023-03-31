@@ -6,7 +6,7 @@ let sizes = ['400px', '280px', '340px']
 
 const Loader = memo((props) => {
 
-    const { type, backgroundColor } = props
+    const { type, width, backgroundColor } = props
 
     return (
         Array(3).fill(null).map((_, index) => (
@@ -18,7 +18,7 @@ const Loader = memo((props) => {
                     <Col md={12} className="my-2">
                         <Shimmer height={60} rounded="sm" />
                     </Col> :
-                    <Col md={4} xs={10} lg={4} className="py-2 px-1">
+                    <Col md={4} className="py-2">
                         {
                             type === 'image-outer-text' ? (
                                 <div>
@@ -62,7 +62,9 @@ const Loader = memo((props) => {
                                 <Shimmer
                                     backgroundColor={backgroundColor}
                                     rounded="lg"
-                                    height={type === 'image-inner-text' ? 250 : window.innerWidth >= 768 ? 332 : 300}
+                                    width={width}
+                                    className={width && "mx-2"}
+                                    height={type === 'image-inner-text' ? 250 : 332}
                                 />
                             )
                         }

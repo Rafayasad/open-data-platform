@@ -106,6 +106,8 @@ const Dataset = memo(() => {
 
     }, [!most_viewed_datasets, sort]);
 
+    console.log("sstatate", state);
+
     useEffect(() => {
         if (most_viewed_datasets) {
             getMostViewedDatasets(setDatasets, setTotalCount, searchValue, setLoading, rowsPerPage, currentPage)
