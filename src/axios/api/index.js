@@ -472,7 +472,7 @@ export const getAllApplications = (dispatch, setData) => {
                                 title_ar: field_title_ar,
                                 description: field_application_description,
                                 description_ar: field_application_description_ar,
-                                image: `${process.env.REACT_APP_BASE_URL}${res.data.data.attributes.uri.url}`,
+                                image: `${process.env.REACT_APP_IMAGE_BASE_URL}${res.data.data.attributes.uri.url}`,
                                 applicationURL: field_application_url.uri
                             })
                         }).catch((err) => {
@@ -514,7 +514,7 @@ export const getAboutUs = (dispatch, setData) => {
                         let image = await endpoints.getImages(item.relationships.field_image.links.related.href)
                             .then((res) => {
                                 if (res.status === 200) {
-                                    return `${process.env.REACT_APP_BASE_URL}${res.data.data.attributes.uri.url}`
+                                    return `${process.env.REACT_APP_IMAGE_BASE_URL}${res.data.data.attributes.uri.url}`
                                 }
                             }).catch((err) => {
                                 console.log("Error Message While Getting Image", err)
@@ -543,7 +543,7 @@ export const getAboutUs = (dispatch, setData) => {
                                             let image = await endpoints.getImages(item.relationships.field_image.links.related.href)
                                                 .then((res) => {
                                                     if (res.status === 200) {
-                                                        return `${process.env.REACT_APP_BASE_URL}${res.data.data.attributes.uri.url}`
+                                                        return `${process.env.REACT_APP_IMAGE_BASE_URL}${res.data.data.attributes.uri.url}`
                                                     }
                                                 }).catch((err) => {
                                                     console.log("Error Message While Getting Image", err)
@@ -804,7 +804,7 @@ export const getSuccessStories = (dispatch, setData, toggleLoading, filters) => 
 
                             let image = res.data.data.attributes.uri.url
 
-                            return `${process.env.REACT_APP_BASE_URL}${image}`;
+                            return `${process.env.REACT_APP_IMAGE_BASE_URL}${image}`;
 
                         }
                     }).catch((err) => {
@@ -890,7 +890,7 @@ export const getSuccessStoriesById = (id, setData) => {
                                         if (res.data.data) {
                                             let image = res.data.data.attributes.uri.url;
 
-                                            return `${process.env.REACT_APP_BASE_URL}${image}`;
+                                            return `${process.env.REACT_APP_IMAGE_BASE_URL}${image}`;
                                         }
 
                                         return null;
@@ -921,7 +921,7 @@ export const getSuccessStoriesById = (id, setData) => {
 
                             let image = res.data.data.attributes.uri.url
 
-                            return `${process.env.REACT_APP_BASE_URL}${image}`;
+                            return `${process.env.REACT_APP_IMAGE_BASE_URL}${image}`;
 
                         }
                     }).catch((err) => {
