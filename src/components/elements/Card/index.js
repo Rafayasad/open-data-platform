@@ -21,6 +21,7 @@ import apiImage from '../../../assets/images/api_img.png';
 import i18n from "../../../i18n/i18n";
 import { locales } from "../../../i18n/helper";
 import BottomSheetBar from "../../modules/BottomSheet";
+import { routes } from "../../../router/helper";
 
 const Card = memo((props) => {
 
@@ -122,7 +123,7 @@ const Card = memo((props) => {
                         {
                             tags && tags.length > 0 && tags.map((item, index) => (
                                 <Tag key={index} title={item}
-                                    onClick={() => !notagsactive && onClickTag("/dataset", { listItem: [{ title: item, type: "theme" }] })} />
+                                    onClick={() => !notagsactive && onClickTag(routes.DATASET, { listItem: [{ title: item, type: "theme" }] })} />
                             ))
                         }
                     </Col>
