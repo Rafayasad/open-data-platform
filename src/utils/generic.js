@@ -23,7 +23,7 @@ export const numberWithCommas = (x) => {
       x = x.replace(pattern, "$1,$2");
     return x;
   }
-  return null;
+  return "0";
 }
 
 

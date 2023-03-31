@@ -112,11 +112,11 @@ const Cards = memo((props) => {
                     <div className="d-flex d-lg-none" style={{ overflowX: "scroll" }}>
                         {
                             data && data.length > 0 ? data.map((item, index) => (
-                                <div key={index} className="p-2 d-flex" style={{ minWidth: "300px" }}>
+                                <div key={index} className="p-2 d-flex" style={{ minWidth: "290px" }}>
                                     <Card
                                         notagsactive={notagsactive}
                                         noheadercomponent={noheadercomponent}
-                                        size={size}
+                                        size={"md"}
                                         hoverable={hoverable}
                                         title={i18n.language === locales.AR ? item.title_ar : item.title}
                                         description={item.description && item.description_ar && i18n.language === locales.AR ? item.description_ar : item.description}

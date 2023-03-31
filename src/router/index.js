@@ -36,6 +36,7 @@ const Router = () => {
 
     return (
         <Routes>
+            {/* <Route path={'/'} element={} /> */}
             <Route path={routes.HOME} element={<Home />} />
             <Route path={routes.DATASET} element={<Dataset />} />
             <Route path={routes.DATASET_DETAIL} element={<DatasetDetail />} />

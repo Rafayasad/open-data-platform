@@ -32,7 +32,7 @@ const Card = memo((props) => {
         hoverable, nopadding, shortTitle, headingSize, onClick, nodropdown,
         noheadercomponent, notags, notagsactive, url } = props;
 
-    var height = "332px", border, ClassName;
+    var HEIGHT = "332px", border, ClassName;
 
     const [selectedDropdownValue, setSelectedDropdownValue] = useState();
     const [isDownloadLink, setIsDownloadLink] = useState(); // for linking url
@@ -43,11 +43,11 @@ const Card = memo((props) => {
     const downloadResources = useCallback((links) => { setIsDownloadLink(links) }); //callback for url redirect
 
     if (size === "xs") {
-        height = "225px"
+        HEIGHT = "225px"
     } else if (size === 'sm') {
-        height = "332px"
+        HEIGHT = "332px"
     } else if (size === 'md') {
-        height = '290px'
+        HEIGHT = '290px'
     }
 
     if (noborder) {
@@ -116,7 +116,7 @@ const Card = memo((props) => {
                 selectedSheetValue={selectedSheetValue}
                 heading={title}
                 options={selectedSheetValue === t("downloadDatasets") ? specificDownloadOptions : selectedSheetValue === t("share") ? specificShareOptions : options} />
-            <RBCard className={` ${nopadding ? "py-4" : "p-4"} ${ClassName}`} style={{ height: height, width: "100%", borderRadius: "30px", borderWidth: border }}>
+            <RBCard className={` ${nopadding ? "py-4" : "p-4"} ${ClassName}`} style={{ height: HEIGHT, width: "100%", borderRadius: "30px", borderWidth: border }}>
                 {
                     !notags &&
                     <Row className={`${nopadding && "m-0"} h-25 align-items-center`}>
