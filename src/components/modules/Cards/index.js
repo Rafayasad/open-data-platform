@@ -1,3 +1,4 @@
+import './style.css';
 import React, { memo, useCallback, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import Header from "./Header";
@@ -43,7 +44,7 @@ const Cards = memo((props) => {
         if (type === 'image-inner-text') {
             return (
                 data && data.length > 0 ? data.map((item, index) => (
-                    <Col key={index} md={4} className="py-2">
+                    <Col key={index} md={6} lg={4} className="py-2">
                         <CardWithText
                             hoverable
                             noborder
@@ -59,7 +60,7 @@ const Cards = memo((props) => {
         } else if (type === 'image-outer-text') {
             return (
                 data && data.length > 0 ? data.map((item, index) => (
-                    <Col key={index} md={4} className="py-2">
+                    <Col key={index} md={6} lg={4} className="py-2">
                         <CardWithOuterText
                             title={i18n.language === locales.AR ? item.title_ar : item.title}
                             description={i18n.language === locales.AR ? item.description_ar : item.description}
@@ -73,7 +74,7 @@ const Cards = memo((props) => {
             return (
                 data ? (
                     data.length > 0 ? data.map((item, index) => (
-                        <Col key={index} md={4} className="py-2">
+                        <Col key={index} md={6} lg={4} className="py-2">
                             <CardStory
                                 title={i18n.language === locales.AR ? item.title_ar : item.title}
                                 description={item.description && item.description_ar && i18n.language === locales.AR ? item.description_ar : item.description}
@@ -90,23 +91,68 @@ const Cards = memo((props) => {
         } else {
 
             return (
-                data && data.length > 0 ? data.map((item, index) => (
-                    <Col key={index} md={4} sm={4} className="py-2">
-                        <Card
-                            notagsactive={notagsactive}
-                            noheadercomponent={noheadercomponent}
-                            size={size}
-                            hoverable={hoverable}
-                            title={i18n.language === locales.AR ? item.title_ar : item.title}
-                            description={item.description && item.description_ar && i18n.language === locales.AR ? item.description_ar : item.description}
-                            publisher={item.publisher && item.publisher_ar && i18n.language === locales.AR ? item.publisher_ar : item.publisher}
-                            tags={i18n.language === locales.AR ? item.tags && item.tags_ar.slice(0, 2) : item.tags && item.tags.slice(0, 2)}
-                            resources={i18n.language === locales.AR ? item.resources_ar : item.resources}
-                            url={item.url}
-                            onClick={() => onClick(item.id)}
-                        />
-                    </Col>
-                )) : <Loader backgroundColor={backgroundColor} />
+                // data && data.length > 0 ? data.map((item, index) => (
+                //     <Col key={index} md={4} sm={4} className="py-2">
+                //         <Card
+                //             notagsactive={notagsactive}
+                //             noheadercomponent={noheadercomponent}
+                //             size={size}
+                //             hoverable={hoverable}
+                //             title={i18n.language === locales.AR ? item.title_ar : item.title}
+                //             description={item.description && item.description_ar && i18n.language === locales.AR ? item.description_ar : item.description}
+                //             publisher={item.publisher && item.publisher_ar && i18n.language === locales.AR ? item.publisher_ar : item.publisher}
+                //             tags={i18n.language === locales.AR ? item.tags && item.tags_ar.slice(0, 2) : item.tags && item.tags.slice(0, 2)}
+                //             resources={i18n.language === locales.AR ? item.resources_ar : item.resources}
+                //             url={item.url}
+                //             onClick={() => onClick(item.id)}
+                //         />
+                //     </Col>
+                // )) : <Loader backgroundColor={backgroundColor} />
+                <>
+                    <div className="d-flex d-lg-none" style={{ overflowX: "scroll" }}>
+                        {
+                            data && data.length > 0 ? data.map((item, index) => (
+                                <div key={index} className="p-2 d-flex" style={{ minWidth: "300px" }}>
+                                    <Card
+                                        notagsactive={notagsactive}
+                                        noheadercomponent={noheadercomponent}
+                                        size={size}
+                                        hoverable={hoverable}
+                                        title={i18n.language === locales.AR ? item.title_ar : item.title}
+                                        description={item.description && item.description_ar && i18n.language === locales.AR ? item.description_ar : item.description}
+                                        publisher={item.publisher && item.publisher_ar && i18n.language === locales.AR ? item.publisher_ar : item.publisher}
+                                        tags={i18n.language === locales.AR ? item.tags && item.tags_ar.slice(0, 2) : item.tags && item.tags.slice(0, 2)}
+                                        resources={i18n.language === locales.AR ? item.resources_ar : item.resources}
+                                        url={item.url}
+                                        onClick={() => onClick(item.id)}
+                                    />
+                                </div>
+                            )) : <Loader backgroundColor={backgroundColor} />
+                        }
+                    </div>
+
+                    <Row className="d-none d-lg-flex w-100 align-items-center m-0">
+                        {
+                            data && data.length > 0 ? data.map((item, index) => (
+                                <Col key={index} md={4} sm={4} className="py-2">
+                                    <Card
+                                        notagsactive={notagsactive}
+                                        noheadercomponent={noheadercomponent}
+                                        size={size}
+                                        hoverable={hoverable}
+                                        title={i18n.language === locales.AR ? item.title_ar : item.title}
+                                        description={item.description && item.description_ar && i18n.language === locales.AR ? item.description_ar : item.description}
+                                        publisher={item.publisher && item.publisher_ar && i18n.language === locales.AR ? item.publisher_ar : item.publisher}
+                                        tags={i18n.language === locales.AR ? item.tags && item.tags_ar.slice(0, 2) : item.tags && item.tags.slice(0, 2)}
+                                        resources={i18n.language === locales.AR ? item.resources_ar : item.resources}
+                                        url={item.url}
+                                        onClick={() => onClick(item.id)}
+                                    />
+                                </Col>
+                            )) : <Loader backgroundColor={backgroundColor} />
+                        }
+                    </Row>
+                </>
             )
         }
     }

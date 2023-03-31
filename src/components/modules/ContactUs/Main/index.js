@@ -7,7 +7,7 @@ const Main = memo(() => {
     return (
         <Container className="pt-5 mt-4" fluid >
             <Row>
-                <Col lg={6} className='d-none d-lg-block bg-primary p-0'>
+                <Col lg={6} className='d-none d-lg-block p-0'>
                     <ImageComponent />
                 </Col>
                 <Col sm={12} md={12} lg={6} >

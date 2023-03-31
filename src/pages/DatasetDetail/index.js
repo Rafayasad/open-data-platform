@@ -8,6 +8,8 @@ import { colors } from "../../utils/colors";
 import { useTranslation } from "react-i18next";
 import BreadCrumb from "../../components/elements/BreadCrumb";
 import View from "../../components/modules/View";
+import i18n from "../../i18n/i18n";
+import { locales } from "../../i18n/helper";
 
 const data = [
     {
@@ -69,15 +71,18 @@ const DatasetDetail = memo(() => {
                 <div className="px-4 pt-5">
                     <BreadCrumb items={[t("datasets"), t("detail")]} />
                 </div>
+                {console.log("ssss", dataset)}
                 <Main data={dataset} url={`https://data.abudhabi/dataset/${id}`} />
                 <Cards onClickViewAll={() => {
                     navigate(routes.DATASET, {
                         replace: true, state: {
                             listItem: [{
-                                title: dataset.topics[0]
+                                title: dataset.topics[0],
+                                type: "theme"
                             }]
                         }
                     })
+                    // [{ title: item, type: "theme" }]
                 }} title={t("similarDatasets")} backgroundColor={colors.white} data={similarDataset} onClick={onClickCard} />
             </div>
         </View>

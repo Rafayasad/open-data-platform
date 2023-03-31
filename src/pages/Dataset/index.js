@@ -23,6 +23,8 @@ const Dataset = memo(() => {
     const { state, pathname, search } = useLocation();
     const datasetsDiv = document.getElementById("datasetsList");
 
+    console.log("lllllllllllllll", storedFilters);
+
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -78,7 +80,6 @@ const Dataset = memo(() => {
             setFilters(storedFilters)
         }
     }, [])
-
     useEffect(() => {
 
         if (state && state.search) {
@@ -92,6 +93,7 @@ const Dataset = memo(() => {
 
         if (!most_viewed_datasets) {
             if (state) {
+                console.log("sasdsad");
                 navigate(pathname, { replace: true, state: null })
                 getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [])
             }
@@ -164,7 +166,15 @@ const Dataset = memo(() => {
             <Main filterData={data} searchData={i18n.language === locales.AR ? datasetsSuggestion?.ar : datasetsSuggestion?.en} search={searchValue} onChangeSearchEnter={onChangeSearch} filter={filters} onApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} />
             {
                 !most_viewed_datasets &&
-                <Cards notagsactive buttonText={viewAll && t("viewLess")} onClickViewAll={toggle} title={t("featuredDatasets")} hoverable="primary" backgroundColor={colors.white} data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)} onClick={onClickCard} />
+                <Cards
+                    notagsactive
+                    buttonText={viewAll && t("viewLess")}
+                    onClickViewAll={toggle}
+                    title={t("featuredDatasets")}
+                    hoverable="primary"
+                    backgroundColor={colors.white}
+                    data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)}
+                    onClick={onClickCard} />
             }
             <div id="datasetsList">
                 <DatasetList
@@ -184,6 +194,7 @@ const Dataset = memo(() => {
                     selectedValue={sort}
                     onClick={onClickCard}
                     onSelectDropdown={onChangeDropdownValue}
+                    minWidth={"70%"}
                 />
             </div>
         </View>

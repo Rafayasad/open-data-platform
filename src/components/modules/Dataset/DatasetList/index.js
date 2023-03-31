@@ -49,7 +49,7 @@ const data = [
 
 const DatasetList = memo((props) => {
 
-    const { nocount, title, onClick, datasets, totalCount, currentPage, rowsPerPage, loading, notagsactive, onChangePage, selectedValue, onSelectDropdown, notags, noheader, cardSize, nodropdown } = props
+    const { minWidth, nocount, title, onClick, datasets, totalCount, currentPage, rowsPerPage, loading, notagsactive, onChangePage, selectedValue, onSelectDropdown, notags, noheader, cardSize, nodropdown } = props
 
     const { t, i18n } = useTranslation();
 
@@ -111,6 +111,7 @@ const DatasetList = memo((props) => {
                                 description={item.Views ? `${item.Views + ` ${t("viewCount")}`}` : i18n.language === locales.AR ? item.description_ar : item.description}
                                 tags={i18n.language === locales.AR ? item.tags_ar : item.tags}
                                 resources={item.resources}
+                                minWidth={minWidth}
                                 // resources={i18n.language === locales.AR ? item.resources : item.resources}
                                 onClick={() => onClick(item.id)}
                             />

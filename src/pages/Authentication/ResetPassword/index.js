@@ -34,7 +34,7 @@ const ResetPassword = memo(() => {
     } else if (validateEmail(email) === false) {
       toast("Please provide a valid email address.", { type: "error" })
     } else if (isStrongPassword(password) === false) {
-      toast("Password isn't matching validation requiremnts.", { type: "error" })
+      toast("Password isn't matching validation requirements.", { type: "error" })
     } else if (rePassword !== password) {
       toast("Both passwords doesn't match.", { type: "error" })
     } else if (!policyCheck) {

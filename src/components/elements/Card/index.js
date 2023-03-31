@@ -29,7 +29,7 @@ const Card = memo((props) => {
 
     const { resources, title, publisher, description, tags, size, noborder,
         hoverable, nopadding, shortTitle, headingSize, onClick, nodropdown,
-        noheadercomponent, notags, notagsactive, url, views } = props;
+        noheadercomponent, notags, notagsactive, url } = props;
 
     var height = "332px", border, ClassName;
 
@@ -72,8 +72,8 @@ const Card = memo((props) => {
 
     const options = [
         {
-            title: !selectedSheetValue ? t("downloadDatasets") : t("download"),
-            icon: !selectedSheetValue ? <BsArrowDownCircleFill size={20} color="black" /> : <MdOutlineFileDownload size={20} color="black" />,
+            title: window.innerWidth <= 768 ? t("downloadDatasets") : t("download"),
+            icon: window.innerWidth <= 768 ? <BsArrowDownCircleFill size={20} color="black" /> : <MdOutlineFileDownload size={20} color="black" />,
             onClick: isClicked,
         },
         {
@@ -107,67 +107,71 @@ const Card = memo((props) => {
         }
     ))
     return (
-        <RBCard className={`${nopadding ? "py-4" : "p-4"} ${ClassName}`} style={{ height: height, borderRadius: "30px", borderWidth: border }}>
-            {<BottomSheetBar
+        <>
+            <BottomSheetBar
                 open={openBottomSheet}
                 setOpen={setOpenBottomSheet}
                 setSelectedSheetValue={setSelectedSheetValue}
                 selectedSheetValue={selectedSheetValue}
                 heading={title}
-                options={selectedSheetValue === t("downloadDatasets") ? specificDownloadOptions : selectedSheetValue === t("share") ? specificShareOptions : options} />}
-            {
-                !notags &&
-                <Row className={`${nopadding && "m-0"} h-25 align-items-center`}>
-                    <Col xs={10} lg={8} md={8} className="d-flex scroll">
+                options={selectedSheetValue === t("downloadDatasets") ? specificDownloadOptions : selectedSheetValue === t("share") ? specificShareOptions : options} />
+            <RBCard className={` ${nopadding ? "py-4" : "p-4"} ${ClassName}`} style={{ height: height, width: "100%", borderRadius: "30px", borderWidth: border }}>
+                {
+                    !notags &&
+                    <Row className={`${nopadding && "m-0"} h-25 align-items-center`}>
+                        <Col xs={8} className="d-flex scroll">
+                            {
+                                tags && tags.length > 0 && tags.map((item, index) => (
+                                    <Tag key={index} title={item}
+                                        onClick={() => !notagsactive && onClickTag("/dataset", { listItem: [{ title: item, type: "theme" }] })} />
+                                ))
+                            }
+                        </Col>
                         {
-                            tags && tags.length > 0 && tags.map((item, index) => (
-                                <Tag key={index} title={item}
-                                    onClick={() => !notagsactive && onClickTag("/dataset", { listItem: [{ title: item, type: "theme" }] })} />
-                            ))
+                            !nodropdown &&
+                            <Col xs={4} className='d-flex justify-content-end'>
+                                {window.innerWidth <= 768 ?
+                                    <BsThreeDots onClick={() => setOpenBottomSheet(true)} color={colors.black} size={28} style={{ cursor: 'pointer' }} />
+                                    :
+                                    <Dropdown
+                                        dropdownWidth={"100%"}
+                                        width={"100%"}
+                                        noheadercomponent={noheadercomponent}
+                                        autoClose={"outside"}
+                                        minWidth={"50%"}
+                                        size={"xl"}
+                                        // size={selectedDropdownValue === t("download") ? window.innerWidth >= 768 ? "sm" : "xl" : window.innerWidth >= 768 ? "sm" : "lg"}
+                                        options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
+                                        selectedDropdownValue={selectedDropdownValue}
+                                        setSelectedDropdownValue={setSelectedDropdownValue}
+                                        headerComponent={<BsThreeDots color={colors.black} size={28} style={{ cursor: 'pointer' }} />}
+                                    />
+                                }
+                            </Col>
                         }
+                    </Row>
+                }
+                <Row className={`${nopadding && "m-0"} ${publisher && !notags ? "h-50" : "h-75"}`}>
+                    <Col md={shortTitle ? 8 : 12}>
+                        <Heading bold underline maxNumberOfLines={shortTitle ? 2 : 3} size={headingSize ? headingSize : "md"} heading={title} onClick={onClick} />
                     </Col>
                     {
-                        !nodropdown &&
-                        <Col md={4} xs={2} lg={4} className='d-flex justify-content-end'>
-                            {window.innerWidth <= 768 ?
-                                <BsThreeDots onClick={() => setOpenBottomSheet(true)} color={colors.black} size={28} style={{ cursor: 'pointer' }} />
-                                :
-                                <Dropdown
-                                    dropdownWidth={"100%"}
-                                    width={"100%"}
-                                    noheadercomponent={noheadercomponent}
-                                    autoClose={"outside"}
-                                    size={selectedDropdownValue === t("download") ? window.innerWidth >= 768 ? "sm" : "xl" : window.innerWidth >= 768 ? "sm" : "lg"}
-                                    options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
-                                    selectedDropdownValue={selectedDropdownValue}
-                                    setSelectedDropdownValue={setSelectedDropdownValue}
-                                    headerComponent={<BsThreeDots color={colors.black} size={28} style={{ cursor: 'pointer' }} />}
-                                />
-                            }
+                        description &&
+                        <Col md={10}>
+                            <Heading maxNumberOfLines={shortTitle ? 2 : 3} color={'#404040'} size={shortTitle ? "xs" : "xxs"} heading={description} />
                         </Col>
                     }
                 </Row>
-            }
-            <Row className={`${nopadding && "m-0"} ${publisher && !notags ? "h-50" : "h-75"}`}>
-                <Col md={shortTitle ? 8 : 12}>
-                    <Heading bold underline maxNumberOfLines={shortTitle ? 2 : 3} size={headingSize ? headingSize : "md"} heading={title} onClick={onClick} />
-                </Col>
                 {
-                    description &&
-                    <Col md={10}>
-                        <Heading maxNumberOfLines={shortTitle ? 2 : 3} color={'#404040'} size={shortTitle ? "xs" : "xxs"} heading={description} />
-                    </Col>
+                    publisher &&
+                    <Row className={`${nopadding && "m-0"} h-25 align-items-end`} >
+                        <Col>
+                            <Heading size='xxs' color={colors.gray} nomargin heading={publisher} />
+                        </Col>
+                    </Row>
                 }
-            </Row>
-            {
-                publisher &&
-                <Row className={`${nopadding && "m-0"} h-25 align-items-end`} >
-                    <Col>
-                        <Heading size='xxs' color={colors.gray} nomargin heading={publisher} />
-                    </Col>
-                </Row>
-            }
-        </RBCard>
+            </RBCard>
+        </>
     )
 });
 

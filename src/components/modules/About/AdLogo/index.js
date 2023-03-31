@@ -22,14 +22,18 @@ const AdLogo = memo(() => {
             </Row>
             <Row className="my-4">
                 <Container>
-                    <Row>
-                        {
-                            data && data.length > 0 && data.map((item, index) => (
-                                <Col md={6} lg={3} key={index} className='d-flex justify-content-center align-items-center'>
-                                    <img width={'150px'} src={item} />
-                                </Col>
-                            ))
-                        }
+                    <Row className="justify-content-center">
+                        <Col md={10}>
+                            <Row>
+                                {
+                                    data && data.length > 0 && data.map((item, index) => (
+                                        <Col xs={6} lg={3} key={index} className='d-flex justify-content-center align-items-center'>
+                                            <img width={'150px'} src={item} />
+                                        </Col>
+                                    ))
+                                }
+                            </Row>
+                        </Col>
                     </Row>
                 </Container>
             </Row>

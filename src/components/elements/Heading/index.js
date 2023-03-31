@@ -7,7 +7,7 @@ import { locales } from "../../../i18n/helper";
 
 const Heading = memo((props) => {
 
-  const { heading, color, size, underline, maxNumberOfLines, nomargin, capitalize, bold, onClick, sup } = props;
+  const { heading, color, size, underline, maxNumberOfLines, nomargin, capitalize, bold, onClick } = props;
 
   var Tag,
     ClassName = "";

@@ -12,7 +12,7 @@ import View from "../../components/modules/View";
 import i18n from "../../i18n/i18n";
 import { locales } from "../../i18n/helper";
 import { getStoriesTags, getSuccessStories } from "../../axios/api";
-import { setStories, setStoriesFilters } from "../../redux/reducers/SuccessStories";
+import { setStories, setStoriesFilters, toggleLoading } from "../../redux/reducers/SuccessStories";
 import { getYears } from "../../utils/generic";
 
 const SuccessStories = memo(() => {
@@ -30,7 +30,7 @@ const SuccessStories = memo(() => {
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
     useEffect(() => {
-        getSuccessStories(dispatch, setStories, storiesFilters);
+        getSuccessStories(dispatch, setStories, toggleLoading, storiesFilters);
     }, [storiesFilters])
 
     useEffect(() => {

@@ -309,8 +309,8 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
 
     return endpoints.
         getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then(async (res) => {
+            console.log("ARRRRRR",res.data);
             if (res.status === 200) {
-
                 if (res.data.total > 0 && search && search.trim() !== "") {
                     let obj = {
                         keyword: search,
@@ -361,6 +361,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                     }
                 ))
                 setLoading(false)
+                console.log("ARRR", res.data, arr);
                 setData(arr)
 
             }

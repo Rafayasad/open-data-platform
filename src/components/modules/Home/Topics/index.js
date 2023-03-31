@@ -33,7 +33,7 @@ const Topics = memo((props) => {
                 </Col>
             </Row>
             {
-                data && data.length > 0 && data.slice(0, all ? data.length : 8).map((item, index) => (
+                data && data.length > 0 && data.slice(0, all ? data.length : window.innerWidth >= 768 ? 8 : 5).map((item, index) => (
                     <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave} >
                         {
                             index > 0 &&
@@ -44,7 +44,7 @@ const Topics = memo((props) => {
                 ))
             }
             <Row className="py-3 m-0">
-                <Col className="px-4 d-flex justify-content-end">
+                <Col className={`px-4 d-flex ${window.innerWidth >= 768 ? "justify-content-end" : "justify-content-center"}`}>
                     <Button borderColor='white' backgroundColor='black' textColor='white' title={all ? t("viewLess") : t("viewAll")}
                         onClick={onClick} />
                 </Col>
