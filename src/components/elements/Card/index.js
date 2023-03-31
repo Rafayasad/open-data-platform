@@ -84,7 +84,7 @@ const Card = memo((props) => {
         }
     ]
 
-    const specificDownloadOptions = resources?.map((item, index) => (
+    const specificDownloadOptions = resources?.map(item => (
         {
             title: i18n.language === locales.AR ? item.title_ar : item.title,
             onClick: downloadResources,
@@ -97,7 +97,7 @@ const Card = memo((props) => {
         }
     ))
 
-    const specificShareOptions = shareOptions?.map((item, index) => (
+    const specificShareOptions = shareOptions?.map(item => (
         {
             title: t(item.title),
             format: item.format,
@@ -130,20 +130,21 @@ const Card = memo((props) => {
                     {
                         !nodropdown &&
                         <Col md={4} xs={2} lg={4} className='d-flex justify-content-end'>
-                            {window.innerWidth <= 768 ?
-                                <BsThreeDots onClick={() => setOpenBottomSheet(true)} color={colors.black} size={28} style={{ cursor: 'pointer' }} />
-                                :
-                                <Dropdown
-                                    dropdownWidth={"100%"}
-                                    width={"100%"}
-                                    noheadercomponent={noheadercomponent}
-                                    autoClose={"outside"}
-                                    size={selectedDropdownValue === t("download") ? window.innerWidth >= 768 ? "sm" : "xl" : window.innerWidth >= 768 ? "sm" : "lg"}
-                                    options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
-                                    selectedDropdownValue={selectedDropdownValue}
-                                    setSelectedDropdownValue={setSelectedDropdownValue}
-                                    headerComponent={<BsThreeDots color={colors.black} size={28} style={{ cursor: 'pointer' }} />}
-                                />
+                            {
+                                window.innerWidth <= 768 ?
+                                    <BsThreeDots onClick={() => setOpenBottomSheet(true)} color={colors.black} size={28} style={{ cursor: 'pointer' }} />
+                                    :
+                                    <Dropdown
+                                        dropdownWidth={"100%"}
+                                        width={"100%"}
+                                        noheadercomponent={noheadercomponent}
+                                        autoClose={"outside"}
+                                        size={selectedDropdownValue === t("download") ? window.innerWidth >= 768 ? "sm" : "xl" : window.innerWidth >= 768 ? "sm" : "lg"}
+                                        options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
+                                        selectedDropdownValue={selectedDropdownValue}
+                                        setSelectedDropdownValue={setSelectedDropdownValue}
+                                        headerComponent={<BsThreeDots color={colors.black} size={28} style={{ cursor: 'pointer' }} />}
+                                    />
                             }
                         </Col>
                     }
