@@ -1,15 +1,17 @@
 import React, { memo, useCallback } from "react";
-import errorimg from '../../../assets/images/Error.png';
 import { Col, Container, Row } from "react-bootstrap";
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from "react-router-dom";
+import errorimg from '../../../assets/images/Error.png';
 import Heading from "../../../components/elements/Heading";
 import { colors } from "../../../utils/colors";
 import Navbar from "../../../components/modules/Navbar";
 import Button from "../../../components/elements/Button";
-import { useNavigate } from "react-router-dom";
 import { routes } from "../../../router/helper";
 
 const NotFound = memo(() => {
 
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const onClickHomepage = useCallback(() => navigate(routes.HOME, { replace: true }), [])
@@ -31,12 +33,12 @@ const NotFound = memo(() => {
                 </Row>
                 <Row>
                     <Col md={6}>
-                        <Heading heading="Sorry, the page you are trying to access is not found" color={colors.white} size="sm" />
+                        <Heading heading={t("notFound")} color={colors.white} size="sm" />
                     </Col>
                 </Row>
                 <Row className="py-4">
                     <Col>
-                        <Button title={"Return to homepage"} backgroundColor={colors.white} onClick={onClickHomepage} />
+                        <Button title={t("returntohomepage")} backgroundColor={colors.white} onClick={onClickHomepage} />
                     </Col>
                 </Row>
             </Container>

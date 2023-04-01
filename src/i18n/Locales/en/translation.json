@@ -255,5 +255,8 @@
     "done": "Done",
     "yes": "Yes",
     "no": "No",
-    "selectOption": "Select Option"
+    "selectOption": "Select Option",
+    "unauthorized": "Sorry, the access to this page might be restricted at the moment.",
+    "notFound": "Sorry, the page you are looking for doesn't exist.",
+    "returntohomepage": "Return to homepage"
 }
