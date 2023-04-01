@@ -1,21 +1,17 @@
 import React, { memo, useEffect, useState } from "react";
 import { useCallback } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { getFacets, getMostViewedDatasets, getPlatformInsights, getRecentsDatasets } from "../../axios/api";
 import Cards from "../../components/modules/Cards";
-import LowerFooter from "../../components/modules/Footer/LowerFooter";
-import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
-import UpperFooter from "../../components/modules/Footer/UpperFooter";
 import Images from "../../components/modules/Home/Images";
 import Main from "../../components/modules/Home/Main";
 import PlatformInsights from "../../components/modules/Home/PlatformInsights";
 import Topics from "../../components/modules/Home/Topics";
-import Navbar from '../../components/modules/Navbar';
 import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
 import { locales } from "../../i18n/helper";
-import { useSelector } from "react-redux";
 import View from "../../components/modules/View";
 import { setFilter } from "../../redux/reducers/Facets";
 import { useDispatch } from "react-redux";
@@ -85,7 +81,8 @@ const Home = memo(() => {
         <View sticky footerTitle={t("GetMore")} footerButton={t("registerNow")} >
             <Main filterData={data} onSearch={onSearch} onClickExplore={() => topicsDiv.scrollIntoView()} onApplyFilter={onApplyFilter} />
             <div id='topics'>
-                <Topics onClickViewless={() => topicsDiv.scrollIntoView()} onClickList={onClickList} data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en} />
+                <Topics onClickViewless={() => topicsDiv.scrollIntoView()} onClickList={onClickList}
+                    data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en} />
             </div>
             <Images />
             <Cards title={t("mostViewedDatasets")} backgroundColor={colors.black} data={mostViewedDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={() => onClickButton("mostvieweddatasets")} />

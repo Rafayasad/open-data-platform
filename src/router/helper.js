@@ -27,5 +27,7 @@ export const routes = {
   REPORTS_INSIGHTS: BASE_ROUTE + '/reports/insights',
   REPORTS_PUBLISHERS: BASE_ROUTE + '/reports/publisher',
   REPORTS_DATASETS: BASE_ROUTE + '/reports/dataset',
-  CONFIRMATION: BASE_ROUTE + '/confirmation'
+  CONFIRMATION: BASE_ROUTE + '/confirmation',
+  UNAUTHORIZED: BASE_ROUTE + '/unauthorized',
+  NOT_FOUND: BASE_ROUTE + '/not-found'
 };

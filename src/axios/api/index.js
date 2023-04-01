@@ -1398,7 +1398,7 @@ export const getRealTimeApiById = (id, setData, setLoading) => {
                         if (res.data.data) {
                             let url = res.data.data.attributes.uri.url;
 
-                            return `${process.env.REACT_APP_BASE_URL}${url}`;
+                            return `${process.env.REACT_APP_IMAGE_BASE_URL}${url}`;
                         }
 
                         return null;
