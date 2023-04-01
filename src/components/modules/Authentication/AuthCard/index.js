@@ -28,7 +28,7 @@ const AuthCard = memo((props) => {
     <Container fluid>
       <Row className="py-2">
         <Col>
-          <Heading bold={view === "mobile"} nomargin heading={title} size="lg" />
+          <Heading bold nomargin heading={title} />
         </Col>
       </Row>
       <Row className="py-2">

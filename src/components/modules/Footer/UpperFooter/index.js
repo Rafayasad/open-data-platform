@@ -8,6 +8,7 @@ import i18n from '../../../../i18n/i18n';
 import { locales } from '../../../../i18n/helper';
 import { routes } from '../../../../router/helper';
 import { useNavigate } from 'react-router';
+import { colors } from '../../../../utils/colors';
 
 const UpperFooter = memo((props) => {
 
@@ -38,10 +39,7 @@ const UpperFooter = memo((props) => {
                 }
                 <Row className='my-2'>
                     <Col xs={8} md={4} className={i18n.language === locales.AR && "py-3"}>
-                        <Button onClick={() => navigate(navigateTo ? navigateTo : routes.REGISTER)} backgroundColor={i18n.language === locales.AR && "transparent"}
-                            borderColor={i18n.language === locales.AR && "white"}
-                            textColor={i18n.language === locales.AR && "white"}
-                            title={button} />
+                        <Button onClick={() => navigate(navigateTo ? navigateTo : routes.REGISTER)} title={button} />
                     </Col>
                 </Row>
             </Container>

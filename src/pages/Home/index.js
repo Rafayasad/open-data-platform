@@ -82,7 +82,8 @@ const Home = memo(() => {
             <Main filterData={data} onSearch={onSearch} onClickExplore={() => topicsDiv.scrollIntoView()} onApplyFilter={onApplyFilter} />
             <div id='topics'>
                 <Topics onClickViewless={() => topicsDiv.scrollIntoView()} onClickList={onClickList}
-                    data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en} />
+                    data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en}
+                />
             </div>
             <Images />
             <Cards title={t("mostViewedDatasets")} backgroundColor={colors.black} data={mostViewedDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={() => onClickButton("mostvieweddatasets")} />
