@@ -11,12 +11,12 @@ const Rows = memo((props) => {
             <Row className='d-flex justify-content-between'>
                 <Col md={6} xs={12} className='py-2 m-0'>
                     <Row>
-                        <Col md={12} className={"m-0"}>
+                        <Col md={10} className={"m-0"}>
                             <Heading bold size='xl' nomargin heading={title} />
                         </Col>
                     </Row>
                     <Row className='py-4'>
-                        <Col md={12} className={"m-0"}>
+                        <Col md={10} className={"m-0"}>
                             <Heading size='xxs' nomargin heading={description} />
                         </Col>
                     </Row>

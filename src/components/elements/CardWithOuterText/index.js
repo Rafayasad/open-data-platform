@@ -17,7 +17,7 @@ const CardWithOuterText = memo((props) => {
                 <img height={'140px'} width={'240px'} src={image} />
             </RBCard>
             <Row>
-                <Col className="d-flex py-3" xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                <Col className="d-flex py-4" xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                     <Heading bold underline nomargin size='sm' heading={title} onClick={onClick} />
                     <sup className="mx-1 my-1">
                         {
@@ -26,7 +26,7 @@ const CardWithOuterText = memo((props) => {
 
                     </sup>
                 </Col>
-                <Col xs={12} sm={12} md={10} lg={10} xl={10} xxl={10}>
+                <Col md={10} className="py-1">
                     <Heading size='xxs' heading={description} />
                 </Col>
             </Row>

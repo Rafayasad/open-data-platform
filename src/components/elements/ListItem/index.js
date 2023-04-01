@@ -17,7 +17,7 @@ const ListItem = memo((props) => {
             </Col>
             {
                 image &&
-                <Col md={6} className='d-md-none d-lg-flex align-items-center'>
+                <Col md={6} className='d-none d-lg-flex align-items-center'>
                     <img style={{ zIndex: 1}} src={image} height="180px" className={"position-absolute"} />
                 </Col>
             }

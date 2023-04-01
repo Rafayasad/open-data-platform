@@ -1,11 +1,11 @@
 import React, { memo } from "react";
 import { Spinner } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { colors } from "../../../utils/colors";
+import { locales } from '../../../i18n/helper';
 
 const Button = memo((props) => {
 
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const { isFilled, title, icon, backgroundColor, textColor, width, borderColor, loading, onClick, disable, bold } = props
 
@@ -13,7 +13,8 @@ const Button = memo((props) => {
         <button
             onClick={onClick ? onClick : () => { }}
             disabled={loading}
-            className={`m-0 px-4 en-font-default ${bold && "en-font-bold"}`}
+            className={`m-0 px-4 ${i18n.language === locales.AR ? "ar-font" : "en-font en-font-default"} ${bold && (i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold") 
+}`}
             style={{
                 backgroundColor: backgroundColor ? backgroundColor : 'white',
                 color: textColor ? textColor : 'black',

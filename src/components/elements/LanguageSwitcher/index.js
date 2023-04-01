@@ -21,7 +21,7 @@ const LanguageSwitcher = memo((props) => {
                 onClick={handler}
                 className={`m-0 ${i18n.language === locales.EN ? "ar-font" : "en-font"}`}
             >
-                {i18n.language === locales.AR ? "English" : "عربى"}
+                {i18n.language === locales.AR ? "English" : "عربي"}
             </p>
         </div>
     )

@@ -1,3 +1,4 @@
+import './style.css';
 import React, { memo, useCallback, useState } from 'react';
 import { Col, Container, Row, useAccordionButton } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -15,8 +16,6 @@ import Heading from '../../../elements/Heading';
 import Accordion from 'react-bootstrap/Accordion';
 import LanguageSwitcher from '../../../elements/LanguageSwitcher';
 import AbuDhabiLogo from "../../../../assets/images/Abu-Dhabi-Data-Logo.png";
-
-import './style.css';
 
 const MiddleFooter = memo(() => {
 
@@ -104,13 +103,13 @@ const MiddleFooter = memo(() => {
             data: [
                 {
                     title: t("GovtManagStandard"),
-                    link: "https://data.abudhabi/sites/default/files/AD-Gov-Data-Management-Standards-EN-v1.0.pdf",
-                    downloadURL: "https://data.abudhabi/sites/default/files/AD-Gov-Data-Management-Standards-EN-v1.0.pdf"
+                    link: `https://data.abudhabi/opendata/sites/default/files/AD-Gov-Data-Management-Standards-EN-v1.0.pdf`,
+                    downloadURL: `https://data.abudhabi/opendata/sites/default/files/AD-Gov-Data-Management-Standards-EN-v1.0.pdf`
                 },
                 {
                     title: t("GovtManagPolicy"),
-                    link: "https://data.abudhabi/sites/default/files/AD-Gov-Data-Management-Policy-EN-v1.0.pdf",
-                    downloadURL: "https://data.abudhabi/sites/default/files/AD-Gov-Data-Management-Policy-EN-v1.0.pdf"
+                    link: `https://data.abudhabi/opendata/sites/default/files/AD-Gov-Data-Management-Policy-EN-v1.0.pdf`,
+                    downloadURL: `https://data.abudhabi/opendata/sites/default/files/AD-Gov-Data-Management-Policy-EN-v1.0.pdf`
                 },
             ]
         }
