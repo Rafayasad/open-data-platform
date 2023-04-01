@@ -29,7 +29,7 @@ const SupportQuestionsDetail = memo(() => {
     }, [])
 
     return (
-        <View theme='dark' footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")}  >
+        <View theme='dark' footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")} onClickFooterButton={routes.CONTACT} >
             <div className="my-5 pt-5">
                 <div className="px-4 pt-4 m-0">
                     <BreadCrumb items={breadCrumbName ? [t("supports"), breadCrumbName] : [t("supports")]} />

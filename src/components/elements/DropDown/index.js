@@ -9,7 +9,7 @@ import './style.css';
 
 const Dropdown = (props) => {
 
-    const { reportsFilter, autoClose, options, setSelectedDropdownValue, textColor, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
+    const { minWidth, reportsFilter, autoClose, options, setSelectedDropdownValue, textColor, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
 
     const [isOpen, setIsOpen] = useState(false);
     const [indexx, setIndexx] = useState();
@@ -53,7 +53,7 @@ const Dropdown = (props) => {
                     <Heading size="xxs" heading={name} nomargin />
                 </div>
             }
-            <BSDropdown style={{ width: dropdownWidth }} autoClose={autoClose} onToggle={toggle}>
+            <BSDropdown className='' style={{ width: dropdownWidth }} autoClose={autoClose} onToggle={toggle}>
                 {
                     noheadercomponent ? null :
                         headerComponent ? (
@@ -77,8 +77,9 @@ const Dropdown = (props) => {
                 {
                     isOpen && options &&
                     <BSDropdown.Menu
+                        align={"end"}
                         className={`d-flex flex-column my-1 p-1`}
-                        style={{ backgroundColor: "white", zIndex: 999, minWidth: "100%", width: size === "xl" ? "75vw" : size === "lg" ? "50vw" : size === "md" ? "30vw" : size === "sm" ? "15vw" : "10vw" }}>
+                        style={{ backgroundColor: "white", zIndex: 999, minWidth: minWidth ? minWidth : "100%", width: size === "xl" ? "175px" : size === "lg" ? "50px" : size === "md" ? "30px" : size === "sm" ? "15px" : "10px" }}>
                         {
                             options && options.length > 0 && options.map((item, index) => (
                                 <BSDropdown.Item

@@ -4,6 +4,7 @@ import Button from "../../../elements/Button";
 import Search from "../../../elements/Search";
 import Heading from "../../../elements/Heading";
 import background from '../../../../assets/images/BG.png';
+import backgroundMobile from '../../../../assets/images/BG-MOB.png';
 import { useTranslation } from "react-i18next";
 import i18n from "../../../../i18n/i18n";
 import { locales } from "../../../../i18n/helper";
@@ -16,9 +17,9 @@ const Main = memo((props) => {
 
     return (
         <div className="d-flex" style={{
-            height: '100vh',
+            height: window.innerWidth >= 768 ? '100vh' : '80vh',
             width: '100vw',
-            backgroundImage: `url(${background})`,
+            backgroundImage: window.innerWidth >= 768 ? `url(${background})` : `url(${backgroundMobile})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: "cover"
         }}>
@@ -54,7 +55,7 @@ const Main = memo((props) => {
                 </Row>
                 <Row className="h-25 align-items-end py-3">
                     <Col />
-                    <Col xs={8} md={4} className='d-none d-lg-flex justify-content-center'>
+                    <Col xs={8} md={4} className='d-none d-md-flex justify-content-center'>
                         <Button onClick={onClickExplore} title={t("explore")} backgroundColor="#9159FF" textColor="white" />
                     </Col>
                     <Col />

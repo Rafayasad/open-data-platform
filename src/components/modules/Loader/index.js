@@ -6,7 +6,7 @@ let sizes = ['400px', '280px', '340px']
 
 const Loader = memo((props) => {
 
-    const { type, backgroundColor } = props
+    const { type, width, backgroundColor } = props
 
     return (
         Array(3).fill(null).map((_, index) => (
@@ -62,6 +62,8 @@ const Loader = memo((props) => {
                                 <Shimmer
                                     backgroundColor={backgroundColor}
                                     rounded="lg"
+                                    width={width}
+                                    className={width && "mx-2"}
                                     height={type === 'image-inner-text' ? 250 : 332}
                                 />
                             )

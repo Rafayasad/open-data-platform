@@ -31,8 +31,8 @@ const MiddleFooter = memo(() => {
     function CustomToggle({ eventKey }) {
         return (
             activeIndex === eventKey ?
-                <IoIosArrowDown color='white' style={{}} className="" size={20} /> :
-                <IoIosArrowUp color='white' style={{}} className="" size={20} />
+                <IoIosArrowUp color='white' style={{}} className="" size={20} /> :
+                <IoIosArrowDown color='white' style={{}} className="" size={20} />
         );
     }
 

@@ -18,7 +18,7 @@ const Search = memo((props) => {
 
     const { t } = useTranslation();
 
-    const { filterData, nofocuseffect, placeholder, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter, searchData } = props;
+    const { nofilter, filterData, nofocuseffect, placeholder, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter, searchData } = props;
 
     const [filterOpen, setFilterOpen] = useState(false);
 
@@ -91,7 +91,7 @@ const Search = memo((props) => {
                     {/* <Col xs={2} md={1} className='d-flex justify-content-center align-items-center'>
                     </Col> */}
                     <Col className='p-0 d-flex align-items-center'>
-                        <div className="ms-3 me-1"> 
+                        <div className="ms-3 me-1">
                             <IoIosSearch color="gray" size={24} />
                         </div>
                         <input
@@ -114,7 +114,7 @@ const Search = memo((props) => {
                                 }} size={24} />
                             </Col>
                             :
-                            filter &&
+                            filter && !nofilter &&
                             <Col xs={3} md={2} xl={2} lg={2}>
                                 <div onClick={toggle} className='d-flex align-items-center justify-content-center filter py-2 px-2' style={{ borderRadius: '30px' }}>
                                     <MdOutlineFilterAlt size={24} />
@@ -161,7 +161,7 @@ const Search = memo((props) => {
                     </Row>
                 }
             </Container>
-        </div>
+        </div >
     )
 });
 
