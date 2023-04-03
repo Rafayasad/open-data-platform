@@ -111,8 +111,9 @@ const AuthCard = memo((props) => {
         <Col sm={12} md={title === t("register") ? 4 : 12}>
           {
             button.map((items, index) => (
-              <div key={index} className="d-flex flex-column align-items-center" >
+              <div key={index} className="d-flex flex-column align-items-center">
                 <Button
+                  padding={items.title === t("logIn") && "mt-3"}
                   width={title === t("register") ? "auto" : "70%"}
                   disable={items.disable}
                   title={items.title}

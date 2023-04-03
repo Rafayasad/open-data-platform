@@ -134,8 +134,8 @@ const Register = memo(() => {
               >
                 <AuthCard
                   view="mobile"
-                  title="Register"
-                  subtitle="Already have an account?"
+                  title={t("register")}
+                  subtitle={t("alreadyAccount")}
                   linktext={{ display_text: t("login"), onClick: onClickLogin }}
                   recaptcha={recaptcha}
                   inputFields={[
@@ -145,7 +145,7 @@ const Register = memo(() => {
                     { placeholder: "Password", type: "password", onChange: (value) => setPassword(value) },
                   ]}
                   button={[{
-                    title: "Register",
+                    title: t("register"),
                     onClick: onClickRegister,
                     backgroundColor: colors.black,
                     textColor: colors.white,

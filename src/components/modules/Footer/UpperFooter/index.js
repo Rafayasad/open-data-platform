@@ -13,12 +13,13 @@ import { colors } from '../../../../utils/colors';
 const UpperFooter = memo((props) => {
 
     const navigate = useNavigate();
-    const { title, description, button, navigateTo } = props
+    const { title, description, button, navigateTo, image } = props
 
     return (
         <div className="d-flex flex-column py-5 px-4" style={{
             height: '75vh',
-            backgroundImage: `${i18n.language === locales.EN ? `url(${FooterImage})` : `url(${FooterImage_ar})`}`,
+            // width:"100vh",
+            backgroundImage: `${i18n.language === locales.EN ? image ? image : `url(${FooterImage})` : image ? image : `url(${FooterImage_ar})`}`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             backgroundPosition: 'center'

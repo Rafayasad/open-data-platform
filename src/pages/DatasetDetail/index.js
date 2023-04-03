@@ -72,7 +72,7 @@ const DatasetDetail = memo(() => {
                     <BreadCrumb items={[t("datasets"), t("detail")]} />
                 </div>
                 {console.log("ssss", dataset)}
-                <Main data={dataset} url={`https://data.abudhabi/dataset/${id}`} />
+                <Main id={id} data={dataset} url={`https://data.abudhabi/opendata/dataset/detail?id=${id}`} />
                 <Cards onClickViewAll={() => {
                     navigate(routes.DATASET, {
                         replace: true, state: {

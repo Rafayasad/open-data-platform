@@ -44,7 +44,7 @@ const Drawer = memo((props) => {
 
             let index = filters.findIndex(el => el.title === items.title)
             let tempArr = [...temp]
-            tempArr.splice(index,1)
+            tempArr.splice(index, 1)
             setFilters(tempArr)
 
         } else {
@@ -141,6 +141,7 @@ const Drawer = memo((props) => {
                                                             return (
                                                                 <div className={``} style={{ paddingTop: "5px", paddingBottom: "5px" }}>
                                                                     <Tag
+                                                                        hoverEffect
                                                                         backgroundColor={filters.some(el => el.title === items.title) ? colors.black : colors.white}
                                                                         textColor={filters.some(el => el.title === items.title) ? colors.white : colors.black}
                                                                         // backgroundColor={filtersData?.some(items => items.title === item.title) ? "black" : "white"}

@@ -6,10 +6,11 @@ import i18n from '../../../i18n/i18n';
 import { colors } from '../../../utils/colors';
 import Heading from '../Heading';
 import './style.css';
+import { locales } from '../../../i18n/helper';
 
 const Dropdown = (props) => {
 
-    const { minWidth, reportsFilter, autoClose, options, setSelectedDropdownValue, textColor, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
+    const { onClick, minWidth, reportsFilter, autoClose, options, setSelectedDropdownValue, textColor, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
 
     const [isOpen, setIsOpen] = useState(false);
     const [indexx, setIndexx] = useState();
@@ -77,7 +78,8 @@ const Dropdown = (props) => {
                 {
                     isOpen && options &&
                     <BSDropdown.Menu
-                        align={"end"}
+
+                        align={i18n.language === locales.AR ? "start" : "end"}
                         className={`d-flex flex-column my-1 p-1`}
                         style={{ backgroundColor: "white", zIndex: 999, minWidth: minWidth ? minWidth : "100%", width: size === "xl" ? "175px" : size === "lg" ? "50px" : size === "md" ? "30px" : size === "sm" ? "15px" : "10px" }}>
                         {
@@ -87,6 +89,7 @@ const Dropdown = (props) => {
                                     onClick={(e) => {
                                         e.preventDefault();
                                         if (item.onClick) {
+                                            onClick(item.id)
                                             highlightableItem && setIndexx(index)
                                             item.onClick(item.title)
                                         }

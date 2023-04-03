@@ -10,7 +10,7 @@ import './style.css'
 
 const Main = memo((props) => {
 
-    const { search, onChangeSearchEnter, filter, onApplyFilter, onDeleteFilter, searchData, filterData, nofilter } = props
+    const { search, onChangeSearchEnter, filter, onApplyFilter, onDeleteFilter, searchData, filterData, nofilter } = props;
 
     const { t } = useTranslation();
 

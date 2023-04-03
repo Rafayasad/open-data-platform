@@ -10,6 +10,7 @@ import Heading from "../Heading";
 import './style.css'
 import ExpandSearchBarModal from "./ExpandSearchBarModal";
 import { isEmptyString } from "../../../utils/generic";
+import i18n from "../../../i18n/i18n";
 
 const Search = memo((props) => {
 
@@ -26,9 +27,8 @@ const Search = memo((props) => {
     const [inputText, setInputText] = useState('');
 
     useEffect(() => {
-        if (value) {
-            setInputText(value)
-        }
+        setInputText(value)
+
     }, [value])
 
     const toggle = useCallback(() => {
@@ -39,6 +39,13 @@ const Search = memo((props) => {
     const onChangeSearch = useCallback((e) => {
         setInputText(e.target.value);
     });
+
+    const onClickedPopularSearch = useCallback((e) => {
+        setInputText(e.target.value);
+        setOpenModal(false)
+        setToggler(false)
+        onPressEnter((e.target.value).trim())
+    })
 
     const onKeyDown = useCallback((e) => {
 
@@ -91,7 +98,7 @@ const Search = memo((props) => {
                     {/* <Col xs={2} md={1} className='d-flex justify-content-center align-items-center'>
                     </Col> */}
                     <Col className='p-0 d-flex align-items-center'>
-                        <div className="ms-3 me-1">
+                        <div className="ms-3 me-3">
                             <IoIosSearch color="gray" size={24} />
                         </div>
                         <input
@@ -145,12 +152,12 @@ const Search = memo((props) => {
                                     <p style={{ fontSize: 12 }} className="py-2 m-0 text-secondary">{t("popularsearches")}</p>
                                 </div>
                                 {
-                                    searchData?.map((item, index) => {
+                                    searchData?.slice(-5).map((item, index) => {
                                         return (
-                                            <div className="d-flex px-5 py-1">
+                                            <div key={index} className="d-flex px-5 py-1">
                                                 <IoIosSearch color="black" size={20} />
                                                 <div className="mx-2">
-                                                    <Heading heading={item} size="xxs" nomargin onClick={() => onChangeSearch({ target: { value: item } })} />
+                                                    <Heading heading={item} size="xxs" nomargin onClick={() => onClickedPopularSearch({ target: { value: item } })} />
                                                 </div>
                                             </div>
                                         )

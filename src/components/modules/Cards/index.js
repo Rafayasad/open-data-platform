@@ -38,7 +38,8 @@ const Cards = memo((props) => {
 
     const { i18n } = useTranslation();
 
-    const { title, notitlebutton, data, backgroundColor, hoverable, type, size, onClick, onClickViewAll, buttonText, notagsactive, noheadercomponent } = props;
+    const { title, notitlebutton, data, backgroundColor, hoverable, type,
+        size, onClick, onClickViewAll, buttonText, notagsactive, noheadercomponent, dropdownWidth } = props;
     console.log("title", data);
     const renderContent = () => {
         if (type === 'image-inner-text') {
@@ -112,7 +113,7 @@ const Cards = memo((props) => {
                     <div className="d-flex d-lg-none" style={{ overflowX: "scroll" }}>
                         {
                             data && data.length > 0 ? data.map((item, index) => (
-                                <div key={index} className="py-2 col d-flex" style={{ minWidth: "290px" }}>
+                                <div key={index} className="py-2 pe-2 d-flex" style={{ minWidth: "300px" }}>
                                     <Card
                                         notagsactive={notagsactive}
                                         noheadercomponent={noheadercomponent}
@@ -136,6 +137,7 @@ const Cards = memo((props) => {
                             data && data.length > 0 ? data.map((item, index) => (
                                 <Col key={index} md={4} sm={4} className="py-2">
                                     <Card
+                                        dropdownWidth={dropdownWidth}
                                         notagsactive={notagsactive}
                                         noheadercomponent={noheadercomponent}
                                         size={size}

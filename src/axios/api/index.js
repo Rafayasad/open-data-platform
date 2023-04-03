@@ -1,13 +1,9 @@
 import _ from 'lodash';
+import { toast } from "react-toastify";
 import { convertHtmlToString } from "../../utils"
 import { endpoints } from "../endpoints"
-import { generateFile, getUnixTime, getYears } from "../../utils/generic.js";
+import { generateFile, getUnixTime } from "../../utils/generic.js";
 import { locales } from "../../i18n/helper"
-import i18n from "../../i18n/i18n"
-import { toast } from "react-toastify";
-import { routes } from '../../router/helper';
-
-var currentLanguage = i18n.language === locales.AR ? "ar" : "en";
 
 export const getPlatformInsights = (setData, setLoading) => {
     return endpoints.
@@ -21,11 +17,11 @@ export const getPlatformInsights = (setData, setLoading) => {
         })
 }
 
-export const getMostViewedDatasets = (setData, setTotalCount, searchValue, setLoading, perPage, pageNumber) => {
+export const getMostViewedDatasets = (setData, setTotalCount, searchValue, setLoading, perPage, pageNumber, language) => {
     setLoading(true);
     setTotalCount(0)
     return endpoints.
-        getMostViewedDatasets(perPage, pageNumber, searchValue).then((res) => {
+        getMostViewedDatasets(perPage, pageNumber, searchValue, language).then((res) => {
             if (res.status === 200) {
                 setLoading(false);
                 setTotalCount(res.data.total_count);
@@ -72,6 +68,7 @@ export const getMostViewedDatasets = (setData, setTotalCount, searchValue, setLo
                         resources: item.distribution.map(item => {
                             return (
                                 {
+                                    id: item.identifier,
                                     title: item.title,
                                     format: item.format === "pdf" ? "pdf"
                                         : item.format === "excel" ? "excel"
@@ -87,6 +84,7 @@ export const getMostViewedDatasets = (setData, setTotalCount, searchValue, setLo
                         ...ar_obj
                     }
                 })
+                console.log("trans", transform);
                 setData(transform)
                 setLoading(false)
             }
@@ -285,7 +283,7 @@ export const getFacets = async (key_en, key_ar, dispatch, setData) => {
 
 }
 
-export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage, filters) => {
+export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage, filters, currentLanguage) => {
 
     setLoading(true)
     setTotalCount(0)
@@ -302,14 +300,13 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
     })
 
     finalFilters.push(
-        { key: i18n.language === locales.EN ? "theme" : "themelear", values: themeArray },
-        { key: i18n.language === locales.EN ? "publisher__name" : "publisherlear__name", values: publisherArray },
-        { key: i18n.language === locales.EN ? "keyword" : "keywordlear", values: tagsArray }
+        { key: currentLanguage === locales.EN ? "theme" : "themelear", values: themeArray },
+        { key: currentLanguage === locales.EN ? "publisher__name" : "publisherlear__name", values: publisherArray },
+        { key: currentLanguage === locales.EN ? "keyword" : "keywordlear", values: tagsArray }
     )
 
     return endpoints.
         getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then(async (res) => {
-            console.log("ARRRRRR",res.data);
             if (res.status === 200) {
                 if (res.data.total > 0 && search && search.trim() !== "") {
                     let obj = {
@@ -376,14 +373,6 @@ export const getDatasetById = (id, setData) => {
         getDatasetById(id).then(async (res) => {
             if (res.status === 200) {
 
-                // const view_count_payload = {
-                //     identifier: id,
-                //     ip_address: "172.0.9.01"
-                // }
-
-                //view count api CORS error
-                // return await endpoints.viewCount(view_count_payload).then((res) => {
-
                 let item = res.data;
 
                 let filteredResources = item.distribution.filter(item => {
@@ -443,9 +432,17 @@ export const getDatasetById = (id, setData) => {
 
                 setData(data)
 
-                // }).catch((err) => {
-                //     console.log("Error message", err)
-                // })
+                const view_count_payload = {
+                    identifier: id,
+                    ip_address: "172.0.9.01"
+                }
+                return await endpoints.viewCount(view_count_payload).then((res) => {
+                    if (res.status === 200) {
+                        console.log("success", res);
+                    }
+                }).catch((err) => {
+                    console.log("Error message", err)
+                })
             }
         }).catch((err) => {
             console.log("Error message", err)
@@ -689,7 +686,7 @@ export const getPopularQuestions = (dispatch, setData) => {
         })
 }
 
-export const getQuestionBySearch = (text, setData) => {
+export const getQuestionBySearch = (text, setData, currentLanguage) => {
     return endpoints.
         getQuestionBySearch(text).then(async (res) => {
 
@@ -988,7 +985,6 @@ export const validateUser = async (navigate, route, setLoading, payload) => {
     await endpoints.validateUser({ username: email, pass: password })
         .then(async (res) => {
             if (res.status === 200) {
-                setLoading(false)
                 if (res.data.status === 200) {
                     await endpoints.otp({ type: "send", username: email })
                         .then((res) => {
@@ -1548,5 +1544,28 @@ export const getStoriesTags = (dispatch, setStoriesTags) => {
             }
         }).catch((err) => {
             console.log("error", err);
+        })
+}
+
+export const addDownloadCount = (id) => {
+
+    console.log("download count", id);
+
+    // setLoading(true)
+
+    const data = {
+        identifier: id,
+        ip_address: "172.0.9.01"
+    }
+
+    return endpoints.addDownloadCountById(data)
+        .then((res) => {
+            // setLoading(false)
+            if (res.status === 200) {
+                console.log("download count", res.data);
+            }
+        }).catch((err) => {
+            // setLoading(false)
+            console.log("Error Message", err);
         })
 }

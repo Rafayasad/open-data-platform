@@ -20,8 +20,8 @@ const Images = memo(() => {
     const onClickRegister = useCallback(() => navigate(routes.REGISTER));
 
     return (
-        <Container fluid style={{ backgroundColor: colors.black }}>
-            <Row>
+        <Container className="py-3" fluid style={{ backgroundColor: colors.black }}>
+            {/* <Row>
                 <Col className="my-3 px-4">
                     <div className="d-flex flex-column justify-content-center" style={{
                         height: '75vh',
@@ -48,7 +48,7 @@ const Images = memo(() => {
                         </Row>
                     </div>
                 </Col>
-            </Row>
+            </Row> */}
             <Row>
                 <Col className="px-4">
                     <Row>

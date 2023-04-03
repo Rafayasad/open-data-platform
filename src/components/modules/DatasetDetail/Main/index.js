@@ -12,7 +12,7 @@ import Heading from "../../../elements/Heading";
 
 const Main = memo((props) => {
 
-    const { data, url } = props;
+    const { data, url, id } = props;
 
     const { t, i18n } = useTranslation();
 
@@ -116,6 +116,7 @@ const Main = memo((props) => {
     return (
         <Container fluid className="px-0">
             <DataHeader
+                id={id}
                 resources={data && data.resources}
                 title={i18n.language === locales.AR ? data && data.title_ar : data && data.title}
                 url={url}

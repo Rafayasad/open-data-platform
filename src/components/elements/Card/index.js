@@ -30,7 +30,7 @@ const Card = memo((props) => {
 
     const { resources, title, publisher, description, tags, size, noborder,
         hoverable, nopadding, shortTitle, headingSize, onClick, nodropdown,
-        noheadercomponent, notags, notagsactive, url } = props;
+        noheadercomponent, notags, notagsactive, url, dropdownWidth } = props;
 
     var HEIGHT = "332px", border, ClassName;
 
@@ -135,7 +135,7 @@ const Card = memo((props) => {
                                     <BsThreeDots onClick={() => setOpenBottomSheet(true)} color={colors.black} size={28} style={{ cursor: 'pointer' }} />
                                     :
                                     <Dropdown
-                                        dropdownWidth={"100%"}
+                                        dropdownWidth={dropdownWidth ? dropdownWidth : "15%"}
                                         width={"100%"}
                                         noheadercomponent={noheadercomponent}
                                         autoClose={"outside"}

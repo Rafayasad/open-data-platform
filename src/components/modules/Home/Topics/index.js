@@ -35,10 +35,10 @@ const Topics = memo((props) => {
     const renderList = (viewport) => (
         data && data.length > 0 && data.slice(0, all ? data.length : viewport === "lg" ? 8 : 5).map((item, index) => (
             <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave} >
-                {
+                {/* {
                     index > 0 &&
                     <hr className="m-0 mx-4" style={{ color: currentHovered === index || currentHovered != null && currentHovered + 1 === index ? 'black' : 'lightgray', borderWidth: 2 }} />
-                }
+                } */}
                 <ListItem
                     title={item.title}
                     value={item.value}
@@ -54,6 +54,8 @@ const Topics = memo((props) => {
                     )}
                     onClick={() => onClickListItem(item)}
                 />
+                <hr className="m-0 mx-4" style={{ color: currentHovered === index || currentHovered != null && currentHovered - 1 === index ? 'black' : 'lightgray', borderWidth: 2 }} />
+
             </div>
         ))
     )
@@ -71,7 +73,7 @@ const Topics = memo((props) => {
             <div className="d-none d-lg-block">
                 {renderList("lg")}
             </div>
-            <Row className="py-3 m-0">
+            <Row className="py-4 m-0">
                 <Col className={`px-4 d-flex justify-content-center justify-content-lg-end`}>
                     <Button borderColor='white' backgroundColor='black' textColor='white' title={all ? t("viewLess") : t("viewAll")}
                         onClick={onClick} />

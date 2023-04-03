@@ -34,11 +34,13 @@ const FormComponent = memo(() => {
 
     const onSubmitHandler = useCallback(() => {
 
-        if (!name && !email && !selectedValue && !message) {
+        if (name === '' || email === '' || selectedValue == t("selectsubject") || message === '') {
             toast("All fields are required.", { type: "error" })
         } else if (validateEmail(email) === false) {
             toast("Please provide a valid email address.", { type: "error" })
-        } else {
+        }
+
+        else {
             contactUs(navigate, routes.CONFIRMATION, setLoading, { name, email, selectedValue, message })
         }
 
