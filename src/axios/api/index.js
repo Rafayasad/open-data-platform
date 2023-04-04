@@ -309,7 +309,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
 
     return endpoints.
         getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then(async (res) => {
-            console.log("ARRRRRR",res.data);
+            console.log("ARRRRRR", res.data);
             if (res.status === 200) {
                 if (res.data.total > 0 && search && search.trim() !== "") {
                     let obj = {
@@ -1510,10 +1510,10 @@ export const logout = (dispatch, setLoading, handleLogout) => {
     return endpoints.logout()
         .then((res) => {
             setLoading(false)
-            if (res.status === 200) {
-                dispatch && dispatch(handleLogout());
-                window.location.reload();
-            }
+            dispatch && dispatch(handleLogout());
+            window.location.reload();
+            // if (res.status === 200) {
+            // }
         }).catch((err) => {
             setLoading(false)
             console.log("Error Message", err);
@@ -1524,8 +1524,6 @@ export const getStoriesTags = (dispatch, setStoriesTags) => {
     return endpoints.getStoriesTags()
         .then((res) => {
             if (res.status == 200) {
-
-                console.log("sasaasdsad", res.data);
 
                 let tags = res.data.data?.map((item) => (
                     {
