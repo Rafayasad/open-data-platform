@@ -19,29 +19,33 @@ import apiImage from '../../../../assets/images/api_img.png';
 import BottomSheetBar from "../../BottomSheet";
 import { RWebShare } from "react-web-share";
 import './style.css';
+import { addDownloadCount } from "../../../../axios/api";
 
 
 const DataHeader = memo((props) => {
 
-    const { title, resources, url, nooptions, downloadCount } = props
+    const { title, resources, url, nooptions, downloadCount, handleReload } = props
 
     const { t } = useTranslation();
     const [openBottomSheet, setOpenBottomSheet] = useState(false)
 
     const [headerOnTop, setHeaderOnTop] = useState(false);
-    const [downloadLink, setDownloadLink] = useState();
-
-    const downloadResources = useCallback((links) => { console.log(links) });
-
     const [currentHovered, setCurrentHovered] = useState(null);
+
+    const addDownloadCounts = useCallback((title, id) => {
+        addDownloadCount(id).then((res) => {
+            handleReload()
+        })
+    });
 
     const onHover = useCallback(() => setCurrentHovered(true), [currentHovered])
     const onLeave = useCallback(() => setCurrentHovered(false), [currentHovered])
 
     const options = resources && resources.length > 0 && resources.map(item => (
         {
+            id: item.id,
             title: i18n.language === locales.AR ? item.title_ar : item.title,
-            onClick: downloadResources,
+            onClick: addDownloadCounts,
             downloadLink: item.downloadURL,
             icon: item.format === "pdf" ? <img src={pdfImage} />
                 : item.format === "excel" ? <img src={excelImage} />
@@ -60,6 +64,8 @@ const DataHeader = memo((props) => {
                     : item.format === "twitter" && <FaTwitter />,
         }
     ))
+
+
 
     const handleClick = async () => {
         if (navigator.share) {
@@ -116,13 +122,14 @@ const DataHeader = memo((props) => {
                                 <Dropdown
                                     autoClose={true}
                                     options={shareOption}
-                                    size={"sm"}
+                                    size={"xl"}
                                     headerComponent={<Button backgroundColor="white" textColor="black" borderColor={currentHovered ? colors.purple : colors.black} icon={<SlShare size={20} color={currentHovered ? colors.purple : colors.black} />} />}
                                 />
                             </div>
                             <div className="d-flex flex-column align-items-center">
                                 <div className="d-flex">
                                     <Dropdown
+                                        onClickDownloadItem={addDownloadCounts}
                                         autoClose={true}
                                         size={"md"}
                                         options={options}
@@ -130,10 +137,10 @@ const DataHeader = memo((props) => {
                                     />
                                 </div>
                                 {
-                                    downloadCount &&
-                                    <div className="d-flex">
-                                        <p className="m-0 px-1">{downloadCount}</p><span style={{ color: colors.light_gray }}>{t("download")}</span>
-                                    </div>
+                                    downloadCount >= 0 ?
+                                        <div className="d-flex">
+                                            <p className="m-0 px-1">{downloadCount}</p><span style={{ color: colors.light_gray }}>{t("download")}</span>
+                                        </div> : ""
                                 }
                             </div>
                         </Col>

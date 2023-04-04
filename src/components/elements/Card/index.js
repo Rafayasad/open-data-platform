@@ -22,6 +22,7 @@ import i18n from "../../../i18n/i18n";
 import { locales } from "../../../i18n/helper";
 import BottomSheetBar from "../../modules/BottomSheet";
 import { routes } from "../../../router/helper";
+import { addDownloadCount } from "../../../axios/api";
 
 const Card = memo((props) => {
 
@@ -30,7 +31,7 @@ const Card = memo((props) => {
 
     const { resources, title, publisher, description, tags, size, noborder,
         hoverable, nopadding, shortTitle, headingSize, onClick, nodropdown,
-        noheadercomponent, notags, notagsactive, url } = props;
+        noheadercomponent, notags, notagsactive, url, dropdownWidth, handleReload } = props;
 
     var HEIGHT = "332px", border, ClassName;
 
@@ -39,8 +40,18 @@ const Card = memo((props) => {
     const [openBottomSheet, setOpenBottomSheet] = useState(false)
     const [selectedSheetValue, setSelectedSheetValue] = useState();
 
-    const isClicked = useCallback((value) => { setSelectedDropdownValue(value) })
+    const isClicked = useCallback((value, id) => {
+        console.log("-------->ssssssssssssssssssssssssss", value, id);
+        setSelectedDropdownValue(value)
+    })
+
     const downloadResources = useCallback((links) => { setIsDownloadLink(links) }); //callback for url redirect
+
+    const addDownloadCounts = useCallback((title, id) => {
+        addDownloadCount(id).then((res) => {
+            handleReload()
+        })
+    });
 
     if (size === "xs") {
         HEIGHT = "225px"
@@ -64,7 +75,6 @@ const Card = memo((props) => {
                 ClassName = ClassName + " " + "hover-third"
             }
         }
-
     }
 
     const onClickTag = useCallback((route, state) => {
@@ -86,8 +96,9 @@ const Card = memo((props) => {
 
     const specificDownloadOptions = resources?.map(item => (
         {
+            id: item.id,
             title: i18n.language === locales.AR ? item.title_ar : item.title,
-            onClick: downloadResources,
+            onClick: addDownloadCounts,
             downloadLink: item.downloadURL,
             icon: item.format === "pdf" ? <img src={pdfImage} />
                 : item.format === "excel" ? <img src={excelImage} />
@@ -135,7 +146,7 @@ const Card = memo((props) => {
                                     <BsThreeDots onClick={() => setOpenBottomSheet(true)} color={colors.black} size={28} style={{ cursor: 'pointer' }} />
                                     :
                                     <Dropdown
-                                        dropdownWidth={"100%"}
+                                        dropdownWidth={dropdownWidth ? dropdownWidth : "15%"}
                                         width={"100%"}
                                         noheadercomponent={noheadercomponent}
                                         autoClose={"outside"}

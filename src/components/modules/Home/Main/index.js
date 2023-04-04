@@ -46,7 +46,7 @@ const Main = memo((props) => {
                             <Col />
                             <Col xs={12} md={6} className="py-2">
                                 <p style={{ textAlign: 'center', color: 'white' }}>
-                                    <span className={`${i18n.language === locales.EN ? "en-font-bold" : "ar-font-bold"}`}>{t("popular")}</span> {t("populartext")}
+                                    <span className={`${i18n.language === locales.EN ? "en-font-bolder" : "ar-font-bold"}`}>{t("popular")}</span> {t("populartext")}
                                 </p>
                             </Col>
                             <Col />

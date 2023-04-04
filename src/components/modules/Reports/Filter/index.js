@@ -135,20 +135,22 @@ const ReportsFilter = memo((props) => {
                 <div className="d-flex my-3">
                     <div className="w-100">
                         <DatePicker
-
                             disabled={selectedTab === "Weekly" || selectedTab === "Monthly" || selectedTab === "Quarterly" || selectedTab === "Yearly"}
-                            value={filters?.start_date} title={t("startDate")} onChange={(start_date) => onChangeFilter({ start_date })} maxDate={filters?.end_date} />
+                            value={filters?.start_date}
+                            title={t("startDate")}
+                            onChange={(start_date) => onChangeFilter({ start_date })} maxDate={filters?.end_date} />
                     </div>
+                    {console.log("rpeorpe", filters)}
                 </div>
                 <div className="d-flex my-3">
                     <div className="w-100">
                         <DatePicker value={filters?.end_date} title={t("endDate")}
                             onChange={(end_date) => onChangeFilter({
                                 end_date,
-                                start_date: selectedTab === "Weekly" ? dayjs(end_date).subtract(6, 'days').format('YYYY-MM-DD') :
+                                start_date: selectedTab === "All" ? filters?.start_date : selectedTab === "Weekly" ? dayjs(end_date).subtract(6, 'days').format('YYYY-MM-DD') :
                                     selectedTab === "Monthly" ? dayjs(end_date).subtract(1, 'month').add(1, 'day').format('YYYY-MM-DD') :
                                         selectedTab === "Quarterly" ? dayjs(end_date).subtract(3, 'month').add(1, 'day').format('YYYY-MM-DD') :
-                                            selectedTab === "Yearly" && dayjs(end_date).subtract(1, 'year').add(1, 'day').format('YYYY-MM-DD')
+                                            selectedTab === "Yearly" ? dayjs(end_date).subtract(1, 'year').add(1, 'day').format('YYYY-MM-DD') : ""
                             })} minDate={filters?.start_date} />
                     </div>
                 </div>

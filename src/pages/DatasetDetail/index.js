@@ -57,6 +57,11 @@ const DatasetDetail = memo(() => {
 
     }, [id])
 
+    const handleReload = useCallback(() => {
+        console.log("hello");
+        getDatasetById(id, setDataset);
+    })
+
     useEffect(() => {
 
         if (dataset) {
@@ -72,7 +77,7 @@ const DatasetDetail = memo(() => {
                     <BreadCrumb items={[t("datasets"), t("detail")]} />
                 </div>
                 {console.log("ssss", dataset)}
-                <Main data={dataset} url={`https://data.abudhabi/dataset/${id}`} />
+                <Main handleReload={handleReload} id={id} data={dataset} url={`https://data.abudhabi/opendata/dataset/detail?id=${id}`} />
                 <Cards onClickViewAll={() => {
                     navigate(routes.DATASET, {
                         replace: true, state: {

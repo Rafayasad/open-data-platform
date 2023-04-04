@@ -45,28 +45,28 @@ const Insights = memo(() => {
         {
             title: t("weekly"),
             onClick: (val) => {
-                setFilters({ ...filters, end_date: dayjs().format('YYYY-MM-DD'), start_date: dayjs().subtract(6, 'days').format('YYYY-MM-DD') })
+                setFilters({ ...filters, start_date: dayjs().subtract(6, 'days').format('YYYY-MM-DD'), end_date: dayjs().format('YYYY-MM-DD') })
                 setSelectedTab(val)
             }
         },
         {
             title: t("monthly"),
             onClick: (val) => {
-                setFilters({ ...filters, end_date: dayjs().format('YYYY-MM-DD'), start_date: dayjs().subtract(1, 'month').add(1,'day').format('YYYY-MM-DD') })
+                setFilters({ ...filters, start_date: dayjs().subtract(1, 'month').add(1, 'day').format('YYYY-MM-DD'), end_date: dayjs().format('YYYY-MM-DD'), })
                 setSelectedTab(val)
             }
         },
         {
             title: t("quarterly"),
             onClick: (val) => {
-                setFilters({ ...filters, end_date: dayjs().format('YYYY-MM-DD'), start_date: dayjs().subtract(3, 'month').add(1,'day').format('YYYY-MM-DD') })
+                setFilters({ ...filters, start_date: dayjs().subtract(3, 'month').add(1, 'day').format('YYYY-MM-DD'), end_date: dayjs().format('YYYY-MM-DD'), })
                 setSelectedTab(val)
             }
         },
         {
             title: t("yearly"),
             onClick: (val) => {
-                setFilters({ ...filters, end_date: dayjs().format('YYYY-MM-DD'), start_date: dayjs().subtract(1, 'year').add(1,'day').format('YYYY-MM-DD') })
+                setFilters({ ...filters, start_date: dayjs().subtract(1, 'year').add(1, 'day').format('YYYY-MM-DD'), end_date: dayjs().format('YYYY-MM-DD') })
                 setSelectedTab(val)
             }
         }
@@ -88,7 +88,7 @@ const Insights = memo(() => {
             enddate: filters?.end_date ? filters.end_date : "all",
             startdate: filters?.start_date ? filters.start_date : "all",
             datatype: datatype,
-            date_type: filters?.date_type ? filters.date_type : "updated",
+            date_type: filters?.date_type ? filters.date_type.toLocaleLowerCase() : "updated",
             publisher: filters?.publisher ? filters.publisher : ""
         }, setLoading, setDataType)
     }, [filters, datatype]);
@@ -104,7 +104,7 @@ const Insights = memo(() => {
             <ReportsFilter selectedTab={selectedTab} accordinData={AccordinData} open={filterOpen} setOpen={setFilterOpen} appliedFilters={filters} onApplyFilters={onApplyFilters} />
             <Container fluid className="my-5 pt-5 px-4">
                 <Header title={t("insightsReport")} onClickFilter={onClickFilter} datatypeCallback={datatypeCallback} />
-                <Tabs data={tabs} selected={selectedTab} />
+                <Tabs loading={loading} data={tabs} selected={selectedTab} />
                 <AppliedFilters filters={filters}
                 />
                 <Table

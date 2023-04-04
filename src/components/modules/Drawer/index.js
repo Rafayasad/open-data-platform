@@ -22,7 +22,7 @@ const Drawer = memo((props) => {
 
     const { open, setOpen, onClickApplyFilter, appliedFilters, data, year } = props;
     // const { isLoggedIn } = useSelector(state => state.authentication);
-
+    { console.log("tas", data) }
     const [activeIndex, setActiveIndex] = useState();
     const [filters, setFilters] = useState([]);
 
@@ -44,7 +44,7 @@ const Drawer = memo((props) => {
 
             let index = filters.findIndex(el => el.title === items.title)
             let tempArr = [...temp]
-            tempArr.splice(index,1)
+            tempArr.splice(index, 1)
             setFilters(tempArr)
 
         } else {
@@ -69,6 +69,8 @@ const Drawer = memo((props) => {
 
     const onClickItem = useCallback((item) => {
 
+        console.log(item);
+
         let filter = [...filters]
 
         if (filters.some(el => el.title === item.title)) {
@@ -85,6 +87,7 @@ const Drawer = memo((props) => {
                     filter.splice(index, 1)
                 }
             }
+            // if()
             filter.push(item)
             setFilters(filter)
         }
@@ -141,6 +144,7 @@ const Drawer = memo((props) => {
                                                             return (
                                                                 <div className={``} style={{ paddingTop: "5px", paddingBottom: "5px" }}>
                                                                     <Tag
+                                                                        hoverEffect
                                                                         backgroundColor={filters.some(el => el.title === items.title) ? colors.black : colors.white}
                                                                         textColor={filters.some(el => el.title === items.title) ? colors.white : colors.black}
                                                                         // backgroundColor={filtersData?.some(items => items.title === item.title) ? "black" : "white"}

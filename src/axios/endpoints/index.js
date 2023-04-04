@@ -1,5 +1,6 @@
 import axios from "axios";
 import { client } from "../axios"
+import { locales } from "../../i18n/helper";
 
 export const endpoints = {
     getImages: (image) => {
@@ -13,8 +14,8 @@ export const endpoints = {
     getPlatformInsights: () => {
         return client.get("/apis/platform_insights-2.php");
     },
-    getMostViewedDatasets: (perPage, pageNumber, searchValue) => {
-        return client.get(`/apis/most_view_datasets-2.php?perpage=${perPage}&pagenumber=${pageNumber}&search=${searchValue ? searchValue : ""}`);
+    getMostViewedDatasets: (perPage, pageNumber, searchValue, lang) => {
+        return client.get(`/apis/most_view_datasets-2.php?perpage=${perPage}&pagenumber=${pageNumber}${lang === locales.AR ? `&search_ar=` + `${searchValue ? searchValue : ""}` : "&search=" + `${searchValue ? searchValue : ""}`}`);
     },
     getRecentsDatasets: () => {
         return client.get("/apis/recently_added_datasets-2.php");
@@ -113,7 +114,7 @@ export const endpoints = {
         return client.get('/checkuser')
     },
     logout: () => {
-        return client.post(`/user/logout`)
+        return client.get(`/user/logout`)
     },
     getIpAddress: () => {
         return axios.get("https://api.db-ip.com/v2/free/self");
@@ -123,5 +124,8 @@ export const endpoints = {
     },
     getDownloadCountById: (id) => {
         return client.get(`/apis/view_download.php?identifier=${id}`)
+    },
+    addDownloadCountById: (data) => {
+        return client.post(`/apis/download_count.php`, data)
     }
 } 

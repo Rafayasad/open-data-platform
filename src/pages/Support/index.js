@@ -9,6 +9,8 @@ import { routes } from "../../router/helper";
 import { locales } from "../../i18n/helper";
 import View from "../../components/modules/View";
 import { getQuestionBySearch, getSearch } from "../../axios/api";
+import FooterImage from '../../assets/images/Contact-Us.png';
+import FooterImageAr from '../../assets/images/Contact-Us.png';
 
 const Support = memo(() => {
 
@@ -25,7 +27,7 @@ const Support = memo(() => {
 
     useEffect(() => {
         if (searchText !== '') {
-            getQuestionBySearch(searchText, setSearchedData)
+            getQuestionBySearch(searchText, setSearchedData, i18n.language)
         }
     }, [searchText])
 
@@ -47,7 +49,7 @@ const Support = memo(() => {
     }, [searchText])
 
     return (
-        <View theme="dark" footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")} onClickFooterButton={routes.CONTACT}>
+        <View theme="dark" footerImage={i18n.language === locales.AR ? `url(${FooterImageAr})` : `url(${FooterImage})`} footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")} onClickFooterButton={routes.CONTACT}>
             <Main popularSearch={i18n.language === locales.AR ? supportSuggestion?.ar : supportSuggestion?.en} onSearch={onSearch} />
             {
                 searchText === '' &&

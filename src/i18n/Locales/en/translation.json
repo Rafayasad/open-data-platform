@@ -26,7 +26,7 @@
     "filter": "Filter",
     "searchPlaceholder": "Search keyword, dataset, topic or publisher",
     "searchKeywords": "Search Keywords",
-    "popular": "Popular",
+    "popular": "Popular:",
     "populartext": "covid-19, CO2 emissions, Technology, Abu Dhabi police",
     "tags": "Tags",
     "publisher": "Publisher",
@@ -132,6 +132,7 @@
     "license": "License",
     "aldar": "Aldar",
     "realTimeAPI": "Real Time API",
+    "realTime":"Real Time",
     "abuDhabiSpatialData": "Abu Dhabi Spatial Data",
     "ADDBOK": "ADDBOK",
     "crosslink1": "Cross link 1",
@@ -258,5 +259,7 @@
     "selectOption": "Select Option",
     "unauthorized": "Sorry, the access to this page might be restricted at the moment.",
     "notFound": "Sorry, the page you are looking for doesn't exist.",
-    "returntohomepage": "Return to homepage"
+    "returntohomepage": "Return to homepage",
+    "cancel": "Cancel",
+    "alreadyAccount": "Already have an account?"
 }

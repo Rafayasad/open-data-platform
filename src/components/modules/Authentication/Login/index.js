@@ -6,13 +6,16 @@ import AuthBackground1 from "../../../../assets/images/Auth-Background-1.png";
 import { validateUser } from "../../../../axios/api";
 import { routes } from "../../../../router/helper";
 import { colors } from "../../../../utils/colors";
+import UaePassImg from '../../../../assets/images/Uaepass.png';
 import Heading from "../../../elements/Heading";
 import AuthCard from "../AuthCard";
 import { toast } from "react-toastify";
+import { locales } from "../../../../i18n/helper";
+import '../style.css';
 
 const Login = memo(() => {
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -35,15 +38,7 @@ const Login = memo(() => {
   return (
     <div>
       <div
-        className="d-none d-lg-flex"
-        style={{
-          minHeight: "100vh",
-          width: "100vw",
-          backgroundImage: `url(${AuthBackground1})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "100vw 100%",
-        }}
-      >
+        className={`d-none d-lg-flex main-auth ${i18n.language === locales.AR ? "flipImage" : "defaultImage"}`}>
         <Container fluid className="my-5 pt-5">
           <Row>
             <Col>
@@ -86,11 +81,13 @@ const Login = memo(() => {
                     },
                     {
                       title: t("LoginWithUAE"),
+                      icon: <img src={UaePassImg} className="mx-2" style={{ height: 22, width: 22 }} />,
                       onClick: "",
                       backgroundColor: colors.white,
                       textColor: colors.black,
                       borderColor: colors.black,
                       textSize: "",
+                      bold: true
                     },
                   ]}
                   onClickForgetPassword={onClickForgetPassword}
@@ -135,6 +132,8 @@ const Login = memo(() => {
                     {
                       title: t("LoginWithUAE"),
                       onClick: "",
+                      icon: <img src={UaePassImg} className="mx-2" style={{ height: 22, width: 22 }} />,
+                      bold: true,
                       backgroundColor: colors.white,
                       textColor: colors.black,
                       borderColor: colors.black,
