@@ -5,7 +5,7 @@ import { colors } from "../../../../utils/colors";
 import Button from "../../../elements/Button";
 import Heading from "../../../elements/Heading";
 import ListItem from "../../../elements/ListItem";
-import Drone from '../../../../assets/images/TopicDrone.png';
+import SafetyAndSecurity from '../../../../assets/images/topics/Safety-and-Security.jpg';
 import Agriculture from '../../../../assets/images/topics/Agriculture.jpg';
 import Business from '../../../../assets/images/topics/Business.jpg';
 import Education from '../../../../assets/images/topics/Education.jpg';
@@ -14,6 +14,10 @@ import Enviroment from '../../../../assets/images/topics/Enviroment.jpg';
 import Society from '../../../../assets/images/topics/Society.jpg';
 import Technology from '../../../../assets/images/topics/Technology.jpg';
 import Transport from '../../../../assets/images/topics/Transport.jpg';
+import Economy from '../../../../assets/images/topics/Economy.jpg';
+import Tourism from '../../../../assets/images/topics/Tourism.jpg';
+import Health from '../../../../assets/images/topics/Health.jpg';
+import HR from '../../../../assets/images/topics/Human-Resources.jpg';
 
 const Topics = memo((props) => {
 
@@ -50,7 +54,12 @@ const Topics = memo((props) => {
                                         item.title === "Environment" || item.title === "البيئة" ? Enviroment :
                                             item.title === "Society" || item.title === "المجتمع" ? Society :
                                                 item.title === "Technology" || item.title === "التكنولوجيا" ? Technology :
-                                                    item.title === "Transport" || item.title === "المواصلات" ? Transport : Drone
+                                                    item.title === "Economy" || item.title === "الاقتصاد" ? Economy :
+                                                        item.title === "Tourism" || item.title === "السياحة" ? Tourism :
+                                                            item.title === "Health" || item.title === "الصحة" ? Health :
+                                                                item.title === "Human Capital" || item.title === "رأس المال البشري" ? HR :
+                                                                    item.title === "Safety and Security" || item.title === "الامن والسلامة" ? SafetyAndSecurity :
+                                                                        item.title === "Transport" || item.title === "المواصلات" && Transport
                     )}
                     onClick={() => onClickListItem(item)}
                 />

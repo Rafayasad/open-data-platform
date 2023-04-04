@@ -1514,10 +1514,10 @@ export const logout = (dispatch, setLoading, handleLogout) => {
     return endpoints.logout()
         .then((res) => {
             setLoading(false)
-            if (res.status === 200) {
-                dispatch && dispatch(handleLogout());
-                window.location.reload();
-            }
+            dispatch && dispatch(handleLogout());
+            window.location.reload();
+            // if (res.status === 200) {
+            // }
         }).catch((err) => {
             setLoading(false)
             console.log("Error Message", err);
@@ -1528,8 +1528,6 @@ export const getStoriesTags = (dispatch, setStoriesTags) => {
     return endpoints.getStoriesTags()
         .then((res) => {
             if (res.status == 200) {
-
-                console.log("sasaasdsad", res.data);
 
                 let tags = res.data.data?.map((item) => (
                     {
