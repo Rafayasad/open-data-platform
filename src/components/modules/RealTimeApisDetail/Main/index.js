@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { colors } from "../../../../utils/colors";
 import { locales } from '../../../../i18n/helper';
+import { BsDot } from "react-icons/bs"
 import Shimmer from '../../../elements/Shimmer';
 import Heading from "../../../elements/Heading";
 import Tabs from "../../Tabs";
@@ -18,11 +19,13 @@ const Main = memo((props) => {
 
     let option = { dateStyle: 'long' };
 
+    let des = data?.description.split("-");
+
     let e = [
         {
             title: t("about"),
             detail: data ? (
-                i18n.language === locales.AR ? data.description_ar : <p>{data.description.split(" - ").join("\r\n• ")}</p>
+                i18n.language === locales.AR ? data.description_ar : des?.map((item, index) => <p>{`${index != 0 ? "• " : ""} ${item}`}</p>)
             ) : (
                 <>
                     <Shimmer rounded='xs' className={"my-1"} />

@@ -22,7 +22,7 @@ const Drawer = memo((props) => {
 
     const { open, setOpen, onClickApplyFilter, appliedFilters, data, year } = props;
     // const { isLoggedIn } = useSelector(state => state.authentication);
-
+    { console.log("tas", data) }
     const [activeIndex, setActiveIndex] = useState();
     const [filters, setFilters] = useState([]);
 
@@ -69,6 +69,8 @@ const Drawer = memo((props) => {
 
     const onClickItem = useCallback((item) => {
 
+        console.log(item);
+
         let filter = [...filters]
 
         if (filters.some(el => el.title === item.title)) {
@@ -85,6 +87,7 @@ const Drawer = memo((props) => {
                     filter.splice(index, 1)
                 }
             }
+            // if()
             filter.push(item)
             setFilters(filter)
         }

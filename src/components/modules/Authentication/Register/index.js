@@ -10,10 +10,11 @@ import { register } from "../../../../axios/api";
 import { routes } from "../../../../router/helper";
 import { toast } from "react-toastify";
 import { isStrongPassword, validateEmail } from "../../../../utils/generic";
+import { locales } from "../../../../i18n/helper";
 
 const Register = memo(() => {
 
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -51,14 +52,7 @@ const Register = memo(() => {
   return (
     <div>
       <div
-        className="d-none d-lg-flex"
-        style={{
-          minHeight: "100vh",
-          width: "100vw",
-          backgroundImage: `url(${AuthBackground1})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "100vw 100%",
-        }}
+        className={`d-none d-lg-flex main-auth ${i18n.language === locales.AR ? "flipImage" : "defaultImage"}`}
       >
         <Container fluid className="my-5 pt-5">
           <Row className="p-0">

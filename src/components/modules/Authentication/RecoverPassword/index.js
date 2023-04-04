@@ -10,10 +10,14 @@ import { routes } from "../../../../router/helper";
 import { useNavigate } from "react-router-dom";
 import { validateEmail } from "../../../../utils/generic";
 import { toast } from "react-toastify";
+import UaePassImg from '../../../../assets/images/Uaepass.png';
+import '../style.css';
+import i18next from "i18next";
+import { locales } from "../../../../i18n/helper";
 
 const RecoverPassword = memo(() => {
 
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const navigate = useNavigate();
 
   const [email, setEmail] = useState();
@@ -32,15 +36,7 @@ const RecoverPassword = memo(() => {
   return (
     <div>
       <div
-        className="d-none d-lg-flex"
-        style={{
-          minHeight: "100vh",
-          width: "100vw",
-          backgroundImage: `url(${AuthBackground2})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "100vw 100%",
-        }}
-      >
+        className={`d-none d-lg-flex main-recover ${i18n.language === locales.AR ? "flipImage" : "defaultImage"}`}>
         <Container fluid className="my-5 pt-5">
           <Row>
             <Col>
@@ -79,6 +75,8 @@ const RecoverPassword = memo(() => {
                     },
                     {
                       title: t("LoginWithUAE"),
+                      icon: <img src={UaePassImg} className="mx-2" style={{ height: 22, width: 22 }} />,
+                      bold: true,
                       onClick: "",
                       backgroundColor: colors.white,
                       textColor: colors.black,
@@ -120,6 +118,8 @@ const RecoverPassword = memo(() => {
                     },
                     {
                       title: t("LoginWithUAE"),
+                      icon: <img src={UaePassImg} className="mx-2" style={{ height: 22, width: 22 }} />,
+                      bold: true,
                       onClick: "",
                       backgroundColor: colors.white,
                       textColor: colors.black,

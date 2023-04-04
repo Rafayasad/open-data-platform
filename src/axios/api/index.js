@@ -23,10 +23,12 @@ export const getMostViewedDatasets = (setData, setTotalCount, searchValue, setLo
     return endpoints.
         getMostViewedDatasets(perPage, pageNumber, searchValue, language).then((res) => {
             if (res.status === 200) {
+                console.log("trans", res.data);
                 setLoading(false);
                 setTotalCount(res.data.total_count);
                 let data = res.data.data;
                 let transform = data.en.map(item => {
+
 
                     let index = data.ar.findIndex(itm => itm.identifier === item.identifier);
                     let ar_obj = {
@@ -39,6 +41,7 @@ export const getMostViewedDatasets = (setData, setTotalCount, searchValue, setLo
                     ar_obj.resources_ar = ar_obj.distributionlear.map(item => {
                         return (
                             {
+                                id: item.identifier,
                                 title: item.titlelear,
                                 format: item.format === "pdf" ? "pdf"
                                     : item.format === "excel" ? "excel"
@@ -68,7 +71,6 @@ export const getMostViewedDatasets = (setData, setTotalCount, searchValue, setLo
                         resources: item.distribution.map(item => {
                             return (
                                 {
-                                    id: item.identifier,
                                     title: item.title,
                                     format: item.format === "pdf" ? "pdf"
                                         : item.format === "excel" ? "excel"
@@ -84,7 +86,9 @@ export const getMostViewedDatasets = (setData, setTotalCount, searchValue, setLo
                         ...ar_obj
                     }
                 })
-                console.log("trans", transform);
+
+
+
                 setData(transform)
                 setLoading(false)
             }
@@ -308,6 +312,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
     return endpoints.
         getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then(async (res) => {
             if (res.status === 200) {
+                console.log("trans", res.data);
                 if (res.data.total > 0 && search && search.trim() !== "") {
                     let obj = {
                         keyword: search,
@@ -325,6 +330,8 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                 setTotalCount(res.data.total)
 
                 let arr = []
+
+                // console.log(res.data.results?.map(item => console.log("RESULTS==>", item)));
 
                 arr = Object.values(res.data.results)?.map(item => (
                     {
@@ -384,6 +391,7 @@ export const getDatasetById = (id, setData) => {
                     let itemm = item.data
                     return (
                         {
+                            id: item.identifier,
                             title: itemm.title,
                             title_ar: itemm.titlelear,
                             description: itemm.description,

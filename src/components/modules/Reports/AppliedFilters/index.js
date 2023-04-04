@@ -9,6 +9,18 @@ const AppliedFilters = memo((props) => {
     const { filters } = props;
     const { t } = useTranslation();
 
+    useEffect(() => {
+        console.log("assadsdadsdada", sort())
+    }, [])
+
+    const sort = () => {
+
+        let arr = Object.keys(filters).sort((a, b) => filters[a] - filters[b]);
+
+        return arr;
+
+    }
+
     return (
         <Row className="py-4 d-flex justify-content-center">
             <Col>

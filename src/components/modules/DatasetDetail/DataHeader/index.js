@@ -24,28 +24,28 @@ import { addDownloadCount } from "../../../../axios/api";
 
 const DataHeader = memo((props) => {
 
-    const { title, resources, url, nooptions, downloadCount, id } = props
+    const { title, resources, url, nooptions, downloadCount, handleReload } = props
 
     const { t } = useTranslation();
     const [openBottomSheet, setOpenBottomSheet] = useState(false)
 
     const [headerOnTop, setHeaderOnTop] = useState(false);
-    const [downloadLink, setDownloadLink] = useState();
-
-    const downloadResources = useCallback((links) => { console.log(links) });
-
     const [currentHovered, setCurrentHovered] = useState(null);
+
+    const addDownloadCounts = useCallback((title, id) => {
+        addDownloadCount(id).then((res) => {
+            handleReload()
+        })
+    });
 
     const onHover = useCallback(() => setCurrentHovered(true), [currentHovered])
     const onLeave = useCallback(() => setCurrentHovered(false), [currentHovered])
 
-    const opensss = resources && resources.length > 0 && resources.map(item => console.log("ss", item))
-
     const options = resources && resources.length > 0 && resources.map(item => (
         {
-            id: item.identifier,
+            id: item.id,
             title: i18n.language === locales.AR ? item.title_ar : item.title,
-            onClick: downloadResources,
+            onClick: addDownloadCounts,
             downloadLink: item.downloadURL,
             icon: item.format === "pdf" ? <img src={pdfImage} />
                 : item.format === "excel" ? <img src={excelImage} />
@@ -65,10 +65,7 @@ const DataHeader = memo((props) => {
         }
     ))
 
-    const addDownloadCounts = useCallback((id) => {
-        console.log("asdfdsa");
-        // addDownloadCount(id)
-    })
+
 
     const handleClick = async () => {
         if (navigator.share) {
@@ -132,7 +129,7 @@ const DataHeader = memo((props) => {
                             <div className="d-flex flex-column align-items-center">
                                 <div className="d-flex">
                                     <Dropdown
-                                        onClick={addDownloadCounts}
+                                        onClickDownloadItem={addDownloadCounts}
                                         autoClose={true}
                                         size={"md"}
                                         options={options}

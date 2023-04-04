@@ -10,7 +10,7 @@ import { locales } from '../../../i18n/helper';
 
 const Dropdown = (props) => {
 
-    const { onClick, minWidth, reportsFilter, autoClose, options, setSelectedDropdownValue, textColor, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
+    const { onClickDownloadItem, minWidth, reportsFilter, autoClose, options, setSelectedDropdownValue, textColor, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
 
     const [isOpen, setIsOpen] = useState(false);
     const [indexx, setIndexx] = useState();
@@ -89,9 +89,8 @@ const Dropdown = (props) => {
                                     onClick={(e) => {
                                         e.preventDefault();
                                         if (item.onClick) {
-                                            onClick(item.id)
                                             highlightableItem && setIndexx(index)
-                                            item.onClick(item.title)
+                                            item.onClick(item.title, item.id)
                                         }
 
                                         if (item.downloadLink) {

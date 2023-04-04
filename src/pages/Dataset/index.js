@@ -178,6 +178,7 @@ const Dataset = memo(() => {
             {
                 !most_viewed_datasets && searchValue === "" && (!storedFilters || storedFilters.length < 1 || storedFilters === null) &&
                 <Cards
+                    dropdownWidth={"100%"}
                     notagsactive
                     buttonText={viewAll && t("viewLess")}
                     onClickViewAll={toggle}
