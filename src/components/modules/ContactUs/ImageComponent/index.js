@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
-import Background from '../../../../assets/images/Contact-Us.png'
+import Background from '../../../../assets/images/Contact-Us-en.jpg'
 import BackgroundAr from '../../../../assets/images/Contact-Us-ar.jpg'
 import BreadCrumb from "../../../elements/BreadCrumb";
 import { useTranslation } from "react-i18next";
