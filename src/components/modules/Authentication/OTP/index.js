@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
-import AuthBackground1 from "../../../../assets/images/Auth-Background-1.png";
+import AuthBackground1 from "../../../../assets/images/Auth-Background-1.jpg";
 import { login } from "../../../../axios/api";
 import { handleLogin } from "../../../../redux/reducers/Authentication";
 import { routes } from "../../../../router/helper";

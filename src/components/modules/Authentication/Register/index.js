@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import AuthBackground1 from "../../../../assets/images/Auth-Background-1.png";
+import AuthBackground1 from "../../../../assets/images/Auth-Background-1.jpg";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import AuthCard from "../AuthCard";

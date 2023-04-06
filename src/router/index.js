@@ -1,5 +1,4 @@
 import React, { lazy } from "react";
-import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes, Navigate } from "react-router-dom";
 import RealTimeApisDetail from "../pages/RealTimeApisDetail";
