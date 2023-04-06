@@ -9,8 +9,8 @@ import { routes } from "../../router/helper";
 import { locales } from "../../i18n/helper";
 import View from "../../components/modules/View";
 import { getQuestionBySearch, getSearch } from "../../axios/api";
-import FooterImage from '../../assets/images/Contact-Us.png';
-import FooterImageAr from '../../assets/images/Contact-Us.png';
+import FooterImage from '../../assets/images/Contact-Us.jpg';
+import FooterImageAr from '../../assets/images/Contact-Us.jpg';
 
 const Support = memo(() => {
 

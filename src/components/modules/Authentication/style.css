@@ -4,7 +4,7 @@
 
 .main-recover::before {
     content: '';
-    background-image: url('../../../assets/images/recover-pass-Image.png');
+    background-image: url('../../../assets/images/recover-pass-Image.jpg');
     position: fixed;
     left: 0;
     top: 0;
@@ -16,7 +16,7 @@
 
 .main-auth::before {
     content: '';
-    background-image: url('../../../assets/images/Auth-Background-1.png');
+    background-image: url('../../../assets/images/Auth-Background-1.jpg');
     position: fixed;
     left: 0;
     top: 0;

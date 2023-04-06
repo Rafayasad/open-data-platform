@@ -1,8 +1,8 @@
 import React, { memo } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import background from '../../../../assets/images/Desktop.png';
-import CardOne from '../../../../assets/images/Card-One.png';
-import CardTwo from '../../../../assets/images/Card-Two.png';
+import background from '../../../../assets/images/Desktop.jpg';
+import CardOne from '../../../../assets/images/Card-One.jpg';
+import CardTwo from '../../../../assets/images/Card-Two.jpg';
 import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
 import { colors } from "../../../../utils/colors";

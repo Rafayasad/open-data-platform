@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import FooterImage from '../../../../assets/images/FooterImage.png';
+import FooterImage from '../../../../assets/images/FooterImage.jpg';
 import FooterImage_ar from '../../../../assets/images/FooterImage-ar.png';
 import Button from '../../../elements/Button';
 import Heading from '../../../elements/Heading';

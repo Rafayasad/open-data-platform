@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useRef, useState } from "react";
 import Modal from "../../../components/elements/Modal/index";
-import AuthBackground1 from "../../../assets/images/Auth-Background-1.png";
+import AuthBackground1 from "../../../assets/images/Auth-Background-1.jpg";
 import Navbar from '../../../components/modules/Navbar'
 import useIsFocused from "../../../utils/hooks/useIsFocused";
 import View from "../../../components/modules/View";

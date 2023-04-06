@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { SlShare } from "react-icons/sl";
 import StoriesDetails from "../../components/modules/SuccessStories/StoriesDetail";
-import demoImage from "../../assets/images/Desktop.png";
+import demoImage from "../../assets/images/Desktop.jpg";
 import Cards from "../../components/modules/Cards";
 import { colors } from "../../utils/colors";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
