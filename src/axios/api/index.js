@@ -1057,6 +1057,7 @@ export const login = async (dispatch, setData, setLoading, payload, route) => {
                         .then((res) => {
                             setLoading(false)
                             if (res.status === 200) {
+                                toast(res.data.message, { type: 'success' })
                                 dispatch && dispatch(setData(res.data))
                                 window.location.assign(route);
                             } else if (res.data.status === 400) {
@@ -1241,11 +1242,13 @@ export const register = async (navigate, route, setLoading, payload) => {
         .then((res) => {
             if (res.status === 200) {
                 navigate(route, { replace: true });
+                toast(res.data.message, { type: 'success' })
             }
             setLoading(false)
         }).catch((err) => {
             setLoading(false)
             console.log("Error message", err)
+            toast(err.message, { type: 'error' })
         })
 
 }
