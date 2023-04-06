@@ -3,12 +3,17 @@ import { Dropdown as BSDropdown } from 'react-bootstrap';
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share';
 import i18n from '../../../i18n/i18n';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 import { colors } from '../../../utils/colors';
 import Heading from '../Heading';
 import './style.css';
 import { locales } from '../../../i18n/helper';
+import { useTranslation } from 'react-i18next';
 
 const Dropdown = (props) => {
+
+    const { t } = useTranslation();
 
     const { onClickDownloadItem, minWidth, reportsFilter, autoClose, options, setSelectedDropdownValue, textColor, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
 
@@ -24,25 +29,41 @@ const Dropdown = (props) => {
         setIndexx();
     }, [i18n.language])
 
-    const itemComponent = (icon, title) => {
+    const renderTooltip = (props) => (
+        <Tooltip id="button-tooltip" {...props}>
+            {props}
+        </Tooltip>
+    );
+
+    const emptyTooltip = (props) => (
+        <></>
+    );
+
+    const itemComponent = (icon, title, url) => {
         return (
-            <div className='d-flex align-items-center'>
-                {
-                    icon &&
-                    <div className='px-2'>
-                        {icon}
+            <OverlayTrigger
+                placement="bottom"
+                delay={{ show: 400, hide: 0 }}
+                overlay={url ? renderTooltip(title) : emptyTooltip}
+            >
+                <div className='d-flex align-items-center'>
+                    {
+                        icon &&
+                        <div className='px-2'>
+                            {icon}
+                        </div>
+                    }
+                    <div className={`d-flex flex-wrap ${icon && "px-2"}`}>
+                        <span className='m-0 p-0 multine-ellipsis-1'
+                            style={{
+                                color: colors.black
+                            }}>
+                            {title}
+                        </span>
+                        {/* <Heading nomargin color={colors.black} maxNumberOfLines={1} size="xxs" heading={item.title} /> */}
                     </div>
-                }
-                <div className={`d-flex flex-wrap ${icon && "px-2"}`}>
-                    <span className='m-0 p-0 multine-ellipsis-1'
-                        style={{
-                            color: colors.black
-                        }}>
-                        {title}
-                    </span>
-                    {/* <Heading nomargin color={colors.black} maxNumberOfLines={1} size="xxs" heading={item.title} /> */}
                 </div>
-            </div>
+            </OverlayTrigger>
         )
     }
 
@@ -104,19 +125,19 @@ const Dropdown = (props) => {
                                     {
                                         item.format === "facebook" ? (
                                             <FacebookShareButton url={item.url}>
-                                                {itemComponent(item.icon, item.title)}
+                                                {itemComponent(item.icon, item.title, item.downloadLink)}
                                             </FacebookShareButton>
                                         ) : item.format === 'twitter' ? (
                                             <TwitterShareButton url={item.url}>
-                                                {itemComponent(item.icon, item.title)}
+                                                {itemComponent(item.icon, item.title, item.downloadLink)}
                                             </TwitterShareButton>
                                         ) : item.format === 'linkedin' ? (
                                             <LinkedinShareButton url={item.url}>
-                                                {itemComponent(item.icon, item.title)}
+                                                {itemComponent(item.icon, item.title, item.downloadLink)}
                                             </LinkedinShareButton>
                                         ) : (
                                             <>
-                                                {itemComponent(item.icon, item.title)}
+                                                {itemComponent(item.icon, item.title, item.downloadLink)}
                                             </>
                                         )
                                     }
