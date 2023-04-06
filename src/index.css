@@ -42,6 +42,11 @@ code {
   font-feature-settings: normal;
 }
 
+.swagger-ui {
+  font-family: 'CircularStd-Regular' !important;
+  font-feature-settings: normal !important;
+}
+
 @font-face {
   font-family: 'CircularStd-Regular';
   src: local('CircularStd'), url(./assets/fonts/CircularStd-Book.ttf) format('truetype');
