@@ -8,6 +8,7 @@ import BreadCrumb from "../../../elements/BreadCrumb";
 import { useTranslation } from "react-i18next";
 import i18n from "../../../../i18n/i18n";
 import { locales } from "../../../../i18n/helper";
+import { routes } from "../../../../router/helper";
 
 const ImageComponent = memo(() => {
     const { t } = useTranslation();
@@ -25,7 +26,13 @@ const ImageComponent = memo(() => {
                 <Row className="pt-5 p-0">
                     <Col>
                         <div className="py-4 p-0">
-                            <BreadCrumb textcolor={colors.white} iconColor={colors.white} items={[t("aboutus")]} />
+                            <BreadCrumb textcolor={colors.white} iconColor={colors.white} items={[
+                                {
+                                    title: t("aboutus"),
+                                    link: routes.ABOUTUS
+                                }
+                            ]}
+                            />
                         </div>
                         <Heading heading={t("contactUs")} size="xl" bold color={colors.white} />
                     </Col>

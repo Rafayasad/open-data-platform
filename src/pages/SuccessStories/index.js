@@ -93,7 +93,12 @@ const SuccessStories = memo(() => {
         <View theme="dark" noupperfooter>
             <div className="my-5 pt-5">
                 <div className="px-4 pt-5">
-                    <BreadCrumb items={[t("aboutus")]} />
+                    <BreadCrumb items={[
+                        {
+                            title: t("aboutus"),
+                            link: routes.ABOUTUS
+                        }
+                    ]} />
                 </div>
                 <div className="px-2">
                     <Header count={stories?.length} onClickClearAll={onClickClearAll} filterData={data} title={t("successStories")} nobutton backgroundColor={colors.white} filterbutton filters={storiesFilters} onClickApplyFilter={onApplyFilter} onDeleteFilter={onDeleteFilter} appliedFilters={storiesFilters} />

@@ -62,8 +62,8 @@ const Dataset = memo(() => {
 
     useEffect(() => {
         setSearchValue("")
-        dispatch(setFilter(null))
-        setFilters()
+        // dispatch(setFilter(null))
+        // setFilters()
         setCurrentPage(1)
         i18n.language === locales.AR ? setSort("تم التعديل") : setSort("Modified")
     }, [i18n.language])
@@ -135,7 +135,6 @@ const Dataset = memo(() => {
     }, [currentPage]);
 
     const onChangeSearch = useCallback((e) => {
-        console.log("sadewada===>", e);
         setSearchValue(e)
         if (e) {
             focustoDatasets()
@@ -188,6 +187,7 @@ const Dataset = memo(() => {
                     data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)}
                     onClick={onClickCard} />
             }
+            {console.log("datasets", datasets)}
             <div id="datasetsList">
                 <DatasetList
                     nocount

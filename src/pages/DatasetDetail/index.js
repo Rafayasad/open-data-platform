@@ -74,7 +74,17 @@ const DatasetDetail = memo(() => {
         <View theme="dark" noupperfooter sticky>
             <div id="main" className="my-5 pt-5">
                 <div className="px-4 pt-5">
-                    <BreadCrumb items={[t("datasets"), t("detail")]} />
+                    <BreadCrumb
+                        items={[
+                            {
+                                title: t("datasets"),
+                                link: routes.DATASET
+                            },
+                            {
+                                title: t("detail"),
+                                link: `${routes.DATASET_DETAIL}?id=${id}`
+                            }]}
+                    />
                 </div>
                 {console.log("ssss", dataset)}
                 <Main handleReload={handleReload} id={id} data={dataset} url={`https://data.abudhabi/opendata/dataset/detail?id=${id}`} />

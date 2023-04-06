@@ -1094,7 +1094,8 @@ export const getInsightsReport = (setData, payload, setLoading, setDatatype) => 
             setLoading(false);
             if (res.status === 200) {
                 if (payload?.datatype === "csv" || payload?.datatype === "excel") {
-                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'insights_report', [res.data])
+                    console.log("RESS",res.data);
+                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'insights_report', [res.data.data])
                     setDatatype('');
                 } else if (payload?.datatype === 'pdf') {
                     const href = window.URL.createObjectURL(res.data);

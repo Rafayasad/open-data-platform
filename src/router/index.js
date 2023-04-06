@@ -60,10 +60,10 @@ const Router = () => {
             <Route path={routes.REAL_TIME_APIS} element={<RealTimeApis />} />
             <Route path={routes.REAL_TIME_APIS_DETAIL} element={<RealTimeApisDetail />} />
             <Route path={routes.CONFIRMATION} element={<Confirmation />} />
-            <Route path={routes.REPORTS} element={isLoggedIn ? <Reports /> : <Unauthorized />} />
-            <Route path={routes.REPORTS_INSIGHTS} element={isLoggedIn ? <InsightsReports /> : <Unauthorized />} />
-            <Route path={routes.REPORTS_PUBLISHERS} element={isLoggedIn ? <PublishersReports /> : <Unauthorized />} />
-            <Route path={routes.REPORTS_DATASETS} element={isLoggedIn ? <DatasetsReports /> : <Unauthorized />} />
+            <Route path={routes.REPORTS} element={!isLoggedIn ? <Reports /> : <Unauthorized />} />
+            <Route path={routes.REPORTS_INSIGHTS} element={!isLoggedIn ? <InsightsReports /> : <Unauthorized />} />
+            <Route path={routes.REPORTS_PUBLISHERS} element={!isLoggedIn ? <PublishersReports /> : <Unauthorized />} />
+            <Route path={routes.REPORTS_DATASETS} element={!isLoggedIn ? <DatasetsReports /> : <Unauthorized />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     )

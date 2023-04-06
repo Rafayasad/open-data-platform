@@ -33,6 +33,8 @@ const Datasets = memo(() => {
 
     const [filterOpen, setFilterOpen] = useState(false);
 
+    const datasetsDiv = document.getElementById("tableList");
+
     let tabs = [
         {
             title: "All",
@@ -92,13 +94,13 @@ const Datasets = memo(() => {
 
     useEffect(() => {
         getDatasetsReport(setDatasets, {
-            date_type: filters?.date_type ? filters.date_type : "created",
+            date_type: filters?.date_type ? filters.date_type.toLocaleLowerCase() : "created",
             startdate: filters?.start_date ? filters.start_date : "all",
             enddate: filters?.end_date ? filters.end_date : "all",
             datatype: datatype,
             publisher: filters?.publisher ? filters.publisher : "",
             kpi: filters?.kpi ? filters.kpi : "",
-            topic: filters?.topics ? filters.topics : "",
+            topic: filters?.topic ? filters.topic : "",
             perpage: rowsPerPage,
             pagenumber: currentPage,
             type: filters?.type ? filters.type : "all"
@@ -106,20 +108,38 @@ const Datasets = memo(() => {
         }, setLoading, setTotalCount, setDatatype)
     }, [filters, currentPage, datatype]);
 
-    const onChangePage = useCallback((page) => setCurrentPage(page), [currentPage]);
+    useEffect(() => {
+        datasetsDiv?.scrollIntoView()
+    }, [currentPage])
+
+    const onChangePage = useCallback((page) => {
+        setCurrentPage(page)
+    }, [currentPage]);
 
     const onClickFilter = useCallback(() => setFilterOpen(!filterOpen), [filterOpen]);
-    const onApplyFilters = useCallback((obj) => setFilters(obj), []);
+    const onApplyFilters = useCallback((obj) => {
+        setCurrentPage(1)
+        setFilters(obj)
+    }, []);
+
+    console.log("datasssssssssssssssss", datasets);
 
     return (
         <>
             <Navbar theme='dark' />
-            <ReportsFilter kpi={filters?.type === "kpi"} accordinData={filters?.type === "kpi" ? AccordinDataWithoutTopics : AccordinData} open={filterOpen} setOpen={setFilterOpen} appliedFilters={filters} onApplyFilters={onApplyFilters} />
+            <ReportsFilter selectedTab={selectedTab} kpi={filters?.type === "kpi"} accordinData={filters?.type === "kpi" ? AccordinDataWithoutTopics : AccordinData} open={filterOpen} setOpen={setFilterOpen} appliedFilters={filters} onApplyFilters={onApplyFilters} />
             <Container fluid className="my-5 pt-5 px-4">
                 <Header title={t("datasetsReports")} onClickFilter={onClickFilter} datatypeCallback={datatypeCallback} />
-                <Tabs data={tabs} selected={selectedTab} />
-                <AppliedFilters filters={filters}
-                />
+                <Tabs loading={loading} data={tabs} selected={selectedTab} />
+                <div id="tableList">
+                    <AppliedFilters
+                        loading={loading}
+                        numberOfDatasets={datasets?.length}
+                        pageNumber={currentPage}
+                        totalCount={totalCount}
+                        filters={filters}
+                    />
+                </div>
                 <Table
                     data={datasets}
                     currentPage={currentPage}

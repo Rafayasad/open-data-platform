@@ -5,13 +5,19 @@ import { MdArrowForwardIos, MdArrowBackIos } from "react-icons/md";
 import { colors } from '../../../utils/colors';
 import i18n from '../../../i18n/i18n';
 import { locales } from '../../../i18n/helper';
+import { Link } from "react-router-dom";
 
 const BreadCrumb = memo((props) => {
 
     const { items, textcolor, iconColor } = props;
 
     const breadcrumbs = [
-        items?.map((item, index) => <Typography className='m-0 p-0' style={{ color: textcolor ? textcolor : colors.gray }} key={index} color="text.primary">{item}</Typography>)
+        items?.map((item, index) => <Link className='text-decoration-none' replace={true} to={item.link && item.link}>
+            <Typography className='m-0 p-0' style={{ color: textcolor ? textcolor : colors.gray }} key={index} color="text.primary">
+                {item.title}
+            </Typography>
+        </Link>
+        )
     ];
 
     return (
