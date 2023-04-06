@@ -9,7 +9,9 @@ import Navbar from "../../../components/modules/Navbar";
 import Button from "../../../components/elements/Button";
 import { routes } from "../../../router/helper";
 
-const Unauthorized = memo(() => {
+const Unauthorized = memo((props) => {
+
+    const { title } = props;
 
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -33,7 +35,7 @@ const Unauthorized = memo(() => {
                 </Row>
                 <Row>
                     <Col md={6}>
-                        <Heading heading={t("unauthorized")} color={colors.white} size="sm" />
+                        <Heading heading={title ? t(title) : t("unauthorized")} color={colors.white} size="sm" />
                     </Col>
                 </Row>
                 <Row className="py-4">

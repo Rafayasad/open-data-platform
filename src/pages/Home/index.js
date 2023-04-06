@@ -15,6 +15,7 @@ import { locales } from "../../i18n/helper";
 import View from "../../components/modules/View";
 import { setFilter } from "../../redux/reducers/Facets";
 import { useDispatch } from "react-redux";
+import { isDuplicates } from "../../utils/generic";
 
 const Home = memo(() => {
 
@@ -42,7 +43,7 @@ const Home = memo(() => {
     const data = [
         {
             title: t("publisher"),
-            tags: i18n.language === locales.AR ? publishers && publishers.ar : publishers && publishers.en
+            tags: i18n.language === locales.AR ? publishers && isDuplicates(publishers?.ar) : publishers && publishers.en
         },
         {
             title: t("topics"),
@@ -86,8 +87,8 @@ const Home = memo(() => {
                 />
             </div>
             <Images />
-            <Cards dropdownWidth={"100%"} title={t("mostViewedDatasets")} backgroundColor={colors.black} data={mostViewedDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={() => onClickButton("mostvieweddatasets")} />
-            <Cards dropdownWidth={"100%"} title={t("recentlyAddedDatasets")} backgroundColor={colors.black} data={recentsDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={() => onClickButton()} />
+            <Cards dropdownWidth={"55%"} title={t("mostViewedDatasets")} backgroundColor={colors.black} data={mostViewedDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={() => onClickButton("mostvieweddatasets")} />
+            <Cards dropdownWidth={"55%"} title={t("recentlyAddedDatasets")} backgroundColor={colors.black} data={recentsDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={() => onClickButton()} />
             <PlatformInsights data={platformInsights} />
         </View>
     )

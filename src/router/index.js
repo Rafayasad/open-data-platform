@@ -50,7 +50,7 @@ const Router = () => {
             <Route path={routes.REGISTER} element={<Register />} />
             <Route path={routes.LOGIN} element={<Login />} />
             <Route path={routes.RECOVER} element={<RecoverPassword />} />
-            <Route path={routes.RESET} element={<ResetPassword />} />
+            <Route path={routes.RESET} element={!isLoggedIn ? <ResetPassword /> : <Unauthorized title={"resetTitle"} />} />
             <Route path={routes.OTP} element={<OTP />} />
             {/* <Route path={routes.SUCCESS_STOIRES} element={<SuccessStories />} />
             <Route path={routes.SUCCESS_STOIRES_DETAIL} element={<SuccessStoriesDetail />} /> */}
@@ -60,7 +60,7 @@ const Router = () => {
             <Route path={routes.REAL_TIME_APIS} element={<RealTimeApis />} />
             <Route path={routes.REAL_TIME_APIS_DETAIL} element={<RealTimeApisDetail />} />
             <Route path={routes.CONFIRMATION} element={<Confirmation />} />
-            <Route path={routes.REPORTS} element={!isLoggedIn ? <Reports /> : <Unauthorized />} />
+            <Route path={routes.REPORTS} element={isLoggedIn ? <Reports /> : <Unauthorized />} />
             <Route path={routes.REPORTS_INSIGHTS} element={!isLoggedIn ? <InsightsReports /> : <Unauthorized />} />
             <Route path={routes.REPORTS_PUBLISHERS} element={!isLoggedIn ? <PublishersReports /> : <Unauthorized />} />
             <Route path={routes.REPORTS_DATASETS} element={!isLoggedIn ? <DatasetsReports /> : <Unauthorized />} />

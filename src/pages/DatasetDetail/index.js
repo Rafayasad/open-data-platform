@@ -92,13 +92,17 @@ const DatasetDetail = memo(() => {
                     navigate(routes.DATASET, {
                         replace: true, state: {
                             listItem: [{
-                                title: dataset.topics[0],
-                                type: "theme"
+                                title: i18n.language === locales.AR ? dataset.topics_ar[0] : dataset.topics[0],
+                                type: i18n.language === locales.AR ? "themelear" : "theme"
                             }]
                         }
                     })
-                    // [{ title: item, type: "theme" }]
-                }} title={t("similarDatasets")} backgroundColor={colors.white} data={similarDataset} onClick={onClickCard} />
+                }}
+                    dropdownWidth={"55%"}
+                    title={t("similarDatasets")}
+                    backgroundColor={colors.white}
+                    data={similarDataset}
+                    onClick={onClickCard} />
             </div>
         </View>
     )

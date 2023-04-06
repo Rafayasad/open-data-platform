@@ -61,3 +61,9 @@ export const getYears = () => {
 export const isEmptyString = (str) => {
   return str.trim() === '';
 }
+
+export const isDuplicates = (arr) => arr?.filter((value, index, self) =>
+  index === self.findIndex((t) => (
+    t.title === value.title
+  ))
+)

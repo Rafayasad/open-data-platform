@@ -11,6 +11,7 @@ import { locales } from "../../i18n/helper";
 import View from "../../components/modules/View";
 import { useDispatch, useSelector } from "react-redux";
 import { setFilter } from "../../redux/reducers/Facets";
+import { isDuplicates } from "../../utils/generic";
 
 const Dataset = memo(() => {
 
@@ -44,7 +45,7 @@ const Dataset = memo(() => {
     const data = [
         {
             title: t("publisher"),
-            tags: i18n.language === locales.AR ? publishers && publishers.ar : publishers && publishers.en
+            tags: i18n.language === locales.AR ? publishers && isDuplicates(publishers?.ar) : publishers && publishers.en
         },
         {
             title: t("topics"),
@@ -70,9 +71,9 @@ const Dataset = memo(() => {
 
     const focustoDatasets = () => {
         datasetsDiv?.scrollIntoView();
-        setTimeout(() => {
-            window.scrollBy(0, -8)
-        }, 500);
+        // setTimeout(() => {
+        //     window.scrollBy(0, -2)
+        // }, 500);
     }
 
 
@@ -177,7 +178,7 @@ const Dataset = memo(() => {
             {
                 !most_viewed_datasets && searchValue === "" && (!storedFilters || storedFilters.length < 1 || storedFilters === null) &&
                 <Cards
-                    dropdownWidth={"100%"}
+                    dropdownWidth={"55%"}
                     notagsactive
                     buttonText={viewAll && t("viewLess")}
                     onClickViewAll={toggle}
