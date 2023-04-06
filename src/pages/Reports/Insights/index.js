@@ -105,7 +105,9 @@ const Insights = memo(() => {
             <Container fluid className="my-5 pt-5 px-4">
                 <Header title={t("insightsReport")} onClickFilter={onClickFilter} datatypeCallback={datatypeCallback} />
                 <Tabs loading={loading} data={tabs} selected={selectedTab} />
-                <AppliedFilters filters={filters}
+                <AppliedFilters
+                    loading={true}
+                    filters={filters}
                 />
                 <Table
                     data={insights && [insights]}

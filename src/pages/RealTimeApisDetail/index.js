@@ -48,7 +48,15 @@ const RealTimeApisDetail = memo(() => {
         <View theme="dark" noupperfooter sticky>
             <div className="my-5 pt-5">
                 <div className="px-4 pt-5">
-                    <BreadCrumb items={[t("realTimeAPI"), t("detail")]} />
+                    <BreadCrumb items={[
+                        {
+                            title: t("realTimeAPI"),
+                            link: routes.REAL_TIME_APIS
+                        },
+                        {
+                            title: t("detail"),
+                            link: `${routes.REAL_TIME_APIS_DETAIL}?id=${id}`
+                        }]} />
                 </div>
                 <Main data={realTimeApi} />
             </div>

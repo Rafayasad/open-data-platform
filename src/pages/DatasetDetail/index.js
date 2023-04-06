@@ -39,8 +39,6 @@ const DatasetDetail = memo(() => {
 
     const id = urlParams.get('id');
 
-    console.log("iiiid", id);
-
     const [dataset, setDataset] = useState();
     const [similarDataset, setSimilarDataset] = useState();
 
@@ -58,7 +56,6 @@ const DatasetDetail = memo(() => {
     }, [id])
 
     const handleReload = useCallback(() => {
-        console.log("hello");
         getDatasetById(id, setDataset);
     })
 
@@ -74,21 +71,34 @@ const DatasetDetail = memo(() => {
         <View theme="dark" noupperfooter sticky>
             <div id="main" className="my-5 pt-5">
                 <div className="px-4 pt-5">
-                    <BreadCrumb items={[t("datasets"), t("detail")]} />
+                    <BreadCrumb
+                        items={[
+                            {
+                                title: t("datasets"),
+                                link: routes.DATASET
+                            },
+                            {
+                                title: t("detail"),
+                                link: `${routes.DATASET_DETAIL}?id=${id}`
+                            }]}
+                    />
                 </div>
-                {console.log("ssss", dataset)}
                 <Main handleReload={handleReload} id={id} data={dataset} url={`https://data.abudhabi/opendata/dataset/detail?id=${id}`} />
                 <Cards onClickViewAll={() => {
                     navigate(routes.DATASET, {
                         replace: true, state: {
                             listItem: [{
-                                title: dataset.topics[0],
-                                type: "theme"
+                                title: i18n.language === locales.AR ? dataset.topics_ar[0] : dataset.topics[0],
+                                type: i18n.language === locales.AR ? "themelear" : "theme"
                             }]
                         }
                     })
-                    // [{ title: item, type: "theme" }]
-                }} title={t("similarDatasets")} backgroundColor={colors.white} data={similarDataset} onClick={onClickCard} />
+                }}
+                    dropdownWidth={"55%"}
+                    title={t("similarDatasets")}
+                    backgroundColor={colors.white}
+                    data={similarDataset}
+                    onClick={onClickCard} />
             </div>
         </View>
     )

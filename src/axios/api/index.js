@@ -67,7 +67,7 @@ export const getMostViewedDatasets = (setData, setTotalCount, searchValue, setLo
                         title: item.title,
                         publisher: item.publisher,
                         tags: item.theme,
-                        url: `${process.env.REACT_APP_BASE_URL}/dataset/${item.identifier}`,
+                        url: `${process.env.REACT_APP_BASE_URL}/dataset/detail?id=${item.identifier}`,
                         resources: item.distribution.map(item => {
                             return (
                                 {
@@ -143,7 +143,7 @@ export const getRecentsDatasets = (setData, setLoading) => {
                         title: item.title,
                         publisher: item.publisher,
                         tags: item.theme,
-                        url: `${process.env.REACT_APP_BASE_URL}/dataset/${item.identifier}`,
+                        url: `${process.env.REACT_APP_BASE_URL}/dataset/detail?id=${item.identifier}`,
                         resources: item.distribution.map(item => {
                             return (
                                 {
@@ -212,7 +212,7 @@ export const getSimilarDatasets = (topic, setData, setLoading) => {
                         title: item.title,
                         publisher: item.publisher,
                         tags: item.theme,
-                        url: `${process.env.REACT_APP_BASE_URL}/dataset/${item.identifier}`,
+                        url: `${process.env.REACT_APP_BASE_URL}/dataset/detail?id=${item.identifier}`,
                         resources: item.distribution.map(item => {
                             return (
                                 {
@@ -344,7 +344,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                         publisher_ar: item.publisherlear?.name,
                         tags: item.theme,
                         tags_ar: item.themelear,
-                        url: `${process.env.REACT_APP_BASE_URL}/dataset/${item.identifier}`,
+                        url: `${process.env.REACT_APP_BASE_URL}/dataset/detail?id=${item.identifier}`,
                         resources: item.distribution.map(item => (
                             {
                                 title: item.title,
@@ -426,8 +426,10 @@ export const getDatasetById = (id, setData) => {
                     frequency_ar: item.accrualPeriodicity === "R/P1Y" ? "سنوي" : item.accrualPeriodicity === "auto/freq" ? "تلقائي" : "لا يوجد",
                     access_level: item.accessLevel,
                     access_level_ar: item.accessLevellear,
-                    license: item.license,
-                    license_ar: item.licenselear,
+                    // license: item.license,
+                    // license_ar: item.licenselear,
+                    license: "https://data.abudhabi/opendata/addata_open_license",
+                    license_ar: "https://data.abudhabi/opendata/addata_open_license",
                     topics: item.theme.map(item => item.data),
                     topics_ar: item.themelear.map(item => item.data),
                     tags: item.keyword.map(item => item.data),
@@ -1094,7 +1096,8 @@ export const getInsightsReport = (setData, payload, setLoading, setDatatype) => 
             setLoading(false);
             if (res.status === 200) {
                 if (payload?.datatype === "csv" || payload?.datatype === "excel") {
-                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'insights_report', [res.data])
+                    console.log("RESS", res.data.data);
+                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'insights_report', [res.data.data])
                     setDatatype('');
                 } else if (payload?.datatype === 'pdf') {
                     const href = window.URL.createObjectURL(res.data);
@@ -1139,7 +1142,7 @@ export const getPublishersReport = (setData, payload, setLoading, setTotalCount,
             setLoading(false)
             if (res.status === 200) {
                 if (payload.datatype === "csv" || payload.datatype === "excel") {
-                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'publishers_report', [res.data])
+                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'publishers_report', [res.data.data])
                     setDatatype('');
                 } else if (payload.datatype === 'pdf') {
                     console.log("hello");
@@ -1186,7 +1189,7 @@ export const getDatasetsReport = (setData, payload, setLoading, setTotalCount, s
             setLoading(false);
             if (res.status === 200) {
                 if (payload?.datatype === "csv" || payload?.datatype === "excel") {
-                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'dataset_report', [res.data])
+                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'dataset_report', [res.data.data])
                     setDatatype('');
                 } else if (payload?.datatype === 'pdf') {
                     console.log("hello");

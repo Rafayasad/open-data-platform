@@ -32,7 +32,27 @@ const SupportQuestionsDetail = memo(() => {
         <View theme='dark' footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")} onClickFooterButton={routes.CONTACT} >
             <div className="my-5 pt-5">
                 <div className="px-4 pt-4 m-0">
-                    <BreadCrumb items={breadCrumbName ? [t("supports"), breadCrumbName] : [t("supports")]} />
+                    <BreadCrumb
+                        items={
+                            breadCrumbName ?
+                                [
+                                    {
+                                        title: t("supports"),
+                                        link: routes.SUPPORT
+                                    },
+                                    {
+                                        title: breadCrumbName,
+                                        link: `${routes.SUPPORT}`
+                                    }
+                                ] : [
+                                    {
+                                        title: t("supports"),
+                                        link: routes.SUPPORT
+                                    }
+                                ]
+                        }
+                    // items={breadCrumbName ? [t("supports"), breadCrumbName] : [t("supports")]}
+                    />
                 </div>
                 <Main title={i18n.language === locales.AR ? details && details.title_ar : details && details.title} description={i18n.language === locales.AR ? details && details.description_ar : details && details.description} />
             </div>

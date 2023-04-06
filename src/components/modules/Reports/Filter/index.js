@@ -82,6 +82,8 @@ const ReportsFilter = memo((props) => {
 
     }, [filters])
 
+    console.log("ITEMS", filters);
+
     const onChangeFilter = useCallback((filter) => setFilters({ ...filters, ...filter }), [filters]);
 
     const onClickApply = useCallback(() => {
@@ -147,10 +149,13 @@ const ReportsFilter = memo((props) => {
                         <DatePicker value={filters?.end_date} title={t("endDate")}
                             onChange={(end_date) => onChangeFilter({
                                 end_date,
-                                start_date: selectedTab === "All" ? filters?.start_date : selectedTab === "Weekly" ? dayjs(end_date).subtract(6, 'days').format('YYYY-MM-DD') :
-                                    selectedTab === "Monthly" ? dayjs(end_date).subtract(1, 'month').add(1, 'day').format('YYYY-MM-DD') :
-                                        selectedTab === "Quarterly" ? dayjs(end_date).subtract(3, 'month').add(1, 'day').format('YYYY-MM-DD') :
-                                            selectedTab === "Yearly" ? dayjs(end_date).subtract(1, 'year').add(1, 'day').format('YYYY-MM-DD') : ""
+                                start_date:
+                                    selectedTab === "All" || selectedTab === t("linkedResource")
+                                        || t("physicalResource") || t("kpi")
+                                        ? filters?.start_date : selectedTab === "Weekly" ? dayjs(end_date).subtract(6, 'days').format('YYYY-MM-DD') :
+                                            selectedTab === "Monthly" ? dayjs(end_date).subtract(1, 'month').add(1, 'day').format('YYYY-MM-DD') :
+                                                selectedTab === "Quarterly" ? dayjs(end_date).subtract(3, 'month').add(1, 'day').format('YYYY-MM-DD') :
+                                                    selectedTab === "Yearly" ? dayjs(end_date).subtract(1, 'year').add(1, 'day').format('YYYY-MM-DD') : ""
                             })} minDate={filters?.start_date} />
                     </div>
                 </div>

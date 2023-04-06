@@ -117,6 +117,7 @@ const Cards = memo((props) => {
                         {
                             data && data.length > 0 ? data.map((item, index) => (
                                 <div key={index} className="py-2 pe-2 d-flex" style={{ minWidth: "300px" }}>
+                                    {console.log("URL", item.url)}
                                     <Card
                                         notagsactive={notagsactive}
                                         noheadercomponent={noheadercomponent}

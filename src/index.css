@@ -1,4 +1,11 @@
 html,
+* {
+  box-sizing: border-box;
+  scrollbar-width: none;
+  /* Firefox implementation */
+
+}
+
 body {
   margin: 0;
   font-family: 'CircularStd-Regular';

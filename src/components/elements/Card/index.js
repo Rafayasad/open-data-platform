@@ -41,7 +41,6 @@ const Card = memo((props) => {
     const [selectedSheetValue, setSelectedSheetValue] = useState();
 
     const isClicked = useCallback((value, id) => {
-        console.log("-------->ssssssssssssssssssssssssss", value, id);
         setSelectedDropdownValue(value)
     })
 
@@ -97,7 +96,7 @@ const Card = memo((props) => {
     const specificDownloadOptions = resources?.map(item => (
         {
             id: item.id,
-            title: i18n.language === locales.AR ? item.title_ar : item.title,
+            title: i18n.language === locales.AR ? (item.title_ar && item.title_ar != "" ? item.title_ar : item.downloadURL) : (item.title && item.title != "" ? item.title : item.downloadURL),
             onClick: addDownloadCounts,
             downloadLink: item.downloadURL,
             icon: item.format === "pdf" ? <img src={pdfImage} />

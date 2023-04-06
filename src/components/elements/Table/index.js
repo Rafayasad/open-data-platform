@@ -157,7 +157,10 @@ const Table = memo((props) => {
                                     <StyledTableRow key={row.name}>
                                         {
                                             Object.keys(row).map(item => (
+                                                <>
+                                                {console.log(" inside  data",row)}
                                                 <StyledTableCell>{row[item]}</StyledTableCell>
+                                                </>
                                             ))
                                         }
                                     </StyledTableRow>

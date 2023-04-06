@@ -64,7 +64,15 @@ const SuccessStoriesDetail = memo(() => {
             <div className="my-5 pt-5 px-0">
                 <div className="px-4 pt-5 d-flex justify-content-between align-items-center">
                     <div className="">
-                        <BreadCrumb items={[t("aboutus"), t("successStories")]} />
+                        <BreadCrumb items={[
+                            {
+                                title: t("aboutus"),
+                                link: routes.ABOUTUS
+                            },
+                            {
+                                title: t("successStories"),
+                                link: routes.SUCCESS_STOIRES
+                            }]} />
                     </div>
                     <div className="d-none d-lg-block">
                         <Dropdown

@@ -11,6 +11,7 @@ import { locales } from "../../i18n/helper";
 import View from "../../components/modules/View";
 import { useDispatch, useSelector } from "react-redux";
 import { setFilter } from "../../redux/reducers/Facets";
+import { isDuplicates } from "../../utils/generic";
 
 const Dataset = memo(() => {
 
@@ -44,7 +45,7 @@ const Dataset = memo(() => {
     const data = [
         {
             title: t("publisher"),
-            tags: i18n.language === locales.AR ? publishers && publishers.ar : publishers && publishers.en
+            tags: i18n.language === locales.AR ? publishers && isDuplicates(publishers?.ar) : publishers && publishers.en
         },
         {
             title: t("topics"),
@@ -62,17 +63,17 @@ const Dataset = memo(() => {
 
     useEffect(() => {
         setSearchValue("")
-        dispatch(setFilter(null))
-        setFilters()
+        // dispatch(setFilter(null))
+        // setFilters()
         setCurrentPage(1)
         i18n.language === locales.AR ? setSort("تم التعديل") : setSort("Modified")
     }, [i18n.language])
 
     const focustoDatasets = () => {
         datasetsDiv?.scrollIntoView();
-        setTimeout(() => {
-            window.scrollBy(0, -8)
-        }, 500);
+        // setTimeout(() => {
+        //     window.scrollBy(0, -2)
+        // }, 500);
     }
 
 
@@ -135,7 +136,6 @@ const Dataset = memo(() => {
     }, [currentPage]);
 
     const onChangeSearch = useCallback((e) => {
-        console.log("sadewada===>", e);
         setSearchValue(e)
         if (e) {
             focustoDatasets()
@@ -178,7 +178,7 @@ const Dataset = memo(() => {
             {
                 !most_viewed_datasets && searchValue === "" && (!storedFilters || storedFilters.length < 1 || storedFilters === null) &&
                 <Cards
-                    dropdownWidth={"100%"}
+                    dropdownWidth={"55%"}
                     notagsactive
                     buttonText={viewAll && t("viewLess")}
                     onClickViewAll={toggle}
@@ -188,6 +188,7 @@ const Dataset = memo(() => {
                     data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)}
                     onClick={onClickCard} />
             }
+            {console.log("datasets", datasets)}
             <div id="datasetsList">
                 <DatasetList
                     nocount

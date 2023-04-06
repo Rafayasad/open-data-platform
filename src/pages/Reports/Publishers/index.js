@@ -37,10 +37,11 @@ const Publishers = memo(() => {
 
     let tabs = [
         {
-            title: t("all"),
+            title: t("All"),
             onClick: (val) => {
                 setFilters({ ...filters, date_type: "Modified", type: "all" })
                 setSelectedTab(val)
+                setCurrentPage(1);
             }
         },
         {
@@ -48,6 +49,7 @@ const Publishers = memo(() => {
             onClick: (val) => {
                 setFilters({ ...filters, type: "user" })
                 setSelectedTab(val)
+                setCurrentPage(1);
             }
         }
     ]
@@ -67,7 +69,7 @@ const Publishers = memo(() => {
         getPublishersReport(setPublishersData, {
             startdate: filters?.start_date ? filters.start_date : "all",
             enddate: filters?.end_date ? filters.end_date : "all",
-            date_type: filters?.date_type ? filters.date_type : "modified",
+            date_type: filters?.date_type ? filters.date_type.toLocaleLowerCase() : "modified",
             datatype: datatype,
             type: filters?.type ? filters.type : "all",
             publisher: filters?.publisher ? filters.publisher : "",
@@ -82,7 +84,10 @@ const Publishers = memo(() => {
     }, [currentPage, tableDiv]);
 
     const onClickFilter = useCallback(() => setFilterOpen(!filterOpen), [filterOpen]);
-    const onApplyFilters = useCallback((obj) => setFilters(obj), []);
+    const onApplyFilters = useCallback((obj) => {
+        setCurrentPage(1)
+        setFilters(obj)
+    }, []);
 
     return (
         <>
@@ -90,18 +95,23 @@ const Publishers = memo(() => {
             <ReportsFilter accordinData={AccordinData} open={filterOpen} setOpen={setFilterOpen} appliedFilters={filters} onApplyFilters={onApplyFilters} />
             <Container id="header" fluid className="my-5 pt-5 px-4">
                 <Header title={t("publishersReports")} onClickFilter={onClickFilter} datatypeCallback={datatypeCallback} />
-                <Tabs data={tabs} selected={selectedTab} />
-                <AppliedFilters filters={filters}
-                />
+                <Tabs loading={loading} data={tabs} selected={selectedTab} />
                 <div id="table">
-                    <Table
-                        data={publisherData}
-                        currentPage={currentPage}
-                        totalCount={Math.ceil(totalCount / rowsPerPage)}
-                        onChange={onChangePage}
+                    <AppliedFilters
                         loading={loading}
+                        numberOfDatasets={publisherData?.length}
+                        pageNumber={currentPage}
+                        totalCount={totalCount}
+                        filters={filters}
                     />
                 </div>
+                <Table
+                    data={publisherData}
+                    currentPage={currentPage}
+                    totalCount={Math.ceil(totalCount / rowsPerPage)}
+                    onChange={onChangePage}
+                    loading={loading}
+                />
             </Container>
             <MiddleFooter />
             <LowerFooter />
