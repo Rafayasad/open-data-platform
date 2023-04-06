@@ -39,8 +39,6 @@ const DatasetDetail = memo(() => {
 
     const id = urlParams.get('id');
 
-    console.log("iiiid", id);
-
     const [dataset, setDataset] = useState();
     const [similarDataset, setSimilarDataset] = useState();
 
@@ -58,7 +56,6 @@ const DatasetDetail = memo(() => {
     }, [id])
 
     const handleReload = useCallback(() => {
-        console.log("hello");
         getDatasetById(id, setDataset);
     })
 
@@ -86,7 +83,6 @@ const DatasetDetail = memo(() => {
                             }]}
                     />
                 </div>
-                {console.log("ssss", dataset)}
                 <Main handleReload={handleReload} id={id} data={dataset} url={`https://data.abudhabi/opendata/dataset/detail?id=${id}`} />
                 <Cards onClickViewAll={() => {
                     navigate(routes.DATASET, {
