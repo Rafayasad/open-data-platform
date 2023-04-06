@@ -1455,8 +1455,8 @@ export const getPrivacyPolicy = (setData, setLoading) => {
                 {
                     title: item.attributes.title,
                     title_ar: item.attributes.field_privacytitle_ar,
-                    description: item.attributes.field_body,
-                    description_ar: item.attributes.field_privacy_description_ar
+                    description: item.attributes.field_body.value,
+                    description_ar: item.attributes.field_privacy_description_ar.value
                 }))
 
             let obj = {
