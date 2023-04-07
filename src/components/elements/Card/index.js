@@ -141,22 +141,23 @@ const Card = memo((props) => {
                         {
                             !nodropdown &&
                             <Col xs={4} className='d-flex justify-content-end'>
-                                {window.innerWidth <= 768 ?
-                                    <BsThreeDots onClick={() => setOpenBottomSheet(true)} color={colors.black} size={28} style={{ cursor: 'pointer' }} />
-                                    :
-                                    <Dropdown
-                                        dropdownWidth={dropdownWidth ? dropdownWidth : "15%"}
-                                        width={"100%"}
-                                        noheadercomponent={noheadercomponent}
-                                        autoClose={"outside"}
-                                        minWidth={"50%"}
-                                        size={"xl"}
-                                        // size={selectedDropdownValue === t("download") ? window.innerWidth >= 768 ? "sm" : "xl" : window.innerWidth >= 768 ? "sm" : "lg"}
-                                        options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
-                                        selectedDropdownValue={selectedDropdownValue}
-                                        setSelectedDropdownValue={setSelectedDropdownValue}
-                                        headerComponent={<BsThreeDots color={colors.black} size={28} style={{ cursor: 'pointer' }} />}
-                                    />
+                                {
+                                    window.innerWidth <= 768 ?
+                                        <BsThreeDots onClick={() => setOpenBottomSheet(true)} color={colors.black} size={28} style={{ cursor: 'pointer' }} />
+                                        :
+                                        <Dropdown
+                                            dropdownWidth={dropdownWidth ? dropdownWidth : "15%"}
+                                            width={"100%"}
+                                            noheadercomponent={noheadercomponent}
+                                            autoClose={"outside"}
+                                            minWidth={"50%"}
+                                            size={"xl"}
+                                            // size={selectedDropdownValue === t("download") ? window.innerWidth >= 768 ? "sm" : "xl" : window.innerWidth >= 768 ? "sm" : "lg"}
+                                            options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
+                                            selectedDropdownValue={selectedDropdownValue}
+                                            setSelectedDropdownValue={setSelectedDropdownValue}
+                                            headerComponent={<BsThreeDots color={colors.black} size={28} style={{ cursor: 'pointer' }} />}
+                                        />
                                 }
                             </Col>
                         }

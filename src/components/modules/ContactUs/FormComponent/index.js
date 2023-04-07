@@ -65,7 +65,7 @@ const FormComponent = memo(() => {
         <Container className="my-5 py-5" fluid>
             <Row className="d-flex justify-content-center d-lg-none zindex-modal">
                 <Col md={10}>
-                    <Heading heading={t("contactUs")} size="xxl" />
+                    <Heading heading={t("contactUs")} size="xxxl" />
                 </Col>
                 <Col md={10}>
                     <Heading nomargin heading={t("footerPartText")} size="xxs" color={colors.gray} />

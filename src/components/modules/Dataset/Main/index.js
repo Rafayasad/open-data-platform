@@ -21,8 +21,8 @@ const Main = memo((props) => {
                     <Col className="d-flex flex-column justify-content-center">
                         <Row>
                             <Col />
-                            <Col xs={10} md={6} style={{ textAlign: 'center' }} className="py-2">
-                                <Heading bold color={colors.black} heading={t("datasetTitle")} />
+                            <Col xs={10} md={8} style={{ textAlign: 'center' }} className="py-2">
+                                <Heading size="xxl" bold color={colors.black} heading={t("datasetTitle")} />
                             </Col>
                             <Col />
                         </Row>

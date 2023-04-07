@@ -1,3 +1,7 @@
 .list-item-hover:hover {
     background-color: #762FFF;
 }
+
+.delay:hover {
+    transition: 0.3s ease-in-out;
+}
