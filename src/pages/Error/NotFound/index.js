@@ -28,7 +28,7 @@ const NotFound = memo(() => {
             <Container fluid className="px-4 py-5 my-5">
                 <Row className="mt-5">
                     <Col>
-                        <Heading heading="404" color={colors.white} size="xxl" />
+                        <Heading heading="404" color={colors.white} size="xxxl" />
                     </Col>
                 </Row>
                 <Row>

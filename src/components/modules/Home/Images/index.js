@@ -54,7 +54,7 @@ const Images = memo(() => {
                     <Row>
                         <Col xs={12} md={12} lg={6} className="my-2">
                             <div className="d-flex flex-column justify-content-center" style={{
-                                height: '60vh',
+                                height: '500px',
                                 backgroundImage: `url(${CardOne})`,
                                 backgroundRepeat: 'no-repeat',
                                 backgroundSize: 'cover',
@@ -65,8 +65,8 @@ const Images = memo(() => {
                                 <div className="overlay" />
                                 <Row className="py-1" style={{ zIndex: 1 }}>
                                     <Col />
-                                    <Col sm={12} md={6} className='text-center'>
-                                        <Heading size="xl" color='white' heading={t("areYouNewToOpenData")} />
+                                    <Col sm={12} md={8} className='text-center'>
+                                        <Heading bold color='white' heading={t("areYouNewToOpenData")} />
                                     </Col>
                                     <Col />
                                 </Row>
@@ -81,7 +81,7 @@ const Images = memo(() => {
                         </Col>
                         <Col xs={12} md={12} lg={6} className="my-2">
                             <div className="d-flex flex-column justify-content-center" style={{
-                                height: '60vh',
+                                height: '500px',
                                 backgroundImage: `url(${CardTwo})`,
                                 backgroundRepeat: 'no-repeat',
                                 backgroundSize: 'cover',
@@ -91,7 +91,7 @@ const Images = memo(() => {
                                 <Row className="py-1">
                                     <Col />
                                     <Col sm={10} md={6} className='d-flex justify-content-center align-items-center text-center'>
-                                        <Heading size='xl' color='white' heading={t("joinUsRegisterWithUs")} />
+                                        <Heading bold size='xl' color='white' heading={t("joinUsRegisterWithUs")} />
                                     </Col>
                                     <Col />
                                 </Row>

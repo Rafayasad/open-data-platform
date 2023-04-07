@@ -17,17 +17,17 @@ const UpperFooter = memo((props) => {
 
     return (
         <div className="d-flex flex-column py-5 px-4" style={{
-            height: '75vh',
+            height: '500px',
             // width:"100vh",
             backgroundImage: `${i18n.language === locales.EN ? image ? image : `url(${FooterImage})` : image ? image : `url(${FooterImage_ar})`}`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             backgroundPosition: 'center'
         }}>
-            <Container fluid className='p-0'>
+            <Container fluid className='px-0 py-3'>
                 <Row>
-                    <Col xs={8} md={5}>
-                        <Heading color='white' bold heading={title} />
+                    <Col xs={10} md={5}>
+                        <Heading color='white' heading={title} size="xxl" />
                     </Col>
                 </Row>
                 {
@@ -38,7 +38,7 @@ const UpperFooter = memo((props) => {
                         </Col>
                     </Row>
                 }
-                <Row className='my-2'>
+                <Row className='my-3'>
                     <Col xs={8} md={4} className={i18n.language === locales.AR && "py-3"}>
                         <Button onClick={() => navigate(navigateTo ? navigateTo : routes.REGISTER)} title={button} />
                     </Col>

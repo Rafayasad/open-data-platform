@@ -122,18 +122,18 @@ const MiddleFooter = memo(() => {
                     {
                         data?.map((item, index) => (
                             <Col key={index}>
-                                <div className='my-4 d-flex align-items-center'>
-                                    <Heading size="sm" color="white" heading={item.heading} />
+                                <div className='my-3 d-flex align-items-center'>
+                                    <Heading size="md" bold color="white" heading={item.heading} />
                                 </div>
                                 <div className='my-1'>
                                     {
                                         item.data?.map((item, index) => (
-                                            <div className='d-flex'>
+                                            <div key={index} className='d-flex'>
                                                 <Link style={{ textDecoration: "none" }} to={item.link} state={item.params}>
                                                     {
                                                         item.downloadURL ? (
                                                             <a style={{ display: 'flex', textDecoration: "none", color: "white" }} target={"_blank"} href={item.downloadURL}>
-                                                                <Heading size='xxs' heading={t(item.title)} color={colors.white} />
+                                                                <Heading size='xxs' underline heading={t(item.title)} color={colors.white} />
                                                                 {i18n.language === locales.EN ? <RxArrowTopRight size={25} color='white' className='mx-2' /> : <RxArrowTopLeft size={25} color='white' className='mx-2' />}
                                                             </a>
 

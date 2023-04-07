@@ -26,12 +26,12 @@ const LowerFooter = memo(() => {
                     <Heading size="xs" color="white" heading={t("powered")} />
                 </Col>
             </div>
-            <Row className='d-flex justify-content-between'>
+            <Row className='d-flex justify-content-between mx-0'>
                 <div className={`p-0 col-12 col-md-6 d-flex ${window.innerWidth >= 768 ? "justify-content-start" : "justify-content-end"}`}>
-                    <div className={`${window.innerWidth >= 768 ? "px-2" : "px-4"}`}>
+                    <div className={`${window.innerWidth >= 768 ? "px-0" : "px-4"}`}>
                         <img height={"100px"} width={"auto"} src={AbuDhabi} />
                     </div>
-                    <div className={`${window.innerWidth >= 768 ? "px-2" : "px-0"}`}>
+                    <div className={`${window.innerWidth >= 768 ? "px-4" : "px-0"}`}>
                         <img height={"100px"} width={"auto"} src={Emirates} />
                     </div>
                 </div>
@@ -50,7 +50,7 @@ const LowerFooter = memo(() => {
                             <BsInstagram className='mx-2' color='white' size={28} onClick={onClickInstagram} style={{ cursor: 'pointer' }} />
                         </div>
                         <div className='d-none d-lg-block'>
-                            <p className='text-white m-0'>{t('allRights')}</p>
+                            <p style={{ fontSize: "14px" }} className='text-white m-0'>{t('allRights')}</p>
                         </div>
                     </div>
                 </div>

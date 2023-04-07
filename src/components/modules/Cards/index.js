@@ -43,7 +43,6 @@ const Cards = memo((props) => {
         , handleReload
     } = props;
 
-    console.log("title", data);
     const renderContent = () => {
         if (type === 'image-inner-text') {
             return (
@@ -117,7 +116,6 @@ const Cards = memo((props) => {
                         {
                             data && data.length > 0 ? data.map((item, index) => (
                                 <div key={index} className="py-2 pe-2 d-flex" style={{ minWidth: "300px" }}>
-                                    {console.log("URL", item.url)}
                                     <Card
                                         notagsactive={notagsactive}
                                         noheadercomponent={noheadercomponent}
@@ -130,6 +128,7 @@ const Cards = memo((props) => {
                                         resources={i18n.language === locales.AR ? item.resources_ar : item.resources}
                                         url={item.url}
                                         onClick={() => onClick(item.id)}
+                                        headingSize="lg"
                                     />
                                 </div>
                             )) : <Loader type='image-inner-text' width={290} backgroundColor={backgroundColor} />
@@ -154,6 +153,7 @@ const Cards = memo((props) => {
                                         resources={i18n.language === locales.AR ? item.resources_ar : item.resources}
                                         url={item.url}
                                         onClick={() => onClick(item.id)}
+                                        headingSize="lg"
                                     />
                                 </Col>
                             )) : <Loader backgroundColor={backgroundColor} />
