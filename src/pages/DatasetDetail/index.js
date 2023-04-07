@@ -42,6 +42,11 @@ const DatasetDetail = memo(() => {
     const [dataset, setDataset] = useState();
     const [similarDataset, setSimilarDataset] = useState();
 
+    // useEffect(() => {
+    //     mainDiv.scrollIntoView();
+    //     setDataset();
+    // }, [id])
+
     const onClickCard = useCallback((id) => {
         mainDiv.scrollIntoView();
         navigate(`${routes.DATASET_DETAIL}?id=${id}`, { replace: true })

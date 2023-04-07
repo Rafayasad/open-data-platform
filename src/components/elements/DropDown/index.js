@@ -96,15 +96,15 @@ const Dropdown = (props) => {
                             </BSDropdown.Toggle>
                         )
                 }
+                {console.log("OPTIONS=>", options)}
                 {
-                    isOpen && options &&
+                    isOpen && options && options != false &&
                     <BSDropdown.Menu
-
                         align={i18n.language === locales.AR ? "start" : "end"}
                         className={`d-flex flex-column my-1 p-1`}
                         style={{ backgroundColor: "white", zIndex: 999, minWidth: minWidth ? minWidth : "100%", width: size === "xl" ? "175px" : size === "lg" ? "50px" : size === "md" ? "30px" : size === "sm" ? "15px" : "10px" }}>
                         {
-                            options && options.length > 0 && options.map((item, index) => (
+                            options && options.length > 0 && options?.map((item, index) => (
                                 <BSDropdown.Item
                                     as={"div"}
                                     onClick={(e) => {

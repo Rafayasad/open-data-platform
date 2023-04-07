@@ -78,13 +78,13 @@ const Main = memo((props) => {
         {
             title: t("createdAt"),
             detail: data ? (
-                new Date(data.created).toLocaleDateString("en-US", option)
+                new Date(data.created).toLocaleDateString(i18n.language === locales.AR ? "ar-US" : "en-US", option)
             ) : <Shimmer rounded='xs' width="40%" className={"my-1"} />
         },
         {
             title: t("lastUpdated"),
             detail: data ? (
-                new Date(data.modified).toLocaleDateString("en-US", option)
+                new Date(data.modified).toLocaleDateString(i18n.language === locales.AR ? "ar-US" : "en-US", option)
             ) : <Shimmer rounded='xs' width="40%" className={"my-1"} />
         },
         {
