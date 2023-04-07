@@ -1,6 +1,6 @@
 import React, { memo, useCallback } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import AuthBackground2 from "../../../../assets/images/recover-pass-Image.png";
+import AuthBackground2 from "../../../../assets/images/recover-pass-Image.jpg";
 import { colors } from "../../../../utils/colors";
 import Heading from "../../../elements/Heading";
 import AuthCard from "../AuthCard";

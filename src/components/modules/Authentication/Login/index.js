@@ -2,7 +2,7 @@ import React, { memo, useCallback, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import AuthBackground1 from "../../../../assets/images/Auth-Background-1.png";
+import AuthBackground1 from "../../../../assets/images/Auth-Background-1.jpg";
 import { validateUser } from "../../../../axios/api";
 import { routes } from "../../../../router/helper";
 import { colors } from "../../../../utils/colors";

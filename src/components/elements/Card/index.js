@@ -134,7 +134,7 @@ const Card = memo((props) => {
                             {
                                 tags && tags.length > 0 && tags.map((item, index) => (
                                     <Tag key={index} title={item}
-                                        onClick={() => !notagsactive && onClickTag(routes.DATASET, { listItem: [{ title: item, type: "theme" }] })} />
+                                        onClick={() => !notagsactive && onClickTag(routes.DATASET, { listItem: [{ title: item, type: i18n.language === locales.AR ? "themelear" : "theme" }] })} />
                                 ))
                             }
                         </Col>

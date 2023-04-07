@@ -59,7 +59,7 @@ const Topics = memo((props) => {
                                                             item.title === "Health" || item.title === "الصحة" ? Health :
                                                                 item.title === "Human Capital" || item.title === "رأس المال البشري" ? HR :
                                                                     item.title === "Safety and Security" || item.title === "الامن والسلامة" ? SafetyAndSecurity :
-                                                                        item.title === "Transport" || item.title === "المواصلات" && Transport
+                                                                        item.title === "Transport" || item.title === "المواصلات" ? Transport : null
                     )}
                     onClick={() => onClickListItem(item)}
                 />

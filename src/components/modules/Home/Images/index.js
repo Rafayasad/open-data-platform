@@ -1,8 +1,8 @@
 import React, { memo, useCallback } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import background from '../../../../assets/images/Desktop.png';
-import CardOne from '../../../../assets/images/Card-One.png';
-import CardTwo from '../../../../assets/images/Card-Two.png';
+import background from '../../../../assets/images/Desktop.jpg';
+import CardOne from '../../../../assets/images/Card-One.jpg';
+import CardTwo from '../../../../assets/images/Card-Two.jpg';
 import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
 import { colors } from "../../../../utils/colors";
@@ -59,16 +59,18 @@ const Images = memo(() => {
                                 backgroundRepeat: 'no-repeat',
                                 backgroundSize: 'cover',
                                 borderRadius: '30px',
-                                backgroundPosition: 'center'
+                                backgroundPosition: 'center',
+                                position: 'relative'
                             }}>
-                                <Row className="py-1">
+                                <div className="overlay" />
+                                <Row className="py-1" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col sm={12} md={6} className='text-center'>
                                         <Heading size="xl" color='white' heading={t("areYouNewToOpenData")} />
                                     </Col>
                                     <Col />
                                 </Row>
-                                <Row className="py-1">
+                                <Row className="py-1" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
                                         <Button bold title={t("discover")} onClick={onClickDiscover} />

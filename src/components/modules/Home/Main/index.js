@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Button from "../../../elements/Button";
 import Search from "../../../elements/Search";
 import Heading from "../../../elements/Heading";
-import background from '../../../../assets/images/BG.png';
+import background from '../../../../assets/images/BG.jpg';
 import backgroundMobile from '../../../../assets/images/BG-MOB.png';
 import { useTranslation } from "react-i18next";
 import i18n from "../../../../i18n/i18n";

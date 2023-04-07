@@ -1,9 +1,30 @@
-.modal-content{
+.modal-content {
     border-radius: 25px;
 }
-.modal-header{
+
+.modal-header {
     border-bottom: none;
 }
-.btn-close{
+
+.btn-close {
     box-sizing: border-box;
+}
+
+.modal-body::-webkit-scrollbar {
+    width: 12px !important;
+    /* width of the entire scrollbar */
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: orange !important;
+    /* color of the tracking area */
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background-color: blue !important;
+    /* color of the scroll thumb */
+    border-radius: 20px !important;
+    /* roundness of the scroll thumb */
+    border: 3px solid orange !important ;
+    /* creates padding around scroll thumb */
 }
