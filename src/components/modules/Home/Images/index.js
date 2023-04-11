@@ -90,7 +90,7 @@ const Images = memo(() => {
                             }}>
                                 <Row className="py-1">
                                     <Col />
-                                    <Col sm={10} md={6} className='d-flex flex-column justify-content-center align-items-center text-center'>
+                                    <Col xs={10} md={6} className='d-flex flex-column justify-content-center align-items-center text-center'>
                                         <Heading bold size='xxl' color='white' heading={t("joinUsRegisterWithUs")} />
                                         <Heading size='xxs' color='white' heading={t("joinUsRegisterWithUsDescription")} />
 
