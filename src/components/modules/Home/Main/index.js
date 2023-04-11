@@ -33,7 +33,7 @@ const Main = memo((props) => {
                             <img src={Symbol} style={{ height: "28px" }} />
                         </div>
                         <div className="no-letter-spacing">
-                            <Heading nomargin color="white" size="xxs" heading={t("OPEN DATA")} />
+                            <Heading nomargin color="white" size="xxs" heading={t("opendata")} />
                         </div>
                     </Col>
                 </Row>

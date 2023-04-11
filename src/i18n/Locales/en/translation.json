@@ -263,5 +263,6 @@
     "notFound": "Sorry, the page you are looking for doesn't exist.",
     "returntohomepage": "Return to homepage",
     "cancel": "Cancel",
-    "alreadyAccount": "Already have an account?"
+    "alreadyAccount": "Already have an account?",
+    "opendata": "OPEN DATA"
 }
