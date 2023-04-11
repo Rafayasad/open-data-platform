@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import i18n from "../../../../i18n/i18n";
 import { locales } from "../../../../i18n/helper";
 import { useSelector } from "react-redux";
+import Symbol from "../../../../assets/images/Product-Symbol.png"
 
 const Main = memo((props) => {
 
@@ -27,6 +28,14 @@ const Main = memo((props) => {
         }}>
             <Container>
                 <Row className="h-25">
+                    <Col className="d-flex align-items-end justify-content-center">
+                        <div className="mx-2">
+                            <img src={Symbol} style={{ height: "28px" }} />
+                        </div>
+                        <div className="no-letter-spacing">
+                            <Heading nomargin color="white" size="xxs" heading={t("OPEN DATA")} />
+                        </div>
+                    </Col>
                 </Row>
                 <Row className="h-50">
                     <Col className="d-flex flex-column justify-content-center">

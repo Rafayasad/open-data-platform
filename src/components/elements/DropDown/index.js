@@ -15,7 +15,7 @@ const Dropdown = (props) => {
 
     const { t } = useTranslation();
 
-    const { onClickDownloadItem, minWidth, reportsFilter, autoClose, options, setSelectedDropdownValue, textColor, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
+    const { iconColor, borderColor, onClickDownloadItem, minWidth, reportsFilter, autoClose, options, setSelectedDropdownValue, textColor, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
 
     const [isOpen, setIsOpen] = useState(false);
     const [indexx, setIndexx] = useState();
@@ -85,13 +85,14 @@ const Dropdown = (props) => {
                         ) : (
                             <BSDropdown.Toggle
                                 href={null}
-                                className={`w-100 bg-white my-1 d-flex align-items-center justify-content-between my-dropdown-toggle text-black border border-1 ${isOpen && "dropdown-hover"}`}
+                                style={{ border: borderColor && !isOpen ? "1.5px solid #CFCFCF" : "1px solid #CFCFCF" }}
+                                className={`w-100 bg-white my-1 d-flex align-items-center justify-content-between my-dropdown-toggle text-black ${isOpen && "dropdown-hover"}`}
                             >
                                 <div className=''>
                                     <Heading size="xxs" color={isOpen ? "#AD50F0" : textColor} nomargin heading={selectedValue} />
                                 </div>
                                 <div className='my-1'>
-                                    <MdKeyboardArrowDown />
+                                    <MdKeyboardArrowDown color={`${!isOpen ? "#404040" : "#AD50F0"}`} size={20} />
                                 </div>
                             </BSDropdown.Toggle>
                         )

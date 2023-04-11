@@ -89,7 +89,8 @@ const FormComponent = memo(() => {
                         <Heading heading={t("subjectquery")} size={"xxs"} color={colors.gray} nomargin />
                     </div>
                     <Dropdown
-                        borderColor={"black"}
+                        iconColor={"#404040"}
+                        borderColor={selectedValue != t("selectsubject") && "1px solid #CFCFCF"}
                         autoClose={true}
                         dropdownWidth={"100%"}
                         options={options}

@@ -15,7 +15,7 @@ function TextArea(props) {
                 onChange={(e) => onChange(e.target.value)}
                 className='w-100'
                 multiline
-                rows={4}
+                rows={3}
                 placeholder={label}
             />
             {/* <Form.Control

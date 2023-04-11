@@ -31,3 +31,7 @@
     color: #1e2125 !important;
     background-color: #f3f3f3 !important;
 }
+
+.border-color{
+    border: 1.5px solid #CFCFCF !important;
+}
