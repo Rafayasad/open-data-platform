@@ -53,7 +53,7 @@ const Main = memo((props) => {
                         <Row className="pb-3 m-0">
                             <Col className="d-flex flex-wrap justify-content-center align-items-center">
                                 {
-                                    filter && filter.length > 0 && filter.map((item, index) =>
+                                    filter && filter.length > 0 && filter.slice(0, 5).map((item, index) =>
                                     (
                                         <div className="py-1">
                                             <Tag
@@ -62,7 +62,18 @@ const Main = memo((props) => {
                                                 title={item.title}
                                                 crossIcon={<RxCross2 size={20} onClick={() => onDeleteFilter(item)} />} />
                                         </div>
-                                    ))}
+                                    ))
+                                }
+                                {
+                                    filter && filter.length > 5 &&
+                                    <div className="py-1">
+                                        <Tag
+                                            backgroundColor={colors.black}
+                                            textColor={colors.white}
+                                            title={`+ ${(filter.length) - 5}`}
+                                        />
+                                    </div>
+                                }
                             </Col>
                         </Row>
                     }

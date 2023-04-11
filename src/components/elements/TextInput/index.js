@@ -84,11 +84,11 @@ const TextInput = memo((props) => {
         onBlur={toggle}
         id="standard-adornment-password"
         sx={{
-          ':before': { borderBottomColor: 'black' },
+          ':before': { borderBottomColor: '#101010' },
           ':after': {
             borderBottomColor:
               placeholder === t("password") && type === t("password") && isStrongPassword(value) === true ? '#2C9C2E'
-                : 'black'
+                : '#101010'
           },
         }}
         type={!showPassword && type === "password" ? "password" : "text"} value={value}

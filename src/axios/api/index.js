@@ -246,7 +246,7 @@ export const getFacets = async (key_en, key_ar, dispatch, setData) => {
 
             if (res.status === 200) {
 
-                let transform = res.data.facets.map(item => ({
+                let transform = res.data.facets.filter(item => item.name != " ").map(item => ({
                     title: item.name,
                     value: item.total,
                     type: item.type
@@ -265,14 +265,18 @@ export const getFacets = async (key_en, key_ar, dispatch, setData) => {
     let ar = await endpoints.
         getFacets(key_ar).then((res) => {
             if (res.status === 200) {
-
-                let transform = res.data.facets.map(item => ({
+                console.log("sAASASAS", res.data);
+                let transform = res.data.facets.filter(item => item.name != " ").map(item => ({
                     title: item.name,
                     value: item.total,
                     type: item.type
-                }))
+                })
+                )
+
+                console.log("sAASASASssssssssssssssssssssssssssssssssssssss", transform);
 
                 let sorted = _.sortBy(transform, 'title');
+                console.log("sAASASASsssssssssssssssssssssssssssssssssssssSORTs", sorted);
 
                 return sorted
 
@@ -437,7 +441,7 @@ export const getDatasetById = (id, setData) => {
                     resources: filteredResources,
                     created: item.issued,
                     modified: item.modified,
-                    downloadCount
+                    downloadCount:"565"
                 }
 
                 setData(data)

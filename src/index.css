@@ -49,6 +49,10 @@ code {
   font-feature-settings: normal;
 }
 
+.no-letter-spacing {
+  letter-spacing: 0.15rem;
+}
+
 .overlay {
   background: rgba(0, 0, 0, 0.4);
   position: absolute;

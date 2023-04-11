@@ -126,7 +126,10 @@ const Card = memo((props) => {
                 selectedSheetValue={selectedSheetValue}
                 heading={title}
                 options={selectedSheetValue === t("downloadDatasets") ? specificDownloadOptions : selectedSheetValue === t("share") ? specificShareOptions : options} />
-            <RBCard className={` ${nopadding ? "py-4" : "p-4"} ${ClassName}`} style={{ height: HEIGHT, width: "100%", borderRadius: "30px", borderWidth: border }}>
+            <RBCard
+                // onClick={onClick}
+                className={`${nopadding ? "py-4" : "p-4"} ${ClassName}`}
+                style={{ height: HEIGHT, width: "100%", borderRadius: "30px", borderWidth: border }}>
                 {
                     !notags &&
                     <Row className={`${nopadding && "m-0"} h-25 align-items-center`}>
@@ -165,7 +168,14 @@ const Card = memo((props) => {
                 }
                 <Row className={`${nopadding && "m-0"} ${publisher && !notags ? "h-50" : "h-75"}`}>
                     <Col md={shortTitle ? 8 : 12}>
-                        <Heading bold underline maxNumberOfLines={shortTitle ? 2 : 3} size={headingSize ? headingSize : "md"} heading={title} onClick={onClick} />
+                        <Heading
+                            bold
+                            underline
+                            maxNumberOfLines={shortTitle ? 2 : 3}
+                            size={headingSize ? headingSize : "md"}
+                            heading={title}
+                            onClick={onClick}
+                        />
                     </Col>
                     {
                         description &&

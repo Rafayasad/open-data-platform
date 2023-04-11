@@ -16,6 +16,7 @@ import View from "../../components/modules/View";
 import { setFilter } from "../../redux/reducers/Facets";
 import { useDispatch } from "react-redux";
 import { isDuplicates } from "../../utils/generic";
+import { Container } from "react-bootstrap";
 
 const Home = memo(() => {
 
@@ -81,7 +82,7 @@ const Home = memo(() => {
     return (
         <View sticky footerTitle={t("GetMore")} footerButton={t("registerNow")} >
             <Main filterData={data} onSearch={onSearch} onClickExplore={() => topicsDiv.scrollIntoView()} onApplyFilter={onApplyFilter} />
-            <div id='topics'>
+            <div id='topics' className="m-0 p-0">
                 <Topics onClickViewless={() => topicsDiv.scrollIntoView()} onClickList={onClickList}
                     data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en}
                 />

@@ -66,7 +66,7 @@ const Images = memo(() => {
                                 <Row className="py-1" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col sm={12} md={8} className='text-center'>
-                                        <Heading bold color='white' heading={t("areYouNewToOpenData")} />
+                                        <Heading bold size={"xxl"} color='white' heading={t("areYouNewToOpenData")} />
                                     </Col>
                                     <Col />
                                 </Row>
@@ -90,8 +90,10 @@ const Images = memo(() => {
                             }}>
                                 <Row className="py-1">
                                     <Col />
-                                    <Col sm={10} md={6} className='d-flex justify-content-center align-items-center text-center'>
-                                        <Heading bold size='xl' color='white' heading={t("joinUsRegisterWithUs")} />
+                                    <Col sm={10} md={6} className='d-flex flex-column justify-content-center align-items-center text-center'>
+                                        <Heading bold size='xxl' color='white' heading={t("joinUsRegisterWithUs")} />
+                                        <Heading size='xxs' color='white' heading={t("joinUsRegisterWithUsDescription")} />
+
                                     </Col>
                                     <Col />
                                 </Row>

@@ -66,7 +66,7 @@ const Dataset = memo(() => {
         // dispatch(setFilter(null))
         // setFilters()
         setCurrentPage(1)
-        i18n.language === locales.AR ? setSort("تم التعديل") : setSort("Modified")
+        i18n.language === locales.AR ? setSort("الأكثر تحميلا") : setSort("Modified")
     }, [i18n.language])
 
     const focustoDatasets = () => {

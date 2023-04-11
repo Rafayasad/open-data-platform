@@ -46,11 +46,11 @@ const Router = () => {
             <Route path={routes.SUPPORT_QUESTIONS} element={<SupportQuestions />} />
             <Route path={routes.SUPPORT_QUESTIONS_DETAIL} element={<SupportQuestionsDetail />} />
             <Route path={routes.ABOUTUS} element={<About />} />
-            <Route path={routes.REGISTER} element={<Register />} />
-            <Route path={routes.LOGIN} element={<Login />} />
-            <Route path={routes.RECOVER} element={<RecoverPassword />} />
+            <Route path={routes.REGISTER} element={!isLoggedIn ? <Register /> : <Unauthorized title={"resetTitle"} />} />
+            <Route path={routes.LOGIN} element={!isLoggedIn ? <Login /> : <Unauthorized title={"loginTitle"} />} />
+            <Route path={routes.RECOVER} element={!isLoggedIn ? <RecoverPassword /> : <Unauthorized title={"resetTitle"} />} />
             <Route path={routes.RESET} element={!isLoggedIn ? <ResetPassword /> : <Unauthorized title={"resetTitle"} />} />
-            <Route path={routes.OTP} element={<OTP />} />
+            <Route path={routes.OTP} element={!isLoggedIn ? <OTP /> : <Unauthorized title={"resetTitle"} />} />
             {/* <Route path={routes.SUCCESS_STOIRES} element={<SuccessStories />} />
             <Route path={routes.SUCCESS_STOIRES_DETAIL} element={<SuccessStoriesDetail />} /> */}
             <Route path={routes.POLICY} element={<PrivacyPolicy />} />
@@ -60,9 +60,9 @@ const Router = () => {
             <Route path={routes.REAL_TIME_APIS_DETAIL} element={<RealTimeApisDetail />} />
             <Route path={routes.CONFIRMATION} element={<Confirmation />} />
             <Route path={routes.REPORTS} element={isLoggedIn ? <Reports /> : <Unauthorized />} />
-            <Route path={routes.REPORTS_INSIGHTS} element={!isLoggedIn ? <InsightsReports /> : <Unauthorized />} />
-            <Route path={routes.REPORTS_PUBLISHERS} element={!isLoggedIn ? <PublishersReports /> : <Unauthorized />} />
-            <Route path={routes.REPORTS_DATASETS} element={!isLoggedIn ? <DatasetsReports /> : <Unauthorized />} />
+            <Route path={routes.REPORTS_INSIGHTS} element={isLoggedIn ? <InsightsReports /> : <Unauthorized />} />
+            <Route path={routes.REPORTS_PUBLISHERS} element={isLoggedIn ? <PublishersReports /> : <Unauthorized />} />
+            <Route path={routes.REPORTS_DATASETS} element={isLoggedIn ? <DatasetsReports /> : <Unauthorized />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     )
