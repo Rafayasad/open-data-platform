@@ -37,17 +37,14 @@ const SupportQuestionsDetail = memo(() => {
                             breadCrumbName ?
                                 [
                                     {
-                                        title: t("supports"),
-                                        link: routes.SUPPORT
+                                        title: t("supports")
                                     },
                                     {
-                                        title: breadCrumbName,
-                                        link: `${routes.SUPPORT}`
+                                        title: breadCrumbName
                                     }
                                 ] : [
                                     {
-                                        title: t("supports"),
-                                        link: routes.SUPPORT
+                                        title: t("supports")
                                     }
                                 ]
                         }

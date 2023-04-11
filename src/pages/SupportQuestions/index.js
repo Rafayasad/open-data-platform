@@ -41,8 +41,7 @@ const SupportQuestions = memo(() => {
                 <div className="px-4 pt-5">
                     <BreadCrumb items={[
                         {
-                            title: t("supports"),
-                            link: routes.SUPPORT
+                            title: t("supports")
                         }
                     ]} />
                 </div>

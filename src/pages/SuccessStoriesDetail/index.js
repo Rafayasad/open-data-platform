@@ -66,12 +66,10 @@ const SuccessStoriesDetail = memo(() => {
                     <div className="">
                         <BreadCrumb items={[
                             {
-                                title: t("aboutus"),
-                                link: routes.ABOUTUS
+                                title: t("aboutus")
                             },
                             {
-                                title: t("successStories"),
-                                link: routes.SUCCESS_STOIRES
+                                title: t("successStories")
                             }]} />
                     </div>
                     <div className="d-none d-lg-block">

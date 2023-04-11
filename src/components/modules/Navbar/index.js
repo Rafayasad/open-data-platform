@@ -88,7 +88,7 @@ const Navbar = memo((props) => {
                         !nocontent &&
                         <Col md={6} className="d-flex justify-content-center align-items-center">
                             <div className="mx-3">
-                                <Link to={routes.DATASET} replace={true}>
+                                <Link to={routes.DATASET}>
                                     <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("datasets")}</p>
                                 </Link>
                             </div>
