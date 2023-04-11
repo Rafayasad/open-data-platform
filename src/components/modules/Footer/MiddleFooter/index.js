@@ -129,19 +129,19 @@ const MiddleFooter = memo(() => {
                                     {
                                         item.data?.map((item, index) => (
                                             <div key={index} className='d-flex'>
-                                                <Link style={{ textDecoration: "none" }} to={item.link} state={item.params}>
-                                                    {
-                                                        item.downloadURL ? (
-                                                            <a style={{ display: 'flex', textDecoration: "none", color: "white" }} target={"_blank"} href={item.downloadURL}>
-                                                                <Heading size='xxs' underline heading={t(item.title)} color={colors.white} />
-                                                                {i18n.language === locales.EN ? <RxArrowTopRight size={25} color='white' className='mx-2' /> : <RxArrowTopLeft size={25} color='white' className='mx-2' />}
-                                                            </a>
+                                                {
+                                                    item.downloadURL ? (
+                                                        <>
+                                                            <Heading size='xxs' underline heading={t(item.title)} color={colors.white} onClick={() => window.open(item.downloadURL, '_blank')} />
+                                                            {i18n.language === locales.EN ? <RxArrowTopRight size={25} color='white' className='mx-2' /> : <RxArrowTopLeft size={25} color='white' className='mx-2' />}
+                                                        </>
 
-                                                        ) : (
+                                                    ) : (
+                                                        <Link style={{ textDecoration: "none" }} to={item.link} state={item.params}>
                                                             <Heading size='xxs' heading={t(item.title)} color={colors.white} />
-                                                        )
-                                                    }
-                                                </Link>
+                                                        </Link>
+                                                    )
+                                                }
                                             </div>
                                         ))
                                     }

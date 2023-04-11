@@ -10,15 +10,12 @@ const ListItem = memo((props) => {
     return (
         <Row className="p-4 m-0 list-item-hover">
             <Col md={12} className="p-0 m-0 d-flex">
-                <p className="display-1 m-0 text-white">
+                <p className="display-1 m-0 text-white" onClick={() => onClick()} style={{ cursor: 'pointer' }}>
                     {title}
                     <span className="mx-3 position-relative">
                         <sup className="text-white h1 position-absolute m-0" style={{ top: -7 }}>{value}</sup>
                     </span>
                 </p>
-                {/* <h1 className="m-0 px-2">
-                </h1> */}
-                {/* <Heading nomarginlist-item-hover size="4xl" heading={title} color={'white'} onClick={() => onClick()} /> */}
                 {
                     image &&
                     <div className='d-none d-lg-flex align-items-center'>

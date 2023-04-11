@@ -34,7 +34,6 @@ const Topics = memo((props) => {
         setAll(!all)
         all && onClickViewless()
     })
-    const onClickListItem = useCallback((item) => onClickList(item), [])
 
     const renderList = (viewport) => (
         data && data.length > 0 && data.slice(0, all ? data.length : viewport === "lg" ? 8 : 5).map((item, index) => (
@@ -61,7 +60,7 @@ const Topics = memo((props) => {
                                                                     item.title === "Safety and Security" || item.title === "الامن والسلامة" ? SafetyAndSecurity :
                                                                         item.title === "Transport" || item.title === "المواصلات" ? Transport : null
                     )}
-                    onClick={() => onClickListItem(item)}
+                    onClick={() => onClickList(item)}
                 />
                 <hr className="m-0 mx-4" style={{ color: currentHovered === index || currentHovered != null && currentHovered - 1 === index ? 'black' : 'lightgray', borderWidth: 2 }} />
 
