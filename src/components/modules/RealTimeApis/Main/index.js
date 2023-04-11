@@ -15,12 +15,10 @@ const RealTimeApisHeader = memo((props) => {
             <div className="px-4 pt-5">
                 <BreadCrumb items={[
                     {
-                        title: t("applications"),
-                        link: routes.APPLICATIONS
+                        title: t("applications")
                     },
                     {
-                        title: t("realTimeAPI"),
-                        link: routes.REAL_TIME_APIS
+                        title: t("realTimeAPI")
                     }]} />
             </div>
             <div className="p-4 row">

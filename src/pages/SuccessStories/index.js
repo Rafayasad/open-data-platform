@@ -95,8 +95,7 @@ const SuccessStories = memo(() => {
                 <div className="px-4 pt-5">
                     <BreadCrumb items={[
                         {
-                            title: t("aboutus"),
-                            link: routes.ABOUTUS
+                            title: t("aboutus")
                         }
                     ]} />
                 </div>

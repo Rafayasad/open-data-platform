@@ -441,7 +441,7 @@ export const getDatasetById = (id, setData) => {
                     resources: filteredResources,
                     created: item.issued,
                     modified: item.modified,
-                    downloadCount:"565"
+                    downloadCount: "565"
                 }
 
                 setData(data)
@@ -1147,7 +1147,7 @@ export const getPublishersReport = (setData, payload, setLoading, setTotalCount,
             setLoading(false)
             if (res.status === 200) {
                 if (payload.datatype === "csv" || payload.datatype === "excel") {
-                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'publishers_report', [res.data.data])
+                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'publishers_report', res.data.data)
                     setDatatype('');
                 } else if (payload.datatype === 'pdf') {
                     console.log("hello");
@@ -1194,7 +1194,7 @@ export const getDatasetsReport = (setData, payload, setLoading, setTotalCount, s
             setLoading(false);
             if (res.status === 200) {
                 if (payload?.datatype === "csv" || payload?.datatype === "excel") {
-                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'dataset_report', [res.data.data])
+                    generateFile(payload?.datatype === 'csv' ? 'csv' : payload?.datatype === 'excel' ? 'xlsx' : '', 'dataset_report', res.data.data)
                     setDatatype('');
                 } else if (payload?.datatype === 'pdf') {
                     console.log("hello");

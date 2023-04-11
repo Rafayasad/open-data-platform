@@ -26,12 +26,12 @@ const ImageComponent = memo(() => {
                 <Row className="pt-5 p-0">
                     <Col>
                         <div className="py-4 p-0">
-                            <BreadCrumb textcolor={colors.white} iconColor={colors.white} items={[
-                                {
-                                    title: t("aboutus"),
-                                    link: routes.ABOUTUS
-                                }
-                            ]}
+                            <BreadCrumb textcolor={colors.white} iconColor={colors.white}
+                                items={[
+                                    {
+                                        title: t("aboutus")
+                                    }
+                                ]}
                             />
                         </div>
                         <Heading heading={t("contactUs")} size="xl" bold color={colors.white} />

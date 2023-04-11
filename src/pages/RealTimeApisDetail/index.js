@@ -50,12 +50,10 @@ const RealTimeApisDetail = memo(() => {
                 <div className="px-4 pt-5">
                     <BreadCrumb items={[
                         {
-                            title: t("realTimeAPI"),
-                            link: routes.REAL_TIME_APIS
+                            title: t("realTimeAPI")
                         },
                         {
-                            title: t("detail"),
-                            link: `${routes.REAL_TIME_APIS_DETAIL}?id=${id}`
+                            title: t("detail")
                         }]} />
                 </div>
                 <Main data={realTimeApi} />
