@@ -188,7 +188,6 @@ const Dataset = memo(() => {
                     data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)}
                     onClick={onClickCard} />
             }
-            {console.log("datasets", datasets)}
             <div id="datasetsList">
                 <DatasetList
                     nocount

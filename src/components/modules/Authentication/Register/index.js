@@ -14,7 +14,7 @@ import { locales } from "../../../../i18n/helper";
 
 const Register = memo(() => {
 
-  const { t,i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -27,6 +27,8 @@ const Register = memo(() => {
 
   const [isChecked, setIsChecked] = useState(false);
   const [isRecaptcha, setIsRecaptcha] = useState();
+
+  console.log("name", name, email);
 
   const onClickRegister = useCallback(() => {
     if (email === '' || reEmail === '' || password === '' || name === '' || isRecaptcha == null || !isChecked) {
@@ -49,11 +51,12 @@ const Register = memo(() => {
   const onClickLogin = useCallback(() => navigate(routes.LOGIN));
   const onClickTermsAndPolicy = useCallback(() => navigate(routes.POLICY));
 
+
+
   return (
     <div>
       <div
-        className={`d-none d-lg-flex main-auth ${i18n.language === locales.AR ? "flipImage" : "defaultImage"}`}
-      >
+        className={`d-none d-lg-flex main-auth ${i18n.language === locales.AR ? "flipImage" : "defaultImage"}`}>
         <Container fluid className="my-5 pt-5">
           <Row className="p-0">
             <Col className="pt-2 m-0">
@@ -76,6 +79,7 @@ const Register = memo(() => {
                   height: "100%"
                 }}
               >
+                {console.log("NAME",name)}
                 <AuthCard
                   view="dekstop"
                   title={t("register")}
@@ -133,10 +137,10 @@ const Register = memo(() => {
                   linktext={{ display_text: t("login"), onClick: onClickLogin }}
                   recaptcha={recaptcha}
                   inputFields={[
-                    { placeholder: "Full name", type: "text", onChange: (value) => setName(value) },
-                    { placeholder: "Email", type: "text", onChange: (value) => setEmail(value) },
-                    { placeholder: "Re-enter email", type: "text", onChange: (value) => setReEmail(value) },
-                    { placeholder: "Password", type: "password", onChange: (value) => setPassword(value) },
+                    { placeholder: "Full name", type: "text", onChange: (value) => setName(value), value: name },
+                    { placeholder: "Email", type: "text", onChange: (value) => setEmail(value), value: email },
+                    { placeholder: "Re-enter email", type: "text", onChange: (value) => setReEmail(value), value: reEmail },
+                    { placeholder: "Password", type: "password", onChange: (value) => setPassword(value), value: password },
                   ]}
                   button={[{
                     title: t("register"),
@@ -148,7 +152,7 @@ const Register = memo(() => {
                   }]}
                   checkbox={{
                     onClick: checked,
-                    label: <p>{t("agreeCond")} <span onClick={() => navigate(routes.POLICY)} style={{ color: colors.purple, cursor: "pointer" }}> {t("terms")} </span > {t("and")} <span onClick={() => navigate(routes.POLICY)} style={{ color: colors.purple, cursor: "pointer" }}> {t("policy")} </span></p>,
+                    label: <p>{t("agreeCond")} <span onClick={() => navigate(routes.POLICY, { state: { data: { email } } })} style={{ color: colors.purple, cursor: "pointer" }}> {t("terms")} </span > {t("and")} <span onClick={() => navigate(routes.POLICY)} style={{ color: colors.purple, cursor: "pointer" }}> {t("policy")} </span></p>,
                     borderColor: colors.light_gray,
                     linktextColor: colors.purple,
                     labelColor: colors.black

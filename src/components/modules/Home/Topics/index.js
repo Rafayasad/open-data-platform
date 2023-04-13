@@ -36,7 +36,7 @@ const Topics = memo((props) => {
     })
 
     const renderList = (viewport) => (
-        data && data.length > 0 && data.slice(0, all ? data.length : viewport === "lg" ? 8 : 5).map((item, index) => (
+        data && data.length > 0 && data.slice(0, all ? data.length : viewport === "md" ? 8 : 5).map((item, index) => (
             <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave} >
                 {/* {
                     index > 0 &&
@@ -75,14 +75,14 @@ const Topics = memo((props) => {
                     <Heading size='xs' nomargin color={colors.white} heading={t("explore")} />
                 </Col>
             </Row>
-            <div className="d-block d-lg-none">
+            <div className="d-block d-md-none">
                 {renderList("sm")}
             </div>
-            <div className="d-none d-lg-block">
-                {renderList("lg")}
+            <div className="d-none d-md-block">
+                {renderList("md")}
             </div>
             <Row className="py-4 m-0">
-                <Col className={`px-4 d-flex justify-content-center justify-content-lg-end`}>
+                <Col className={`px-4 d-flex justify-content-center justify-content-md-end`}>
                     <Button borderColor='white' backgroundColor='black' textColor='white' title={all ? t("viewLess") : t("viewAll")}
                         onClick={onClick} />
                 </Col>

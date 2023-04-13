@@ -31,8 +31,8 @@ const Support = memo(() => {
         }
     }, [searchText])
 
-    const onClickCard = useCallback((id, name) => {
-        navigate(`${routes.SUPPORT_QUESTIONS}?id=${id}`, { state: { backURL: routes.SUPPORT, name } })
+    const onClickCard = useCallback((id, name, name_ar) => {
+        navigate(`${routes.SUPPORT_QUESTIONS}?id=${id}`, { state: { backURL: routes.SUPPORT, name, name_ar } })
     }, []);
 
     const onClickQuestion = useCallback((id) => {

@@ -55,7 +55,7 @@ const Cards = memo((props) => {
                             title={i18n.language === locales.AR ? item.title_ar : item.title}
                             description={i18n.language === locales.AR ? item.description_ar : item.description}
                             image={images[Math.floor(Math.random() * images.length)]}
-                            onClick={() => onClick(item.id, i18n.language === locales.EN ? item.title : item.title_ar)}
+                            onClick={() => onClick(item.id, item.title, item.title_ar)}
                         />
                     </Col>
                 )) : <Loader type={type} backgroundColor={backgroundColor} />

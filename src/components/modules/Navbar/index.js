@@ -47,7 +47,7 @@ const Navbar = memo((props) => {
 
     const MobileRoutes = [
         {
-            name: t("dataset"),
+            name: t("datasets"),
             route: routes.DATASET
         },
         {
@@ -141,10 +141,16 @@ const Navbar = memo((props) => {
             </Container>
             <Container fluid className={`px-4 py-3 d-block d-lg-none ${scroll && "sticky bg-white transition"}`} style={{ position: !scroll && 'absolute', top: isLoggedIn ? '78px' : 0, left: 0, right: 0, zIndex: 1000 }}>
                 <Row className="d-flex justify-content-between align-items-center" >
-                    <Col className="d-flex align-items-center justify-content-start">
+                    <Col className="d-flex d-md-none align-items-center justify-content-start">
                         <Link to={routes.HOME}>
                             <img height={"40px"}
                                 src={theme === 'dark' || scroll ? AbuDhabiLogoDarkMobile : AbuDhabiLogoMobile} />
+                        </Link>
+                    </Col>
+                    <Col className="d-none d-md-flex align-items-center justify-content-start">
+                        <Link to={routes.HOME}>
+                            <img height={"40px"}
+                                src={theme === 'dark' || scroll ? AbuDhabiLogoDark : AbuDhabiLogo} />
                         </Link>
                     </Col>
                     {!nolanguageswitcher &&
@@ -155,17 +161,22 @@ const Navbar = memo((props) => {
                 </Row>
             </Container>
             <Drawer
-                style={{ width: "100%", height: "100vh", scrollBehavior: "smooth", overflow: "auto", minHeight: "100vh", zIndex: 1050, backgroundColor: colors.white }}
+                style={{ width: "100%", height: "100%", scrollBehavior: "smooth", overflow: "auto", minHeight: "100%", zIndex: 1050, backgroundColor: colors.white }}
                 open={isOpen}
                 direction='right'
                 className="p-3"
                 lockBackgroundScroll
             >
-                <div className="" style={{ minHeight: "85vh" }}>
+                <div className="" style={{ minHeight: "85%" }}>
                     <Row className="">
-                        <Col className="d-flex align-items-center">
+                        <Col className="d-flex d-md-none align-items-center">
                             <Link to={routes.HOME}>
                                 <img height={"40px"} src={AbuDhabiLogoDarkMobile} />
+                            </Link>
+                        </Col>
+                        <Col className="d-none d-md-block align-items-center">
+                            <Link to={routes.HOME}>
+                                <img height={"40px"} src={AbuDhabiLogoDark} />
                             </Link>
                         </Col>
                         <Col className="d-flex justify-content-end align-items-center">
@@ -179,7 +190,7 @@ const Navbar = memo((props) => {
                             </div>
                         </Col>
                     </Row>
-                    <Row className="d-flex my-5">
+                    <Row className="d-flex my-4">
                         {
                             MobileRoutes.map((item, index) => {
                                 return (
@@ -227,11 +238,11 @@ const Navbar = memo((props) => {
                     </Row>
                 </div>
                 <Row className="fixed-bottom p-4">
-                    <Col className="d-flex align-items-center">
+                    <Col className="d-flex align-items-center" xs={3}>
                         <LanguageSwitcher theme={"dark"} />
                     </Col>
-                    <Col className="d-flex align-items-center justify-content-end">
-                        <Heading size={"xxs"} nomargin color={colors.gray} heading={t("adda")} />
+                    <Col className="d-flex align-items-center justify-content-end p-0">
+                        <p className="m-0" style={{ color: colors.gray }}><small>{t("adda")}</small></p>
                     </Col>
                 </Row>
             </Drawer>

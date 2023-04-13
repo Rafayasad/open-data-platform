@@ -29,10 +29,10 @@ const Main = memo((props) => {
             <Container>
                 <Row className="h-25">
                     <Col className="d-flex align-items-end justify-content-center">
-                        <div className="mx-2">
+                        <div>
                             <img src={Symbol} style={{ height: "28px" }} />
                         </div>
-                        <div className="no-letter-spacing">
+                        <div className="no-letter-spacing mx-2">
                             <Heading nomargin color="white" size="xxs" heading={t("opendata")} />
                         </div>
                     </Col>

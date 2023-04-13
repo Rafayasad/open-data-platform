@@ -6,6 +6,8 @@ import { getPopularQuestions, getQuestionByCategories } from "../../axios/api";
 import { routes } from "../../router/helper";
 import BreadCrumb from "../../components/elements/BreadCrumb";
 import View from "../../components/modules/View";
+import i18n from "../../i18n/i18n";
+import { locales } from "../../i18n/helper";
 
 const SupportQuestions = memo(() => {
 
@@ -19,6 +21,9 @@ const SupportQuestions = memo(() => {
     const id = urlParams.get('id');
     const url = state && state.backURL ? state.backURL : routes.SUPPORT
     const title_name = state && state.name
+    const title_name_ar = state && state.name_ar
+
+    console.log("datatata", title_name);
 
     const [questions, setQuestions] = useState();
 
@@ -45,7 +50,7 @@ const SupportQuestions = memo(() => {
                         }
                     ]} />
                 </div>
-                <QuestionList title={title_name} data={questions} onClick={onClickQuestion} />
+                <QuestionList title={i18n.language === locales.AR ? title_name_ar : title_name} data={questions} onClick={onClickQuestion} />
             </div>
         </View>
 

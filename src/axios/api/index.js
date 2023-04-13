@@ -1244,9 +1244,11 @@ export const register = async (navigate, route, setLoading, payload) => {
 
     await endpoints.register(data, headers)
         .then((res) => {
-            if (res.status === 200) {
+            if (res.data.status === 200) {
                 navigate(route, { replace: true });
                 toast(res.data.message, { type: 'success' })
+            } else {
+                toast(res.data.message, { type: 'error' })
             }
             setLoading(false)
         }).catch((err) => {

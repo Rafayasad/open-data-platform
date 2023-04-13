@@ -52,7 +52,6 @@
 
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { memo } from 'react';
@@ -92,13 +91,41 @@ const ModalEelment = memo((props) => {
 
   return (
     <div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
+      {window.innerWidth >= 765 ?
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            {
+              loading ? (
+                <div className="d-flex align-items-center justify-content-center">
+                  <Spinner />
+                </div>
+              ) : (
+                <>
+                  <div className='d-flex align-items-start justify-content-between'>
+                    <Typography className='pb-4' id="modal-modal-title" variant="h6" component="h2">
+                      <Heading heading={title} nomargin bold size={"lg"} />
+                    </Typography>
+                    <div>
+                      <AiOutlineClose style={{ cursor: "pointer" }} onClick={handleClose} />
+                    </div>
+                  </div>
+                  {/* <Typography id="modal-modal-description modal-body" sx={{ mt: 2, overflowY: "scroll", height: "350px" }}>
+                  {description}
+                </Typography> */}
+                  <div style={{ overflowY: "scroll", height: "400px" }}>
+                    <p dangerouslySetInnerHTML={{ __html: description }} />
+                  </div>
+                </>
+              )}
+          </Box>
+        </Modal>
+        :
+        <div className='w-100 p-3'>
           {
             loading ? (
               <div className="d-flex align-items-center justify-content-center">
@@ -110,20 +137,20 @@ const ModalEelment = memo((props) => {
                   <Typography className='pb-4' id="modal-modal-title" variant="h6" component="h2">
                     <Heading heading={title} nomargin bold size={"lg"} />
                   </Typography>
-                  <div>
+                  <div className='d-none d-lg-block'>
                     <AiOutlineClose style={{ cursor: "pointer" }} onClick={handleClose} />
                   </div>
                 </div>
                 {/* <Typography id="modal-modal-description modal-body" sx={{ mt: 2, overflowY: "scroll", height: "350px" }}>
                   {description}
                 </Typography> */}
-                <div style={{ overflowY: "scroll" , height:"400px" }}>
+                <div style={{ overflowY: "scroll", height: window.innerWidth >= 765 ? "400px" : "100%" }}>
                   <p dangerouslySetInnerHTML={{ __html: description }} />
                 </div>
               </>
             )}
-        </Box>
-      </Modal>
+        </div>
+      }
     </div>
   );
 })
