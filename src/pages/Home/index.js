@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from "react";
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { getFacets, getMostViewedDatasets, getPlatformInsights, getRecentsDatasets } from "../../axios/api";
@@ -23,6 +23,10 @@ const Home = memo(() => {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const { state } = useLocation();
+
+    console.log("statehome", state);
 
     const topicsDiv = document.getElementById("topics");
 
@@ -64,7 +68,7 @@ const Home = memo(() => {
 
     const onClickCard = useCallback((id) => { navigate(`${routes.DATASET_DETAIL}?id=${id}`) });
     const onSearch = useCallback((value) => { value != "" && navigate(routes.DATASET, { state: { search: value } }) });
-    
+
     const onClickList = useCallback((item) => {
         navigate(routes.DATASET, { state: { listItem: [item] } })
     });

@@ -1,6 +1,6 @@
 import React from "react";
 import { memo } from "react";
-import { Col } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import BreadCrumb from "../../../elements/BreadCrumb";
 import Heading from "../../../elements/Heading";
 import { useTranslation } from "react-i18next";
@@ -21,16 +21,26 @@ const RealTimeApisHeader = memo((props) => {
                         title: t("realTimeAPI")
                     }]} />
             </div>
-            <div className="p-4 row">
-                <Col className="" lg={6}>
+            <Container fluid>
+                <div className="row px-2 mt-2">
+                    <div className="col-lg-6 col-12 my-2">
+                        <Heading size={"xl"} heading={t("openData")} bold />
+                    </div>
+                    <div className="col-lg-6 col-12">
+                        <Heading heading={t("openDataDescription")} size={"xxs"} />
+                    </div>
+                </div>
+            </Container>
+            {/* <Row className="">
+                <Col className="" lg={6} xs={12}>
                     <Heading size={"xl"} heading={t("openData")} bold />
                 </Col>
-            </div>
-            <div className="px-4 row">
-                <Col className="" lg={6}>
+            </Row>
+            <Row className="">
+                <Col className="" lg={6} xs={12}>
                     <Heading heading={t("openDataDescription")} size={"xxs"} />
                 </Col>
-            </div>
+            </Row> */}
         </div>
     )
 })

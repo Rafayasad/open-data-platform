@@ -3,6 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import background from '../../../../assets/images/Desktop.jpg';
 import CardOne from '../../../../assets/images/Card-One.jpg';
 import CardTwo from '../../../../assets/images/Card-Two.jpg';
+import CardTwoMob from '../../../../assets/images/Card-two-mob.png';
 import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
 import { colors } from "../../../../utils/colors";
@@ -54,7 +55,7 @@ const Images = memo(() => {
                     <Row>
                         <Col xs={12} md={12} lg={6} className="my-2">
                             <div className="d-flex flex-column justify-content-center" style={{
-                                height: '500px',
+                                height: window.innerWidth <= 765 ? '400px' : '500px',
                                 backgroundImage: `url(${CardOne})`,
                                 backgroundRepeat: 'no-repeat',
                                 backgroundSize: 'cover',
@@ -65,7 +66,7 @@ const Images = memo(() => {
                                 <div className="overlay" />
                                 <Row className="py-1" style={{ zIndex: 1 }}>
                                     <Col />
-                                    <Col sm={12} md={8} className='text-center'>
+                                    <Col xs={10} sm={12} md={8} className='text-center'>
                                         <Heading bold size={"xxl"} color='white' heading={t("areYouNewToOpenData")} />
                                     </Col>
                                     <Col />
@@ -81,7 +82,7 @@ const Images = memo(() => {
                         </Col>
                         <Col xs={12} md={12} lg={6} className="my-2">
                             <div className="d-flex flex-column justify-content-center" style={{
-                                height: '500px',
+                                height: window.innerWidth <= 765 ? '400px' : '500px',
                                 backgroundImage: `url(${CardTwo})`,
                                 backgroundRepeat: 'no-repeat',
                                 backgroundSize: 'cover',

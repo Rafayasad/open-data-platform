@@ -7,8 +7,13 @@ import View from "../../../components/modules/View";
 import { getPrivacyPolicy } from "../../../axios/api";
 import i18n from "../../../i18n/i18n";
 import { locales } from "../../../i18n/helper";
+import { useLocation } from "react-router-dom";
 
 const PrivacyPolicy = memo(() => {
+
+    const { state } = useLocation();
+
+    console.log("SATATAT",state);
 
     const ref1 = useRef(null);
     const [data, setData] = useState();
@@ -24,7 +29,7 @@ const PrivacyPolicy = memo(() => {
                 <View nolanguageswitcher nocontent noupperfooter nomiddlefooter nolowerfooter />
             </div>
 
-            <div className="d-block d-lg-none" style={{ height: "100vh", width: "100vw" }}>
+            <div className="d-block d-lg-none py-5" style={{ height: "100%", width: "100%" }}>
                 <View theme={"dark"} nolanguageswitcher nocontent noupperfooter nomiddlefooter nolowerfooter />
             </div>
 

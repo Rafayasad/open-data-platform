@@ -1,17 +1,20 @@
 import React, { memo, useCallback, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { locales } from "../../../../i18n/helper";
-import i18n from "../../../../i18n/i18n";
 import { colors } from "../../../../utils/colors";
+import { useTranslation } from "react-i18next";
 import Heading from "../../../elements/Heading";
 import QuestionListItem from "../../../elements/QuestionListItem";
 import Loader from "../../Loader";
 
 const QuestionList = memo((props) => {
 
-    const { title, data, onClick } = props
+    const { title, data, onClick } = props;
+    const { t, i18n } = useTranslation();
 
     const [currentHovered, setCurrentHovered] = useState(null);
+
+    console.log("datttttttttta", data);
 
     const onHover = useCallback((index) => setCurrentHovered(index), [currentHovered])
     const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered])
@@ -35,7 +38,7 @@ const QuestionList = memo((props) => {
                                 icon={currentHovered === index}
                             />
                         </div>
-                    )) : <Heading size="md" bold nomargin heading="No Result Found!" />
+                    )) : <Heading size="md" bold nomargin heading={t("NoResultFound!")} />
                         : <Loader type='full-width-min' />
                 }
             </Row>

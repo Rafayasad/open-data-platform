@@ -54,11 +54,11 @@ function App() {
     getSuccessStories(dispatch, setStories, toggleLoading, storiesFilters);
   }, []);
 
-  if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
-    console.log = () => { }
-    console.error = () => { }
-    console.warn = () => { }
-  }
+  // if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
+  //   console.log = () => { }
+  //   console.error = () => { }
+  //   console.warn = () => { }
+  // }
 
   return (
     <CacheProvider value={i18n.language === locales.AR ? cacheRtl : emptyCache}>

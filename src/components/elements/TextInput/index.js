@@ -9,13 +9,13 @@ import './style.css';
 import Heading from "../Heading";
 import i18n from "../../../i18n/i18n";
 import { locales } from "../../../i18n/helper";
-import { isStrongPassword } from "../../../utils/generic";
+import { isDigitExist, isLowerCaseExist, isMaximumLengthExist, isSpecialCharExist, isStrongPassword, isUpperCaseExist, isUsernameExist, validateEmail } from "../../../utils/generic";
 
 const TextInput = memo((props) => {
 
   const { t } = useTranslation();
 
-  const { placeholder, type, onChange, value, title } = props;
+  const { placeholder, type, onChange, value, title, index } = props;
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -33,8 +33,51 @@ const TextInput = memo((props) => {
     i18n.language === locales.AR ? "يجب أن يكون الحد الأقصى للطول 20 رقما" : 'Maximum length must be 30 digits',
     i18n.language === locales.AR ? "يجب ألا يحتوي على اسم المستخدم أو كلمات القاموس" : 'Must not contain your username or dictionary words'
   ]
-  const [onFocusPassword, setOnFocusPassword] = useState(false);
-  const toggle = useCallback(() => setOnFocusPassword(!onFocusPassword));
+  const [onFocusField, setOnFocusField] = useState(false);
+  const toggle = useCallback(() => setOnFocusField(!onFocusField));
+
+  const checkEmailValidation = [
+    {
+      inValid_title: i18n.language === locales.AR ? 'تنسيق بريد إلكتروني غير صالح' : 'Invalid email format',
+      valid_title: i18n.language === locales.AR ? 'تنسيق البريد الإلكتروني هذا صالح' : 'This email format is valid',
+      isValid: placeholder === t("pwdEmail") && type === "text" && validateEmail(value) === true
+    }
+  ]
+
+  // const checkReEmailValidation = [
+  //   {
+  //     title: i18n.language === locales.AR ? 'لا يتطابق كل من البريد الإلكتروني مع' : 'Both email does not match',
+  //   }
+  // ]
+
+  const passwordValidationTexts = [
+    {
+      title: i18n.language === locales.AR ? 'تضمين حرف كبير واحد على الأقل' : 'Include at least 1 uppercase letter',
+      isValid: type === "password" && isUpperCaseExist(value) === true
+    },
+    {
+      title: i18n.language === locales.AR ? "تضمين حرف صغير واحد على الأقل " : 'Include at least 1 lowercase letter',
+      isValid: type === "password" && isLowerCaseExist(value) === true
+    },
+    {
+      title: i18n.language === locales.AR ? "يجب أن يكون طوله 8 أرقام على الأقل" : 'Must be at least 15 digits long',
+      isValid: type === "password" && isDigitExist(value) === true
+    },
+    {
+      title: i18n.language === locales.AR ? "تضمين حرف خاص واحد على الأقل (!@#$٪^&*)" : 'Include at least 1 special character (!@#$%^&*)',
+      isValid: type === "password" && isSpecialCharExist(value) === true
+    },
+    {
+      title: i18n.language === locales.AR ? "يجب أن يكون الحد الأقصى للطول 20 رقما" : 'Maximum length must be 30 digits',
+      isValid: type === "password" && isMaximumLengthExist(value) === true
+    },
+    {
+      title: i18n.language === locales.AR ? "يجب ألا يحتوي على اسم المستخدم أو كلمات القاموس" : 'Must not contain your username or dictionary words or any empty spaces or must contain one digit number',
+      isValid: type === "password" && isStrongPassword(value) === true
+    }
+  ]
+
+  // console.log("s=====>ssS", checkReEmailValidation);
 
   return (
     // <Form.Group
@@ -87,7 +130,10 @@ const TextInput = memo((props) => {
           ':before': { borderBottomColor: '#101010' },
           ':after': {
             borderBottomColor:
-              placeholder === t("password") && type === t("password") && isStrongPassword(value) === true ? '#2C9C2E'
+              placeholder === t("password")
+                && type === "password"
+                && isMaximumLengthExist(value) === true
+                && isStrongPassword(value) === true ? '#2C9C2E'
                 : '#101010'
           },
         }}
@@ -108,12 +154,34 @@ const TextInput = memo((props) => {
           </InputAdornment>
         }
       />
-      {onFocusPassword && placeholder === t("password") &&
+      {onFocusField && placeholder === t("pwdEmail") &&
         title !== t("logIn") &&
-        < div className="mt-3">
-          {passwordValidationText?.map(item => <p className="m-0" style={{ color: colors.green }}><small>{item}</small></p>)}
+        <div className="mt-2">
+          {checkEmailValidation?.map(item => <p className="m-0"
+            style={{ color: item.isValid ? colors.green : colors.dark_red }}>
+            <small>
+              {placeholder === t("pwdEmail") && value == ""
+                ? null
+                : placeholder === t("pwdEmail") && item.isValid === false ?
+                  item.inValid_title
+                  :
+                  item.valid_title}
+            </small>
+          </p>)}
         </div>
       }
+
+      {onFocusField && placeholder === t("password") &&
+        title !== t("logIn") &&
+        <div className="mt-3">
+          {passwordValidationTexts?.map(item => <p className="m-0"
+
+            style={{ color: item.isValid ? colors.green : colors.dark_red }}>
+
+            <small>{item.title}</small></p>)}
+        </div>
+      }
+
     </FormControl >
 
 
