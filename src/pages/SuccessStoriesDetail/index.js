@@ -75,7 +75,7 @@ const SuccessStoriesDetail = memo(() => {
                     <div className="d-none d-lg-block">
                         <Dropdown
                             width={"100%"}
-                            size={"sm"}
+                            size={"xl"}
                             autoClose={true}
                             options={shareOption}
                             headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}

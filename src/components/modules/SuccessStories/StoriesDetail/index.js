@@ -18,6 +18,7 @@ const StoriesDetails = memo((props) => {
 
     const { item, shareOption, url } = props;
     const { t, i18n } = useTranslation();
+    let option = { dateStyle: 'long' };
 
     const [headerOnTop, setHeaderOnTop] = useState(false);
     const [openBottomSheet, setOpenBottomSheet] = useState(false)
@@ -58,15 +59,16 @@ const StoriesDetails = memo((props) => {
                         options={options}
                     />}
                     <Row className="d-none d-lg-flex m-0 p-0 w-100 align-items-center">
-                        <Col className="px-4 py-2 m-0" lg={6}>
+
+                        <Col className="px-4 py-4 m-0" lg={8}>
                             <Heading nomargin maxNumberOfLines={2} bold size={"md"} heading={i18n.language === locales.AR ? item?.title_ar : item?.title} />
                         </Col>
-                        <Col lg={6} sm={0} xs={0} className={"d-flex justify-content-end"}>
+                        <Col lg={4} sm={0} xs={0} className={"d-flex justify-content-end"}>
                             <div className="d-flex align-items-center">
                                 <Dropdown
                                     autoClose={true}
                                     options={shareOption}
-                                    size={"sm"}
+                                    size={"xl"}
                                     headerComponent={<Button backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />}
                                 />
                             </div>
@@ -94,12 +96,15 @@ const StoriesDetails = memo((props) => {
                         {
                             item ? (
                                 <div className="py-3">
+                                    <div className="no-letter-spacing py-4">
+                                        <Heading nomargin size="xxs" heading={i18n.language === locales.AR ? item?.publisher_ar : item?.publisher.toUpperCase()} />
+                                    </div>
                                     <div id="main">
                                         <Heading bold size={"xl"} heading={i18n.language === locales.AR ? item?.title_ar : item?.title} />
                                     </div>
                                     <Heading size={"xs"} heading={i18n.language === locales.AR ? item?.short_description_ar : item?.short_description} />
                                     <div className="py-2">
-                                        <Heading size={"xxs"} heading={`${t("publishedOn")}` + item?.created} />
+                                        <Heading size={"xxs"} heading={`${t("publishedOn")} ` + new Date(item?.created).toLocaleDateString(i18n.language === locales.AR ? "ar-US" : "en-US", option)} />
                                     </div>
                                     <div className="py-3">
                                         <img src={item?.image} width='100%' style={{ borderRadius: "30px" }} />
