@@ -882,7 +882,7 @@ export const getSuccessStoriesById = (id, setData) => {
                 let stories = await Promise.all(data.map(async item => {
 
                     let { id, attributes, relationships } = item;
-                    let { title, titlear, short_description, short_descriptionar, description, descriptionar, created } = attributes;
+                    let { title, titlear, short_description, short_descriptionar, description, descriptionar, created, field_publisher_name, field_publisher_namear } = attributes;
                     let { banner, story_paragraph, story_tags } = relationships;
 
                     let rows = await endpoints.getImages(story_paragraph.links.related.href).then(async (res) => {
@@ -972,6 +972,8 @@ export const getSuccessStoriesById = (id, setData) => {
                         short_description_ar: short_descriptionar,
                         description,
                         description_ar: descriptionar,
+                        publisher: field_publisher_name,
+                        publisher_ar: field_publisher_namear,
                         tags,
                         tags_ar,
                         image,

@@ -32,7 +32,8 @@ let images = [
     }
 ]
 
-let sizes = ['400px', '340px', '280px']
+// let sizes = ['400px', '340px', '280px']
+let sizes = ['400px', '650px', '540px']
 
 const Cards = memo((props) => {
 
@@ -40,7 +41,7 @@ const Cards = memo((props) => {
 
     const { title, notitlebutton, data, backgroundColor, hoverable, type,
         size, onClick, onClickViewAll, buttonText, notagsactive, noheadercomponent, dropdownWidth
-        , handleReload
+        , handleReload, cardsCount
     } = props;
 
     const renderContent = () => {
@@ -138,7 +139,7 @@ const Cards = memo((props) => {
                     <Row className="d-none d-lg-flex w-100 align-items-center m-0">
                         {
                             data && data.length > 0 ? data.map((item, index) => (
-                                <Col key={index} md={4} sm={4} className="py-2">
+                                <Col key={index} lg={4} md={4} sm={4} className="py-2">
                                     <Card
                                         handleReload={handleReload}
                                         dropdownWidth={dropdownWidth}

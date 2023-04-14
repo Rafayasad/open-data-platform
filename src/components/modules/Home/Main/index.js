@@ -41,7 +41,7 @@ const Main = memo((props) => {
                     <Col className="d-flex flex-column justify-content-center">
                         <Row>
                             <Col />
-                            <Col xs={12} md={8} style={{ textAlign: 'center' }} className="py-2">
+                            <Col xs={12} lg={8} md={10} style={{ textAlign: 'center' }} className="py-2">
                                 <Heading bold color="white" size="xxl" heading={t("dataAvailable")} />
                             </Col>
                             <Col />
