@@ -239,10 +239,10 @@ export const getSimilarDatasets = (topic, setData, setLoading) => {
         })
 }
 
-export const getFacets = async (key_en, key_ar, dispatch, setData) => {
+export const getFacets = async (key_en, key_ar, dispatch, setData, filters) => {
 
     let en = await endpoints.
-        getFacets(key_en).then((res) => {
+        getFacets(key_en, filters).then((res) => {
 
             if (res.status === 200) {
 
@@ -263,7 +263,7 @@ export const getFacets = async (key_en, key_ar, dispatch, setData) => {
         })
 
     let ar = await endpoints.
-        getFacets(key_ar).then((res) => {
+        getFacets(key_ar, filters).then((res) => {
             if (res.status === 200) {
                 console.log("sAASASAS", res.data);
                 let transform = res.data.facets.filter(item => item.name != " ").map(item => ({
@@ -291,7 +291,7 @@ export const getFacets = async (key_en, key_ar, dispatch, setData) => {
 
 }
 
-export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage, filters, currentLanguage) => {
+export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage, filters, currentLanguage, dispatch, setTopics, setTags, setPublishers) => {
 
     setLoading(true)
     setTotalCount(0)
@@ -313,6 +313,9 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
         { key: currentLanguage === locales.EN ? "keyword" : "keywordlear", values: tagsArray }
     )
 
+    getFacets("theme", "themelear", dispatch, setTopics, finalFilters);
+    getFacets("keyword", "keywordlear", dispatch, setTags, finalFilters);
+    getFacets("publisher__name", "publisherlear__name", dispatch, setPublishers, finalFilters);
     return endpoints.
         getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then(async (res) => {
             if (res.status === 200) {
@@ -369,7 +372,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                     }
                 ))
                 setLoading(false)
-                console.log("ARRR", res.data, arr);
+
                 setData(arr)
 
             }

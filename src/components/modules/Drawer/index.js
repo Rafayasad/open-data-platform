@@ -150,7 +150,7 @@ const Drawer = memo((props) => {
                                                                         // backgroundColor={filtersData?.some(items => items.title === item.title) ? "black" : "white"}
                                                                         // textColor={filtersData?.some(items => items.title === item.title) ? "white" : "black"}
                                                                         borderColor={"1px solid #cfcfcf"}
-                                                                        title={`${items.title} ${items.value ? `(${items.value})` : ""}`}
+                                                                        title={`${items.title} ${items.value ? `(${items.value})` : "(0)"}`}
                                                                         onClick={() => item.title === t("categories") ?
                                                                             onClickStoriesItem({
                                                                                 type: t("categories"),

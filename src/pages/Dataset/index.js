@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import { locales } from "../../i18n/helper";
 import View from "../../components/modules/View";
 import { useDispatch, useSelector } from "react-redux";
-import { setFilter } from "../../redux/reducers/Facets";
+import { setFilter, setPublishers, setTags, setTopics } from "../../redux/reducers/Facets";
 import { isDuplicates } from "../../utils/generic";
 
 const Dataset = memo(() => {
@@ -97,7 +97,7 @@ const Dataset = memo(() => {
         if (!most_viewed_datasets) {
             if (state) {
                 navigate(pathname, { replace: true, state: null })
-                getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [], i18n.language)
+                getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [], i18n.language, dispatch, setTopics, setTags, setPublishers)
             }
         }
 
@@ -119,7 +119,7 @@ const Dataset = memo(() => {
         if (!most_viewed_datasets) {
             if (currentPage || searchValue || sort || storedFilters) {
                 if (!state?.search && !state?.listItem) {
-                    getAllDatasets(setDatasets, setTotalCount, setLoading, searchValue, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, storedFilters, i18n.language)
+                    getAllDatasets(setDatasets, setTotalCount, setLoading, searchValue, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, storedFilters, i18n.language, dispatch, setTopics, setTags, setPublishers)
                 }
             }
         }

@@ -23,7 +23,10 @@ export const endpoints = {
     getSimilarDatasets: (topic) => {
         return client.get(`/apis/similar_dataset.php?type=similar&topic=${topic}`);
     },
-    getFacets: (key) => {
+    getFacets: (key, filters) => {
+        if (filters && filters.length > 0) {
+            return client.get(`/api/1/search/facets?fulltext=&page=1&page-size=10&sort=modified&sort-order=desc&facets=${key}&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
+        }
         return client.get(`/api/1/search/facets?fulltext=&page=1&page-size=10&sort=modified&sort-order=desc&facets=${key}`);
     },
     getAllDatasets: (search, sort, currentPage, rowsPerPage, filters) => {
