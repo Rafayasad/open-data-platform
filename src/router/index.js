@@ -17,8 +17,8 @@ const Login = lazy(() => import('../pages/Authentication/Login'))
 const RecoverPassword = lazy(() => import('../pages/Authentication/RecoverPassword'))
 const ResetPassword = lazy(() => import('../pages/Authentication/ResetPassword'))
 const OTP = lazy(() => import('../pages/Authentication/OTP'))
-const SuccessStories = lazy(() => import('../pages/SuccessStories'))
-const SuccessStoriesDetail = lazy(() => import('../pages/SuccessStoriesDetail'))
+// const SuccessStories = lazy(() => import('../pages/SuccessStories'))
+// const SuccessStoriesDetail = lazy(() => import('../pages/SuccessStoriesDetail'))
 const PrivacyPolicy = lazy(() => import('../pages/Authentication/PrivacyPolicy'))
 const ChangePassword = lazy(() => import('../pages/Authentication/ChangePassword'))
 const ContactUs = lazy(() => import('../pages/ContactUs'))
@@ -51,8 +51,8 @@ const Router = () => {
             <Route path={routes.RECOVER} element={!isLoggedIn ? <RecoverPassword /> : <Unauthorized title={"resetTitle"} />} />
             <Route path={routes.RESET} element={!isLoggedIn ? <ResetPassword /> : <Unauthorized title={"resetTitle"} />} />
             <Route path={routes.OTP} element={!isLoggedIn ? <OTP /> : <Unauthorized title={"resetTitle"} />} />
-            <Route path={routes.SUCCESS_STOIRES} element={<SuccessStories />} />
-            <Route path={routes.SUCCESS_STOIRES_DETAIL} element={<SuccessStoriesDetail />} />
+            {/* <Route path={routes.SUCCESS_STOIRES} element={<SuccessStories />} />
+            <Route path={routes.SUCCESS_STOIRES_DETAIL} element={<SuccessStoriesDetail />} /> */}
             <Route path={routes.POLICY} element={<PrivacyPolicy />} />
             <Route path={routes.CHANGE} element={<ChangePassword />} />
             <Route path={routes.CONTACT} element={<ContactUs />} />
