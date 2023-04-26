@@ -1538,16 +1538,18 @@ export const checkUser = (dispatch, handleLogin, handleLogout) => {
 
 export const logout = (dispatch, setLoading, handleLogout) => {
     setLoading(true)
-    window.location.reload();
     return endpoints.logout()
         .then((res) => {
             setLoading(false)
+            console.log("logout", res);
             dispatch && dispatch(handleLogout());
             // if (res.status === 200) {
             // }
         }).catch((err) => {
-            setLoading(false)
+            setLoading(false);
             console.log("Error Message", err);
+        }).finally(() => {
+            window.location.reload();
         })
 }
 
