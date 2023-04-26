@@ -9,10 +9,14 @@ import SwaggerUI from "../../SwaggerUI";
 import DataHeader from "../DataHeader";
 import Shimmer from '../../../elements/Shimmer';
 import Heading from "../../../elements/Heading";
+import { useNavigate } from "react-router-dom";
 
 const Main = memo((props) => {
 
-    const { data, url, handleReload } = props;
+    const { data, url, handleReload, id } = props;
+    const navigate = useNavigate();
+
+    console.log("DATATTATA", data);
 
     const { t, i18n } = useTranslation();
 
@@ -73,7 +77,7 @@ const Main = memo((props) => {
             title: t("tags"),
             detail: data && (i18n.language === locales.AR ? (data.tags_ar.length > 0 && !data.tags_ar.includes(" ") ? data.tags_ar : [t("noTagsFound")]) : (data.tags.length > 0 && !data.tags.includes(" ") ? data.tags : [t("noTagsFound")])),
             tags: true,
-            theme: 'light'
+            theme: 'light',
         },
         {
             title: t("createdAt"),
@@ -109,7 +113,7 @@ const Main = memo((props) => {
         },
         {
             name: t("APIDocumentation"),
-            component: <SwaggerUI url={`${process.env.REACT_APP_BASE_URL}/api/1/metastore/schemas/dataset/items/${data && data.id}/docs`} />
+            component: <SwaggerUI url={`${process.env.REACT_APP_BASE_URL}/api/1/metastore/schemas/dataset/items/${id}/docs`} />
         }
     ]
 

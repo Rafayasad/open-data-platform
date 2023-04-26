@@ -33,16 +33,18 @@ const DataCard = memo((props) => {
                                     {
                                         item && item.detail && item.detail.length > 0 ? item.detail.map((value, index) => (
                                             <div key={index} className="my-1">
+                                                {console.log("LOG", value)}
                                                 <Tag
                                                     onClick={() => {
-                                                        navigate(routes.DATASET, {
-                                                            replace: true, state: {
-                                                                listItem: [{
-                                                                    title: value,
-                                                                    type: i18n.language === locales.AR ? item.title === t("tags") ? "keywordlear" : "themelear" : item.title === t("tags") ? "keyword" : "theme"
-                                                                }]
-                                                            }
-                                                        })
+                                                        value != t("noTagsFound") &&
+                                                            navigate(routes.DATASET, {
+                                                                replace: true, state: {
+                                                                    listItem: [{
+                                                                        title: value,
+                                                                        type: i18n.language === locales.AR ? item.title === t("tags") ? "keywordlear" : "themelear" : item.title === t("tags") ? "keyword" : "theme"
+                                                                    }]
+                                                                }
+                                                            })
                                                     }}
                                                     title={value}
                                                     backgroundColor={item.theme === 'light' && colors.white}
