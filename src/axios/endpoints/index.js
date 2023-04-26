@@ -25,9 +25,12 @@ export const endpoints = {
     },
     getFacets: (key, filters) => {
         if (filters && filters.length > 0) {
-            return client.get(`/api/1/search/facets?fulltext=&page=1&page-size=10&sort=modified&sort-order=desc&facets=${key}&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
+            return client.get(`/api/1/search/facets?fulltext=&page=1&page-size=0&sort=modified&sort-order=desc&facets=${key}&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
         }
-        return client.get(`/api/1/search/facets?fulltext=&page=1&page-size=10&sort=modified&sort-order=desc&facets=${key}`);
+        return client.get(`/api/1/search/facets?fulltext=&page=1&page-size=0&sort=modified&sort-order=desc&facets=${key}`);
+    },
+    getFileFormats: () => {
+        return client.get('/apis/format_facet.php?format=');
     },
     getAllDatasets: (search, sort, currentPage, rowsPerPage, filters) => {
         return client.get(`/api/1/search?fulltext=${search}&page=${currentPage}&page-size=${rowsPerPage}&sort-order=${sort === 'modified' ? "desc" : "aesc"}&sort=${sort}&facets=0&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);

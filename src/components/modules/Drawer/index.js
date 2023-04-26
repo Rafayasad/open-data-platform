@@ -15,6 +15,7 @@ import Button from "../../elements/Button";
 import './style.css';
 import 'react-modern-drawer/dist/index.css'
 import CheckBox from "../../elements/CheckBox";
+import SearchBox from "../../elements/SearchBox";
 
 const Drawer = memo((props) => {
 
@@ -25,6 +26,9 @@ const Drawer = memo((props) => {
     { console.log("tas", data) }
     const [activeIndex, setActiveIndex] = useState();
     const [filters, setFilters] = useState([]);
+    const [searchFilters, setSearchFilters] = useState();
+
+    const [filteredData, setFilteredData] = useState();
 
     useEffect(() => {
         if (appliedFilters && appliedFilters.length > 0) {
@@ -109,6 +113,11 @@ const Drawer = memo((props) => {
         );
     }
 
+    const filterByValue = (value) => {
+        setSearchFilters(value);
+    }
+
+
     return (
         <RMDrawer
             // size={"400px"}
@@ -139,10 +148,21 @@ const Drawer = memo((props) => {
                                             </Accordion.Header>
                                             <Accordion.Body>
                                                 <div className="d-flex flex-wrap">
+                                                    <div className="w-100 p-0 m-0">
+                                                        <SearchBox title={item.title} setSearchValue={filterByValue} />
+                                                    </div>
                                                     {
-                                                        item.tags?.map((items, index) => {
+                                                        item.tags?.filter(el => {
+                                                            if (searchFilters && searchFilters.type === item.title) {
+                                                                if (el.title.toLowerCase().includes(searchFilters.title.toLowerCase())) {
+                                                                    return el;
+                                                                }
+                                                            } else {
+                                                                return item.tags;
+                                                            }
+                                                        }).map((items, index) => {
                                                             return (
-                                                                <div className={``} style={{ paddingTop: "5px", paddingBottom: "5px" }}>
+                                                                <div style={{ paddingTop: "5px", paddingBottom: "5px" }}>
                                                                     <Tag
                                                                         hoverEffect
                                                                         backgroundColor={filters.some(el => el.title === items.title) ? colors.black : colors.white}

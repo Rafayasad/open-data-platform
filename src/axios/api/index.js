@@ -319,7 +319,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
     return endpoints.
         getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then(async (res) => {
             if (res.status === 200) {
-                console.log("trans", res.data);
+                setLoading(false)
                 if (res.data.total > 0 && search && search.trim() !== "") {
                     let obj = {
                         keyword: search,
@@ -340,6 +340,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
 
                 // console.log(res.data.results?.map(item => console.log("RESULTS==>", item)));
 
+                console.log("ssssssssssssssssssadasdsadsadas", res.data);
                 arr = Object.values(res.data.results)?.map(item => (
                     {
                         id: item.identifier,
@@ -352,10 +353,10 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                         tags: item.theme,
                         tags_ar: item.themelear,
                         url: `${process.env.REACT_APP_BASE_URL}/dataset/detail?id=${item.identifier}`,
-                        resources: item.distribution.map(item => (
+                        resources: item.distribution ? item.distribution.map(item => (
                             {
-                                title: item.title,
-                                title_ar: item.titlelear,
+                                title: item.title ? item.title : "No Name Found",
+                                title_ar: item.titlelear ? item.titlelear : "لم يتم العثور على اسم",
                                 description: item.description,
                                 description_ar: item.descriptionlear,
                                 format:
@@ -368,26 +369,31 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                                                             : item.format === "API" && "api",
                                 downloadURL: item.downloadURL
                             }
-                        )),
+                        )) : [],
                     }
                 ))
-                setLoading(false)
+                // setLoading(false)
+
+                console.log("ARRayssssssssssssssss", arr);
 
                 setData(arr)
 
             }
         }).catch((err) => {
+            setLoading(false)
             console.log("Error message", err)
         })
 }
 
 export const getDatasetById = (id, setData) => {
 
+
     return endpoints.
         getDatasetById(id).then(async (res) => {
             if (res.status === 200) {
 
                 let item = res.data;
+                console.log("sssssssssssssssssssssid", item);
 
                 let filteredResources = item.distribution.filter(item => {
                     let itemm = item.data
@@ -399,8 +405,8 @@ export const getDatasetById = (id, setData) => {
                     return (
                         {
                             id: item.identifier,
-                            title: itemm.title,
-                            title_ar: itemm.titlelear,
+                            title: itemm.title ? itemm.title : "No Name Found",
+                            title_ar: itemm.titlelear ? itemm.titlelear : "لم يتم العثور على اسم",
                             description: itemm.description,
                             description_ar: itemm.descriptionlear,
                             format: itemm.format === "pdf" ? "pdf"
@@ -421,6 +427,8 @@ export const getDatasetById = (id, setData) => {
                         console.log("Error message", err)
                     })
 
+                console.log("Here 123")
+
                 let data = {
                     id: item.identifier,
                     title: item.title,
@@ -439,15 +447,17 @@ export const getDatasetById = (id, setData) => {
                     license_ar: "https://data.abudhabi/opendata/addata_open_license",
                     topics: item.theme.map(item => item.data),
                     topics_ar: item.themelear.map(item => item.data),
-                    tags: item.keyword.map(item => item.data),
-                    tags_ar: item.keywordlear.map(item => item.data),
+                    tags: item && item.keyword ? item.keyword.map(item => item.data) : [],
+                    tags_ar: item && item.keyword ? item.keywordlear.map(item => item.data) : [],
                     resources: filteredResources,
                     created: item.issued,
                     modified: item.modified,
-                    downloadCount: "565"
+                    downloadCount
                 }
 
                 setData(data)
+
+                console.log("DATASEsdadsadasdadTS", data);
 
                 const view_count_payload = {
                     identifier: id,
@@ -1528,11 +1538,11 @@ export const checkUser = (dispatch, handleLogin, handleLogout) => {
 
 export const logout = (dispatch, setLoading, handleLogout) => {
     setLoading(true)
+    window.location.reload();
     return endpoints.logout()
         .then((res) => {
             setLoading(false)
             dispatch && dispatch(handleLogout());
-            window.location.reload();
             // if (res.status === 200) {
             // }
         }).catch((err) => {
@@ -1589,6 +1599,16 @@ export const addDownloadCount = (id) => {
             }
         }).catch((err) => {
             // setLoading(false)
+            console.log("Error Message", err);
+        })
+}
+
+export const getFileFormats = (setData) => {
+    return endpoints.getFileFormats()
+        .then((res) => {
+            setData(res.data);
+        })
+        .catch((err) => {
             console.log("Error Message", err);
         })
 }

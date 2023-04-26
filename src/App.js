@@ -49,16 +49,16 @@ function App() {
     getFaqsCategory(dispatch, setCategories);
     getPopularQuestions(dispatch, setQuestions);
     getStoriesTags(dispatch, setStoriesTags);
-    getSearch("datasets", dispatch, setDatasetsSuggestion)
+    getSearch("dataset", dispatch, setDatasetsSuggestion)
     getSearch("support", dispatch, setSupportSuggestion)
     getSuccessStories(dispatch, setStories, toggleLoading, storiesFilters);
   }, []);
 
-  if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
-    console.log = () => { }
-    console.error = () => { }
-    console.warn = () => { }
-  }
+  // if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
+  //   console.log = () => { }
+  //   console.error = () => { }
+  //   console.warn = () => { }
+  // }
 
   return (
     <CacheProvider value={i18n.language === locales.AR ? cacheRtl : emptyCache}>

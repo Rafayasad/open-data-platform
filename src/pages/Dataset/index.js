@@ -164,6 +164,8 @@ const Dataset = memo(() => {
 
     }, [filters])
 
+    console.log("DATASETS", datasets);
+
     return (
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
             <Main
@@ -188,6 +190,7 @@ const Dataset = memo(() => {
                     data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)}
                     onClick={onClickCard} />
             }
+            {console.log("===>sssssssssssssss", datasets)}
             <div id="datasetsList">
                 <DatasetList
                     nocount
