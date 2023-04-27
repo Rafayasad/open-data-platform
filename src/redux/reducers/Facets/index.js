@@ -4,6 +4,7 @@ const initialState = {
     topics: null,
     publishers: null,
     tags: null,
+    file_Formats: null,
     filter: null,
     storiesTags: null,
     datasetsSuggestion: null,
@@ -23,6 +24,9 @@ export const facetsSlice = createSlice({
         setTags: (state, action) => {
             state.tags = action.payload
         },
+        setFileFormats: (state, action) => {
+            state.file_Formats = action.payload
+        },
         setStoriesTags: (state, action) => {
             state.storiesTags = action.payload
         },
@@ -38,6 +42,6 @@ export const facetsSlice = createSlice({
     }
 })
 
-export const { setTopics, setPublishers, setTags, setFilter, setStoriesTags, setDatasetsSuggestion, setSupportSuggestion } = facetsSlice.actions
+export const { setTopics, setPublishers, setTags, setFileFormats, setFilter, setStoriesTags, setDatasetsSuggestion, setSupportSuggestion } = facetsSlice.actions
 
 export default facetsSlice.reducer

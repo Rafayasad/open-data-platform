@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { Fragment, memo, useEffect, useState } from "react";
 import RMDrawer from 'react-modern-drawer'
 import { RxCross2 } from "react-icons/rx";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
@@ -147,67 +147,72 @@ const Drawer = memo((props) => {
                                                 </div>
                                             </Accordion.Header>
                                             <Accordion.Body>
-                                                <div className="d-flex flex-wrap">
-                                                    <div className="w-100 p-0 m-0">
-                                                        <SearchBox title={item.title} setSearchValue={filterByValue} />
-                                                    </div>
-                                                    {
-                                                        item.tags?.filter(el => {
-                                                            if (searchFilters && searchFilters.type === item.title) {
-                                                                if (el.title.toLowerCase().includes(searchFilters.title.toLowerCase())) {
-                                                                    return el;
-                                                                }
-                                                            } else {
-                                                                return item.tags;
-                                                            }
-                                                        }).map((items, index) => {
-                                                            return (
-                                                                <div style={{ paddingTop: "5px", paddingBottom: "5px" }}>
-                                                                    <Tag
-                                                                        hoverEffect
-                                                                        backgroundColor={filters.some(el => el.title === items.title) ? colors.black : colors.white}
-                                                                        textColor={filters.some(el => el.title === items.title) ? colors.white : colors.black}
-                                                                        // backgroundColor={filtersData?.some(items => items.title === item.title) ? "black" : "white"}
-                                                                        // textColor={filtersData?.some(items => items.title === item.title) ? "white" : "black"}
-                                                                        borderColor={"1px solid #cfcfcf"}
-                                                                        title={`${items.title} ${items.value ? `(${items.value})` : "(0)"}`}
-                                                                        onClick={() => item.title === t("categories") ?
-                                                                            onClickStoriesItem({
-                                                                                type: t("categories"),
-                                                                                title: items.title,
-                                                                                id: items.id
-                                                                            })
-                                                                            : onClickItem(items)}
-                                                                    />
-                                                                </div>
-                                                            )
-                                                        })
-                                                    }
-                                                </div>
-                                                {
-                                                    item.data &&
-                                                    <div className="">
+                                                <Fragment>
+                                                    <div className="d-flex flex-wrap">
+                                                        {item.title != t("fileFormat")
+                                                            &&
+                                                            <div className="w-100 p-0 m-0">
+                                                                <SearchBox title={item.title} setSearchValue={filterByValue} />
+                                                            </div>
+                                                        }
                                                         {
-                                                            item.data?.map((items, index) => {
+                                                            item.tags?.filter(el => {
+                                                                if (searchFilters && searchFilters.type === item.title) {
+                                                                    if (el.title.toLowerCase().includes(searchFilters.title.toLowerCase())) {
+                                                                        return el;
+                                                                    }
+                                                                } else {
+                                                                    return item.tags;
+                                                                }
+                                                            }).map((items, index) => {
                                                                 return (
-                                                                    <div className="d-flex justify-content-between align-items-center">
-                                                                        <div className="py-2">
-                                                                            <Heading nomargin heading={items.title} size={"xs"} />
-                                                                        </div>
-                                                                        <div>
-                                                                            <CheckBox
-                                                                                checked={filters?.some(el => items.type === el.type && el.title === items.title)}
-                                                                                callBack={() => {
-                                                                                    onClickStoriesItem(items)
-                                                                                    items.onclick(items.title)
-                                                                                }} borderColor={colors.black} />
-                                                                        </div>
+                                                                    <div style={{ paddingTop: "5px", paddingBottom: "5px" }}>
+                                                                        <Tag
+                                                                            hoverEffect
+                                                                            backgroundColor={filters.some(el => el.title === items.title) ? colors.black : colors.white}
+                                                                            textColor={filters.some(el => el.title === items.title) ? colors.white : colors.black}
+                                                                            // backgroundColor={filtersData?.some(items => items.title === item.title) ? "black" : "white"}
+                                                                            // textColor={filtersData?.some(items => items.title === item.title) ? "white" : "black"}
+                                                                            borderColor={"1px solid #cfcfcf"}
+                                                                            title={`${items.title} ${items.value ? `(${items.value})` : "(0)"}`}
+                                                                            onClick={() => item.title === t("categories") ?
+                                                                                onClickStoriesItem({
+                                                                                    type: t("categories"),
+                                                                                    title: items.title,
+                                                                                    id: items.id
+                                                                                })
+                                                                                : onClickItem(items)}
+                                                                        />
                                                                     </div>
                                                                 )
                                                             })
                                                         }
                                                     </div>
-                                                }
+                                                    {
+                                                        item.data &&
+                                                        <div className="">
+                                                            {
+                                                                item.data?.map((items, index) => {
+                                                                    return (
+                                                                        <div className="d-flex justify-content-between align-items-center">
+                                                                            <div className="py-2">
+                                                                                <Heading nomargin heading={`${items.title} ${items.value ? `(${items.value})` : ""}`} size={"xxs"} />
+                                                                            </div>
+                                                                            <div>
+                                                                                <CheckBox
+                                                                                    checked={filters?.some(el => items.type === el.type && el.title === items.title)}
+                                                                                    callBack={() => {
+                                                                                        onClickStoriesItem(items)
+                                                                                        items.onclick(items.title)
+                                                                                    }} borderColor={colors.black} />
+                                                                            </div>
+                                                                        </div>
+                                                                    )
+                                                                })
+                                                            }
+                                                        </div>
+                                                    }
+                                                </Fragment>
                                             </Accordion.Body>
                                         </Accordion.Item>
                                     </Accordion>

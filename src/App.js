@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { locales } from './i18n/helper';
-import { setDatasetsSuggestion, setPublishers, setStoriesTags, setSupportSuggestion, setTags, setTopics } from './redux/reducers/Facets';
+import { setDatasetsSuggestion, setPublishers, setStoriesTags, setSupportSuggestion, setTags, setTopics, setFileFormats } from './redux/reducers/Facets';
 import { setAboutus } from './redux/reducers/About';
-import { checkUser, getAboutUs, getAllApplications, getFacets, getFaqsCategory, getPopularQuestions, getSearch, getStoriesTags, getSuccessStories } from './axios/api';
+import { checkUser, getAboutUs, getAllApplications, getFacets, getFaqsCategory, getFileFormatsFacets, getPopularQuestions, getSearch, getStoriesTags, getSuccessStories } from './axios/api';
 import { setApplications } from './redux/reducers/Applications';
 import { handleLogin, handleLogout } from './redux/reducers/Authentication';
 import { setStories, toggleLoading } from './redux/reducers/SuccessStories';
@@ -45,6 +45,7 @@ function App() {
     getFacets("theme", "themelear", dispatch, setTopics);
     getFacets("keyword", "keywordlear", dispatch, setTags);
     getFacets("publisher__name", "publisherlear__name", dispatch, setPublishers);
+    getFileFormatsFacets("format", dispatch, setFileFormats);
     getAllApplications(dispatch, setApplications);
     getFaqsCategory(dispatch, setCategories);
     getPopularQuestions(dispatch, setQuestions);
@@ -54,11 +55,11 @@ function App() {
     getSuccessStories(dispatch, setStories, toggleLoading, storiesFilters);
   }, []);
 
-  if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
-    console.log = () => { }
-    console.error = () => { }
-    console.warn = () => { }
-  }
+  // if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
+  //   console.log = () => { }
+  //   console.error = () => { }
+  //   console.warn = () => { }
+  // }
 
   return (
     <CacheProvider value={i18n.language === locales.AR ? cacheRtl : emptyCache}>

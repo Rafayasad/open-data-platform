@@ -264,5 +264,6 @@
     "returntohomepage": "Return to homepage",
     "cancel": "Cancel",
     "alreadyAccount": "Already have an account?",
-    "opendata": "OPEN DATA"
+    "opendata": "OPEN DATA",
+    "fileFormat":"File Format"
 }
