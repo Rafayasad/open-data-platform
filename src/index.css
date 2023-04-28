@@ -45,6 +45,10 @@ code {
   font-family: "CircularStd-Bold";
 }
 
+.ar-font-bolder {
+  font-family: "CircularAr-Bold";
+}
+
 .en-font-default {
   font-feature-settings: normal;
 }
@@ -111,11 +115,13 @@ code {
   .fs-lg {
     font-size: 56px;
     line-height: 60px;
+    letter-spacing: -0.03em;
   }
 
   .fs-md {
     font-size: 48px;
     line-height: 52px;
+    letter-spacing: -0.03em;
   }
 
   .fs-sm {
@@ -164,11 +170,13 @@ code {
   .fs-lg {
     font-size: 56px;
     line-height: 60px;
+    letter-spacing: -0.03em;
   }
 
   .fs-md {
     font-size: 48px;
     line-height: 52px;
+    letter-spacing: -0.03em;
   }
 
   .fs-sm {
@@ -202,7 +210,7 @@ code {
 
 /* Mobile */
 
-@media (max-width: 768.98px) {
+@media (max-width: 767.98px) {
 
   .fs-xl {
     font-size: 32px;
@@ -212,11 +220,13 @@ code {
   .fs-lg {
     font-size: 32px;
     line-height: 36px;
+    letter-spacing: -0.01em;
   }
 
   .fs-md {
     font-size: 32px;
     line-height: 36px;
+    letter-spacing: -0.01em;
   }
 
   .fs-sm {
@@ -263,5 +273,17 @@ code {
 .fs-xs-static {
   font-size: 16px;
   line-height: 22px;
+  letter-spacing: -0.01em;
+}
+
+.fs-sm-static {
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: -0.01em;
+}
+
+.fs-lg-static {
+  font-size: 32px;
+  line-height: 36px;
   letter-spacing: -0.01em;
 }
