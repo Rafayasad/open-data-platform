@@ -117,6 +117,20 @@ const Drawer = memo((props) => {
         setSearchFilters(value);
     }
 
+    const getFilteredSearch = (item) => {
+        return (
+            item.tags?.filter(el => {
+                if (searchFilters && searchFilters.type === item.title) {
+                    if (el.title.toLowerCase().includes(searchFilters.title.toLowerCase())) {
+                        return el;
+                    }
+                } else {
+                    return item.tags;
+                }
+            })
+        )
+    }
+
 
     return (
         <RMDrawer
@@ -151,41 +165,38 @@ const Drawer = memo((props) => {
                                                     <div className="d-flex flex-wrap">
                                                         {item.title != t("fileFormat")
                                                             &&
-                                                            <div className="w-100 p-0 m-0">
+                                                            <div className="w-100 p-0 pb-3 m-0">
                                                                 <SearchBox title={item.title} setSearchValue={filterByValue} />
                                                             </div>
                                                         }
-                                                        {
-                                                            item.tags?.filter(el => {
-                                                                if (searchFilters && searchFilters.type === item.title) {
-                                                                    if (el.title.toLowerCase().includes(searchFilters.title.toLowerCase())) {
-                                                                        return el;
-                                                                    }
-                                                                } else {
-                                                                    return item.tags;
-                                                                }
-                                                            }).map((items, index) => {
-                                                                return (
-                                                                    <div style={{ paddingTop: "5px", paddingBottom: "5px" }}>
-                                                                        <Tag
-                                                                            hoverEffect
-                                                                            backgroundColor={filters.some(el => el.title === items.title) ? colors.black : colors.white}
-                                                                            textColor={filters.some(el => el.title === items.title) ? colors.white : colors.black}
-                                                                            // backgroundColor={filtersData?.some(items => items.title === item.title) ? "black" : "white"}
-                                                                            // textColor={filtersData?.some(items => items.title === item.title) ? "white" : "black"}
-                                                                            borderColor={"1px solid #cfcfcf"}
-                                                                            title={`${items.title} ${items.value ? `(${items.value})` : "(0)"}`}
-                                                                            onClick={() => item.title === t("categories") ?
-                                                                                onClickStoriesItem({
-                                                                                    type: t("categories"),
-                                                                                    title: items.title,
-                                                                                    id: items.id
-                                                                                })
-                                                                                : onClickItem(items)}
-                                                                        />
-                                                                    </div>
-                                                                )
-                                                            })
+                                                        {getFilteredSearch(item)?.length > 0 ? getFilteredSearch(item)?.map((items, index) => {
+                                                            return (
+                                                                <div style={{ paddingTop: "5px", paddingBottom: "5px" }}>
+                                                                    <Tag
+                                                                        hoverEffect
+                                                                        backgroundColor={filters.some(el => el.title === items.title) ? colors.black : colors.white}
+                                                                        textColor={filters.some(el => el.title === items.title) ? colors.white : colors.black}
+                                                                        // backgroundColor={filtersData?.some(items => items.title === item.title) ? "black" : "white"}
+                                                                        // textColor={filtersData?.some(items => items.title === item.title) ? "white" : "black"}
+                                                                        borderColor={"1px solid #cfcfcf"}
+                                                                        title={`${items.title} ${items.value ? `(${items.value})` : "(0)"}`}
+                                                                        onClick={() => item.title === t("categories") ?
+                                                                            onClickStoriesItem({
+                                                                                type: t("categories"),
+                                                                                title: items.title,
+                                                                                id: items.id
+                                                                            })
+                                                                            : onClickItem(items)}
+                                                                    />
+                                                                </div>
+                                                            )
+                                                        })
+                                                            : item.title != t("fileFormat") && <Tag
+                                                                backgroundColor={colors.white}
+                                                                textColor={colors.black}
+                                                                borderColor={"1px solid #cfcfcf"}
+                                                                title={t("noResultFound!")}
+                                                            />
                                                         }
                                                     </div>
                                                     {

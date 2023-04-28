@@ -264,5 +264,6 @@
     "cancel": "إلغاء",
     "alreadyAccount": "هل لديك حساب بالفعل ؟",
     "opendata": "فتح البيانات",
-    "fileFormat":"تنسيق الملف"
+    "fileFormat": "تنسيق الملف",
+    "noResultFound!": "لم يتم العثور على نتائج!"
 }

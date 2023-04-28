@@ -22,7 +22,7 @@ const Main = memo((props) => {
                         <Row>
                             <Col />
                             <Col xs={10} md={8} style={{ textAlign: 'center' }} className="py-2">
-                                <Heading size="xxl" bold color={colors.black} heading={t("datasetTitle")} />
+                                <Heading size="xxxl" bold color={colors.black} heading={t("datasetTitle")} />
                             </Col>
                             <Col />
                         </Row>

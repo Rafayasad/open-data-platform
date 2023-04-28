@@ -1,6 +1,7 @@
 import './style.css';
 import React, { memo, useEffect, useState } from "react";
 import { BiSearch } from 'react-icons/bi';
+import { colors } from '../../../utils/colors';
 
 const SearchBox = memo((props) => {
 
@@ -11,10 +12,10 @@ const SearchBox = memo((props) => {
     return (
         <div class="content">
             <div className="search p-2 d-flex align-items-center">
-                <BiSearch size={15} />
+                <BiSearch size={24} color={colors.gray} />
                 <input
                     type="text"
-                    className="search__input"
+                    className="search__input mx-2"
                     aria-label="search"
                     placeholder={`Search ${title}`}
                     onChange={(e) => setSearchValue({

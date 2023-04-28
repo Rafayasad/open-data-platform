@@ -98,7 +98,7 @@ const Search = memo((props) => {
                     {/* <Col xs={2} md={1} className='d-flex justify-content-center align-items-center'>
                     </Col> */}
                     <Col className='p-0 d-flex align-items-center'>
-                        <div className="ms-3 me-3">
+                        <div className="ms-3 me-1">
                             <IoIosSearch color="gray" size={24} />
                         </div>
                         <input

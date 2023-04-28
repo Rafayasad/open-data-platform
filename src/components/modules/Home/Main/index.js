@@ -10,13 +10,16 @@ import i18n from "../../../../i18n/i18n";
 import { locales } from "../../../../i18n/helper";
 import { useSelector } from "react-redux";
 import Symbol from "../../../../assets/images/Product-Symbol.png"
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../../../router/helper";
 
 const Main = memo((props) => {
 
     const { onSearch, onClickExplore, onApplyFilter, filterData } = props;
     const { datasetsSuggestion } = useSelector((state) => state.facets);
 
-    const { t } = useTranslation()
+    const { t } = useTranslation();
+    const navigate = useNavigate();
 
     return (
         <div className="d-flex" style={{
@@ -62,10 +65,20 @@ const Main = memo((props) => {
                         </Row>
                         <Row>
                             <Col />
-                            <Col xs={12} md={6} className="py-2">
-                                <p style={{ textAlign: 'center', color: 'white' }}>
-                                    <span className={`${i18n.language === locales.EN ? "en-font-bolder" : "ar-font-bold"}`}>{t("popular")}</span> {t("populartext")}
-                                </p>
+                            <Col xs={12} md={6} className="py-2 d-flex align-items-center justify-content-center">
+                                <span className={`text-center text-white me-1 ${i18n.language === locales.EN ? "en-font-bolder" : "ar-font-bold"}`}>{t("popular")}</span>
+                                {t("populartext").split(",").map((item, index) => {
+                                    return (
+                                        <p
+                                            className="m-0 me-1"
+                                            onClick={() => {
+                                                navigate(routes.DATASET, { state: { search: item } })
+                                            }}
+                                            style={{ textAlign: 'center', color: 'white', cursor: "pointer" }}>
+                                            {item + (index == t("populartext").split(",").length - 1 ? '' : ',')}
+                                        </p>
+                                    )
+                                })}
                             </Col>
                             <Col />
                         </Row>
