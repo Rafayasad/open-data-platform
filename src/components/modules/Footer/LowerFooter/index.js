@@ -19,14 +19,14 @@ const LowerFooter = memo(() => {
     const onClickTwitter = useCallback(() => window.open(socialLinks.twitter));
 
     return (
-        <Container fluid className='bg-black py-3 px-4'>
+        <Container fluid className='bg-black py-4 px-4'>
             <div className='d-none d-lg-block'>
                 <hr className='text-white' />
                 <Col className='my-4'>
                     <Heading size="xs" color="white" heading={t("powered")} />
                 </Col>
             </div>
-            <Row className='d-flex justify-content-between mx-0'>
+            <Row className='d-flex justify-content-between mx-0 my-1'>
                 <div className={`p-0 col-12 col-md-6 d-flex ${window.innerWidth >= 768 ? "justify-content-start" : "justify-content-end"}`}>
                     <div className={`${window.innerWidth >= 768 ? "px-0" : "px-4"}`}>
                         <img height={"100px"} width={"auto"} src={AbuDhabi} />

@@ -291,7 +291,7 @@ export const getFacets = async (key_en, key_ar, dispatch, setData, filters) => {
 
 }
 
-export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage, filters, currentLanguage, dispatch, setTopics, setTags, setPublishers) => {
+export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage, filters, currentLanguage, dispatch, setTopics, setTags, setPublishers, setFileFormats) => {
 
     setLoading(true)
     setTotalCount(0)
@@ -300,22 +300,28 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
     let themeArray = []
     let publisherArray = []
     let tagsArray = []
+    let filesArray = []
+
+    console.log("filterss", filters);
 
     filters?.filter((el, index) => {
         el.type == "theme" ? themeArray.push(el.title) : el.type == "themelear" ? themeArray.push(el.title)
             : el.type == "publisher__name" ? publisherArray.push(el.title) : el.type == "publisherlear__name" ? publisherArray.push(el.title)
-                : el.type == "keyword" ? tagsArray.push(el.title) : el.type == "keywordlear" && tagsArray.push(el.title)
+                : el.type == "keyword" ? tagsArray.push(el.title) : el.type == "keywordlear" ? tagsArray.push(el.title)
+                    : el.type == "file" && filesArray.push(el.title)
     })
 
     finalFilters.push(
         { key: currentLanguage === locales.EN ? "theme" : "themelear", values: themeArray },
         { key: currentLanguage === locales.EN ? "publisher__name" : "publisherlear__name", values: publisherArray },
-        { key: currentLanguage === locales.EN ? "keyword" : "keywordlear", values: tagsArray }
+        { key: currentLanguage === locales.EN ? "keyword" : "keywordlear", values: tagsArray },
+        { key: "distribution__item__format", values: filesArray }
     )
 
     getFacets("theme", "themelear", dispatch, setTopics, finalFilters);
     getFacets("keyword", "keywordlear", dispatch, setTags, finalFilters);
     getFacets("publisher__name", "publisherlear__name", dispatch, setPublishers, finalFilters);
+    getFileFormatsFacets("distribution__item__format", dispatch, setFileFormats, finalFilters);
     return endpoints.
         getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then(async (res) => {
             if (res.status === 200) {
@@ -1605,10 +1611,16 @@ export const addDownloadCount = (id) => {
         })
 }
 
-export const getFileFormats = (setData) => {
-    return endpoints.getFileFormats()
+export const getFileFormatsFacets = (key, dispatch, setData, filters) => {
+    return endpoints.getFileFormatsFacets(key, filters)
         .then((res) => {
-            setData(res.data);
+            let files_Formats = res.data.data?.map((item) => (
+                {
+                    title: item.Format,
+                    value: item.Count,
+                    type: "file"
+                }))
+            dispatch(setData(files_Formats));
         })
         .catch((err) => {
             console.log("Error Message", err);

@@ -98,3 +98,170 @@ code {
   font-family: 'CircularAr-Semibold';
   src: local('CircularAr'), url(./assets/fonts/CircularAr-Medium.ttf) format('truetype');
 }
+
+/* Tablet */
+
+@media (max-width: 1199.98px) {
+
+  .fs-xl {
+    font-size: 64px;
+    line-height: 68px;
+  }
+
+  .fs-lg {
+    font-size: 56px;
+    line-height: 60px;
+  }
+
+  .fs-md {
+    font-size: 48px;
+    line-height: 52px;
+  }
+
+  .fs-sm {
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+  }
+
+  .fs-xs {
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+  }
+
+  .bold-md {
+    font-family: "CircularStd-Bold";
+  }
+
+  .bold-md-ar {
+    font-family: "CircularAr-Bold";
+  }
+
+  .semibold-md {
+    font-family: "CircularStd-SemiBold";
+  }
+
+  .semibold-md-ar {
+    font-family: "CircularAr-SemiBold";
+  }
+
+  .fs-md-only {
+    font-size: 48px;
+    line-height: 52px;
+  }
+}
+
+/* Desktop */
+
+@media (min-width: 1199.98px) {
+
+  .fs-xl {
+    font-size: 64px;
+    line-height: 68px;
+  }
+
+  .fs-lg {
+    font-size: 56px;
+    line-height: 60px;
+  }
+
+  .fs-md {
+    font-size: 48px;
+    line-height: 52px;
+  }
+
+  .fs-sm {
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: -0.01em;
+  }
+
+  .fs-xs {
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+  }
+
+  .bold-lg {
+    font-family: "CircularStd-Bold";
+  }
+
+  .bold-lg-ar {
+    font-family: "CircularAr-Bold";
+  }
+
+  .semibold-lg {
+    font-family: "CircularStd-SemiBold";
+  }
+
+  .semibold-lg-ar {
+    font-family: "CircularAr-SemiBold";
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 768.98px) {
+
+  .fs-xl {
+    font-size: 32px;
+    line-height: 36px;
+  }
+
+  .fs-lg {
+    font-size: 32px;
+    line-height: 36px;
+  }
+
+  .fs-md {
+    font-size: 32px;
+    line-height: 36px;
+  }
+
+  .fs-sm {
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+  }
+
+  .fs-xs {
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: -0.01em;
+  }
+
+  .bold-sm {
+    font-family: "CircularStd-Bold";
+  }
+
+  .bold-sm-ar {
+    font-family: "CircularAr-Bold";
+  }
+
+  .semibold-sm {
+    font-family: "CircularStd-SemiBold";
+  }
+
+  .semibold-sm-ar {
+    font-family: "CircularAr-SemiBold";
+  }
+}
+
+.fs-static {
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+}
+
+.fs-md-static {
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -0.01em;
+}
+
+.fs-xs-static {
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -0.01em;
+}

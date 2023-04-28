@@ -37,7 +37,7 @@ let sizes = ['400px', '650px', '540px']
 
 const Cards = memo((props) => {
 
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
 
     const { title, notitlebutton, data, backgroundColor, hoverable, type,
         size, onClick, onClickViewAll, buttonText, notagsactive, noheadercomponent, dropdownWidth
@@ -89,7 +89,7 @@ const Cards = memo((props) => {
                                 onClick={() => onClick(item.id)}
                             />
                         </Col>
-                    )) : <Heading size="md" bold nomargin heading="No Result Found!" />
+                    )) : <Heading size="md" bold nomargin heading={t("noResultFound!")} />
                 ) : <Loader type={type} backgroundColor={backgroundColor} />
             )
         } else {
