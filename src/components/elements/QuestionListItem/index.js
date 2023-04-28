@@ -11,7 +11,7 @@ const QuestionListItem = memo((props) => {
     const { title, icon, onClick } = props
 
     return (
-        <Container fluid className="py-3 question-list-item-hover">
+        <Container fluid className="py-3 m-0 question-list-item-hover">
             <Row onClick={onClick}>
                 <Col xs={10} sm={10} md={10} className="d-flex align-items-center">
                     <Heading size="sm" underline nomargin heading={title} />

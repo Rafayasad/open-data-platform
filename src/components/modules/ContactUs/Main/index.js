@@ -6,11 +6,11 @@ import ImageComponent from "../ImageComponent";
 const Main = memo(() => {
     return (
         <Container className="pt-5 mt-4" fluid >
-            <Row>
+            <Row className="p-0 mt-3">
                 <Col lg={6} className='d-none d-lg-block p-0'>
                     <ImageComponent />
                 </Col>
-                <Col sm={12} md={12} lg={6} >
+                <Col className="px-5" sm={12} md={12} lg={6} >
                     <FormComponent />
                 </Col>
             </Row>

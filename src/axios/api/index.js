@@ -380,9 +380,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                 ))
                 // setLoading(false)
 
-                console.log("ARRayssssssssssssssss", arr);
-
-                setData(arr)
+                setData(arr);
 
             }
         }).catch((err) => {
