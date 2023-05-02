@@ -16,6 +16,29 @@ const UpperFooter = memo((props) => {
     const navigate = useNavigate();
     const { title, description, button, navigateTo, image } = props;
 
+    const renderImage = (viewport) => (
+        <Container fluid className='px-0 py-lg-3 py-1'>
+            <Row>
+                <Col xs={10} md={5}>
+                    <Heading color='white' heading={title} size="xxl" />
+                </Col>
+            </Row>
+            {
+                description &&
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Heading size='xxs' color='white' heading={description} />
+                    </Col>
+                </Row>
+            }
+            <Row className='my-3'>
+                <Col xs={8} md={4} className={i18n.language === locales.AR && "py-3"}>
+                    <Button onClick={() => navigate(navigateTo ? navigateTo : routes.REGISTER)} title={button} />
+                </Col>
+            </Row>
+        </Container>
+    )
+
     return (
         <Fragment>
             {/* desktop */}
@@ -26,26 +49,7 @@ const UpperFooter = memo((props) => {
                     backgroundSize: 'cover',
                     backgroundPosition: '100%'
                 }}>
-                <Container fluid className='px-0 py-lg-3 py-1'>
-                    <Row>
-                        <Col xs={10} md={5}>
-                            <Heading color='white' heading={title} size="xxl" />
-                        </Col>
-                    </Row>
-                    {
-                        description &&
-                        <Row>
-                            <Col xs={12} md={6}>
-                                <Heading size='xxs' color='white' heading={description} />
-                            </Col>
-                        </Row>
-                    }
-                    <Row className='my-3'>
-                        <Col xs={8} md={4} className={i18n.language === locales.AR && "py-3"}>
-                            <Button onClick={() => navigate(navigateTo ? navigateTo : routes.REGISTER)} title={button} />
-                        </Col>
-                    </Row>
-                </Container>
+                {renderImage()}
             </div>
             {/* mobile */}
             <div className="d-flex d-md-none align-items-end flex-lg-column py-0 py-lg-5 px-4 img-upper-footer"
@@ -55,26 +59,7 @@ const UpperFooter = memo((props) => {
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'
                 }}>
-                <Container fluid className='px-0 py-lg-3 py-1'>
-                    <Row>
-                        <Col xs={10} md={5}>
-                            <Heading color='white' heading={title} size="xxl" />
-                        </Col>
-                    </Row>
-                    {
-                        description &&
-                        <Row>
-                            <Col xs={12} md={6}>
-                                <Heading size='xxs' color='white' heading={description} />
-                            </Col>
-                        </Row>
-                    }
-                    <Row className='my-3'>
-                        <Col xs={8} md={4} className={i18n.language === locales.AR && "py-3"}>
-                            <Button onClick={() => navigate(navigateTo ? navigateTo : routes.REGISTER)} title={button} />
-                        </Col>
-                    </Row>
-                </Container>
+                {renderImage()}
             </div>
         </Fragment>
     )
