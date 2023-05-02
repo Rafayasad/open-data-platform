@@ -50,7 +50,7 @@ const Header = memo((props) => {
                             size={headingSize}
                             color={color}
                             heading={title} /> */}
-                            <p className={`fs-title en-font-bold ps-2`} style={{color:color}}>
+                            <p className={`fs-title en-font-bold ps-2 m-0`} style={{color:color}}>
                                 {title}
                             </p>
                     </div>
