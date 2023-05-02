@@ -44,12 +44,15 @@ const Header = memo((props) => {
             <Row className="w-100 d-flex p-0 m-0 align-items-center justify-content-between">
                 <Col md={8} lg={8} xs={!dropdown && nobutton ? 12 : 8} className="px-0">
                     <div>
-                        <Heading
+                        {/* <Heading
                             bold
                             nomargin
                             size={headingSize}
                             color={color}
-                            heading={title} />
+                            heading={title} /> */}
+                            <p className={`fs-title en-font-bold ps-2`} style={{color:color}}>
+                                {title}
+                            </p>
                     </div>
                 </Col>
                 {!dropdown && nobutton && !nocount &&

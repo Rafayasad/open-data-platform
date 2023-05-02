@@ -118,7 +118,7 @@ const MiddleFooter = memo(() => {
     return (
         <div className=''>
             <Container fluid className='bg-black p-3 px-4 d-none d-lg-block'>
-                <div className='d-flex'>
+                <div className='d-flex max-width'>
                     {
                         data?.map((item, index) => (
                             <Col key={index}>

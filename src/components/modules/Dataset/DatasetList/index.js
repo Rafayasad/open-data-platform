@@ -70,7 +70,7 @@ const DatasetList = memo((props) => {
     ]
 
     return (
-        <Container fluid>
+        <Container fluid className="max-width">
             {
                 !noheader &&
                 <>

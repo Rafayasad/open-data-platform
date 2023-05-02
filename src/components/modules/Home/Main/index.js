@@ -12,6 +12,8 @@ import { useSelector } from "react-redux";
 import Symbol from "../../../../assets/images/Product-Symbol.png"
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../../../router/helper";
+import i18next from "i18next";
+import './style.css';
 
 const Main = memo((props) => {
 
@@ -26,7 +28,7 @@ const Main = memo((props) => {
         t("populartext").split(",").slice(0, viewport === "md" ? 4 : 1).map((item, index) => {
             return (
                 <p
-                    className="m-0 me-1"
+                    className="m-0 me-1 fs-static"
                     onClick={() => {
                         navigate(routes.DATASET, { state: { search: item } })
                     }}
@@ -39,10 +41,11 @@ const Main = memo((props) => {
 
 
     return (
-        <div className="d-flex" style={{
-            height: window.innerWidth >= 768 ? '100vh' : '80vh',
+        <div className="d-flex background-img" style={{
+            //height: window.innerWidth >= 768 ? '100vh' : '80vh',
             width: '100vw',
-            backgroundImage: window.innerWidth >= 768 ? `url(${background})` : `url(${backgroundMobile})`,
+            height: '100vh',
+            // backgroundImage: window.innerWidth >= 768 ? `url(${background})` : `url(${backgroundMobile})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: "cover"
         }}>
@@ -62,7 +65,8 @@ const Main = memo((props) => {
                         <Row>
                             <Col />
                             <Col xs={12} lg={8} md={10} style={{ textAlign: 'center' }} className="py-2">
-                                <Heading bold color="white" size="xxl" heading={t("dataAvailable")} />
+                                {/* <Heading bold color="white" size="xxl" heading={t("dataAvailable")} /> */}
+                                <p className={`fs-lg text-white ${i18next.language === locales.AR ? 'ar-font-bold' : 'en-font-bold'}`}>{t("dataAvailable")}</p>
                             </Col>
                             <Col />
                         </Row>
@@ -83,8 +87,8 @@ const Main = memo((props) => {
                         </Row>
                         <Row>
                             <Col />
-                            <Col xs={12} md={6} className="py-2 d-flex align-items-center justify-content-center">
-                                <span className={`text-center text-white me-1 ${i18n.language === locales.EN ? "en-font-bolder" : "ar-font-bold"}`}>{t("popular")}</span>
+                            <Col xs={12} md={10} className="py-2 d-flex align-items-center justify-content-center flex-wrap">
+                                <span className={`text-center text-white  fs-static me-1 ${i18n.language === locales.EN ? "en-font-bolder" : "ar-font-bold"}`}>{t("popular")}</span>
                                 <div className="d-flex d-md-none">
                                     {renderSearchTags("sm")}
                                 </div>

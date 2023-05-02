@@ -2,18 +2,20 @@ import React, { memo } from "react";
 import { Col, Row } from "react-bootstrap";
 import './style.css';
 import Heading from "../Heading";
+import i18next from "i18next";
+import { locales } from "../../../i18n/helper";
 
 const ListItem = memo((props) => {
 
     const { title, value, image, onClick } = props;
 
     return (
-        <Row className="p-4 m-0 list-item-hover">
+        <Row className="p-4 m-0 list-item-hover padding-xl">
             <Col md={12} className="p-0 m-0 d-flex">
-                <p className="display-1 m-0 text-white" onClick={() => onClick()} style={{ cursor: 'pointer' }}>
+                <p className={`fs-2xl m-0 text-white ${i18next.language === locales.AR ? 'ar-font-bold' : 'en-font-bold'}`} onClick={() => onClick()} style={{ cursor: 'pointer' }}>
                     {title}
                     <span className="mx-3 position-relative">
-                        <sup className="text-white h1 position-absolute m-0" style={{ top: -7 }}>{value}</sup>
+                        <sup className={`text-white h1 position-absolute m-0 fs-kilo ${i18next.language === locales.AR ? 'ar-font' : 'en-font'}`} style={{ top: -7 }}>{value}</sup>
                     </span>
                 </p>
                 {
