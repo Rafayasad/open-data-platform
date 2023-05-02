@@ -20,7 +20,7 @@ const QuestionList = memo((props) => {
     const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered])
 
     return (
-        <Container fluid className="my-2 p-4">
+        <Container fluid className="my-2 p-4 max-width">
             <div className="py-2">
                 <Heading heading={title} size={"lg"} bold backgroundColor={colors.white} />
             </div>
