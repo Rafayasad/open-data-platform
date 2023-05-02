@@ -10,6 +10,7 @@ import { colors } from "../../../../utils/colors";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { routes } from "../../../../router/helper";
+import './style.css';
 
 const Images = memo(() => {
 
@@ -54,8 +55,8 @@ const Images = memo(() => {
                 <Col className="px-4 max-width">
                     <Row>
                         <Col xs={12} md={12} lg={6} className="my-2 ">
-                            <div className="d-flex flex-column justify-content-center" style={{
-                                height: window.innerWidth <= 765 ? '400px' : '500px',
+                            <div className="d-flex flex-column justify-content-center card-height" style={{
+                                //height: window.innerWidth <= 765 ? '400px' : '500px',
                                 backgroundImage: `url(${CardOne})`,
                                 backgroundRepeat: 'no-repeat',
                                 backgroundSize: 'cover',
@@ -71,7 +72,7 @@ const Images = memo(() => {
                                     </Col>
                                     <Col />
                                 </Row>
-                                <Row className="py-1" style={{ zIndex: 1 }}>
+                                <Row className="pt-4" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
                                         <Button bold title={t("discover")} onClick={onClickDiscover} />
@@ -81,9 +82,9 @@ const Images = memo(() => {
                             </div>
                         </Col>
                         <Col xs={12} md={12} lg={6} className="my-2">
-                            <div className="d-flex flex-column justify-content-center" style={{
-                                height: window.innerWidth <= 765 ? '400px' : '500px',
-                                backgroundImage: `url(${CardTwo})`,
+                            <div className="d-flex flex-column justify-content-center card-two card-height" style={{
+                                //height: window.innerWidth <= 765 ? '400px' : '500px',
+                                //backgroundImage: `url(${CardTwo})`,
                                 backgroundRepeat: 'no-repeat',
                                 backgroundSize: 'cover',
                                 borderRadius: '30px',
@@ -98,7 +99,7 @@ const Images = memo(() => {
                                     </Col>
                                     <Col />
                                 </Row>
-                                <Row className="py-1">
+                                <Row className="pt-3">
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
                                         <Button bold title={t("getStarted")} onClick={onClickRegister} />
