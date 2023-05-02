@@ -1,19 +1,23 @@
 .css-vjfk8i-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
-    color: grey !important;
+    color: #707070 !important;
 }
 
 .meaningless-key-vjfk8i-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
-    color: gray !important;
+    color: #707070 !important;
 }
 
 .muiltr-vjfk8i-MuiFormLabel-root-MuiInputLabel-root {
-    color: grey !important;
+    color: #707070 !important;
 }
 
 .muirtl-vjfk8i-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
-    color: grey !important;
+    color: #707070 !important;
 }
 
 .muiltr-1wjfk1i.Mui-focused {
-    color: grey !important;
+    color: #707070 !important;
 }
+/* 
+.muiltr-2w1a49-MuiInputBase-root-MuiInput-root:before {
+    border-bottom-color: black;
+} */

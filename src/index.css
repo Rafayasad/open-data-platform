@@ -203,6 +203,15 @@ code {
     letter-spacing: -0.04em;
   }
 
+  .img-upper-footer {
+    height: 500px;
+  }
+
+  /* .img-about-us {
+    height: 256px;
+    width: 343px;
+  } */
+
   .fs-xl {
     font-size: 64px;
     line-height: 68px;
@@ -267,6 +276,17 @@ code {
     line-height: 44px;
     letter-spacing: -0.02em;
   }
+
+  .img-upper-footer {
+    height: 400px;
+  }
+
+  .img-about-us {
+    height: 256px;
+    width: 343px;
+  }
+
+
   .fs-xl {
     font-size: 32px;
     line-height: 36px;

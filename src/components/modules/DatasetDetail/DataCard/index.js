@@ -49,6 +49,7 @@ const DataCard = memo((props) => {
                                                                 }
                                                             })
                                                     }}
+                                                    margin={"0"}
                                                     title={value}
                                                     backgroundColor={item.theme === 'light' && colors.white}
                                                     borderColor={item.theme === 'light' && `1.5px solid ${colors.light_gray}`}

@@ -90,7 +90,7 @@ const FormComponent = memo(() => {
                     </div>
                     <Dropdown
                         iconColor={"#404040"}
-                        borderColor={selectedValue != t("selectsubject") && "1px solid #CFCFCF"}
+                        borderColor={selectedValue != t("selectsubject") && "1px solid black"}
                         autoClose={true}
                         dropdownWidth={"100%"}
                         options={options}

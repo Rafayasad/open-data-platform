@@ -23,12 +23,29 @@ const Main = memo((props) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
 
+    const renderSearchTags = (viewport) =>
+    (
+        t("populartext").split(",").slice(0, viewport === "md" ? 4 : 1).map((item, index) => {
+            return (
+                <p
+                    className="m-0 me-1 fs-static"
+                    onClick={() => {
+                        navigate(routes.DATASET, { state: { search: item } })
+                    }}
+                    style={{ textAlign: 'center', color: 'white', cursor: "pointer" }}>
+                    {item + (index == t("populartext").split(",").slice(0, viewport === "md" ? 4 : 1).length - 1 ? '' : ',')}
+                </p>
+            )
+        })
+    )
+
+
     return (
         <div className="d-flex background-img" style={{
             //height: window.innerWidth >= 768 ? '100vh' : '80vh',
             width: '100vw',
             height: '100vh',
-           // backgroundImage: window.innerWidth >= 768 ? `url(${background})` : `url(${backgroundMobile})`,
+            // backgroundImage: window.innerWidth >= 768 ? `url(${background})` : `url(${backgroundMobile})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: "cover"
         }}>
@@ -61,7 +78,8 @@ const Main = memo((props) => {
                                     // nofocuseffect
                                     searchData={i18n.language === locales.AR ? datasetsSuggestion?.ar : datasetsSuggestion?.en}
                                     onClickApplyFilter={onApplyFilter}
-                                    placeholder={t("searchPlaceholder")}
+                                    placeholder={t("searchPlaceholderfordesktop")}
+                                    placeholderformobile={t("searchPlaceholderformobile")}
                                     filter
                                     onPressEnter={onSearch} />
                             </Col>
@@ -71,18 +89,12 @@ const Main = memo((props) => {
                             <Col />
                             <Col xs={12} md={10} className="py-2 d-flex align-items-center justify-content-center flex-wrap">
                                 <span className={`text-center text-white  fs-static me-1 ${i18n.language === locales.EN ? "en-font-bolder" : "ar-font-bold"}`}>{t("popular")}</span>
-                                {t("populartext").split(",").map((item, index) => {
-                                    return (
-                                        <p
-                                            className="m-0 me-1 fs-static"
-                                            onClick={() => {
-                                                navigate(routes.DATASET, { state: { search: item } })
-                                            }}
-                                            style={{ textAlign: 'center', color: 'white', cursor: "pointer" }}>
-                                            {item + (index == t("populartext").split(",").length - 1 ? '' : ',')}
-                                        </p>
-                                    )
-                                })}
+                                <div className="d-flex d-md-none">
+                                    {renderSearchTags("sm")}
+                                </div>
+                                <div className="d-none d-md-flex">
+                                    {renderSearchTags("md")}
+                                </div>
                             </Col>
                             <Col />
                         </Row>

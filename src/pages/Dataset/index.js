@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import { locales } from "../../i18n/helper";
 import View from "../../components/modules/View";
 import { useDispatch, useSelector } from "react-redux";
-import { setFileFormats, setFilter, setPublishers, setTags, setTopics } from "../../redux/reducers/Facets";
+import { setFileFormats, setFilter, setSearch, setPublishers, setTags, setTopics } from "../../redux/reducers/Facets";
 import { isDuplicates } from "../../utils/generic";
 import Heading from "../../components/elements/Heading";
 
@@ -19,6 +19,7 @@ const Dataset = memo(() => {
     const { t, i18n } = useTranslation();
     const dispatch = useDispatch();
     const storedFilters = useSelector((state) => state.facets.filter);
+    const storedSearch = useSelector((state) => state.facets.search);
     const { datasetsSuggestion } = useSelector((state) => state.facets);
 
     const navigate = useNavigate();
@@ -43,8 +44,6 @@ const Dataset = memo(() => {
     const publishers = useSelector((state) => state.facets.publishers);
     const tags = useSelector((state) => state.facets.tags);
     const files = useSelector((state) => state.facets.file_Formats);
-
-    console.log("ss", files);
 
     const data = [
         {
@@ -71,6 +70,7 @@ const Dataset = memo(() => {
 
     useEffect(() => {
         setSearchValue("")
+        // dispatch(setSearch(""))
         // dispatch(setFilter(null))
         // setFilters()
         setCurrentPage(1)
@@ -95,6 +95,7 @@ const Dataset = memo(() => {
 
         if (state && state.search) {
             setSearchValue(state.search)
+            dispatch(setSearch(state.search))
         }
 
         if (state && state.listItem && state.listItem.length > 0) {
@@ -105,7 +106,7 @@ const Dataset = memo(() => {
         if (!most_viewed_datasets) {
             if (state) {
                 navigate(pathname, { replace: true, state: null })
-                getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [], i18n.language, dispatch, setTopics, setTags, setPublishers)
+                getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [], i18n.language, dispatch, setTopics, setTags, setPublishers, setFileFormats)
             }
         }
 
@@ -118,20 +119,21 @@ const Dataset = memo(() => {
 
     useEffect(() => {
         if (most_viewed_datasets) {
-            getMostViewedDatasets(setDatasets, setTotalCount, searchValue, setLoading, rowsPerPage, currentPage, i18n.language)
+            getMostViewedDatasets(setDatasets, setTotalCount, storedSearch, setLoading, rowsPerPage, currentPage, i18n.language)
         }
-    }, [currentPage, searchValue, i18n.language])
+    }, [currentPage, storedSearch, i18n.language])
 
 
     useEffect(() => {
         if (!most_viewed_datasets) {
-            if (currentPage || searchValue || sort || storedFilters) {
+            if (currentPage || storedSearch || sort || storedFilters) {
                 if (!state?.search && !state?.listItem) {
-                    getAllDatasets(setDatasets, setTotalCount, setLoading, searchValue, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, storedFilters, i18n.language, dispatch, setTopics, setTags, setPublishers, setFileFormats)
+                    console.log("ARRayssssssssssssssss", storedFilters, filters);
+                    getAllDatasets(setDatasets, setTotalCount, setLoading, storedSearch, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, storedFilters, i18n.language, dispatch, setTopics, setTags, setPublishers, setFileFormats)
                 }
             }
         }
-    }, [currentPage, searchValue, sort, storedFilters, !most_viewed_datasets]);
+    }, [currentPage, storedSearch, sort, storedFilters, !most_viewed_datasets]);
 
     const toggle = useCallback(() => setViewAll(!viewAll), [viewAll]);
 
@@ -145,10 +147,11 @@ const Dataset = memo(() => {
 
     const onChangeSearch = useCallback((e) => {
         setSearchValue(e)
+        dispatch(setSearch(e))
         if (e) {
             focustoDatasets()
         }
-    }, [searchValue])
+    }, [storedSearch])
 
     const onChangeDropdownValue = useCallback((e) => {
         setSort(e)
@@ -180,13 +183,13 @@ const Dataset = memo(() => {
                 nofilter={most_viewed_datasets}
                 filterData={data}
                 searchData={i18n.language === locales.AR ? datasetsSuggestion?.ar : datasetsSuggestion?.en}
-                search={searchValue}
+                search={storedSearch}
                 onChangeSearchEnter={onChangeSearch}
                 filter={filters}
                 onApplyFilter={onApplyFilter}
                 onDeleteFilter={onDeleteFilter} />
             {
-                !most_viewed_datasets && searchValue === "" && (!storedFilters || storedFilters.length < 1 || storedFilters === null) &&
+                !most_viewed_datasets && storedSearch === "" && (!storedFilters || storedFilters.length < 1 || storedFilters === null) &&
                 <Cards
                     dropdownWidth={"55%"}
                     notagsactive
@@ -196,9 +199,11 @@ const Dataset = memo(() => {
                     hoverable="primary"
                     backgroundColor={colors.white}
                     data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)}
-                    onClick={onClickCard} />
+                    onClick={onClickCard}
+                // size={"md"}
+                />
+
             }
-            {console.log("===>sssssssssssssss", datasets)}
             <div id="datasetsList">
                 <DatasetList
                     nocount

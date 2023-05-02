@@ -22,11 +22,11 @@ const RealTimeApisHeader = memo((props) => {
                     }]} />
             </div>
             <Container fluid>
-                <div className="row px-2 mt-2">
-                    <div className="col-lg-6 col-12 my-2">
+                <div className="row px-2 mt-2 align-items-center justify-content-between">
+                    <div className="col-lg-5 col-12 my-2">
                         <Heading size={"xl"} heading={t("openData")} bold />
                     </div>
-                    <div className="col-lg-6 col-12">
+                    <div className="col-lg-12 my-0 my-lg-2 col-12">
                         <Heading heading={t("openDataDescription")} size={"xxs"} />
                     </div>
                 </div>

@@ -72,38 +72,40 @@ const DatasetDetail = memo(() => {
 
     }, [dataset])
 
-    console.log("IDDD--->",dataset);
+    console.log("IDDD--->", dataset);
 
     return (
-        <View theme="dark" noupperfooter sticky>
-            <div id="main" className="my-5 pt-5">
-                <div className="px-4 pt-5">
-                    <BreadCrumb
-                        items={[
-                            {
-                                title: t("datasets")
+        <div style={{ maxWidth: "1800px", margin: "auto" }}>
+            <View theme="dark" noupperfooter sticky>
+                <div id="main" className="my-5 pt-5">
+                    <div className="px-4 pt-5">
+                        <BreadCrumb
+                            items={[
+                                {
+                                    title: t("datasets")
+                                }
+                            ]}
+                        />
+                    </div>
+                    <Main handleReload={handleReload} id={id} data={dataset} url={`https://data.abudhabi/opendata/dataset/detail?id=${id}`} />
+                    <Cards onClickViewAll={() => {
+                        navigate(routes.DATASET, {
+                            replace: true, state: {
+                                listItem: [{
+                                    title: i18n.language === locales.AR ? dataset.topics_ar[0] : dataset.topics[0],
+                                    type: i18n.language === locales.AR ? "themelear" : "theme"
+                                }]
                             }
-                        ]}
-                    />
+                        })
+                    }}
+                        dropdownWidth={"55%"}
+                        title={t("similarDatasets")}
+                        backgroundColor={colors.white}
+                        data={similarDataset}
+                        onClick={onClickCard} />
                 </div>
-                <Main handleReload={handleReload} id={id} data={dataset} url={`https://data.abudhabi/opendata/dataset/detail?id=${id}`} />
-                <Cards onClickViewAll={() => {
-                    navigate(routes.DATASET, {
-                        replace: true, state: {
-                            listItem: [{
-                                title: i18n.language === locales.AR ? dataset.topics_ar[0] : dataset.topics[0],
-                                type: i18n.language === locales.AR ? "themelear" : "theme"
-                            }]
-                        }
-                    })
-                }}
-                    dropdownWidth={"55%"}
-                    title={t("similarDatasets")}
-                    backgroundColor={colors.white}
-                    data={similarDataset}
-                    onClick={onClickCard} />
-            </div>
-        </View>
+            </View>
+        </div>
     )
 });
 

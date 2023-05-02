@@ -19,7 +19,7 @@ const Main = memo((props) => {
     return (
         <>
             <Container className="pt-5 mt-5">
-                <Row className="pt-5 pb-2">
+                <Row className="pt-4 pt-lg-5 pb2">
                     <Col className="d-flex flex-column justify-content-center">
                         <Row>
                             <Col />
@@ -44,9 +44,11 @@ const Main = memo((props) => {
                                 filterData={filterData}
                                 value={search}
                                 searchData={searchData}
-                                placeholder={t("searchKeywords")}
+                                placeholder={t("searchKeywords")}v
+                                placeholderformobile={t("searchPlaceholderformobile")}
                                 onPressEnter={onChangeSearchEnter}
                                 filter
+                                isFilterIcon
                                 appliedFilters={filter}
                                 onClickApplyFilter={onApplyFilter}
                             />

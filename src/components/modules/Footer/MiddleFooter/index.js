@@ -151,7 +151,7 @@ const MiddleFooter = memo(() => {
                     }
                 </div>
             </Container>
-            <Container fluid className='d-lg-none bg-black m-0'>
+            <Container fluid className='d-lg-none bg-black m-0 px-4'>
                 <div className='py-4'>
                     <img height={"50px"} src={AbuDhabiLogo} />
                 </div>
