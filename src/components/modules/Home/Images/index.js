@@ -51,9 +51,9 @@ const Images = memo(() => {
                 </Col>
             </Row> */}
             <Row>
-                <Col className="px-4">
+                <Col className="px-4 max-width">
                     <Row>
-                        <Col xs={12} md={12} lg={6} className="my-2">
+                        <Col xs={12} md={12} lg={6} className="my-2 ">
                             <div className="d-flex flex-column justify-content-center" style={{
                                 height: window.innerWidth <= 765 ? '400px' : '500px',
                                 backgroundImage: `url(${CardOne})`,

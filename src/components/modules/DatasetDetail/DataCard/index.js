@@ -21,7 +21,10 @@ const DataCard = memo((props) => {
                 data && data.length > 0 && data.map((item, index) => (
                     <div key={index} className="py-1">
                         <div>
-                            <Heading heading={item.title} size='xs' bold />
+                            {/* <Heading heading={item.title} size='xs' bold /> */}
+                            <p className="fs-sm en-font-bolder">
+                                {item.title}
+                            </p>
                         </div>
                         {
                             !item.tags ? (

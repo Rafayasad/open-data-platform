@@ -24,7 +24,7 @@ const UpperFooter = memo((props) => {
             backgroundSize: 'cover',
             backgroundPosition: 'center'
         }}>
-            <Container fluid className='px-0 py-3'>
+            <Container fluid className='px-0 py-3 max-width'>
                 <Row>
                     <Col xs={10} md={5}>
                         <Heading color='white' heading={title} size="xxl" />

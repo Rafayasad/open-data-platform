@@ -3,14 +3,13 @@ html,
   box-sizing: border-box;
   scrollbar-width: none;
   /* Firefox implementation */
-
 }
 
 body {
   margin: 0;
-  font-family: 'CircularStd-Regular';
+  font-family: "CircularStd-Regular";
   letter-spacing: -0.03em;
-  font-feature-settings: 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on;
+  font-feature-settings: "salt" on, "ss01" on, "ss02" on, "ss03" on;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scrollbar-width: none;
@@ -21,24 +20,29 @@ body::-webkit-scrollbar {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
+.max-width {
+  max-width: 1800px;
+  margin: auto;
+}
+
 .ar-font {
-  font-family: 'CircularAr-Regular';
+  font-family: "CircularAr-Regular";
 }
 
 .en-font {
-  font-family: 'CircularStd-Regular';
+  font-family: "CircularStd-Regular";
 }
 
 .ar-font-bold {
-  font-family: 'CircularAr-Semibold';
+  font-family: "CircularAr-Semibold";
 }
 
 .en-font-bold {
-  font-family: 'CircularStd-Semibold';
+  font-family: "CircularStd-Semibold";
 }
 
 .en-font-bolder {
@@ -69,43 +73,64 @@ code {
 }
 
 .swagger-ui {
-  font-family: 'CircularStd-Regular' !important;
+  font-family: "CircularStd-Regular" !important;
   font-feature-settings: normal !important;
 }
 
 @font-face {
-  font-family: 'CircularStd-Regular';
-  src: local('CircularStd'), url(./assets/fonts/CircularStd-Book.ttf) format('truetype');
+  font-family: "CircularStd-Regular";
+  src: local("CircularStd"),
+    url(./assets/fonts/CircularStd-Book.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: 'CircularStd-Bold';
-  src: local('CircularStd'), url(./assets/fonts/CircularStd-Bold.ttf) format('truetype');
+  font-family: "CircularStd-Bold";
+  src: local("CircularStd"),
+    url(./assets/fonts/CircularStd-Bold.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: 'CircularStd-Semibold';
-  src: local('CircularStd'), url(./assets/fonts/CircularStd-Medium.ttf) format('truetype');
+  font-family: "CircularStd-Semibold";
+  src: local("CircularStd"),
+    url(./assets/fonts/CircularStd-Medium.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: 'CircularAr-Regular';
-  src: local('CircularAr'), url(./assets/fonts/CircularAr-Book.ttf) format('truetype');
+  font-family: "CircularAr-Regular";
+  src: local("CircularAr"),
+    url(./assets/fonts/CircularAr-Book.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: 'CircularAr-Bold';
-  src: local('CircularAr'), url(./assets/fonts/CircularAr-Bold.ttf) format('truetype');
+  font-family: "CircularAr-Bold";
+  src: local("CircularAr"),
+    url(./assets/fonts/CircularAr-Bold.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: 'CircularAr-Semibold';
-  src: local('CircularAr'), url(./assets/fonts/CircularAr-Medium.ttf) format('truetype');
+  font-family: "CircularAr-Semibold";
+  src: local("CircularAr"),
+    url(./assets/fonts/CircularAr-Medium.ttf) format("truetype");
 }
 
 /* Tablet */
 
 @media (max-width: 1199.98px) {
+  .fs-kilo {
+    font-size: 40px;
+    line-height: 44px;
+    letter-spacing: -0.02em;
+  }
+  .fs-mega {
+    font-size: 56px;
+    line-height: 60px;
+    letter-spacing: -0.03em;
+  }
+  .fs-2xl {
+    font-size: 64px;
+    line-height: 68px;
+    letter-spacing: -0.03em;
+  }
 
   .fs-xl {
     font-size: 64px;
@@ -161,6 +186,22 @@ code {
 /* Desktop */
 
 @media (min-width: 1199.98px) {
+  .fs-kilo {
+    font-size: 40px;
+    line-height: 44px;
+    letter-spacing: -0.02em;
+  }
+  .fs-mega {
+    font-size: 64px;
+    line-height: 68px;
+    letter-spacing: -0.03em;
+  }
+
+  .fs-2xl {
+    font-size: 80px;
+    line-height: 84px;
+    letter-spacing: -0.04em;
+  }
 
   .fs-xl {
     font-size: 64px;
@@ -211,7 +252,21 @@ code {
 /* Mobile */
 
 @media (max-width: 767.98px) {
-
+  .fs-mega {
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: -0.01em;
+  }
+  .fs-kilo {
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+  }
+  .fs-2xl {
+    font-size: 40px;
+    line-height: 44px;
+    letter-spacing: -0.02em;
+  }
   .fs-xl {
     font-size: 32px;
     line-height: 36px;
@@ -286,4 +341,14 @@ code {
   font-size: 32px;
   line-height: 36px;
   letter-spacing: -0.01em;
+}
+@keyframes comeOut {
+0%{
+   background-size: 100% 100%;
+   background-position: 0 0;
+}
+100%{
+   background-size: 120% 120%;
+   background-position: -30px -30px;
+}
 }

@@ -169,14 +169,14 @@ const Cards = memo((props) => {
         <Container fluid style={{ backgroundColor: backgroundColor }}>
             {
                 title &&
-                <Row>
+                <Row className="max-width">
                     <Col>
                         <Header nobutton={notitlebutton && true} buttonText={buttonText} backgroundColor={backgroundColor} title={title} onClickButton={onClickViewAll} />
                     </Col>
                 </Row>
             }
             <Row>
-                <Col className="px-4">
+                <Col className="px-4 max-width">
                     <Row>
                         {renderContent()}
                     </Row>
