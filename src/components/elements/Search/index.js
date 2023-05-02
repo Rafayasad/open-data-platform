@@ -1,4 +1,4 @@
-import React, { useRef, memo, useState, useCallback, useEffect } from "react";
+import React, { useRef, memo, useState, useCallback, useEffect, Fragment } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import _ from 'lodash';
 import { IoIosSearch } from 'react-icons/io';
@@ -11,6 +11,7 @@ import './style.css'
 import ExpandSearchBarModal from "./ExpandSearchBarModal";
 import { isEmptyString } from "../../../utils/generic";
 import i18n from "../../../i18n/i18n";
+import { locales } from "../../../i18n/helper";
 
 const Search = memo((props) => {
 
@@ -19,7 +20,7 @@ const Search = memo((props) => {
 
     const { t } = useTranslation();
 
-    const { nofilter, filterData, nofocuseffect, placeholder, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter, searchData } = props;
+    const { isFilterIcon, nofilter, filterData, nofocuseffect, placeholder, placeholderformobile, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter, searchData } = props;
 
     const [filterOpen, setFilterOpen] = useState(false);
 
@@ -94,23 +95,37 @@ const Search = memo((props) => {
                     setShow={() => setOpenModal(false)} />
             }
             <Container id="cont" fluid ref={wrapperRef}>
-                <Row id="main" className={`${toggler && !nofocuseffect ? "search-box-active input-focused" : "search-box"}`}>
-                    {/* <Col xs={2} md={1} className='d-flex justify-content-center align-items-center'>
-                    </Col> */}
-                    <Col className='p-0 d-flex align-items-center'>
-                        <div className="ms-3 me-1">
-                            <IoIosSearch color="gray" size={24} />
+                <Row id="main" className={`d-flex ${!(toggler && !nofocuseffect) && "hover"} ${toggler && !nofocuseffect ? "search-box-active input-focused" : "search-box"}`}>
+                    <Col className={`p-0 d-flex align-items-center ${!isFilterIcon && "justify-content-center"} display-search-icon`}>
+                        <div className={`${i18n.language === locales.AR ? "ms-1 me-3" : "ms-3 me-1"} ${!isFilterIcon && "d-none d-md-block"} `}>
+                            <IoIosSearch color={!isFilterIcon ? "gray" : "black"} size={24} />
                         </div>
-                        <input
-                            onClick={() => {
-                                document?.getElementById("cont")?.offsetWidth <= 540 ?
-                                    setOpenModal(true)
-                                    :
-                                    setToggler(true)
-                            }}
-                            type="text"
-                            className='border-0 bg-transparent w-100 placeholder-color'
-                            value={inputText} placeholder={placeholder} onChange={onChangeSearch} onKeyDown={onKeyDown} />
+                        {/* desktop */}
+                        <div className="d-none d-md-block w-100">
+                            <input
+                                onClick={() => {
+                                    document?.getElementById("cont")?.offsetWidth <= 540 ?
+                                        setOpenModal(true)
+                                        :
+                                        setToggler(true)
+                                }}
+                                type="text"
+                                className={`border-0 bg-transparent wid placeholder-color ${i18n.language === locales.AR ? "text-lg-end" : "text-lg-start"}`}
+                                value={inputText} placeholder={placeholder} onChange={onChangeSearch} onKeyDown={onKeyDown} />
+                        </div>
+                        {/* mobile */}
+                        <div className="d-block d-md-none">
+                            <input
+                                onClick={() => {
+                                    document?.getElementById("cont")?.offsetWidth <= 540 ?
+                                        setOpenModal(true)
+                                        :
+                                        setToggler(true)
+                                }}
+                                type="text"
+                                className={`border-0 bg-transparent ${!isFilterIcon && "text-center"} placeholder-color ${i18n.language === locales.AR ? "text-lg-end" : "text-lg-start"}`}
+                                value={inputText} placeholder={placeholderformobile} onChange={onChangeSearch} onKeyDown={onKeyDown} />
+                        </div>
                     </Col>
                     {
                         inputText?.length > 0 ?
@@ -122,9 +137,19 @@ const Search = memo((props) => {
                             </Col>
                             :
                             filter && !nofilter &&
-                            <Col xs={3} md={2} xl={2} lg={2}>
+                            <Col xs={3} md={2} xl={2} lg={2} className="search-icon">
                                 <div onClick={toggle} className='d-flex align-items-center justify-content-center filter py-2 px-2' style={{ borderRadius: '30px' }}>
-                                    <MdOutlineFilterAlt size={24} />
+                                    {!isFilterIcon &&
+                                        <div className="d-flex d-md-none justify-content-end w-100">
+                                            <div className="bg-black p-2 rounded-pill">
+                                                <IoIosSearch color="white" size={25} />
+                                            </div>
+                                            {/* <MdOutlineFilterAlt size={24} /> */}
+                                        </div>
+                                    }
+                                    <div className={`${!isFilterIcon && "d-none d-md-flex"}`}>
+                                        <MdOutlineFilterAlt size={24} />
+                                    </div>
                                     <div className="d-none d-lg-flex align-items-center justify-content-center">
                                         <p className='m-0'>{t("filters")}</p>
                                     </div>

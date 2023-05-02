@@ -162,6 +162,15 @@ code {
 
 @media (min-width: 1199.98px) {
 
+  .img-upper-footer {
+    height: 500px;
+  }
+
+  /* .img-about-us {
+    height: 256px;
+    width: 343px;
+  } */
+
   .fs-xl {
     font-size: 64px;
     line-height: 68px;
@@ -211,6 +220,16 @@ code {
 /* Mobile */
 
 @media (max-width: 767.98px) {
+
+  .img-upper-footer {
+    height: 400px;
+  }
+
+  .img-about-us {
+    height: 256px;
+    width: 343px;
+  }
+
 
   .fs-xl {
     font-size: 32px;

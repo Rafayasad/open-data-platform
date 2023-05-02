@@ -59,22 +59,25 @@ const Applications = memo(() => {
     })
 
     return (
-        <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
-            <div className="my-5 pt-5">
-                <Main />
-                <div id="cards">
-                    <Cards type="image-outer-text" data={displayApplications} onClick={onClickCard} />
+        <div style={{ maxWidth: "1800px", margin: "auto" }}>
+
+            <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
+                <div className="my-5 pt-5">
+                    <Main />
+                    <div className="my-5" id="cards">
+                        <Cards type="image-outer-text" data={displayApplications} onClick={onClickCard} />
+                    </div>
+                    <Pagination
+                        currentPage={currentPage}
+                        totalCount={Math.ceil(applications?.length / rowsPerPage)}
+                        onChange={(page) => {
+                            cardsDiv.scrollIntoView(true)
+                            onChangePage(page)
+                        }}
+                    />
                 </div>
-                <Pagination
-                    currentPage={currentPage}
-                    totalCount={Math.ceil(applications?.length / rowsPerPage)}
-                    onChange={(page) => {
-                        cardsDiv.scrollIntoView(true)
-                        onChangePage(page)
-                    }}
-                />
-            </div>
-        </View>
+            </View>
+        </div>
     )
 })
 

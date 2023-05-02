@@ -45,7 +45,7 @@ const Main = memo((props) => {
                     </Row>
                     <Row className="py-5">
                         <Col>
-                            <Image src={item.image} fluid style={{ borderRadius: '30px' }} />
+                            <Image className="img-about-us" src={item.image} fluid style={{ borderRadius: '30px' }} />
                         </Col>
                     </Row>
                 </Container>

@@ -44,6 +44,7 @@ const Home = memo(() => {
     const topics = useSelector((state) => state.facets.topics);
     const publishers = useSelector((state) => state.facets.publishers);
     const tags = useSelector((state) => state.facets.tags);
+    const files = useSelector((state) => state.facets.file_Formats);
 
     const data = [
         {
@@ -57,6 +58,10 @@ const Home = memo(() => {
         {
             title: t("tags"),
             tags: i18n.language === locales.AR ? tags && tags.ar : tags && tags.en
+        },
+        {
+            title: t("fileFormat"),
+            data: files
         }
     ]
 
@@ -85,6 +90,7 @@ const Home = memo(() => {
     const onApplyFilter = useCallback((filters) => { navigate(routes.DATASET, { state: { listItem: filters } }) })
 
     return (
+        // <div style={{ maxWidth: "1800px", margin: "auto" }}>
         <View sticky footerTitle={t("GetMore")} footerButton={t("registerNow")} >
             <Main filterData={data} onSearch={onSearch} onClickExplore={() => topicsDiv.scrollIntoView()} onApplyFilter={onApplyFilter} />
             <div id='topics' className="m-0 p-0">
@@ -97,6 +103,7 @@ const Home = memo(() => {
             <Cards dropdownWidth={"55%"} title={t("recentlyAddedDatasets")} backgroundColor={colors.black} data={recentsDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={() => onClickButton()} />
             <PlatformInsights data={platformInsights} />
         </View>
+        // </div>
     )
 })
 
