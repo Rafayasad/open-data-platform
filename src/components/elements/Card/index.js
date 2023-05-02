@@ -57,7 +57,7 @@ const Card = memo((props) => {
     } else if (size === 'sm') {
         HEIGHT = "332px"
     } else if (size === 'md') {
-        HEIGHT = '290px'
+        HEIGHT = '288px'
     }
 
     if (noborder) {
