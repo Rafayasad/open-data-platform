@@ -78,11 +78,11 @@ const Topics = memo((props) => {
             <div className="d-block d-md-none">
                 {renderList("sm")}
             </div>
-            <div className="d-none d-md-block">
+            <div className="d-none d-md-block max-width ">
                 {renderList("md")}
             </div>
             <Row className="py-4 m-0">
-                <Col className={`px-4 d-flex justify-content-center justify-content-md-end`}>
+                <Col className={`px-4 d-flex justify-content-center justify-content-md-end max-width`}>
                     <Button borderColor='white' backgroundColor='black' textColor='white' title={all ? t("viewLess") : t("viewAll")}
                         onClick={onClick} />
                 </Col>

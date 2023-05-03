@@ -94,7 +94,7 @@ const DataHeader = memo((props) => {
             }
         }
     }, [])
-
+    
     return (
         <Container id='main' fluid className={`d-flex justify-content-between align-items-start py-4 bg-white shadow-none ${headerOnTop && "sticky-top shadow-sm w-100 m-0"}`}>
             <BottomSheetBar selectedSheetValue={t("download")} open={openBottomSheet} setOpen={setOpenBottomSheet} options={options} />
@@ -102,13 +102,16 @@ const DataHeader = memo((props) => {
                 {
                     !title ? <><Shimmer rounded="xs" height={"32px"} className="my-2" /><Shimmer rounded="xs" height={"32px"} width="70%" className="my-2" /></> : (
                         <div>
-                            <Heading
+                            {/* <Heading
                                 bold
                                 nomargin
                                 size={headerOnTop ? 'lg' : "xl"}
                                 heading={title}
                                 maxNumberOfLines={headerOnTop && 2}
-                            />
+                            /> */}
+                            <p className={`fs-lg multine-ellipsis-${headerOnTop && 2} en-font-bold`}>
+                                {title}
+                            </p>
                         </div>
                     )
                 }

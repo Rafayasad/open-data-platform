@@ -6,6 +6,8 @@ import Heading from "../../../elements/Heading";
 import Search from "../../../elements/Search";
 import Tag from "../../../elements/Tag";
 import { colors } from "../../../../utils/colors";
+import i18next from "i18next";
+import { locales } from "../../../../i18n/helper";
 import './style.css'
 
 const Main = memo((props) => {
@@ -32,7 +34,10 @@ const Main = memo((props) => {
                         <Row>
                             <Col />
                             <Col xs={10} md={8} style={{ textAlign: 'center' }} className="py-2">
-                                <Heading size="xxxl" bold color={colors.black} heading={t("datasetTitle")} />
+                                {/* <Heading size="xxxl" bold color={colors.black} heading={t("datasetTitle")} /> */}
+                                <p className={`fs-mega ${i18next.language === locales.AR ? 'ar-font-bold' : 'en-font-bold'}`}>
+                                    {t("datasetTitle")} 
+                                </p>
                             </Col>
                             <Col />
                         </Row>

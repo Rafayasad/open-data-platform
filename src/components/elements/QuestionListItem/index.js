@@ -5,6 +5,7 @@ import './style.css';
 import Heading from "../Heading";
 import i18n from "../../../i18n/i18n";
 import { locales } from "../../../i18n/helper";
+import i18next from "i18next";
 
 const QuestionListItem = memo((props) => {
 
@@ -14,7 +15,8 @@ const QuestionListItem = memo((props) => {
         <Container fluid className="py-3 m-0 question-list-item-hover">
             <Row onClick={onClick}>
                 <Col xs={10} sm={10} md={10} className="d-flex align-items-center">
-                    <Heading size="sm" underline nomargin heading={title} />
+                    <p style={{ cursor: 'pointer' }} className={`m-0 fs-sm-md ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{title}</p>
+                    {/* <Heading size="sm" underline nomargin heading={title} /> */}
                 </Col>
                 <Col xs={2} sm={2} md={2} className="d-flex justify-content-end align-items-center">
                     {

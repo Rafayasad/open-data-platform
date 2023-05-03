@@ -3,6 +3,8 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import Heading from '../../../elements/Heading';
 import Search from '../../../elements/Search';
+import i18next from "i18next";
+import { locales } from "../../../../i18n/helper";
 
 const Main = memo((props) => {
 
@@ -16,8 +18,9 @@ const Main = memo((props) => {
                 <Col className="d-flex flex-column justify-content-center">
                     <Row>
                         <Col />
-                        <Col xs={10} md={6} style={{ textAlign: 'center' }} className="py-2">
-                            <Heading bold color="black" heading={t("howCanHelp")} />
+                        <Col xs={10} md={8} style={{ textAlign: 'center' }} className="py-2">
+                            <p className={`text-black fs-mega ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("howCanHelp")}</p>
+                            {/* <Heading bold color="black" heading={t("howCanHelp")} /> */}
                         </Col>
                         <Col />
                     </Row>

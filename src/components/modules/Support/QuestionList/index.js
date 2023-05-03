@@ -14,15 +14,14 @@ const QuestionList = memo((props) => {
 
     const [currentHovered, setCurrentHovered] = useState(null);
 
-    console.log("datttttttttta", data);
-
     const onHover = useCallback((index) => setCurrentHovered(index), [currentHovered])
     const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered])
 
     return (
-        <Container fluid className="my-2 p-4">
+        <Container fluid className="my-2 p-4 max-width">
             <div className="py-2">
-                <Heading heading={i18n.language === locales.AR ? titleAr : title} size={"lg"} bold backgroundColor={colors.white} />
+                <p className={`fs-md ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{i18n.language === locales.AR ? titleAr : title}</p>
+                {/* <Heading heading={title} size={"lg"} bold backgroundColor={colors.white} /> */}
             </div>
             <Row>
                 {

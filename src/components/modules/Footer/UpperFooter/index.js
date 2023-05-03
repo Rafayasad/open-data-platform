@@ -49,7 +49,9 @@ const UpperFooter = memo((props) => {
                     backgroundSize: 'cover',
                     backgroundPosition: '100%'
                 }}>
-                {renderImage()}
+                <Container fluid className='px-0 py-3 max-width'>
+                    {renderImage()}
+                </Container>
             </div>
             {/* mobile */}
             <div className="d-flex d-md-none align-items-end flex-lg-column py-0 py-lg-5 px-4 img-upper-footer"
@@ -59,7 +61,9 @@ const UpperFooter = memo((props) => {
                     backgroundSize: 'cover',
                     backgroundPosition: "100%"
                 }}>
-                {renderImage()}
+                <Container fluid className='px-0 py-3 max-width'>
+                    {renderImage()}
+                </Container>
             </div>
         </Fragment>
     )

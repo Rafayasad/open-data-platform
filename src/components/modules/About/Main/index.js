@@ -35,7 +35,7 @@ const Main = memo((props) => {
         data && data.length > 0 ? data.map((item, index) => (
             <Fragment key={index}>
                 <Container fluid className="my-4 px-4">
-                    <Row className="justify-content-between align-items-center">
+                    <Row className="justify-content-between align-items-center max-width">
                         <Col md={6} xs={12} className='py-2'>
                             <Heading bold nomargin heading={i18n.language === locales.AR ? item.title_ar : item.title} />
                         </Col>
