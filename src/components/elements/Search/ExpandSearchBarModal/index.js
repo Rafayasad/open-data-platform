@@ -10,7 +10,7 @@ import "./style.css";
 
 const ExpandSearchBarModal = memo((props) => {
 
-    const { show, setShow, searchData, value, placeholder, onChangeSearch, onKeyDown } = props;
+    const { show, setShow, searchData, value, placeholder, onChangeSearch, onKeyDown, setExpandedSearchbar } = props;
     const { t } = useTranslation();
 
     const emailInput = useRef(null);
@@ -33,19 +33,27 @@ const ExpandSearchBarModal = memo((props) => {
                             value={value}
                             onChange={onChangeSearch}
                             type="text"
-                            className='input-field shadow-none py-2 px-4 bg-transparent w-100'
+                            className='input-field shadow-none py-2 px-4 bg-transparent w-100 fs-xs'
                             placeholder={placeholder}
                             onKeyDown={onKeyDown}
                         />
                     </Col>
                     <Col xs={2}>
-                        <Heading
+                        <p className="m-0 fs-xs-sm-only"
+                            style={{ color: colors.gray }}
+                            onClick={() => {
+                                setExpandedSearchbar(false)
+                                setShow()
+                                onChangeSearch({ target: { value: null } })
+                            }}>{t("cancel")}</p>
+                        {/* <Heading
                             nomargin heading={t("cancel")} size={"xxs"} color={colors.gray}
                             onClick={() => {
+                                setExpandedSearchbar(false)
                                 setShow()
                                 onChangeSearch({ target: { value: null } })
                             }}
-                        />
+                        /> */}
                     </Col>
                 </Modal.Title>
             </Modal.Header>

@@ -26,7 +26,7 @@ code {
 
 .max-width {
   max-width: 1800px;
-  margin: auto;
+  /* margin: auto; */
 }
 
 .ar-font {
@@ -360,6 +360,13 @@ code {
     line-height: 22px;
     letter-spacing: -0.01em;
   }
+
+  .fs-xs-sm-only {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0;
+  }
+
 
   .bold-sm {
     font-family: "CircularStd-Bold";

@@ -20,12 +20,16 @@ const Search = memo((props) => {
 
     const { t } = useTranslation();
 
-    const { isFilterIcon, nofilter, filterData, nofocuseffect, placeholder, placeholderformobile, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter, searchData, iconColor } = props;
+    const { expandedSearchbar, setExpandedSearchbar, isFilterIcon, nofilter, filterData, nofocuseffect, placeholder, placeholderformobile, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter, searchData, iconColor } = props;
 
     const [filterOpen, setFilterOpen] = useState(false);
 
     const [toggler, setToggler] = useState(false)
     const [inputText, setInputText] = useState('');
+
+    useEffect(() => {
+        setOpenModal(expandedSearchbar);
+    }, [expandedSearchbar])
 
     useEffect(() => {
         setInputText(value)
@@ -57,6 +61,7 @@ const Search = memo((props) => {
             setInputText(value.trim())
             setOpenModal(false)
             setToggler(false)
+            setExpandedSearchbar(false);
         }
     }, [toggler, openModal])
 
@@ -86,6 +91,7 @@ const Search = memo((props) => {
             {
                 openModal &&
                 <ExpandSearchBarModal
+                    setExpandedSearchbar={setExpandedSearchbar}
                     value={inputText}
                     onChangeSearch={onChangeSearch}
                     onKeyDown={onKeyDown}

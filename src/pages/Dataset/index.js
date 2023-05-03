@@ -39,6 +39,7 @@ const Dataset = memo(() => {
 
     const [loading, setLoading] = useState(false);
     const [viewAll, setViewAll] = useState(false);
+    const [expandedSearchbar, setExpandedSearchbar] = useState(false);
 
     const topics = useSelector((state) => state.facets.topics);
     const publishers = useSelector((state) => state.facets.publishers);
@@ -178,8 +179,10 @@ const Dataset = memo(() => {
     console.log("DATASETS", datasets);
 
     return (
-        <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
+        <View setExpandedSearchbar={setExpandedSearchbar} searchIcon theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
             <Main
+                expandedSearchbar={expandedSearchbar}
+                setExpandedSearchbar={setExpandedSearchbar}
                 nofilter={most_viewed_datasets}
                 filterData={data}
                 searchData={i18n.language === locales.AR ? datasetsSuggestion?.ar : datasetsSuggestion?.en}

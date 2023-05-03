@@ -8,12 +8,12 @@ import { locales } from "../../../i18n/helper";
 
 const View = memo((props) => {
 
-    const { footerImageMobile, footerImage, onClickFooterButton, nolanguageswitcher, nonavbar, noupperfooter, nomiddlefooter, nolowerfooter, children, theme, nocontent, sticky, footerTitle, footerButton, footerDescription } = props;
+    const { setExpandedSearchbar, searchIcon, footerImageMobile, footerImage, onClickFooterButton, nolanguageswitcher, nonavbar, noupperfooter, nomiddlefooter, nolowerfooter, children, theme, nocontent, sticky, footerTitle, footerButton, footerDescription } = props;
 
     return (
         <>
             {
-                !nonavbar && <Navbar nolanguageswitcher={nolanguageswitcher} theme={theme} nocontent={nocontent} sticky={sticky} />
+                !nonavbar && <Navbar setExpandedSearchbar={setExpandedSearchbar} searchIcon={searchIcon} nolanguageswitcher={nolanguageswitcher} theme={theme} nocontent={nocontent} sticky={sticky} />
             }
             {
                 children
