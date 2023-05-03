@@ -19,8 +19,8 @@ const UpperFooter = memo((props) => {
     const renderImage = (viewport) => (
         <Container fluid className='px-0 py-lg-3 py-1'>
             <Row>
-                <Col xs={10} md={5}>
-                    <Heading color='white' heading={title} size="xxl" />
+                <Col xs={10} md={6} lg={5} xl={3}>
+                    <Heading color='white' heading={title} bold size="xxl" />
                 </Col>
             </Row>
             {
@@ -42,7 +42,7 @@ const UpperFooter = memo((props) => {
     return (
         <Fragment>
             {/* desktop */}
-            <div className="d-none d-md-flex align-items-end flex-lg-column py-0 py-lg-5 px-4 img-upper-footer"
+            <div className="d-none d-md-flex align-items-end flex-lg-column py-0 py-lg-5  img-upper-footer"
                 style={{
                     backgroundImage: `${i18n.language === locales.EN ? image ? image : `url(${FooterImage})` : image ? image : `url(${FooterImage_ar})`}`,
                     backgroundRepeat: 'no-repeat',
@@ -54,7 +54,7 @@ const UpperFooter = memo((props) => {
                 </Container>
             </div>
             {/* mobile */}
-            <div className="d-flex d-md-none align-items-end flex-lg-column py-0 py-lg-5 px-4 img-upper-footer"
+            <div className="d-flex d-md-none align-items-end flex-lg-column py-0 py-lg-5  img-upper-footer"
                 style={{
                     backgroundImage: `${i18n.language === locales.EN ? image ? image : `url(${FooterImageMobile})` : image ? image : `url(${FooterImage_ar})`}`,
                     backgroundRepeat: 'no-repeat',

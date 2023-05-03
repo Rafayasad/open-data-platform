@@ -189,6 +189,11 @@ code {
     font-size: 48px;
     line-height: 52px;
   }
+  .img-upper-footer {
+    height: 500px;
+    padding-left:40px !important;
+    padding-right:40px !important;
+  }
 }
 
 /* Desktop */
@@ -214,6 +219,8 @@ code {
 
   .img-upper-footer {
     height: 500px;
+    padding-left:40px !important;
+    padding-right:40px !important;
   }
 
   /* .img-about-us {
@@ -296,6 +303,8 @@ code {
 
   .img-upper-footer {
     height: 400px;
+    padding-left:16px !important;
+    padding-right:16px !important;
   }
 
   .img-about-us {

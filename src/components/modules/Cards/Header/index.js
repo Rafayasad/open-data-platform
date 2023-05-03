@@ -9,6 +9,8 @@ import { MdOutlineFilterAlt, MdCancel } from 'react-icons/md';
 import Drawer from "../../Drawer";
 import { RxCross2 } from "react-icons/rx";
 import Tag from "../../../elements/Tag";
+import i18next from "i18next";
+import { locales } from "../../../../i18n/helper";
 import './style.css';
 
 const Header = memo((props) => {
@@ -50,7 +52,7 @@ const Header = memo((props) => {
                             size={headingSize}
                             color={color}
                             heading={title} /> */}
-                            <p className={`fs-title en-font-bold ps-2 m-0`} style={{color:color}}>
+                            <p className={`fs-title en-font-bold ps-2 m-0 ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`} style={{color:color}}>
                                 {title}
                             </p>
                     </div>

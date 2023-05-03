@@ -156,7 +156,8 @@ const Drawer = memo((props) => {
                                         <Accordion.Item eventKey={index} className="border-0 my-3">
                                             <Accordion.Header onClick={() => onClickAccordian(index)}>
                                                 <div className='w-100 d-flex justify-content-between align-items-center' style={{ textAlign: 'start' }}>
-                                                    <Heading bold size="xs" heading={item.title} nomargin />
+                                                    {/* <Heading bold size="xs" heading={item.title} nomargin /> */}
+                                                    <p className={`fs-sm ${i18n.language === locales.EN ? "en-font-bold" : "ar-font-bold"} mb-0`}>{item.title}</p>
                                                     <CustomToggle eventKey={index} />
                                                 </div>
                                             </Accordion.Header>
