@@ -2,6 +2,8 @@ import React, { memo, useCallback, useState } from "react";
 import { Card as RBCard, Col, Row } from "react-bootstrap";
 import './style.css';
 import Heading from "../Heading";
+import i18next from "i18next";
+import { locales } from "../../../i18n/helper";
 
 const CardWithText = memo((props) => {
 
@@ -29,16 +31,18 @@ const CardWithText = memo((props) => {
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover'
         }}>
-            <RBCard className={`p-4 justify-content-center align-items-center bg-transparent`} style={{ minHeight: '250px', height: height, borderWidth: border }}>
+            <RBCard className={`p-4 justify-content-center align-items-center bg-transparent card-height`} style={{ borderWidth: border }}>
                 <Row>
                     <Col className="d-flex text-center">
-                        <Heading bold size='md' heading={title} onClick={onClick} />
+                        <p className={`fs-sm-md-const ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{title}</p>
+                        {/* <Heading bold size='md' heading={title} onClick={onClick} /> */}
                     </Col>
                 </Row>
                 <Row>
                     <Col />
                     <Col md={8} className="d-flex text-center">
-                        <Heading nomargin size='xxs' heading={description} maxNumberOfLines={maxNumberOfLines} />
+                        <p className="m-0 multine-ellipsis-4 en-font-default fs-xs">{description}</p>
+                        {/* <Heading nomargin size='xxs' heading={description} maxNumberOfLines={maxNumberOfLines} /> */}
                     </Col>
                     <Col />
                 </Row>

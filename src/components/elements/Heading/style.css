@@ -33,3 +33,12 @@
     text-overflow: ellipsis;
     white-space: normal;
 }
+
+.multine-ellipsis-4 {
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}

@@ -151,6 +151,12 @@ code {
     letter-spacing: -0.03em;
   }
 
+  .fs-sm-md-const {
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: -0.01em;
+  }
+
   .fs-sm-md {
     font-size: 24px;
     line-height: 28px;
@@ -216,10 +222,10 @@ code {
     height: 500px;
   }
 
-  /* .img-about-us {
-    height: 256px;
-    width: 343px;
-  } */
+  .img-about-us {
+    height: 700px;
+    width: 100%;
+  }
 
   .fs-xl {
     font-size: 64px;
@@ -236,6 +242,12 @@ code {
     font-size: 48px;
     line-height: 52px;
     letter-spacing: -0.03em;
+  }
+
+  .fs-sm-md-const {
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: -0.01em;
   }
 
   .fs-sm-md {
@@ -308,7 +320,6 @@ code {
     width: 343px;
   }
 
-
   .fs-xl {
     font-size: 32px;
     line-height: 36px;
@@ -326,7 +337,7 @@ code {
     letter-spacing: -0.01em;
   }
 
-  .fs-md-md {
+  .fs-sm-md-const {
     font-size: 24px;
     line-height: 28px;
     letter-spacing: -0.01em;
