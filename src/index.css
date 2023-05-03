@@ -222,10 +222,10 @@ code {
     height: 500px;
   }
 
-  /* .img-about-us {
-    height: 256px;
-    width: 343px;
-  } */
+  .img-about-us {
+    height: 700px;
+    width: 100%;
+  }
 
   .fs-xl {
     font-size: 64px;
@@ -314,7 +314,6 @@ code {
     height: 256px;
     width: 343px;
   }
-
 
   .fs-xl {
     font-size: 32px;
