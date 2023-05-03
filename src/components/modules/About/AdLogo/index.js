@@ -17,7 +17,8 @@ const AdLogo = memo(() => {
         <Container className="py-4">
             <Row className="my-4">
                 <Col className="text-center">
-                    <Heading size="xs" heading={t("powered")} />
+                    <p className="fs-sm en-font-default">{t("powered")}</p>
+                    {/* <Heading size="xs" heading={t("powered")} /> */}
                 </Col>
             </Row>
             <Row className="my-4">

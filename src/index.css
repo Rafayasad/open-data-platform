@@ -151,6 +151,12 @@ code {
     letter-spacing: -0.03em;
   }
 
+  .fs-sm-md-const {
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: -0.01em;
+  }
+
   .fs-sm-md {
     font-size: 24px;
     line-height: 28px;
@@ -238,6 +244,12 @@ code {
     letter-spacing: -0.03em;
   }
 
+  .fs-sm-md-const {
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: -0.01em;
+  }
+
   .fs-sm-md {
     font-size: 32px;
     line-height: 36px;
@@ -318,6 +330,12 @@ code {
   .fs-md {
     font-size: 32px;
     line-height: 36px;
+    letter-spacing: -0.01em;
+  }
+
+  .fs-sm-md-const {
+    font-size: 24px;
+    line-height: 28px;
     letter-spacing: -0.01em;
   }
 
