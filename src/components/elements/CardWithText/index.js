@@ -1,6 +1,6 @@
+import './style.css';
 import React, { memo, useCallback, useState } from "react";
 import { Card as RBCard, Col, Row } from "react-bootstrap";
-import './style.css';
 import Heading from "../Heading";
 import i18next from "i18next";
 import { locales } from "../../../i18n/helper";
