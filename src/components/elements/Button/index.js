@@ -13,7 +13,7 @@ const Button = memo((props) => {
         <button
             onClick={onClick ? onClick : () => { }}
             disabled={loading}
-            className={`m-0 px-4 ${padding && padding} ${i18n.language === locales.AR ? "ar-font" : "en-font en-font-default"} ${bold && (i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold") 
+            className={`m-0 fs-xs px-4 ${padding && padding} ${i18n.language === locales.AR ? "ar-font" : "en-font en-font-default"} ${bold && (i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold") 
 }`}
             style={{
                 backgroundColor: backgroundColor ? backgroundColor : 'white',

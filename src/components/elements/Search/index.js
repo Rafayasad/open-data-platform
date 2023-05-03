@@ -169,7 +169,7 @@ const Search = memo((props) => {
                 </Row>
                 {
                     toggler && !nofocuseffect &&
-                    <Row className="search-box-extend d-none d-md-block" style={{ width: toggler && document?.getElementById("main")?.offsetWidth }}>
+                    <Row className="n-z1 search-box-extend d-none d-md-block" style={{ width: toggler && document?.getElementById("main")?.offsetWidth }}>
                         <Col className="m-0">
                             <hr className="m-0 p-0" style={{ borderWidth: "2px", borderColor: colors.purple }} />
                             <div className="py-3">

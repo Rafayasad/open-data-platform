@@ -143,7 +143,7 @@ const Drawer = memo((props) => {
         // className="mt-5"
         >
             <div style={{ height: "100%" }}>
-                <div style={{ top: 0, position: "relative", left: 0, right: 0, zIndex: 1000 }} className="p-4 bg-white d-flex align-items-center justify-content-between">
+                <div style={{ top: 0, position: "relative", left: 0, right: 0, zIndex: 1000 }} className="p-4 bg-white d-flex align-items-center justify-content-between shadow-bottom">
                     <Heading size="xxs" heading={t("filters")} nomargin />
                     <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="" size={20} />
                 </div>
@@ -156,7 +156,8 @@ const Drawer = memo((props) => {
                                         <Accordion.Item eventKey={index} className="border-0 my-3">
                                             <Accordion.Header onClick={() => onClickAccordian(index)}>
                                                 <div className='w-100 d-flex justify-content-between align-items-center' style={{ textAlign: 'start' }}>
-                                                    <Heading bold size="xs" heading={item.title} nomargin />
+                                                    <p className={`${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} fs-sm m-0`}>{item.title}</p>
+                                                    {/* <Heading bold size="xs" heading={item.title} nomargin /> */}
                                                     <CustomToggle eventKey={index} />
                                                 </div>
                                             </Accordion.Header>

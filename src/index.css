@@ -288,6 +288,11 @@ code {
     letter-spacing: -0.01em;
   }
 
+  .fs-mini {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
   .fs-2xl {
     font-size: 40px;
     line-height: 44px;
@@ -318,6 +323,12 @@ code {
   .fs-md {
     font-size: 32px;
     line-height: 36px;
+    letter-spacing: -0.01em;
+  }
+
+  .fs-md-md {
+    font-size: 24px;
+    line-height: 28px;
     letter-spacing: -0.01em;
   }
 

@@ -3,6 +3,7 @@ import { Col, Container, Image, Row } from "react-bootstrap";
 import Application from '../../../../assets/images/Applications-1.png'
 import Heading from "../../../elements/Heading";
 import { useTranslation } from "react-i18next";
+import './style.css';
 
 const Main = memo(() => {
 
@@ -20,7 +21,10 @@ const Main = memo(() => {
             </Row>
             <Row className="py-2">
                 <Col>
-                    <Image src={Application} fluid style={{ borderRadius: '30px' }} />
+                    <img
+                        className="image-sizing"
+                        src={Application}
+                        style={{ borderRadius: '30px' }} />
                 </Col>
             </Row>
         </Container>

@@ -51,7 +51,8 @@ const ExpandSearchBarModal = memo((props) => {
             </Modal.Header>
             <Modal.Body className="px-4">
                 <div>
-                    <Heading nomargin heading={t("popularsearches")} size={"xxs"} color={colors.gray} />
+                    <p className="fs-mini" style={{ color: colors.gray }}>{t("popularsearches")}</p>
+                    {/* <Heading nomargin heading={t("popularsearches")} size={"xxs"} color={colors.gray} /> */}
                 </div>
                 <div>
                     {
