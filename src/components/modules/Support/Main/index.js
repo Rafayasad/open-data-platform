@@ -28,6 +28,9 @@ const Main = memo((props) => {
                                 searchData={popularSearch}
                                 onPressEnter={onSearch}
                                 placeholder={t("searchKeywords")}
+                                placeholderformobile={t("searchPlaceholderformobileTopic")}
+                                isFilterIcon
+                                iconColor={"#707070"}
                             />
                         </Col>
                         <Col />

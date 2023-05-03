@@ -20,7 +20,7 @@ const Search = memo((props) => {
 
     const { t } = useTranslation();
 
-    const { isFilterIcon, nofilter, filterData, nofocuseffect, placeholder, placeholderformobile, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter, searchData } = props;
+    const { isFilterIcon, nofilter, filterData, nofocuseffect, placeholder, placeholderformobile, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter, searchData, iconColor } = props;
 
     const [filterOpen, setFilterOpen] = useState(false);
 
@@ -98,7 +98,7 @@ const Search = memo((props) => {
                 <Row id="main" className={`d-flex ${!(toggler && !nofocuseffect) && "hover"} ${toggler && !nofocuseffect ? "search-box-active input-focused" : "search-box"}`}>
                     <Col className={`p-0 d-flex align-items-center ${!isFilterIcon && "justify-content-center"} display-search-icon`}>
                         <div className={`${i18n.language === locales.AR ? "ms-1 me-3" : "ms-3 me-1"} ${!isFilterIcon && "d-none d-md-block"} `}>
-                            <IoIosSearch color={!isFilterIcon ? "gray" : "black"} size={24} />
+                            <IoIosSearch color={iconColor ? iconColor : !isFilterIcon ? "gray" : "black"} size={24} />
                         </div>
                         {/* desktop */}
                         <div className="d-none d-md-block w-100">

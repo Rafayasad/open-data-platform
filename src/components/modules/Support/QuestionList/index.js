@@ -9,7 +9,7 @@ import Loader from "../../Loader";
 
 const QuestionList = memo((props) => {
 
-    const { title, data, onClick } = props;
+    const { title, data, onClick, titleAr } = props;
     const { t, i18n } = useTranslation();
 
     const [currentHovered, setCurrentHovered] = useState(null);
@@ -22,7 +22,7 @@ const QuestionList = memo((props) => {
     return (
         <Container fluid className="my-2 p-4">
             <div className="py-2">
-                <Heading heading={title} size={"lg"} bold backgroundColor={colors.white} />
+                <Heading heading={i18n.language === locales.AR ? titleAr : title} size={"lg"} bold backgroundColor={colors.white} />
             </div>
             <Row>
                 {
@@ -34,7 +34,7 @@ const QuestionList = memo((props) => {
                             }
                             <QuestionListItem
                                 title={i18n.language === locales.AR ? item.title_ar : item.title}
-                                onClick={() => onClick(item.id, title)}
+                                onClick={() => onClick(item.id, title, titleAr)}
                                 icon={currentHovered === index}
                             />
                         </div>

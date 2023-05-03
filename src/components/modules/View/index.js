@@ -8,7 +8,7 @@ import { locales } from "../../../i18n/helper";
 
 const View = memo((props) => {
 
-    const { footerImage, onClickFooterButton, nolanguageswitcher, nonavbar, noupperfooter, nomiddlefooter, nolowerfooter, children, theme, nocontent, sticky, footerTitle, footerButton, footerDescription } = props;
+    const { footerImageMobile, footerImage, onClickFooterButton, nolanguageswitcher, nonavbar, noupperfooter, nomiddlefooter, nolowerfooter, children, theme, nocontent, sticky, footerTitle, footerButton, footerDescription } = props;
 
     return (
         <>
@@ -19,7 +19,7 @@ const View = memo((props) => {
                 children
             }
             {
-                !noupperfooter && <UpperFooter image={footerImage} navigateTo={onClickFooterButton} title={footerTitle} button={footerButton} description={footerDescription} />
+                !noupperfooter && <UpperFooter mobImage={footerImageMobile} image={footerImage} navigateTo={onClickFooterButton} title={footerTitle} button={footerButton} description={footerDescription} />
             }
             {
                 !nomiddlefooter && <MiddleFooter />

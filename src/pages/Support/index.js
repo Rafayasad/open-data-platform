@@ -10,6 +10,7 @@ import { locales } from "../../i18n/helper";
 import View from "../../components/modules/View";
 import { getQuestionBySearch, getSearch } from "../../axios/api";
 import FooterImage from '../../assets/images/Contact-Us.jpg';
+import FooterImageMobSupportPage from '../../assets/images/footImageMobileSupport.png';
 import FooterImageAr from '../../assets/images/Contact-Us.jpg';
 
 const Support = memo(() => {
@@ -49,7 +50,7 @@ const Support = memo(() => {
     }, [searchText])
 
     return (
-        <View theme="dark" footerImage={i18n.language === locales.AR ? `url(${FooterImageAr})` : `url(${FooterImage})`} footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")} onClickFooterButton={routes.CONTACT}>
+        <View theme="dark" footerImageMobile={i18n.language === locales.AR ? `url(${FooterImageMobSupportPage})` : `url(${FooterImageMobSupportPage})`} footerImage={i18n.language === locales.AR ? `url(${FooterImageAr})` : `url(${FooterImage})`} footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")} onClickFooterButton={routes.CONTACT}>
             <Main popularSearch={i18n.language === locales.AR ? supportSuggestion?.ar : supportSuggestion?.en} onSearch={onSearch} />
             {
                 searchText === '' &&

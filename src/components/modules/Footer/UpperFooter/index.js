@@ -14,7 +14,7 @@ import { colors } from '../../../../utils/colors';
 const UpperFooter = memo((props) => {
 
     const navigate = useNavigate();
-    const { title, description, button, navigateTo, image } = props;
+    const { title, description, button, navigateTo, image, mobImage } = props;
 
     const renderImage = (viewport) => (
         <Container fluid className='px-0 py-lg-3 py-1'>
@@ -54,10 +54,10 @@ const UpperFooter = memo((props) => {
             {/* mobile */}
             <div className="d-flex d-md-none align-items-end flex-lg-column py-0 py-lg-5 px-4 img-upper-footer"
                 style={{
-                    backgroundImage: `${i18n.language === locales.EN ? image ? image : `url(${FooterImageMobile})` : image ? image : `url(${FooterImage_ar})`}`,
+                    backgroundImage: `${i18n.language === locales.EN ? mobImage ? mobImage : `url(${FooterImageMobile})` : mobImage ? mobImage : `url(${FooterImage_ar})`}`,
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'cover',
-                    backgroundPosition: 'center'
+                    backgroundPosition: "100%"
                 }}>
                 {renderImage()}
             </div>
