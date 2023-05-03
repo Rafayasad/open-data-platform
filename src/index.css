@@ -300,6 +300,11 @@ code {
     letter-spacing: -0.01em;
   }
 
+  .fs-mini {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
   .fs-2xl {
     font-size: 40px;
     line-height: 44px;

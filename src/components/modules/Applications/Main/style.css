@@ -1,0 +1,15 @@
+/* mobile */
+@media (max-width: 767.98px) {
+    .image-sizing {
+        height: 256px;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+/* desktop */
+@media (min-width: 1199.98px) {
+    .image-sizing {
+        height: 700px;
+    }
+}

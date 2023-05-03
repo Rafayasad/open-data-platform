@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { RxCross2 } from "react-icons/rx";
 import { useTranslation } from "react-i18next";
@@ -15,6 +15,16 @@ const Main = memo((props) => {
     const { search, onChangeSearchEnter, filter, onApplyFilter, onDeleteFilter, searchData, filterData, nofilter } = props;
 
     const { t } = useTranslation();
+
+    const [offset, setOffset] = useState(0);
+
+    useEffect(() => {
+        const onScroll = () => setOffset(window.pageYOffset);
+        // clean up code
+        window.removeEventListener('scroll', onScroll);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
 
     return (
         <>
@@ -33,8 +43,8 @@ const Main = memo((props) => {
                         </Row>
                     </Col>
                 </Row>
-            </Container >
-            <Container fluid className="z-n1 sticky-top bg-white mb-5">
+            </Container>
+            <Container fluid className={`z-n1 ${offset > 250 && "sticky"} bg-white mb-5`}>
                 <Container>
                     <Row>
                         <Col />
@@ -44,7 +54,7 @@ const Main = memo((props) => {
                                 filterData={filterData}
                                 value={search}
                                 searchData={searchData}
-                                placeholder={t("searchKeywords")}v
+                                placeholder={t("searchKeywords")} v
                                 placeholderformobile={t("searchPlaceholderformobile")}
                                 onPressEnter={onChangeSearchEnter}
                                 filter

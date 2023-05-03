@@ -74,7 +74,7 @@ const DatasetList = memo((props) => {
             {
                 !noheader &&
                 <>
-                    <hr className="mt-5" style={{ color: '#CFCFCF', borderWidth: 2 }} />
+                    <hr className="mt-4 mt-lg-5" style={{ color: '#CFCFCF', borderWidth: 2 }} />
                     <Header
                         title={`${numberWithCommas(totalCount)} ${title}`}
                         backgroundColor={colors.white}
