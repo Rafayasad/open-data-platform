@@ -35,7 +35,7 @@ const LowerFooter = memo(() => {
                         <img height={"100px"} width={"auto"} src={Emirates} />
                     </div>
                 </div>
-                <div className={`p-0 col-12 col-sm-12 col-md-6 d-flex flex-row-reverse flex-sm-row justify-content-between align-items-center align-items-lg-end py-3 py-lg-0`}>
+                <div className={`p-0 col-12 col-sm-12 col-md-6 d-flex flex-row-reverse flex-sm-row justify-content-between align-items-center align-items-md-end py-3 py-lg-0`}>
                     <div className={`d-flex justify-content-between align-items-center`}>
                         <p className='text-white m-0 px-4 fs-2xs-static' style={{ cursor: "pointer" }} onClick={() => { navigate(routes.POLICY) }}>
                             {`${t("privacy")}`}

@@ -7,7 +7,7 @@ const Button = memo((props) => {
 
     const { t, i18n } = useTranslation()
 
-    const { nopadding, padding, isReverse, isFilled, title, icon, backgroundColor, textColor, width, borderColor, loading, onClick, disable, bold } = props
+    const { padding, isFilled, title, icon, backgroundColor, textColor, width, borderColor, loading, onClick, disable, bold, iconend } = props
 
     return (
         <button
@@ -31,13 +31,13 @@ const Button = memo((props) => {
             {
                 loading ? (
                     <Spinner animation="border" size="sm" color={textColor} />
-                ) :
-                    <div className={`d-flex align-items-center justify-content-center ${isReverse && "flex-row-reverse"}`}>
-                        {title}
+                ) : <>
+                    <span className={`d-flex ${iconend && 'flex-row-reverse'}`}>
                         {icon}
+                        {title}
+                    </span>
 
-
-                    </div>
+                </>
             }
         </button>
     )

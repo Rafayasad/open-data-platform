@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useCallback, memo } from "react";
 import { Col, Container } from "react-bootstrap";
 import { SlShare } from "react-icons/sl";
-// import { MdDownloadForOffline } from "react-icons/md"
-import { MdOutlineFileDownload } from "react-icons/md";
+import { RxDownload } from "react-icons/rx";
 import { useTranslation } from "react-i18next";
 import { locales } from "../../../../i18n/helper";
 import { colors } from "../../../../utils/colors";
@@ -141,7 +140,7 @@ const DataHeader = memo((props) => {
                                         autoClose={true}
                                         size={"md"}
                                         options={options}
-                                        headerComponent={<Button icon={<MdOutlineFileDownload className="ms-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" />}
+                                        headerComponent={<Button icon={<RxDownload className="ms-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" iconend/>}
                                     />
                                 </div>
                                 {
