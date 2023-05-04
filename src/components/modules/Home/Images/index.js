@@ -55,9 +55,9 @@ const Images = memo(() => {
                 <Col className="px-4 max-width">
                     <Row>
                         <Col xs={12} md={12} lg={6} className="my-2 ">
-                            <div className="d-flex flex-column justify-content-center card-height" style={{
+                            <div className="d-flex flex-column justify-content-center card-height" id="zoom-in-out-card-one" style={{
                                 //height: window.innerWidth <= 765 ? '400px' : '500px',
-                                backgroundImage: `url(${CardOne})`,
+                                // backgroundImage: `url(${CardOne})`,
                                 backgroundRepeat: 'no-repeat',
                                 backgroundSize: 'cover',
                                 borderRadius: '30px',
@@ -67,7 +67,7 @@ const Images = memo(() => {
                                 <div className="overlay" />
                                 <Row className="py-1" style={{ zIndex: 1 }}>
                                     <Col />
-                                    <Col xs={10} sm={12} md={8} className='text-center'>
+                                    <Col xs={10} sm={12} md={8} className='text-center' id='zoom-in'>
                                         <Heading bold size={"xxl"} color='white' heading={t("areYouNewToOpenData")} />
                                     </Col>
                                     <Col />
@@ -82,7 +82,7 @@ const Images = memo(() => {
                             </div>
                         </Col>
                         <Col xs={12} md={12} lg={6} className="my-2">
-                            <div className="d-flex flex-column justify-content-center card-two card-height" style={{
+                            <div className="d-flex flex-column justify-content-center card-two card-height " id="zoom-in-out-card-two" style={{
                                 //height: window.innerWidth <= 765 ? '400px' : '500px',
                                 //backgroundImage: `url(${CardTwo})`,
                                 backgroundRepeat: 'no-repeat',
@@ -90,16 +90,16 @@ const Images = memo(() => {
                                 borderRadius: '30px',
                                 backgroundPosition: 'center'
                             }}>
-                                <Row className="py-1">
+                                <Row className="py-1" style={{ zIndex: 1 }}>
                                     <Col />
-                                    <Col xs={10} md={6} className='d-flex flex-column justify-content-center align-items-center text-center'>
+                                    <Col xs={10} md={6} className='d-flex flex-column justify-content-center align-items-center text-center' id='zoom-in'>
                                         <Heading bold size='xxl' color='white' heading={t("joinUsRegisterWithUs")} />
-                                        <Heading size='xxs' color='white' heading={t("joinUsRegisterWithUsDescription")} />
+                                        <Heading size='xxs' color='white' heading={t("joinUsRegisterWithUsDescription")}/>
 
                                     </Col>
                                     <Col />
                                 </Row>
-                                <Row className="pt-3">
+                                <Row className="pt-3" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
                                         <Button bold title={t("getStarted")} onClick={onClickRegister} />

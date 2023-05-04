@@ -17,7 +17,7 @@ const UpperFooter = memo((props) => {
     const { title, description, button, navigateTo, image, mobImage } = props;
 
     const renderImage = (viewport) => (
-        <Container fluid className='px-0 py-lg-3 py-1'>
+        <Container fluid className='px-0 py-lg-3 py-1 max-width'>
             <Row>
                 <Col xs={10} md={6} lg={5} xl={4}>
                     <Heading color='white' heading={title} bold size="xxl" />
