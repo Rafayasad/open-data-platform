@@ -2,6 +2,8 @@ import React, { memo } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Heading from "../../../elements/Heading";
 import Shimmer from "../../../elements/Shimmer";
+import i18next from "i18next";
+import { locales } from "../../../../i18n/helper";
 
 const Main = memo((props) => {
 
@@ -14,7 +16,10 @@ const Main = memo((props) => {
                     <Row className="py-4">
                         <Col>
                             {
-                                title ? <Heading heading={title} /> : <Shimmer rounded='xs' height="48px" />
+                                title ?
+                                    // <Heading heading={title} />
+                                    <p className={`fs-lg ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{title}</p>
+                                    : <Shimmer rounded='xs' height="48px" />
                             }
                         </Col>
                     </Row>
@@ -22,7 +27,8 @@ const Main = memo((props) => {
                         <Col>
                             {
                                 description ? (
-                                    <Heading nomargin size="xxs" heading={description} />
+                                    // <Heading nomargin size="xxs" heading={description} />
+                                    <p className="fs-xs m-0 en-font-default">{description}</p>
                                 ) : (
                                     <>
                                         <Shimmer className='my-1' rounded='xs' />

@@ -20,7 +20,7 @@ const QuestionList = memo((props) => {
     return (
         <Container fluid className="my-2 p-4 max-width">
             <div className="py-2">
-                <p className={`fs-md ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{i18n.language === locales.AR ? titleAr : title}</p>
+                <p className={`fs-xl ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{i18n.language === locales.AR ? titleAr : title}</p>
                 {/* <Heading heading={title} size={"lg"} bold backgroundColor={colors.white} /> */}
             </div>
             <Row>
@@ -37,7 +37,7 @@ const QuestionList = memo((props) => {
                                 icon={currentHovered === index}
                             />
                         </div>
-                    )) : <Heading size="md" bold nomargin heading={t("NoResultFound!")} />
+                    )) : <Heading size="md" bold nomargin heading={t("noResultFound!")} />
                         : <Loader type='full-width-min' />
                 }
             </Row>

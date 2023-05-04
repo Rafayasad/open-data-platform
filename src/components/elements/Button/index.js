@@ -26,6 +26,7 @@ const Button = memo((props) => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                whiteSpace:"nowrap"
             }}>
             {
                 loading ? (
