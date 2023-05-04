@@ -156,7 +156,7 @@ const Drawer = memo((props) => {
                                     <Accordion activeKey={activeIndex} key={index} className="bg-transparent">
                                         <Accordion.Item eventKey={index} className="border-0 my-3">
                                             <Accordion.Header onClick={() => onClickAccordian(index)}>
-                                                <div className='w-100 d-flex justify-content-between align-items-center' style={{ textAlign: 'start' }}>
+                                                <div className='w-100 d-flex justify-content-between align-items-center py-1' style={{ textAlign: 'start' }}>
                                                     <p className={`${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} fs-sm m-0`}>{item.title}</p>
                                                     {/* <Heading bold size="xs" heading={item.title} nomargin /> */}
                                                     <CustomToggle eventKey={index} />
@@ -241,9 +241,9 @@ const Drawer = memo((props) => {
             </div>
             <div className="fixed-bottom d-flex align-items-center justify-content-between">
                 <hr className="m-0 p-0" />
-                <div className="w-100 p-2 bg-white d-flex justify-content-between align-items-center">
+                <div className="w-100 py-2 px-4 bg-white d-flex justify-content-between align-items-center">
                     <div className="">
-                        <Button onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} />
+                        <Button nopadding onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} />
                     </div>
                     <div>
                         <Button onClick={() => onClickApplyFilter(filters)} title={`${t("apply")} ${filters.length > 0 ? `(${filters.length})` : ""}`} backgroundColor={"black"} textColor={"white"} />

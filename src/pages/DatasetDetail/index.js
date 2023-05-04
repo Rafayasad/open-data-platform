@@ -49,6 +49,8 @@ const DatasetDetail = memo(() => {
 
     const onClickCard = useCallback((id) => {
         mainDiv.scrollIntoView();
+        setDataset()
+        setSimilarDataset()
         navigate(`${routes.DATASET_DETAIL}?id=${id}`, { replace: true })
     }, [id]);
 
@@ -102,7 +104,9 @@ const DatasetDetail = memo(() => {
                         title={t("similarDatasets")}
                         backgroundColor={colors.white}
                         data={similarDataset}
-                        onClick={onClickCard} />
+                        onClick={onClickCard}
+                        size={"md"}
+                    />
                 </div>
             </View>
         </div>

@@ -81,7 +81,7 @@ const Navbar = memo((props) => {
                 <Row>
                     <Col className="d-flex align-items-center">
                         <Link to={routes.HOME}>
-                            <img height={"50px"} src={theme === 'dark' ? AbuDhabiLogoDark : AbuDhabiLogo} />
+                            <img height={"40px"} src={theme === 'dark' ? AbuDhabiLogoDark : AbuDhabiLogo} />
                         </Link>
                     </Col>
                     {

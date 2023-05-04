@@ -179,9 +179,9 @@ const Dataset = memo(() => {
     console.log("DATASETS", datasets);
 
     const style = {
-        titleFs : 'tittle-sm-md',
+        titleFs: 'tittle-sm-md',
         descFs: 'fs-xs',
-        publisher:'publisher-xs-sm'
+        publisher: 'publisher-xs-sm'
     }
 
     return (
@@ -207,9 +207,9 @@ const Dataset = memo(() => {
                     title={t("featuredDatasets")}
                     hoverable="primary"
                     backgroundColor={colors.white}
-                    data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)}
+                    data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 4)}
                     onClick={onClickCard}
-                // size={"md"}
+                    size={"md"}
                 />
 
             }
@@ -232,7 +232,7 @@ const Dataset = memo(() => {
                     onClick={onClickCard}
                     onSelectDropdown={onChangeDropdownValue}
                     minWidth={"70%"}
-                    cardStyle = {style}
+                    cardStyle={style}
                 />
             </div>
         </View>

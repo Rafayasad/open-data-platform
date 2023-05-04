@@ -3,6 +3,7 @@ import { Card as RBCard, Col, Row } from "react-bootstrap";
 import { BsPerson, BsShare, BsThreeDots } from "react-icons/bs";
 import { MdOutlineFileDownload } from 'react-icons/md';
 import { BsArrowDownCircleFill } from "react-icons/bs";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { FaFilePdf, FaFileExcel, FaFileCsv } from "react-icons/fa";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { colors } from "../../../utils/colors";
@@ -32,7 +33,7 @@ const Card = memo((props) => {
 
     const { resources, title, publisher, description, tags, size, noborder,
         hoverable, nopadding, shortTitle, headingSize, onClick, nodropdown,
-        noheadercomponent, notags, notagsactive, url, dropdownWidth, handleReload,cardStyle, datasetID, tempIncreaseDownloadCount } = props;
+        noheadercomponent, notags, notagsactive, url, dropdownWidth, handleReload, cardStyle, datasetID, tempIncreaseDownloadCount } = props;
 
     var HEIGHT = "332px", border, ClassName;
 
@@ -94,7 +95,7 @@ const Card = memo((props) => {
             onClick: isClicked,
         }
     ]
-    console.log("resorucessssss==>", resources);
+
     const specificDownloadOptions = resources?.map(item => (
         {
             id: item.id,
@@ -147,75 +148,83 @@ const Card = memo((props) => {
                         {
                             !nodropdown &&
                             <Col xs={4} className='d-flex justify-content-end'>
-                                {
-                                    window.innerWidth <= 768 ?
-                                        <BsThreeDots onClick={() => setOpenBottomSheet(true)} color={colors.black} size={28} style={{ cursor: 'pointer' }} />
-                                        :
-                                        <Dropdown
-                                            dropdownWidth={dropdownWidth ? dropdownWidth : "15%"}
-                                            width={"100%"}
-                                            noheadercomponent={noheadercomponent}
-                                            autoClose={"outside"}
-                                            minWidth={"50%"}
-                                            size={"xl"}
-                                            // size={selectedDropdownValue === t("download") ? window.innerWidth >= 768 ? "sm" : "xl" : window.innerWidth >= 768 ? "sm" : "lg"}
-                                            options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
-                                            selectedDropdownValue={selectedDropdownValue}
-                                            setSelectedDropdownValue={setSelectedDropdownValue}
-                                            headerComponent={<BsThreeDots color={colors.black} size={28} style={{ cursor: 'pointer' }} />}
-                                        />
-                                }
+                                <div className="d-block d-lg-none">
+                                    <HiOutlineDotsHorizontal onClick={() => setOpenBottomSheet(true)} color={colors.black} size={28} style={{ cursor: 'pointer' }} />
+                                </div>
+                                <div className="d-none d-lg-block">
+                                    <Dropdown
+                                        dropdownWidth={dropdownWidth ? dropdownWidth : "15%"}
+                                        width={"100%"}
+                                        noheadercomponent={noheadercomponent}
+                                        autoClose={"outside"}
+                                        minWidth={"50%"}
+                                        size={"xl"}
+                                        // size={selectedDropdownValue === t("download") ? window.innerWidth >= 768 ? "sm" : "xl" : window.innerWidth >= 768 ? "sm" : "lg"}
+                                        options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
+                                        selectedDropdownValue={selectedDropdownValue}
+                                        setSelectedDropdownValue={setSelectedDropdownValue}
+                                        headerComponent={<HiOutlineDotsHorizontal color={colors.black} size={28} style={{ cursor: 'pointer' }} />}
+                                    />
+                                </div>
                             </Col>
                         }
                     </Row>
                 }
                 <Row className={`${nopadding && "m-0"} ${publisher && !notags ? "h-50" : "h-75"}`}>
                     <Col md={shortTitle ? 8 : 12}>
-                        {cardStyle ? 
-                        <p className={`${onClick && 'text-underline-hover'} ${shortTitle ? 'multine-ellipsis-2' : 'multine-ellipsis-3'} ${cardStyle?.titleFs} ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}
-                        onClick={onClick ? onClick : () => { }}
-                        >
-                            {title}
-                        </p> 
-                        :
-                         <Heading
-                            bold
-                            underline
-                            maxNumberOfLines={shortTitle ? 2 : 3}
-                            size={headingSize ? headingSize : "md"}
-                            heading={title}
-                            onClick={onClick}
-                        />}
-                       
+                        {cardStyle ?
+                            <p className={`${onClick && 'text-underline-hover'} ${shortTitle ? 'multine-ellipsis-2' : 'multine-ellipsis-3'} ${cardStyle?.titleFs} ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}
+                                onClick={onClick ? onClick : () => { }}
+                            >
+                                {title}
+                            </p>
+                            :
+                            <>
+                                <p
+                                    className={`${headingSize ? headingSize : "fs-sm"} text-underline-hover ${shortTitle ? 'multine-ellipsis-2' : 'multine-ellipsis-3'} ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}
+                                    onClick={onClick}>
+                                    {title}
+                                </p>
+                                {/* <Heading
+                                    bold
+                                    underline
+                                    maxNumberOfLines={shortTitle ? 2 : 3}
+                                    size={headingSize ? headingSize : "md"}
+                                    heading={title}
+                                    onClick={onClick}
+                                /> */}
+                            </>
+                        }
+
                     </Col>
                     {
-                        description && cardStyle ? 
-                         <Col md={8}>
-                        <p className={`${shortTitle ? 'multine-ellipsis-2' : 'multine-ellipsis-3'} ${cardStyle?.descFs} ${i18next.language === locales.AR ? "ar-font" : "en-font"}`} style={{color:colors.dark_gray}}>
-                            {description}
-                        </p> 
-                        </Col>
-                        :
-                        <Col md={8}>
-                            <Heading maxNumberOfLines={shortTitle ? 2 : 3} color={'#404040'} size={shortTitle ? "xs" : "xxs"} heading={description} />
-                        </Col>
+                        description && cardStyle ?
+                            <Col md={8}>
+                                <p className={`${shortTitle ? 'multine-ellipsis-2' : 'multine-ellipsis-3'} ${cardStyle?.descFs} ${i18next.language === locales.AR ? "ar-font" : "en-font"}`} style={{ color: colors.dark_gray }}>
+                                    {description}
+                                </p>
+                            </Col>
+                            :
+                            <Col md={8}>
+                                <Heading maxNumberOfLines={shortTitle ? 2 : 3} color={'#404040'} size={shortTitle ? "xs" : "xxs"} heading={description} />
+                            </Col>
                     }
                 </Row>
                 {
-                    publisher && cardStyle ? 
-                     <Row className={`${nopadding && "m-0"} h-25 align-items-end`} >
-                        <Col>
-                            <p className={`${cardStyle?.publisher} ${i18next.language === locales.AR ? "ar-font" : "en-font"}`} style={{color:colors.gray}}>
-                            {publisher}
-                            </p> 
-                        </Col>
-                    </Row>
-                    :
-                    <Row className={`${nopadding && "m-0"} h-25 align-items-end`} >
-                        <Col>
-                            <Heading size='xxs' color={colors.gray} nomargin heading={publisher} />
-                        </Col>
-                    </Row>
+                    publisher && cardStyle ?
+                        <Row className={`${nopadding && "m-0"} h-25 align-items-end`} >
+                            <Col>
+                                <p className={`${cardStyle?.publisher} ${i18next.language === locales.AR ? "ar-font" : "en-font"}`} style={{ color: colors.gray }}>
+                                    {publisher}
+                                </p>
+                            </Col>
+                        </Row>
+                        :
+                        <Row className={`${nopadding && "m-0"} h-25 align-items-end`} >
+                            <Col>
+                                <Heading size='xxs' color={colors.gray} nomargin heading={publisher} />
+                            </Col>
+                        </Row>
                 }
             </RBCard>
         </>
