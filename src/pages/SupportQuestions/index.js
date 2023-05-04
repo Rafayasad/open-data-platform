@@ -8,6 +8,7 @@ import BreadCrumb from "../../components/elements/BreadCrumb";
 import View from "../../components/modules/View";
 import i18n from "../../i18n/i18n";
 import { locales } from "../../i18n/helper";
+import FooterImageMobSupportPage from '../../assets/images/footImageMobileSupport.png';
 
 const SupportQuestions = memo(() => {
 
@@ -36,12 +37,12 @@ const SupportQuestions = memo(() => {
 
     console.log("QUES", questions);
 
-    const onClickQuestion = useCallback((id, name) => {
-        navigate(`${routes.SUPPORT_QUESTIONS_DETAIL}?id=${id}`, { state: { backURL: routes.SUPPORT, breadCrumbName: name } })
+    const onClickQuestion = useCallback((id, name, name_ar) => {
+        navigate(`${routes.SUPPORT_QUESTIONS_DETAIL}?id=${id}`, { state: { backURL: routes.SUPPORT, breadCrumbName: name, breadCrumbNameAr: name_ar } })
     }, []);
 
     return (
-        <View theme="dark" footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")}>
+        <View theme="dark" footerImageMobile={i18n.language === locales.AR ? `url(${FooterImageMobSupportPage})` : `url(${FooterImageMobSupportPage})`} footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")}>
             <div className="mt-5 pt-5">
                 <div className="px-4 pt-5">
                     <BreadCrumb items={[
@@ -50,7 +51,7 @@ const SupportQuestions = memo(() => {
                         }
                     ]} />
                 </div>
-                <QuestionList title={i18n.language === locales.AR ? title_name_ar : title_name} data={questions} onClick={onClickQuestion} />
+                <QuestionList title={title_name} titleAr={title_name_ar} data={questions} onClick={onClickQuestion} />
             </div>
         </View>
 

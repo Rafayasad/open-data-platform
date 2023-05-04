@@ -18,6 +18,7 @@ const CardWithOuterText = memo((props) => {
             </RBCard>
             <Row>
                 <Col className="d-flex py-4" xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                    {/* <p onClick={onClick} className={`fs-md-md text-underline-hover m-0 text-black ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{title}</p> */}
                     <Heading bold underline nomargin size='sm' heading={title} onClick={onClick} />
                     <sup className="mx-1 my-1">
                         {

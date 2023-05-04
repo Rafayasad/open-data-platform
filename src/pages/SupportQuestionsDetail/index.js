@@ -7,6 +7,7 @@ import { routes } from "../../router/helper";
 import { locales } from "../../i18n/helper";
 import BreadCrumb from "../../components/elements/BreadCrumb";
 import View from "../../components/modules/View";
+import FooterImageMobSupportPage from '../../assets/images/footImageMobileSupport.png';
 
 const SupportQuestionsDetail = memo(() => {
 
@@ -20,6 +21,9 @@ const SupportQuestionsDetail = memo(() => {
     const id = urlParams.get('id');
     const url = state && state.backURL ? state.backURL : routes.SUPPORT
     const breadCrumbName = state && state.breadCrumbName;
+    const breadCrumbNameAr = state && state.breadCrumbNameAr;
+
+    console.log("arabic,", breadCrumbName, breadCrumbNameAr);
 
     const [details, setDetails] = useState();
 
@@ -29,7 +33,9 @@ const SupportQuestionsDetail = memo(() => {
     }, [])
 
     return (
-        <View theme='dark' footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")} onClickFooterButton={routes.CONTACT} >
+        <View
+            footerImageMobile={i18n.language === locales.AR ? `url(${FooterImageMobSupportPage})` : `url(${FooterImageMobSupportPage})`}
+            theme='dark' footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")} onClickFooterButton={routes.CONTACT} >
             <div className="my-5 pt-5">
                 <div className="px-4 pt-4 m-0">
                     <BreadCrumb
@@ -40,7 +46,7 @@ const SupportQuestionsDetail = memo(() => {
                                         title: t("supports")
                                     },
                                     {
-                                        title: breadCrumbName
+                                        title: i18n.language === locales.AR ? breadCrumbNameAr : breadCrumbName
                                     }
                                 ] : [
                                     {

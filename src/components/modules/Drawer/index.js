@@ -143,8 +143,9 @@ const Drawer = memo((props) => {
         // className="mt-5"
         >
             <div style={{ height: "100%" }}>
-                <div style={{ top: 0, position: "relative", left: 0, right: 0, zIndex: 1000 }} className="p-4 bg-white d-flex align-items-center justify-content-between">
-                    <Heading size="xxs" heading={t("filters")} nomargin />
+                <div style={{ top: 0, position: "relative", left: 0, right: 0, zIndex: 1000 }} className="p-4 bg-white d-flex align-items-center justify-content-between shadow-bottom">
+                    {/* <Heading size="xxs" heading={t("filters")} nomargin /> */}
+                    <p className={`fs-xs-static m-0 en-font-default text-black ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("filters")}</p>
                     <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="" size={20} />
                 </div>
                 <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%" }} className={`p-4`}>
@@ -156,8 +157,8 @@ const Drawer = memo((props) => {
                                         <Accordion.Item eventKey={index} className="border-0 my-3">
                                             <Accordion.Header onClick={() => onClickAccordian(index)}>
                                                 <div className='w-100 d-flex justify-content-between align-items-center' style={{ textAlign: 'start' }}>
+                                                    <p className={`${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} fs-sm m-0`}>{item.title}</p>
                                                     {/* <Heading bold size="xs" heading={item.title} nomargin /> */}
-                                                    <p className={`fs-sm ${i18n.language === locales.EN ? "en-font-bold" : "ar-font-bold"} mb-0`}>{item.title}</p>
                                                     <CustomToggle eventKey={index} />
                                                 </div>
                                             </Accordion.Header>

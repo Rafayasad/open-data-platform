@@ -35,12 +35,14 @@ const Main = memo((props) => {
         data && data.length > 0 ? data.map((item, index) => (
             <Fragment key={index}>
                 <Container fluid className="my-4 px-4">
-                    <Row className="justify-content-between align-items-center max-width">
-                        <Col md={6} xs={12} className='py-2'>
-                            <Heading bold nomargin heading={i18n.language === locales.AR ? item.title_ar : item.title} />
+                    <Row className="justify-content-between max-width">
+                        <Col md={5} xs={12} className='py-2'>
+                            <p className={`fs-mega m-0 ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{i18n.language === locales.AR ? item.title_ar : item.title}</p>
+                            {/* <Heading bold nomargin heading={i18n.language === locales.AR ? item.title_ar : item.title} /> */}
                         </Col>
                         <Col md={6} xs={12} className='py-2'>
-                            <Heading size='xxs' nomargin heading={i18n.language === locales.AR ? item.description_ar : item.description} />
+                            <p className={`fs-xs m-0 ${i18n.language === locales.AR ? "ar-font" : "en-font-default"}`}>{i18n.language === locales.AR ? item.description_ar : item.description}</p>
+                            {/* <Heading size='xxs' nomargin heading={i18n.language === locales.AR ? item.description_ar : item.description} /> */}
                         </Col>
                     </Row>
                     <Row className="py-5">

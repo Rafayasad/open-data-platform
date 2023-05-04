@@ -17,9 +17,9 @@ const ExpandSearchBarModal = memo((props) => {
 
     useEffect(() => {
         if (emailInput.current) {
-          emailInput.current.focus();
+            emailInput.current.focus();
         }
-      }, []);
+    }, []);
 
     // const onKeyDown = useCallback((e) => e.key === "Enter" && onPressEnter && onPressEnter(e.target.value));
 
@@ -51,15 +51,18 @@ const ExpandSearchBarModal = memo((props) => {
             </Modal.Header>
             <Modal.Body className="px-4">
                 <div>
-                    <Heading nomargin heading={t("popularsearches")} size={"xxs"} color={colors.gray} />
+                    <p className="fs-mini" style={{ color: colors.gray }}>{t("popularsearches")}</p>
+                    {/* <Heading nomargin heading={t("popularsearches")} size={"xxs"} color={colors.gray} /> */}
                 </div>
                 <div>
                     {
                         searchData?.map((item, index) => {
                             return (
-                                <div className="d-flex py-3">
-                                    <IoIosSearch color={colors.gray} size={25} />
-                                    <div className="px-2">
+                                <div className="row d-flex py-3 align-items-start">
+                                    <div className="col-2">
+                                        <IoIosSearch color={colors.gray} size={25} />
+                                    </div>
+                                    <div className="p-0 col-10">
                                         <Heading heading={item} size="xs" nomargin onClick={() => {
                                             setShow()
                                             onChangeSearch({ target: { value: item } })
