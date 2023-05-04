@@ -177,6 +177,12 @@ const Dataset = memo(() => {
 
     console.log("DATASETS", datasets);
 
+    const style = {
+        titleFs : 'tittle-sm-md',
+        descFs: 'fs-xs',
+        publisher:'publisher-xs-sm'
+    }
+
     return (
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
             <Main
@@ -223,6 +229,7 @@ const Dataset = memo(() => {
                     onClick={onClickCard}
                     onSelectDropdown={onChangeDropdownValue}
                     minWidth={"70%"}
+                    cardStyle = {style}
                 />
             </div>
         </View>

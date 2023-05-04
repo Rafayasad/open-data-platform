@@ -16,6 +16,7 @@ import Heading from '../../../elements/Heading';
 import Accordion from 'react-bootstrap/Accordion';
 import LanguageSwitcher from '../../../elements/LanguageSwitcher';
 import AbuDhabiLogo from "../../../../assets/images/Abu-Dhabi-Data-Logo.png";
+import i18next from "i18next";
 
 const MiddleFooter = memo(() => {
 
@@ -123,7 +124,8 @@ const MiddleFooter = memo(() => {
                         data?.map((item, index) => (
                             <Col key={index}>
                                 <div className='my-3 d-flex align-items-center'>
-                                    <Heading size="md" bold color="white" heading={item.heading} />
+                                    {/* <Heading size="md" bold color="white" heading={item.heading} /> */}
+                                    <p className={`fs-xs-static text-white ${i18next.language === locales.AR ? 'ar-font-bolder' :'en-font-bolder'}`}>{item.heading}</p>
                                 </div>
                                 <div className='my-1'>
                                     {

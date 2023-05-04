@@ -20,6 +20,7 @@ import BottomSheetBar from "../../BottomSheet";
 import { RWebShare } from "react-web-share";
 import './style.css';
 import { addDownloadCount } from "../../../../axios/api";
+import i18next from "i18next";
 
 
 const DataHeader = memo((props) => {
@@ -109,7 +110,7 @@ const DataHeader = memo((props) => {
                                 heading={title}
                                 maxNumberOfLines={headerOnTop && 2}
                             /> */}
-                            <p className={`fs-lg multine-ellipsis-${headerOnTop && 2} en-font-bold`}>
+                            <p className={`fs-lg multine-ellipsis-${headerOnTop && 2} ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>
                                 {title}
                             </p>
                         </div>
