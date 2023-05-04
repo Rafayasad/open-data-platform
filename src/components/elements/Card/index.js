@@ -32,7 +32,7 @@ const Card = memo((props) => {
 
     const { resources, title, publisher, description, tags, size, noborder,
         hoverable, nopadding, shortTitle, headingSize, onClick, nodropdown,
-        noheadercomponent, notags, notagsactive, url, dropdownWidth, handleReload,cardStyle } = props;
+        noheadercomponent, notags, notagsactive, url, dropdownWidth, handleReload,cardStyle, datasetID, tempIncreaseDownloadCount } = props;
 
     var HEIGHT = "332px", border, ClassName;
 
@@ -48,7 +48,8 @@ const Card = memo((props) => {
     const downloadResources = useCallback((links) => { setIsDownloadLink(links) }); //callback for url redirect
 
     const addDownloadCounts = useCallback((title, id) => {
-        addDownloadCount(id).then((res) => {
+        addDownloadCount(tempIncreaseDownloadCount ? datasetID : id, tempIncreaseDownloadCount).then((res) => {
+            console.log("hello its running...s", datasetID);
             handleReload()
         })
     });
@@ -93,7 +94,7 @@ const Card = memo((props) => {
             onClick: isClicked,
         }
     ]
-
+    console.log("resorucessssss==>", resources);
     const specificDownloadOptions = resources?.map(item => (
         {
             id: item.id,

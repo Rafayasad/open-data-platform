@@ -68,7 +68,7 @@ const DatasetList = memo((props) => {
             onClick: onSelectDropdown,
         }
     ]
-
+    console.log("datatatataataaa,",datasets);
     return (
         <Container fluid className="max-width" style={{paddingLeft:'10px'}}>
             {
@@ -105,6 +105,8 @@ const DatasetList = memo((props) => {
                                 nopadding
                                 hoverable="light"
                                 shortTitle
+                                tempIncreaseDownloadCount
+                                datasetID={item.id}
                                 url={item.url}
                                 title={i18n.language === locales.AR ? item.title_ar : item.title}
                                 publisher={i18n.language === locales.AR ? item.publisher_ar : item.publisher}

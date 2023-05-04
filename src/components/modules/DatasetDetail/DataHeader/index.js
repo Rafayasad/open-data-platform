@@ -35,6 +35,7 @@ const DataHeader = memo((props) => {
 
     const addDownloadCounts = useCallback((title, id) => {
         addDownloadCount(id).then((res) => {
+            console.log("hello its running...",id);
             handleReload()
         })
     });
@@ -133,7 +134,7 @@ const DataHeader = memo((props) => {
                             <div className="d-flex flex-column align-items-center">
                                 <div className="d-flex">
                                     <Dropdown
-                                        onClickDownloadItem={addDownloadCounts}
+                                        // onClickDownloadItem={addDownloadCounts}
                                         autoClose={true}
                                         size={"md"}
                                         options={options}

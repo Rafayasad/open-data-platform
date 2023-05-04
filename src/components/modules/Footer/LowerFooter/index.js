@@ -31,11 +31,11 @@ const LowerFooter = memo(() => {
                     <div className={`${window.innerWidth >= 768 ? "px-0" : "px-4"}`}>
                         <img height={"100px"} width={"auto"} src={AbuDhabi} />
                     </div>
-                    <div className={`${window.innerWidth >= 768 ? "px-4" : "px-0"}`}>
+                    <div className={`px-0 px-lg-4 ms-2 ms-lg-0`}>
                         <img height={"100px"} width={"auto"} src={Emirates} />
                     </div>
                 </div>
-                <div className={`p-0 col-12 col-sm-12 col-md-6 d-flex flex-row-reverse flex-sm-row justify-content-between ${window.innerWidth >= 768 ? "align-items-end" : "align-items-center py-3"}`}>
+                <div className={`p-0 col-12 col-sm-12 col-md-6 d-flex flex-row-reverse flex-sm-row justify-content-between align-items-center align-items-lg-end py-3 py-lg-0`}>
                     <div className={`d-flex justify-content-between align-items-center`}>
                         <p className='text-white m-0 px-4 fs-2xs-static' style={{ cursor: "pointer" }} onClick={() => { navigate(routes.POLICY) }}>
                             {`${t("privacy")}`}

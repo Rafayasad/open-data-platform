@@ -49,9 +49,7 @@ const UpperFooter = memo((props) => {
                     backgroundSize: 'cover',
                     backgroundPosition: '100%'
                 }}>
-                <Container fluid className='px-0 py-3 max-width'>
-                    {renderImage()}
-                </Container>
+                {renderImage()}
             </div>
             {/* mobile */}
             <div className="d-flex d-md-none align-items-end flex-lg-column py-0 py-lg-5  img-upper-footer"
@@ -59,11 +57,9 @@ const UpperFooter = memo((props) => {
                     backgroundImage: `${i18n.language === locales.EN ? mobImage ? mobImage : `url(${FooterImageMobile})` : mobImage ? mobImage : `url(${FooterImage_ar})`}`,
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'cover',
-                    backgroundPosition: "100%"
+                    backgroundPosition: "center"
                 }}>
-                <Container fluid className='px-0 py-3 max-width'>
-                    {renderImage()}
-                </Container>
+                {renderImage()}
             </div>
         </Fragment>
     )

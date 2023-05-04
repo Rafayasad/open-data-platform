@@ -23,7 +23,7 @@ import { logout } from "../../../axios/api";
 
 const Navbar = memo((props) => {
 
-    const { theme, sticky, nocontent, nolanguageswitcher } = props;
+    const { theme, sticky, nocontent, nolanguageswitcher, searchIcon, setExpandedSearchbar } = props;
 
     const { t, i18n } = useTranslation();
     const dispatch = useDispatch();
@@ -155,11 +155,16 @@ const Navbar = memo((props) => {
                     </Col>
                     {!nolanguageswitcher &&
                         <Col className="d-flex align-items-center justify-content-end">
-                            <RxHamburgerMenu size={25} color={theme === 'dark' || scroll ? colors.black : colors.white} onClick={onClickDrawer} />
+                            {searchIcon &&
+                                <AiOutlineSearch className="mx-3" size={25} onClick={() => setExpandedSearchbar(true)} />
+                            }
+                            {!nolanguageswitcher &&
+                                <RxHamburgerMenu size={25} color={theme === 'dark' || scroll ? colors.black : colors.white} onClick={onClickDrawer} />
+                            }
                         </Col>
                     }
                 </Row>
-            </Container>
+            </Container >
             <Drawer
                 style={{ width: "100%", height: "100%", scrollBehavior: "smooth", overflow: "auto", minHeight: "100%", zIndex: 1050, backgroundColor: colors.white }}
                 open={isOpen}
@@ -197,6 +202,7 @@ const Navbar = memo((props) => {
                                     <Fragment>
                                         <Col className="d-flex align-items-center py-2" xs={12}>
                                             <Link style={{ textDecoration: "none" }} to={item.route} replace={true}>
+                                                {/* <p className="m-0 text-black fs-2xl p-0">{item.name}</p> */}
                                                 <Heading size={"xl"} color={colors.black} nomargin heading={item.name} />
                                             </Link>
                                         </Col>
@@ -237,12 +243,12 @@ const Navbar = memo((props) => {
                         </Col>
                     </Row>
                 </div>
-                <Row className="fixed-bottom p-4">
+                <Row className="p-4 fixed-bottom">
                     <Col className="d-flex align-items-center" xs={3}>
                         <LanguageSwitcher theme={"dark"} />
                     </Col>
                     <Col className="d-flex align-items-center justify-content-end p-0">
-                        <p className="m-0" style={{ color: colors.gray }}><small>{t("adda")}</small></p>
+                        <p className="m-0 p-0" style={{ color: colors.gray }}><small>{t("adda")}</small></p>
                     </Col>
                 </Row>
             </Drawer>
