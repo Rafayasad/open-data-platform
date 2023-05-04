@@ -195,6 +195,15 @@ code {
     font-size: 48px;
     line-height: 52px;
   }
+  .img-upper-footer {
+    height: 500px;
+    padding-left:40px !important;
+    padding-right:40px !important;
+  }
+  .footer-padding {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }
 
 /* Desktop */
@@ -220,6 +229,8 @@ code {
 
   .img-upper-footer {
     height: 500px;
+    padding-left:40px !important;
+    padding-right:40px !important;
   }
 
   .img-about-us {
@@ -283,6 +294,10 @@ code {
   .semibold-lg-ar {
     font-family: "CircularAr-SemiBold";
   }
+  .footer-padding {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }
 
 /* Mobile */
@@ -313,6 +328,8 @@ code {
 
   .img-upper-footer {
     height: 400px;
+    padding-left:16px !important;
+    padding-right:16px !important;
   }
 
   .img-about-us {
@@ -383,6 +400,10 @@ code {
   .semibold-sm-ar {
     font-family: "CircularAr-SemiBold";
   }
+  .footer-padding {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
 
 .fs-static {
@@ -401,6 +422,11 @@ code {
   font-size: 16px;
   line-height: 22px;
   letter-spacing: -0.01em;
+}
+
+.fs-2xs-static{
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .fs-sm-static {

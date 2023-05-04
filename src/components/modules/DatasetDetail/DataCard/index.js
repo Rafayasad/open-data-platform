@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { routes } from "../../../../router/helper";
 import { locales } from "../../../../i18n/helper";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const DataCard = memo((props) => {
 
@@ -22,7 +23,7 @@ const DataCard = memo((props) => {
                     <div key={index} className="py-1">
                         <div>
                             {/* <Heading heading={item.title} size='xs' bold /> */}
-                            <p className="fs-sm en-font-bolder">
+                            <p className={`fs-sm ${i18next.language === locales.AR ? "ar-font-bolder" : "en-font-bolder"}`}>
                                 {item.title}
                             </p>
                         </div>

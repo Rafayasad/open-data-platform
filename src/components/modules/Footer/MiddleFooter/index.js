@@ -118,7 +118,7 @@ const MiddleFooter = memo(() => {
 
     return (
         <div className=''>
-            <Container fluid className='bg-black p-3 px-4 d-none d-lg-block'>
+            <Container fluid className='bg-black py-3 d-none d-xl-block footer-padding'>
                 <div className='d-flex max-width'>
                     {
                         data?.map((item, index) => (
@@ -155,7 +155,7 @@ const MiddleFooter = memo(() => {
                     }
                 </div>
             </Container>
-            <Container fluid className='d-lg-none bg-black m-0 px-4'>
+            <Container fluid className='d-xl-none bg-black m-0 footer-padding'>
                 <div className='py-4'>
                     <img height={"50px"} src={AbuDhabiLogo} />
                 </div>
