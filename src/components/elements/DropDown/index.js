@@ -15,7 +15,7 @@ const Dropdown = (props) => {
 
     const { t } = useTranslation();
 
-    const { iconColor, borderColor, onClickDownloadItem, minWidth, reportsFilter, autoClose, options, setSelectedDropdownValue, textColor, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
+    const { iconColor, borderColor, nopadding, onClickDownloadItem, minWidth, reportsFilter, autoClose, options, setSelectedDropdownValue, textColor, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
 
     const [isOpen, setIsOpen] = useState(false);
     const [indexx, setIndexx] = useState();
@@ -75,11 +75,12 @@ const Dropdown = (props) => {
                     <Heading size="xxs" heading={name} nomargin />
                 </div>
             }
-            <BSDropdown className='' style={{ width: dropdownWidth }} autoClose={autoClose} onToggle={toggle}>
+            {/* here we set width to 100% incase if there is any issue we need to change it to dropdownWidth inplace of 100% */}
+            <BSDropdown className='' style={{ width: "100%" }} autoClose={autoClose} onToggle={toggle}>
                 {
                     noheadercomponent ? null :
                         headerComponent ? (
-                            <BSDropdown.Toggle href={null} className='w-100 bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end'>
+                            <BSDropdown.Toggle href={null} className={`w-100 bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end ${nopadding && "px-0"}`}>
                                 {headerComponent}
                             </BSDropdown.Toggle>
                         ) : (
@@ -97,7 +98,6 @@ const Dropdown = (props) => {
                             </BSDropdown.Toggle>
                         )
                 }
-                {console.log("OPTIONS=>", options)}
                 {
                     isOpen && options && options != false &&
                     <BSDropdown.Menu

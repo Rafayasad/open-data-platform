@@ -16,8 +16,6 @@ const Main = memo((props) => {
     const { data, url, handleReload, id } = props;
     const navigate = useNavigate();
 
-    console.log("DATATTATA", data);
-
     const { t, i18n } = useTranslation();
 
     let option = { dateStyle: 'long' };

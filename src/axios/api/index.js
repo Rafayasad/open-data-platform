@@ -231,7 +231,7 @@ export const getSimilarDatasets = (topic, setData, setLoading) => {
                     }
                 })
 
-                setData(transform.slice(0, 3))
+                setData(transform.slice(0, 4))
                 setLoading(false)
             }
         }).catch((err) => {

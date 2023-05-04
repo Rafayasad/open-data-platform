@@ -41,9 +41,13 @@ const Cards = memo((props) => {
 
     const { title, notitlebutton, data, backgroundColor, hoverable, type,
         size, onClick, onClickViewAll, buttonText, notagsactive, noheadercomponent, dropdownWidth
-        , handleReload, cardsCount
+        , handleReload, cardsCount, textSize
     } = props;
 
+    var numberOfColumns = 4;
+    if (data?.length === 4) {
+        numberOfColumns = 3;
+    }
     const renderContent = () => {
         if (type === 'image-inner-text') {
             return (
@@ -139,7 +143,7 @@ const Cards = memo((props) => {
                     <Row className="d-none d-lg-flex w-100 align-items-center m-0">
                         {
                             data && data.length > 0 ? data.map((item, index) => (
-                                <Col key={index} lg={4} md={4} sm={4} className="py-2">
+                                <Col key={index} lg={numberOfColumns} md={numberOfColumns} sm={4} className="py-2">
                                     <Card
                                         handleReload={handleReload}
                                         dropdownWidth={dropdownWidth}
@@ -154,10 +158,10 @@ const Cards = memo((props) => {
                                         resources={i18n.language === locales.AR ? item.resources_ar : item.resources}
                                         url={item.url}
                                         onClick={() => onClick(item.id)}
-                                        headingSize="lg"
+                                        headingSize={textSize}
                                     />
                                 </Col>
-                            )) : <Loader backgroundColor={backgroundColor} />
+                            )) : <Loader size={288} numberOfColumns={4} backgroundColor={backgroundColor} />
                         }
                     </Row>
                 </>

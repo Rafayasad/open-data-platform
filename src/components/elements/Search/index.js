@@ -3,6 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import _ from 'lodash';
 import { IoIosSearch } from 'react-icons/io';
 import { MdOutlineFilterAlt, MdCancel } from 'react-icons/md';
+import { RxDotFilled } from 'react-icons/rx';
 import { useTranslation } from "react-i18next";
 import { colors } from "../../../utils/colors";
 import Drawer from '../../modules/Drawer';
@@ -144,8 +145,9 @@ const Search = memo((props) => {
                             :
                             filter && !nofilter &&
                             <Col xs={3} md={2} xl={2} lg={2} className="search-icon">
-                                <div onClick={toggle} className='d-flex align-items-center justify-content-center filter py-2 px-2' style={{ borderRadius: '30px' }}>
-                                    {!isFilterIcon &&
+                                <div onClick={toggle} className='d-flex align-items-center justify-content-center filter py-2 px-2' style={{ borderRadius: '30px', position: 'relative' }}>
+                                    {
+                                        !isFilterIcon &&
                                         <div className="d-flex d-md-none justify-content-end w-100">
                                             <div className="bg-black p-2 rounded-pill">
                                                 <IoIosSearch color="white" size={25} />
@@ -153,21 +155,33 @@ const Search = memo((props) => {
                                             {/* <MdOutlineFilterAlt size={24} /> */}
                                         </div>
                                     }
-                                    <div className={`${!isFilterIcon && "d-none d-md-flex"}`}>
+                                    <div className={`${!isFilterIcon && "d-none d-md-flex"} ${isFilterIcon && "position-relative"}`}>
                                         <MdOutlineFilterAlt size={24} />
+                                        {
+                                            appliedFilters && appliedFilters.length > 0 ?
+                                                <div className="d-md-none" style={{ position: 'absolute', top: -10, right: -5 }}>
+                                                    <RxDotFilled size={14} color={colors.red} />
+                                                </div> : null
+                                        }
                                     </div>
-                                    <div className="d-none d-lg-flex align-items-center justify-content-center">
-                                        <p className='m-0'>{t("filters")}</p>
+                                    <div className="d-none d-lg-flex align-items-center justify-content-center position-relative">
+                                        <p className='m-0 en-font-default'>{t("filters")}</p>
+                                        {
+                                            appliedFilters && appliedFilters.length > 0 ?
+                                                <div style={{ position: 'absolute', top: -8, right: -10 }}>
+                                                    <RxDotFilled size={14} color={colors.red} />
+                                                </div> : null
+                                        }
                                     </div>
                                     {/* {FOR RED DOT ICON} */}
-                                    {/* <div className="d-flex">
-                                <sup>
-                                    {
-                                        selectedFilters.length > 0 &&
-                                        <RxDotFilled size={20} color={colors.red} />
-                                    }
-                                </sup>
-                            </div> */}
+                                    {/* <div className="d-flex" style={{ position: 'absolute', right: 16, top: 10 }}>
+                                        <sup>
+                                            {
+                                                // selectedFilters.length > 0 &&
+                                                <RxDotFilled size={14} color={colors.red} />
+                                            }
+                                        </sup>
+                                    </div> */}
                                 </div>
                                 <Drawer data={filterData} open={filterOpen} setOpen={setFilterOpen} onClickApplyFilter={onClickApply} appliedFilters={appliedFilters} />
                             </Col>
@@ -175,17 +189,17 @@ const Search = memo((props) => {
                 </Row>
                 {
                     toggler && !nofocuseffect &&
-                    <Row className="n-z1 search-box-extend d-none d-md-block" style={{ width: toggler && document?.getElementById("main")?.offsetWidth }}>
+                    <Row className="search-box-extend d-none d-md-block" style={{ zIndex: 999, width: toggler && document?.getElementById("main")?.offsetWidth }}>
                         <Col className="m-0">
                             <hr className="m-0 p-0" style={{ borderWidth: "2px", borderColor: colors.purple }} />
                             <div className="py-3">
-                                <div className="px-5">
+                                <div style={{ marginLeft: "30px" }}>
                                     <p style={{ fontSize: 12 }} className="py-2 m-0 text-secondary">{t("popularsearches")}</p>
                                 </div>
                                 {
                                     searchData?.slice(-5).map((item, index) => {
                                         return (
-                                            <div key={index} className="d-flex px-5 py-1">
+                                            <div key={index} style={{ marginLeft: "30px" }} className="d-flex py-1">
                                                 <IoIosSearch color="black" size={20} />
                                                 <div className="mx-2">
                                                     <Heading heading={item} size="xxs" nomargin onClick={() => onClickedPopularSearch({ target: { value: item } })} />

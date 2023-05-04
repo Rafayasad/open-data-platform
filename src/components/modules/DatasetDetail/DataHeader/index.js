@@ -35,7 +35,7 @@ const DataHeader = memo((props) => {
 
     const addDownloadCounts = useCallback((title, id) => {
         addDownloadCount(id).then((res) => {
-            console.log("hello its running...",id);
+            console.log("hello its running...", id);
             handleReload()
         })
     });
@@ -96,7 +96,7 @@ const DataHeader = memo((props) => {
             }
         }
     }, [])
-    
+
     return (
         <Container id='main' fluid className={`d-flex justify-content-between align-items-start py-4 bg-white shadow-none ${headerOnTop && "sticky-top shadow-sm w-100 m-0"}`}>
             <BottomSheetBar selectedSheetValue={t("download")} open={openBottomSheet} setOpen={setOpenBottomSheet} options={options} />
@@ -123,28 +123,30 @@ const DataHeader = memo((props) => {
                 (
                     <>
                         <Col className="d-none d-lg-flex justify-content-end">
-                            <div className="" onClick={() => setCurrentHovered(false)} onMouseOver={onHover} onMouseLeave={onLeave}>
+                            <div className="px-2" onClick={() => setCurrentHovered(false)} onMouseOver={onHover} onMouseLeave={onLeave}>
                                 <Dropdown
+                                    nopadding
                                     autoClose={true}
                                     options={shareOption}
                                     size={"xl"}
                                     headerComponent={<Button backgroundColor="white" textColor="black" borderColor={currentHovered ? colors.purple : colors.black} icon={<SlShare size={20} color={currentHovered ? colors.purple : colors.black} />} />}
                                 />
                             </div>
-                            <div className="d-flex flex-column align-items-center">
+                            <div className="d-flex flex-column">
                                 <div className="d-flex">
                                     <Dropdown
                                         // onClickDownloadItem={addDownloadCounts}
+                                        nopadding
                                         autoClose={true}
                                         size={"md"}
                                         options={options}
-                                        headerComponent={<Button icon={<RxDownload className="mx-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" iconend/>}
+                                        headerComponent={<Button icon={<RxDownload className="ms-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" iconend/>}
                                     />
                                 </div>
                                 {
                                     downloadCount >= 0 ?
-                                        <div className="d-flex">
-                                            <p className="m-0 px-1">{downloadCount}</p><span style={{ color: colors.light_gray }}>{t("download")}</span>
+                                        <div className="d-flex justify-content-center">
+                                            <p className="m-0 px-1 text-center">{downloadCount}</p><span style={{ color: colors.light_gray }}>{t("download")}</span>
                                         </div> : ""
                                 }
                             </div>

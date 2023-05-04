@@ -15,7 +15,7 @@ const Tabs = memo((props) => {
         <Container fluid>
             <Tab.Container defaultActiveKey={0} activeKey={active}>
                 <div>
-                    <Col sm={12} style={{ borderBottom: '1.5px solid #CFCFCF' }}>
+                    <Col sm={12} style={{ borderBottom: '1px solid #CFCFCF' }}>
                         <Nav>
                             {
                                 data.map((item, index) => (
@@ -29,7 +29,7 @@ const Tabs = memo((props) => {
                         </Nav>
                     </Col>
                 </div>
-                <Row className="d-flex py-3" style={{ borderBottom: '1.5px solid #CFCFCF' }}>
+                <Row className="d-flex py-3" style={{ borderBottom: '1px solid #CFCFCF' }}>
                     <Col xs={12} sm={12} lg={8}>
                         <Tab.Content>
                             {
@@ -45,7 +45,7 @@ const Tabs = memo((props) => {
                     {
                         staticComponentOnRight &&
                         <Col xs={12} sm={12} lg={4} className="d-flex ">
-                            <div className="mx-4 d-none d-lg-block" style={{ border: '1px solid #CFCFCF' }} />
+                            <div className="mx-4 d-none d-lg-block" style={{ border: '0.5px solid #CFCFCF' }} />
                             {staticComponentOnRight}
                         </Col>
                     }

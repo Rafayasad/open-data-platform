@@ -30,7 +30,8 @@ const DataCard = memo((props) => {
                         {
                             !item.tags ? (
                                 <div className="">
-                                    <Heading capitalize={item.capitalize} color={item.color} underline={item.underline} heading={item.detail} size='xxs' onClick={item.onClick} />
+                                    <p className={`fs-xs en-font-default ${item.capitalize && "text-capitalize"} ${item.underline && "text-underline-hover"}`} style={{ color: item.color }} onClick={item.onClick}>{item.detail}</p>
+                                    {/* <Heading capitalize={item.capitalize} color={item.color} underline={item.underline} heading={item.detail} size='xxs' onClick={item.onClick} /> */}
                                 </div>
                             ) : (
                                 <div className="d-flex flex-wrap mb-3">
