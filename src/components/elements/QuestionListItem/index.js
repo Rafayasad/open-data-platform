@@ -14,7 +14,7 @@ const QuestionListItem = memo((props) => {
     const { title, icon, onClick } = props
 
     return (
-        <Container fluid className="py-3 m-0 question-list-item-hover">
+        <Container fluid className="py-4 m-0 question-list-item-hover">
             <Row onClick={onClick}>
                 <Col xs={10} sm={10} md={10} className="d-flex align-items-center">
                     <p style={{ cursor: 'pointer' }} className={`m-0 fs-sm-md ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{title}</p>

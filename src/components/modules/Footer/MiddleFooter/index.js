@@ -16,7 +16,7 @@ import Heading from '../../../elements/Heading';
 import Accordion from 'react-bootstrap/Accordion';
 import LanguageSwitcher from '../../../elements/LanguageSwitcher';
 import AbuDhabiLogo from "../../../../assets/images/Abu-Dhabi-Data-Logo.png";
-import i18next from "i18next";
+import i18next from 'i18next';
 
 const MiddleFooter = memo(() => {
 
@@ -124,8 +124,8 @@ const MiddleFooter = memo(() => {
                         data?.map((item, index) => (
                             <Col key={index}>
                                 <div className='my-3 d-flex align-items-center'>
+                                    <p className={`text-white fs-xs-static en-font-default ${i18next.language === locales.AR ? "ar-font-bolder" : "en-font-bolder"}`}>{item.heading}</p>
                                     {/* <Heading size="md" bold color="white" heading={item.heading} /> */}
-                                    <p className={`fs-xs-static text-white ${i18next.language === locales.AR ? 'ar-font-bolder' :'en-font-bolder'}`}>{item.heading}</p>
                                 </div>
                                 <div className='my-1'>
                                     {
@@ -134,13 +134,15 @@ const MiddleFooter = memo(() => {
                                                 {
                                                     item.downloadURL ? (
                                                         <>
-                                                            <Heading size='xxs' underline heading={t(item.title)} color={colors.white} onClick={() => window.open(item.downloadURL, '_blank')} />
+                                                            <p className={`text-white fs-xs-static en-font-default text-underline-hover`} onClick={() => window.open(item.downloadURL, '_blank')}>{t(item.title)}</p>
+                                                            {/* <Heading size='xxs' underline heading={t(item.title)} color={colors.white} onClick={() => window.open(item.downloadURL, '_blank')} /> */}
                                                             {i18n.language === locales.EN ? <RxArrowTopRight size={25} color='white' className='mx-2' /> : <RxArrowTopLeft size={25} color='white' className='mx-2' />}
                                                         </>
 
                                                     ) : (
                                                         <Link style={{ textDecoration: "none" }} to={item.link} state={item.params}>
-                                                            <Heading size='xxs' heading={t(item.title)} color={colors.white} />
+                                                            <p className={`text-white fs-xs-static en-font-default`}>{t(item.title)}</p>
+                                                            {/* <Heading size='xxs' heading={t(item.title)} color={colors.white} /> */}
                                                         </Link>
                                                     )
                                                 }
