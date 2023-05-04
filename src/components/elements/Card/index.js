@@ -23,6 +23,7 @@ import { locales } from "../../../i18n/helper";
 import BottomSheetBar from "../../modules/BottomSheet";
 import { routes } from "../../../router/helper";
 import { addDownloadCount } from "../../../axios/api";
+import i18next from "i18next";
 
 const Card = memo((props) => {
 
@@ -31,7 +32,7 @@ const Card = memo((props) => {
 
     const { resources, title, publisher, description, tags, size, noborder,
         hoverable, nopadding, shortTitle, headingSize, onClick, nodropdown,
-        noheadercomponent, notags, notagsactive, url, dropdownWidth, handleReload, datasetID, tempIncreaseDownloadCount } = props;
+        noheadercomponent, notags, notagsactive, url, dropdownWidth, handleReload,cardStyle, datasetID, tempIncreaseDownloadCount } = props;
 
     var HEIGHT = "332px", border, ClassName;
 
@@ -129,7 +130,7 @@ const Card = memo((props) => {
                 options={selectedSheetValue === t("downloadDatasets") ? specificDownloadOptions : selectedSheetValue === t("share") ? specificShareOptions : options} />
             <RBCard
                 // onClick={onClick}
-                className={`${nopadding ? "py-4" : "p-4"} ${ClassName}`}
+                className={`${nopadding ? "py-4" : "p-4"} ${ClassName} hover-pl`}
                 style={{ height: HEIGHT, width: "100%", borderRadius: "30px", borderWidth: border }}>
                 {
                     !notags &&
@@ -170,24 +171,46 @@ const Card = memo((props) => {
                 }
                 <Row className={`${nopadding && "m-0"} ${publisher && !notags ? "h-50" : "h-75"}`}>
                     <Col md={shortTitle ? 8 : 12}>
-                        <Heading
+                        {cardStyle ? 
+                        <p className={`${onClick && 'text-underline-hover'} ${shortTitle ? 'multine-ellipsis-2' : 'multine-ellipsis-3'} ${cardStyle?.titleFs} ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}
+                        onClick={onClick ? onClick : () => { }}
+                        >
+                            {title}
+                        </p> 
+                        :
+                         <Heading
                             bold
                             underline
                             maxNumberOfLines={shortTitle ? 2 : 3}
                             size={headingSize ? headingSize : "md"}
                             heading={title}
                             onClick={onClick}
-                        />
+                        />}
+                       
                     </Col>
                     {
-                        description &&
+                        description && cardStyle ? 
+                         <Col md={8}>
+                        <p className={`${shortTitle ? 'multine-ellipsis-2' : 'multine-ellipsis-3'} ${cardStyle?.descFs} ${i18next.language === locales.AR ? "ar-font" : "en-font"}`} style={{color:colors.dark_gray}}>
+                            {description}
+                        </p> 
+                        </Col>
+                        :
                         <Col md={8}>
                             <Heading maxNumberOfLines={shortTitle ? 2 : 3} color={'#404040'} size={shortTitle ? "xs" : "xxs"} heading={description} />
                         </Col>
                     }
                 </Row>
                 {
-                    publisher &&
+                    publisher && cardStyle ? 
+                     <Row className={`${nopadding && "m-0"} h-25 align-items-end`} >
+                        <Col>
+                            <p className={`${cardStyle?.publisher} ${i18next.language === locales.AR ? "ar-font" : "en-font"}`} style={{color:colors.gray}}>
+                            {publisher}
+                            </p> 
+                        </Col>
+                    </Row>
+                    :
                     <Row className={`${nopadding && "m-0"} h-25 align-items-end`} >
                         <Col>
                             <Heading size='xxs' color={colors.gray} nomargin heading={publisher} />

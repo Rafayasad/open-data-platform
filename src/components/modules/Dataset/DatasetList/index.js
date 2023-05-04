@@ -49,7 +49,7 @@ const data = [
 
 const DatasetList = memo((props) => {
 
-    const { minWidth, nocount, title, onClick, datasets, totalCount, currentPage, rowsPerPage, loading, notagsactive, onChangePage, selectedValue, onSelectDropdown, notags, noheader, cardSize, nodropdown } = props
+    const { minWidth, nocount, title, onClick, datasets, totalCount, currentPage, rowsPerPage, loading, notagsactive, onChangePage, selectedValue, onSelectDropdown, notags, noheader, cardSize, nodropdown ,cardStyle } = props
 
     const { t, i18n } = useTranslation();
 
@@ -70,7 +70,7 @@ const DatasetList = memo((props) => {
     ]
     console.log("datatatataataaa,",datasets);
     return (
-        <Container fluid className="max-width">
+        <Container fluid className="max-width" style={{paddingLeft:'10px'}}>
             {
                 !noheader &&
                 <>
@@ -116,6 +116,7 @@ const DatasetList = memo((props) => {
                                 minWidth={minWidth}
                                 // resources={i18n.language === locales.AR ? item.resources : item.resources}
                                 onClick={() => onClick(item.id)}
+                                cardStyle ={cardStyle}
                             />
                         </div>
                     ))

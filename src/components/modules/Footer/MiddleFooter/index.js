@@ -16,6 +16,7 @@ import Heading from '../../../elements/Heading';
 import Accordion from 'react-bootstrap/Accordion';
 import LanguageSwitcher from '../../../elements/LanguageSwitcher';
 import AbuDhabiLogo from "../../../../assets/images/Abu-Dhabi-Data-Logo.png";
+import i18next from "i18next";
 
 const MiddleFooter = memo(() => {
 
@@ -117,13 +118,14 @@ const MiddleFooter = memo(() => {
 
     return (
         <div className=''>
-            <Container fluid className='bg-black p-3 px-4 d-none d-lg-block'>
+            <Container fluid className='bg-black py-3 d-none d-xl-block footer-padding'>
                 <div className='d-flex max-width'>
                     {
                         data?.map((item, index) => (
                             <Col key={index}>
                                 <div className='my-3 d-flex align-items-center'>
-                                    <Heading size="md" bold color="white" heading={item.heading} />
+                                    {/* <Heading size="md" bold color="white" heading={item.heading} /> */}
+                                    <p className={`fs-xs-static text-white ${i18next.language === locales.AR ? 'ar-font-bolder' :'en-font-bolder'}`}>{item.heading}</p>
                                 </div>
                                 <div className='my-1'>
                                     {
@@ -151,7 +153,7 @@ const MiddleFooter = memo(() => {
                     }
                 </div>
             </Container>
-            <Container fluid className='d-lg-none bg-black m-0 px-4'>
+            <Container fluid className='d-xl-none bg-black m-0 footer-padding'>
                 <div className='py-4'>
                     <img height={"50px"} src={AbuDhabiLogo} />
                 </div>
