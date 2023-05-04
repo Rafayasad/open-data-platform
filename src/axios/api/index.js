@@ -361,6 +361,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                         url: `${process.env.REACT_APP_BASE_URL}/dataset/detail?id=${item.identifier}`,
                         resources: item.distribution ? item.distribution.map(item => (
                             {
+                                id: item.identifier,
                                 title: item.title ? item.title : "No Name Found",
                                 title_ar: item.titlelear ? item.titlelear : "لم يتم العثور على اسم",
                                 description: item.description,
@@ -417,7 +418,7 @@ export const getDatasetById = (id, setData) => {
                                 : item.format === "excel" || itemm.format === "xlsx" || itemm.format === "esri rest" || itemm.format == "xls" ? "excel"
                                     : itemm.format === "csv" ? "csv"
                                         : itemm.format === "API" && "API",
-                            downloadURL: itemm.downloadURL
+                            downloadURL: itemm.downloadURL ? itemm.downloadURL : "No File Uploaded Yet"
                         }
                     )
                 })
@@ -430,8 +431,6 @@ export const getDatasetById = (id, setData) => {
                     }).catch((err) => {
                         console.log("Error message", err)
                     })
-
-                console.log("Here 123")
 
                 let data = {
                     id: item.identifier,
@@ -460,8 +459,6 @@ export const getDatasetById = (id, setData) => {
                 }
 
                 setData(data)
-
-                console.log("DATASEsdadsadasdadTS", data);
 
                 const view_count_payload = {
                     identifier: id,
@@ -1586,7 +1583,7 @@ export const getStoriesTags = (dispatch, setStoriesTags) => {
         })
 }
 
-export const addDownloadCount = (id) => {
+export const addDownloadCount = (id, forDatasetsListing) => {
 
     console.log("download count", id);
 
@@ -1597,7 +1594,12 @@ export const addDownloadCount = (id) => {
         ip_address: "172.0.9.01"
     }
 
-    return endpoints.addDownloadCountById(data)
+    const data_for_listing = {
+        dataset_identifier: id,
+        ip_address: "172.0.9.01"
+    }
+
+    return endpoints.addDownloadCountById(forDatasetsListing ? data_for_listing : data)
         .then((res) => {
             // setLoading(false)
             if (res.status === 200) {

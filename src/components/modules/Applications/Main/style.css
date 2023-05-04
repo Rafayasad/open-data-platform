@@ -11,5 +11,7 @@
 @media (min-width: 1199.98px) {
     .image-sizing {
         height: 700px;
+        width: 100%;
+        object-fit: cover;
     }
 }

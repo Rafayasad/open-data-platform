@@ -21,7 +21,7 @@ const PlatformInsights = memo((props) => {
                         <Heading size="xs" color={colors.pearl_white} heading={t("abuDhabiDataInNumbers")} />
                     </Col>
                 </Row>
-                <Row className="my-3 px-4 gx-5">
+                <Row className="my-3 px-4">
                     {
                         data && data.length > 0 && data.map((item, index) => (
                             <Col key={index} xs={6} md={4} xl={2} className='text-center m-0 pb-md-4'>

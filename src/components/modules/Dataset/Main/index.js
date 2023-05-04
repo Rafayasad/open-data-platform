@@ -12,7 +12,7 @@ import './style.css'
 
 const Main = memo((props) => {
 
-    const { search, onChangeSearchEnter, filter, onApplyFilter, onDeleteFilter, searchData, filterData, nofilter } = props;
+    const { expandedSearchbar, setExpandedSearchbar, search, onChangeSearchEnter, filter, onApplyFilter, onDeleteFilter, searchData, filterData, nofilter } = props;
 
     const { t } = useTranslation();
 
@@ -36,7 +36,7 @@ const Main = memo((props) => {
                             <Col xs={10} md={8} style={{ textAlign: 'center' }} className="py-2">
                                 {/* <Heading size="xxxl" bold color={colors.black} heading={t("datasetTitle")} /> */}
                                 <p className={`fs-mega ${i18next.language === locales.AR ? 'ar-font-bold' : 'en-font-bold'}`}>
-                                    {t("datasetTitle")} 
+                                    {t("datasetTitle")}
                                 </p>
                             </Col>
                             <Col />
@@ -50,11 +50,13 @@ const Main = memo((props) => {
                         <Col />
                         <Col xs={12} md={10} lg={8} className="py-3">
                             <Search
+                                expandedSearchbar={expandedSearchbar}
+                                setExpandedSearchbar={setExpandedSearchbar}
                                 nofilter={nofilter}
                                 filterData={filterData}
                                 value={search}
                                 searchData={searchData}
-                                placeholder={t("searchKeywords")} v
+                                placeholder={t("searchKeywords")}
                                 placeholderformobile={t("searchPlaceholderformobile")}
                                 onPressEnter={onChangeSearchEnter}
                                 filter
