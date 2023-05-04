@@ -144,7 +144,8 @@ const Drawer = memo((props) => {
         >
             <div style={{ height: "100%" }}>
                 <div style={{ top: 0, position: "relative", left: 0, right: 0, zIndex: 1000 }} className="p-4 bg-white d-flex align-items-center justify-content-between shadow-bottom">
-                    <Heading size="xxs" heading={t("filters")} nomargin />
+                    {/* <Heading size="xxs" heading={t("filters")} nomargin /> */}
+                    <p className={`fs-xs-static m-0 en-font-default text-black ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("filters")}</p>
                     <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="" size={20} />
                 </div>
                 <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%" }} className={`p-4`}>
