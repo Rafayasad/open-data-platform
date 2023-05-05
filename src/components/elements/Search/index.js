@@ -34,7 +34,6 @@ const Search = memo((props) => {
 
     useEffect(() => {
         setInputText(value)
-
     }, [value])
 
     const toggle = useCallback(() => {

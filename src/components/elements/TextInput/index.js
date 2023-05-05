@@ -121,13 +121,12 @@ const TextInput = memo((props) => {
 
     <FormControl sx={{ width: '100%' }} variant="standard" className="my-2">
       <InputLabel position="right" htmlFor="standard-adornment-password">{placeholder}</InputLabel>
-      {console.log("helloooooooooooooooooo", value.length)}
       <Input
         onFocus={toggle}
         onBlur={toggle}
         id="standard-adornment-password"
         sx={{
-          ':before': { borderBottomColor: value.length > 0 ? "black" : '#9F9F9F' , borderBottomWidth:"1.5px" },
+          ':before': { borderBottomColor: value?.length > 0 ? "black" : '#9F9F9F' , borderBottomWidth:"1.5px" },
           ':after': {
             borderBottomColor:
               placeholder === t("password")
