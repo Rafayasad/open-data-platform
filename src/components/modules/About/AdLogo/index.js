@@ -14,7 +14,7 @@ const AdLogo = memo(() => {
     const { t } = useTranslation()
 
     return (
-        <Container className="py-4">
+        <Container className="py-4 page-padding">
             <Row className="my-4">
                 <Col className="text-center">
                     <p className="fs-sm en-font-default">{t("powered")}</p>

@@ -1,3 +1,11 @@
+/* Tablet */
+@media (max-width: 1199.98px) {
+    .image-sizing {
+      height: auto; 
+      max-width: 100%
+    }
+}
+
 /* mobile */
 @media (max-width: 767.98px) {
     .image-sizing {
