@@ -9,44 +9,6 @@ import Loader from "../../Loader";
 import { useTranslation } from "react-i18next";
 import { numberWithCommas } from "../../../../utils/generic";
 
-const data = [
-    {
-        title: "Immunizations by Nationality, Type of Vaccine and Age Group",
-        description: "Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Ministry of Health and Prevention",
-        tags: ['Social', 'Enviornment']
-    },
-    {
-        title: "Licensed Social Care Professional 2021 - 2022 Immunizations by Nationality, Type of Vaccine and Age Group",
-        description: "Immunizations by Nationality, Type of Vaccine and Age Group. Immunizations by Nationality, Type of Vaccine and Age Group. Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Ministry of Health and Prevention",
-        tags: ['Enviornment', 'Social']
-    },
-    {
-        title: "List of applicants for participation in the school bus supervisors",
-        description: "Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Telecommunication Regulatory Authority",
-        tags: ['Social', 'Enviornment']
-    },
-    {
-        title: "Immunizations by Nationality, Type of Vaccine and Age Group",
-        description: "Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Ministry of Health and Prevention",
-        tags: ['Social', 'Police']
-    },
-    {
-        title: "Licensed Social Care Professional 2021 - 2022 Immunizations by Nationality, Type of Vaccine and Age Group",
-        description: "Immunizations by Nationality, Type of Vaccine and Age Group. Immunizations by Nationality, Type of Vaccine and Age Group. Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Ministry of Health and Prevention"
-    },
-    {
-        title: "List of applicants for participation in the school bus supervisors",
-        description: "Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Telecommunication Regulatory Authority",
-        tags: ['Social', 'Enviornment']
-    }
-]
-
 const DatasetList = memo((props) => {
 
     const { minWidth, nocount, title, onClick, datasets, totalCount, currentPage, rowsPerPage, loading, notagsactive, onChangePage, selectedValue, onSelectDropdown, notags, noheader, cardSize, nodropdown ,cardStyle } = props
@@ -68,7 +30,7 @@ const DatasetList = memo((props) => {
             onClick: onSelectDropdown,
         }
     ]
-    
+
     return (
         <Container fluid className="max-width" style={{paddingLeft:'10px'}}>
             {
