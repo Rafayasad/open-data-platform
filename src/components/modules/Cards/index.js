@@ -180,7 +180,7 @@ const Cards = memo((props) => {
                 </Row>
             }
             <Row>
-                <Col className="px-4 max-width">
+                <Col className="px-4 max-width page-padding">
                     <Row>
                         {renderContent()}
                     </Row>

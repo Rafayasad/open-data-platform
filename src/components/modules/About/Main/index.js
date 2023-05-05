@@ -34,19 +34,19 @@ const Main = memo((props) => {
     return (
         data && data.length > 0 ? data.map((item, index) => (
             <Fragment key={index}>
-                <Container fluid className="my-4 px-4">
+                <Container fluid className="my-4 px-4 page-padding">
                     <Row className="justify-content-between max-width">
-                        <Col md={5} xs={12} className='py-2'>
+                        <Col md={5} xs={12} className='py-2 px-0'>
                             <p className={`fs-mega m-0 ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{i18n.language === locales.AR ? item.title_ar : item.title}</p>
                             {/* <Heading bold nomargin heading={i18n.language === locales.AR ? item.title_ar : item.title} /> */}
                         </Col>
-                        <Col md={6} xs={12} className='py-2'>
+                        <Col md={6} xs={12} className='py-2 px-0'>
                             <p className={`fs-xs m-0 ${i18n.language === locales.AR ? "ar-font" : "en-font-default"}`}>{i18n.language === locales.AR ? item.description_ar : item.description}</p>
                             {/* <Heading size='xxs' nomargin heading={i18n.language === locales.AR ? item.description_ar : item.description} /> */}
                         </Col>
                     </Row>
                     <Row className="py-5">
-                        <Col>
+                        <Col className="d-flex justify-content-center">
                             <Image className="img-about-us" src={item.image} fluid style={{ borderRadius: '30px' }} />
                         </Col>
                     </Row>
