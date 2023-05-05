@@ -44,10 +44,11 @@ const Login = memo(() => {
             <Col>
               <Row className="p-4">
                 <Col md={8}>
-                  <Heading
+                  <p className={`fs-mega text-white ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("openDataTitle")}</p>
+                  {/* <Heading
                     heading={t("openDataTitle")}
                     color={colors.white}
-                  />
+                  /> */}
                 </Col>
               </Row>
             </Col>

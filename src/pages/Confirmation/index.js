@@ -40,8 +40,8 @@ const Confirmation = memo((props) => {
                                     <Heading size={"md"} bold heading={t("thankyou")} />
                                 </div>
                                 <div className="text-center my-1">
-                                    <Heading size={"xs"} heading={`${t("confirmationtextone")}`} />
-                                    <Heading size={"xs"} heading={`${t("confirmationtextsecond")} ${email ? `on ${state && state.email}` : ""}`} />
+                                    <Heading size={"xs"} heading={`${t("thankyouPara")}`} />
+                                    <Heading size={"xs"} heading={`${t("thankyouSecPara")} ${email ? `on ${state && state.email}` : ""}`} />
                                 </div>
                                 <div className="py-4">
                                     <Button

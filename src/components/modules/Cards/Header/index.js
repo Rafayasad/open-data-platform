@@ -52,9 +52,9 @@ const Header = memo((props) => {
                             size={headingSize}
                             color={color}
                             heading={title} /> */}
-                            <p className={`fs-title en-font-bold ps-2 m-0 ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`} style={{color:color}}>
-                                {title}
-                            </p>
+                        <p className={`fs-title ps-2 m-0 ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`} style={{ color: color }}>
+                            {title}
+                        </p>
                     </div>
                 </Col>
                 {!dropdown && nobutton && !nocount &&

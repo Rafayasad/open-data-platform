@@ -16,14 +16,16 @@ const Main = memo((props) => {
 
     const { t } = useTranslation();
 
-    const [offset, setOffset] = useState(0);
+    const [offset, setOffset] = useState(false);
 
     useEffect(() => {
-        const onScroll = () => setOffset(window.pageYOffset);
-        // clean up code
-        window.removeEventListener('scroll', onScroll);
-        window.addEventListener('scroll', onScroll, { passive: true });
-        return () => window.removeEventListener('scroll', onScroll);
+        window.onscroll = function () {
+            if (window.scrollY > 300) {
+                setOffset(true);
+            } else {
+                setOffset(false);
+            }
+        };
     }, []);
 
     return (
@@ -44,7 +46,8 @@ const Main = memo((props) => {
                     </Col>
                 </Row>
             </Container>
-            <Container fluid className={`z-n1 ${offset > 250 && "sticky"} bg-white mb-5`}>
+            {console.log("Login", offset)}
+            <Container fluid className={`${offset && "sticky"}  bg-white mb-5`}>
                 <Container>
                     <Row>
                         <Col />

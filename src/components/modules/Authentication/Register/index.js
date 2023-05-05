@@ -1,3 +1,4 @@
+import '../style.css';
 import React, { memo, useCallback, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import AuthBackground1 from "../../../../assets/images/Auth-Background-1.jpg";
@@ -62,10 +63,11 @@ const Register = memo(() => {
             <Col className="pt-2 m-0">
               <Row className="px-3 py-5">
                 <Col md={8}>
-                  <Heading
+                  <p className={`fs-mega text-white ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("openDataTitle")}</p>
+                  {/* <Heading
                     heading={t("openDataTitle")}
                     color={colors.white}
-                  />
+                  /> */}
                 </Col>
               </Row>
             </Col>
@@ -79,9 +81,9 @@ const Register = memo(() => {
                   height: "100%"
                 }}
               >
-                {console.log("NAME",name)}
+
                 <AuthCard
-                  view="dekstop"
+                  view="desktop"
                   title={t("register")}
                   recaptcha={recaptcha}
                   subtitle={t("accExist")}

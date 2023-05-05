@@ -68,7 +68,7 @@ const DatasetList = memo((props) => {
             onClick: onSelectDropdown,
         }
     ]
-    console.log("datatatataataaa,",datasets);
+    
     return (
         <Container fluid className="max-width" style={{paddingLeft:'10px'}}>
             {
