@@ -44,7 +44,7 @@ const Header = memo((props) => {
     return (
         <Container fluid className="py-lg-4 pt-4">
             <Row className="w-100 d-flex p-0 m-0 align-items-center justify-content-between">
-                <Col md={8} lg={8} xs={!dropdown && nobutton ? 12 : 8} className="px-0">
+                <Col md={8} lg={8} xs={!dropdown && nobutton ? 12 : 6} className="px-0">
                     <div>
                         {/* <Heading
                             bold
@@ -62,7 +62,7 @@ const Header = memo((props) => {
                         <Heading nomargin bold size={"lg"} heading={`${count ? count : 0} ${t("results")}`} />
                     </Col>
                 }
-                <Col md={4} lg={3} sm={6} xs={4} className={`px-0 ${count && "pt-3"} d-flex justify-content-end align-items-center`}>
+                <Col md={4} lg={3} sm={6} xs={5} className={`px-0 ${count && "pt-3"} d-flex justify-content-end align-items-center`}>
                     {
                         !nobutton ?
                             <div>
