@@ -107,7 +107,7 @@ const Search = memo((props) => {
                             <IoIosSearch color={iconColor ? iconColor : !isFilterIcon ? "gray" : "black"} size={24} />
                         </div>
                         {/* desktop */}
-                        <div className="d-none d-md-block w-100">
+                        <div className="w-100 d-none d-md-block">
                             <input
                                 onClick={() => {
                                     document?.getElementById("cont")?.offsetWidth <= 540 ?
@@ -143,44 +143,33 @@ const Search = memo((props) => {
                             </Col>
                             :
                             filter && !nofilter &&
-                            <Col xs={3} md={2} xl={2} lg={2} className="search-icon">
-                                <div onClick={toggle} className='d-flex align-items-center justify-content-center filter py-2 px-2' style={{ borderRadius: '30px', position: 'relative' }}>
-                                    {
-                                        !isFilterIcon &&
-                                        <div className="d-flex d-md-none justify-content-end w-100">
-                                            <div className="bg-black p-2 rounded-pill">
-                                                <IoIosSearch color="white" size={25} />
+                            <Col xs={2} md={2} xl={2} lg={2} className="">
+                                <div onClick={toggle} className='d-flex align-items-center justify-content-center filter p-lg-2 p-0' style={{ borderRadius: '30px', position: 'relative' }}>
+                                    <MdOutlineFilterAlt size={24} />
+                                    <div className="d-none d-lg-flex align-items-center justify-content-center">
+                                        <p className='m-0'>{t("filters")}</p>
+                                        {appliedFilters && appliedFilters.length > 0
+                                            &&
+                                            <div style={{ position: "absolute", right: i18n.language === locales.EN && 6, top: 0, left: i18n.language === locales.AR && 10 }}>
+                                                <RxDotFilled color={colors.red} />
                                             </div>
-                                            {/* <MdOutlineFilterAlt size={24} /> */}
+                                        }
+                                    </div>
+                                    {appliedFilters && appliedFilters.length > 0
+                                        &&
+                                        <div className="d-flex d-lg-none" style={{ position: "absolute", right: i18n.language === locales.EN && -5, top: -8, left: i18n.language === locales.AR && -2 }}>
+                                            <RxDotFilled color={colors.red} />
                                         </div>
                                     }
-                                    <div className={`${!isFilterIcon && "d-none d-md-flex"} ${isFilterIcon && "position-relative"}`}>
-                                        <MdOutlineFilterAlt size={24} />
-                                        {
-                                            appliedFilters && appliedFilters.length > 0 ?
-                                                <div className="d-md-none" style={{ position: 'absolute', top: -10, right: -5 }}>
-                                                    <RxDotFilled size={14} color={colors.red} />
-                                                </div> : null
-                                        }
-                                    </div>
-                                    <div className="d-none d-lg-flex align-items-center justify-content-center position-relative">
-                                        <p className='m-0 en-font-default'>{t("filters")}</p>
-                                        {
-                                            appliedFilters && appliedFilters.length > 0 ?
-                                                <div style={{ position: 'absolute', top: -8, right: -10 }}>
-                                                    <RxDotFilled size={14} color={colors.red} />
-                                                </div> : null
-                                        }
-                                    </div>
                                     {/* {FOR RED DOT ICON} */}
-                                    {/* <div className="d-flex" style={{ position: 'absolute', right: 16, top: 10 }}>
-                                        <sup>
-                                            {
-                                                // selectedFilters.length > 0 &&
-                                                <RxDotFilled size={14} color={colors.red} />
-                                            }
-                                        </sup>
-                                    </div> */}
+                                    {/* <div className="d-flex">
+                                <sup>
+                                    {
+                                        selectedFilters.length > 0 &&
+                                        <RxDotFilled size={20} color={colors.red} />
+                                    }
+                                </sup>
+                            </div> */}
                                 </div>
                                 <Drawer data={filterData} open={filterOpen} setOpen={setFilterOpen} onClickApplyFilter={onClickApply} appliedFilters={appliedFilters} />
                             </Col>
