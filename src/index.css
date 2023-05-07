@@ -202,257 +202,267 @@ code {
     padding-right: 40px !important;
   }
 
-  .footer-padding {
+  <<<<<<< HEAD .footer-padding {
     padding-left: 40px;
     padding-right: 40px;
-  }
-}
 
-/* Desktop */
-
-@media (min-width: 1199.98px) {
-  .fs-kilo {
-    font-size: 40px;
-    line-height: 44px;
-    letter-spacing: -0.02em;
+    =======.page-padding {
+      padding-left: 40px !important;
+      padding-right: 40px !important;
+      >>>>>>>be6c28a8945b46e91cb592bd366d253c13a65ec4
+    }
   }
 
-  .fs-mega {
-    font-size: 64px;
-    line-height: 68px;
-    letter-spacing: -0.03em;
-  }
+  /* Desktop */
 
-  .fs-2xl {
-    font-size: 80px;
-    line-height: 84px;
-    letter-spacing: -0.04em;
-  }
+  @media (min-width: 1199.98px) {
+    .fs-kilo {
+      font-size: 40px;
+      line-height: 44px;
+      letter-spacing: -0.02em;
+    }
 
-  .img-upper-footer {
-    height: 500px;
-    padding-left: 40px !important;
-    padding-right: 40px !important;
-  }
+    .fs-mega {
+      font-size: 64px;
+      line-height: 68px;
+      letter-spacing: -0.03em;
+    }
 
-  .img-about-us {
-    height: 700px;
-    width: 100%;
-  }
+    .fs-2xl {
+      font-size: 80px;
+      line-height: 84px;
+      letter-spacing: -0.04em;
+    }
 
-  .fs-xl {
-    font-size: 64px;
-    line-height: 68px;
-  }
+    .img-upper-footer {
+      height: 500px;
+      padding-left: 40px !important;
+      padding-right: 40px !important;
+    }
 
-  .fs-lg {
-    font-size: 56px;
-    line-height: 60px;
-    letter-spacing: -0.03em;
-  }
+    .img-about-us {
+      height: 700px;
+      width: 100%;
+    }
 
-  .fs-md {
-    font-size: 48px;
-    line-height: 52px;
-    letter-spacing: -0.03em;
-  }
+    .fs-xl {
+      font-size: 64px;
+      line-height: 68px;
+    }
 
-  .fs-sm-md-const {
-    font-size: 32px;
-    line-height: 36px;
-    letter-spacing: -0.01em;
-  }
+    .fs-lg {
+      font-size: 56px;
+      line-height: 60px;
+      letter-spacing: -0.03em;
+    }
 
-  .fs-sm-md {
-    font-size: 32px;
-    line-height: 36px;
-    letter-spacing: -0.01em;
-  }
+    .fs-md {
+      font-size: 48px;
+      line-height: 52px;
+      letter-spacing: -0.03em;
+    }
 
-  .fs-sm {
-    font-size: 24px;
-    line-height: 28px;
-    letter-spacing: -0.01em;
-  }
+    .fs-sm-md-const {
+      font-size: 32px;
+      line-height: 36px;
+      letter-spacing: -0.01em;
+    }
 
-  .fs-xs {
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing: -0.01em;
-  }
+    .fs-sm-md {
+      font-size: 32px;
+      line-height: 36px;
+      letter-spacing: -0.01em;
+    }
 
-  .bold-lg {
-    font-family: "CircularStd-Bold";
-  }
+    .fs-sm {
+      font-size: 24px;
+      line-height: 28px;
+      letter-spacing: -0.01em;
+    }
 
-  .bold-lg-ar {
-    font-family: "CircularAr-Bold";
-  }
+    .fs-xs {
+      font-size: 18px;
+      line-height: 24px;
+      letter-spacing: -0.01em;
+    }
 
-  .semibold-lg {
-    font-family: "CircularStd-SemiBold";
-  }
+    .bold-lg {
+      font-family: "CircularStd-Bold";
+    }
 
-  .semibold-lg-ar {
-    font-family: "CircularAr-SemiBold";
-  }
+    .bold-lg-ar {
+      font-family: "CircularAr-Bold";
+    }
 
-  .footer-padding {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-}
+    .semibold-lg {
+      font-family: "CircularStd-SemiBold";
+    }
 
-/* Mobile */
+    .semibold-lg-ar {
+      font-family: "CircularAr-SemiBold";
+    }
 
-@media (max-width: 767.98px) {
-  .fs-mega {
-    font-size: 32px;
-    line-height: 36px;
-    letter-spacing: -0.01em;
-  }
+    <<<<<<< HEAD .footer-padding {
+      padding-left: 40px;
+      padding-right: 40px;
 
-  .fs-kilo {
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing: -0.01em;
-  }
+      =======.page-padding {
+        padding-left: 40px !important;
+        padding-right: 40px !important;
+        >>>>>>>be6c28a8945b46e91cb592bd366d253c13a65ec4
+      }
+    }
 
-  .fs-mini {
-    font-size: 12px;
-    line-height: 18px;
-  }
+    /* Mobile */
 
-  .fs-2xl {
-    font-size: 40px;
-    line-height: 44px;
-    letter-spacing: -0.02em;
-  }
+    @media (max-width: 767.98px) {
+      .fs-mega {
+        font-size: 32px;
+        line-height: 36px;
+        letter-spacing: -0.01em;
+      }
 
-  .img-upper-footer {
-    height: 400px;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
+      .fs-kilo {
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: -0.01em;
+      }
 
-  .img-about-us {
-    height: 256px;
-    width: 343px;
-  }
+      .fs-mini {
+        font-size: 12px;
+        line-height: 18px;
+      }
 
-  .fs-xl {
-    font-size: 32px;
-    line-height: 36px;
-  }
+      .fs-2xl {
+        font-size: 40px;
+        line-height: 44px;
+        letter-spacing: -0.02em;
+      }
 
-  .fs-lg {
-    font-size: 32px;
-    line-height: 36px;
-    letter-spacing: -0.01em;
-  }
+      .img-upper-footer {
+        height: 400px;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
 
-  .fs-md {
-    font-size: 32px;
-    line-height: 36px;
-    letter-spacing: -0.01em;
-  }
+      .img-about-us {
+        height: 256px;
+        width: 343px;
+      }
 
-  .fs-sm-md-const {
-    font-size: 24px;
-    line-height: 28px;
-    letter-spacing: -0.01em;
-  }
+      .fs-xl {
+        font-size: 32px;
+        line-height: 36px;
+      }
 
-  .fs-sm-md {
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing: -0.01em;
-  }
+      .fs-lg {
+        font-size: 32px;
+        line-height: 36px;
+        letter-spacing: -0.01em;
+      }
 
-  .fs-sm {
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing: -0.01em;
-  }
+      .fs-md {
+        font-size: 32px;
+        line-height: 36px;
+        letter-spacing: -0.01em;
+      }
 
-  .fs-xs {
-    font-size: 16px;
-    line-height: 22px;
-    letter-spacing: -0.01em;
-  }
+      .fs-sm-md-const {
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: -0.01em;
+      }
 
-  .fs-xs-sm-only {
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 0;
-  }
+      .fs-sm-md {
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: -0.01em;
+      }
+
+      .fs-sm {
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: -0.01em;
+      }
+
+      .fs-xs {
+        font-size: 16px;
+        line-height: 22px;
+        letter-spacing: -0.01em;
+      }
+
+      .fs-xs-sm-only {
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0;
+      }
 
 
-  .bold-sm {
-    font-family: "CircularStd-Bold";
-  }
+      .bold-sm {
+        font-family: "CircularStd-Bold";
+      }
 
-  .bold-sm-ar {
-    font-family: "CircularAr-Bold";
-  }
+      .bold-sm-ar {
+        font-family: "CircularAr-Bold";
+      }
 
-  .semibold-sm {
-    font-family: "CircularStd-SemiBold";
-  }
+      .semibold-sm {
+        font-family: "CircularStd-SemiBold";
+      }
 
-  .semibold-sm-ar {
-    font-family: "CircularAr-SemiBold";
-  }
+      .semibold-sm-ar {
+        font-family: "CircularAr-SemiBold";
+      }
 
-  .footer-padding {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-}
+      .page-padding {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
+    }
 
-.fs-static {
-  font-size: 18px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-}
+    .fs-static {
+      font-size: 18px;
+      line-height: 24px;
+      letter-spacing: -0.01em;
+    }
 
-.fs-md-static {
-  font-size: 24px;
-  line-height: 28px;
-  letter-spacing: -0.01em;
-}
+    .fs-md-static {
+      font-size: 24px;
+      line-height: 28px;
+      letter-spacing: -0.01em;
+    }
 
-.fs-xs-static {
-  font-size: 16px;
-  line-height: 22px;
-  letter-spacing: -0.01em;
-}
+    .fs-xs-static {
+      font-size: 16px;
+      line-height: 22px;
+      letter-spacing: -0.01em;
+    }
 
-.fs-2xs-static {
-  font-size: 14px;
-  line-height: 20px;
-}
+    .fs-2xs-static {
+      font-size: 14px;
+      line-height: 20px;
+    }
 
-.fs-sm-static {
-  font-size: 16px;
-  line-height: 26px;
-  letter-spacing: -0.01em;
-}
+    .fs-sm-static {
+      font-size: 16px;
+      line-height: 26px;
+      letter-spacing: -0.01em;
+    }
 
-.fs-lg-static {
-  font-size: 32px;
-  line-height: 36px;
-  letter-spacing: -0.01em;
-}
+    .fs-lg-static {
+      font-size: 32px;
+      line-height: 36px;
+      letter-spacing: -0.01em;
+    }
 
-@keyframes comeOut {
-  0% {
-    background-size: 100% 100%;
-    background-position: 0 0;
-  }
+    @keyframes comeOut {
+      0% {
+        background-size: 100% 100%;
+        background-position: 0 0;
+      }
 
-  100% {
-    background-size: 120% 120%;
-    background-position: -30px -30px;
-  }
-}
+      100% {
+        background-size: 120% 120%;
+        background-position: -30px -30px;
+      }
+    }

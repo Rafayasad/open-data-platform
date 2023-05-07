@@ -10,7 +10,7 @@ const Rows = memo((props) => {
     const { title, description, image } = props;
 
     return (
-        <Container fluid className="my-4 px-4 max-width">
+        <Container fluid className="my-4 px-4 max-width page-padding">
             <Row className='d-flex justify-content-between'>
                 <Col md={6} xs={12} className='py-2 m-0'>
                     <Row>
@@ -25,7 +25,7 @@ const Rows = memo((props) => {
                         </Col>
                     </Row>
                 </Col>
-                <Col md={6} xs={12} className='py-2 m-0'>
+                <Col md={6} xs={12} className='py-2 m-0 d-flex justify-content-lg-end justify-content-center'>
                     <Image className='image-height' src={image} fluid style={{ borderRadius: '30px' }} />
                 </Col>
             </Row>

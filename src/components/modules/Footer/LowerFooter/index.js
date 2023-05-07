@@ -19,7 +19,7 @@ const LowerFooter = memo(() => {
     const onClickTwitter = useCallback(() => window.open(socialLinks.twitter));
 
     return (
-        <Container fluid className='bg-black py-4 footer-padding'>
+        <Container fluid className='bg-black py-4 page-padding'>
             <div className='d-none d-lg-block max-width'>
                 <hr className='text-white' />
                 <Col className='my-4'>
