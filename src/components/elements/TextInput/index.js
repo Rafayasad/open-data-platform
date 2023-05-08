@@ -15,7 +15,7 @@ const TextInput = memo((props) => {
 
   const { t } = useTranslation();
 
-  const { placeholder, type, onChange, value, title, index } = props;
+  const { placeholder, type, onChange, value, title, index, name, password } = props;
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -41,6 +41,13 @@ const TextInput = memo((props) => {
       inValid_title: i18n.language === locales.AR ? 'تنسيق بريد إلكتروني غير صالح' : 'Invalid email format',
       valid_title: i18n.language === locales.AR ? 'تنسيق البريد الإلكتروني هذا صالح' : 'This email format is valid',
       isValid: placeholder === t("pwdEmail") && type === "text" && validateEmail(value) === true
+    }
+  ]
+
+  const checkEqualBothPasswords = [
+    {
+      inValid_title: i18n.language === locales.AR ? 'كلا كلمتي المرور غير متطابقتين.' : "Both passwords doesn't match.",
+      isValid: placeholder === t("rePwd") && type === "rePassword" && password === value
     }
   ]
 
@@ -73,7 +80,7 @@ const TextInput = memo((props) => {
     },
     {
       title: i18n.language === locales.AR ? "يجب ألا يحتوي على اسم المستخدم أو كلمات القاموس" : 'Must not contain your username or dictionary words or any empty spaces or must contain one digit number',
-      isValid: type === "password" && isStrongPassword(value) === true
+      isValid: type === "password" && isStrongPassword(value, name) === true
     }
   ]
 
@@ -126,7 +133,7 @@ const TextInput = memo((props) => {
         onBlur={toggle}
         id="standard-adornment-password"
         sx={{
-          ':before': { borderBottomColor: value?.length > 0 ? "black" : '#9F9F9F' , borderBottomWidth:"1px" },
+          ':before': { borderBottomColor: value?.length > 0 ? "black" : '#9F9F9F', borderBottomWidth: "1px" },
           ':after': {
             borderBottomColor:
               placeholder === t("password")
@@ -134,7 +141,7 @@ const TextInput = memo((props) => {
                 && isMaximumLengthExist(value) === true
                 && isStrongPassword(value) === true ? '#2C9C2E'
                 : '#AD50F0',
-                borderBottomWidth:"1px" ,
+            borderBottomWidth: "1px",
           },
         }}
         type={!showPassword && type === "password" ? "password" : "text"} value={value}
@@ -179,6 +186,22 @@ const TextInput = memo((props) => {
             style={{ color: item.isValid ? colors.green : colors.dark_red }}>
 
             <small>{item.title}</small></p>)}
+        </div>
+      }
+
+      {
+        onFocusField && placeholder === t("rePwd") &&
+        title !== t("logIn") &&
+        <div className="mt-3">
+          {checkEqualBothPasswords?.map(item =>
+          (!item.isValid &&
+            <p className="m-0"
+
+              style={{ color: colors.dark_red }}>
+
+              <small>{item.inValid_title}</small></p>
+          )
+          )}
         </div>
       }
 

@@ -48,6 +48,9 @@ const ResetPassword = memo(() => {
   return (
     <View theme={window.innerWidth <= 768 ? "dark" : "light"} nocontent noupperfooter nomiddlefooter nolowerfooter>
       <ResetPassComponent
+        email={email}
+        password={password}
+        rePassword={rePassword}
         setEmail={setEmail}
         setPassword={setPassword}
         setRePassword={setRePassword}
