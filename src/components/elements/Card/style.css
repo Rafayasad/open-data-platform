@@ -1,9 +1,9 @@
 .card-hover-light:hover {
-  background-color: #f3f3f3;
+  background-color: #f3f3f3 !important;
 }
 
 .card-hover-primary:hover {
-  background-color: #762fff;
+  background-color: #762fff !important;
   color: #ffffff !important;
   transition: 0.2s ease-in-out;
 }
@@ -30,6 +30,13 @@
   white-space: nowrap;
 }
 
+.paddofcards {
+  padding-left: 31px !important;
+  padding-right: 31px !important;
+  padding-top: 20px !important;
+  padding-bottom: 31px !important;
+}
+
 /* Tablet */
 
 @media (max-width: 1199.98px) {
@@ -48,11 +55,13 @@
     font-size: 12px;
     line-height: 18px;
   }
+
   .publisher-xs-sm {
     font-size: 14px;
     line-height: 20px;
   }
-   .hover-pl{
+
+  .hover-pl {
     padding-left: 18px;
   }
 }
@@ -65,19 +74,23 @@
 
     letter-spacing: -0.01em;
   }
+
   .tittle-sm {
     font-size: 32px;
     line-height: 36px;
   }
+
   .publisher-xs {
     font-size: 14px;
     line-height: 20px;
   }
+
   .publisher-xs-sm {
     font-size: 14px;
     line-height: 20px;
   }
-  .hover-pl{
+
+  .hover-pl {
     padding-left: 18px;
   }
 }
@@ -90,28 +103,32 @@
     line-height: 24px;
     letter-spacing: -0.01em;
   }
+
   .tittle-sm {
     font-size: 18px;
     line-height: 24px;
   }
+
   .publisher-xs {
     font-size: 12px;
     line-height: 18px;
   }
+
   .publisher-xs-sm {
     font-size: 12px;
     line-height: 18px;
   }
-  .hover-pl{
+
+  .hover-pl {
     padding-left: 0px;
   }
 }
 
 .text-underline-hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .text-underline-hover:hover {
-    text-decoration: underline;
-    cursor: pointer;
+  text-decoration: underline;
+  cursor: pointer;
 }
