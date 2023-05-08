@@ -41,7 +41,7 @@ const Cards = memo((props) => {
 
     const { title, notitlebutton, data, backgroundColor, hoverable, type,
         size, onClick, onClickViewAll, buttonText, notagsactive, noheadercomponent, dropdownWidth
-        , handleReload, cardsCount, textSize
+        , handleReload, cardsCount, textSize,padding
     } = props;
 
     var numberOfColumns = 4;
@@ -180,7 +180,7 @@ const Cards = memo((props) => {
                 </Row>
             }
             <Row>
-                <Col className="px-4 max-width page-padding">
+                <Col className={`x-4 max-width  ${padding ? 'page-padding-md' :'page-padding'}`}>
                     <Row>
                         {renderContent()}
                     </Row>

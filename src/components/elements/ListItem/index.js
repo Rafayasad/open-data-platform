@@ -10,7 +10,7 @@ const ListItem = memo((props) => {
     const { title, value, image, onClick } = props;
 
     return (
-        <Row className="p-4 m-0 list-item-hover padding-xl">
+        <Row className="page-padding  m-0 list-item-hover padding-xl">
             <Col md={12} className="p-0 m-0 d-flex">
                 <p className={`fs-2xl m-0 text-white ${i18next.language === locales.AR ? 'ar-font-bold' : 'en-font-bold'}`} onClick={() => onClick()} style={{ cursor: 'pointer' }}>
                     {title}

@@ -18,7 +18,7 @@ const QuestionList = memo((props) => {
     const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered])
 
     return (
-        <Container fluid className="my-2 p-4 max-width">
+        <Container fluid className="my-2 page-padding max-width">
             <div className="py-2">
                 <p className={`fs-xl ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{i18n.language === locales.AR ? titleAr : title}</p>
                 {/* <Heading heading={title} size={"lg"} bold backgroundColor={colors.white} /> */}
