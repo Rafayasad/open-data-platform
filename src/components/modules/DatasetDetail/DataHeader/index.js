@@ -5,6 +5,8 @@ import { RxDownload } from "react-icons/rx";
 import { useTranslation } from "react-i18next";
 import { locales } from "../../../../i18n/helper";
 import { colors } from "../../../../utils/colors";
+import { BsPerson } from "react-icons/bs";
+import { FiTwitter, FiLinkedin } from "react-icons/fi";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
@@ -61,9 +63,9 @@ const DataHeader = memo((props) => {
             title: t(item.title),
             format: item.format,
             url: url,
-            icon: item.format === "facebook" ? <FaFacebookF />
-                : item.format === "linkedin" ? <FaLinkedinIn />
-                    : item.format === "twitter" && <FaTwitter />,
+            icon: item.format === "facebook" ? <BsPerson />
+                : item.format === "linkedin" ? <FiLinkedin />
+                    : item.format === "twitter" && <FiTwitter />,
         }
     ))
 
@@ -140,7 +142,7 @@ const DataHeader = memo((props) => {
                                         autoClose={true}
                                         size={"md"}
                                         options={options}
-                                        headerComponent={<Button icon={<RxDownload className="ms-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" iconend/>}
+                                        headerComponent={<Button icon={<RxDownload className="ms-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" iconend />}
                                     />
                                 </div>
                                 {

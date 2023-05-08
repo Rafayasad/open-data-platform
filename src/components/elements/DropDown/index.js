@@ -80,7 +80,7 @@ const Dropdown = (props) => {
                 {
                     noheadercomponent ? null :
                         headerComponent ? (
-                            <BSDropdown.Toggle href={null} className={`w-100 bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end ${nopadding && "px-0"}`}>
+                            <BSDropdown.Toggle href={null} className={`w-100 bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end ${nopadding && "px-0"} p-0`}>
                                 {headerComponent}
                             </BSDropdown.Toggle>
                         ) : (

@@ -5,6 +5,8 @@ import { locales } from "../../../../i18n/helper";
 import { colors } from "../../../../utils/colors";
 import { SlShare } from "react-icons/sl";
 import { FaFilePdf, FaFileExcel, FaFileCsv, FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { BsPerson } from "react-icons/bs";
+import { FiTwitter, FiLinkedin } from "react-icons/fi";
 import Heading from "../../../elements/Heading";
 import Shimmer from "../../../elements/Shimmer";
 import Tag from "../../../elements/Tag";
@@ -30,9 +32,9 @@ const StoriesDetails = memo((props) => {
             title: t(item.title),
             format: item.format,
             url: url,
-            icon: item.format === "facebook" ? <FaFacebookF />
-                : item.format === "linkedin" ? <FaLinkedinIn />
-                    : item.format === "twitter" && <FaTwitter />
+            icon: item.format === "facebook" ? <BsPerson />
+                : item.format === "linkedin" ? <FiLinkedin />
+                    : item.format === "twitter" && <FiTwitter />
         }
     ))
 
