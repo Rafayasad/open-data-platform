@@ -32,9 +32,11 @@ export const validateEmail = (email) => {
   return regex.test(String(email).toLowerCase())
 };
 
-export const isStrongPassword = (str) => {
-  var regex = /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]{15,30}$/;
-  return regex.test(str);
+export const isStrongPassword = (str, name) => {
+  // var regex = /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]{15,30}$/;
+  var regex = /^(?=.*\d)\S+$/
+  // console.log("namemee",str.includes(name));
+  return regex.test(str) && !str.includes(name);
 }
 
 export const isLowerCaseExist = (str) => {
