@@ -181,7 +181,7 @@ const Search = memo((props) => {
                         <Col className="m-0">
                             <hr className="m-0 p-0" style={{ borderWidth: "2px", borderColor: colors.purple }} />
                             <div className="py-3">
-                                <div style={{ marginLeft: "30px" }}>
+                                <div style={{ marginLeft: "32px" }}>
                                     <p style={{ fontSize: 12 }} className="py-2 m-0 text-secondary">{t("popularsearches")}</p>
                                 </div>
                                 {
