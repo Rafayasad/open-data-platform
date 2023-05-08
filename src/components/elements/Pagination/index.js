@@ -20,9 +20,7 @@ const theme = createTheme(
             },
         },
         typography: {
-    fontFamily: 'CircularStd-Regular',
-    color:grey
-  
+        fontFamily: 'CircularStd-Regular'
   }
         
     }
