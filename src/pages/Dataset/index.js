@@ -210,6 +210,7 @@ const Dataset = memo(() => {
                     data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 4)}
                     onClick={onClickCard}
                     size={"md"}
+                    padding='card-padding-md'
                 />
 
             }

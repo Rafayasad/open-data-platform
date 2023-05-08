@@ -22,7 +22,7 @@ const Images = memo(() => {
     const onClickRegister = useCallback(() => navigate(routes.REGISTER));
 
     return (
-        <Container className="py-3" fluid style={{ backgroundColor: colors.black }}>
+        <Container className="py-3 " fluid style={{ backgroundColor: colors.black }}>
             {/* <Row>
                 <Col className="my-3 px-4">
                     <div className="d-flex flex-column justify-content-center" style={{
@@ -52,9 +52,9 @@ const Images = memo(() => {
                 </Col>
             </Row> */}
             <Row>
-                <Col className="px-4 max-width">
-                    <Row>
-                        <Col xs={12} md={12} lg={6} className="my-2 ">
+                <Col className="max-width">
+                    <Row className="card-padding-lg">
+                        <Col xs={12} md={12} lg={6} className="my-2">
                             <div className="d-flex flex-column justify-content-center card-height" id="zoom-in-out-card-one" style={{
                                 //height: window.innerWidth <= 765 ? '400px' : '500px',
                                 // backgroundImage: `url(${CardOne})`,

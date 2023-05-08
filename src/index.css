@@ -205,6 +205,10 @@ code {
     padding-left: 40px !important;
     padding-right: 40px !important;
   }
+   .page-padding-md {
+    padding-left: 28px !important;
+    padding-right: 28px !important;
+  }
 }
 
 /* Desktop */
@@ -298,6 +302,10 @@ code {
   .page-padding {
     padding-left: 40px !important;
     padding-right: 40px !important;
+  }
+    .page-padding-md {
+    padding-left: 28px !important;
+    padding-right: 28px !important;
   }
 }
 
@@ -402,6 +410,10 @@ code {
     font-family: "CircularAr-SemiBold";
   }
   .page-padding {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  .page-padding-md {
     padding-left: 16px !important;
     padding-right: 16px !important;
   }

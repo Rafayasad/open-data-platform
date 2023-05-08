@@ -126,14 +126,15 @@ const TextInput = memo((props) => {
         onBlur={toggle}
         id="standard-adornment-password"
         sx={{
-          ':before': { borderBottomColor: value?.length > 0 ? "black" : '#9F9F9F' , borderBottomWidth:"1.5px" },
+          ':before': { borderBottomColor: value?.length > 0 ? "black" : '#9F9F9F' , borderBottomWidth:"1px" },
           ':after': {
             borderBottomColor:
               placeholder === t("password")
                 && type === "password"
                 && isMaximumLengthExist(value) === true
                 && isStrongPassword(value) === true ? '#2C9C2E'
-                : '#101010'
+                : '#AD50F0',
+                borderBottomWidth:"1px" ,
           },
         }}
         type={!showPassword && type === "password" ? "password" : "text"} value={value}
