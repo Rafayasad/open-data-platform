@@ -35,8 +35,7 @@ export const validateEmail = (email) => {
 export const isStrongPassword = (str, name) => {
   // var regex = /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]{15,30}$/;
   var regex = /^(?=.*\d)\S+$/
-  // console.log("namemee",str.includes(name));
-  return regex.test(str) && !str.includes(name);
+  return name ? !str.includes(name) &&  regex.test(str) : regex.test(str)  ;
 }
 
 export const isLowerCaseExist = (str) => {

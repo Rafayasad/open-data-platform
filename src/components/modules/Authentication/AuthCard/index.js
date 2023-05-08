@@ -60,7 +60,7 @@ const AuthCard = memo((props) => {
           {
             inputFields?.length > 0 && inputFields?.map((items, index) => (
               <Col key={index} className="py-2" md={12}>
-                <TextInput    password={password} title={title} name={userName} index={index} value={items.value} placeholder={items.placeholder} type={items.type} onChange={items.onChange} />
+                <TextInput password={password} title={title} name={userName} index={index} value={items.value} placeholder={items.placeholder} type={items.type} onChange={items.onChange} />
               </Col>
             ))
           }

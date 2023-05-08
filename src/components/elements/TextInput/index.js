@@ -84,7 +84,7 @@ const TextInput = memo((props) => {
     }
   ]
 
-  // console.log("s=====>ssS", checkReEmailValidation);
+
 
   return (
     // <Form.Group
