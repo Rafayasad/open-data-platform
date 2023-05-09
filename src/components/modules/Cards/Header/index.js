@@ -43,9 +43,9 @@ const Header = memo((props) => {
     }
 
     return (
-        <Container fluid className="py-md-4 pt-4 py-3">
+        <Container fluid className="py-md-4 pt-4 py-3 px-0">
             <Row className="w-100 d-flex p-0 m-0 align-items-center justify-content-between">
-                <Col md={8} lg={8} xs={!dropdown && nobutton ? 12 : 6} className="px-0">
+                <Col md={8} lg={8} xs={!dropdown && nobutton ? 12 : 6} className='px-0'>
                     <div>
                         {/* <Heading
                             bold

@@ -18,7 +18,7 @@ const ListCard = memo((props) => {
 
     const onHover = useCallback((index) => setCurrentHovered(index), [currentHovered]);
     const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered]);
-
+    
     return (
         <div className="">
             {

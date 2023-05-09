@@ -174,7 +174,7 @@ const Cards = memo((props) => {
             {
                 title &&
                 <Row className="max-width">
-                    <Col>
+                    <Col className='datalist-title-padding'>
                         <Header nobutton={notitlebutton && true} buttonText={buttonText} backgroundColor={backgroundColor} title={title} onClickButton={onClickViewAll} />
                     </Col>
                 </Row>

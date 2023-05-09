@@ -78,14 +78,3 @@
   transition: 0.3s ease;
 }
 
-.text-black {
-  color: black !important;
-  background-color: white;
-  border: none;
-}
-
-.text-black:hover {
-  text-underline-position: under;
-  text-decoration: underline;
-  transition: 0.3s ease;
-}
