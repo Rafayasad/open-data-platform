@@ -20,6 +20,7 @@ import Heading from "../../elements/Heading";
 import './style.css';
 import { handleLogout } from "../../../redux/reducers/Authentication";
 import { logout } from "../../../axios/api";
+import CustomButton from "../../elements/CustomButton";
 
 const Navbar = memo((props) => {
 
@@ -124,16 +125,18 @@ const Navbar = memo((props) => {
                             <>
                                 <div className="d-flex justify-content-center mx-2">
                                     <Link style={{ textDecoration: 'none' }} to={routes.REGISTER}>
-                                        <Button borderColor={color} backgroundColor='transparent' textColor={color} title={t("register")} />
+                                        {/* <Button borderColor={color} backgroundColor='transparent' textColor={color} title={t("register")} /> */}
+                                        <CustomButton title={t("register")} buttonClass={`${theme==='dark'?'outlined' :'outlined-transparent'}`}/>
                                     </Link>
                                 </div>
                                 <div className="d-flex justify-content-center mx-2">
                                     {
                                         isLoggedIn ? (
-                                            <Button backgroundColor={color} textColor={color === colors.black && colors.white} title={t("logout")} loading={loading} onClick={onClickLogout} />
+                                            <CustomButton title={t("logout")} loading={loading} onClick={onClickLogout} buttonClass = {`${theme==='dark' ? 'contained-black' :'contained'}`}/>
+                                            
                                         ) : (
                                             <Link style={{ textDecoration: 'none' }} to={routes.LOGIN}>
-                                                <Button backgroundColor={color} textColor={color === colors.black && colors.white} title={t("LogIn")} />
+                                                <CustomButton  title={t("LogIn")} buttonClass = {`${theme==='dark' ? 'contained-black' :'contained'}`}/>
                                             </Link>
                                         )
                                     }
@@ -225,10 +228,10 @@ const Navbar = memo((props) => {
                         <Col>
                             {
                                 isLoggedIn ? (
-                                    <Button width={"100%"} borderColor={""} backgroundColor='black' textColor={"white"} title={t("logout")} loading={loading} onClick={onClickLogout} />
+                                    <CustomButton width={"100%"} buttonClass = 'contained-black' title={t("logout")} loading={loading} onClick={onClickLogout} />
                                 ) : (
                                     <Link style={{ textDecoration: 'none' }} to={routes.LOGIN}>
-                                        <Button width={"100%"} borderColor={""} backgroundColor='black' textColor={"white"} title={t("LogIn")} />
+                                        <CustomButton width={"100%"} title={t("LogIn")} buttonClass = 'contained-black'/>
                                     </Link>
                                 )
                             }

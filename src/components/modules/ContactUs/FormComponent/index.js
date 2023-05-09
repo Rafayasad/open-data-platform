@@ -13,6 +13,9 @@ import { validateEmail } from "../../../../utils/generic";
 import { useNavigate } from "react-router-dom";
 import { contactUs } from "../../../../axios/api";
 import i18n from "../../../../i18n/i18n";
+import CustomButton from "../../../elements/CustomButton";
+import i18next from "i18next";
+import { locales } from "../../../../i18n/helper";
 
 const FormComponent = memo(() => {
 
@@ -65,7 +68,8 @@ const FormComponent = memo(() => {
         <Container className="my-5 py-5" fluid>
             <Row className="d-flex justify-content-center d-lg-none zindex-modal">
                 <Col md={10}>
-                    <Heading heading={t("contactUs")} size="xxxl" />
+                    {/* <Heading heading={t("contactUs")} size="xxxl" /> */}
+                    <p className={`${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"} fs-lg-static`}>{t("contactUs")}</p>
                 </Col>
                 <Col md={10}>
                     <Heading nomargin heading={t("footerPartText")} size="xxs" color={colors.gray} />
@@ -110,12 +114,16 @@ const FormComponent = memo(() => {
                 </Col>
             </Row>
             <Row className="d-flex justify-content-center">
-                <Col md={10} className="d-flex justify-content-end">
-                    <Button
+                <Col md={10} className="d-flex justify-content-start justify-content-md-end pt-2">
+                    {/* <Button
                         onClick={onSubmitHandler}
                         title={t("submit")}
                         backgroundColor={name && email && selectedValue != t("selectsubject") && message ? colors.black : colors.lighter_gray}
-                        textColor={name && email && selectedValue != t("selectsubject") && message ? colors.white : colors.gray} />
+                        textColor={name && email && selectedValue != t("selectsubject") && message ? colors.white : colors.gray} /> */}
+                    <CustomButton 
+                    onClick={onSubmitHandler}
+                    title={t("submit")}
+                    buttonClass= {`${name && email && selectedValue != t("selectsubject") && message ? 'contained-black' : 'disabled'}`} />
                 </Col>
             </Row>
         </Container>

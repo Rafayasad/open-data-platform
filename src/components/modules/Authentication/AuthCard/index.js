@@ -11,6 +11,7 @@ import Recaptcha from "../../../elements/Recaptcha";
 import OtpInput from "react18-input-otp";
 import { locales } from "../../../../i18n/helper";
 import i18next from "i18next";
+import CustomButton from '../../../elements/CustomButton';
 
 const AuthCard = memo((props) => {
 
@@ -115,7 +116,7 @@ const AuthCard = memo((props) => {
           {
             button?.map((items, index) => (
               <div key={index} className="d-flex flex-column align-items-center">
-                <Button
+                {/* <Button
                   padding={items.title === t("logIn") && "mt-3"}
                   width={title === t("register") ? "auto" : "80%"}
                   disable={items.disable}
@@ -127,6 +128,16 @@ const AuthCard = memo((props) => {
                   onClick={() => items.onClick()}
                   loading={items.loading}
                   bold={items.bold}
+                /> */}
+                <CustomButton
+                padding={items.title === t('logIn') && 'mt-3'}
+                width={title === t('register') ? 'auto' : '80%'}
+                title={items.title}
+                icon={items.icon}
+                onClick={() => items.onClick()}
+                loading={items.loading}
+                bold={items.bold}
+                buttonClass={`${items.backgroundColor === '#000000' ? 'contained-black' : 'disabled'}`}
                 />
                 {
                   button?.length - 1 != index &&

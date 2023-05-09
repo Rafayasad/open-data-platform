@@ -12,6 +12,7 @@ import Tag from "../../../elements/Tag";
 import i18next from "i18next";
 import { locales } from "../../../../i18n/helper";
 import './style.css';
+import CustomButton from "../../../elements/CustomButton";
 
 const Header = memo((props) => {
 
@@ -66,13 +67,14 @@ const Header = memo((props) => {
                     {
                         !nobutton ?
                             <div>
-                                <Button
+                                {/* <Button
                                     title={buttonText ? buttonText : t("viewAll")}
                                     textColor={color}
                                     borderColor={color}
                                     backgroundColor='transparent'
                                     onClick={onClickButton}
-                                />
+                                /> */}
+                                <CustomButton buttonClass={`${color==='#000000' ? 'outlined' :'outlined-transparent'}`} title={buttonText ? buttonText : t("viewAll")}  onClick={onClickButton}/>
                             </div> :
                             dropdown ?
                                 <Dropdown

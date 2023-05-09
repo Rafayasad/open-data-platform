@@ -23,6 +23,7 @@ import { RWebShare } from "react-web-share";
 import './style.css';
 import { addDownloadCount } from "../../../../axios/api";
 import i18next from "i18next";
+import CustomButton from "../../../elements/CustomButton";
 
 
 const DataHeader = memo((props) => {
@@ -131,7 +132,8 @@ const DataHeader = memo((props) => {
                                     autoClose={true}
                                     options={shareOption}
                                     size={"xl"}
-                                    headerComponent={<Button backgroundColor="white" textColor="black" borderColor={currentHovered ? colors.purple : colors.black} icon={<SlShare size={20} color={currentHovered ? colors.purple : colors.black} />} />}
+                                    headerComponent={<CustomButton buttonClass='outlined' icon={<SlShare size={20}  />} />}
+                                    //headerComponent={<Button backgroundColor="white" textColor="black" borderColor={currentHovered ? colors.purple : colors.black} icon={<SlShare size={20} color={currentHovered ? colors.purple : colors.black} />} />}
                                 />
                             </div>
                             <div className="d-flex flex-column">
@@ -142,7 +144,8 @@ const DataHeader = memo((props) => {
                                         autoClose={true}
                                         size={"md"}
                                         options={options}
-                                        headerComponent={<Button icon={<RxDownload className="ms-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" iconend />}
+                                        headerComponent={<CustomButton icon={<RxDownload className="ms-1" size={20} />} title={t("download")} buttonClass='contained-black' iconend/>}
+                                        //headerComponent={<Button icon={<RxDownload className="ms-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" iconend />}
                                     />
                                 </div>
                                 {

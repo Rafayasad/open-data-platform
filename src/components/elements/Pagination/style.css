@@ -14,6 +14,7 @@
 .muiltr-1drmwn4-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
   min-width: 30px;
   height: 30px;
+  color: white !important;
 }
 [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
     color: #707070;
