@@ -173,7 +173,7 @@ const Cards = memo((props) => {
         <Container fluid style={{ backgroundColor: backgroundColor }}>
             {
                 title &&
-                <Row className="max-width">
+                <Row className="max-width pt-5">
                     <Col>
                         <Header nobutton={notitlebutton && true} buttonText={buttonText} backgroundColor={backgroundColor} title={title} onClickButton={onClickViewAll} />
                     </Col>

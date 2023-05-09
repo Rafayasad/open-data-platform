@@ -42,7 +42,7 @@ const Login = memo(() => {
         <Container fluid className="my-5 pt-5">
           <Row>
             <Col>
-              <Row className="p-4">
+              <Row className="px-4 py-5">
                 <Col md={8}>
                   <p className={`fs-mega text-white ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("openDataTitle")}</p>
                   {/* <Heading

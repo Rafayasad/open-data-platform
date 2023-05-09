@@ -22,7 +22,7 @@ const Images = memo(() => {
     const onClickRegister = useCallback(() => navigate(routes.REGISTER));
 
     return (
-        <Container className="py-3 " fluid style={{ backgroundColor: colors.black }}>
+        <Container className="" fluid style={{ backgroundColor: colors.black }}>
             {/* <Row>
                 <Col className="my-3 px-4">
                     <div className="d-flex flex-column justify-content-center" style={{
@@ -51,7 +51,7 @@ const Images = memo(() => {
                     </div>
                 </Col>
             </Row> */}
-            <Row>
+            <Row >
                 <Col className="max-width">
                     <Row className="card-padding-lg">
                         <Col xs={12} md={12} lg={6} className="my-2">
@@ -65,7 +65,7 @@ const Images = memo(() => {
                                 position: 'relative'
                             }}>
                                 <div className="overlay" />
-                                <Row className="py-1" style={{ zIndex: 1 }}>
+                                <Row className="pt-1" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col xs={10} sm={12} md={8} className='text-center' id='zoom-in'>
                                         <Heading bold size={"xxl"} color='white' heading={t("areYouNewToOpenData")} />
@@ -90,7 +90,7 @@ const Images = memo(() => {
                                 borderRadius: '30px',
                                 backgroundPosition: 'center'
                             }}>
-                                <Row className="py-1" style={{ zIndex: 1 }}>
+                                <Row className="pt-1" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col xs={10} md={6} className='d-flex flex-column justify-content-center align-items-center text-center' id='zoom-in'>
                                         <Heading bold size='xxl' color='white' heading={t("joinUsRegisterWithUs")} />

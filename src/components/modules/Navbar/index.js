@@ -122,7 +122,7 @@ const Navbar = memo((props) => {
                         {
                             !nocontent &&
                             <>
-                                <div className="d-flex justify-content-center mx-2">
+                                <div className="d-flex justify-content-center mx-1">
                                     <Link style={{ textDecoration: 'none' }} to={routes.REGISTER}>
                                         <Button borderColor={color} backgroundColor='transparent' textColor={color} title={t("register")} />
                                     </Link>
