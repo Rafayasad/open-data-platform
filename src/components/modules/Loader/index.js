@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Shimmer from '../../elements/Shimmer';
+import ShimmerEffect from '../../elements/ShimmerEffect';
+import { colors } from '../../../utils/colors';
 
 let sizes = ['400px', '280px', '340px']
 
@@ -14,6 +16,9 @@ const Loader = memo((props) => {
                 <Col md={12} className="my-2">
                     <Shimmer height={332} rounded="lg" />
                 </Col> :
+            //       <Col md={12} className="my-2">
+            //       <ShimmerEffect height={332} rounded="lg" backgroundColor={colors.lighter_gray}  />
+            //   </Col> :
                 type === 'full-width-min' ?
                     <Col md={12} className="my-2">
                         <Shimmer height={60} rounded="sm" />

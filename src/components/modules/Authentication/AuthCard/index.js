@@ -15,10 +15,9 @@ import i18next from "i18next";
 const AuthCard = memo((props) => {
 
 
-
   const { t } = useTranslation()
 
-  const { view, name, title, subtitle, linktext, inputFields, button, checkbox, recaptcha, onClickForgetPassword, hasOtp, otp, setOtp } = props;
+  const { view, userName, title, subtitle, linktext, inputFields, button, checkbox, recaptcha, onClickForgetPassword, hasOtp, otp, setOtp, password } = props;
 
   // const [otp, setOtp] = useState("");
 
@@ -61,7 +60,7 @@ const AuthCard = memo((props) => {
           {
             inputFields?.length > 0 && inputFields?.map((items, index) => (
               <Col key={index} className="py-2" md={12}>
-                <TextInput title={title} name={name} index={index} value={items.value} placeholder={items.placeholder} type={items.type} onChange={items.onChange} />
+                <TextInput password={password} title={title} name={userName} index={index} value={items.value} placeholder={items.placeholder} type={items.type} onChange={items.onChange} />
               </Col>
             ))
           }

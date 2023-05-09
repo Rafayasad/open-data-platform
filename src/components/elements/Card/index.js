@@ -1,17 +1,18 @@
+import './style.css';
 import React, { memo, useState } from "react";
 import { Card as RBCard, Col, Row } from "react-bootstrap";
 import { BsPerson, BsShare, BsThreeDots } from "react-icons/bs";
+import { FiTwitter, FiLinkedin } from "react-icons/fi";
 import { MdOutlineFileDownload } from 'react-icons/md';
 import { BsArrowDownCircleFill } from "react-icons/bs";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { FaFilePdf, FaFileExcel, FaFileCsv } from "react-icons/fa";
-import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+// import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { colors } from "../../../utils/colors";
 import { useCallback } from "react";
 import Dropdown from '../../elements/DropDown';
 import Heading from "../Heading";
 import Tag from "../Tag";
-import './style.css';
 import { shareOptions } from "../../../utils";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -115,9 +116,9 @@ const Card = memo((props) => {
             title: t(item.title),
             format: item.format,
             url: url,
-            icon: item.format === "facebook" ? <FaFacebookF />
-                : item.format === "linkedin" ? <FaLinkedinIn />
-                    : item.format === "twitter" && <FaTwitter />
+            icon: item.format === "facebook" ? <BsPerson />
+                : item.format === "linkedin" ? <FiLinkedin />
+                    : item.format === "twitter" && <FiTwitter />
         }
     ))
     return (
@@ -131,8 +132,13 @@ const Card = memo((props) => {
                 options={selectedSheetValue === t("downloadDatasets") ? specificDownloadOptions : selectedSheetValue === t("share") ? specificShareOptions : options} />
             <RBCard
                 // onClick={onClick}
-                className={`${nopadding ? "py-4" : "p-4"} ${ClassName} hover-pl`}
-                style={{ height: HEIGHT, width: "100%", borderRadius: "30px", borderWidth: border }}>
+                className={`${nopadding ? "py-4" : "paddofcards"} ${ClassName} hover-pl`}
+                style={{
+                    height: HEIGHT,
+                    width: "100%",
+                    borderRadius: "30px",
+                    borderWidth: border
+                }}>
                 {
                     !notags &&
                     <Row className={`${nopadding && "m-0"} h-25 align-items-center`}>

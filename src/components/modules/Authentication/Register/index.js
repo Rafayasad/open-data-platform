@@ -53,7 +53,6 @@ const Register = memo(() => {
   const onClickTermsAndPolicy = useCallback(() => navigate(routes.POLICY));
 
 
-
   return (
     <div>
       <div
@@ -84,6 +83,7 @@ const Register = memo(() => {
 
                 <AuthCard
                   view="desktop"
+                  userName={name}
                   title={t("register")}
                   recaptcha={recaptcha}
                   subtitle={t("accExist")}
@@ -134,6 +134,7 @@ const Register = memo(() => {
               >
                 <AuthCard
                   view="mobile"
+                  userName={name}
                   title={t("register")}
                   subtitle={t("alreadyAccount")}
                   linktext={{ display_text: t("login"), onClick: onClickLogin }}

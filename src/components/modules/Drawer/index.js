@@ -143,12 +143,12 @@ const Drawer = memo((props) => {
         // className="mt-5"
         >
             <div style={{ height: "100%" }}>
-                <div style={{ top: 0, position: "relative", left: 0, right: 0, zIndex: 1000 }} className="p-4 bg-white d-flex align-items-center justify-content-between shadow-bottom">
+                <div style={{ top: 0, position: "relative", left: 0, right: 0, zIndex: 1000, paddingLeft: "40px", paddingRight: "40px" }} className="py-4 bg-white d-flex align-items-center justify-content-between shadow-bottom">
                     {/* <Heading size="xxs" heading={t("filters")} nomargin /> */}
                     <p className={`fs-xs-static m-0 en-font-default text-black ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("filters")}</p>
                     <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="" size={20} />
                 </div>
-                <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%" }} className={`p-4`}>
+                <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%", paddingLeft: "40px", paddingRight: "40px" }} className={`py-4`}>
                     {
                         data?.map((item, index) => {
                             return (
@@ -238,11 +238,10 @@ const Drawer = memo((props) => {
                         })
                     }
                 </div>
-                {console.log("AI", activeIndex)}
             </div>
             <div className="fixed-bottom d-flex align-items-center justify-content-between">
                 <hr className="m-0 p-0" />
-                <div className="w-100 py-2 px-4 bg-white d-flex justify-content-between align-items-center">
+                <div style={{ paddingLeft: "40px", paddingRight: "40px" }} className="w-100 py-2 bg-white d-flex justify-content-between align-items-center">
                     <div className="">
                         <Button nopadding onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} />
                     </div>

@@ -1,3 +1,4 @@
+import './style.css'
 import React, { memo, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { RxCross2 } from "react-icons/rx";
@@ -8,7 +9,6 @@ import Tag from "../../../elements/Tag";
 import { colors } from "../../../../utils/colors";
 import i18next from "i18next";
 import { locales } from "../../../../i18n/helper";
-import './style.css'
 
 const Main = memo((props) => {
 
@@ -37,7 +37,7 @@ const Main = memo((props) => {
                             <Col />
                             <Col xs={10} md={8} style={{ textAlign: 'center' }} className="py-2">
                                 {/* <Heading size="xxxl" bold color={colors.black} heading={t("datasetTitle")} /> */}
-                                <p className={`fs-mega ${i18next.language === locales.AR ? 'ar-font-bold' : 'en-font-bold'}`}>
+                                <p className={`fs-lg ${i18next.language === locales.AR ? 'ar-font-bold' : 'en-font-bold'}`}>
                                     {t("datasetTitle")}
                                 </p>
                             </Col>
@@ -47,7 +47,7 @@ const Main = memo((props) => {
                 </Row>
             </Container>
             {console.log("Login", offset)}
-            <Container fluid className={`${offset && "sticky"}  bg-white mb-5`}>
+            <Container fluid className={`sticky bg-white mb-5 ${offset && "boxShadow"}`}>
                 <Container>
                     <Row>
                         <Col />
