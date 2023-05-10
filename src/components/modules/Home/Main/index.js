@@ -73,7 +73,7 @@ const Main = memo((props) => {
                         </Row>
                         <Row>
                             <Col />
-                            <Col xs={12} md={10} lg={8} className="py-3">
+                            <Col xs={12} md={10} lg={8} className="py-3 padding-search">
                                 <Search
                                     filterData={filterData}
                                     // nofocuseffect

@@ -5,7 +5,7 @@ const useIsFocused = (ref) => {
     const [focus, setFocus] = useState(true)
 
     const callback = () => {
-        if (ref.current.offsetHeight > 0) {
+        if (ref?.current?.offsetHeight > 0) {
             setFocus(true)
         }
         else {

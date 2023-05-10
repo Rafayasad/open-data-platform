@@ -107,6 +107,7 @@ const DatasetDetail = memo(() => {
                         onClick={onClickCard}
                         size={"md"}
                         padding="page-padding-md"
+                        hoverable="primary"
                     />
                 </div>
             </View>

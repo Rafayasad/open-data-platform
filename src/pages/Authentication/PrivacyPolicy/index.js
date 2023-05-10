@@ -26,7 +26,7 @@ const PrivacyPolicy = memo(() => {
     return (
         <>
             <div ref={ref1} className="d-none d-lg-block" style={{ height: "100vh", width: "100vw", backgroundImage: `url(${AuthBackground1})`, backgroundRepeat: "no-repeat", backgroundSize: "100vw 100vh" }}>
-                <View nolanguageswitcher nocontent noupperfooter nomiddlefooter nolowerfooter />
+                <View  nocontent noupperfooter nomiddlefooter nolowerfooter />
             </div>
 
             <div className="d-block d-lg-none py-5" style={{ height: "100%", width: "100%" }}>
