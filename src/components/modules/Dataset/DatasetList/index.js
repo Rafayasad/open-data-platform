@@ -54,7 +54,7 @@ const DatasetList = memo((props) => {
                 </>
             }
             {
-                !loading ?
+                loading ?
                     datasets && datasets.length > 0 && datasets.map((item, index) => (
                         <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
                             {
