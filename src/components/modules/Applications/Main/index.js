@@ -4,6 +4,9 @@ import Application from '../../../../assets/images/Applications-1.png'
 import Heading from "../../../elements/Heading";
 import { useTranslation } from "react-i18next";
 import './style.css';
+import i18next from "i18next";
+import { locales } from "../../../../i18n/helper";
+import { colors } from "../../../../utils/colors";
 
 const Main = memo(() => {
 
@@ -11,12 +14,14 @@ const Main = memo(() => {
 
     return (
         <Container fluid className="my-4 px-4 page-padding">
-            <Row className="align-items-center justify-content-between py-0 py-md-5">
-                <Col md={5} xs={12} className='py-2'>
-                    <Heading bold nomargin heading={t("applicationTitle")} />
+            <Row className="align-items-start justify-content-between py-0 py-md-5">
+                <Col md={5} xs={12} className='py-3'>
+                    <p className={`m-0 fs-xl ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("applicationTitle")}</p>
+                    {/* <Heading bold nomargin heading={t("applicationTitle")} /> */}
                 </Col>
-                <Col md={5} xs={12} className='py-2'>
-                    <Heading size='xxs' nomargin heading={t("applicationDiscription")} />
+                <Col md={5} xs={12} className='py-3'>
+                    <p className="m-0 fs-xs-static" style={{ color: colors.dark_gray }}>{t("applicationDiscription")}</p>
+                    {/* <Heading size='xxs' nomargin heading={t("applicationDiscription")} /> */}
                 </Col>
             </Row>
             <Row className="py-2">

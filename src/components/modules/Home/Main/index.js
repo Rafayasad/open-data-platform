@@ -42,14 +42,15 @@ const Main = memo((props) => {
 
 
     return (
-        <div className="d-flex background-img" style={{
-            //height: window.innerWidth >= 768 ? '100vh' : '80vh',
-            width: '100vw',
-            height: '100vh',
-            // backgroundImage: window.innerWidth >= 768 ? `url(${background})` : `url(${backgroundMobile})`,
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: "cover"
-        }}>
+        <div
+            className="d-flex background-img" style={{
+                //height: window.innerWidth >= 768 ? '100vh' : '80vh',
+                width: '100vw',
+                height: '100vh',
+                // backgroundImage: window.innerWidth >= 768 ? `url(${background})` : `url(${backgroundMobile})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: "cover"
+            }}>
             <Container>
                 <Row className="h-25">
                     <Col className="d-flex align-items-end justify-content-center">
@@ -105,7 +106,7 @@ const Main = memo((props) => {
                     <Col />
                     <Col xs={8} md={4} className='d-none d-md-flex justify-content-center'>
                         {/* <Button onClick={onClickExplore} title={t("explore")} backgroundColor="#9159FF" textColor="white" /> */}
-                        <CustomButton title={t("explore")} onClick={onClickExplore} buttonClass='contained-purple'/>
+                        <CustomButton title={t("explore")} onClick={onClickExplore} buttonClass='contained-purple' />
                     </Col>
                     <Col />
                 </Row>

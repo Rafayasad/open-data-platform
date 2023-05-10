@@ -48,7 +48,7 @@ const Topics = memo((props) => {
                     value={item.value}
                     image={currentHovered === index && (
                         item.title === "Agriculture" || item.title === "الزراعة" ? Agriculture :
-                            item.title === "Business" || item.title === "الاعمال" ? Business :
+                            item.title === "Business" || item.title === "ادارة الأعمال" ? Business :
                                 item.title === "Education" || item.title === "التعليم" ? Education :
                                     item.title === "Energy" || item.title === "الطاقة" ? Energy :
                                         item.title === "Environment" || item.title === "البيئة" ? Enviroment :
@@ -86,7 +86,7 @@ const Topics = memo((props) => {
                 <Col className={`px-4 d-flex justify-content-center justify-content-md-end max-width`}>
                     {/* <Button borderColor='white' backgroundColor='black' textColor='white' title={all ? t("viewLess") : t("viewAll")}
                         onClick={onClick} /> */}
-                    <CustomButton title={all ? t("viewLess") : t("viewAll")} onClick={onClick} buttonClass='outlined-transparent'/>
+                    <CustomButton title={all ? t("viewLess") : t("viewAll")} onClick={onClick} buttonClass='outlined-transparent' />
                 </Col>
             </Row>
         </Container>

@@ -43,8 +43,8 @@ const Login = memo(() => {
           <Row>
             <Col>
               <Row className="px-4 py-5">
-                <Col md={8}>
-                  <p className={`fs-mega text-white ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("openDataTitle")}</p>
+                <Col className="pt-lg-2 pt-0" md={8}>
+                  <p className={`fs-lg text-white ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("openDataTitle")}</p>
                   {/* <Heading
                     heading={t("openDataTitle")}
                     color={colors.white}
@@ -68,7 +68,7 @@ const Login = memo(() => {
                   subtitle={t("accDontExist")}
                   linktext={{ display_text: t("requestAccess"), onClick: onClickRegister }}
                   inputFields={[
-                    { placeholder: t("governmentEmail"), type: "text", onChange: (value) => setEmail(value) },
+                    { placeholder: t("governmentUser"), type: "text", onChange: (value) => setEmail(value) },
                     { placeholder: t("password"), type: "password", onChange: (value) => setPassword(value) },
                   ]}
                   button={[

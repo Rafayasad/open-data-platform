@@ -99,8 +99,8 @@ const Home = memo(() => {
                 />
             </div>
             <Images />
-            <Cards textSize={"fs-sm-md"} dropdownWidth={"55%"} title={t("mostViewedDatasets")} backgroundColor={colors.black} data={mostViewedDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={() => onClickButton("mostvieweddatasets")} padding='card-padding-md'/>
-            <Cards textSize={"fs-sm-md"} dropdownWidth={"55%"} title={t("recentlyAddedDatasets")} backgroundColor={colors.black} data={recentsDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={() => onClickButton()} padding='card-padding-md' />
+            <Cards hoverable="primary" textSize={"fs-sm-md"} dropdownWidth={"55%"} title={t("mostViewedDatasets")} backgroundColor={colors.black} data={mostViewedDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={() => onClickButton("mostvieweddatasets")} padding='card-padding-md' />
+            <Cards hoverable="primary" textSize={"fs-sm-md"} dropdownWidth={"55%"} title={t("recentlyAddedDatasets")} backgroundColor={colors.black} data={recentsDatasets?.slice(0, 3)} onClick={onClickCard} onClickViewAll={() => onClickButton()} padding='card-padding-md' />
             <PlatformInsights data={platformInsights} />
         </View>
         // </div>
