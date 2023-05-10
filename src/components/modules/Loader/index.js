@@ -14,7 +14,7 @@ const Loader = memo((props) => {
         Array(numberOfColumns ? numberOfColumns : 3).fill(null).map((_, index) => (
             type === 'full-width-max' ?
                 <Col md={12} className="my-2">
-                    <Shimmer height={332} rounded="lg" />
+                    <Shimmer backgroundImage height={332} rounded="lg" />
                 </Col> :
             //       <Col md={12} className="my-2">
             //       <ShimmerEffect height={332} rounded="lg" backgroundColor={colors.lighter_gray}  />
