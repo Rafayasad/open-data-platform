@@ -11,6 +11,10 @@
   .background-img {
     background-image: url("../../../../assets/images/BGTablet.png");
   }
+  .padding-search{
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
 
 /* Medium */
