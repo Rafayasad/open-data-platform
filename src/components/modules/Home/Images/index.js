@@ -12,6 +12,8 @@ import { useNavigate } from "react-router";
 import { routes } from "../../../../router/helper";
 import './style.css';
 import CustomButton from "../../../elements/CustomButton";
+import i18next from "i18next";
+import { locales } from "../../../../i18n/helper";
 
 const Images = memo(() => {
 
@@ -23,7 +25,7 @@ const Images = memo(() => {
     const onClickRegister = useCallback(() => navigate(routes.REGISTER));
 
     return (
-        <Container className="py-3 " fluid style={{ backgroundColor: colors.black }}>
+        <Container className="" fluid style={{ backgroundColor: colors.black }}>
             {/* <Row>
                 <Col className="my-3 px-4">
                     <div className="d-flex flex-column justify-content-center" style={{
@@ -52,7 +54,7 @@ const Images = memo(() => {
                     </div>
                 </Col>
             </Row> */}
-            <Row>
+            <Row >
                 <Col className="max-width">
                     <Row className="card-padding-lg">
                         <Col xs={12} md={12} lg={6} className="my-2">
@@ -66,7 +68,7 @@ const Images = memo(() => {
                                 position: 'relative'
                             }}>
                                 <div className="overlay" />
-                                <Row className="py-1" style={{ zIndex: 1 }}>
+                                <Row className="pt-1" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col xs={10} sm={12} md={8} className='text-center' id='zoom-in'>
                                         <Heading bold size={"xxl"} color='white' heading={t("areYouNewToOpenData")} />
@@ -77,7 +79,7 @@ const Images = memo(() => {
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
                                         {/* <Button bold title={t("discover")} onClick={onClickDiscover} /> */}
-                                        <CustomButton bold title={t("discover")} onClick={onClickDiscover} buttonClass='contained'/>
+                                        <CustomButton bold title={t("discover")} onClick={onClickDiscover} buttonClass='contained' />
                                     </Col>
                                     <Col />
                                 </Row>
@@ -92,12 +94,14 @@ const Images = memo(() => {
                                 borderRadius: '30px',
                                 backgroundPosition: 'center'
                             }}>
-                                <Row className="py-1" style={{ zIndex: 1 }}>
+                                <Row className="pt-1" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col xs={10} md={6} className='d-flex flex-column justify-content-center align-items-center text-center' id='zoom-in'>
-                                        <Heading bold size='xxl' color='white' heading={t("joinUsRegisterWithUs")} />
-                                        <Heading size='xxs' color='white' heading={t("joinUsRegisterWithUsDescription")}/>
-
+                                        {/* <Heading bold size='xxl' color='white' heading={t("joinUsRegisterWithUs")} /> */}
+                                        <p className={`text-white fs-lg ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>
+                                            {t("joinUsRegisterWithUs")}
+                                        </p>
+                                        <Heading size='xxs' color='white' heading={t("joinUsRegisterWithUsDescription")} />
                                     </Col>
                                     <Col />
                                 </Row>
@@ -105,7 +109,7 @@ const Images = memo(() => {
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
                                         {/* <Button bold title={t("getStarted")} onClick={onClickRegister} /> */}
-                                        <CustomButton bold title={t("getStarted")} onClick={onClickRegister} buttonClass='contained'/>
+                                        <CustomButton bold title={t("getStarted")} onClick={onClickRegister} buttonClass='contained' />
                                     </Col>
                                     <Col />
                                 </Row>

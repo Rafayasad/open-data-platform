@@ -38,7 +38,7 @@ const PlatformInsights = memo((props) => {
                                 </Col>
                                 <Col>
                                     {/* <Heading size='xxs' color={colors.pearl_white} heading={i18n.language === locales.AR ? item.label_ar : item.label} /> */}
-                                    <p className={`fs-static  ${i18n.language === locales.EN ? "en-font" : "ar-font"} ${index==0 ? 'pb-md-5 pb-xl-2' : 'pb-md-0'}`} style={{color:colors.pearl_white}}>{i18n.language === locales.AR ? item.label_ar : item.label} </p>
+                                    <p className={`fs-static ${i18n.language === locales.EN ? "en-font" : "ar-font"} ${index==0 ? 'pb-md-5 pb-xl-2' : 'pb-md-0'}`} style={{color:colors.pearl_white}}>{i18n.language === locales.AR ? item.label_ar : item.label} </p>
                                 </Col>
                             </Col>
                         ))
