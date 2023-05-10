@@ -21,6 +21,11 @@
 /* Desktop */
 
 @media (min-width: 1199.98px) {
+  .padd-desktop {
+    padding-top: 72px !important;
+    /* padding-bottom: 80px !important; */
+  }
+
   .fs-title {
     font-size: 48px;
     line-height: 52px;

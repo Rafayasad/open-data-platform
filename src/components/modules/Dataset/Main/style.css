@@ -11,9 +11,14 @@
 @media (max-width: 768.98px) {
   .sticky {
     position: sticky;
-    box-shadow: 0 1px 4px -2px gray;
+    /* box-shadow: 0 1px 4px -2px gray; */
     z-index: 99;
   }
+
+  .boxShadow {
+    box-shadow: 0 1px 4px -2px gray;
+  }
+
 
 }
 
@@ -36,7 +41,12 @@
 @media (max-width: 1199.98px) {
   .sticky {
     position: sticky;
-    box-shadow: 0 1px 4px -2px gray;
+    /* box-shadow: 0 1px 4px -2px gray; */
     z-index: 99;
   }
+
+  .boxShadow {
+    box-shadow: 0 1px 4px -2px gray;
+  }
+
 }

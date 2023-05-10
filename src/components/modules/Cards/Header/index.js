@@ -1,3 +1,4 @@
+import './style.css';
 import React, { memo, useCallback, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { colors } from "../../../../utils/colors";
@@ -11,7 +12,6 @@ import { RxCross2 } from "react-icons/rx";
 import Tag from "../../../elements/Tag";
 import i18next from "i18next";
 import { locales } from "../../../../i18n/helper";
-import './style.css';
 import CustomButton from "../../../elements/CustomButton";
 
 const Header = memo((props) => {
@@ -43,7 +43,7 @@ const Header = memo((props) => {
     }
 
     return (
-        <Container fluid className="py-md-4 pt-4 py-3 px-0">
+        <Container fluid className="pt-4 py-3 px-0 padd-desktop">
             <Row className="w-100 d-flex p-0 m-0 align-items-center justify-content-between">
                 <Col md={8} lg={8} xs={!dropdown && nobutton ? 12 : 6} className='px-0'>
                     <div>
