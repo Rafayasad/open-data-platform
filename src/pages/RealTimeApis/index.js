@@ -30,6 +30,12 @@ const RealTimeApis = memo((props) => {
         navigate(`${routes.REAL_TIME_APIS_DETAIL}?id=${id}`)
     }, []);
 
+    const style = {
+        titleFs: 'tittle-sm-md',
+        descFs: 'fs-xs',
+        publisher: 'publisher-xs-sm'
+    }
+
     return (
         <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
             <RealTimeApisHeader />
@@ -43,6 +49,7 @@ const RealTimeApis = memo((props) => {
                 cardSize="xs"
                 noheader
                 onClick={onClickCard}
+                cardStyle={style}
             />
             {/* <ListCard loading={loading} datalist={data} /> */}
         </View>

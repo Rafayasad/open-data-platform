@@ -205,9 +205,17 @@ code {
     padding-left: 40px !important;
     padding-right: 40px !important;
   }
-   .page-padding-md {
+  .page-padding-md {
     padding-left: 28px !important;
     padding-right: 28px !important;
+  }
+  .breadCrumb-padding {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .page-padding-md-sm {
+    padding-left: 28px;
+    padding-left: 28px;
   }
 }
 
@@ -303,9 +311,17 @@ code {
     padding-left: 40px !important;
     padding-right: 40px !important;
   }
-    .page-padding-md {
+  .page-padding-md {
     padding-left: 28px !important;
     padding-right: 28px !important;
+  }
+  .breadCrumb-padding {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .page-padding-md-sm {
+    padding-left: 28px;
+    padding-left: 28px;
   }
 }
 
@@ -393,7 +409,6 @@ code {
     letter-spacing: 0;
   }
 
-
   .bold-sm {
     font-family: "CircularStd-Bold";
   }
@@ -414,8 +429,16 @@ code {
     padding-right: 16px !important;
   }
   .page-padding-md {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  .breadCrumb-padding {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .page-padding-md-sm {
+    padding-left: 4px;
+    padding-left: 4px;
   }
 }
 

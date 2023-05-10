@@ -3,11 +3,13 @@ import { Col, Container, Row } from "react-bootstrap";
 import MUIPagination from '@mui/material/Pagination';
 import MUIPaginationItem from '@mui/material/PaginationItem';
 import { useTranslation } from 'react-i18next';
-import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
+import {HiOutlineChevronDoubleLeft,HiOutlineChevronDoubleRight,HiOutlineChevronLeft,HiOutlineChevronRight} from 'react-icons/hi'
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './style.css';
 import { locales } from "../../../i18n/helper";
 import { getBreakpoint } from "../../../utils/generic";
+import { grey } from "@mui/material/colors";
 
 const theme = createTheme(
     {
@@ -16,7 +18,11 @@ const theme = createTheme(
                 main: 'black',
                 contrastText: '#fff',
             },
-        }
+        },
+        typography: {
+        fontFamily: 'CircularStd-Regular'
+  }
+        
     }
 );
 const Pagination = memo((props) => {
@@ -31,10 +37,11 @@ const Pagination = memo((props) => {
                 <Row>
                     <Col md={12} xl={12} sm={12} lg={12} xs={12}>
                         <MUIPagination
+                           
                             showFirstButton
                             showLastButton
                             page={currentPage || 1}
-                            size={window.innerWidth >= 768 ? "medium" : "small"}
+                            size={window.innerWidth >= 768 ? "large" : "small"}
                             siblingCount={window.innerWidth >= 768 ? 1 : 0}
                             count={totalCount || 1}
                             color="neutral"
@@ -43,11 +50,12 @@ const Pagination = memo((props) => {
                             }}
                             renderItem={(item) => (
                                 <MUIPaginationItem
+                                
                                     slots={{
-                                        previous: i18n.language === locales.EN ? FiChevronLeft : FiChevronRight,
-                                        next: i18n.language === locales.EN ? FiChevronRight : FiChevronLeft,
-                                        first: i18n.language === locales.EN ? FiChevronsLeft : FiChevronsRight,
-                                        last: i18n.language === locales.EN ? FiChevronsRight : FiChevronsLeft
+                                        previous: i18n.language === locales.EN ? HiOutlineChevronLeft : HiOutlineChevronRight,
+                                        next: i18n.language === locales.EN ? HiOutlineChevronRight : HiOutlineChevronLeft,
+                                        first: i18n.language === locales.EN ? HiOutlineChevronDoubleLeft : HiOutlineChevronDoubleRight,
+                                        last: i18n.language === locales.EN ? HiOutlineChevronDoubleRight : HiOutlineChevronDoubleLeft
                                     }}
                                     {...item}
                                 />

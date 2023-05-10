@@ -16,6 +16,8 @@ import './style.css';
 import 'react-modern-drawer/dist/index.css'
 import CheckBox from "../../elements/CheckBox";
 import SearchBox from "../../elements/SearchBox";
+import CustomButton from '../../elements/CustomButton';
+
 
 const Drawer = memo((props) => {
 
@@ -157,7 +159,7 @@ const Drawer = memo((props) => {
                                         <Accordion.Item eventKey={index} className="border-0 m-0">
                                             <Accordion.Header onClick={() => onClickAccordian(index)} className="">
                                                 <div className='w-100 d-flex justify-content-between align-items-center py-0' style={{ textAlign: 'start', height: "80px" }}>
-                                                    <p className={`${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} fs-sm m-0`}>{item.title}</p>
+                                                    <p className={`${i18n.language === locales.AR ? "ar-font-bold text-black" : "en-font-bold text-black"} fs-sm m-0`}>{item.title}</p>
                                                     {/* <Heading bold size="xs" heading={item.title} nomargin /> */}
                                                     <CustomToggle eventKey={index} />
                                                 </div>
@@ -243,11 +245,12 @@ const Drawer = memo((props) => {
                 <hr className="m-0 p-0" />
                 <div style={{ paddingLeft: "40px", paddingRight: "40px" }} className="w-100 py-2 bg-white d-flex justify-content-between align-items-center">
                     <div className="">
-                        <Button nopadding onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} />
+                        {/* <Button nopadding onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} /> */}
+                        <CustomButton nopadding onClick={onClickClear} buttonClass='text-purple' title={t("clearAll")}/>
                     </div>
                     <div>
-                        <Button onClick={() => onClickApplyFilter(filters)} title={`${t("apply")} ${filters.length > 0 ? `(${filters.length})` : ""}`} backgroundColor={"black"} textColor={"white"} />
-                    </div>
+                        {/* <Button onClick={() => onClickApplyFilter(filters)} title={`${t("apply")} ${filters.length > 0 ? `(${filters.length})` : ""}`} backgroundColor={"black"} textColor={"white"} /> */}
+                        <CustomButton onClick={() => onClickApplyFilter(filters)} title={`${t("apply")} ${filters.length > 0 ? `(${filters.length})` : ""}`} buttonClass='contained-black'/>                                            </div>
                 </div>
             </div>
         </RMDrawer>

@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { routes } from "../../../../router/helper";
 import './style.css';
+import CustomButton from "../../../elements/CustomButton";
 
 const Images = memo(() => {
 
@@ -75,7 +76,8 @@ const Images = memo(() => {
                                 <Row className="pt-4" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                        <Button bold title={t("discover")} onClick={onClickDiscover} />
+                                        {/* <Button bold title={t("discover")} onClick={onClickDiscover} /> */}
+                                        <CustomButton bold title={t("discover")} onClick={onClickDiscover} buttonClass='contained'/>
                                     </Col>
                                     <Col />
                                 </Row>
@@ -102,7 +104,8 @@ const Images = memo(() => {
                                 <Row className="pt-3" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                        <Button bold title={t("getStarted")} onClick={onClickRegister} />
+                                        {/* <Button bold title={t("getStarted")} onClick={onClickRegister} /> */}
+                                        <CustomButton bold title={t("getStarted")} onClick={onClickRegister} buttonClass='contained'/>
                                     </Col>
                                     <Col />
                                 </Row>

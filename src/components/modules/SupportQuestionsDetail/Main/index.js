@@ -10,7 +10,7 @@ const Main = memo((props) => {
     const { title, description } = props
 
     return (
-        <Container fluid className="px-4">
+        <Container fluid className="px-4 page-padding">
             <Row>
                 <Col lg={8} md={12}>
                     <Row className="py-4">

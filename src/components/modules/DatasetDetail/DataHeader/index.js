@@ -23,6 +23,7 @@ import { RWebShare } from "react-web-share";
 import './style.css';
 import { addDownloadCount } from "../../../../axios/api";
 import i18next from "i18next";
+import CustomButton from "../../../elements/CustomButton";
 
 
 const DataHeader = memo((props) => {
@@ -100,9 +101,9 @@ const DataHeader = memo((props) => {
     }, [])
 
     return (
-        <Container id='main' fluid className={`d-flex justify-content-between align-items-start py-4 bg-white shadow-none ${headerOnTop && "sticky-top shadow-sm w-100 m-0"}`}>
+        <Container id='main' fluid className={`page-padding d-flex justify-content-between align-items-start py-4 bg-white shadow-none ${headerOnTop && "sticky-top shadow-sm w-100 m-0"}`}>
             <BottomSheetBar selectedSheetValue={t("download")} open={openBottomSheet} setOpen={setOpenBottomSheet} options={options} />
-            <Col md={12} lg={8} className="px-2">
+            <Col md={12} lg={8} className="px-0">
                 {
                     !title ? <><Shimmer rounded="xs" height={"32px"} className="my-2" /><Shimmer rounded="xs" height={"32px"} width="70%" className="my-2" /></> : (
                         <div>
@@ -131,7 +132,8 @@ const DataHeader = memo((props) => {
                                     autoClose={true}
                                     options={shareOption}
                                     size={"xl"}
-                                    headerComponent={<Button backgroundColor="white" textColor="black" borderColor={currentHovered ? colors.purple : colors.black} icon={<SlShare size={20} color={currentHovered ? colors.purple : colors.black} />} />}
+                                    headerComponent={<CustomButton buttonClass='outlined' icon={<SlShare size={20}  />} />}
+                                    //headerComponent={<Button backgroundColor="white" textColor="black" borderColor={currentHovered ? colors.purple : colors.black} icon={<SlShare size={20} color={currentHovered ? colors.purple : colors.black} />} />}
                                 />
                             </div>
                             <div className="d-flex flex-column">
@@ -142,7 +144,8 @@ const DataHeader = memo((props) => {
                                         autoClose={true}
                                         size={"md"}
                                         options={options}
-                                        headerComponent={<Button icon={<RxDownload className="ms-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" iconend />}
+                                        headerComponent={<CustomButton icon={<RxDownload className="ms-1" size={20} />} title={t("download")} buttonClass='contained-black' iconend/>}
+                                        //headerComponent={<Button icon={<RxDownload className="ms-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" iconend />}
                                     />
                                 </div>
                                 {

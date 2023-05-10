@@ -12,6 +12,7 @@ import Tag from "../../../elements/Tag";
 import i18next from "i18next";
 import { locales } from "../../../../i18n/helper";
 import './style.css';
+import CustomButton from "../../../elements/CustomButton";
 
 const Header = memo((props) => {
 
@@ -42,9 +43,9 @@ const Header = memo((props) => {
     }
 
     return (
-        <Container fluid className="py-md-4 pt-4 py-3">
+        <Container fluid className="py-md-4 pt-4 py-3 px-0">
             <Row className="w-100 d-flex p-0 m-0 align-items-center justify-content-between">
-                <Col md={8} lg={8} xs={!dropdown && nobutton ? 12 : 6} className="px-0">
+                <Col md={8} lg={8} xs={!dropdown && nobutton ? 12 : 6} className='px-0'>
                     <div>
                         {/* <Heading
                             bold
@@ -66,13 +67,14 @@ const Header = memo((props) => {
                     {
                         !nobutton ?
                             <div>
-                                <Button
+                                {/* <Button
                                     title={buttonText ? buttonText : t("viewAll")}
                                     textColor={color}
                                     borderColor={color}
                                     backgroundColor='transparent'
                                     onClick={onClickButton}
-                                />
+                                /> */}
+                                <CustomButton buttonClass={`${color==='#000000' ? 'outlined' :'outlined-transparent'}`} title={buttonText ? buttonText : t("viewAll")}  onClick={onClickButton}/>
                             </div> :
                             dropdown ?
                                 <Dropdown
