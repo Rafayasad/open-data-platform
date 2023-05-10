@@ -44,7 +44,7 @@ const SupportQuestions = memo(() => {
     return (
         <View theme="dark" footerImageMobile={i18n.language === locales.AR ? `url(${FooterImageMobSupportPage})` : `url(${FooterImageMobSupportPage})`} footerTitle={t("stillNeedHelp")} footerDescription={t("footerPartText")} footerButton={t("contactUs")}>
             <div className="mt-5 pt-5">
-                <div className="px-4 pt-5">
+                <div className="breadCrumb-padding pt-5">
                     <BreadCrumb items={[
                         {
                             title: t("supports")

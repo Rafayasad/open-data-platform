@@ -18,6 +18,7 @@ import Economy from '../../../../assets/images/topics/Economy.jpg';
 import Tourism from '../../../../assets/images/topics/Tourism.jpg';
 import Health from '../../../../assets/images/topics/Health.jpg';
 import HR from '../../../../assets/images/topics/Human-Resources.jpg';
+import CustomButton from "../../../elements/CustomButton";
 
 const Topics = memo((props) => {
 
@@ -83,8 +84,9 @@ const Topics = memo((props) => {
             </div>
             <Row className="py-4 m-0">
                 <Col className={`px-4 d-flex justify-content-center justify-content-md-end max-width`}>
-                    <Button borderColor='white' backgroundColor='black' textColor='white' title={all ? t("viewLess") : t("viewAll")}
-                        onClick={onClick} />
+                    {/* <Button borderColor='white' backgroundColor='black' textColor='white' title={all ? t("viewLess") : t("viewAll")}
+                        onClick={onClick} /> */}
+                    <CustomButton title={all ? t("viewLess") : t("viewAll")} onClick={onClick} buttonClass='outlined-transparent'/>
                 </Col>
             </Row>
         </Container>

@@ -50,13 +50,13 @@ const LowerFooter = memo(() => {
                             <BsInstagram className='mx-2' color='white' size={28} onClick={onClickInstagram} style={{ cursor: 'pointer' }} />
                         </div>
                         <div className='d-none d-md-block'>
-                            <p style={{ fontSize: "12px" }} className='text-white m-0'>{t('allRights')}</p>
+                            <p style={{ fontSize: "14px" }} className='text-white m-0'>{t('allRights')}</p>
                         </div>
                     </div>
                 </div>
                 <div className='d-md-none col-12'>
                     {/* <Heading nomargin size={"xxs"} color={colors.white} heading={t('allRights')} /> */}
-                     <p style={{ fontSize: "12px" }} className='text-white'>{t('allRights')}</p>
+                     <p style={{ fontSize: "14px" }} className='text-white'>{t('allRights')}</p>
                 </div>
             </Row>
         </Container>

@@ -84,7 +84,7 @@ const Main = memo((props) => {
                 nooptions
                 title={i18n.language === locales.AR ? data && data.title_ar : data && data.title}
             />
-            <div className="px-3">
+            <div className="page-padding-md-sm">
                 <Tabs data={tabs} staticComponentOnRight={<DataCard data={f} />} />
             </div>
         </Container>

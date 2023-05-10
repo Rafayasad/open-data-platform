@@ -173,8 +173,8 @@ const Cards = memo((props) => {
         <Container fluid style={{ backgroundColor: backgroundColor }}>
             {
                 title &&
-                <Row className="max-width pt-5">
-                    <Col>
+                <Row className="max-width">
+                    <Col className='datalist-title-padding'>
                         <Header nobutton={notitlebutton && true} buttonText={buttonText} backgroundColor={backgroundColor} title={title} onClickButton={onClickViewAll} />
                     </Col>
                 </Row>

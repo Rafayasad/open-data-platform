@@ -10,6 +10,7 @@ import { locales } from '../../../../i18n/helper';
 import { routes } from '../../../../router/helper';
 import { useNavigate } from 'react-router';
 import { colors } from '../../../../utils/colors';
+import CustomButton from '../../../elements/CustomButton';
 
 const UpperFooter = memo((props) => {
 
@@ -35,7 +36,8 @@ const UpperFooter = memo((props) => {
             }
             <Row className='my-3'>
                 <Col xs={8} md={4} className={i18n.language === locales.AR && "py-3"}>
-                    <Button onClick={() => navigate(navigateTo ? navigateTo : routes.REGISTER)} title={button} />
+                    {/* <Button onClick={() => navigate(navigateTo ? navigateTo : routes.REGISTER)} title={button} /> */}
+                    <CustomButton onClick={() => navigate(navigateTo ? navigateTo : routes.REGISTER)} title={button} buttonClass='contained'/>
                 </Col>
             </Row>
         </Container>

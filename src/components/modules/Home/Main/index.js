@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { routes } from "../../../../router/helper";
 import i18next from "i18next";
 import './style.css';
+import CustomButton from "../../../elements/CustomButton";
 
 const Main = memo((props) => {
 
@@ -103,7 +104,8 @@ const Main = memo((props) => {
                 <Row className="h-25 align-items-end py-3">
                     <Col />
                     <Col xs={8} md={4} className='d-none d-md-flex justify-content-center'>
-                        <Button onClick={onClickExplore} title={t("explore")} backgroundColor="#9159FF" textColor="white" />
+                        {/* <Button onClick={onClickExplore} title={t("explore")} backgroundColor="#9159FF" textColor="white" /> */}
+                        <CustomButton title={t("explore")} onClick={onClickExplore} buttonClass='contained-purple'/>
                     </Col>
                     <Col />
                 </Row>

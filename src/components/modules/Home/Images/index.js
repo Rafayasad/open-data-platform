@@ -11,6 +11,9 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { routes } from "../../../../router/helper";
 import './style.css';
+import CustomButton from "../../../elements/CustomButton";
+import i18next from "i18next";
+import { locales } from "../../../../i18n/helper";
 
 const Images = memo(() => {
 
@@ -75,7 +78,8 @@ const Images = memo(() => {
                                 <Row className="pt-4" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                        <Button bold title={t("discover")} onClick={onClickDiscover} />
+                                        {/* <Button bold title={t("discover")} onClick={onClickDiscover} /> */}
+                                        <CustomButton bold title={t("discover")} onClick={onClickDiscover} buttonClass='contained' />
                                     </Col>
                                     <Col />
                                 </Row>
@@ -93,16 +97,19 @@ const Images = memo(() => {
                                 <Row className="pt-1" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col xs={10} md={6} className='d-flex flex-column justify-content-center align-items-center text-center' id='zoom-in'>
-                                        <Heading bold size='xxl' color='white' heading={t("joinUsRegisterWithUs")} />
-                                        <Heading size='xxs' color='white' heading={t("joinUsRegisterWithUsDescription")}/>
-
+                                        {/* <Heading bold size='xxl' color='white' heading={t("joinUsRegisterWithUs")} /> */}
+                                        <p className={`text-white fs-lg ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>
+                                            {t("joinUsRegisterWithUs")}
+                                        </p>
+                                        <Heading size='xxs' color='white' heading={t("joinUsRegisterWithUsDescription")} />
                                     </Col>
                                     <Col />
                                 </Row>
                                 <Row className="pt-3" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                        <Button bold title={t("getStarted")} onClick={onClickRegister} />
+                                        {/* <Button bold title={t("getStarted")} onClick={onClickRegister} /> */}
+                                        <CustomButton bold title={t("getStarted")} onClick={onClickRegister} buttonClass='contained' />
                                     </Col>
                                     <Col />
                                 </Row>

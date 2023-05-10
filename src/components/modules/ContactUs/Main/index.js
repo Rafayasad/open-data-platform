@@ -10,7 +10,7 @@ const Main = memo(() => {
                 <Col lg={6} className='d-none d-lg-block p-0'>
                     <ImageComponent />
                 </Col>
-                <Col className="px-5" sm={12} md={12} lg={6} >
+                <Col className="px-md-5" sm={12} md={12} lg={6} >
                     <FormComponent />
                 </Col>
             </Row>

@@ -20,6 +20,7 @@ import Heading from "../../elements/Heading";
 import './style.css';
 import { handleLogout } from "../../../redux/reducers/Authentication";
 import { logout } from "../../../axios/api";
+import CustomButton from "../../elements/CustomButton";
 
 const Navbar = memo((props) => {
 
@@ -77,7 +78,7 @@ const Navbar = memo((props) => {
 
     return (
         <>
-            <Container fluid className="px-4 py-3 d-none d-lg-block" style={{ position: 'absolute', top: isLoggedIn ? '78px' : 0, right: 0, left: 0 }}>
+            <Container fluid className="nav-padding py-3 d-none d-lg-block" style={{ position: 'absolute', top: isLoggedIn ? '78px' : 0, right: 0, left: 0 }}>
                 <Row>
                     <Col className="d-flex align-items-center">
                         <Link to={routes.HOME}>
@@ -113,7 +114,7 @@ const Navbar = memo((props) => {
                             </div>
                         </Col>
                     }
-                    <Col className="d-flex justify-content-end align-items-center">
+                    <Col className="d-flex justify-content-end align-items-center px-0">
                         {!nolanguageswitcher &&
                             <div className="d-flex justify-content-center mx-2">
                                 <LanguageSwitcher theme={theme} />
@@ -124,16 +125,18 @@ const Navbar = memo((props) => {
                             <>
                                 <div className="d-flex justify-content-center mx-1">
                                     <Link style={{ textDecoration: 'none' }} to={routes.REGISTER}>
-                                        <Button borderColor={color} backgroundColor='transparent' textColor={color} title={t("register")} />
+                                        {/* <Button borderColor={color} backgroundColor='transparent' textColor={color} title={t("register")} /> */}
+                                        <CustomButton title={t("register")} buttonClass={`${theme==='dark'?'outlined' :'outlined-transparent'}`}/>
                                     </Link>
                                 </div>
                                 <div className="d-flex justify-content-center mx-2">
                                     {
                                         isLoggedIn ? (
-                                            <Button backgroundColor={color} textColor={color === colors.black && colors.white} title={t("logout")} loading={loading} onClick={onClickLogout} />
+                                            <CustomButton title={t("logout")} loading={loading} onClick={onClickLogout} buttonClass = {`${theme==='dark' ? 'contained-black' :'contained'}`}/>
+                                            
                                         ) : (
                                             <Link style={{ textDecoration: 'none' }} to={routes.LOGIN}>
-                                                <Button backgroundColor={color} textColor={color === colors.black && colors.white} title={t("LogIn")} />
+                                                <CustomButton  title={t("LogIn")} buttonClass = {`${theme==='dark' ? 'contained-black' :'contained'}`}/>
                                             </Link>
                                         )
                                     }
@@ -143,7 +146,7 @@ const Navbar = memo((props) => {
                     </Col>
                 </Row>
             </Container>
-            <Container fluid className={`px-4 py-3 d-block d-lg-none ${scroll && "sticky bg-white transition"}`} style={{ position: !scroll && 'absolute', top: isLoggedIn ? '78px' : 0, left: 0, right: 0, zIndex: 1000 }}>
+            <Container fluid className={`nav-padding py-3 d-block d-lg-none ${scroll && "sticky bg-white transition"}`} style={{ position: !scroll && 'absolute', top: isLoggedIn ? '78px' : 0, left: 0, right: 0, zIndex: 1000 }}>
                 <Row className="d-flex justify-content-between align-items-center" >
                     <Col className="d-flex d-md-none align-items-center justify-content-start">
                         <Link to={routes.HOME}>
@@ -225,10 +228,10 @@ const Navbar = memo((props) => {
                         <Col>
                             {
                                 isLoggedIn ? (
-                                    <Button width={"100%"} borderColor={""} backgroundColor='black' textColor={"white"} title={t("logout")} loading={loading} onClick={onClickLogout} />
+                                    <CustomButton width={"100%"} buttonClass = 'contained-black' title={t("logout")} loading={loading} onClick={onClickLogout} />
                                 ) : (
                                     <Link style={{ textDecoration: 'none' }} to={routes.LOGIN}>
-                                        <Button width={"100%"} borderColor={""} backgroundColor='black' textColor={"white"} title={t("LogIn")} />
+                                        <CustomButton width={"100%"} title={t("LogIn")} buttonClass = 'contained-black'/>
                                     </Link>
                                 )
                             }

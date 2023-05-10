@@ -8,6 +8,7 @@ import Header from "../../Cards/Header";
 import Loader from "../../Loader";
 import { useTranslation } from "react-i18next";
 import { numberWithCommas } from "../../../../utils/generic";
+import './style.css';
 
 const DatasetList = memo((props) => {
 
@@ -32,11 +33,12 @@ const DatasetList = memo((props) => {
     ]
 
     return (
-        <Container fluid className="max-width" style={{paddingLeft:'10px'}}>
+        <Container fluid className="max-width" style={{paddingLeft:'10px'}} >
             {
                 !noheader &&
                 <>
                     <hr className="mt-4 mt-lg-5" style={{ color: '#CFCFCF', borderWidth: 2 }} />
+                    <div className="dataset-padding">
                     <Header
                         title={`${numberWithCommas(totalCount)} ${title}`}
                         backgroundColor={colors.white}
@@ -48,6 +50,7 @@ const DatasetList = memo((props) => {
                             selectedValue
                         }}
                     />
+                    </div>
                 </>
             }
             {

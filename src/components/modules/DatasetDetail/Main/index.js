@@ -124,7 +124,7 @@ const Main = memo((props) => {
                 url={url}
                 downloadCount={data && data.downloadCount}
             />
-            <div className="px-2">
+            <div className="page-padding-md-sm">
                 <Tabs data={tabs} staticComponentOnRight={<DataCard data={f} />} />
             </div>
         </Container>
