@@ -94,11 +94,15 @@ const ModalEelment = memo((props) => {
       {window.innerWidth >= 992 ?
         <Modal
           open={open}
-          onClose={handleClose}
+          //onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          slots = {{backdrop:false}}
-          scroll="body"
+          //slots = {{backdrop:false}}
+          //scroll="body"
+          hideBackdrop 
+          disableEnforceFocus 
+          style={{ position: 'initial' }} 
+          disableBackdropClick
         >
           <Box sx={style}>
             {
