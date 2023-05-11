@@ -60,6 +60,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
 import Heading from '../Heading';
 import './style.css';
+import i18next from 'i18next';
+import { locales } from '../../../i18n/helper';
 
 const style = {
   position: 'absolute',
@@ -99,9 +101,9 @@ const ModalEelment = memo((props) => {
           aria-describedby="modal-modal-description"
           //slots = {{backdrop:false}}
           //scroll="body"
-          hideBackdrop 
-          disableEnforceFocus 
-          style={{ position: 'initial' }} 
+          hideBackdrop
+          disableEnforceFocus
+          style={{ position: 'initial' }}
           disableBackdropClick
         >
           <Box sx={style}>
@@ -115,9 +117,9 @@ const ModalEelment = memo((props) => {
                   <div className='d-flex align-items-start justify-content-between'>
                     <Typography className='pb-4' id="modal-modal-title" variant="h6" component="h2">
                       {/* <Heading heading={title} nomargin bold size={"lg"} /> */}
-              
-                      <p className='fs-kilo en-font-bold'>{title}</p>
-          
+
+                      <p className={`fs-kilo ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{title}</p>
+
                     </Typography>
                     <div>
                       <AiOutlineClose style={{ cursor: "pointer" }} onClick={handleClose} />
@@ -127,10 +129,10 @@ const ModalEelment = memo((props) => {
                   {description}
                 </Typography> */}
                   <div style={{ overflowY: "scroll", height: "400px" }}>
-                    <p className='' dangerouslySetInnerHTML={{ __html: description }} />
+                    <p className={`${i18next.language === locales.AR ? "ar-font" : "en-font"}`} dangerouslySetInnerHTML={{ __html: description }} />
                   </div>
                 </>
-                
+
               )}
           </Box>
         </Modal>
