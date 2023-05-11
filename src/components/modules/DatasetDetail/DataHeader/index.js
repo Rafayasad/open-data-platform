@@ -33,6 +33,9 @@ const DataHeader = memo((props) => {
     const { t } = useTranslation();
     const [openBottomSheet, setOpenBottomSheet] = useState(false)
 
+
+    console.log("sadasdasdsadasdadsa",resources);
+
     const [headerOnTop, setHeaderOnTop] = useState(false);
     const [currentHovered, setCurrentHovered] = useState(null);
 

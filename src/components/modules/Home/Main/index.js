@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Button from "../../../elements/Button";
 import Search from "../../../elements/Search";
@@ -23,6 +23,20 @@ const Main = memo((props) => {
 
     const { t } = useTranslation();
     const navigate = useNavigate();
+
+    const [offset, setOffset] = useState(false);
+    const [oneTime, setOneTime] = useState(false);
+
+    useEffect(() => {
+        window.onscroll = function () {
+            if (window.scrollY > 250) {
+                setOneTime(true)
+                setOffset(true);
+            } else {
+                setOffset(false);
+            }
+        };
+    }, []);
 
     const renderSearchTags = (viewport) =>
     (
@@ -63,7 +77,7 @@ const Main = memo((props) => {
                     </Col>
                 </Row>
                 <Row className="h-50">
-                    <Col className="d-flex flex-column justify-content-center">
+                    <Col className={`${offset ? "fade-in" : !offset && oneTime && "fade-out"} d-flex flex-column justify-content-center`}>
                         <Row>
                             <Col />
                             <Col xs={12} lg={8} md={10} style={{ textAlign: 'center' }} className="py-2">

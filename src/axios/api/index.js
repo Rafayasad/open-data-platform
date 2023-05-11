@@ -4,6 +4,8 @@ import { convertHtmlToString } from "../../utils"
 import { endpoints } from "../endpoints"
 import { generateFile, getUnixTime } from "../../utils/generic.js";
 import { locales } from "../../i18n/helper"
+import { BiError } from "react-icons/bi";
+import i18next from 'i18next';
 
 export const getPlatformInsights = (setData, setLoading) => {
     return endpoints.
@@ -398,14 +400,14 @@ export const getDatasetById = (id, setData) => {
             if (res.status === 200) {
 
                 let item = res.data;
-                console.log("sssssssssssssssssssssid", item);
 
-                let filteredResources = item.distribution.filter(item => {
+
+                let filteredResources = item.distribution?.filter(item => {
                     let itemm = item.data
                     if (itemm.downloadURL && itemm.downloadURL !== "") {
                         return item
                     }
-                }).map(item => {
+                })?.map(item => {
                     let itemm = item.data
                     return (
                         {
@@ -422,7 +424,6 @@ export const getDatasetById = (id, setData) => {
                         }
                     )
                 })
-
                 let downloadCount = await endpoints.getDownloadCountById(id)
                     .then((res) => {
                         if (res.status === 200) {
@@ -431,7 +432,8 @@ export const getDatasetById = (id, setData) => {
                     }).catch((err) => {
                         console.log("Error message", err)
                     })
-
+                console.log("sssssssssssssssssssssid", filteredResources);
+                console.log("sssssssssssssssssssssid", item.keyword?.map(item => item.data != ' ' ? item.data : 'no'));
                 let data = {
                     id: item.identifier,
                     title: item.title,
@@ -448,16 +450,22 @@ export const getDatasetById = (id, setData) => {
                     // license_ar: item.licenselear,
                     license: "https://data.abudhabi/opendata/addata_open_license",
                     license_ar: "https://data.abudhabi/opendata/addata_open_license",
-                    topics: item.theme.map(item => item.data),
-                    topics_ar: item.themelear.map(item => item.data),
-                    tags: item && item.keyword ? item.keyword.map(item => item.data) : [],
-                    tags_ar: item && item.keyword ? item.keywordlear.map(item => item.data) : [],
-                    resources: filteredResources,
+                    topics: item && item.theme?.map(item => item.data != ' ' ? item.data : ['No Topics Found']),
+                    topics_ar: item && item.themelear?.map(item => item.data != ' ' ? item.data : ["لم يتم العثور على أي مواضيع"]),
+                    tags: item && item.keyword?.map(item => item.data != ' ' ? item.data : ['No Tags Found']),
+                    tags_ar: item && item.keywordlear?.map(item => item.data != ' ' ? item.data : ['لم يتم العثور على علامات']),
+                    resources: filteredResources.length > 0 ? filteredResources :
+                        [{
+                            id: '',
+                            title: 'No file uploaded yet.',
+                            title_ar: "لم يتم تحميل أي ملف بعد."
+                        }],
                     created: item.issued,
                     modified: item.modified,
                     downloadCount
                 }
 
+                console.log("DATATTATA", data);
                 setData(data)
 
                 const view_count_payload = {
