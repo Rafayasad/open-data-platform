@@ -42,6 +42,7 @@ const Shimmer = memo((props) => {
                             <img
                                 src={ShimmerLoader}
                                 height={"100%"}
+                                width={"100%"}
                             />
                         </div>
                     </div>
