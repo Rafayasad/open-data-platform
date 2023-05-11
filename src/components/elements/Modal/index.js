@@ -122,7 +122,7 @@ const ModalEelment = memo((props) => {
 
                     </Typography>
                     <div>
-                      <AiOutlineClose style={{ cursor: "pointer" }} onClick={handleClose} />
+                      <AiOutlineClose style={{ cursor: "pointer" }} size={23} onClick={handleClose} />
                     </div>
                   </div>
                   {/* <Typography id="modal-modal-description modal-body" sx={{ mt: 2, overflowY: "scroll", height: "350px" }}>

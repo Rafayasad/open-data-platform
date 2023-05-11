@@ -432,8 +432,7 @@ export const getDatasetById = (id, setData) => {
                     }).catch((err) => {
                         console.log("Error message", err)
                     })
-                console.log("sssssssssssssssssssssid", filteredResources);
-                console.log("sssssssssssssssssssssid", item.keyword?.map(item => item.data != ' ' ? item.data : 'no'));
+
                 let data = {
                     id: item.identifier,
                     title: item.title,
@@ -465,7 +464,7 @@ export const getDatasetById = (id, setData) => {
                     downloadCount
                 }
 
-                console.log("DATATTATA", data);
+                // console.log("DATATTATA", data);
                 setData(data)
 
                 const view_count_payload = {
