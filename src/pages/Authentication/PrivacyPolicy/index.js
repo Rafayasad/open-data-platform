@@ -21,7 +21,7 @@ const PrivacyPolicy = memo(() => {
 
     useEffect(() => {
         getPrivacyPolicy(setData, setLoading)
-    }, [])
+    }, [i18n.language])
 
     return (
         <>
