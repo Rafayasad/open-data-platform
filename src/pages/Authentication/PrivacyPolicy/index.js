@@ -8,12 +8,13 @@ import { getPrivacyPolicy } from "../../../axios/api";
 import i18n from "../../../i18n/i18n";
 import { locales } from "../../../i18n/helper";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const PrivacyPolicy = memo(() => {
 
     const { state } = useLocation();
 
-    console.log("SATATAT",state);
+    const { t } = useTranslation();
 
     const ref1 = useRef(null);
     const [data, setData] = useState();
@@ -21,7 +22,8 @@ const PrivacyPolicy = memo(() => {
 
     useEffect(() => {
         getPrivacyPolicy(setData, setLoading)
-    }, [])
+
+    }, [i18n.language])
 
     return (
         <>
