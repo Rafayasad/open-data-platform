@@ -20,6 +20,8 @@ const Main = memo((props) => {
 
     let option = { dateStyle: 'long' };
 
+    console.log("logsssssssssssssssssssssssss", data);
+
     let e = [
         {
             title: t("about"),
@@ -73,7 +75,7 @@ const Main = memo((props) => {
         },
         {
             title: t("tags"),
-            detail: data && (i18n.language === locales.AR ? (data.tags_ar.length > 0 && !data.tags_ar.includes(" ") ? data.tags_ar : [t("noTagsFound")]) : (data.tags.length > 0 && !data.tags.includes(" ") ? data.tags : [t("noTagsFound")])),
+            detail: data && (i18n.language === locales.AR ? (data.tags_ar.length > 0 && !data.tags_ar.includes(' ') ? data.tags_ar : [t("noTagsFound")]) : (data.tags.length > 0 && !data.tags.includes(" ") ? data.tags : [t("noTagsFound")])),
             tags: true,
             theme: 'light',
         },

@@ -16,10 +16,12 @@ const DataCard = memo((props) => {
     const navigate = useNavigate();
     const { t, i18n } = useTranslation();
 
+    console.log("LOGOGOGOG",data);
+
     return (
         <Container fluid className="p-0">
             {
-                data && data.length > 0 && data.map((item, index) => (
+                data && data.length > 0 && data?.map((item, index) => (
                     <div key={index} className="py-1">
                         <div>
                             {/* <Heading heading={item.title} size='xs' bold /> */}
