@@ -57,7 +57,7 @@ const Register = memo(() => {
     <div>
       <div
         className={`d-none d-lg-flex main-auth ${i18n.language === locales.AR ? "flipImage" : "defaultImage"}`}>
-        <Container fluid className="my-5 pt-5">
+        <Container fluid className="my-5 pt-5 max-width">
           <Row className="p-0">
             <Col className="pt-2 m-0">
               <Row className="px-3 py-5">

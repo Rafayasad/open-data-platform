@@ -14,7 +14,7 @@ const Main = memo(() => {
 
     return (
         <Container fluid className="my-4 px-4 page-padding">
-            <Row className="align-items-start justify-content-between py-0 py-md-5">
+            <Row className="align-items-start justify-content-between py-0 py-md-5 max-width">
                 <Col md={5} xs={12} className='py-3'>
                     <p className={`m-0 fs-xl ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("applicationTitle")}</p>
                     {/* <Heading bold nomargin heading={t("applicationTitle")} /> */}
@@ -24,7 +24,7 @@ const Main = memo(() => {
                     {/* <Heading size='xxs' nomargin heading={t("applicationDiscription")} /> */}
                 </Col>
             </Row>
-            <Row className="py-2">
+            <Row className="py-2 max-width">
                 <Col>
                     <img
                         className="image-sizing"

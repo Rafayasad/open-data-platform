@@ -31,7 +31,7 @@ const ResetPassword = memo((props) => {
           backgroundSize: "100vw 100%",
         }}
       >
-        <Container fluid className="my-5 pt-5">
+        <Container fluid className="my-5 pt-5 max-width">
           <Row>
             <Col>
               <Row className="px-3 py-5">
