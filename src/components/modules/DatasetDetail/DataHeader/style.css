@@ -4,3 +4,11 @@
     border-top-left-radius: 1.5rem !important;
     overflow: hidden !important;
 }
+
+
+/* desktop */
+/* @media (min-width: 1199.98px) { */
+    .boxShadowofDataSet {
+        box-shadow: 0 1px 4px -2px gray;
+    }
+/* } */

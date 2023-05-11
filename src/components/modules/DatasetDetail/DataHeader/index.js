@@ -1,3 +1,4 @@
+import './style.css';
 import React, { useEffect, useState, useCallback, memo } from "react";
 import { Col, Container } from "react-bootstrap";
 import { SlShare } from "react-icons/sl";
@@ -20,7 +21,6 @@ import csvImage from '../../../../assets/images/csv_img.png';
 import apiImage from '../../../../assets/images/api_img.png';
 import BottomSheetBar from "../../BottomSheet";
 import { RWebShare } from "react-web-share";
-import './style.css';
 import { addDownloadCount } from "../../../../axios/api";
 import i18next from "i18next";
 import CustomButton from "../../../elements/CustomButton";
@@ -34,7 +34,9 @@ const DataHeader = memo((props) => {
     const [openBottomSheet, setOpenBottomSheet] = useState(false)
 
 
-    console.log("sadasdasdsadasdadsa",resources);
+    // const [offset, setOffset] = useState(false);
+
+
 
     const [headerOnTop, setHeaderOnTop] = useState(false);
     const [currentHovered, setCurrentHovered] = useState(null);
@@ -96,15 +98,26 @@ const DataHeader = memo((props) => {
     useEffect(() => {
         window.onscroll = () => {
             if (document?.getElementById("main")?.getBoundingClientRect().top <= 20) {
-                setHeaderOnTop(true)
+                setHeaderOnTop(true);
+                // setOffset(true);
             } else {
                 setHeaderOnTop(false)
             }
         }
     }, [])
 
+    // useEffect(() => {
+    //     window.onscroll = function () {
+    //         if (window.scrollY > 200) {
+    //             setOffset(true);
+    //         } else {
+    //             setOffset(false);
+    //         }
+    //     };
+    // }, []);
+
     return (
-        <Container id='main' fluid className={`page-padding d-flex justify-content-between align-items-start py-4 bg-white shadow-none ${headerOnTop && "sticky-top shadow-sm w-100 m-0"}`}>
+        <Container id='main' fluid className={`bg-white page-padding d-flex justify-content-between align-items-start py-4 ${headerOnTop && "sticky-top w-100 m-0"}`}>
             <BottomSheetBar selectedSheetValue={t("download")} open={openBottomSheet} setOpen={setOpenBottomSheet} options={options} />
             <Col md={12} lg={8} className="px-0">
                 {
@@ -135,8 +148,8 @@ const DataHeader = memo((props) => {
                                     autoClose={true}
                                     options={shareOption}
                                     size={"xl"}
-                                    headerComponent={<CustomButton buttonClass='outlined' icon={<SlShare size={20}  />} />}
-                                    //headerComponent={<Button backgroundColor="white" textColor="black" borderColor={currentHovered ? colors.purple : colors.black} icon={<SlShare size={20} color={currentHovered ? colors.purple : colors.black} />} />}
+                                    headerComponent={<CustomButton buttonClass='outlined' icon={<SlShare size={20} />} />}
+                                //headerComponent={<Button backgroundColor="white" textColor="black" borderColor={currentHovered ? colors.purple : colors.black} icon={<SlShare size={20} color={currentHovered ? colors.purple : colors.black} />} />}
                                 />
                             </div>
                             <div className="d-flex flex-column">
@@ -147,8 +160,8 @@ const DataHeader = memo((props) => {
                                         autoClose={true}
                                         size={"md"}
                                         options={options}
-                                        headerComponent={<CustomButton icon={<RxDownload className="ms-1" size={20} />} title={t("download")} buttonClass='contained-black' iconend/>}
-                                        //headerComponent={<Button icon={<RxDownload className="ms-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" iconend />}
+                                        headerComponent={<CustomButton icon={<RxDownload className="ms-1" size={20} />} title={t("download")} buttonClass='contained-black' iconend />}
+                                    //headerComponent={<Button icon={<RxDownload className="ms-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" iconend />}
                                     />
                                 </div>
                                 {
