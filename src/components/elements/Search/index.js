@@ -181,13 +181,13 @@ const Search = memo((props) => {
                         <Col className="m-0">
                             <hr className="m-0 p-0" style={{ borderWidth: "2px", borderColor: colors.purple }} />
                             <div className="py-3">
-                                <div style={{ marginLeft: "32px" }}>
+                                <div style={{ marginLeft: "32px",marginRight: "32px" }}>
                                     <p style={{ fontSize: 12 }} className="py-2 m-0 text-secondary">{t("popularsearches")}</p>
                                 </div>
                                 {
                                     searchData?.slice(-5).map((item, index) => {
                                         return (
-                                            <div key={index} style={{ marginLeft: "30px" }} className="d-flex py-1">
+                                            <div key={index} style={{ marginLeft: "30px", marginRight: "30px" }} className="d-flex py-1">
                                                 <IoIosSearch color="black" size={20} />
                                                 <div className="mx-2">
                                                     <Heading heading={item} size="xxs" nomargin onClick={() => onClickedPopularSearch({ target: { value: item } })} />

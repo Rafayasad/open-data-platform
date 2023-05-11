@@ -39,7 +39,7 @@ const Login = memo(() => {
     <div>
       <div
         className={`d-none d-lg-flex main-auth ${i18n.language === locales.AR ? "flipImage" : "defaultImage"}`}>
-        <Container fluid className="my-5 pt-5">
+        <Container fluid className="my-5 pt-5 max-width">
           <Row>
             <Col>
               <Row className="px-4 py-5">

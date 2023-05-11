@@ -26,9 +26,9 @@ const LowerFooter = memo(() => {
                     <Heading size="xs" color="white" heading={t("powered")} />
                 </Col>
             </div>
-            <Row className='d-flex justify-content-between max-width my-1'>
+            <Row className='d-flex justify-content-between max-width mt-0 pb-3'>
                 <div className={`p-0 col-12 col-md-6 d-flex ${window.screen.width >= 768 ? "justify-content-start" : "justify-content-end"}`}>
-                    <div className={`${window.innerWidth >= 768 ? "px-0" : "px-4"}`}>
+                    <div className={`${window.innerWidth >= 768 ? "px-0" : "px-4"}`} style={{ marginRight: window.screen.width >= 768 && '16px' }}>
                         <img height={"100px"} width={"auto"} src={AbuDhabi} />
                     </div>
                     <div className={`px-0 px-lg-4 ms-2 ms-lg-0`}>
@@ -56,7 +56,7 @@ const LowerFooter = memo(() => {
                 </div>
                 <div className='d-md-none col-12'>
                     {/* <Heading nomargin size={"xxs"} color={colors.white} heading={t('allRights')} /> */}
-                     <p style={{ fontSize: "14px" }} className='text-white'>{t('allRights')}</p>
+                    <p style={{ fontSize: "14px" }} className='text-white'>{t('allRights')}</p>
                 </div>
             </Row>
         </Container>

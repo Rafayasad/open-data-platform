@@ -37,7 +37,7 @@ const RecoverPassword = memo(() => {
     <div>
       <div
         className={`d-none d-lg-flex main-recover ${i18n.language === locales.AR ? "flipImage" : "defaultImage"}`}>
-        <Container fluid className="my-5 pt-5">
+        <Container fluid className="my-5 pt-5 max-width">
           <Row>
             <Col>
               <Row className="p-4">
