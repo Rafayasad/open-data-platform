@@ -347,43 +347,6 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
 
                 let arr = []
 
-                let array = Object.values(res.data.results)?.map(item =>
-                (
-                    item.distribution
-                ))
-
-
-                // let filtered = array?.map(item => (
-
-
-                // ))
-
-
-                console.log("Adassa", array[0].filter(item => item));
-
-                let filteredResources = array[0]?.filter(item => {
-                    if (item.downloadURL && item.downloadURL !== "") {
-                        return item
-                    }
-                })?.map(item => {
-                    return (
-                        {
-                            id: item.identifier,
-                            title: item.title ? item.title : "No Name Found",
-                            title_ar: item.titlelear ? item.titlelear : "لم يتم العثور على اسم",
-                            description: item.description,
-                            description_ar: item.descriptionlear,
-                            format: item.format === "pdf" ? "pdf"
-                                : item.format === "excel" || item.format === "xlsx" || item.format === "esri rest" || item.format == "xls" ? "excel"
-                                    : item.format === "csv" ? "csv"
-                                        : item.format === "API" && "API",
-                            downloadURL: item.downloadURL ? item.downloadURL : "No File Uploaded Yet"
-                        }
-                    )
-                })
-
-                console.log("AdassaR", filteredResources);
-
                 arr = Object.values(res.data.results)?.map(item => (
 
                     {
