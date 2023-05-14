@@ -14,7 +14,7 @@ const ReactRecaptcha = memo((props) => {
 
     return (
         <ReCAPTCHA
-            sitekey={"6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"}
+            sitekey={"6LcJewwmAAAAANiffp7yErck1xV0eRipjW7xFQsM"}
             onChange={onChange}
             ref={captchaRef}
             type="image"
