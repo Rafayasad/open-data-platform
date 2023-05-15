@@ -1,24 +1,29 @@
 import React, { memo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Shimmer from '../../elements/Shimmer';
+import ShimmerEffect from '../../elements/ShimmerEffect';
+import { colors } from '../../../utils/colors';
 
 let sizes = ['400px', '280px', '340px']
 
 const Loader = memo((props) => {
 
-    const { type, width, backgroundColor } = props
+    const { type, width, backgroundColor, size, numberOfColumns } = props
 
     return (
-        Array(3).fill(null).map((_, index) => (
+        Array(numberOfColumns ? numberOfColumns : 3).fill(null).map((_, index) => (
             type === 'full-width-max' ?
                 <Col md={12} className="my-2">
-                    <Shimmer height={332} rounded="lg" />
+                    <Shimmer backgroundImage height={332} rounded="lg" />
                 </Col> :
+            //       <Col md={12} className="my-2">
+            //       <ShimmerEffect height={332} rounded="lg" backgroundColor={colors.lighter_gray}  />
+            //   </Col> :
                 type === 'full-width-min' ?
                     <Col md={12} className="my-2">
                         <Shimmer height={60} rounded="sm" />
                     </Col> :
-                    <Col md={4} className="py-2">
+                    <Col md={numberOfColumns === 4 ? 3 : 4} className="py-2">
                         {
                             type === 'image-outer-text' ? (
                                 <div>
@@ -64,7 +69,7 @@ const Loader = memo((props) => {
                                     rounded="lg"
                                     width={width}
                                     className={width && "mx-2"}
-                                    height={type === 'image-inner-text' ? 250 : 332}
+                                    height={type === 'image-inner-text' ? 250 : (size ? size : 332)}
                                 />
                             )
                         }

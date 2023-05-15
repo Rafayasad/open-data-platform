@@ -3,6 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import _ from 'lodash';
 import { IoIosSearch } from 'react-icons/io';
 import { MdOutlineFilterAlt, MdCancel } from 'react-icons/md';
+import { RxDotFilled } from 'react-icons/rx';
 import { useTranslation } from "react-i18next";
 import { colors } from "../../../utils/colors";
 import Drawer from '../../modules/Drawer';
@@ -20,7 +21,7 @@ const Search = memo((props) => {
 
     const { t } = useTranslation();
 
-    const { isFilterIcon, nofilter, filterData, nofocuseffect, placeholder, placeholderformobile, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter, searchData, iconColor } = props;
+    const { expandedSearchbar, setExpandedSearchbar, isFilterIcon, nofilter, filterData, nofocuseffect, placeholder, placeholderformobile, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter, searchData, iconColor } = props;
 
     const [filterOpen, setFilterOpen] = useState(false);
 
@@ -28,8 +29,11 @@ const Search = memo((props) => {
     const [inputText, setInputText] = useState('');
 
     useEffect(() => {
-        setInputText(value)
+        setOpenModal(expandedSearchbar);
+    }, [expandedSearchbar])
 
+    useEffect(() => {
+        setInputText(value)
     }, [value])
 
     const toggle = useCallback(() => {
@@ -57,6 +61,7 @@ const Search = memo((props) => {
             setInputText(value.trim())
             setOpenModal(false)
             setToggler(false)
+            setExpandedSearchbar(false);
         }
     }, [toggler, openModal])
 
@@ -86,6 +91,7 @@ const Search = memo((props) => {
             {
                 openModal &&
                 <ExpandSearchBarModal
+                    setExpandedSearchbar={setExpandedSearchbar}
                     value={inputText}
                     onChangeSearch={onChangeSearch}
                     onKeyDown={onKeyDown}
@@ -101,7 +107,7 @@ const Search = memo((props) => {
                             <IoIosSearch color={iconColor ? iconColor : !isFilterIcon ? "gray" : "black"} size={24} />
                         </div>
                         {/* desktop */}
-                        <div className="d-none d-md-block w-100">
+                        <div className="w-100 d-none d-md-block">
                             <input
                                 onClick={() => {
                                     document?.getElementById("cont")?.offsetWidth <= 540 ?
@@ -137,22 +143,24 @@ const Search = memo((props) => {
                             </Col>
                             :
                             filter && !nofilter &&
-                            <Col xs={3} md={2} xl={2} lg={2} className="search-icon">
-                                <div onClick={toggle} className='d-flex align-items-center justify-content-center filter py-2 px-2' style={{ borderRadius: '30px' }}>
-                                    {!isFilterIcon &&
-                                        <div className="d-flex d-md-none justify-content-end w-100">
-                                            <div className="bg-black p-2 rounded-pill">
-                                                <IoIosSearch color="white" size={25} />
-                                            </div>
-                                            {/* <MdOutlineFilterAlt size={24} /> */}
-                                        </div>
-                                    }
-                                    <div className={`${!isFilterIcon && "d-none d-md-flex"}`}>
-                                        <MdOutlineFilterAlt size={24} />
-                                    </div>
+                            <Col xs={2} md={2} xl={2} lg={2} className="">
+                                <div onClick={toggle} className='d-flex align-items-center justify-content-center filter p-lg-2 p-0' style={{ borderRadius: '30px', position: 'relative' }}>
+                                    <MdOutlineFilterAlt size={24} />
                                     <div className="d-none d-lg-flex align-items-center justify-content-center">
                                         <p className='m-0'>{t("filters")}</p>
+                                        {appliedFilters && appliedFilters.length > 0
+                                            &&
+                                            <div style={{ position: "absolute", right: i18n.language === locales.EN && 6, top: 0, left: i18n.language === locales.AR && 10 }}>
+                                                <RxDotFilled color={colors.red} />
+                                            </div>
+                                        }
                                     </div>
+                                    {appliedFilters && appliedFilters.length > 0
+                                        &&
+                                        <div className="d-flex d-lg-none" style={{ position: "absolute", right: i18n.language === locales.EN && -5, top: -8, left: i18n.language === locales.AR && -2 }}>
+                                            <RxDotFilled color={colors.red} />
+                                        </div>
+                                    }
                                     {/* {FOR RED DOT ICON} */}
                                     {/* <div className="d-flex">
                                 <sup>
@@ -169,17 +177,17 @@ const Search = memo((props) => {
                 </Row>
                 {
                     toggler && !nofocuseffect &&
-                    <Row className="n-z1 search-box-extend d-none d-md-block" style={{ width: toggler && document?.getElementById("main")?.offsetWidth }}>
+                    <Row className="search-box-extend d-none d-md-block" style={{ zIndex: 999, width: toggler && document?.getElementById("main")?.offsetWidth }}>
                         <Col className="m-0">
                             <hr className="m-0 p-0" style={{ borderWidth: "2px", borderColor: colors.purple }} />
                             <div className="py-3">
-                                <div className="px-5">
+                                <div style={{ marginLeft: "32px",marginRight: "32px" }}>
                                     <p style={{ fontSize: 12 }} className="py-2 m-0 text-secondary">{t("popularsearches")}</p>
                                 </div>
                                 {
                                     searchData?.slice(-5).map((item, index) => {
                                         return (
-                                            <div key={index} className="d-flex px-5 py-1">
+                                            <div key={index} style={{ marginLeft: "30px", marginRight: "30px" }} className="d-flex py-1">
                                                 <IoIosSearch color="black" size={20} />
                                                 <div className="mx-2">
                                                     <Heading heading={item} size="xxs" nomargin onClick={() => onClickedPopularSearch({ target: { value: item } })} />

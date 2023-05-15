@@ -39,15 +39,16 @@ const Login = memo(() => {
     <div>
       <div
         className={`d-none d-lg-flex main-auth ${i18n.language === locales.AR ? "flipImage" : "defaultImage"}`}>
-        <Container fluid className="my-5 pt-5">
+        <Container fluid className="my-5 pt-5 max-width">
           <Row>
             <Col>
-              <Row className="p-4">
-                <Col md={8}>
-                  <Heading
+              <Row className="px-4 py-5">
+                <Col className="pt-lg-2 pt-0" md={8}>
+                  <p className={`fs-lg text-white ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("openDataTitle")}</p>
+                  {/* <Heading
                     heading={t("openDataTitle")}
                     color={colors.white}
-                  />
+                  /> */}
                 </Col>
               </Row>
             </Col>
@@ -67,7 +68,7 @@ const Login = memo(() => {
                   subtitle={t("accDontExist")}
                   linktext={{ display_text: t("requestAccess"), onClick: onClickRegister }}
                   inputFields={[
-                    { placeholder: t("governmentEmail"), type: "text", onChange: (value) => setEmail(value) },
+                    { placeholder: t("governmentUser"), type: "text", onChange: (value) => setEmail(value) },
                     { placeholder: t("password"), type: "password", onChange: (value) => setPassword(value) },
                   ]}
                   button={[

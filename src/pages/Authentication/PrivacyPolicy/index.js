@@ -8,12 +8,13 @@ import { getPrivacyPolicy } from "../../../axios/api";
 import i18n from "../../../i18n/i18n";
 import { locales } from "../../../i18n/helper";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const PrivacyPolicy = memo(() => {
 
     const { state } = useLocation();
 
-    console.log("SATATAT",state);
+    const { t } = useTranslation();
 
     const ref1 = useRef(null);
     const [data, setData] = useState();
@@ -21,12 +22,13 @@ const PrivacyPolicy = memo(() => {
 
     useEffect(() => {
         getPrivacyPolicy(setData, setLoading)
-    }, [])
+
+    }, [i18n.language])
 
     return (
         <>
             <div ref={ref1} className="d-none d-lg-block" style={{ height: "100vh", width: "100vw", backgroundImage: `url(${AuthBackground1})`, backgroundRepeat: "no-repeat", backgroundSize: "100vw 100vh" }}>
-                <View nolanguageswitcher nocontent noupperfooter nomiddlefooter nolowerfooter />
+                <View  nocontent noupperfooter nomiddlefooter nolowerfooter />
             </div>
 
             <div className="d-block d-lg-none py-5" style={{ height: "100%", width: "100%" }}>

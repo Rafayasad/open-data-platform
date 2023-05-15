@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { routes } from "../../../../router/helper";
 import { locales } from "../../../../i18n/helper";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const DataCard = memo((props) => {
 
@@ -15,21 +16,24 @@ const DataCard = memo((props) => {
     const navigate = useNavigate();
     const { t, i18n } = useTranslation();
 
+    console.log("LOGOGOGOG",data);
+
     return (
         <Container fluid className="p-0">
             {
-                data && data.length > 0 && data.map((item, index) => (
+                data && data.length > 0 && data?.map((item, index) => (
                     <div key={index} className="py-1">
                         <div>
                             {/* <Heading heading={item.title} size='xs' bold /> */}
-                            <p className="fs-sm en-font-bolder">
+                            <p className={`fs-sm ${i18next.language === locales.AR ? "ar-font-bolder" : "en-font-bolder"}`}>
                                 {item.title}
                             </p>
                         </div>
                         {
                             !item.tags ? (
                                 <div className="">
-                                    <Heading capitalize={item.capitalize} color={item.color} underline={item.underline} heading={item.detail} size='xxs' onClick={item.onClick} />
+                                    <p className={`fs-xs en-font-default ${item.capitalize && "text-capitalize"} ${item.underline && "text-underline-hover"}`} style={{ color: item.color }} onClick={item.onClick}>{item.detail}</p>
+                                    {/* <Heading capitalize={item.capitalize} color={item.color} underline={item.underline} heading={item.detail} size='xxs' onClick={item.onClick} /> */}
                                 </div>
                             ) : (
                                 <div className="d-flex flex-wrap mb-3">

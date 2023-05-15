@@ -15,7 +15,7 @@ const Dropdown = (props) => {
 
     const { t } = useTranslation();
 
-    const { iconColor, borderColor, onClickDownloadItem, minWidth, reportsFilter, autoClose, options, setSelectedDropdownValue, textColor, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
+    const { iconColor, borderColor, nopadding, onClickDownloadItem, minWidth, reportsFilter, autoClose, options, setSelectedDropdownValue, textColor, selectedValue, name, size, noheadercomponent, headerComponent, highlightableItem, width, dropdownToggleWidth, dropdownWidth, selectedDropdownValue } = props;
 
     const [isOpen, setIsOpen] = useState(false);
     const [indexx, setIndexx] = useState();
@@ -54,7 +54,7 @@ const Dropdown = (props) => {
                         </div>
                     }
                     <div className={`d-flex flex-wrap ${icon && "px-2"}`}>
-                        <span className='m-0 p-0 multine-ellipsis-1'
+                        <span className='m-0 p-0 multine-ellipsis-1 text-underline-hover'
                             style={{
                                 color: colors.black
                             }}>
@@ -71,21 +71,22 @@ const Dropdown = (props) => {
         <div className='d-flex align-items-center w-100 justify-content-end'>
             {
                 name &&
-                <div className={` ${reportsFilter ? 'p-0' : 'px-3'} d-none d-md-block w-50 ${reportsFilter ? "text-start" : "text-end"}`}>
+                <div className={` ${reportsFilter ? 'p-0' : 'px-3'} d-none d-md-block w-50 ${reportsFilter ? "text-start" : i18n.language === locales.AR ? "text-start" : "text-end"}`}>
                     <Heading size="xxs" heading={name} nomargin />
                 </div>
             }
-            <BSDropdown className='' style={{ width: dropdownWidth }} autoClose={autoClose} onToggle={toggle}>
+            {/* here we set width to 100% incase if there is any issue we need to change it to dropdownWidth inplace of 100% */}
+            <BSDropdown className='' style={{ width: "100%" }} autoClose={autoClose} onToggle={toggle}>
                 {
                     noheadercomponent ? null :
                         headerComponent ? (
-                            <BSDropdown.Toggle href={null} className='w-100 bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end'>
+                            <BSDropdown.Toggle href={null} className={`w-100 bg-transparent border-0 my-dropdown-toggle d-flex justify-content-end ${nopadding && "px-0"} p-0`}>
                                 {headerComponent}
                             </BSDropdown.Toggle>
                         ) : (
                             <BSDropdown.Toggle
                                 href={null}
-                                style={{ border: borderColor && !isOpen ? "1.5px solid black" : "1px solid #9F9F9F" }}
+                                style={{ border: borderColor && !isOpen ? "1px solid black" : "1px solid #9F9F9F" }}
                                 className={`w-100 bg-white my-1 d-flex align-items-center justify-content-between my-dropdown-toggle text-black ${isOpen && "dropdown-hover"}`}
                             >
                                 <div className=''>
@@ -97,12 +98,11 @@ const Dropdown = (props) => {
                             </BSDropdown.Toggle>
                         )
                 }
-                {console.log("OPTIONS=>", options)}
                 {
                     isOpen && options && options != false &&
                     <BSDropdown.Menu
                         align={i18n.language === locales.AR ? "start" : "end"}
-                        className={`d-flex flex-column my-1 p-1`}
+                        className={`d-flex shadow-sm flex-column my-1 p-1`}
                         style={{ backgroundColor: "white", zIndex: 999, minWidth: minWidth ? minWidth : "100%", width: size === "xl" ? "175px" : size === "lg" ? "50px" : size === "md" ? "30px" : size === "sm" ? "15px" : "10px" }}>
                         {
                             options && options.length > 0 && options?.map((item, index) => (

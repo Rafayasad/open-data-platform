@@ -1,3 +1,4 @@
+import './style.css'
 import React, { memo, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { RxCross2 } from "react-icons/rx";
@@ -8,22 +9,23 @@ import Tag from "../../../elements/Tag";
 import { colors } from "../../../../utils/colors";
 import i18next from "i18next";
 import { locales } from "../../../../i18n/helper";
-import './style.css'
 
 const Main = memo((props) => {
 
-    const { search, onChangeSearchEnter, filter, onApplyFilter, onDeleteFilter, searchData, filterData, nofilter } = props;
+    const { expandedSearchbar, setExpandedSearchbar, search, onChangeSearchEnter, filter, onApplyFilter, onDeleteFilter, searchData, filterData, nofilter } = props;
 
     const { t } = useTranslation();
 
-    const [offset, setOffset] = useState(0);
+    const [offset, setOffset] = useState(false);
 
     useEffect(() => {
-        const onScroll = () => setOffset(window.pageYOffset);
-        // clean up code
-        window.removeEventListener('scroll', onScroll);
-        window.addEventListener('scroll', onScroll, { passive: true });
-        return () => window.removeEventListener('scroll', onScroll);
+        window.onscroll = function () {
+            if (window.scrollY > 300) {
+                setOffset(true);
+            } else {
+                setOffset(false);
+            }
+        };
     }, []);
 
     return (
@@ -35,8 +37,8 @@ const Main = memo((props) => {
                             <Col />
                             <Col xs={10} md={8} style={{ textAlign: 'center' }} className="py-2">
                                 {/* <Heading size="xxxl" bold color={colors.black} heading={t("datasetTitle")} /> */}
-                                <p className={`fs-mega ${i18next.language === locales.AR ? 'ar-font-bold' : 'en-font-bold'}`}>
-                                    {t("datasetTitle")} 
+                                <p className={`fs-lg ${i18next.language === locales.AR ? 'ar-font-bold' : 'en-font-bold'}`}>
+                                    {t("datasetTitle")}
                                 </p>
                             </Col>
                             <Col />
@@ -44,17 +46,20 @@ const Main = memo((props) => {
                     </Col>
                 </Row>
             </Container>
-            <Container fluid className={`z-n1 ${offset > 250 && "sticky"} bg-white mb-5`}>
+            {console.log("Login", offset)}
+            <Container fluid className={`sticky bg-white mb-5 ${offset && "boxShadow"}`}>
                 <Container>
                     <Row>
                         <Col />
                         <Col xs={12} md={10} lg={8} className="py-3">
                             <Search
+                                expandedSearchbar={expandedSearchbar}
+                                setExpandedSearchbar={setExpandedSearchbar}
                                 nofilter={nofilter}
                                 filterData={filterData}
                                 value={search}
                                 searchData={searchData}
-                                placeholder={t("searchKeywords")} v
+                                placeholder={t("searchKeywords")}
                                 placeholderformobile={t("searchPlaceholderformobile")}
                                 onPressEnter={onChangeSearchEnter}
                                 filter

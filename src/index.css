@@ -195,6 +195,32 @@ code {
     font-size: 48px;
     line-height: 52px;
   }
+
+  .img-upper-footer {
+    height: 500px;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+  }
+
+  .page-padding {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+  }
+
+  .page-padding-md {
+    padding-left: 28px !important;
+    padding-right: 28px !important;
+  }
+
+  .breadCrumb-padding {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .page-padding-md-sm {
+    padding-left: 28px;
+    padding-left: 28px;
+  }
 }
 
 /* Desktop */
@@ -220,6 +246,8 @@ code {
 
   .img-upper-footer {
     height: 500px;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
   }
 
   .img-about-us {
@@ -283,6 +311,26 @@ code {
   .semibold-lg-ar {
     font-family: "CircularAr-SemiBold";
   }
+
+  .page-padding {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+  }
+
+  .page-padding-md {
+    padding-left: 28px !important;
+    padding-right: 28px !important;
+  }
+
+  .breadCrumb-padding {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .page-padding-md-sm {
+    padding-left: 28px;
+    padding-left: 28px;
+  }
 }
 
 /* Mobile */
@@ -313,6 +361,8 @@ code {
 
   .img-upper-footer {
     height: 400px;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
 
   .img-about-us {
@@ -361,6 +411,12 @@ code {
     letter-spacing: -0.01em;
   }
 
+  .fs-xs-sm-only {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0;
+  }
+
   .bold-sm {
     font-family: "CircularStd-Bold";
   }
@@ -375,6 +431,26 @@ code {
 
   .semibold-sm-ar {
     font-family: "CircularAr-SemiBold";
+  }
+
+  .page-padding {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .page-padding-md {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .breadCrumb-padding {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .page-padding-md-sm {
+    padding-left: 4px;
+    padding-left: 4px;
   }
 }
 
@@ -394,6 +470,11 @@ code {
   font-size: 16px;
   line-height: 22px;
   letter-spacing: -0.01em;
+}
+
+.fs-2xs-static {
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .fs-sm-static {

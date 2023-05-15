@@ -47,7 +47,7 @@ const RealTimeApisDetail = memo(() => {
     return (
         <View theme="dark" noupperfooter sticky>
             <div className="my-5 pt-5">
-                <div className="px-4 pt-5">
+                <div className="breadCrumb-padding pt-5">
                     <BreadCrumb items={[
                         {
                             title: t("realTimeAPI")

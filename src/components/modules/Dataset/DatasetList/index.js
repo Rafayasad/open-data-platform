@@ -8,48 +8,11 @@ import Header from "../../Cards/Header";
 import Loader from "../../Loader";
 import { useTranslation } from "react-i18next";
 import { numberWithCommas } from "../../../../utils/generic";
-
-const data = [
-    {
-        title: "Immunizations by Nationality, Type of Vaccine and Age Group",
-        description: "Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Ministry of Health and Prevention",
-        tags: ['Social', 'Enviornment']
-    },
-    {
-        title: "Licensed Social Care Professional 2021 - 2022 Immunizations by Nationality, Type of Vaccine and Age Group",
-        description: "Immunizations by Nationality, Type of Vaccine and Age Group. Immunizations by Nationality, Type of Vaccine and Age Group. Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Ministry of Health and Prevention",
-        tags: ['Enviornment', 'Social']
-    },
-    {
-        title: "List of applicants for participation in the school bus supervisors",
-        description: "Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Telecommunication Regulatory Authority",
-        tags: ['Social', 'Enviornment']
-    },
-    {
-        title: "Immunizations by Nationality, Type of Vaccine and Age Group",
-        description: "Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Ministry of Health and Prevention",
-        tags: ['Social', 'Police']
-    },
-    {
-        title: "Licensed Social Care Professional 2021 - 2022 Immunizations by Nationality, Type of Vaccine and Age Group",
-        description: "Immunizations by Nationality, Type of Vaccine and Age Group. Immunizations by Nationality, Type of Vaccine and Age Group. Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Ministry of Health and Prevention"
-    },
-    {
-        title: "List of applicants for participation in the school bus supervisors",
-        description: "Immunizations by Nationality, Type of Vaccine and Age Group",
-        publisher: "Telecommunication Regulatory Authority",
-        tags: ['Social', 'Enviornment']
-    }
-]
+import './style.css';
 
 const DatasetList = memo((props) => {
 
-    const { minWidth, nocount, title, onClick, datasets, totalCount, currentPage, rowsPerPage, loading, notagsactive, onChangePage, selectedValue, onSelectDropdown, notags, noheader, cardSize, nodropdown } = props
+    const { minWidth, nocount, title, onClick, datasets, totalCount, currentPage, rowsPerPage, loading, notagsactive, onChangePage, selectedValue, onSelectDropdown, notags, noheader, cardSize, nodropdown ,cardStyle } = props
 
     const { t, i18n } = useTranslation();
 
@@ -70,11 +33,12 @@ const DatasetList = memo((props) => {
     ]
 
     return (
-        <Container fluid className="max-width">
+        <Container fluid className="max-width" style={{paddingLeft:'10px'}} >
             {
                 !noheader &&
                 <>
                     <hr className="mt-4 mt-lg-5" style={{ color: '#CFCFCF', borderWidth: 2 }} />
+                    <div className="dataset-padding">
                     <Header
                         title={`${numberWithCommas(totalCount)} ${title}`}
                         backgroundColor={colors.white}
@@ -86,6 +50,7 @@ const DatasetList = memo((props) => {
                             selectedValue
                         }}
                     />
+                    </div>
                 </>
             }
             {
@@ -105,6 +70,8 @@ const DatasetList = memo((props) => {
                                 nopadding
                                 hoverable="light"
                                 shortTitle
+                                tempIncreaseDownloadCount
+                                datasetID={item.id}
                                 url={item.url}
                                 title={i18n.language === locales.AR ? item.title_ar : item.title}
                                 publisher={i18n.language === locales.AR ? item.publisher_ar : item.publisher}
@@ -114,6 +81,7 @@ const DatasetList = memo((props) => {
                                 minWidth={minWidth}
                                 // resources={i18n.language === locales.AR ? item.resources : item.resources}
                                 onClick={() => onClick(item.id)}
+                                cardStyle ={cardStyle}
                             />
                         </div>
                     ))

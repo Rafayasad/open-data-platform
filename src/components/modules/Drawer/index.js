@@ -16,6 +16,8 @@ import './style.css';
 import 'react-modern-drawer/dist/index.css'
 import CheckBox from "../../elements/CheckBox";
 import SearchBox from "../../elements/SearchBox";
+import CustomButton from '../../elements/CustomButton';
+
 
 const Drawer = memo((props) => {
 
@@ -143,21 +145,21 @@ const Drawer = memo((props) => {
         // className="mt-5"
         >
             <div style={{ height: "100%" }}>
-                <div style={{ top: 0, position: "relative", left: 0, right: 0, zIndex: 1000 }} className="p-4 bg-white d-flex align-items-center justify-content-between shadow-bottom">
+                <div style={{ top: 0, position: "relative", left: 0, right: 0, zIndex: 1000, paddingLeft: "40px", paddingRight: "40px" }} className="py-4 bg-white d-flex align-items-center justify-content-between shadow-bottom">
                     {/* <Heading size="xxs" heading={t("filters")} nomargin /> */}
                     <p className={`fs-xs-static m-0 en-font-default text-black ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("filters")}</p>
                     <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="" size={20} />
                 </div>
-                <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%" }} className={`p-4`}>
+                <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%", paddingLeft: "40px", paddingRight: "40px" }} className={`py-4`}>
                     {
                         data?.map((item, index) => {
                             return (
                                 <>
                                     <Accordion activeKey={activeIndex} key={index} className="bg-transparent">
-                                        <Accordion.Item eventKey={index} className="border-0 my-3">
-                                            <Accordion.Header onClick={() => onClickAccordian(index)}>
-                                                <div className='w-100 d-flex justify-content-between align-items-center' style={{ textAlign: 'start' }}>
-                                                    <p className={`${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} fs-sm m-0`}>{item.title}</p>
+                                        <Accordion.Item eventKey={index} className="border-0 m-0">
+                                            <Accordion.Header onClick={() => onClickAccordian(index)} className="">
+                                                <div className='w-100 d-flex justify-content-between align-items-center py-0' style={{ textAlign: 'start', height: "80px" }}>
+                                                    <p className={`${i18n.language === locales.AR ? "ar-font-bold text-black" : "en-font-bold text-black"} fs-sm m-0`}>{item.title}</p>
                                                     {/* <Heading bold size="xs" heading={item.title} nomargin /> */}
                                                     <CustomToggle eventKey={index} />
                                                 </div>
@@ -231,7 +233,7 @@ const Drawer = memo((props) => {
                                     </Accordion>
                                     {
                                         index != data.length - 1
-                                        && <hr className="" />
+                                        && activeIndex !== index && <hr className={`m-0`} />
                                     }
                                 </>
                             )
@@ -241,13 +243,14 @@ const Drawer = memo((props) => {
             </div>
             <div className="fixed-bottom d-flex align-items-center justify-content-between">
                 <hr className="m-0 p-0" />
-                <div className="w-100 p-2 bg-white d-flex justify-content-between align-items-center">
+                <div style={{ paddingLeft: "40px", paddingRight: "40px" }} className="w-100 py-2 bg-white d-flex justify-content-between align-items-center">
                     <div className="">
-                        <Button onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} />
+                        {/* <Button nopadding onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} /> */}
+                        <CustomButton nopadding onClick={onClickClear} buttonClass='text-purple' title={t("clearAll")}/>
                     </div>
                     <div>
-                        <Button onClick={() => onClickApplyFilter(filters)} title={`${t("apply")} ${filters.length > 0 ? `(${filters.length})` : ""}`} backgroundColor={"black"} textColor={"white"} />
-                    </div>
+                        {/* <Button onClick={() => onClickApplyFilter(filters)} title={`${t("apply")} ${filters.length > 0 ? `(${filters.length})` : ""}`} backgroundColor={"black"} textColor={"white"} /> */}
+                        <CustomButton onClick={() => onClickApplyFilter(filters)} title={`${t("apply")} ${filters.length > 0 ? `(${filters.length})` : ""}`} buttonClass='contained-black'/>                                            </div>
                 </div>
             </div>
         </RMDrawer>

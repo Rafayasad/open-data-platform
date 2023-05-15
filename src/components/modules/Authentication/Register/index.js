@@ -1,3 +1,4 @@
+import '../style.css';
 import React, { memo, useCallback, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import AuthBackground1 from "../../../../assets/images/Auth-Background-1.jpg";
@@ -52,20 +53,20 @@ const Register = memo(() => {
   const onClickTermsAndPolicy = useCallback(() => navigate(routes.POLICY));
 
 
-
   return (
     <div>
       <div
         className={`d-none d-lg-flex main-auth ${i18n.language === locales.AR ? "flipImage" : "defaultImage"}`}>
-        <Container fluid className="my-5 pt-5">
+        <Container fluid className="my-5 pt-5 max-width">
           <Row className="p-0">
             <Col className="pt-2 m-0">
               <Row className="px-3 py-5">
                 <Col md={8}>
-                  <Heading
+                  <p className={`fs-mega text-white ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("openDataTitle")}</p>
+                  {/* <Heading
                     heading={t("openDataTitle")}
                     color={colors.white}
-                  />
+                  /> */}
                 </Col>
               </Row>
             </Col>
@@ -79,9 +80,10 @@ const Register = memo(() => {
                   height: "100%"
                 }}
               >
-                {console.log("NAME",name)}
+
                 <AuthCard
-                  view="dekstop"
+                  view="desktop"
+                  userName={name}
                   title={t("register")}
                   recaptcha={recaptcha}
                   subtitle={t("accExist")}
@@ -132,6 +134,7 @@ const Register = memo(() => {
               >
                 <AuthCard
                   view="mobile"
+                  userName={name}
                   title={t("register")}
                   subtitle={t("alreadyAccount")}
                   linktext={{ display_text: t("login"), onClick: onClickLogin }}

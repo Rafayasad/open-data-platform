@@ -34,12 +34,14 @@ const ImageComponent = memo(() => {
                                 ]}
                             />
                         </div>
-                        <Heading heading={t("contactUs")} size="xl" bold color={colors.white} />
+                        <p className={`text-white ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} fs-lg`}>{t("contactUs")}</p>
+                        {/* <Heading heading={t("contactUs")} size="xl" bold color={colors.white} /> */}
                     </Col>
                 </Row>
                 <Row className="px-0">
-                    <Col md={7} className={""}>
-                        <Heading nomargin heading={t("footerPartText")} size="xs" color={colors.white} />
+                    <Col md={7}>
+                        <p className="fs-xs m-0 text-white">{t("footerPartText")}</p>
+                        {/* <Heading nomargin heading={t("footerPartText")} size="xs" color={colors.white} /> */}
                     </Col>
                 </Row>
             </Container>

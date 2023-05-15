@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Button from "../../../elements/Button";
 import Search from "../../../elements/Search";
@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { routes } from "../../../../router/helper";
 import i18next from "i18next";
 import './style.css';
+import CustomButton from "../../../elements/CustomButton";
 
 const Main = memo((props) => {
 
@@ -22,6 +23,20 @@ const Main = memo((props) => {
 
     const { t } = useTranslation();
     const navigate = useNavigate();
+
+    const [offset, setOffset] = useState(false);
+    const [oneTime, setOneTime] = useState(false);
+
+    useEffect(() => {
+        window.onscroll = function () {
+            if (window.scrollY > 250) {
+                setOneTime(true)
+                setOffset(true);
+            } else {
+                setOffset(false);
+            }
+        };
+    }, []);
 
     const renderSearchTags = (viewport) =>
     (
@@ -41,14 +56,15 @@ const Main = memo((props) => {
 
 
     return (
-        <div className="d-flex background-img" style={{
-            //height: window.innerWidth >= 768 ? '100vh' : '80vh',
-            width: '100vw',
-            height: '100vh',
-            // backgroundImage: window.innerWidth >= 768 ? `url(${background})` : `url(${backgroundMobile})`,
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: "cover"
-        }}>
+        <div
+            className="d-flex background-img" style={{
+                //height: window.innerWidth >= 768 ? '100vh' : '80vh',
+                width: '100vw',
+                height: '100vh',
+                // backgroundImage: window.innerWidth >= 768 ? `url(${background})` : `url(${backgroundMobile})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: "cover"
+            }}>
             <Container>
                 <Row className="h-25">
                     <Col className="d-flex align-items-end justify-content-center">
@@ -61,7 +77,7 @@ const Main = memo((props) => {
                     </Col>
                 </Row>
                 <Row className="h-50">
-                    <Col className="d-flex flex-column justify-content-center">
+                    <Col className={`${offset ? "fade-in" : !offset && oneTime && "fade-out"} d-flex flex-column justify-content-center`}>
                         <Row>
                             <Col />
                             <Col xs={12} lg={8} md={10} style={{ textAlign: 'center' }} className="py-2">
@@ -72,7 +88,7 @@ const Main = memo((props) => {
                         </Row>
                         <Row>
                             <Col />
-                            <Col xs={12} md={10} lg={8} className="py-3">
+                            <Col xs={12} md={10} lg={8} className="py-3 padding-search">
                                 <Search
                                     filterData={filterData}
                                     // nofocuseffect
@@ -103,7 +119,8 @@ const Main = memo((props) => {
                 <Row className="h-25 align-items-end py-3">
                     <Col />
                     <Col xs={8} md={4} className='d-none d-md-flex justify-content-center'>
-                        <Button onClick={onClickExplore} title={t("explore")} backgroundColor="#9159FF" textColor="white" />
+                        {/* <Button onClick={onClickExplore} title={t("explore")} backgroundColor="#9159FF" textColor="white" /> */}
+                        <CustomButton title={t("explore")} onClick={onClickExplore} buttonClass='contained-purple' />
                     </Col>
                     <Col />
                 </Row>

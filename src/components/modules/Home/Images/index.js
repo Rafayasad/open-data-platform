@@ -11,6 +11,9 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { routes } from "../../../../router/helper";
 import './style.css';
+import CustomButton from "../../../elements/CustomButton";
+import i18next from "i18next";
+import { locales } from "../../../../i18n/helper";
 
 const Images = memo(() => {
 
@@ -22,7 +25,7 @@ const Images = memo(() => {
     const onClickRegister = useCallback(() => navigate(routes.REGISTER));
 
     return (
-        <Container className="py-3" fluid style={{ backgroundColor: colors.black }}>
+        <Container className="" fluid style={{ backgroundColor: colors.black }}>
             {/* <Row>
                 <Col className="my-3 px-4">
                     <div className="d-flex flex-column justify-content-center" style={{
@@ -51,13 +54,13 @@ const Images = memo(() => {
                     </div>
                 </Col>
             </Row> */}
-            <Row>
-                <Col className="px-4 max-width">
-                    <Row>
-                        <Col xs={12} md={12} lg={6} className="my-2 ">
-                            <div className="d-flex flex-column justify-content-center card-height" style={{
+            <Row >
+                <Col className="max-width">
+                    <Row className="card-padding-lg">
+                        <Col xs={12} md={12} lg={6} className="my-2">
+                            <div className="d-flex flex-column justify-content-center card-height" id="zoom-in-out-card-one" style={{
                                 //height: window.innerWidth <= 765 ? '400px' : '500px',
-                                backgroundImage: `url(${CardOne})`,
+                                // backgroundImage: `url(${CardOne})`,
                                 backgroundRepeat: 'no-repeat',
                                 backgroundSize: 'cover',
                                 borderRadius: '30px',
@@ -65,9 +68,9 @@ const Images = memo(() => {
                                 position: 'relative'
                             }}>
                                 <div className="overlay" />
-                                <Row className="py-1" style={{ zIndex: 1 }}>
+                                <Row className="pt-1" style={{ zIndex: 1 }}>
                                     <Col />
-                                    <Col xs={10} sm={12} md={8} className='text-center'>
+                                    <Col xs={10} sm={12} md={8} className='text-center' id='zoom-in'>
                                         <Heading bold size={"xxl"} color='white' heading={t("areYouNewToOpenData")} />
                                     </Col>
                                     <Col />
@@ -75,14 +78,15 @@ const Images = memo(() => {
                                 <Row className="pt-4" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                        <Button bold title={t("discover")} onClick={onClickDiscover} />
+                                        {/* <Button bold title={t("discover")} onClick={onClickDiscover} /> */}
+                                        <CustomButton bold title={t("discover")} onClick={onClickDiscover} buttonClass='contained' />
                                     </Col>
                                     <Col />
                                 </Row>
                             </div>
                         </Col>
                         <Col xs={12} md={12} lg={6} className="my-2">
-                            <div className="d-flex flex-column justify-content-center card-two card-height" style={{
+                            <div className="d-flex flex-column justify-content-center card-two card-height " id="zoom-in-out-card-two" style={{
                                 //height: window.innerWidth <= 765 ? '400px' : '500px',
                                 //backgroundImage: `url(${CardTwo})`,
                                 backgroundRepeat: 'no-repeat',
@@ -90,19 +94,22 @@ const Images = memo(() => {
                                 borderRadius: '30px',
                                 backgroundPosition: 'center'
                             }}>
-                                <Row className="py-1">
+                                <Row className="pt-1" style={{ zIndex: 1 }}>
                                     <Col />
-                                    <Col xs={10} md={6} className='d-flex flex-column justify-content-center align-items-center text-center'>
-                                        <Heading bold size='xxl' color='white' heading={t("joinUsRegisterWithUs")} />
+                                    <Col xs={10} md={6} className='d-flex flex-column justify-content-center align-items-center text-center' id='zoom-in'>
+                                        {/* <Heading bold size='xxl' color='white' heading={t("joinUsRegisterWithUs")} /> */}
+                                        <p className={`text-white fs-lg ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>
+                                            {t("joinUsRegisterWithUs")}
+                                        </p>
                                         <Heading size='xxs' color='white' heading={t("joinUsRegisterWithUsDescription")} />
-
                                     </Col>
                                     <Col />
                                 </Row>
-                                <Row className="pt-3">
+                                <Row className="pt-3" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
-                                        <Button bold title={t("getStarted")} onClick={onClickRegister} />
+                                        {/* <Button bold title={t("getStarted")} onClick={onClickRegister} /> */}
+                                        <CustomButton bold title={t("getStarted")} onClick={onClickRegister} buttonClass='contained' />
                                     </Col>
                                     <Col />
                                 </Row>

@@ -59,7 +59,7 @@ const Applications = memo(() => {
     })
 
     return (
-        // <div style={{ maxWidth: "1800px", margin: "auto" }}>
+        <div>
             <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
                 <div className="my-5 pt-5 max-width">
                     <Main />
@@ -76,7 +76,7 @@ const Applications = memo(() => {
                     />
                 </div>
             </View>
-        // </div>
+        </div>
     )
 })
 

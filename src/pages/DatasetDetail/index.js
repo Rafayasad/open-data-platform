@@ -49,6 +49,8 @@ const DatasetDetail = memo(() => {
 
     const onClickCard = useCallback((id) => {
         mainDiv.scrollIntoView();
+        setDataset()
+        setSimilarDataset()
         navigate(`${routes.DATASET_DETAIL}?id=${id}`, { replace: true })
     }, [id]);
 
@@ -78,7 +80,7 @@ const DatasetDetail = memo(() => {
         <div style={{ maxWidth: "1800px", margin: "auto" }}>
             <View theme="dark" noupperfooter sticky>
                 <div id="main" className="my-5 pt-5">
-                    <div className="px-4 pt-5">
+                    <div className="breadCrumb-padding pt-5">
                         <BreadCrumb
                             items={[
                                 {
@@ -102,7 +104,11 @@ const DatasetDetail = memo(() => {
                         title={t("similarDatasets")}
                         backgroundColor={colors.white}
                         data={similarDataset}
-                        onClick={onClickCard} />
+                        onClick={onClickCard}
+                        size={"md"}
+                        padding="page-padding-md"
+                        hoverable="primary"
+                    />
                 </div>
             </View>
         </div>

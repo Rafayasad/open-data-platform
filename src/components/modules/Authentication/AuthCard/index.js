@@ -9,14 +9,16 @@ import CheckBox from "../../../elements/CheckBox";
 import { useTranslation } from "react-i18next";
 import Recaptcha from "../../../elements/Recaptcha";
 import OtpInput from "react18-input-otp";
+import { locales } from "../../../../i18n/helper";
+import i18next from "i18next";
+import CustomButton from '../../../elements/CustomButton';
 
 const AuthCard = memo((props) => {
 
 
-
   const { t } = useTranslation()
 
-  const { name, title, subtitle, linktext, inputFields, button, checkbox, recaptcha, onClickForgetPassword, hasOtp, otp, setOtp } = props;
+  const { view, userName, title, subtitle, linktext, inputFields, button, checkbox, recaptcha, onClickForgetPassword, hasOtp, otp, setOtp, password } = props;
 
   // const [otp, setOtp] = useState("");
 
@@ -28,13 +30,15 @@ const AuthCard = memo((props) => {
     <Container fluid>
       <Row className="py-2">
         <Col>
-          <Heading bold nomargin heading={title} />
+          <p className={`m-0 ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${view === "desktop" ? "fs-kilo" : "fs-md"}`}>{title}</p>
+          {/* <Heading bold nomargin heading={title} /> */}
         </Col>
       </Row>
       <Row className="py-2">
         <Col className="d-flex">
           <div>
-            <Heading nomargin heading={subtitle} size="xxs" />
+            <p className={`m-0 fs-xs`}>{subtitle}</p>
+            {/* <Heading nomargin heading={subtitle} size="xxs" /> */}
           </div>
           {
             linktext &&
@@ -55,9 +59,9 @@ const AuthCard = memo((props) => {
         inputFields &&
         <Row className="py-2">
           {
-            inputFields.length > 0 && inputFields.map((items, index) => (
+            inputFields?.length > 0 && inputFields?.map((items, index) => (
               <Col key={index} className="py-2" md={12}>
-                <TextInput title={title} name={name} index={index} value={items.value} placeholder={items.placeholder} type={items.type} onChange={items.onChange} />
+                <TextInput password={password} title={title} name={userName} index={index} value={items.value} placeholder={items.placeholder} type={items.type} onChange={items.onChange} />
               </Col>
             ))
           }
@@ -110,9 +114,9 @@ const AuthCard = memo((props) => {
         }
         <Col sm={12} md={title === t("register") ? 4 : 12}>
           {
-            button.map((items, index) => (
+            button?.map((items, index) => (
               <div key={index} className="d-flex flex-column align-items-center">
-                <Button
+                {/* <Button
                   padding={items.title === t("logIn") && "mt-3"}
                   width={title === t("register") ? "auto" : "80%"}
                   disable={items.disable}
@@ -124,9 +128,19 @@ const AuthCard = memo((props) => {
                   onClick={() => items.onClick()}
                   loading={items.loading}
                   bold={items.bold}
+                /> */}
+                <CustomButton
+                padding={items.title === t('logIn') && 'mt-3'}
+                width={title === t('register') ? 'auto' : '80%'}
+                title={items.title}
+                icon={items.icon}
+                onClick={() => items.onClick()}
+                loading={items.loading}
+                bold={items.bold}
+                buttonClass={`${items.backgroundColor === '#000000' ? 'contained-black' : 'disabled'}`}
                 />
                 {
-                  button.length - 1 != index &&
+                  button?.length - 1 != index &&
                   <StraigthLine
                     label={t("or")}
                     textColor={colors.gray}

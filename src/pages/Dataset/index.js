@@ -39,6 +39,7 @@ const Dataset = memo(() => {
 
     const [loading, setLoading] = useState(false);
     const [viewAll, setViewAll] = useState(false);
+    const [expandedSearchbar, setExpandedSearchbar] = useState(false);
 
     const topics = useSelector((state) => state.facets.topics);
     const publishers = useSelector((state) => state.facets.publishers);
@@ -106,7 +107,7 @@ const Dataset = memo(() => {
         if (!most_viewed_datasets) {
             if (state) {
                 navigate(pathname, { replace: true, state: null })
-                getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : "", sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [], i18n.language, dispatch, setTopics, setTags, setPublishers, setFileFormats)
+                getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : storedSearch ? storedSearch : "", sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [], i18n.language, dispatch, setTopics, setTags, setPublishers, setFileFormats)
             }
         }
 
@@ -177,9 +178,17 @@ const Dataset = memo(() => {
 
     console.log("DATASETS", datasets);
 
+    const style = {
+        titleFs: 'tittle-sm-md',
+        descFs: 'fs-xs',
+        publisher: 'publisher-xs-sm'
+    }
+
     return (
-        <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
+        <View setExpandedSearchbar={setExpandedSearchbar} searchIcon theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
             <Main
+                expandedSearchbar={expandedSearchbar}
+                setExpandedSearchbar={setExpandedSearchbar}
                 nofilter={most_viewed_datasets}
                 filterData={data}
                 searchData={i18n.language === locales.AR ? datasetsSuggestion?.ar : datasetsSuggestion?.en}
@@ -198,9 +207,10 @@ const Dataset = memo(() => {
                     title={t("featuredDatasets")}
                     hoverable="primary"
                     backgroundColor={colors.white}
-                    data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 3)}
+                    data={viewAll ? recentsDatasets : recentsDatasets?.slice(0, 4)}
                     onClick={onClickCard}
-                // size={"md"}
+                    size={"md"}
+                    padding='card-padding-md'
                 />
 
             }
@@ -223,6 +233,7 @@ const Dataset = memo(() => {
                     onClick={onClickCard}
                     onSelectDropdown={onChangeDropdownValue}
                     minWidth={"70%"}
+                    cardStyle={style}
                 />
             </div>
         </View>

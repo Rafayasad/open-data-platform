@@ -7,6 +7,8 @@ import demoImage from "../../assets/images/Desktop.jpg";
 import Cards from "../../components/modules/Cards";
 import { colors } from "../../utils/colors";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { BsPerson } from "react-icons/bs";
+import { FiTwitter, FiLinkedin } from "react-icons/fi";
 import { routes } from "../../router/helper";
 import { getSuccessStoriesById } from "../../axios/api";
 import BreadCrumb from "../../components/elements/BreadCrumb";
@@ -53,9 +55,9 @@ const SuccessStoriesDetail = memo(() => {
             format: item.format,
             downloadLink: "null",
             url: `${process.env.REACT_APP_BASE_URL}/success-stories/detail?id=${id}`,
-            icon: item.format === "facebook" ? <FaFacebookF />
-                : item.format === "linkedin" ? <FaLinkedinIn />
-                    : item.format === "twitter" && <FaTwitter />
+            icon: item.format === "facebook" ? <BsPerson />
+                : item.format === "linkedin" ? <FiLinkedin />
+                    : item.format === "twitter" && <FiTwitter />
         }
     ))
 

@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import './style.css';
 import Heading from "../Heading";
@@ -9,8 +9,11 @@ const ListItem = memo((props) => {
 
     const { title, value, image, onClick } = props;
 
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+
     return (
-        <Row className="p-4 m-0 list-item-hover padding-xl">
+        <Row
+            className="page-padding m-0 list-item-hover padding-xl">
             <Col md={12} className="p-0 m-0 d-flex">
                 <p className={`fs-2xl m-0 text-white ${i18next.language === locales.AR ? 'ar-font-bold' : 'en-font-bold'}`} onClick={() => onClick()} style={{ cursor: 'pointer' }}>
                     {title}
@@ -21,7 +24,7 @@ const ListItem = memo((props) => {
                 {
                     image &&
                     <div className='d-none d-lg-flex align-items-center'>
-                        <img style={{ zIndex: 1, left: title.length < 15 ? '50%' : '65%' }} src={image} height="200px" className={"position-absolute"} />
+                        <img style={{ zIndex: 1, left: title.length < 15 ? '50%' : '65%' }} src={image} height="268px" className={"position-absolute"} />
                     </div>
                 }
             </Col>

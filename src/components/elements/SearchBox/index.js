@@ -2,10 +2,12 @@ import './style.css';
 import React, { memo, useEffect, useState } from "react";
 import { BiSearch } from 'react-icons/bi';
 import { colors } from '../../../utils/colors';
+import { useTranslation } from "react-i18next";
 
 const SearchBox = memo((props) => {
 
     const { title, data, searchValue, setSearchValue } = props;
+    const { t, i18n } = useTranslation();
 
     const [searchVal, setSearchVal] = useState("");
 
@@ -17,14 +19,14 @@ const SearchBox = memo((props) => {
                     type="text"
                     className="search__input mx-2"
                     aria-label="search"
-                    placeholder={`Search ${title}`}
+                    placeholder={`${t("searchBox")} ${title}`}
                     onChange={(e) => setSearchValue({
                         title: e.target.value,
                         type: title
                     })}
                 />
             </div>
-        </div>  
+        </div>
     )
 });
 

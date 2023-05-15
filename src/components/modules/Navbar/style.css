@@ -41,5 +41,30 @@
 .transition{
     transition: 0.2s ease-in-out;
 }
-
 ::-webkit-scrollbar {display:none;}
+
+/* Tablet */
+
+@media (max-width: 1199.98px) {
+    .nav-padding{
+        padding-left: 40px;
+        padding-right: 40px;
+    } 
+}
+
+/* Desktop */
+
+@media (min-width: 1199.98px) {
+.nav-padding{
+        padding-left: 40px;
+        padding-right: 40px;
+    } 
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+.nav-padding{
+        padding-left: 16px;
+        padding-right: 16px;
+    } 
+}

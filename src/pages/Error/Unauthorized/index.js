@@ -8,6 +8,7 @@ import { colors } from "../../../utils/colors";
 import Navbar from "../../../components/modules/Navbar";
 import Button from "../../../components/elements/Button";
 import { routes } from "../../../router/helper";
+import CustomButton from "../../../components/elements/CustomButton";
 
 const Unauthorized = memo((props) => {
 
@@ -40,7 +41,8 @@ const Unauthorized = memo((props) => {
                 </Row>
                 <Row className="py-4">
                     <Col>
-                        <Button title={t("returntohomepage")} backgroundColor={colors.white} onClick={onClickHomepage} />
+                        {/* <Button title={t("returntohomepage")} backgroundColor={colors.white} onClick={onClickHomepage} /> */}
+                        <CustomButton title={t("returntohomepage")} onClick={onClickHomepage} buttonClass='contained'/>
                     </Col>
                 </Row>
             </Container>

@@ -14,7 +14,7 @@ const ResetPassword = memo((props) => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const { setEmail, setPassword, setRePassword, setPolicyCheck, onClickButton, loading } = props;
+  const { setEmail, setPassword, setRePassword, setPolicyCheck, onClickButton, loading, email, password, rePassword } = props;
 
   const checked = useCallback((check) => setPolicyCheck(check));
   const onClickTermsAndPolicy = useCallback(() => navigate(routes.POLICY));
@@ -31,7 +31,7 @@ const ResetPassword = memo((props) => {
           backgroundSize: "100vw 100%",
         }}
       >
-        <Container fluid className="my-5 pt-5">
+        <Container fluid className="my-5 pt-5 max-width">
           <Row>
             <Col>
               <Row className="px-3 py-5">
@@ -58,11 +58,12 @@ const ResetPassword = memo((props) => {
                 <AuthCard
                   view="dekstop"
                   title={t("resetPassword")}
+                  password={password}
                   subtitle={t("strongPassword")}
                   inputFields={[
-                    { placeholder: t("governmentEmail"), type: "text", onChange: (val) => setEmail(val) },
-                    { placeholder: t("password"), type: "password", onChange: (val) => setPassword(val) },
-                    { placeholder: t("rePwd"), type: "password", onChange: (val) => setRePassword(val) },
+                    { placeholder: t("governmentEmail"), type: "text", onChange: (val) => setEmail(val), value: email },
+                    { placeholder: t("password"), type: "password", onChange: (val) => setPassword(val), value: password },
+                    { placeholder: t("rePwd"), type: "rePassword", onChange: (val) => setRePassword(val), value: rePassword },
                   ]}
                   checkbox={{
                     // label: t("agreeCond"),
@@ -111,6 +112,7 @@ const ResetPassword = memo((props) => {
                   view="mobile"
                   title={t("changePassword")}
                   subtitle={t("strongPassword")}
+                  password={password}
                   inputFields={[
                     { placeholder: t("governmentEmail"), type: "text", onChange: (val) => setEmail(val) },
                     { placeholder: t("password"), type: "password", onChange: (val) => setPassword(val) },

@@ -1,10 +1,13 @@
+import './style.css';
 import React, { useEffect, useState, useCallback, memo } from "react";
 import { Col, Container } from "react-bootstrap";
 import { SlShare } from "react-icons/sl";
-import { MdDownloadForOffline } from "react-icons/md"
+import { RxDownload } from "react-icons/rx";
 import { useTranslation } from "react-i18next";
 import { locales } from "../../../../i18n/helper";
 import { colors } from "../../../../utils/colors";
+import { BsPerson } from "react-icons/bs";
+import { FiTwitter, FiLinkedin } from "react-icons/fi";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
@@ -18,8 +21,9 @@ import csvImage from '../../../../assets/images/csv_img.png';
 import apiImage from '../../../../assets/images/api_img.png';
 import BottomSheetBar from "../../BottomSheet";
 import { RWebShare } from "react-web-share";
-import './style.css';
 import { addDownloadCount } from "../../../../axios/api";
+import i18next from "i18next";
+import CustomButton from "../../../elements/CustomButton";
 
 
 const DataHeader = memo((props) => {
@@ -29,11 +33,17 @@ const DataHeader = memo((props) => {
     const { t } = useTranslation();
     const [openBottomSheet, setOpenBottomSheet] = useState(false)
 
+
+    // const [offset, setOffset] = useState(false);
+
+
+
     const [headerOnTop, setHeaderOnTop] = useState(false);
     const [currentHovered, setCurrentHovered] = useState(null);
 
     const addDownloadCounts = useCallback((title, id) => {
         addDownloadCount(id).then((res) => {
+            console.log("hello its running...", id);
             handleReload()
         })
     });
@@ -59,9 +69,9 @@ const DataHeader = memo((props) => {
             title: t(item.title),
             format: item.format,
             url: url,
-            icon: item.format === "facebook" ? <FaFacebookF />
-                : item.format === "linkedin" ? <FaLinkedinIn />
-                    : item.format === "twitter" && <FaTwitter />,
+            icon: item.format === "facebook" ? <BsPerson />
+                : item.format === "linkedin" ? <FiLinkedin />
+                    : item.format === "twitter" && <FiTwitter />,
         }
     ))
 
@@ -88,17 +98,28 @@ const DataHeader = memo((props) => {
     useEffect(() => {
         window.onscroll = () => {
             if (document?.getElementById("main")?.getBoundingClientRect().top <= 20) {
-                setHeaderOnTop(true)
+                setHeaderOnTop(true);
+                // setOffset(true);
             } else {
                 setHeaderOnTop(false)
             }
         }
     }, [])
-    
+
+    // useEffect(() => {
+    //     window.onscroll = function () {
+    //         if (window.scrollY > 200) {
+    //             setOffset(true);
+    //         } else {
+    //             setOffset(false);
+    //         }
+    //     };
+    // }, []);
+
     return (
-        <Container id='main' fluid className={`d-flex justify-content-between align-items-start py-4 bg-white shadow-none ${headerOnTop && "sticky-top shadow-sm w-100 m-0"}`}>
+        <Container id='main' fluid className={`bg-white page-padding d-flex justify-content-between align-items-start py-4 ${headerOnTop && "sticky-top w-100 m-0"}`}>
             <BottomSheetBar selectedSheetValue={t("download")} open={openBottomSheet} setOpen={setOpenBottomSheet} options={options} />
-            <Col md={12} lg={8} className="px-2">
+            <Col md={12} lg={8} className="px-0">
                 {
                     !title ? <><Shimmer rounded="xs" height={"32px"} className="my-2" /><Shimmer rounded="xs" height={"32px"} width="70%" className="my-2" /></> : (
                         <div>
@@ -109,7 +130,7 @@ const DataHeader = memo((props) => {
                                 heading={title}
                                 maxNumberOfLines={headerOnTop && 2}
                             /> */}
-                            <p className={`fs-lg multine-ellipsis-${headerOnTop && 2} en-font-bold`}>
+                            <p className={`fs-lg multine-ellipsis-${headerOnTop && 2} ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>
                                 {title}
                             </p>
                         </div>
@@ -121,28 +142,32 @@ const DataHeader = memo((props) => {
                 (
                     <>
                         <Col className="d-none d-lg-flex justify-content-end">
-                            <div className="" onClick={() => setCurrentHovered(false)} onMouseOver={onHover} onMouseLeave={onLeave}>
+                            <div className="px-2" onClick={() => setCurrentHovered(false)} onMouseOver={onHover} onMouseLeave={onLeave}>
                                 <Dropdown
+                                    nopadding
                                     autoClose={true}
                                     options={shareOption}
                                     size={"xl"}
-                                    headerComponent={<Button backgroundColor="white" textColor="black" borderColor={currentHovered ? colors.purple : colors.black} icon={<SlShare size={20} color={currentHovered ? colors.purple : colors.black} />} />}
+                                    headerComponent={<CustomButton buttonClass='outlined' icon={<SlShare size={20} />} />}
+                                //headerComponent={<Button backgroundColor="white" textColor="black" borderColor={currentHovered ? colors.purple : colors.black} icon={<SlShare size={20} color={currentHovered ? colors.purple : colors.black} />} />}
                                 />
                             </div>
-                            <div className="d-flex flex-column align-items-center">
+                            <div className="d-flex flex-column">
                                 <div className="d-flex">
                                     <Dropdown
-                                        onClickDownloadItem={addDownloadCounts}
+                                        // onClickDownloadItem={addDownloadCounts}
+                                        nopadding
                                         autoClose={true}
                                         size={"md"}
                                         options={options}
-                                        headerComponent={<Button icon={<MdDownloadForOffline className="mx-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" />}
+                                        headerComponent={<CustomButton icon={<RxDownload className="ms-1" size={20} />} title={t("download")} buttonClass='contained-black' iconend />}
+                                    //headerComponent={<Button icon={<RxDownload className="ms-1" size={20} />} title={t("download")} backgroundColor="black" textColor="white" iconend />}
                                     />
                                 </div>
                                 {
                                     downloadCount >= 0 ?
-                                        <div className="d-flex">
-                                            <p className="m-0 px-1">{downloadCount}</p><span style={{ color: colors.light_gray }}>{t("download")}</span>
+                                        <div className="d-flex justify-content-center">
+                                            <p className="m-0 px-1 text-center">{downloadCount}</p><span style={{ color: colors.light_gray }}>{t("download")}</span>
                                         </div> : ""
                                 }
                             </div>

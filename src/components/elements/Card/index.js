@@ -1,16 +1,18 @@
+import './style.css';
 import React, { memo, useState } from "react";
 import { Card as RBCard, Col, Row } from "react-bootstrap";
 import { BsPerson, BsShare, BsThreeDots } from "react-icons/bs";
+import { FiTwitter, FiLinkedin } from "react-icons/fi";
 import { MdOutlineFileDownload } from 'react-icons/md';
 import { BsArrowDownCircleFill } from "react-icons/bs";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { FaFilePdf, FaFileExcel, FaFileCsv } from "react-icons/fa";
-import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+// import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { colors } from "../../../utils/colors";
 import { useCallback } from "react";
 import Dropdown from '../../elements/DropDown';
 import Heading from "../Heading";
 import Tag from "../Tag";
-import './style.css';
 import { shareOptions } from "../../../utils";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +25,7 @@ import { locales } from "../../../i18n/helper";
 import BottomSheetBar from "../../modules/BottomSheet";
 import { routes } from "../../../router/helper";
 import { addDownloadCount } from "../../../axios/api";
+import i18next from "i18next";
 
 const Card = memo((props) => {
 
@@ -31,7 +34,7 @@ const Card = memo((props) => {
 
     const { resources, title, publisher, description, tags, size, noborder,
         hoverable, nopadding, shortTitle, headingSize, onClick, nodropdown,
-        noheadercomponent, notags, notagsactive, url, dropdownWidth, handleReload } = props;
+        noheadercomponent, notags, notagsactive, url, dropdownWidth, handleReload, cardStyle, datasetID, tempIncreaseDownloadCount } = props;
 
     var HEIGHT = "332px", border, ClassName;
 
@@ -47,7 +50,8 @@ const Card = memo((props) => {
     const downloadResources = useCallback((links) => { setIsDownloadLink(links) }); //callback for url redirect
 
     const addDownloadCounts = useCallback((title, id) => {
-        addDownloadCount(id).then((res) => {
+        addDownloadCount(tempIncreaseDownloadCount ? datasetID : id, tempIncreaseDownloadCount).then((res) => {
+            console.log("hello its running...s", datasetID);
             handleReload()
         })
     });
@@ -112,9 +116,9 @@ const Card = memo((props) => {
             title: t(item.title),
             format: item.format,
             url: url,
-            icon: item.format === "facebook" ? <FaFacebookF />
-                : item.format === "linkedin" ? <FaLinkedinIn />
-                    : item.format === "twitter" && <FaTwitter />
+            icon: item.format === "facebook" ? <BsPerson />
+                : item.format === "linkedin" ? <FiLinkedin />
+                    : item.format === "twitter" && <FiTwitter />
         }
     ))
     return (
@@ -128,8 +132,13 @@ const Card = memo((props) => {
                 options={selectedSheetValue === t("downloadDatasets") ? specificDownloadOptions : selectedSheetValue === t("share") ? specificShareOptions : options} />
             <RBCard
                 // onClick={onClick}
-                className={`${nopadding ? "py-4" : "p-4"} ${ClassName}`}
-                style={{ height: HEIGHT, width: "100%", borderRadius: "30px", borderWidth: border }}>
+                className={`${nopadding ? "py-4" : "paddofcards"} ${ClassName} hover-pl`}
+                style={{
+                    height: HEIGHT,
+                    width: "100%",
+                    borderRadius: "30px",
+                    borderWidth: border
+                }}>
                 {
                     !notags &&
                     <Row className={`${nopadding && "m-0"} h-25 align-items-center`}>
@@ -137,7 +146,7 @@ const Card = memo((props) => {
                             {
                                 tags && tags.length > 0 && tags.map((item, index) => (
                                     <Tag key={index} title={item}
-                                        margin={"0"}
+                                        margin={index == 0 ? "0" : "2"}
                                         onClick={() => !notagsactive && onClickTag(routes.DATASET, { listItem: [{ title: item, type: i18n.language === locales.AR ? "themelear" : "theme" }] })} />
                                 ))
                             }
@@ -145,53 +154,83 @@ const Card = memo((props) => {
                         {
                             !nodropdown &&
                             <Col xs={4} className='d-flex justify-content-end'>
-                                {
-                                    window.innerWidth <= 768 ?
-                                        <BsThreeDots onClick={() => setOpenBottomSheet(true)} color={colors.black} size={28} style={{ cursor: 'pointer' }} />
-                                        :
-                                        <Dropdown
-                                            dropdownWidth={dropdownWidth ? dropdownWidth : "15%"}
-                                            width={"100%"}
-                                            noheadercomponent={noheadercomponent}
-                                            autoClose={"outside"}
-                                            minWidth={"50%"}
-                                            size={"xl"}
-                                            // size={selectedDropdownValue === t("download") ? window.innerWidth >= 768 ? "sm" : "xl" : window.innerWidth >= 768 ? "sm" : "lg"}
-                                            options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
-                                            selectedDropdownValue={selectedDropdownValue}
-                                            setSelectedDropdownValue={setSelectedDropdownValue}
-                                            headerComponent={<BsThreeDots color={colors.black} size={28} style={{ cursor: 'pointer' }} />}
-                                        />
-                                }
+                                <div className="d-block d-lg-none">
+                                    <HiOutlineDotsHorizontal onClick={() => setOpenBottomSheet(true)} color={colors.black} size={28} style={{ cursor: 'pointer' }} />
+                                </div>
+                                <div className="d-none d-lg-block">
+                                    <Dropdown
+                                        dropdownWidth={dropdownWidth ? dropdownWidth : "15%"}
+                                        width={"100%"}
+                                        noheadercomponent={noheadercomponent}
+                                        autoClose={"outside"}
+                                        minWidth={"50%"}
+                                        size={"xl"}
+                                        // size={selectedDropdownValue === t("download") ? window.innerWidth >= 768 ? "sm" : "xl" : window.innerWidth >= 768 ? "sm" : "lg"}
+                                        options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
+                                        selectedDropdownValue={selectedDropdownValue}
+                                        setSelectedDropdownValue={setSelectedDropdownValue}
+                                        headerComponent={<div className='d-flex align-items-center' style={{ height: '10px', overflow: 'hidden' }}><HiOutlineDotsHorizontal color={colors.black} size={28} style={{ cursor: 'pointer' }} /> </div>}
+                                    />
+                                </div>
                             </Col>
                         }
                     </Row>
                 }
                 <Row className={`${nopadding && "m-0"} ${publisher && !notags ? "h-50" : "h-75"}`}>
                     <Col md={shortTitle ? 8 : 12}>
-                        <Heading
-                            bold
-                            underline
-                            maxNumberOfLines={shortTitle ? 2 : 3}
-                            size={headingSize ? headingSize : "md"}
-                            heading={title}
-                            onClick={onClick}
-                        />
+                        {cardStyle ?
+                            <p className={`${onClick && 'text-underline-hover'} ${shortTitle ? 'multine-ellipsis-2' : 'multine-ellipsis-3'} ${cardStyle?.titleFs} ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}
+                                onClick={onClick ? onClick : () => { }}
+                            >
+                                {title}
+                            </p>
+                            :
+                            <>
+                                <p
+                                    className={`${headingSize ? headingSize : "fs-sm"} text-underline-hover ${shortTitle ? 'multine-ellipsis-2' : 'multine-ellipsis-3'} ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}
+                                    onClick={onClick}>
+                                    {title}
+                                </p>
+                                {/* <Heading
+                                    bold
+                                    underline
+                                    maxNumberOfLines={shortTitle ? 2 : 3}
+                                    size={headingSize ? headingSize : "md"}
+                                    heading={title}
+                                    onClick={onClick}
+                                /> */}
+                            </>
+                        }
+
                     </Col>
                     {
-                        description &&
-                        <Col md={8}>
-                            <Heading maxNumberOfLines={shortTitle ? 2 : 3} color={'#404040'} size={shortTitle ? "xs" : "xxs"} heading={description} />
-                        </Col>
+                        description && cardStyle ?
+                            <Col md={8}>
+                                <p className={`${shortTitle ? 'multine-ellipsis-2' : 'multine-ellipsis-3'} ${cardStyle?.descFs} ${i18next.language === locales.AR ? "ar-font" : "en-font"}`} style={{ color: colors.dark_gray }}>
+                                    {description}
+                                </p>
+                            </Col>
+                            :
+                            <Col md={8}>
+                                <Heading maxNumberOfLines={shortTitle ? 2 : 3} color={'#404040'} size={shortTitle ? "xs" : "xxs"} heading={description} />
+                            </Col>
                     }
                 </Row>
                 {
-                    publisher &&
-                    <Row className={`${nopadding && "m-0"} h-25 align-items-end`} >
-                        <Col>
-                            <Heading size='xxs' color={colors.gray} nomargin heading={publisher} />
-                        </Col>
-                    </Row>
+                    publisher && cardStyle ?
+                        <Row className={`${nopadding && "m-0"} h-25 align-items-end`} >
+                            <Col>
+                                <p className={`${cardStyle?.publisher} ${i18next.language === locales.AR ? "ar-font" : "en-font"}`} style={{ color: colors.gray }}>
+                                    {publisher}
+                                </p>
+                            </Col>
+                        </Row>
+                        :
+                        <Row className={`${nopadding && "m-0"} h-25 align-items-end`} >
+                            <Col>
+                                <Heading size='xxs' color={colors.gray} nomargin heading={publisher} />
+                            </Col>
+                        </Row>
                 }
             </RBCard>
         </>

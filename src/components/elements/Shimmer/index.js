@@ -1,10 +1,11 @@
 import React, { memo } from "react";
 import { Skeleton } from "@mui/material";
 import { colors } from "../../../utils/colors";
+import ShimmerLoader from "../../../assets/images/Shimmer-loader.png"
 
 const Shimmer = memo((props) => {
 
-    const { backgroundColor, rounded } = props;
+    const { backgroundColor, rounded, backgroundImage } = props;
 
     let theme = '', radius = '';
 
@@ -23,15 +24,41 @@ const Shimmer = memo((props) => {
     }
 
     return (
-        <Skeleton
-            style={{
-                borderRadius: radius,
-                backgroundColor: theme
-            }}
-            animation="wave"
-            variant="rectangular"
-            {...props}
-        />
+        <>
+            {
+                backgroundImage ?
+
+                    <div className="position-relative">
+                        <Skeleton
+                            style={{
+                                borderRadius: radius,
+                                backgroundColor: theme,
+                            }}
+                            animation="wave"
+                            variant="rectangular"
+                            {...props}
+                        />
+                        <div className="h-100 w-100 opacity-class" style={{ position: "absolute", top: 0,overflow:'hidden' }}>
+                            <img
+                                src={ShimmerLoader}
+                                height={"100%"}
+                                width={"100%"}
+                            />
+                        </div>
+                    </div>
+
+                    :
+                    <Skeleton
+                        style={{
+                            borderRadius: radius,
+                            backgroundColor: theme
+                        }}
+                        animation="wave"
+                        variant="rectangular"
+                        {...props}
+                    />
+            }
+        </>
     )
 
 });
