@@ -1,3 +1,4 @@
+import './style.css';
 import React, { memo, useCallback, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { locales } from "../../../../i18n/helper";
@@ -19,8 +20,8 @@ const QuestionList = memo((props) => {
 
     return (
         <Container fluid className="my-2 page-padding max-width">
-            <div className="py-2">
-                <p className={`fs-xl ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{i18n.language === locales.AR ? titleAr : title}</p>
+            <div className="padd-support">
+                <p className={`fs-md ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{i18n.language === locales.AR ? titleAr : title}</p>
                 {/* <Heading heading={title} size={"lg"} bold backgroundColor={colors.white} /> */}
             </div>
             <Row>

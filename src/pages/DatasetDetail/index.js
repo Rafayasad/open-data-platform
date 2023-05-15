@@ -47,6 +47,8 @@ const DatasetDetail = memo(() => {
     //     setDataset();
     // }, [id])
 
+    console.log("datatatattatatat");
+
     const onClickCard = useCallback((id) => {
         mainDiv.scrollIntoView();
         setDataset()
@@ -69,7 +71,7 @@ const DatasetDetail = memo(() => {
     useEffect(() => {
 
         if (dataset) {
-            getSimilarDatasets(dataset.topics[0], setSimilarDataset)
+            getSimilarDatasets(dataset.id, dataset.topics[0], setSimilarDataset)
         }
 
     }, [dataset])

@@ -32,7 +32,7 @@ const Register = memo(() => {
   console.log("name", name, email);
 
   const onClickRegister = useCallback(() => {
-    if (email === '' || reEmail === '' || password === '' || name === '' || isRecaptcha == null || !isChecked) {
+    if (email === '' || reEmail === '' || password === '' || name === '' || !isChecked) {
       toast("Please fill all the fields.", { type: "error" })
     } else if (validateEmail(email) === false) {
       toast("Please provide a valid email address.", { type: "error" })
@@ -42,6 +42,8 @@ const Register = memo(() => {
       toast("Both email doesn't match.", { type: "error" })
     } else if (!isChecked) {
       toast("Please check the Abu Dhabi Open Data terms and policy.", { type: "error" })
+    } else if (isRecaptcha == null) {
+      toast("Please verify, you are not a rebot.", { type: "error" })
     } else if (isChecked && isRecaptcha != null && name && email && reEmail && password) {
       register(navigate, routes.HOME, setLoading, { email, password, reEmail, name })
     }
@@ -52,6 +54,7 @@ const Register = memo(() => {
   const onClickLogin = useCallback(() => navigate(routes.LOGIN));
   const onClickTermsAndPolicy = useCallback(() => navigate(routes.POLICY));
 
+  console.log("ISrepcahtaaaaaaaa", isRecaptcha);
 
   return (
     <div>
@@ -74,7 +77,7 @@ const Register = memo(() => {
               <Card
                 className="p-5"
                 style={{
-                  width: "450px",
+                  width: "566px",
                   backgroundColor: colors.white,
                   borderRadius: "30px",
                   height: "100%"

@@ -171,7 +171,7 @@ export const getRecentsDatasets = (setData, setLoading) => {
         })
 }
 
-export const getSimilarDatasets = (topic, setData, setLoading) => {
+export const getSimilarDatasets = (id, topic, setData, setLoading) => {
     return endpoints.
         getSimilarDatasets(topic).then((res) => {
             if (res.status === 200) {
@@ -233,7 +233,8 @@ export const getSimilarDatasets = (topic, setData, setLoading) => {
                     }
                 })
 
-                setData(transform.slice(0, 4))
+                let similarDatasets = transform?.filter(el => el.id !== id)
+                setData(similarDatasets)
                 setLoading(false)
             }
         }).catch((err) => {
