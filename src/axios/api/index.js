@@ -234,7 +234,7 @@ export const getSimilarDatasets = (id, topic, setData, setLoading) => {
                 })
 
                 let similarDatasets = transform?.filter(el => el.id !== id)
-                setData(similarDatasets)
+                setData(similarDatasets.slice(0, 4))
                 setLoading(false)
             }
         }).catch((err) => {
