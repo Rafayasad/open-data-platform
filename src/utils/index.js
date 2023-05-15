@@ -29,5 +29,15 @@ export const shareOptions = [
         title: "twitter",
         format: "twitter",
         downloadURL: "...."
+    },
+    {
+        title: "copylink",
+        format: "copylink",
+        downloadURL: "..."
+    },
+    {
+        title: "email",
+        format: "email",
+        downloadURL: "..."
     }
 ]

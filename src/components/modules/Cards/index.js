@@ -41,7 +41,7 @@ const Cards = memo((props) => {
 
     const { title, notitlebutton, data, backgroundColor, hoverable, type,
         size, onClick, onClickViewAll, buttonText, notagsactive, noheadercomponent, dropdownWidth
-        , handleReload, cardsCount, textSize,padding
+        , handleReload, cardsCount, textSize, padding
     } = props;
 
     var numberOfColumns = 4;
@@ -73,6 +73,7 @@ const Cards = memo((props) => {
                             title={i18n.language === locales.AR ? item.title_ar : item.title}
                             description={i18n.language === locales.AR ? item.description_ar : item.description}
                             image={item.image}
+                            datasetViewCount={item.viewDatasets}
                             onClick={() => onClick(item.id)}
                         />
                     </Col>
@@ -180,7 +181,7 @@ const Cards = memo((props) => {
                 </Row>
             }
             <Row>
-                <Col className={`x-4 max-width  ${padding ? 'page-padding-md' :'page-padding'}`}>
+                <Col className={`x-4 max-width  ${padding ? 'page-padding-md' : 'page-padding'}`}>
                     <Row>
                         {renderContent()}
                     </Row>

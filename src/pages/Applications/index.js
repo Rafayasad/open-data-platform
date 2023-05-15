@@ -58,6 +58,8 @@ const Applications = memo(() => {
 
     })
 
+    console.log("====>", displayApplications);
+
     return (
         <div>
             <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
