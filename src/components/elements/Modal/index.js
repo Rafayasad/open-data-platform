@@ -63,39 +63,45 @@ import './style.css';
 import i18next from 'i18next';
 import { locales } from '../../../i18n/helper';
 
-const style = {
-  position: 'absolute',
-  borderRadius: "30px",
-  overflow: "scroll",
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 800,
-  bgcolor: 'white',
-  boxShadow: 24,
-  color: 'black',
-  border: 0,
-  minHeight: "400px",
-  p: 4,
-};
+
 
 const ModalEelment = memo((props) => {
 
-  const { size, backdrop, loading, title, description } = props;
+  const { size, backdrop, loading, title, description, isOpen,
+    setIsOpen, height, width, descriptionHeight, setData, isPublisherModal } = props;
+
   const navigate = useNavigate();
 
-  const [open, setOpen] = React.useState(true);
+  const style = {
+    position: 'absolute',
+    borderRadius: "30px",
+    overflow: "scroll",
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: width ? width : 800,
+    height: height && height,
+    bgcolor: 'white',
+    boxShadow: 24,
+    color: 'black',
+    border: 0,
+    minHeight: "400px",
+    p: 4,
+  };
+
+  // const [open, setOpen] = React.useState(true);
 
   const handleClose = () => {
-    setOpen(false)
-    navigate(-1);
+    setIsOpen(false)
+    !isPublisherModal && navigate(-1);
+    setData();
   };
 
   return (
     <div>
       {window.innerWidth >= 992 ?
         <Modal
-          open={open}
+          open={isOpen}
           //onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
@@ -117,9 +123,7 @@ const ModalEelment = memo((props) => {
                   <div className='d-flex align-items-start justify-content-between'>
                     <Typography className='pb-4' id="modal-modal-title" variant="h6" component="h2">
                       {/* <Heading heading={title} nomargin bold size={"lg"} /> */}
-
                       <p className={`fs-kilo ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{title}</p>
-
                     </Typography>
                     <div>
                       <AiOutlineClose style={{ cursor: "pointer" }} size={23} onClick={handleClose} />
@@ -128,16 +132,15 @@ const ModalEelment = memo((props) => {
                   {/* <Typography id="modal-modal-description modal-body" sx={{ mt: 2, overflowY: "scroll", height: "350px" }}>
                   {description}
                 </Typography> */}
-                  <div style={{ overflowY: "scroll", height: "400px" }}>
+                  <div style={{ overflowY: "scroll", height: descriptionHeight ? descriptionHeight : "400px" }}>
                     <p className={`${i18next.language === locales.AR ? "ar-font" : "en-font"}`} dangerouslySetInnerHTML={{ __html: description }} />
                   </div>
                 </>
-
               )}
           </Box>
         </Modal>
         :
-        <div className='w-100 p-3'>
+        <div className={`w-100 p-3 ${!isOpen && "d-none"}`}>
           {
             loading ? (
               <div className="d-flex align-items-center justify-content-center">
@@ -150,7 +153,7 @@ const ModalEelment = memo((props) => {
                     <p className='fs-kilo en-font-bold'>{title}</p>
                   </Typography>
                   <div className=''>
-                    <AiOutlineClose style={{ cursor: "pointer" }} onClick={handleClose} />
+                    <AiOutlineClose size={25} onClick={handleClose} />
                   </div>
                 </div>
                 {/* <Typography id="modal-modal-description modal-body" sx={{ mt: 2, overflowY: "scroll", height: "350px" }}>

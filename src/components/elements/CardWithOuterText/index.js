@@ -1,10 +1,8 @@
 import './style.css';
-import React, { memo, useEffect, useRef, useState } from "react";
+import React, { memo } from "react";
 import { Col, Row, Card as RBCard } from "react-bootstrap";
 import { FiArrowUpLeft, FiArrowUpRight } from 'react-icons/fi';
 import { locales } from "../../../i18n/helper";
-import i18n from "../../../i18n/i18n";
-import Heading from "../Heading";
 import { colors } from "../../../utils/colors";
 import { useTranslation } from "react-i18next";
 import _ from 'lodash';
@@ -13,37 +11,11 @@ import { routes } from '../../../router/helper';
 
 const CardWithOuterText = memo((props) => {
 
-    const { title, description, image, datasetViewCount, onClick } = props;
+    const { title, description, image, datasetViewCount, onClick, setIsOpenModal, setData } = props;
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
 
     var height = "250px";
-
-    // const containerRef = useRef(null);
-    // const [isExpanded, setIsExpanded] = useState(false);
-
-    // useEffect(() => {
-    //     const container = containerRef.current;
-    //     const linesToShow = isExpanded ? Infinity : 5;
-    //     const lineHeight = 1.5; // Adjust line height as needed
-    //     const fontSize = 16; // Adjust font size as needed
-    //     const containerHeight = linesToShow * lineHeight * fontSize;
-
-    //     container.style.height = `${containerHeight}px`;
-    //     container.style.overflow = "hidden";
-    //     container.style.display = "-webkit-box";
-    //     container.style.WebkitLineClamp = linesToShow.toString();
-    //     container.style.WebkitBoxOrient = "vertical";
-    //     container.style.wordWrap = "break-word";
-    //     container.style.wordBreak = "break-all";
-    //     container.style.width = "80%";
-    // }, [description, isExpanded]);
-
-    // const toggleExpand = () => {
-    //     setIsExpanded(!isExpanded);
-    // };
-
-    const [isTruncated, setIsTruncated] = useState(true);
 
     return (
         <div>
@@ -63,9 +35,29 @@ const CardWithOuterText = memo((props) => {
                     }
                 </Col>
                 <Col md={10} className="py-1">
-                    <p className="fs-xs en-font-default m-0">{_.truncate(description, {
-                        'length': 200,
-                    })}<span className='fs-xs en-font-default en-font-bold ms-2' style={{ color: colors.purple, cursor: "pointer" }}>{t("more")}</span></p>
+                    <p className="fs-xs en-font-default m-0">
+                        {
+                            datasetViewCount &&
+                            _.truncate(description, {
+                                'length': 200,
+                            })}
+                        {
+                            datasetViewCount && description.length > 200 &&
+                            <span
+                                onClick={() => {
+                                    setIsOpenModal(true)
+                                    setData({
+                                        title,
+                                        description
+                                    })
+                                }}
+                                className={`fs-xs en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ms-2`}
+                                style={{ color: colors.purple, cursor: "pointer" }}>
+                                {t("more")}
+                            </span>
+                        }
+                        {!datasetViewCount && description}
+                    </p>
                 </Col>
                 {datasetViewCount &&
                     <Col xs={5} md={4} className="py-2">

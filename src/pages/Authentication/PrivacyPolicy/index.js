@@ -19,10 +19,10 @@ const PrivacyPolicy = memo(() => {
     const ref1 = useRef(null);
     const [data, setData] = useState();
     const [loading, setLoading] = useState(true);
+    const [isOpen, setIsOpen] = useState(true);
 
     useEffect(() => {
         getPrivacyPolicy(setData, setLoading)
-
     }, [i18n.language])
 
     return (
@@ -39,6 +39,8 @@ const PrivacyPolicy = memo(() => {
             </div>
 
             <Modal
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
                 loading={loading}
                 backdrop={useIsFocused(ref1)}
                 title={i18n.language === locales.EN ? data?.title : data?.title_ar}

@@ -41,7 +41,7 @@ const Cards = memo((props) => {
 
     const { title, notitlebutton, data, backgroundColor, hoverable, type,
         size, onClick, onClickViewAll, buttonText, notagsactive, noheadercomponent, dropdownWidth
-        , handleReload, cardsCount, textSize, padding
+        , handleReload, cardsCount, textSize, padding, setData, setIsOpenModal
     } = props;
 
     var numberOfColumns = 4;
@@ -74,6 +74,8 @@ const Cards = memo((props) => {
                             description={i18n.language === locales.AR ? item.description_ar : item.description}
                             image={item.image}
                             datasetViewCount={item.viewDatasets}
+                            setData={setData}
+                            setIsOpenModal={setIsOpenModal}
                             onClick={() => onClick(item.id)}
                         />
                     </Col>

@@ -2,6 +2,10 @@
     border-radius: 25px;
 }
 
+.muiltr-lahdlo {
+    outline: 0;
+}
+
 .modal-header {
     border-bottom: none;
 }
@@ -25,6 +29,6 @@
     /* color of the scroll thumb */
     border-radius: 20px !important;
     /* roundness of the scroll thumb */
-    border: 3px solid orange !important ;
+    border: 3px solid orange !important;
     /* creates padding around scroll thumb */
 }
