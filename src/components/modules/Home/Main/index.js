@@ -27,6 +27,8 @@ const Main = memo((props) => {
     const [offset, setOffset] = useState(false);
     const [oneTime, setOneTime] = useState(false);
 
+    console.log("=====>", datasetsSuggestion?.en.slice(0, 4));
+
     useEffect(() => {
         window.onscroll = function () {
             if (window.scrollY > 250) {
@@ -39,20 +41,35 @@ const Main = memo((props) => {
     }, []);
 
     const renderSearchTags = (viewport) =>
-    (
-        t("populartext").split(",").slice(0, viewport === "md" ? 4 : 1).map((item, index) => {
-            return (
-                <p
-                    className="m-0 me-1 fs-static"
-                    onClick={() => {
-                        navigate(routes.DATASET, { state: { search: item } })
-                    }}
-                    style={{ textAlign: 'center', color: 'white', cursor: "pointer" }}>
-                    {item + (index == t("populartext").split(",").slice(0, viewport === "md" ? 4 : 1).length - 1 ? '' : ',')}
-                </p>
+        i18n.language === locales.AR ?
+            (
+                datasetsSuggestion?.ar.slice(0, viewport === "md" ? 4 : 1).map((item, index) => {
+                    return (
+                        <p
+                            className="m-0 me-1 fs-static"
+                            onClick={() => {
+                                navigate(routes.DATASET, { state: { search: item } })
+                            }}
+                            style={{ textAlign: 'center', color: 'white', cursor: "pointer" }}>
+                            {item + (index == datasetsSuggestion?.ar.slice(0, viewport === "md" ? 4 : 1).length - 1 ? '' : ',')}
+                        </p>
+                    )
+                })
+            ) :
+            (
+                datasetsSuggestion?.en.slice(0, viewport === "md" ? 4 : 2).map((item, index) => {
+                    return (
+                        <p
+                            className="m-0 me-1 fs-static"
+                            onClick={() => {
+                                navigate(routes.DATASET, { state: { search: item } })
+                            }}
+                            style={{ textAlign: 'center', color: 'white', cursor: "pointer" }}>
+                            {item + (index == datasetsSuggestion?.en.slice(0, viewport === "md" ? 4 : 2).length - 1 ? '' : ',')}
+                        </p>
+                    )
+                })
             )
-        })
-    )
 
 
     return (
