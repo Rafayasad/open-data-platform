@@ -171,7 +171,7 @@ export const getRecentsDatasets = (setData, setLoading) => {
         })
 }
 
-export const getSimilarDatasets = (topic, setData, setLoading) => {
+export const getSimilarDatasets = (id, topic, setData, setLoading) => {
     return endpoints.
         getSimilarDatasets(topic).then((res) => {
             if (res.status === 200) {
@@ -233,7 +233,8 @@ export const getSimilarDatasets = (topic, setData, setLoading) => {
                     }
                 })
 
-                setData(transform.slice(0, 4))
+                let similarDatasets = transform?.filter(el => el.id !== id)
+                setData(similarDatasets.slice(0, 4))
                 setLoading(false)
             }
         }).catch((err) => {
@@ -328,6 +329,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
         getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then(async (res) => {
             if (res.status === 200) {
                 setLoading(false)
+
                 if (res.data.total > 0 && search && search.trim() !== "") {
                     let obj = {
                         keyword: search,
@@ -346,10 +348,8 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
 
                 let arr = []
 
-                // console.log(res.data.results?.map(item => console.log("RESULTS==>", item)));
-
-                console.log("ssssssssssssssssssadasdsadsadas", res.data);
                 arr = Object.values(res.data.results)?.map(item => (
+
                     {
                         id: item.identifier,
                         title: item.title,
@@ -361,28 +361,62 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                         tags: item.theme,
                         tags_ar: item.themelear,
                         url: `${process.env.REACT_APP_BASE_URL}/dataset/detail?id=${item.identifier}`,
-                        resources: item.distribution ? item.distribution.map(item => (
-                            {
-                                id: item.identifier,
-                                title: item.title ? item.title : "No Name Found",
-                                title_ar: item.titlelear ? item.titlelear : "لم يتم العثور على اسم",
-                                description: item.description,
-                                description_ar: item.descriptionlear,
-                                format:
-                                    item.format === "pdf" ? "pdf"
-                                        : item.format === "excel" ? "excel"
-                                            : item.format === "esri rest" ? "excel"
-                                                : item.format === "xlsx" ? "excel"
-                                                    : item.format === "xls" ? "excel"
-                                                        : item.format === "csv" ? "csv"
-                                                            : item.format === "API" && "api",
-                                downloadURL: item.downloadURL
-                            }
-                        )) : [],
+                        resources: item.distribution
+                            &&
+                            item.distribution?.filter(item => {
+                                if (item.downloadURL && item.downloadURL !== "") {
+                                    return item
+                                }
+                            })?.map(item => (
+                                {
+                                    id: item.identifier,
+                                    title: item.title ? item.title : "No Name Found",
+                                    title_ar: item.titlelear ? item.titlelear : "لم يتم العثور على اسم",
+                                    description: item.description,
+                                    description_ar: item.descriptionlear,
+                                    format:
+                                        item.format === "pdf" ? "pdf"
+                                            : item.format === "excel" ? "excel"
+                                                : item.format === "esri rest" ? "excel"
+                                                    : item.format === "xlsx" ? "excel"
+                                                        : item.format === "xls" ? "excel"
+                                                            : item.format === "csv" ? "csv"
+                                                                : item.format === "API" && "api",
+                                    downloadURL: item.downloadURL
+                                }
+                            )).length > 0 ?
+                            item.distribution?.filter(item => {
+                                if (item.downloadURL && item.downloadURL !== "") {
+                                    return item
+                                }
+                            })?.map(item => (
+                                {
+                                    id: item.identifier,
+                                    title: item.title ? item.title : "No Name Found",
+                                    title_ar: item.titlelear ? item.titlelear : "لم يتم العثور على اسم",
+                                    description: item.description,
+                                    description_ar: item.descriptionlear,
+                                    format:
+                                        item.format === "pdf" ? "pdf"
+                                            : item.format === "excel" ? "excel"
+                                                : item.format === "esri rest" ? "excel"
+                                                    : item.format === "xlsx" ? "excel"
+                                                        : item.format === "xls" ? "excel"
+                                                            : item.format === "csv" ? "csv"
+                                                                : item.format === "API" && "api",
+                                    downloadURL: item.downloadURL
+                                }
+                            )) : [{
+                                id: '0',
+                                title: 'No file uploaded yet.',
+                                title_ar: "لم يتم تحميل أي ملف بعد."
+                            }]
+                        ,
                     }
                 ))
                 // setLoading(false)
 
+                console.log("RRRRRRRRRRRRRRRRRR", arr);
                 setData(arr);
 
             }
@@ -400,8 +434,8 @@ export const getDatasetById = (id, setData) => {
             if (res.status === 200) {
 
                 let item = res.data;
-
-
+                console.log("AdassaS", item.distribution);
+                // for resources filterout
                 let filteredResources = item.distribution?.filter(item => {
                     let itemm = item.data
                     if (itemm.downloadURL && itemm.downloadURL !== "") {
@@ -424,6 +458,13 @@ export const getDatasetById = (id, setData) => {
                         }
                     )
                 })
+
+                let keyword = item && item.keyword && item.keyword?.filter(el => el.data && el.data !== ' ' && el)?.map(item => item.data);
+                let keywordlear = item && item.keywordlear && item.keywordlear?.filter(el => el.data && el.data !== ' ' && el)?.map(item => item.data);
+                let topics = item && item.theme && item.theme?.filter(el => el.data && el.data !== ' ' && el)?.map(item => item.data);
+                let topics_ar = item && item.themelear && item.themelear?.filter(el => el.data && el.data !== ' ' && el)?.map(item => item.data);
+
+
                 let downloadCount = await endpoints.getDownloadCountById(id)
                     .then((res) => {
                         if (res.status === 200) {
@@ -432,6 +473,17 @@ export const getDatasetById = (id, setData) => {
                     }).catch((err) => {
                         console.log("Error message", err)
                     })
+
+                // let obj = [
+                //     {
+                //         data: " ",
+                //         identifier: "2476ab9e-6421-5e20-b2a3-89275ccf22bb"
+                //     },
+                //     {
+                //         data: "hello",
+                //         identifier: "2476ab9e-6421-5e20-b2a3-89275ccf22bb"
+                //     }
+                // ]
 
                 let data = {
                     id: item.identifier,
@@ -449,10 +501,10 @@ export const getDatasetById = (id, setData) => {
                     // license_ar: item.licenselear,
                     license: "https://data.abudhabi/opendata/addata_open_license",
                     license_ar: "https://data.abudhabi/opendata/addata_open_license",
-                    topics: item && item.theme?.map(item => item.data != ' ' ? item.data : ['No Topics Found']),
-                    topics_ar: item && item.themelear?.map(item => item.data != ' ' ? item.data : ["لم يتم العثور على أي مواضيع"]),
-                    tags: item && item.keyword?.map(item => item.data != ' ' ? item.data : ['No Tags Found']),
-                    tags_ar: item && item.keywordlear?.map(item => item.data != ' ' ? item.data : ['لم يتم العثور على علامات']),
+                    topics: topics && topics?.length > 0 ? topics : ['No Topics Found'],
+                    topics_ar: topics_ar && topics_ar?.length > 0 ? topics_ar : ["لم يتم العثور على أي مواضيع"],
+                    tags: keyword && keyword?.length > 0 ? keyword : ['No Tags Found'],
+                    tags_ar: keywordlear && keywordlear?.length > 0 ? keywordlear : ['لم يتم العثور على علامات'],
                     resources: filteredResources.length > 0 ? filteredResources :
                         [{
                             id: '',

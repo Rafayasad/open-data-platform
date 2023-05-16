@@ -4,6 +4,7 @@ import Heading from "../../../elements/Heading";
 import Shimmer from "../../../elements/Shimmer";
 import i18next from "i18next";
 import { locales } from "../../../../i18n/helper";
+import { colors } from "../../../../utils/colors";
 
 const Main = memo((props) => {
 
@@ -28,7 +29,7 @@ const Main = memo((props) => {
                             {
                                 description ? (
                                     // <Heading nomargin size="xxs" heading={description} />
-                                    <p className="fs-xs m-0 en-font-default">{description}</p>
+                                    <p className="fs-xs m-0 en-font-default" style={{ color: colors.dark_gray }}>{description}</p>
                                 ) : (
                                     <>
                                         <Shimmer className='my-1' rounded='xs' />

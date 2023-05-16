@@ -4,6 +4,7 @@ import { Card as RBCard, Col, Row } from "react-bootstrap";
 import Heading from "../Heading";
 import i18next from "i18next";
 import { locales } from "../../../i18n/helper";
+import { colors } from '../../../utils/colors';
 
 const CardWithText = memo((props) => {
 
@@ -41,7 +42,7 @@ const CardWithText = memo((props) => {
                 <Row>
                     <Col />
                     <Col md={8} className="d-flex text-center">
-                        <p className="m-0 multine-ellipsis-4 en-font-default fs-xs">{description}</p>
+                        <p className="m-0 multine-ellipsis-4 en-font-default fs-xs" style={{ color: !currentHovered && colors.dark_gray }}>{description}</p>
                         {/* <Heading nomargin size='xxs' heading={description} maxNumberOfLines={maxNumberOfLines} /> */}
                     </Col>
                     <Col />
