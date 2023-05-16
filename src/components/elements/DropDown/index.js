@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Dropdown as BSDropdown } from 'react-bootstrap';
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share';
+import { FacebookShareButton, LinkedinShareButton, TwitterShareButton, EmailShareButton } from 'react-share';
 import i18n from '../../../i18n/i18n';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
@@ -10,6 +10,7 @@ import Heading from '../Heading';
 import './style.css';
 import { locales } from '../../../i18n/helper';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 const Dropdown = (props) => {
 
@@ -39,12 +40,17 @@ const Dropdown = (props) => {
         <></>
     );
 
-    const itemComponent = (icon, title, url) => {
+    const onClickCopyLink = (url, title) => {
+        { title === t("copylink") && toast("Copied to clipboard", { type: "success" }) }
+        navigator.clipboard.writeText(url)
+    };
+
+    const itemComponent = (icon, title, downloadUrl, linkUrl) => {
         return (
             <OverlayTrigger
                 placement="bottom"
                 delay={{ show: 400, hide: 0 }}
-                overlay={url ? renderTooltip(title) : emptyTooltip}
+                overlay={downloadUrl ? renderTooltip(title) : emptyTooltip}
             >
                 <div className='d-flex align-items-center'>
                     {
@@ -53,7 +59,7 @@ const Dropdown = (props) => {
                             {icon}
                         </div>
                     }
-                    <div className={`d-flex flex-wrap ${icon && "px-2"}`}>
+                    <div onClick={() => title === t("copylink") && onClickCopyLink(linkUrl, title)} className={`d-flex flex-wrap ${icon && "px-2"}`}>
                         <span className='m-0 p-0 multine-ellipsis-1 text-underline-hover'
                             style={{
                                 color: colors.black
@@ -121,8 +127,7 @@ const Dropdown = (props) => {
 
                                     }}
                                     style={{ width: "auto", alignItems: "center" }}
-                                    key={index} className={`d-flex rounded p-2 align-items-center ${indexx === index && "dropdown-items"} ${index > 0 && "mt-1"}`}
-                                >
+                                    key={index} className={`d-flex rounded p-2 align-items-center ${indexx === index && "dropdown-items"} ${index > 0 && "mt-1"}`}>
                                     {
                                         item.format === "facebook" ? (
                                             <FacebookShareButton url={item.url}>
@@ -136,6 +141,14 @@ const Dropdown = (props) => {
                                             <LinkedinShareButton url={item.url}>
                                                 {itemComponent(item.icon, item.title, item.downloadLink)}
                                             </LinkedinShareButton>
+                                        ) : item.format === 'copylink' ? (
+                                            <>
+                                                {itemComponent(item.icon, item.title, item.downloadLink, item.url)}
+                                            </>
+                                        ) : item.format === "email" ? (
+                                            <EmailShareButton url={item.url}>
+                                                {itemComponent(item.icon, item.title, item.downloadLink)}
+                                            </EmailShareButton>
                                         ) : (
                                             <>
                                                 {itemComponent(item.icon, item.title, item.downloadLink)}
