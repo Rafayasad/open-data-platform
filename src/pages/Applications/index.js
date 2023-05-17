@@ -58,11 +58,12 @@ const Applications = memo(() => {
 
     })
 
+    console.log("====>", displayApplications);
+
     return (
         <div>
-
             <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
-                <div className="my-5 pt-5">
+                <div className="my-5 pt-5 max-width">
                     <Main />
                     <div className="my-5" id="cards">
                         <Cards type="image-outer-text" data={displayApplications} onClick={onClickCard} />

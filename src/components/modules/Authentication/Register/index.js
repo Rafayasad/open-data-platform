@@ -54,8 +54,6 @@ const Register = memo(() => {
   const onClickLogin = useCallback(() => navigate(routes.LOGIN));
   const onClickTermsAndPolicy = useCallback(() => navigate(routes.POLICY));
 
-  console.log("ISrepcahtaaaaaaaa", isRecaptcha);
-
   return (
     <div>
       <div

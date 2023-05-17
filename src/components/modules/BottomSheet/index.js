@@ -1,12 +1,13 @@
 import { BottomSheet } from 'react-spring-bottom-sheet'
 import { GrClose } from "react-icons/gr";
 import { useTranslation } from 'react-i18next';
-import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share';
+import { EmailShareButton, FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share';
 import 'react-spring-bottom-sheet/dist/style.css';
 import Heading from '../../elements/Heading';
 import './style.css';
 import i18n from '../../../i18n/i18n';
 import { locales } from '../../../i18n/helper';
+import { toast } from 'react-toastify';
 
 const BottomSheetBar = (props) => {
 
@@ -14,7 +15,12 @@ const BottomSheetBar = (props) => {
 
     const { open, setOpen, options, setSelectedSheetValue, selectedSheetValue, heading } = props;
 
-    const itemComponent = (icon, title) => {
+    const onClickCopyLink = (url, title) => {
+        { title === t("copylink") && toast("Copied to clipboard", { type: "success" }) }
+        navigator.clipboard.writeText(url)
+    };
+
+    const itemComponent = (icon, title, downloadUrl, linkUrl) => {
         return (
             <div className='d-flex align-items-center'>
                 {
@@ -23,7 +29,7 @@ const BottomSheetBar = (props) => {
                         {icon}
                     </div>
                 }
-                <div className={`d-flex flex-wrap ${icon && "px-2"}`}>
+                <div onClick={() => title === t("copylink") && onClickCopyLink(linkUrl, title)} className={`d-flex flex-wrap ${icon && "px-2"}`}>
                     <span className='m-0 p-0 multine-ellipsis-1'
                         style={{
                             color: 'black'
@@ -87,6 +93,14 @@ const BottomSheetBar = (props) => {
                                                             <LinkedinShareButton url={item.url}>
                                                                 {itemComponent(item.icon, item.title)}
                                                             </LinkedinShareButton>
+                                                        ) : item.format === 'copylink' ? (
+                                                            <>
+                                                                {itemComponent(item.icon, item.title, item.downloadLink, item.url)}
+                                                            </>
+                                                        ) : item.format === "email" ? (
+                                                            <EmailShareButton url={item.url}>
+                                                                {itemComponent(item.icon, item.title, item.downloadLink)}
+                                                            </EmailShareButton>
                                                         ) : (
                                                             <>
                                                                 {itemComponent(item.icon, item.title)}

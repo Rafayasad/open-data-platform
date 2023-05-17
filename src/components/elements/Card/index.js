@@ -5,7 +5,7 @@ import { BsPerson, BsShare, BsThreeDots } from "react-icons/bs";
 import { FiTwitter, FiLinkedin } from "react-icons/fi";
 import { MdOutlineFileDownload } from 'react-icons/md';
 import { BsArrowDownCircleFill } from "react-icons/bs";
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { HiOutlineDotsHorizontal, HiLink } from "react-icons/hi";
 import { FaFilePdf, FaFileExcel, FaFileCsv } from "react-icons/fa";
 // import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { colors } from "../../../utils/colors";
@@ -118,7 +118,9 @@ const Card = memo((props) => {
             url: url,
             icon: item.format === "facebook" ? <BsPerson />
                 : item.format === "linkedin" ? <FiLinkedin />
-                    : item.format === "twitter" && <FiTwitter />
+                    : item.format === "twitter" ? <FiTwitter />
+                        : item.format === "copylink" ? <HiLink />
+                            : item.format === "email" && <BsPerson />
         }
     ))
     return (

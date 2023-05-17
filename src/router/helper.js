@@ -10,6 +10,7 @@ export const routes = {
   SUPPORT_QUESTIONS_DETAIL: BASE_ROUTE + '/support/questions/detail',
   ABOUTUS: BASE_ROUTE + "/about-us",
   APPLICATIONS: BASE_ROUTE + "/applications",
+  PUBLISHER: BASE_ROUTE + "/publishers",
   AUTHENTICATION: BASE_ROUTE + "/authentication",
   LOGIN: BASE_ROUTE + `/login`,
   REGISTER: BASE_ROUTE + `/register`,

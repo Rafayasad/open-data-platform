@@ -9,6 +9,7 @@ import { colors } from "../../../../utils/colors";
 import { BsPerson } from "react-icons/bs";
 import { FiTwitter, FiLinkedin } from "react-icons/fi";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { HiLink } from "react-icons/hi";
 import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
 import Shimmer from "../../../elements/Shimmer";
@@ -71,7 +72,9 @@ const DataHeader = memo((props) => {
             url: url,
             icon: item.format === "facebook" ? <BsPerson />
                 : item.format === "linkedin" ? <FiLinkedin />
-                    : item.format === "twitter" && <FiTwitter />,
+                    : item.format === "twitter" ? <FiTwitter />
+                        : item.format === "copylink" ? <HiLink />
+                            : item.format === "email" && <BsPerson />,
         }
     ))
 

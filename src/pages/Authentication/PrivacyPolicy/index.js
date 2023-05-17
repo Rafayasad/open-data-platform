@@ -19,16 +19,19 @@ const PrivacyPolicy = memo(() => {
     const ref1 = useRef(null);
     const [data, setData] = useState();
     const [loading, setLoading] = useState(true);
+    const [isOpen, setIsOpen] = useState(true);
 
     useEffect(() => {
         getPrivacyPolicy(setData, setLoading)
-
     }, [i18n.language])
 
     return (
         <>
-            <div ref={ref1} className="d-none d-lg-block" style={{ height: "100vh", width: "100vw", backgroundImage: `url(${AuthBackground1})`, backgroundRepeat: "no-repeat", backgroundSize: "100vw 100vh" }}>
-                <View  nocontent noupperfooter nomiddlefooter nolowerfooter />
+            <div ref={ref1} className="d-none d-lg-block" style={{
+                height: "100vh", width: "100vw",
+                backgroundImage: `url(${AuthBackground1})`, backgroundRepeat: "no-repeat", backgroundSize: "100vw 100vh"
+            }}>
+                <View nocontent noupperfooter nomiddlefooter nolowerfooter />
             </div>
 
             <div className="d-block d-lg-none py-5" style={{ height: "100%", width: "100%" }}>
@@ -36,6 +39,8 @@ const PrivacyPolicy = memo(() => {
             </div>
 
             <Modal
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
                 loading={loading}
                 backdrop={useIsFocused(ref1)}
                 title={i18n.language === locales.EN ? data?.title : data?.title_ar}
