@@ -40,7 +40,7 @@ const Main = memo((props) => {
         };
     }, []);
 
-    const renderSearchTags = (viewport) =>
+    const renderSearchTagsSuggestion = (viewport) =>
         i18n.language === locales.AR ?
             (
                 datasetsSuggestion?.ar.slice(0, viewport === "md" ? 4 : 1).map((item, index) => {
@@ -71,6 +71,21 @@ const Main = memo((props) => {
                 })
             )
 
+    const renderSearchTags = (viewport) =>
+    (
+        t("populartext").split(",").slice(0, viewport === "md" ? 4 : 1).map((item, index) => {
+            return (
+                <p
+                    className="m-0 me-1 fs-static"
+                    onClick={() => {
+                        navigate(routes.DATASET, { state: { search: item } })
+                    }}
+                    style={{ textAlign: 'center', color: 'white', cursor: "pointer" }}>
+                    {item + (index == t("populartext").split(",").slice(0, viewport === "md" ? 4 : 1).length - 1 ? '' : ',')}
+                </p>
+            )
+        })
+    )
 
     return (
         <div
