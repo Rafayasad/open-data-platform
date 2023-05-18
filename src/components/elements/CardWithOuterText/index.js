@@ -42,7 +42,7 @@ const CardWithOuterText = memo((props) => {
                                 'length': 200,
                             })}
                         {
-                            datasetViewCount && description.length > 200 &&
+                            datasetViewCount && description?.length > 200 &&
                             <span
                                 onClick={() => {
                                     setIsOpenModal(true)

@@ -137,5 +137,8 @@ export const endpoints = {
     },
     addDownloadCountById: (data) => {
         return client.post(`/apis/download_count.php`, data)
+    },
+    getPublishers: (data) => {
+        return client.post(`/apis/publisher2.php`,data)
     }
 } 

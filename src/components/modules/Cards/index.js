@@ -51,7 +51,7 @@ const Cards = memo((props) => {
     const renderContent = () => {
         if (type === 'image-inner-text') {
             return (
-                data && data.length > 0 ? data.map((item, index) => (
+                data && data?.length > 0 ? data?.map((item, index) => (
                     <Col key={index} md={6} lg={4} className="py-2">
                         <CardWithText
                             hoverable
@@ -67,7 +67,7 @@ const Cards = memo((props) => {
             )
         } else if (type === 'image-outer-text') {
             return (
-                data && data.length > 0 ? data.map((item, index) => (
+                data && data?.length > 0 ? data?.map((item, index) => (
                     <Col key={index} md={6} lg={4} className="py-2">
                         <CardWithOuterText
                             title={i18n.language === locales.AR ? item.title_ar : item.title}
