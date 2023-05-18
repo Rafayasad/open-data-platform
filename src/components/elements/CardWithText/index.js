@@ -32,7 +32,7 @@ const CardWithText = memo((props) => {
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover'
         }}>
-            <RBCard onClick={onClick} className={`p-4 justify-content-center align-items-center bg-transparent card-height`} style={{ borderWidth: border, cursor: "pointer" }}>
+            <RBCard onClick={onClick} className={`p-4 justify-content-center align-items-center bg-transparent card-with-text-height`} style={{ borderWidth: border, cursor: "pointer" }}>
                 <Row>
                     <Col className="d-flex text-center">
                         <p className={`fs-sm-md-const ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{title}</p>

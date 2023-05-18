@@ -15,6 +15,7 @@ import Dropdown from "../../../elements/DropDown";
 import '../../../modules/Drawer/style.css';
 import 'react-modern-drawer/dist/index.css';
 import dayjs from "dayjs";
+import CustomButton from "../../../elements/CustomButton";
 
 const ReportsFilter = memo((props) => {
 
@@ -218,10 +219,10 @@ const ReportsFilter = memo((props) => {
             <div className="h-25">
                 <div className="d-flex justify-content-between align-items-center p-2">
                     <div className="">
-                        <Button onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} />
+                        <CustomButton buttonClass="text-purple" onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} />
                     </div>
                     <div>
-                        <Button onClick={onClickApply} title={t("apply")} backgroundColor={"black"} textColor={"white"} />
+                        <CustomButton buttonClass='contained-black' onClick={onClickApply} title={t("apply")} backgroundColor={"black"} textColor={"white"} />
                     </div>
                 </div>
             </div>

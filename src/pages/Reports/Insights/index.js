@@ -102,7 +102,7 @@ const Insights = memo(() => {
         <>
             <Navbar theme='dark' />
             <ReportsFilter selectedTab={selectedTab} accordinData={AccordinData} open={filterOpen} setOpen={setFilterOpen} appliedFilters={filters} onApplyFilters={onApplyFilters} />
-            <Container fluid className="my-5 pt-5 px-4">
+            <Container fluid className="my-5 pt-5 page-padding">
                 <Header title={t("insightsReport")} onClickFilter={onClickFilter} datatypeCallback={datatypeCallback} />
                 <Tabs loading={loading} data={tabs} selected={selectedTab} />
                 <AppliedFilters
