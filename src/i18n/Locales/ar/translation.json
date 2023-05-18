@@ -47,7 +47,7 @@
     "alphabetically": "ألفبائي",
     "recentlyAddedDatasets": "مجموعات البيانات المضافة مؤخرا",
     "mostViewedDatasets": "معظم مجموعات البيانات المعروضة",
-    "abuDhabiDataInNumbers": "البيانات الرقمية",
+    "abuDhabiDataInNumbers": "احصائيات منصة أبوظبي للبيانات المفتوحة",
     "login": "تسجيل الدخول",
     "logout": "تسجيل الخروج",
     "register": "التسجيل",
@@ -274,6 +274,6 @@
     "opendata": "فتح البيانات",
     "fileFormat": "تنسيق الملف",
     "noResultFound!": "لم يتم العثور على نتائج!",
-    "copylink":"نسخ الارتباط",
-    "email":"بريد إلكتروني"
+    "copylink": "نسخ الارتباط",
+    "email": "بريد إلكتروني"
 }

@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getAllApplications } from "../../axios/api";
+import { getAllApplications, getPublishers } from "../../axios/api";
 import Pagination from "../../components/elements/Pagination";
 import Main from "../../components/modules/Applications/Main";
 import Cards from "../../components/modules/Cards";
@@ -13,6 +13,8 @@ import View from "../../components/modules/View";
 import Modal from "../../components/elements/Modal/index";
 import useIsFocused from "../../utils/hooks/useIsFocused";
 import { colors } from "../../utils/colors";
+import i18next from "i18next";
+import { locales } from "../../i18n/helper";
 
 const Publisher = memo(() => {
 
@@ -142,9 +144,7 @@ const Publisher = memo(() => {
         }
     ]
 
-
-    // const applications = useSelector(state => state.application.applications)
-    const cardsDiv = document.getElementById("cards");
+    const cardsDiv = document.getElementById("publisher-cards");
 
     const [displayPublishers, setDisplayPublishers] = useState();
 
@@ -156,41 +156,39 @@ const Publisher = memo(() => {
     const [loading, setLoading] = useState(true);
     const [modalData, setModalData] = useState();
 
-    useEffect(() => {
-        if (demo_data) {
-            let arr = [...demo_data]
-            let x = arr.slice(0, rowsPerPage)
-            setDisplayPublishers(x)
-        }
-    }, [])
-
     const onChangePage = useCallback((page) => {
+        console.log("PAGE",page);
+        setCurrentPage(page);
+        setDisplayPublishers();
+    }, [currentPage]);
 
-        if (page) {
-            let start = (page - 1) * rowsPerPage
-            let end = (start + rowsPerPage)
+    useEffect(() => {
+        getPublishers(currentPage, rowsPerPage, i18next.language === locales.AR ? "ar" : "en", setDisplayPublishers, setTotalCount)
+    }, [currentPage,i18next.language])
 
-            let arr = [...demo_data]
-            let x = arr.slice(start, end);
-            setDisplayPublishers(x);
-            setCurrentPage(page)
-        }
+    console.log("DATASsS", totalCount);
 
-    }, [currentPage, displayPublishers])
+    // useEffect(() => {
+    //     if (demo_data) {
+    //         let arr = [...demo_data]
+    //         let x = arr.slice(0, rowsPerPage)
+    //         setDisplayPublishers(x)
+    //     }
+    // }, [])
 
-    console.log("====>s", modalData);
+    // const onChangePage = useCallback((page) => {
 
-    // const onClickCard = useCallback((id) => {
+    //     if (page) {
+    //         let start = (page - 1) * rowsPerPage
+    //         let end = (start + rowsPerPage)
 
-    //     if (id) {
-
-    //         let app = applications.find(item => item.id === id)
-
-    //         window.open(app.applicationURL, '_blank')
-
+    //         let arr = [...demo_data]
+    //         let x = arr.slice(start, end);
+    //         setDisplayPublishers(x);
+    //         setCurrentPage(page)
     //     }
 
-    // })
+    // }, [currentPage, displayPublishers])
 
     return (
         <>
@@ -201,10 +199,10 @@ const Publisher = memo(() => {
                             <Main
                                 title={t("publishers")}
                                 description={t("publishersDiscription")} />
-                            <div className="my-5" id="cards">
+                            <div className="my-5" id="publisher-cards">
                                 <Cards
                                     type="image-outer-text"
-                                    data={displayPublishers}
+                                    data={i18next.language === locales.AR ? displayPublishers?.data_ar : displayPublishers?.data_en}
                                     isModalForPublisher
                                     setData={setModalData}
                                     setIsOpenModal={setIsOpen}
@@ -213,7 +211,7 @@ const Publisher = memo(() => {
                             </div>
                             <Pagination
                                 currentPage={currentPage}
-                                totalCount={Math.ceil(demo_data?.length / rowsPerPage)}
+                                totalCount={Math.ceil(totalCount / rowsPerPage)}
                                 onChange={(page) => {
                                     cardsDiv.scrollIntoView(true)
                                     onChangePage(page)
@@ -243,6 +241,7 @@ const Publisher = memo(() => {
                 setData={setModalData}
                 isPublisherModal
             />
+            
         </>
     )
 })

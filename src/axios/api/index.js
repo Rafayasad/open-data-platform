@@ -329,7 +329,6 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
         getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then(async (res) => {
             if (res.status === 200) {
                 setLoading(false)
-
                 if (res.data.total > 0 && search && search.trim() !== "") {
                     let obj = {
                         keyword: search,
@@ -1680,6 +1679,53 @@ export const getFileFormatsFacets = (key, dispatch, setData, filters) => {
                     type: "file"
                 }))
             dispatch(setData(files_Formats));
+        })
+        .catch((err) => {
+            console.log("Error Message", err);
+        })
+}
+
+export const getPublishers = (pageNumber, rowsPerPage, lang, setData, setTotalCount) => {
+
+    setTotalCount(0);
+
+    let payload = {
+        publisher: "",
+        language: lang,
+        perpage: rowsPerPage,
+        pagenumber: pageNumber
+    }
+
+    return endpoints.getPublishers(payload)
+        .then((res) => {
+            if (res.data.status === 200) {
+                setTotalCount(res.data.data.total_count)
+                let arr_en = res.data.data?.en?.map((item) => (
+                    {
+                        description: item.description,
+                        title: item.publisher,
+                        image: `${process.env.REACT_APP_IMAGE_BASE_URL}/opendata${item.image_url}`,
+                        viewDatasets: item.total_datasets
+                    }
+                ))
+
+                let arr_ar = res.data.data?.ar?.map((item) => (
+                    {
+                        description_ar: item.description,
+                        title_ar: item.publisher,
+                        image: `${process.env.REACT_APP_IMAGE_BASE_URL}/opendata${item.image_url}`,
+                        viewDatasets: item.total_datasets
+                    }
+                ))
+
+                let data = {
+                    data_en: arr_en,
+                    data_ar: arr_ar
+                }
+
+                console.log("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEE==>", data);
+                setData(data)
+            }
         })
         .catch((err) => {
             console.log("Error Message", err);

@@ -27,7 +27,12 @@ const Main = memo((props) => {
     const [offset, setOffset] = useState(false);
     const [oneTime, setOneTime] = useState(false);
 
-    console.log("=====>", datasetsSuggestion?.en.slice(0, 4));
+    console.log("=====>s", datasetsSuggestion);
+
+    const staticPopularSearches = {
+        en: ["Health", "Education", "Hotels", "Abu Dhabi", "Economy"],
+        ar: ["الصحة", "التعليم", "فنادق", "أبوظبي", "الاقتصاد"]
+    }
 
     useEffect(() => {
         window.onscroll = function () {
@@ -43,7 +48,7 @@ const Main = memo((props) => {
     const renderSearchTags = (viewport) =>
         i18n.language === locales.AR ?
             (
-                datasetsSuggestion?.ar.slice(0, viewport === "md" ? 4 : 1).map((item, index) => {
+                staticPopularSearches?.ar.slice(0, viewport === "md" ? 5 : 1).map((item, index) => {
                     return (
                         <p
                             className="m-0 me-1 fs-static"
@@ -51,13 +56,13 @@ const Main = memo((props) => {
                                 navigate(routes.DATASET, { state: { search: item } })
                             }}
                             style={{ textAlign: 'center', color: 'white', cursor: "pointer" }}>
-                            {item + (index == datasetsSuggestion?.ar.slice(0, viewport === "md" ? 4 : 1).length - 1 ? '' : ',')}
+                            {item + (index == staticPopularSearches?.ar.slice(0, viewport === "md" ? 5 : 1).length - 1 ? '' : ',')}
                         </p>
                     )
                 })
             ) :
             (
-                datasetsSuggestion?.en.slice(0, viewport === "md" ? 4 : 2).map((item, index) => {
+                staticPopularSearches?.en.slice(0, viewport === "md" ? 5 : 2).map((item, index) => {
                     return (
                         <p
                             className="m-0 me-1 fs-static"
@@ -65,12 +70,11 @@ const Main = memo((props) => {
                                 navigate(routes.DATASET, { state: { search: item } })
                             }}
                             style={{ textAlign: 'center', color: 'white', cursor: "pointer" }}>
-                            {item + (index == datasetsSuggestion?.en.slice(0, viewport === "md" ? 4 : 2).length - 1 ? '' : ',')}
+                            {item + (index == staticPopularSearches?.en.slice(0, viewport === "md" ? 5 : 2).length - 1 ? '' : ',')}
                         </p>
                     )
                 })
             )
-
 
     return (
         <div
