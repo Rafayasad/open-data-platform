@@ -101,8 +101,8 @@ const Datasets = memo(() => {
             publisher: filters?.publisher ? filters.publisher : "",
             kpi: filters?.kpi ? filters.kpi : "",
             topic: filters?.topic ? filters.topic : "",
-            perpage: datatype === "pdf" || datatype === "csv" || datatype === "excel" ? "all" : rowsPerPage,
-            pagenumber: datatype === "pdf" || datatype === "csv" || datatype === "excel" ? "all" : currentPage,
+            perpage: rowsPerPage,
+            pagenumber: currentPage,
             type: filters?.type ? filters.type : "all"
 
         }, setLoading, setTotalCount, setDatatype)
