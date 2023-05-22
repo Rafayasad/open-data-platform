@@ -20,7 +20,7 @@ const BreadCrumb = memo((props) => {
                     let arr = items.map((_, index) => -(index + 1)).reverse()
                     navigate(arr[index])
                 }}>
-                    <Typography className='m-0 p-0' style={{ color: textcolor ? textcolor : colors.gray }} key={index} color="text.primary">
+                    <Typography className='m-0 p-0' style={{ cursor: "pointer", color: textcolor ? textcolor : colors.gray }} key={index} color="text.primary">
                         {item.title}
                     </Typography>
                 </div >

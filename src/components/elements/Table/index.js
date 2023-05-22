@@ -160,6 +160,7 @@ const Table = memo((props) => {
                                         {
                                             Object.keys(row).map(item => (
                                                 <>
+                                                    {console.log("TABLEEE==>",row.resource)}
                                                     <StyledTableCell>{row[item]}</StyledTableCell>
                                                 </>
                                             ))

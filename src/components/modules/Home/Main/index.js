@@ -27,8 +27,6 @@ const Main = memo((props) => {
     const [offset, setOffset] = useState(false);
     const [oneTime, setOneTime] = useState(false);
 
-    console.log("=====>s", datasetsSuggestion);
-
     const staticPopularSearches = {
         en: ["Health", "Education", "Hotels", "Abu Dhabi", "Economy"],
         ar: ["الصحة", "التعليم", "فنادق", "أبوظبي", "الاقتصاد"]

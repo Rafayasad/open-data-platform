@@ -1285,7 +1285,19 @@ export const getDatasetsReport = (setData, payload, setLoading, setTotalCount, s
 
                 if (payload?.datatype !== "pdf" && payload?.datatype !== "excel" && payload?.datatype !== "csv") {
                     if (res.data.status === 200) {
-                        setData(res.data.data);
+
+                        let arr = res.data.data?.map((items) => ({
+                            ...items,
+                            resources: items?.resource?.map((item, index) => index === 0 ? item : ', ' + item)
+                        })
+                        )
+
+                        let filteredData = arr?.map(item => {
+                            delete item?.resource;
+                            return item
+                        })
+
+                        setData(filteredData);
                         setTotalCount(res.data.total_count);
                     }
                 }
