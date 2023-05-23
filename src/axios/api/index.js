@@ -1072,6 +1072,7 @@ export const validateUser = async (navigate, route, setLoading, payload) => {
 
     await endpoints.validateUser({ username: email, pass: password })
         .then(async (res) => {
+            setLoading(false);
             if (res.status === 200) {
                 if (res.data.status === 200) {
                     await endpoints.otp({ type: "send", username: email })
@@ -1112,16 +1113,17 @@ export const login = async (dispatch, setData, setLoading, payload, route) => {
 
     await endpoints.otp({ type: "verify", username: email, otp_v: otp })
         .then(async (res) => {
-            setLoading(false)
             if (res.status === 200) {
                 if (res.data.status === 200) {
                     let token = await endpoints.getCRSFToken()
                         .then((res) => {
                             if (res.status === 200) {
+                                setLoading(false)
                                 return res.data
                             }
 
                         }).catch((err) => {
+                            setLoading(false)
                             console.log("Error message", err)
                         })
 
@@ -1133,14 +1135,16 @@ export const login = async (dispatch, setData, setLoading, payload, route) => {
 
                     await endpoints.login(data, headers)
                         .then((res) => {
-                            setLoading(false)
                             if (res.status === 200) {
+                                setLoading(false)
                                 toast(res.data.message, { type: 'success' })
                                 dispatch && dispatch(setData(res.data))
                                 window.location.assign(route);
                             } else if (res.data.status === 400) {
+                                setLoading(false)
                                 toast(res.data.message, { type: 'error' })
                             } else {
+                                setLoading(false)
                                 toast("Invalid username or password.", { type: "error" })
                             }
                         }).catch((err) => {
@@ -1154,7 +1158,8 @@ export const login = async (dispatch, setData, setLoading, payload, route) => {
                 }
             }
         }).catch((err) => {
-            console.log("Error message", err)
+            setLoading(false);
+            console.log("Error message", err);
         })
 }
 

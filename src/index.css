@@ -196,6 +196,11 @@ code {
     line-height: 52px;
   }
 
+  .fs-mini {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
   .img-upper-footer {
     height: 500px;
     padding-left: 40px !important;
@@ -294,6 +299,11 @@ code {
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.01em;
+  }
+
+  .fs-mini {
+    font-size: 12px;
+    line-height: 18px;
   }
 
   .bold-lg {
