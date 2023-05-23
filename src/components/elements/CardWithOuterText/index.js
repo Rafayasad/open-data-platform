@@ -67,7 +67,7 @@ const CardWithOuterText = memo((props) => {
                                     replace: true, state: {
                                         listItem: [{
                                             title: title,
-                                            type: i18n.language === locales.AR ? "themelear" : "theme"
+                                            type: i18n.language === locales.AR ? "publisherlear__name" : "publisher__name"
                                         }]
                                     }
                                 })
