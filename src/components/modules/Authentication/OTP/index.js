@@ -31,7 +31,7 @@ const OTP = memo(() => {
         if (!email || !password) {
             navigate(routes.LOGIN, { replace: true })
         }
-    }, [])
+    }, []);
 
     const onClickLogin = useCallback(() => login(dispatch, handleLogin, setLoading, { email, password, otp }, routes.HOME));
     const onClickForgetPassword = useCallback(() => navigate(routes.RECOVER));

@@ -144,7 +144,7 @@ const Card = memo((props) => {
                 {
                     !notags &&
                     <Row className={`${nopadding && "m-0"} h-25 align-items-center`}>
-                        <Col xs={8} className="d-flex scroll">
+                        <Col xs={8} className="d-flex scroll" style={{ overflow: "hidden" }}>
                             {
                                 tags && tags.length > 0 && tags.map((item, index) => (
                                     <Tag key={index} title={item}
@@ -171,7 +171,7 @@ const Card = memo((props) => {
                                         options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
                                         selectedDropdownValue={selectedDropdownValue}
                                         setSelectedDropdownValue={setSelectedDropdownValue}
-                                        headerComponent={<div className='d-flex align-items-center mx-lg-3 m-0' style={{ height: '10px', overflow: 'hidden' }}><HiOutlineDotsHorizontal color={colors.black} size={28} style={{ cursor: 'pointer' }} /> </div>}
+                                        headerComponent={<div className='d-flex align-items-center m-0' style={{ height: '10px', overflow: 'hidden' }}><HiOutlineDotsHorizontal color={colors.black} size={28} style={{ cursor: 'pointer' }} /> </div>}
                                     />
                                 </div>
                             </Col>

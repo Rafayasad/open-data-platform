@@ -120,7 +120,7 @@ const Cards = memo((props) => {
                 //     </Col>
                 // )) : <Loader backgroundColor={backgroundColor} />
                 <>
-                    <div className="d-flex d-lg-none" style={{ overflowX: "scroll" }}>
+                    <div className="d-flex d-lg-none scroll-bar">
                         {
                             data && data.length > 0 ? data.map((item, index) => (
                                 <div key={index} className="py-2 pe-2 d-flex" style={{ minWidth: "300px" }}>
