@@ -134,7 +134,7 @@ const Search = memo((props) => {
                         </div>
                     </Col>
                     {
-                        inputText?.length > 0 ?
+                        inputText?.length > 0 && !nofocuseffect && toggler ?
                             <Col md={1} lg={1} xs={2}>
                                 <MdCancel color="#9f9f9f" style={{ cursor: "pointer" }} onClick={() => {
                                     setInputText('');

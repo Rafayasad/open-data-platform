@@ -204,7 +204,7 @@ const DataHeader = memo((props) => {
                     </>
                 )
             }
-        </Container >
+        </Container>
     )
 });
 
