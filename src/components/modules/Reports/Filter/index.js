@@ -143,7 +143,6 @@ const ReportsFilter = memo((props) => {
                             title={t("startDate")}
                             onChange={(start_date) => onChangeFilter({ start_date })} maxDate={filters?.end_date} />
                     </div>
-                    {console.log("rpeorpe", filters)}
                 </div>
                 <div className="d-flex my-3">
                     <div className="w-100">
