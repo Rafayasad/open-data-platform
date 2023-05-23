@@ -9,7 +9,7 @@ const Dataset = lazy(() => import('../pages/Dataset'))
 const DatasetDetail = lazy(() => import('../pages/DatasetDetail'))
 const About = lazy(() => import('../pages/About'))
 const Applications = lazy(() => import('../pages/Applications'))
-// const Publishers = lazy(() => import('../pages/Publisher'))
+const Publishers = lazy(() => import('../pages/Publisher'))
 const Support = lazy(() => import('../pages/Support'))
 const SupportQuestions = lazy(() => import('../pages/SupportQuestions'))
 const SupportQuestionsDetail = lazy(() => import('../pages/SupportQuestionsDetail'))
@@ -43,7 +43,7 @@ const Router = () => {
             <Route path={routes.DATASET} element={<Dataset />} />
             <Route path={routes.DATASET_DETAIL} element={<DatasetDetail />} />
             <Route path={routes.APPLICATIONS} element={<Applications />} />
-            {/* <Route path={routes.PUBLISHER} element={<Publishers />} /> */}
+            <Route path={routes.PUBLISHER} element={<Publishers />} />
             <Route path={routes.SUPPORT} element={<Support />} />
             <Route path={routes.SUPPORT_QUESTIONS} element={<SupportQuestions />} />
             <Route path={routes.SUPPORT_QUESTIONS_DETAIL} element={<SupportQuestionsDetail />} />
