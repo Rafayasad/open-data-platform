@@ -1072,6 +1072,7 @@ export const validateUser = async (navigate, route, setLoading, payload) => {
 
     await endpoints.validateUser({ username: email, pass: password })
         .then(async (res) => {
+            setLoading(false);
             if (res.status === 200) {
                 if (res.data.status === 200) {
                     await endpoints.otp({ type: "send", username: email })
@@ -1112,16 +1113,17 @@ export const login = async (dispatch, setData, setLoading, payload, route) => {
 
     await endpoints.otp({ type: "verify", username: email, otp_v: otp })
         .then(async (res) => {
-            setLoading(false)
             if (res.status === 200) {
                 if (res.data.status === 200) {
                     let token = await endpoints.getCRSFToken()
                         .then((res) => {
                             if (res.status === 200) {
+                                setLoading(false)
                                 return res.data
                             }
 
                         }).catch((err) => {
+                            setLoading(false)
                             console.log("Error message", err)
                         })
 
@@ -1133,14 +1135,16 @@ export const login = async (dispatch, setData, setLoading, payload, route) => {
 
                     await endpoints.login(data, headers)
                         .then((res) => {
-                            setLoading(false)
                             if (res.status === 200) {
+                                setLoading(false)
                                 toast(res.data.message, { type: 'success' })
                                 dispatch && dispatch(setData(res.data))
                                 window.location.assign(route);
                             } else if (res.data.status === 400) {
+                                setLoading(false)
                                 toast(res.data.message, { type: 'error' })
                             } else {
+                                setLoading(false)
                                 toast("Invalid username or password.", { type: "error" })
                             }
                         }).catch((err) => {
@@ -1154,7 +1158,8 @@ export const login = async (dispatch, setData, setLoading, payload, route) => {
                 }
             }
         }).catch((err) => {
-            console.log("Error message", err)
+            setLoading(false);
+            console.log("Error message", err);
         })
 }
 
@@ -1349,6 +1354,7 @@ export const getSearch = (type, dispatch, setData) => {
     return endpoints.
         getSearch(type).then((res) => {
             if (res.status === 200) {
+                console.log("salndlkjsandsalkjd",res.data);
                 dispatch && dispatch(setData(res.data.data));
             }
 
@@ -1697,19 +1703,36 @@ export const getFileFormatsFacets = (key, dispatch, setData, filters) => {
         })
 }
 
-export const getPublishers = (pageNumber, rowsPerPage, lang, setData, setTotalCount) => {
+export const getPublishers = (pageNumber, rowsPerPage, lang, setData, setTotalCount, searchPublisher, setLoading) => {
 
     setTotalCount(0);
+    setLoading(true);
 
     let payload = {
-        publisher: "",
+        publisher: searchPublisher,
         language: lang,
         perpage: rowsPerPage,
         pagenumber: pageNumber
     }
 
     return endpoints.getPublishers(payload)
-        .then((res) => {
+        .then(async (res) => {
+            setLoading(false);
+
+            if (res.data.data.total_count > 0 && searchPublisher && searchPublisher.trim() !== "") {
+                let obj = {
+                    keyword: searchPublisher,
+                    ip: "192.168.0.44",
+                    lang: lang,
+                    type: "publishers"
+                }
+                await endpoints.
+                    postSearch(obj).then((res) => {
+                    }).catch((err) => {
+                        console.log("Error Message", err)
+                    })
+            }
+
             if (res.data.status === 200) {
                 setTotalCount(res.data.data.total_count)
                 let arr_en = res.data.data?.en?.map((item) => (
@@ -1735,11 +1758,11 @@ export const getPublishers = (pageNumber, rowsPerPage, lang, setData, setTotalCo
                     data_ar: arr_ar
                 }
 
-                console.log("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEE==>", data);
                 setData(data)
             }
         })
         .catch((err) => {
+            setLoading(false);
             console.log("Error Message", err);
         })
 }

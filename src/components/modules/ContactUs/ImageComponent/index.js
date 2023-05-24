@@ -40,7 +40,7 @@ const ImageComponent = memo(() => {
                 </Row>
                 <Row className="px-0">
                     <Col md={7}>
-                        <p className="fs-xs m-0 text-white">{t("footerPartText")}</p>
+                        <p className="fs-xxs m-0 text-white">{t("footerPartText")}</p>
                         {/* <Heading nomargin heading={t("footerPartText")} size="xs" color={colors.white} /> */}
                     </Col>
                 </Row>

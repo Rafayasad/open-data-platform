@@ -133,7 +133,7 @@ const DataHeader = memo((props) => {
                                 heading={title}
                                 maxNumberOfLines={headerOnTop && 2}
                             /> */}
-                            <p className={`fs-lg multine-ellipsis-${headerOnTop && 2} ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>
+                            <p style={{ color: colors.darker_gray }} className={`fs-lg multine-ellipsis-${headerOnTop && 2} ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>
                                 {title}
                             </p>
                         </div>

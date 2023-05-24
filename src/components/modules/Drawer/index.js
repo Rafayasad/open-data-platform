@@ -150,7 +150,7 @@ const Drawer = memo((props) => {
                     <p className={`fs-xs-static m-0 en-font-default text-black ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("filters")}</p>
                     <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="" size={20} />
                 </div>
-                <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%", paddingLeft: "40px", paddingRight: "40px" }} className={`py-4`}>
+                <div style={{ height: "75%", paddingLeft: "40px", paddingRight: "40px" }} className={`py-4 scroll-bar`}>
                     {
                         data?.map((item, index) => {
                             return (
@@ -246,11 +246,11 @@ const Drawer = memo((props) => {
                 <div style={{ paddingLeft: "40px", paddingRight: "40px" }} className="w-100 py-2 bg-white d-flex justify-content-between align-items-center">
                     <div className="">
                         {/* <Button nopadding onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} /> */}
-                        <CustomButton nopadding onClick={onClickClear} buttonClass='text-purple' title={t("clearAll")}/>
+                        <CustomButton nopadding onClick={onClickClear} buttonClass='text-purple' title={t("clearAll")} />
                     </div>
                     <div>
                         {/* <Button onClick={() => onClickApplyFilter(filters)} title={`${t("apply")} ${filters.length > 0 ? `(${filters.length})` : ""}`} backgroundColor={"black"} textColor={"white"} /> */}
-                        <CustomButton onClick={() => onClickApplyFilter(filters)} title={`${t("apply")} ${filters.length > 0 ? `(${filters.length})` : ""}`} buttonClass='contained-black'/>                                            </div>
+                        <CustomButton onClick={() => onClickApplyFilter(filters)} title={`${t("apply")} ${filters.length > 0 ? `(${filters.length})` : ""}`} buttonClass='contained-black' />                                            </div>
                 </div>
             </div>
         </RMDrawer>

@@ -12,6 +12,7 @@ import OtpInput from "react18-input-otp";
 import { locales } from "../../../../i18n/helper";
 import i18next from "i18next";
 import CustomButton from '../../../elements/CustomButton';
+import { AiOutlineInfoCircle } from "react-icons/ai";
 
 const AuthCard = memo((props) => {
 
@@ -108,7 +109,7 @@ const AuthCard = memo((props) => {
       }
       <Row className="py-2 align-items-center">
         {title === t("register") &&
-          <Col sm={8} md={8}>
+          <Col className="mb-3 mb-lg-0" sm={8} md={8}>
             <Recaptcha callBack={recaptchaCallback} />
           </Col>
         }
@@ -130,14 +131,14 @@ const AuthCard = memo((props) => {
                   bold={items.bold}
                 /> */}
                 <CustomButton
-                padding={items.title === t('logIn') && 'mt-3'}
-                width={title === t('register') ? 'auto' : '80%'}
-                title={items.title}
-                icon={items.icon}
-                onClick={() => items.onClick()}
-                loading={items.loading}
-                bold={items.bold}
-                buttonClass={`${items.backgroundColor === '#000000' ? 'contained-black' : 'disabled'}`}
+                  padding={items.title === t('logIn') && 'mt-3'}
+                  width={title === t('register') ? 'auto' : '80%'}
+                  title={items.title}
+                  icon={items.icon}
+                  onClick={() => items.onClick()}
+                  loading={items.loading}
+                  bold={items.bold}
+                  buttonClass={`${items.backgroundColor === '#000000' ? 'contained-black' : 'disabled'}`}
                 />
                 {
                   button?.length - 1 != index &&
@@ -146,6 +147,13 @@ const AuthCard = memo((props) => {
                     textColor={colors.gray}
                     lineColor={colors.light_gray}
                   />
+                }
+                {
+                  items.title === t("LoginWithUAE") &&
+                  <div className="d-flex mt-3 w-50 px-4 justify-content-lg-between justify-content-around">
+                    <p style={{ color: colors.dark_gray }} className="m-0 fs-mini">{t("WhatIsUAEPASS")}</p>
+                    <AiOutlineInfoCircle color={colors.dark_gray} />
+                  </div>
                 }
               </div>
             ))

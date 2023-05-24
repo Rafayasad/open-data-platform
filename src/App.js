@@ -18,6 +18,7 @@ import createCache from '@emotion/cache';
 import Router from './router';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import { setPublisherSuggestion } from './redux/reducers/Publishers';
 
 function App() {
 
@@ -52,6 +53,7 @@ function App() {
     getStoriesTags(dispatch, setStoriesTags);
     getSearch("dataset", dispatch, setDatasetsSuggestion)
     getSearch("support", dispatch, setSupportSuggestion)
+    getSearch("publishers", dispatch, setPublisherSuggestion)
     getSuccessStories(dispatch, setStories, toggleLoading, storiesFilters);
   }, []);
 

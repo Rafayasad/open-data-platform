@@ -111,7 +111,7 @@ const ReportsFilter = memo((props) => {
                 <Heading size="xxs" heading={t("filter")} nomargin />
                 <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="mx-1" size={20} />
             </div>
-            <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%" }} className={"p-4"}>
+            <div style={{ scrollBehavior: "smooth", height: "75%" }} className={"p-4 scroll-bar"}>
                 <div className="w-100">
                     <Dropdown
                         textColor={filters?.date_type && "black"}
@@ -143,7 +143,6 @@ const ReportsFilter = memo((props) => {
                             title={t("startDate")}
                             onChange={(start_date) => onChangeFilter({ start_date })} maxDate={filters?.end_date} />
                     </div>
-                    {console.log("rpeorpe", filters)}
                 </div>
                 <div className="d-flex my-3">
                     <div className="w-100">

@@ -20,8 +20,6 @@ const Main = memo((props) => {
 
     let option = { dateStyle: 'long' };
 
-    console.log("logsssssssssssssssssssssssss", data);
-
     let e = [
         {
             title: t("about"),

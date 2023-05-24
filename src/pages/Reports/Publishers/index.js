@@ -73,8 +73,8 @@ const Publishers = memo(() => {
             datatype: datatype,
             type: filters?.type ? filters.type : "all",
             publisher: filters?.publisher ? filters.publisher : "",
-            perpage: rowsPerPage,
-            pagenumber: currentPage
+            perpage: datatype === "pdf" || datatype === "csv" || datatype === "excel" ? "all" : rowsPerPage,
+            pagenumber: datatype === "pdf" || datatype === "csv" || datatype === "excel" ? "all" : currentPage,
         }, setLoading, setTotalCount, setDatatype)
     }, [filters, currentPage, datatype]);
 

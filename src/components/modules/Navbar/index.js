@@ -52,8 +52,8 @@ const Navbar = memo((props) => {
             route: routes.DATASET
         },
         {
-            name: t("application"),
-            route: routes.APPLICATIONS
+            name: t("publishers"),
+            route: routes.PUBLISHER
         },
         {
             name: t("supports"),
@@ -95,8 +95,8 @@ const Navbar = memo((props) => {
                                 </Link>
                             </div>
                             <div className="mx-4">
-                                <Link to={routes.APPLICATIONS} replace={true}>
-                                    <p className={`m-0 fs-xs-static en-font-default hover-underline-animation ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ color: color }}>{t("application")}</p>
+                                <Link to={routes.PUBLISHER} replace={true}>
+                                    <p className={`m-0 fs-xs-static en-font-default hover-underline-animation ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ color: color }}>{t("publishers")}</p>
                                     {/* <p className={`m-0 hover-underline-animation en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ${color === colors.black ? "underline-black" : "underline-white"}`} style={{ fontSize: '18px', color: color }}>{t("application")}</p> */}
                                 </Link>
                             </div>
