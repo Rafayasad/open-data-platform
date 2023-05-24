@@ -183,7 +183,7 @@ const TextInput = memo((props) => {
         <div className="mt-3">
           {passwordValidationTexts?.map(item => <p className="m-0"
 
-            style={{ color: item.isValid ? colors.green : colors.dark_red }}>
+            style={{ color: item.isValid ? colors.green : colors.gray }}>
 
             <small>{item.title}</small></p>)}
         </div>
@@ -197,7 +197,7 @@ const TextInput = memo((props) => {
           (!item.isValid &&
             <p className="m-0"
 
-              style={{ color: colors.dark_red }}>
+              style={{ color: colors.gray }}>
 
               <small>{item.inValid_title}</small></p>
           )

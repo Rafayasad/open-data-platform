@@ -19,15 +19,15 @@ const QuestionList = memo((props) => {
     const onLeave = useCallback(() => setCurrentHovered(null), [currentHovered])
 
     return (
-        <Container fluid className="my-2 page-padding max-width">
-            <div className="padd-support">
+        <Container fluid className="my-2 max-width">
+            <div className="padd-support page-padding">
                 <p className={`fs-md ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{i18n.language === locales.AR ? titleAr : title}</p>
                 {/* <Heading heading={title} size={"lg"} bold backgroundColor={colors.white} /> */}
             </div>
             <Row>
                 {
                     data ? data.length > 0 ? data.map((item, index) => (
-                        <div className="p-0" onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
+                        <div className="p-0 px-3" onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
                             {
                                 index > 0 &&
                                 <hr className="mx-2 my-0" style={{ color: currentHovered === index || currentHovered != null && currentHovered + 1 === index ? 'white' : 'lightgray', borderWidth: 2 }} />

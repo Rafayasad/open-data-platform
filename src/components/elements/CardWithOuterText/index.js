@@ -23,7 +23,7 @@ const CardWithOuterText = memo((props) => {
                 <img height={'140px'} width={'240px'} style={{ objectFit: "contain" }} src={image} />
             </RBCard>
             <Row>
-                <Col className="d-flex pt-4 pb-2" xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                <Col style={{ paddingTop: "20px" }} className="d-flex pb-2" xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                     <p onClick={!datasetViewCount && onClick} className={`fs-sm-md-const ${!datasetViewCount && "text-underline-hover"} m-0 text-black ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{title}</p>
                     {/* <Heading bold underline nomargin size='sm' heading={title} onClick={onClick} /> */}
                     {!datasetViewCount &&
@@ -34,7 +34,7 @@ const CardWithOuterText = memo((props) => {
                         </sup>
                     }
                 </Col>
-                <Col md={10} className="py-1">
+                <Col md={10} style={{ paddingBottom:"32px" }}>
                     <p className="fs-xs en-font-default m-0">
                         {
                             datasetViewCount &&

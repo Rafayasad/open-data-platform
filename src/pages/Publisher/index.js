@@ -15,6 +15,8 @@ import useIsFocused from "../../utils/hooks/useIsFocused";
 import { colors } from "../../utils/colors";
 import i18next from "i18next";
 import { locales } from "../../i18n/helper";
+import Search from "../../components/elements/Search";
+import { Col, Row } from "react-bootstrap";
 
 const Publisher = memo(() => {
 
@@ -157,14 +159,14 @@ const Publisher = memo(() => {
     const [modalData, setModalData] = useState();
 
     const onChangePage = useCallback((page) => {
-        console.log("PAGE",page);
+        console.log("PAGE", page);
         setCurrentPage(page);
         setDisplayPublishers();
     }, [currentPage]);
 
     useEffect(() => {
         getPublishers(currentPage, rowsPerPage, i18next.language === locales.AR ? "ar" : "en", setDisplayPublishers, setTotalCount)
-    }, [currentPage,i18next.language])
+    }, [currentPage, i18next.language])
 
     console.log("DATASsS", totalCount);
 
@@ -199,7 +201,7 @@ const Publisher = memo(() => {
                             <Main
                                 title={t("publishers")}
                                 description={t("publishersDiscription")} />
-                            <div className="my-5" id="publisher-cards">
+                            <div className="" id="publisher-cards">
                                 <Cards
                                     type="image-outer-text"
                                     data={i18next.language === locales.AR ? displayPublishers?.data_ar : displayPublishers?.data_en}
@@ -241,7 +243,7 @@ const Publisher = memo(() => {
                 setData={setModalData}
                 isPublisherModal
             />
-            
+
         </>
     )
 })

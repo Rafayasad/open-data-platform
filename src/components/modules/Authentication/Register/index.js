@@ -63,7 +63,7 @@ const Register = memo(() => {
             <Col className="pt-2 m-0">
               <Row className="px-3 py-5">
                 <Col md={8}>
-                  <p className={`fs-mega text-white ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("openDataTitle")}</p>
+                  <p className={`fs-lg text-white ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("openDataTitle")}</p>
                   {/* <Heading
                     heading={t("openDataTitle")}
                     color={colors.white}

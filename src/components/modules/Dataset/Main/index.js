@@ -46,7 +46,6 @@ const Main = memo((props) => {
                     </Col>
                 </Row>
             </Container>
-            {console.log("Login", offset)}
             <Container fluid className={`sticky bg-white mb-5 ${offset && "boxShadow"}`}>
                 <Container>
                     <Row>
