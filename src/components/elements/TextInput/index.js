@@ -129,6 +129,7 @@ const TextInput = memo((props) => {
     <FormControl sx={{ width: '100%' }} variant="standard" className="my-2">
       <InputLabel position="right" htmlFor="standard-adornment-password">{placeholder}</InputLabel>
       <Input
+        value={value}
         onFocus={toggle}
         onBlur={toggle}
         id="standard-adornment-password"
@@ -144,7 +145,7 @@ const TextInput = memo((props) => {
             borderBottomWidth: "1px",
           },
         }}
-        type={!showPassword && type === "password" ? "password" : "text"} value={value}
+        type={!showPassword && type === "password" ? "password" : "text"}
         onChange={(e) => onChange(e.target.value)}
         endAdornment={
           <InputAdornment>

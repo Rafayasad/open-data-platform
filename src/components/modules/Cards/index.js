@@ -41,7 +41,7 @@ const Cards = memo((props) => {
 
     const { title, notitlebutton, data, backgroundColor, hoverable, type,
         size, onClick, onClickViewAll, buttonText, notagsactive, noheadercomponent, dropdownWidth
-        , handleReload, cardsCount, textSize, padding, setData, setIsOpenModal
+        , handleReload, cardsCount, textSize, padding, setData, setIsOpenModal,loading
     } = props;
 
     var numberOfColumns = 4;
@@ -67,7 +67,7 @@ const Cards = memo((props) => {
             )
         } else if (type === 'image-outer-text') {
             return (
-                data && data?.length > 0 ? data?.map((item, index) => (
+                !loading && data && data?.length > 0 ? data?.map((item, index) => (
                     <Col key={index} md={6} lg={4} className="py-2">
                         <CardWithOuterText
                             title={i18n.language === locales.AR ? item.title_ar : item.title}

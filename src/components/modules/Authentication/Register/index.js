@@ -12,11 +12,19 @@ import { routes } from "../../../../router/helper";
 import { toast } from "react-toastify";
 import { isStrongPassword, validateEmail } from "../../../../utils/generic";
 import { locales } from "../../../../i18n/helper";
+import { useDispatch } from 'react-redux';
+import { handleRegisterDetails } from '../../../../redux/reducers/Register';
+import { useSelector } from 'react-redux';
 
 const Register = memo(() => {
 
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const details = useSelector(state => state.register.registerUserDetails);
+
+  console.log("Details", details);
 
   const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(true);
@@ -28,8 +36,6 @@ const Register = memo(() => {
 
   const [isChecked, setIsChecked] = useState(false);
   const [isRecaptcha, setIsRecaptcha] = useState();
-
-  console.log("name", name, email);
 
   const onClickRegister = useCallback(() => {
     if (email === '' || reEmail === '' || password === '' || name === '' || !isChecked) {
@@ -81,7 +87,7 @@ const Register = memo(() => {
                   height: "100%"
                 }}
               >
-
+                {console.log("-o-o-o-", name, email)}
                 <AuthCard
                   view="desktop"
                   userName={name}
@@ -90,10 +96,10 @@ const Register = memo(() => {
                   subtitle={t("accExist")}
                   linktext={{ display_text: t("login"), onClick: onClickLogin }}
                   inputFields={[
-                    { placeholder: t("fullName"), type: "text", onChange: (value) => setName(value), value: name },
-                    { placeholder: t("pwdEmail"), type: "text", onChange: (value) => setEmail(value), value: email },
-                    { placeholder: t("reEmail"), type: "text", onChange: (value) => setReEmail(value), value: reEmail },
-                    { placeholder: t("password"), type: "password", onChange: (value) => setPassword(value), value: password },
+                    { placeholder: t("fullName"), type: "text", onChange: (value) => setName(value), value: name ? name : details?.name },
+                    { placeholder: t("pwdEmail"), type: "text", onChange: (value) => setEmail(value), value: email ? email : details?.email },
+                    { placeholder: t("reEmail"), type: "text", onChange: (value) => setReEmail(value), value: reEmail ? reEmail : details?.reEmail },
+                    { placeholder: t("password"), type: "password", onChange: (value) => setPassword(value), value: password ? password : details?.password },
                   ]}
                   button={[{
                     title: t("register"),
@@ -107,7 +113,26 @@ const Register = memo(() => {
                   checkbox={{
                     onClick: checked,
                     naviagte: onClickTermsAndPolicy,
-                    label: <p>{t("agreeCond")} <span onClick={() => navigate(routes.POLICY)} style={{ color: colors.purple, cursor: "pointer" }}> {t("terms")} </span > {t("and")} <span onClick={() => navigate(routes.POLICY)} style={{ color: colors.purple, cursor: "pointer" }}> {t("policy")} </span></p>,
+                    label: <p>{t("agreeCond")}
+                      <span onClick={() => {
+                        dispatch(handleRegisterDetails({
+                          name: name ? name : details?.name,
+                          email: email ? email : details?.email,
+                          reEmail: reEmail ? reEmail : details?.reEmail,
+                          password: password ? password : details?.password
+                        }))
+                        navigate(routes.POLICY)
+                      }}
+                        style={{ color: colors.purple, cursor: "pointer" }}> {t("terms")} </span > {t("and")} <span
+                          onClick={() => {
+                            dispatch(handleRegisterDetails({
+                              name: name ? name : details?.name,
+                              email: email ? email : details?.email,
+                              reEmail: reEmail ? reEmail : details?.reEmail,
+                              password: password ? password : details?.password
+                            }))
+                            navigate(routes.POLICY)
+                          }} style={{ color: colors.purple, cursor: "pointer" }}> {t("policy")} </span></p>,
                     borderColor: colors.light_gray,
                     linktextColor: colors.purple,
                     labelColor: colors.black,
@@ -141,10 +166,10 @@ const Register = memo(() => {
                   linktext={{ display_text: t("login"), onClick: onClickLogin }}
                   recaptcha={recaptcha}
                   inputFields={[
-                    { placeholder: "Full name", type: "text", onChange: (value) => setName(value), value: name },
-                    { placeholder: "Email", type: "text", onChange: (value) => setEmail(value), value: email },
-                    { placeholder: "Re-enter email", type: "text", onChange: (value) => setReEmail(value), value: reEmail },
-                    { placeholder: "Password", type: "password", onChange: (value) => setPassword(value), value: password },
+                    { placeholder: t("fullName"), type: "text", onChange: (value) => setName(value), value: name ? name : details?.name },
+                    { placeholder: t("pwdEmail"), type: "text", onChange: (value) => setEmail(value), value: email ? email : details?.email },
+                    { placeholder: t("reEmail"), type: "text", onChange: (value) => setReEmail(value), value: reEmail ? reEmail : details?.reEmail },
+                    { placeholder: t("password"), type: "password", onChange: (value) => setPassword(value), value: password ? password : details?.password },
                   ]}
                   button={[{
                     title: t("register"),
@@ -156,7 +181,28 @@ const Register = memo(() => {
                   }]}
                   checkbox={{
                     onClick: checked,
-                    label: <p>{t("agreeCond")} <span onClick={() => navigate(routes.POLICY, { state: { data: { email } } })} style={{ color: colors.purple, cursor: "pointer" }}> {t("terms")} </span > {t("and")} <span onClick={() => navigate(routes.POLICY)} style={{ color: colors.purple, cursor: "pointer" }}> {t("policy")} </span></p>,
+                    label: <p>{t("agreeCond")}
+                      <span
+                        onClick={() => {
+                          dispatch(handleRegisterDetails({
+                            name: name ? name : details?.name,
+                            email: email ? email : details?.email,
+                            reEmail: reEmail ? reEmail : details?.reEmail,
+                            password: password ? password : details?.password
+                          }))
+                          navigate(routes.POLICY)
+                        }}
+                        style={{ color: colors.purple, cursor: "pointer" }}> {t("terms")} </span > {t("and")}<span
+                          onClick={() => {
+                            dispatch(handleRegisterDetails({
+                              name: name ? name : details?.name,
+                              email: email ? email : details?.email,
+                              reEmail: reEmail ? reEmail : details?.reEmail,
+                              password: password ? password : details?.password
+                            }))
+                            navigate(routes.POLICY)
+                          }}
+                          style={{ color: colors.purple, cursor: "pointer" }}> {t("policy")} </span></p>,
                     borderColor: colors.light_gray,
                     linktextColor: colors.purple,
                     labelColor: colors.black

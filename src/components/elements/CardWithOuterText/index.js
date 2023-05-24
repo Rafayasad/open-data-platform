@@ -34,12 +34,12 @@ const CardWithOuterText = memo((props) => {
                         </sup>
                     }
                 </Col>
-                <Col md={10} style={{ paddingBottom:"32px" }}>
+                <Col md={10} style={{ paddingBottom: !datasetViewCount ? "32px" : "16px" }}>
                     <p className="fs-xs en-font-default m-0">
                         {
                             datasetViewCount &&
                             _.truncate(description, {
-                                'length': 200,
+                                'length': 220,
                             })}
                         {
                             datasetViewCount && description?.length > 200 &&
@@ -60,7 +60,7 @@ const CardWithOuterText = memo((props) => {
                     </p>
                 </Col>
                 {datasetViewCount &&
-                    <Col xs={5} md={4} className="py-2">
+                    <div className="d-flex">
                         <p
                             onClick={() => {
                                 navigate(routes.DATASET, {
@@ -72,10 +72,10 @@ const CardWithOuterText = memo((props) => {
                                     }
                                 })
                             }}
-                            className="fs-2xs-static w-100 p-0" style={{ color: colors.purple, cursor: "pointer" }}>
+                            className="fs-2xs-static p-0 text-underline-hover" style={{ color: colors.purple, cursor: "pointer" }}>
                             {`${t('viewDatasets')} (${datasetViewCount})`}
                         </p>
-                    </Col>
+                    </div>
                 }
             </Row>
         </div >

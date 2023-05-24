@@ -20,131 +20,12 @@ import { Col, Row } from "react-bootstrap";
 
 const Publisher = memo(() => {
 
-    const { t } = useTranslation()
+    const { t,i18n } = useTranslation()
     const ref1 = useRef(null);
 
-    const demo_data = [
-        {
-            applicationURL: "https://enviroportal.ead.ae/map/",
-            description: "The Environment - Abu Dhabi (EAD) was established in 1996. EAD is a government entity responsible for protecting and enhancing the environment by reducing pollution and protecting and enhancing",
-            description_ar: "الجيومكانيةتأسست هيئة البيئة - أبو ظبي في عام 1996. هيئة البيئة هي الجهة الحكومية المسئولة عن حماية البيئة عن طريق تقليل التلوث، وحماية وتعزيز التنوع البيولوجي، من خلال إجراء الدارسات والبحوث، ووضع القوانين واللوائح وتنفيذ برامج التعليم والتوعية البيئية تمتلك هيئة البيئة قاعدة قوية وحيوية من البيانات البيئية تستخدم لدعم كافة مشاريعها ومبادراتها الحكومية. كما تعتمد الهيئة على أحدث التقنيات لإدارة البيانات المكانية منها تقنيات مؤسسة ازري التي استخدمت في بناء هذه البوابة الجغرافية لنشر وتبادل البيانات والمعلومات البيئية مع شركاء الهيئة والجمهو",
-            id: "fd68bb1f-a15c-4df0-87c1-1a9ee3ba9e6a",
-            image: "https://data.abudhabi/opendata/sites/default/files/2023-03/EADlogo%20%282%29.png",
-            title: "The Environment GeoSpatial Portal",
-            title_ar: "البوابة الإلكترونية البيئية",
-            viewDatasets: 43
-        },
-        {
-            applicationURL: "https://enviroportal.ead.ae/map/",
-            description: "The Environment - Abu Dhabi (EAD) was established in 1996. EAD is a government entity responsible for protecting and enhancing the environment by reducing pollution and protecting and enhancing our biodiversity. It does this through science, research, policy regulation, environmental education and awareness. EAD has a powerful and dynamic geospatial environmental database which supports its projects as well as government initiatives. The Agency adopts the latest technologies for the management of spatial data. ESRI technologies were used in the construction of this geo-portal to disseminate environmental data and information with our partners and the public.",
-            description_ar: "الجيومكانيةتأسست هيئة البيئة - أبو ظبي في عام 1996. هيئة البيئة هي الجهة الحكومية المسئولة عن حماية البيئة عن طريق تقليل التلوث، وحماية وتعزيز التنوع البيولوجي، من خلال إجراء الدارسات والبحوث، ووضع القوانين واللوائح وتنفيذ برامج التعليم والتوعية البيئية تمتلك هيئة البيئة قاعدة قوية وحيوية من البيانات البيئية تستخدم لدعم كافة مشاريعها ومبادراتها الحكومية. كما تعتمد الهيئة على أحدث التقنيات لإدارة البيانات المكانية منها تقنيات مؤسسة ازري التي استخدمت في بناء هذه البوابة الجغرافية لنشر وتبادل البيانات والمعلومات البيئية مع شركاء الهيئة والجمهو",
-            id: "fd68bb1f-a15c-4df0-87c1-1a9ee3ba9e6a",
-            image: "https://data.abudhabi/opendata/sites/default/files/2023-03/EADlogo%20%282%29.png",
-            title: "The Environment GeoSpatial Portal",
-            title_ar: "البوابة الإلكترونية البيئية",
-            viewDatasets: 43
-        },
-        {
-            applicationURL: "https://enviroportal.ead.ae/map/",
-            description: "The Environment - Abu Dhabi (EAD) was established in 1996. EAD is a government entity responsible for protecting and enhancing the environment by reducing pollution and protecting and enhancing our biodiversity. It does this through science, research, policy regulation, environmental education and awareness. EAD has a powerful and dynamic geospatial environmental database which supports its projects as well as government initiatives. The Agency adopts the latest technologies for the management of spatial data. ESRI technologies were used in the construction of this geo-portal to disseminate environmental data and information with our partners and the public.",
-            description_ar: "الجيومكانيةتأسست هيئة البيئة - أبو ظبي في عام 1996. هيئة البيئة هي الجهة الحكومية المسئولة عن حماية البيئة عن طريق تقليل التلوث، وحماية وتعزيز التنوع البيولوجي، من خلال إجراء الدارسات والبحوث، ووضع القوانين واللوائح وتنفيذ برامج التعليم والتوعية البيئية تمتلك هيئة البيئة قاعدة قوية وحيوية من البيانات البيئية تستخدم لدعم كافة مشاريعها ومبادراتها الحكومية. كما تعتمد الهيئة على أحدث التقنيات لإدارة البيانات المكانية منها تقنيات مؤسسة ازري التي استخدمت في بناء هذه البوابة الجغرافية لنشر وتبادل البيانات والمعلومات البيئية مع شركاء الهيئة والجمهو",
-            id: "fd68bb1f-a15c-4df0-87c1-1a9ee3ba9e6a",
-            image: "https://data.abudhabi/opendata/sites/default/files/2023-03/EADlogo%20%282%29.png",
-            title: "The Environment GeoSpatial Portal",
-            title_ar: "البوابة الإلكترونية البيئية",
-            viewDatasets: 43
-        },
-        {
-            applicationURL: "https://enviroportal.ead.ae/map/",
-            description: "The Environment - Abu Dhabi (EAD) was established in 1996. EAD is a government entity responsible for protecting and enhancing the environment by reducing pollution and protecting and enhancing our biodiversity. It does this through science, research, policy regulation, environmental education and awareness. EAD has a powerful and dynamic geospatial environmental database which supports its projects as well as government initiatives. The Agency adopts the latest technologies for the management of spatial data. ESRI technologies were used in the construction of this geo-portal to disseminate environmental data and information with our partners and the public.",
-            description_ar: "الجيومكانيةتأسست هيئة البيئة - أبو ظبي في عام 1996. هيئة البيئة هي الجهة الحكومية المسئولة عن حماية البيئة عن طريق تقليل التلوث، وحماية وتعزيز التنوع البيولوجي، من خلال إجراء الدارسات والبحوث، ووضع القوانين واللوائح وتنفيذ برامج التعليم والتوعية البيئية تمتلك هيئة البيئة قاعدة قوية وحيوية من البيانات البيئية تستخدم لدعم كافة مشاريعها ومبادراتها الحكومية. كما تعتمد الهيئة على أحدث التقنيات لإدارة البيانات المكانية منها تقنيات مؤسسة ازري التي استخدمت في بناء هذه البوابة الجغرافية لنشر وتبادل البيانات والمعلومات البيئية مع شركاء الهيئة والجمهو",
-            id: "fd68bb1f-a15c-4df0-87c1-1a9ee3ba9e6a",
-            image: "https://data.abudhabi/opendata/sites/default/files/2023-03/EADlogo%20%282%29.png",
-            title: "The Environment GeoSpatial Portal",
-            title_ar: "البوابة الإلكترونية البيئية",
-            viewDatasets: 43
-        },
-        {
-            applicationURL: "https://enviroportal.ead.ae/map/",
-            description: "The Environment - Abu Dhabi (EAD) was established in 1996. EAD is a government entity responsible for protecting and enhancing the environment by reducing pollution and protecting and enhancing our biodiversity. It does this through science, research, policy regulation, environmental education and awareness. EAD has a powerful and dynamic geospatial environmental database which supports its projects as well as government initiatives. The Agency adopts the latest technologies for the management of spatial data. ESRI technologies were used in the construction of this geo-portal to disseminate environmental data and information with our partners and the public.",
-            description_ar: "الجيومكانيةتأسست هيئة البيئة - أبو ظبي في عام 1996. هيئة البيئة هي الجهة الحكومية المسئولة عن حماية البيئة عن طريق تقليل التلوث، وحماية وتعزيز التنوع البيولوجي، من خلال إجراء الدارسات والبحوث، ووضع القوانين واللوائح وتنفيذ برامج التعليم والتوعية البيئية تمتلك هيئة البيئة قاعدة قوية وحيوية من البيانات البيئية تستخدم لدعم كافة مشاريعها ومبادراتها الحكومية. كما تعتمد الهيئة على أحدث التقنيات لإدارة البيانات المكانية منها تقنيات مؤسسة ازري التي استخدمت في بناء هذه البوابة الجغرافية لنشر وتبادل البيانات والمعلومات البيئية مع شركاء الهيئة والجمهو",
-            id: "fd68bb1f-a15c-4df0-87c1-1a9ee3ba9e6a",
-            image: "https://data.abudhabi/opendata/sites/default/files/2023-03/EADlogo%20%282%29.png",
-            title: "The Environment GeoSpatial Portal",
-            title_ar: "البوابة الإلكترونية البيئية",
-            viewDatasets: 43
-        },
-        {
-            applicationURL: "https://enviroportal.ead.ae/map/",
-            description: "The Environment - Abu Dhabi (EAD) was established in 1996. EAD is a government entity responsible for protecting and enhancing the environment by reducing pollution and protecting and enhancing our biodiversity. It does this through science, research, policy regulation, environmental education and awareness. EAD has a powerful and dynamic geospatial environmental database which supports its projects as well as government initiatives. The Agency adopts the latest technologies for the management of spatial data. ESRI technologies were used in the construction of this geo-portal to disseminate environmental data and information with our partners and the public.",
-            description_ar: "الجيومكانيةتأسست هيئة البيئة - أبو ظبي في عام 1996. هيئة البيئة هي الجهة الحكومية المسئولة عن حماية البيئة عن طريق تقليل التلوث، وحماية وتعزيز التنوع البيولوجي، من خلال إجراء الدارسات والبحوث، ووضع القوانين واللوائح وتنفيذ برامج التعليم والتوعية البيئية تمتلك هيئة البيئة قاعدة قوية وحيوية من البيانات البيئية تستخدم لدعم كافة مشاريعها ومبادراتها الحكومية. كما تعتمد الهيئة على أحدث التقنيات لإدارة البيانات المكانية منها تقنيات مؤسسة ازري التي استخدمت في بناء هذه البوابة الجغرافية لنشر وتبادل البيانات والمعلومات البيئية مع شركاء الهيئة والجمهو",
-            id: "fd68bb1f-a15c-4df0-87c1-1a9ee3ba9e6a",
-            image: "https://data.abudhabi/opendata/sites/default/files/2023-03/EADlogo%20%282%29.png",
-            title: "The Environment GeoSpatial Portal",
-            title_ar: "البوابة الإلكترونية البيئية",
-            viewDatasets: 43
-        },
-        {
-            applicationURL: "https://enviroportal.ead.ae/map/",
-            description: "The Environment - Abu Dhabi (EAD) was established in 1996. EAD is a government entity responsible for protecting and enhancing the environment by reducing pollution and protecting and enhancing our biodiversity. It does this through science, research, policy regulation, environmental education and awareness. EAD has a powerful and dynamic geospatial environmental database which supports its projects as well as government initiatives. The Agency adopts the latest technologies for the management of spatial data. ESRI technologies were used in the construction of this geo-portal to disseminate environmental data and information with our partners and the public.",
-            description_ar: "الجيومكانيةتأسست هيئة البيئة - أبو ظبي في عام 1996. هيئة البيئة هي الجهة الحكومية المسئولة عن حماية البيئة عن طريق تقليل التلوث، وحماية وتعزيز التنوع البيولوجي، من خلال إجراء الدارسات والبحوث، ووضع القوانين واللوائح وتنفيذ برامج التعليم والتوعية البيئية تمتلك هيئة البيئة قاعدة قوية وحيوية من البيانات البيئية تستخدم لدعم كافة مشاريعها ومبادراتها الحكومية. كما تعتمد الهيئة على أحدث التقنيات لإدارة البيانات المكانية منها تقنيات مؤسسة ازري التي استخدمت في بناء هذه البوابة الجغرافية لنشر وتبادل البيانات والمعلومات البيئية مع شركاء الهيئة والجمهو",
-            id: "fd68bb1f-a15c-4df0-87c1-1a9ee3ba9e6a",
-            image: "https://data.abudhabi/opendata/sites/default/files/2023-03/EADlogo%20%282%29.png",
-            title: "The Environment GeoSpatial Portal",
-            title_ar: "البوابة الإلكترونية البيئية",
-            viewDatasets: 43
-        },
-        {
-            applicationURL: "https://enviroportal.ead.ae/map/",
-            description: "The Environment - Abu Dhabi (EAD) was established in 1996. EAD is a government entity responsible for protecting and enhancing the environment by reducing pollution and protecting and enhancing our biodiversity. It does this through science, research, policy regulation, environmental education and awareness. EAD has a powerful and dynamic geospatial environmental database which supports its projects as well as government initiatives. The Agency adopts the latest technologies for the management of spatial data. ESRI technologies were used in the construction of this geo-portal to disseminate environmental data and information with our partners and the public.",
-            description_ar: "الجيومكانيةتأسست هيئة البيئة - أبو ظبي في عام 1996. هيئة البيئة هي الجهة الحكومية المسئولة عن حماية البيئة عن طريق تقليل التلوث، وحماية وتعزيز التنوع البيولوجي، من خلال إجراء الدارسات والبحوث، ووضع القوانين واللوائح وتنفيذ برامج التعليم والتوعية البيئية تمتلك هيئة البيئة قاعدة قوية وحيوية من البيانات البيئية تستخدم لدعم كافة مشاريعها ومبادراتها الحكومية. كما تعتمد الهيئة على أحدث التقنيات لإدارة البيانات المكانية منها تقنيات مؤسسة ازري التي استخدمت في بناء هذه البوابة الجغرافية لنشر وتبادل البيانات والمعلومات البيئية مع شركاء الهيئة والجمهو",
-            id: "fd68bb1f-a15c-4df0-87c1-1a9ee3ba9e6a",
-            image: "https://data.abudhabi/opendata/sites/default/files/2023-03/EADlogo%20%282%29.png",
-            title: "The Environment GeoSpatial Portal",
-            title_ar: "البوابة الإلكترونية البيئية",
-            viewDatasets: 43
-        },
-        {
-            applicationURL: "https://enviroportal.ead.ae/map/",
-            description: "The Environment - Abu Dhabi (EAD) was established in 1996. EAD is a government entity responsible for protecting and enhancing the environment by reducing pollution and protecting and enhancing our biodiversity. It does this through science, research, policy regulation, environmental education and awareness. EAD has a powerful and dynamic geospatial environmental database which supports its projects as well as government initiatives. The Agency adopts the latest technologies for the management of spatial data. ESRI technologies were used in the construction of this geo-portal to disseminate environmental data and information with our partners and the public.",
-            description_ar: "الجيومكانيةتأسست هيئة البيئة - أبو ظبي في عام 1996. هيئة البيئة هي الجهة الحكومية المسئولة عن حماية البيئة عن طريق تقليل التلوث، وحماية وتعزيز التنوع البيولوجي، من خلال إجراء الدارسات والبحوث، ووضع القوانين واللوائح وتنفيذ برامج التعليم والتوعية البيئية تمتلك هيئة البيئة قاعدة قوية وحيوية من البيانات البيئية تستخدم لدعم كافة مشاريعها ومبادراتها الحكومية. كما تعتمد الهيئة على أحدث التقنيات لإدارة البيانات المكانية منها تقنيات مؤسسة ازري التي استخدمت في بناء هذه البوابة الجغرافية لنشر وتبادل البيانات والمعلومات البيئية مع شركاء الهيئة والجمهو",
-            id: "fd68bb1f-a15c-4df0-87c1-1a9ee3ba9e6a",
-            image: "https://data.abudhabi/opendata/sites/default/files/2023-03/EADlogo%20%282%29.png",
-            title: "The Environment GeoSpatial Portal",
-            title_ar: "البوابة الإلكترونية البيئية",
-            viewDatasets: 43
-        },
-        {
-            applicationURL: "https://enviroportal.ead.ae/map/",
-            description: "The Environment - Abu Dhabi (EAD) was established in 1996. EAD is a government entity responsible for protecting and enhancing the environment by reducing pollution and protecting and enhancing our biodiversity. It does this through science, research, policy regulation, environmental education and awareness. EAD has a powerful and dynamic geospatial environmental database which supports its projects as well as government initiatives. The Agency adopts the latest technologies for the management of spatial data. ESRI technologies were used in the construction of this geo-portal to disseminate environmental data and information with our partners and the public.",
-            description_ar: "الجيومكانيةتأسست هيئة البيئة - أبو ظبي في عام 1996. هيئة البيئة هي الجهة الحكومية المسئولة عن حماية البيئة عن طريق تقليل التلوث، وحماية وتعزيز التنوع البيولوجي، من خلال إجراء الدارسات والبحوث، ووضع القوانين واللوائح وتنفيذ برامج التعليم والتوعية البيئية تمتلك هيئة البيئة قاعدة قوية وحيوية من البيانات البيئية تستخدم لدعم كافة مشاريعها ومبادراتها الحكومية. كما تعتمد الهيئة على أحدث التقنيات لإدارة البيانات المكانية منها تقنيات مؤسسة ازري التي استخدمت في بناء هذه البوابة الجغرافية لنشر وتبادل البيانات والمعلومات البيئية مع شركاء الهيئة والجمهو",
-            id: "fd68bb1f-a15c-4df0-87c1-1a9ee3ba9e6a",
-            image: "https://data.abudhabi/opendata/sites/default/files/2023-03/EADlogo%20%282%29.png",
-            title: "The Environment GeoSpatial Portal",
-            title_ar: "البوابة الإلكترونية البيئية",
-            viewDatasets: 43
-        },
-        {
-            applicationURL: "https://enviroportal.ead.ae/map/",
-            description: "The Environment - Abu Dhabi (EAD) was established in 1996. EAD is a government entity responsible for protecting and enhancing the environment by reducing pollution and protecting and enhancing our biodiversity. It does this through science, research, policy regulation, environmental education and awareness. EAD has a powerful and dynamic geospatial environmental database which supports its projects as well as government initiatives. The Agency adopts the latest technologies for the management of spatial data. ESRI technologies were used in the construction of this geo-portal to disseminate environmental data and information with our partners and the public.",
-            description_ar: "الجيومكانيةتأسست هيئة البيئة - أبو ظبي في عام 1996. هيئة البيئة هي الجهة الحكومية المسئولة عن حماية البيئة عن طريق تقليل التلوث، وحماية وتعزيز التنوع البيولوجي، من خلال إجراء الدارسات والبحوث، ووضع القوانين واللوائح وتنفيذ برامج التعليم والتوعية البيئية تمتلك هيئة البيئة قاعدة قوية وحيوية من البيانات البيئية تستخدم لدعم كافة مشاريعها ومبادراتها الحكومية. كما تعتمد الهيئة على أحدث التقنيات لإدارة البيانات المكانية منها تقنيات مؤسسة ازري التي استخدمت في بناء هذه البوابة الجغرافية لنشر وتبادل البيانات والمعلومات البيئية مع شركاء الهيئة والجمهو",
-            id: "fd68bb1f-a15c-4df0-87c1-1a9ee3ba9e6a",
-            image: "https://data.abudhabi/opendata/sites/default/files/2023-03/EADlogo%20%282%29.png",
-            title: "The Environment GeoSpatial Portal",
-            title_ar: "البوابة الإلكترونية البيئية",
-            viewDatasets: 43
-        },
-        {
-            applicationURL: "https://enviroportal.ead.ae/map/",
-            description: "The Environment - Abu Dhabi (EAD) was established in 1996. EAD is a government entity responsible for protecting and enhancing the environment by reducing pollution and protecting and enhancing our biodiversity. It does this through science, research, policy regulation, environmental education and awareness. EAD has a powerful and dynamic geospatial environmental database which supports its projects as well as government initiatives. The Agency adopts the latest technologies for the management of spatial data. ESRI technologies were used in the construction of this geo-portal to disseminate environmental data and information with our partners and the public.",
-            description_ar: "الجيومكانيةتأسست هيئة البيئة - أبو ظبي في عام 1996. هيئة البيئة هي الجهة الحكومية المسئولة عن حماية البيئة عن طريق تقليل التلوث، وحماية وتعزيز التنوع البيولوجي، من خلال إجراء الدارسات والبحوث، ووضع القوانين واللوائح وتنفيذ برامج التعليم والتوعية البيئية تمتلك هيئة البيئة قاعدة قوية وحيوية من البيانات البيئية تستخدم لدعم كافة مشاريعها ومبادراتها الحكومية. كما تعتمد الهيئة على أحدث التقنيات لإدارة البيانات المكانية منها تقنيات مؤسسة ازري التي استخدمت في بناء هذه البوابة الجغرافية لنشر وتبادل البيانات والمعلومات البيئية مع شركاء الهيئة والجمهو",
-            id: "fd68bb1f-a15c-4df0-87c1-1a9ee3ba9e6a",
-            image: "https://data.abudhabi/opendata/sites/default/files/2023-03/EADlogo%20%282%29.png",
-            title: "The Environment GeoSpatial Portal",
-            title_ar: "البوابة الإلكترونية البيئية",
-            viewDatasets: 43
-        }
-    ]
+    const { publisherSuggestion } = useSelector(state => state.publisher)
+
+    console.log("publisherSuggestion",publisherSuggestion);
 
     const cardsDiv = document.getElementById("publisher-cards");
 
@@ -155,7 +36,11 @@ const Publisher = memo(() => {
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(9);
 
-    const [loading, setLoading] = useState(true);
+    // for search
+    const [searchText, setSearchText] = useState('');
+    const [searchedData, setSearchedData] = useState();
+
+    const [loading, setLoading] = useState(false);
     const [modalData, setModalData] = useState();
 
     const onChangePage = useCallback((page) => {
@@ -165,10 +50,24 @@ const Publisher = memo(() => {
     }, [currentPage]);
 
     useEffect(() => {
-        getPublishers(currentPage, rowsPerPage, i18next.language === locales.AR ? "ar" : "en", setDisplayPublishers, setTotalCount)
-    }, [currentPage, i18next.language])
+        getPublishers(currentPage, rowsPerPage, i18n.language === locales.AR ? "ar" : "en", setDisplayPublishers, setTotalCount, searchText, setLoading)
+    }, [currentPage, i18next.language, searchText])
 
-    console.log("DATASsS", totalCount);
+    // useEffect(() => {
+    //     if (searchText !== '') {
+    //         getQuestionBySearch(searchText, setSearchedData, i18n.language)
+    //     }
+    // }, [searchText])
+
+    const onSearch = useCallback((value) => {
+        setCurrentPage(1);
+        setSearchedData();
+        if (value && value !== '') {
+            setSearchText(value)
+        } else {
+            setSearchText('')
+        }
+    }, [searchText])
 
     // useEffect(() => {
     //     if (demo_data) {
@@ -200,7 +99,11 @@ const Publisher = memo(() => {
                         <div className="my-5 pt-5">
                             <Main
                                 title={t("publishers")}
-                                description={t("publishersDiscription")} />
+                                description={t("publishersDiscription")}
+                                isSearchBar
+                                onSearch={onSearch}
+                                popularSearch={i18n.language === locales.AR ? publisherSuggestion?.ar : publisherSuggestion?.en}
+                            />
                             <div className="" id="publisher-cards">
                                 <Cards
                                     type="image-outer-text"
@@ -208,6 +111,7 @@ const Publisher = memo(() => {
                                     isModalForPublisher
                                     setData={setModalData}
                                     setIsOpenModal={setIsOpen}
+                                    loading={loading}
                                 // onClick={onClickCard}
                                 />
                             </div>

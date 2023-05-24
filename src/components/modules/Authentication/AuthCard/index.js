@@ -109,7 +109,7 @@ const AuthCard = memo((props) => {
       }
       <Row className="py-2 align-items-center">
         {title === t("register") &&
-          <Col sm={8} md={8}>
+          <Col className="mb-3 mb-lg-0" sm={8} md={8}>
             <Recaptcha callBack={recaptchaCallback} />
           </Col>
         }

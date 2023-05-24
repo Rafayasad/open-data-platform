@@ -6,6 +6,8 @@ import aboutReducer from './reducers/About';
 import applicationReducer from './reducers/Applications';
 import successStoriesReducer from './reducers/SuccessStories';
 import supportReducer from './reducers/Support';
+import publisherReducer from './reducers/Publishers';
+import registerReducer from './reducers/Register';
 import authenticationReducer from './reducers/Authentication';
 
 const persistConfig = {
@@ -20,6 +22,8 @@ export const store = configureStore({
         application: applicationReducer,
         stories: successStoriesReducer,
         support: supportReducer,
+        publisher: publisherReducer,
+        register: registerReducer,
         authentication: persistReducer(persistConfig, authenticationReducer)
     }
 });

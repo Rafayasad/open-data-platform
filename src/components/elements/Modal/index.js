@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import Heading from '../Heading';
 import i18next from 'i18next';
 import { locales } from '../../../i18n/helper';
+import { routes } from '../../../router/helper';
 
 const ModalEelment = memo((props) => {
 

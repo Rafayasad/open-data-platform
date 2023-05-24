@@ -12,7 +12,7 @@ import Search from "../../../elements/Search";
 const Main = memo((props) => {
 
     const { t } = useTranslation()
-    const { title, description, isSearchBar } = props;
+    const { title, description, isSearchBar, onSearch, popularSearch } = props;
 
     return (
         <Container fluid className="my-4 page-padding">
@@ -40,8 +40,8 @@ const Main = memo((props) => {
                     <Col />
                     <Col xs={12} md={10} lg={8} className="my-4" style={{ zIndex: 1000 }}>
                         <Search
-                            // searchData={popularSearch}
-                            // onPressEnter={onSearch}
+                            searchData={popularSearch}
+                            onPressEnter={onSearch}
                             placeholder={t("searchKeywords")}
                             placeholderformobile={t("searchPlaceholderformobileTopic")}
                             // isFilterIcon
