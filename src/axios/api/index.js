@@ -249,6 +249,8 @@ export const getFacets = async (key_en, key_ar, dispatch, setData, filters) => {
 
             if (res.status === 200) {
 
+                console.log("RESsss", res.data);
+
                 let transform = res.data.facets.filter(item => item.name != " ").map(item => ({
                     title: item.name,
                     value: item.total,
@@ -290,6 +292,8 @@ export const getFacets = async (key_en, key_ar, dispatch, setData, filters) => {
 
     let facets = { en, ar }
 
+    console.log("FACTES", facets);
+
     dispatch && dispatch(setData(facets))
 
 }
@@ -311,7 +315,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
         el.type == "theme" ? themeArray.push(el.title) : el.type == "themelear" ? themeArray.push(el.title)
             : el.type == "publisher__name" ? publisherArray.push(el.title) : el.type == "publisherlear__name" ? publisherArray.push(el.title)
                 : el.type == "keyword" ? tagsArray.push(el.title) : el.type == "keywordlear" ? tagsArray.push(el.title)
-                    : el.type == "file" && filesArray.push(el.title)
+                    : el.type == "format" && filesArray.push(el.title)
     })
 
     finalFilters.push(
@@ -321,15 +325,22 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
         { key: "distribution__item__format", values: filesArray }
     )
 
-    getFacets("theme", "themelear", dispatch, setTopics, finalFilters);
-    getFacets("keyword", "keywordlear", dispatch, setTags, finalFilters);
-    getFacets("publisher__name", "publisherlear__name", dispatch, setPublishers, finalFilters);
-    getFileFormatsFacets("distribution__item__format", dispatch, setFileFormats, finalFilters);
+    if (filters?.length > 0) {
+
+        getFacets("theme", "themelear", dispatch, setTopics, finalFilters);
+        getFacets("keyword", "keywordlear", dispatch, setTags, finalFilters);
+        getFacets("publisher__name", "publisherlear__name", dispatch, setPublishers, finalFilters);
+        getFacets("distribution__item__format", "distribution__item__format", dispatch, setFileFormats, finalFilters);
+    }
+    // getFileFormatsFacets("distribution__item__format", dispatch, setFileFormats, finalFilters);
+
     return endpoints.
         getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then(async (res) => {
             if (res.status === 200) {
                 setLoading(false)
-                if (res.data.total > 0 && search && search.trim() !== "") {
+
+                // for search posting
+                if (res.data.total_count > 0 && search && search.trim() !== "") {
                     let obj = {
                         keyword: search,
                         ip: "192.168.0.44",
@@ -343,80 +354,25 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                         })
                 }
 
-                setTotalCount(res.data.total)
+                setTotalCount(res.data.total_count)
 
-                let arr = []
-
-                arr = Object.values(res.data.results)?.map(item => (
-
+                // for datasets listing
+                let new_arr = res.data.data?.map((item) => (
                     {
                         id: item.identifier,
                         title: item.title,
                         title_ar: item.titlear,
                         description: item.description,
                         description_ar: item.descriptionlear,
-                        publisher: item.publisher?.name,
-                        publisher_ar: item.publisherlear?.name,
+                        publisher: item.publisher,
+                        publisher_ar: item.publisherlear,
                         tags: item.theme,
                         tags_ar: item.themelear,
-                        url: `${process.env.REACT_APP_BASE_URL}/dataset/detail?id=${item.identifier}`,
-                        resources: item.distribution
-                            &&
-                            item.distribution?.filter(item => {
-                                if (item.downloadURL && item.downloadURL !== "") {
-                                    return item
-                                }
-                            })?.map(item => (
-                                {
-                                    id: item.identifier,
-                                    title: item.title ? item.title : "No Name Found",
-                                    title_ar: item.titlelear ? item.titlelear : "لم يتم العثور على اسم",
-                                    description: item.description,
-                                    description_ar: item.descriptionlear,
-                                    format:
-                                        item.format === "pdf" ? "pdf"
-                                            : item.format === "excel" ? "excel"
-                                                : item.format === "esri rest" ? "excel"
-                                                    : item.format === "xlsx" ? "excel"
-                                                        : item.format === "xls" ? "excel"
-                                                            : item.format === "csv" ? "csv"
-                                                                : item.format === "API" && "api",
-                                    downloadURL: item.downloadURL
-                                }
-                            )).length > 0 ?
-                            item.distribution?.filter(item => {
-                                if (item.downloadURL && item.downloadURL !== "") {
-                                    return item
-                                }
-                            })?.map(item => (
-                                {
-                                    id: item.identifier,
-                                    title: item.title ? item.title : "No Name Found",
-                                    title_ar: item.titlelear ? item.titlelear : "لم يتم العثور على اسم",
-                                    description: item.description,
-                                    description_ar: item.descriptionlear,
-                                    format:
-                                        item.format === "pdf" ? "pdf"
-                                            : item.format === "excel" ? "excel"
-                                                : item.format === "esri rest" ? "excel"
-                                                    : item.format === "xlsx" ? "excel"
-                                                        : item.format === "xls" ? "excel"
-                                                            : item.format === "csv" ? "csv"
-                                                                : item.format === "API" && "api",
-                                    downloadURL: item.downloadURL
-                                }
-                            )) : [{
-                                id: '0',
-                                title: 'No file uploaded yet.',
-                                title_ar: "لم يتم تحميل أي ملف بعد."
-                            }]
-                        ,
+                        url: `${process.env.REACT_APP_BASE_URL}/dataset/detail?id=${item.identifier}`
                     }
                 ))
-                // setLoading(false)
 
-                console.log("RRRRRRRRRRRRRRRRRR", arr);
-                setData(arr);
+                setData(new_arr);
 
             }
         }).catch((err) => {
@@ -452,7 +408,7 @@ export const getDatasetById = (id, setData) => {
                             format: itemm.format === "pdf" ? "pdf"
                                 : item.format === "excel" || itemm.format === "xlsx" || itemm.format === "esri rest" || itemm.format == "xls" ? "excel"
                                     : itemm.format === "csv" ? "csv"
-                                        : itemm.format === "API" && "API",
+                                        : itemm.format === "API" || itemm.format === "api" && "API",
                             downloadURL: itemm.downloadURL ? itemm.downloadURL : "No File Uploaded Yet"
                         }
                     )
@@ -1354,7 +1310,7 @@ export const getSearch = (type, dispatch, setData) => {
     return endpoints.
         getSearch(type).then((res) => {
             if (res.status === 200) {
-                console.log("salndlkjsandsalkjd",res.data);
+                console.log("salndlkjsandsalkjd", res.data);
                 dispatch && dispatch(setData(res.data.data));
             }
 
@@ -1670,12 +1626,12 @@ export const addDownloadCount = (id, forDatasetsListing) => {
         ip_address: "172.0.9.01"
     }
 
-    const data_for_listing = {
-        dataset_identifier: id,
-        ip_address: "172.0.9.01"
-    }
+    // const data_for_listing = {
+    //     identifier: id,
+    //     ip_address: "172.0.9.01"
+    // }
 
-    return endpoints.addDownloadCountById(forDatasetsListing ? data_for_listing : data)
+    return endpoints.addDownloadCountById(data)
         .then((res) => {
             // setLoading(false)
             if (res.status === 200) {
@@ -1690,6 +1646,7 @@ export const addDownloadCount = (id, forDatasetsListing) => {
 export const getFileFormatsFacets = (key, dispatch, setData, filters) => {
     return endpoints.getFileFormatsFacets(key, filters)
         .then((res) => {
+            console.log("RESFILEEEEE", res.data);
             let files_Formats = res.data.data?.map((item) => (
                 {
                     title: item.Format,
@@ -1765,4 +1722,13 @@ export const getPublishers = (pageNumber, rowsPerPage, lang, setData, setTotalCo
             setLoading(false);
             console.log("Error Message", err);
         })
+}
+
+export const getResourcesByIdentifier = (id, setData) => {
+    return endpoints.getResourcesByIdentifier(id)
+        .then((res) => {
+            console.log("IDDDDDSAD", res.data);
+            setData(res.data.data);
+        })
+        .catch((err) => console.log("ERROR", err))
 }

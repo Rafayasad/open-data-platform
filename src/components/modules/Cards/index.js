@@ -41,7 +41,7 @@ const Cards = memo((props) => {
 
     const { title, notitlebutton, data, backgroundColor, hoverable, type,
         size, onClick, onClickViewAll, buttonText, notagsactive, noheadercomponent, dropdownWidth
-        , handleReload, cardsCount, textSize, padding, setData, setIsOpenModal,loading
+        , handleReload, cardsCount, textSize, padding, setData, setIsOpenModal, loading
     } = props;
 
     var numberOfColumns = 4;
@@ -125,6 +125,7 @@ const Cards = memo((props) => {
                             data && data.length > 0 ? data.map((item, index) => (
                                 <div key={index} className="py-2 pe-2 d-flex" style={{ minWidth: "300px" }}>
                                     <Card
+                                        datasetID={item.id}
                                         notagsactive={notagsactive}
                                         noheadercomponent={noheadercomponent}
                                         size={"md"}
@@ -148,6 +149,7 @@ const Cards = memo((props) => {
                             data && data.length > 0 ? data.map((item, index) => (
                                 <Col key={index} lg={numberOfColumns} md={numberOfColumns} sm={4} className="py-2">
                                     <Card
+                                        datasetID={item.id}
                                         handleReload={handleReload}
                                         dropdownWidth={dropdownWidth}
                                         notagsactive={notagsactive}

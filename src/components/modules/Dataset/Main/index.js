@@ -35,7 +35,7 @@ const Main = memo((props) => {
                     <Col className="d-flex flex-column justify-content-center">
                         <Row>
                             <Col />
-                            <Col xs={10} md={8} style={{ textAlign: 'center' }} className="py-2">
+                            <Col xs={10} md={8} style={{ textAlign: 'center' }} className="py-lg-2">
                                 {/* <Heading size="xxxl" bold color={colors.black} heading={t("datasetTitle")} /> */}
                                 <p className={`fs-lg ${i18next.language === locales.AR ? 'ar-font-bold' : 'en-font-bold'}`}>
                                     {t("datasetTitle")}
@@ -70,11 +70,11 @@ const Main = memo((props) => {
                         <Col />
                     </Row>
                     {
-                        filter && filter.length > 0 &&
+                        filter && filter?.length > 0 &&
                         <Row className="pb-3 m-0">
                             <Col className="d-flex flex-wrap justify-content-center align-items-center">
                                 {
-                                    filter && filter.length > 0 && filter.slice(0, 5).map((item, index) =>
+                                    filter && filter?.length > 0 && filter?.slice(0, 5).map((item, index) =>
                                     (
                                         <div className="py-1">
                                             <Tag
@@ -86,7 +86,7 @@ const Main = memo((props) => {
                                     ))
                                 }
                                 {
-                                    filter && filter.length > 5 &&
+                                    filter && filter?.length > 5 &&
                                     <div className="py-1">
                                         <Tag
                                             backgroundColor={colors.black}

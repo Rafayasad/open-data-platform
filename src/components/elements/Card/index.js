@@ -1,5 +1,5 @@
 import './style.css';
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Card as RBCard, Col, Row } from "react-bootstrap";
 import { BsPerson, BsShare, BsThreeDots } from "react-icons/bs";
 import { FiTwitter, FiLinkedin } from "react-icons/fi";
@@ -24,7 +24,7 @@ import i18n from "../../../i18n/i18n";
 import { locales } from "../../../i18n/helper";
 import BottomSheetBar from "../../modules/BottomSheet";
 import { routes } from "../../../router/helper";
-import { addDownloadCount } from "../../../axios/api";
+import { addDownloadCount, getResourcesByIdentifier } from "../../../axios/api";
 import i18next from "i18next";
 
 const Card = memo((props) => {
@@ -39,18 +39,19 @@ const Card = memo((props) => {
     var HEIGHT = "332px", border, ClassName;
 
     const [selectedDropdownValue, setSelectedDropdownValue] = useState();
-    const [isDownloadLink, setIsDownloadLink] = useState(); // for linking url
     const [openBottomSheet, setOpenBottomSheet] = useState(false)
     const [selectedSheetValue, setSelectedSheetValue] = useState();
 
+    // for resources
+    const [newResources, setNewResources] = useState();
+
     const isClicked = useCallback((value, id) => {
+        // console.log("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEELO",datasetID);
         setSelectedDropdownValue(value)
     })
 
-    const downloadResources = useCallback((links) => { setIsDownloadLink(links) }); //callback for url redirect
-
     const addDownloadCounts = useCallback((title, id) => {
-        addDownloadCount(tempIncreaseDownloadCount ? datasetID : id, tempIncreaseDownloadCount).then((res) => {
+        addDownloadCount(id).then((res) => {
             console.log("hello its running...s", datasetID);
             handleReload()
         })
@@ -97,17 +98,17 @@ const Card = memo((props) => {
         }
     ]
 
-    const specificDownloadOptions = resources?.map(item => (
+    const specificDownloadOptions = newResources?.map(item => (
         {
-            id: item.id,
-            title: i18n.language === locales.AR ? (item.title_ar && item.title_ar != "" ? item.title_ar : item.downloadURL) : (item.title && item.title != "" ? item.title : item.downloadURL),
+            id: item.identifier,
+            title: i18n.language === locales.AR ? (item.titlelear && item.titlelear != "" ? item.title_ar : item.url) : (item.title && item.title != "" ? item.title : item.url),
             onClick: addDownloadCounts,
-            downloadLink: item.downloadURL,
+            downloadLink: item.url,
             icon: item.format === "pdf" ? <img src={pdfImage} />
                 : item.format === "excel" ? <img src={excelImage} />
                     : item.format === "xlsx" ? <img src={excelImage} />
                         : item.format === "csv" ? <img src={csvImage} height={20} width={20} />
-                            : item.format === "api" && <img src={apiImage} />
+                            : item.format === "api" || item.format === "API" && <img src={apiImage} />
         }
     ))
 
@@ -123,6 +124,14 @@ const Card = memo((props) => {
                             : item.format === "email" && <BsPerson />
         }
     ))
+
+    console.log("datasetsss",datasetID);
+
+    // for getting resorces by id
+    useEffect(() => {
+        getResourcesByIdentifier(datasetID, setNewResources)
+    }, [datasetID])
+
     return (
         <>
             <BottomSheetBar
@@ -134,7 +143,7 @@ const Card = memo((props) => {
                 options={selectedSheetValue === t("downloadDatasets") ? specificDownloadOptions : selectedSheetValue === t("share") ? specificShareOptions : options} />
             <RBCard
                 // onClick={onClick}
-                className={`${nopadding ? "py-4" : "paddofcards"} ${ClassName} hover-pl`}
+                className={`${nopadding ? "py-lg-4" : "paddofcards"} ${ClassName} hover-pl`}
                 style={{
                     height: HEIGHT,
                     width: "100%",

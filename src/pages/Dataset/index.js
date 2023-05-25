@@ -45,6 +45,8 @@ const Dataset = memo(() => {
     const publishers = useSelector((state) => state.facets.publishers);
     const tags = useSelector((state) => state.facets.tags);
     const files = useSelector((state) => state.facets.file_Formats);
+    console.log("OOO File", files);
+    console.log("OOO THNE", tags);
 
     const data = [
         {
@@ -117,6 +119,8 @@ const Dataset = memo(() => {
         }
 
     }, [!most_viewed_datasets, sort]);
+
+    console.log("sadsadsadasdasda",recentsDatasets);
 
     useEffect(() => {
         if (most_viewed_datasets) {

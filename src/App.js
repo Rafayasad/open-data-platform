@@ -46,7 +46,7 @@ function App() {
     getFacets("theme", "themelear", dispatch, setTopics);
     getFacets("keyword", "keywordlear", dispatch, setTags);
     getFacets("publisher__name", "publisherlear__name", dispatch, setPublishers);
-    getFileFormatsFacets("format", dispatch, setFileFormats);
+    getFacets("distribution__item__format", "distribution__item__format", dispatch, setFileFormats);
     getAllApplications(dispatch, setApplications);
     getFaqsCategory(dispatch, setCategories);
     getPopularQuestions(dispatch, setQuestions);
@@ -57,11 +57,11 @@ function App() {
     getSuccessStories(dispatch, setStories, toggleLoading, storiesFilters);
   }, []);
 
-  // if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
-  //   console.log = () => { }
-  //   console.error = () => { }
-  //   console.warn = () => { }
-  // }
+  if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
+    console.log = () => { }
+    console.error = () => { }
+    console.warn = () => { }
+  }
 
   return (
     <CacheProvider value={i18n.language === locales.AR ? cacheRtl : emptyCache}>

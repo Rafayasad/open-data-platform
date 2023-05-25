@@ -141,16 +141,15 @@ const Drawer = memo((props) => {
             onClose={toggleDrawer}
             direction={i18n.language === locales.AR ? 'left' : 'right'}
             lockBackgroundScroll
-            style={{ zIndex: 1000, height: "100%", width: window.innerWidth >= 800 ? "30%" : "100%" }}
-        // className="mt-5"
+            style={{ zIndex: 1200, height: "100%", width: window.innerWidth >= 800 ? "30%" : "100%" }}
         >
             <div style={{ height: "100%" }}>
-                <div style={{ top: 0, position: "relative", left: 0, right: 0, zIndex: 1000, paddingLeft: "40px", paddingRight: "40px" }} className="py-4 bg-white d-flex align-items-center justify-content-between shadow-bottom">
+                <div style={{ top: 0, position: "relative", left: 0, right: 0, zIndex: 1000 }} className="py-4 bg-white d-flex align-items-center justify-content-between shadow-bottom nav-padding">
                     {/* <Heading size="xxs" heading={t("filters")} nomargin /> */}
                     <p className={`fs-xs-static m-0 en-font-default text-black ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("filters")}</p>
                     <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="" size={20} />
                 </div>
-                <div style={{ height: "75%", paddingLeft: "40px", paddingRight: "40px" }} className={`py-4 scroll-bar`}>
+                <div style={{ height: "75%" }} className={`py-4 scroll-bar nav-padding`}>
                     {
                         data?.map((item, index) => {
                             return (
@@ -207,7 +206,7 @@ const Drawer = memo((props) => {
                                                         item.data &&
                                                         <div className="">
                                                             {
-                                                                item.data?.map((items, index) => {
+                                                                item.data.en?.map((items, index) => {
                                                                     return (
                                                                         <div className="d-flex justify-content-between align-items-center">
                                                                             <div className="py-2">
@@ -241,9 +240,9 @@ const Drawer = memo((props) => {
                     }
                 </div>
             </div>
-            <div className="fixed-bottom d-flex align-items-center justify-content-between">
+            <div className="nav-padding fixed-bottom d-flex align-items-center justify-content-between">
                 <hr className="m-0 p-0" />
-                <div style={{ paddingLeft: "40px", paddingRight: "40px" }} className="w-100 py-2 bg-white d-flex justify-content-between align-items-center">
+                <div style={{}} className="w-100 py-3 bg-white d-flex justify-content-between align-items-center">
                     <div className="">
                         {/* <Button nopadding onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} /> */}
                         <CustomButton nopadding onClick={onClickClear} buttonClass='text-purple' title={t("clearAll")} />
