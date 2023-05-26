@@ -47,19 +47,19 @@ const Topics = memo((props) => {
                     title={item.title}
                     value={item.value}
                     image={currentHovered === index && (
-                        item.title === "Agriculture" || item.title === "الزراعة" ? Agriculture :
-                            item.title === "Business" || item.title === "ادارة الأعمال" ? Business :
-                                item.title === "Education" || item.title === "التعليم" ? Education :
-                                    item.title === "Energy" || item.title === "الطاقة" ? Energy :
-                                        item.title === "Environment" || item.title === "البيئة" ? Enviroment :
-                                            item.title === "Society" || item.title === "المجتمع" ? Society :
-                                                item.title === "Technology" || item.title === "التكنولوجيا" ? Technology :
-                                                    item.title === "Economy" || item.title === "الاقتصاد" ? Economy :
-                                                        item.title === "Tourism" || item.title === "السياحة" ? Tourism :
-                                                            item.title === "Health" || item.title === "الصحة" ? Health :
-                                                                item.title === "Human Capital" || item.title === "رأس المال البشري" ? HR :
-                                                                    item.title === "Safety and Security" || item.title === "الامن والسلامة" ? SafetyAndSecurity :
-                                                                        item.title === "Transport" || item.title === "المواصلات" ? Transport : null
+                        (item.title).toLocaleLowerCase() === ("Agriculture").toLocaleLowerCase() || item.title === "الزراعة" ? Agriculture :
+                            (item.title).toLocaleLowerCase() === ("Business").toLocaleLowerCase() || item.title === "ادارة الأعمال" ? Business :
+                                (item.title).toLocaleLowerCase() === ("Education").toLocaleLowerCase() || item.title === "التعليم" ? Education :
+                                    (item.title).toLocaleLowerCase() === ("Energy").toLocaleLowerCase() || item.title === "الطاقة" ? Energy :
+                                        (item.title).toLocaleLowerCase() === ("Environment").toLocaleLowerCase() || item.title === "البيئة" ? Enviroment :
+                                            (item.title).toLocaleLowerCase() === ("Society").toLocaleLowerCase() || item.title === "المجتمع" ? Society :
+                                                (item.title).toLocaleLowerCase() === ("Technology").toLocaleLowerCase() || item.title === "التكنولوجيا" ? Technology :
+                                                    (item.title).toLocaleLowerCase() === ("Economy").toLocaleLowerCase() || item.title === "الاقتصاد" ? Economy :
+                                                        (item.title).toLocaleLowerCase() === ("Tourism").toLocaleLowerCase() || item.title === "السياحة" ? Tourism :
+                                                            (item.title).toLocaleLowerCase() === ("Health").toLocaleLowerCase() || item.title === "الصحة" ? Health :
+                                                                (item.title).toLocaleLowerCase() === ("Human Capital").toLocaleLowerCase() || item.title === "رأس المال البشري" ? HR :
+                                                                    (item.title).toLocaleLowerCase() === ("Safety and Security").toLocaleLowerCase() || item.title === "الامن والسلامة" ? SafetyAndSecurity :
+                                                                        (item.title).toLocaleLowerCase() === ("Transport").toLocaleLowerCase() || item.title === "المواصلات" ? Transport : null
                     )}
                     onClick={() => onClickList(item)}
                 />

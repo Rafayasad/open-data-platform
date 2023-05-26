@@ -10,6 +10,7 @@ import DataHeader from "../DataHeader";
 import Shimmer from '../../../elements/Shimmer';
 import Heading from "../../../elements/Heading";
 import { useNavigate } from "react-router-dom";
+import { routes } from "../../../../router/helper";
 
 const Main = memo((props) => {
 
@@ -100,7 +101,7 @@ const Main = memo((props) => {
             detail: data ? i18n.language === locales.EN ? "Abu Dhabi Government Open Data License" : "حكومة أبو ظبي رخصة البيانات المفتوحة" : <Shimmer rounded='xs' width="70%" className={"my-1"} />,
             color: colors.purple,
             underline: true,
-            onClick: () => data && window.open(data.license, '_blank')
+            onClick: () => data && navigate(routes.LICENSE)
         }
     ]
 

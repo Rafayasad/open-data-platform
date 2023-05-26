@@ -39,6 +39,7 @@
     "stylis": "^4.1.3",
     "stylis-plugin-rtl": "^2.1.1",
     "swagger-ui-react": "^4.15.5",
+    "uuidv4": "^6.2.13",
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5"
   },

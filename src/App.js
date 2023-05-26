@@ -43,10 +43,6 @@ function App() {
   useEffect(() => {
     checkUser(dispatch, handleLogin, handleLogout)
     getAboutUs(dispatch, setAboutus);
-    getFacets("theme", "themelear", dispatch, setTopics);
-    getFacets("keyword", "keywordlear", dispatch, setTags);
-    getFacets("publisher__name", "publisherlear__name", dispatch, setPublishers);
-    getFacets("distribution__item__format", "distribution__item__format", dispatch, setFileFormats);
     getAllApplications(dispatch, setApplications);
     getFaqsCategory(dispatch, setCategories);
     getPopularQuestions(dispatch, setQuestions);

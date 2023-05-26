@@ -9,7 +9,7 @@ import i18n from "../../../i18n/i18n";
 import { locales } from "../../../i18n/helper";
 import { useTranslation } from "react-i18next";
 
-const PrivacyPolicy = memo(() => {
+const Terms = memo(() => {
 
     const { t } = useTranslation();
 
@@ -19,7 +19,7 @@ const PrivacyPolicy = memo(() => {
     const [isOpen, setIsOpen] = useState(true);
 
     useEffect(() => {
-        getPrivacyPolicy(setData, setLoading, "policy")
+        getPrivacyPolicy(setData, setLoading, "terms")
     }, [i18n.language])
 
     return (
@@ -49,4 +49,4 @@ const PrivacyPolicy = memo(() => {
     )
 })
 
-export default PrivacyPolicy;
+export default Terms;

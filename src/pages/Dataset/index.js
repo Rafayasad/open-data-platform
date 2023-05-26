@@ -3,7 +3,7 @@ import Cards from "../../components/modules/Cards";
 import Main from "../../components/modules/Dataset/Main";
 import DatasetList from "../../components/modules/Dataset/DatasetList";
 import { colors } from "../../utils/colors";
-import { getAllDatasets, getMostViewedDatasets, getRecentsDatasets, getSearch } from "../../axios/api";
+import { getAllDatasets, getFacets, getMostViewedDatasets, getRecentsDatasets, getSearch } from "../../axios/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../router/helper";
 import { useTranslation } from "react-i18next";
@@ -45,21 +45,21 @@ const Dataset = memo(() => {
     const publishers = useSelector((state) => state.facets.publishers);
     const tags = useSelector((state) => state.facets.tags);
     const files = useSelector((state) => state.facets.file_Formats);
-    console.log("OOO File", files);
-    console.log("OOO THNE", tags);
+    console.log("OOO File", publishers);
+    console.log("OOO THNE", files);
 
     const data = [
         {
             title: t("publisher"),
-            tags: i18n.language === locales.AR ? publishers && isDuplicates(publishers?.ar) : publishers && publishers.en
+            tags: i18n.language === locales.AR ? publishers && isDuplicates(publishers) : publishers && publishers
         },
         {
             title: t("topics"),
-            tags: i18n.language === locales.AR ? topics && topics.ar : topics && topics.en
+            tags: i18n.language === locales.AR ? topics && topics : topics && topics
         },
         {
             title: t("tags"),
-            tags: i18n.language === locales.AR ? tags && tags.ar : tags && tags.en
+            tags: i18n.language === locales.AR ? tags && tags : tags && tags
         },
         {
             title: t("fileFormat"),
@@ -73,9 +73,6 @@ const Dataset = memo(() => {
 
     useEffect(() => {
         setSearchValue("")
-        // dispatch(setSearch(""))
-        // dispatch(setFilter(null))
-        // setFilters()
         setCurrentPage(1)
         i18n.language === locales.AR ? setSort("الأكثر تحميلا") : setSort("Modified")
     }, [i18n.language])
@@ -86,7 +83,6 @@ const Dataset = memo(() => {
         //     window.scrollBy(0, -2)
         // }, 500);
     }
-
 
     useEffect(() => {
         if (storedFilters) {
@@ -120,7 +116,7 @@ const Dataset = memo(() => {
 
     }, [!most_viewed_datasets, sort]);
 
-    console.log("sadsadsadasdasda",recentsDatasets);
+    console.log("sadsadsadasdasda", recentsDatasets);
 
     useEffect(() => {
         if (most_viewed_datasets) {
@@ -139,6 +135,8 @@ const Dataset = memo(() => {
             }
         }
     }, [currentPage, storedSearch, sort, storedFilters, !most_viewed_datasets]);
+
+
 
     const toggle = useCallback(() => setViewAll(!viewAll), [viewAll]);
 
@@ -198,7 +196,7 @@ const Dataset = memo(() => {
                 searchData={i18n.language === locales.AR ? datasetsSuggestion?.ar : datasetsSuggestion?.en}
                 search={storedSearch}
                 onChangeSearchEnter={onChangeSearch}
-                filter={filters}
+                filter={storedFilters}
                 onApplyFilter={onApplyFilter}
                 onDeleteFilter={onDeleteFilter} />
             {

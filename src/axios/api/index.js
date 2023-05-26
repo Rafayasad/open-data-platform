@@ -6,6 +6,7 @@ import { generateFile, getUnixTime } from "../../utils/generic.js";
 import { locales } from "../../i18n/helper"
 import { BiError } from "react-icons/bi";
 import i18next from 'i18next';
+import { setStaticTopics } from '../../redux/reducers/Facets';
 
 export const getPlatformInsights = (setData, setLoading) => {
     return endpoints.
@@ -242,23 +243,30 @@ export const getSimilarDatasets = (id, topic, setData, setLoading) => {
         })
 }
 
-export const getFacets = async (key_en, key_ar, dispatch, setData, filters) => {
+export const getFacets = async (key, dispatch, setData, finalfilters, filters) => {
 
-    let en = await endpoints.
-        getFacets(key_en, filters).then((res) => {
+    console.log("AAAAAAAAAAAAAAAAAAAASD", filters);
+
+    let arr = await endpoints.
+        getFacets(key, finalfilters, filters).then((res) => {
 
             if (res.status === 200) {
 
-                console.log("RESsss", res.data);
+                var getStaticTopics = res.data.facets.filter(item => item.type === "theme" || item.type === "themelear").map(item => ({
+                    id: item.identifier,
+                    title: item.name,
+                    value: item.total,
+                    type: item.type
+                }))
 
                 let transform = res.data.facets.filter(item => item.name != " ").map(item => ({
+                    id: item.identifier,
                     title: item.name,
                     value: item.total,
                     type: item.type
                 }))
 
                 let sorted = _.sortBy(transform, 'title');
-
                 return sorted
 
             }
@@ -267,34 +275,35 @@ export const getFacets = async (key_en, key_ar, dispatch, setData, filters) => {
             console.log("Error message", err)
         })
 
-    let ar = await endpoints.
-        getFacets(key_ar, filters).then((res) => {
-            if (res.status === 200) {
-                console.log("sAASASAS", res.data);
-                let transform = res.data.facets.filter(item => item.name != " ").map(item => ({
-                    title: item.name,
-                    value: item.total,
-                    type: item.type
-                })
-                )
+    // let ar = await endpoints.
+    //     getFacets(key, filters).then((res) => {
+    //         if (res.status === 200) {
+    //             console.log("sAASASAS", res.data);
+    //             let transform = res.data.facets.filter(item => item.name != " ").map(item => ({
+    //                 title: item.name,
+    //                 value: item.total,
+    //                 type: item.type,
+    //                 id: item.identifier
+    //             })
+    //             )
 
-                console.log("sAASASASssssssssssssssssssssssssssssssssssssss", transform);
+    //             console.log("sAASASASssssssssssssssssssssssssssssssssssssss", transform);
 
-                let sorted = _.sortBy(transform, 'title');
-                console.log("sAASASASsssssssssssssssssssssssssssssssssssssSORTs", sorted);
+    //             let sorted = _.sortBy(transform, 'title');
+    //             console.log("sAASASASsssssssssssssssssssssssssssssssssssssSORTs", sorted);
 
-                return sorted
+    //             return sorted
 
-            }
-        }).catch((err) => {
-            console.log("Error message", err)
-        })
+    //         }
+    //     }).catch((err) => {
+    //         console.log("Error message", err)
+    //     })
 
-    let facets = { en, ar }
+    // let facets = { en, ar }
 
-    console.log("FACTES", facets);
+    console.log("FACTES", arr);
 
-    dispatch && dispatch(setData(facets))
+    dispatch && dispatch(setData(arr))
 
 }
 
@@ -325,13 +334,11 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
         { key: "distribution__item__format", values: filesArray }
     )
 
-    if (filters?.length > 0) {
+    getFacets(currentLanguage === locales.AR ? "themelear" : "theme", dispatch, setTopics, finalFilters, filters);
+    getFacets(currentLanguage === locales.AR ? "keywordlear" : "keyword", dispatch, setTags, finalFilters, filters);
+    getFacets(currentLanguage === locales.AR ? "publisherlear__name" : "publisher__name", dispatch, setPublishers, finalFilters, filters);
+    getFacets("distribution__item__format", dispatch, setFileFormats, finalFilters, filters);
 
-        getFacets("theme", "themelear", dispatch, setTopics, finalFilters);
-        getFacets("keyword", "keywordlear", dispatch, setTags, finalFilters);
-        getFacets("publisher__name", "publisherlear__name", dispatch, setPublishers, finalFilters);
-        getFacets("distribution__item__format", "distribution__item__format", dispatch, setFileFormats, finalFilters);
-    }
     // getFileFormatsFacets("distribution__item__format", dispatch, setFileFormats, finalFilters);
 
     return endpoints.
@@ -1493,7 +1500,7 @@ export const getRealTimeApiById = (id, setData, setLoading) => {
         })
 }
 
-export const getPrivacyPolicy = (setData, setLoading) => {
+export const getPrivacyPolicy = (setData, setLoading, type) => {
 
     setLoading(true);
 
@@ -1502,15 +1509,55 @@ export const getPrivacyPolicy = (setData, setLoading) => {
         .then((res) => {
 
             setLoading(false);
-
+            console.log("arrsssssssssss", res.data);
             // if(res.data.data.length > 0)
 
-            let arr = res.data.data.slice(-1).map(item => (
+            let arr = res.data.data.map(item => (
                 {
                     title: item.attributes.title,
                     title_ar: item.attributes.field_privacytitle_ar,
                     description: item.attributes.field_body.value,
                     description_ar: item.attributes.field_privacy_description_ar.value
+                }))
+
+            let policyObj = {
+                title: arr[0].title,
+                title_ar: arr[0].title_ar,
+                description: arr[0].description,
+                description_ar: arr[0].description_ar
+            }
+
+            let termsObj = {
+                title: arr[1].title,
+                title_ar: arr[1].title_ar,
+                description: arr[1].description,
+                description_ar: arr[1].description_ar
+            }
+
+            let data = type === "terms" ? termsObj : policyObj
+            setData(data)
+
+        }).catch((err) => {
+            console.log("Error Message", err)
+            setLoading(false);
+        })
+}
+
+export const getLicenseDetails = (setData, setLoading) => {
+
+    setLoading(true)
+
+    return endpoints.getLicenseDetails()
+        .then((res) => {
+
+            setLoading(false);
+            console.log("Error Message", res.data.data)
+            let arr = res.data.data.map(item => (
+                {
+                    title: item.attributes.title,
+                    title_ar: item.attributes.field_license_title,
+                    description: item.attributes.body.value,
+                    description_ar: item.attributes.field_license_description.value
                 }))
 
             let obj = {

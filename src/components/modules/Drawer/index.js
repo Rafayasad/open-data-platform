@@ -17,11 +17,14 @@ import 'react-modern-drawer/dist/index.css'
 import CheckBox from "../../elements/CheckBox";
 import SearchBox from "../../elements/SearchBox";
 import CustomButton from '../../elements/CustomButton';
+import { setFilter } from "../../../redux/reducers/Facets";
+import { useDispatch } from "react-redux";
 
 
 const Drawer = memo((props) => {
 
     const { t, i18n } = useTranslation()
+    const dispatch = useDispatch();
 
     const { open, setOpen, onClickApplyFilter, appliedFilters, data, year } = props;
     // const { isLoggedIn } = useSelector(state => state.authentication);
@@ -75,35 +78,38 @@ const Drawer = memo((props) => {
 
     const onClickItem = useCallback((item) => {
 
-        console.log(item);
+        console.log("DADADADAD", item);
 
         let filter = [...filters]
 
-        if (filters.some(el => el.title === item.title)) {
+        if (filters.some(el => el.title == item.title)) {
 
-            let index = filters.indexOf(item)
+            let index = filters.findIndex(el => el.id === item.id)
             let temp = [...filter]
             temp.splice(index, 1)
             setFilters(temp)
 
+            //     let index = filters.indexOf(item)
+            // console.log("DADADADAD", index);
+
+            //     let temp = [...filter]
+            //     temp.splice(index, 1)
+            //     setFilters(temp)
+
         } else {
-            if (i18n.language === locales.EN ? item.type === 'publisher__name' : i18n.language === locales.AR && item.type === 'publisherlear__name') {
-                let index = filter.findIndex(el => i18n.language === locales.EN ? el.type == 'publisher__name' : i18n.language === locales.AR && el.type === "publisherlear__name")
-                if (index > -1) {
-                    filter.splice(index, 1)
-                }
-            }
-            // if()
             filter.push(item)
             setFilters(filter)
         }
 
     }, [filters])
 
+    console.log("DADADADAD", filters);
+
     const onClickAccordian = useCallback((index) => activeIndex === index ? setActiveIndex(null) : setActiveIndex(index), [activeIndex]);
 
     const onClickClear = useCallback(() => {
         setFilters([])
+        dispatch(setFilter())
     });
 
     function CustomToggle({ eventKey }) {
@@ -141,15 +147,14 @@ const Drawer = memo((props) => {
             onClose={toggleDrawer}
             direction={i18n.language === locales.AR ? 'left' : 'right'}
             lockBackgroundScroll
-            style={{ zIndex: 1200, height: "100%", width: window.innerWidth >= 800 ? "30%" : "100%" }}
-        >
+            style={{ zIndex: 1200, height: "100%", width: window.innerWidth >= 800 ? "30%" : "100%" }}>
             <div style={{ height: "100%" }}>
                 <div style={{ top: 0, position: "relative", left: 0, right: 0, zIndex: 1000 }} className="py-4 bg-white d-flex align-items-center justify-content-between shadow-bottom nav-padding">
                     {/* <Heading size="xxs" heading={t("filters")} nomargin /> */}
                     <p className={`fs-xs-static m-0 en-font-default text-black ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("filters")}</p>
                     <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="" size={20} />
                 </div>
-                <div style={{ height: "75%" }} className={`py-4 scroll-bar nav-padding`}>
+                <div className={`py-4 scroll-bar nav-padding height-bottom`}>
                     {
                         data?.map((item, index) => {
                             return (
@@ -177,8 +182,8 @@ const Drawer = memo((props) => {
                                                                 <div style={{ paddingTop: "5px", paddingBottom: "5px" }}>
                                                                     <Tag
                                                                         hoverEffect
-                                                                        backgroundColor={filters.some(el => el.title === items.title) ? colors.black : colors.white}
-                                                                        textColor={filters.some(el => el.title === items.title) ? colors.white : colors.black}
+                                                                        backgroundColor={filters.some(el => el.id === items.id) ? colors.black : colors.white}
+                                                                        textColor={filters.some(el => el.id === items.id) ? colors.white : colors.black}
                                                                         // backgroundColor={filtersData?.some(items => items.title === item.title) ? "black" : "white"}
                                                                         // textColor={filtersData?.some(items => items.title === item.title) ? "white" : "black"}
                                                                         borderColor={"1px solid #cfcfcf"}
@@ -189,7 +194,7 @@ const Drawer = memo((props) => {
                                                                                 title: items.title,
                                                                                 id: items.id
                                                                             })
-                                                                            : onClickItem(items)}
+                                                                            : onClickItem(items, index)}
                                                                     />
                                                                 </div>
                                                             )
@@ -202,11 +207,12 @@ const Drawer = memo((props) => {
                                                             />
                                                         }
                                                     </div>
+                                                    {console.log("FILTERSS", filters)}
                                                     {
                                                         item.data &&
                                                         <div className="">
                                                             {
-                                                                item.data.en?.map((items, index) => {
+                                                                item.data?.map((items, index) => {
                                                                     return (
                                                                         <div className="d-flex justify-content-between align-items-center">
                                                                             <div className="py-2">
@@ -240,7 +246,7 @@ const Drawer = memo((props) => {
                     }
                 </div>
             </div>
-            <div className="nav-padding fixed-bottom d-flex align-items-center justify-content-between">
+            <div className="nav-padding shadow-bottom fixed-bottom d-flex align-items-center justify-content-between">
                 <hr className="m-0 p-0" />
                 <div style={{}} className="w-100 py-3 bg-white d-flex justify-content-between align-items-center">
                     <div className="">

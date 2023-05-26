@@ -23,11 +23,14 @@ export const endpoints = {
     getSimilarDatasets: (topic) => {
         return client.get(`/apis/similar_dataset.php?type=similar&topic=${topic}`);
     },
-    getFacets: (key, filters) => {
-        if (filters && filters.length > 0) {
+    getFacets: (key, filters, listedFilters) => {
+        console.log("hello", key, filters, listedFilters);
+        if (listedFilters != null && filters && filters.length > 0) {
             return client.get(`/apis/facets.php?fulltext=&page=1&page-size=0&sort=modified&sort-order=desc&facets=${key}&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
         }
-        return client.get(`/apis/facets.php?facets=${key}`);
+        else {
+            return client.get(`/apis/facets.php?facets=${key}`);
+        }
     },
     // getFileFormatsFacets: (key, filters) => {
     //     // &${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}
@@ -122,6 +125,9 @@ export const endpoints = {
     },
     getPrivacyPolicy: () => {
         return client.get("/jsonapi/node/privacy_policy");
+    },
+    getLicenseDetails: () => {
+        return client.get("/jsonapi/node/open_data_license");
     },
     contactUs: (data) => {
         return client.post("/apis/contact.php", data);

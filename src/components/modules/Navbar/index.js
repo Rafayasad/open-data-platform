@@ -123,7 +123,8 @@ const Navbar = memo((props) => {
                         {
                             !nocontent &&
                             <>
-                                <div className="d-flex justify-content-center mx-1">
+                                {/* register button is hide */}
+                                <div className="d-none justify-content-center mx-1">
                                     <Link style={{ textDecoration: 'none' }} to={routes.REGISTER}>
                                         {/* <Button borderColor={color} backgroundColor='transparent' textColor={color} title={t("register")} /> */}
                                         <CustomButton title={t("register")} buttonClass={`${theme === 'dark' ? 'outlined' : 'outlined-transparent'}`} />
@@ -242,7 +243,8 @@ const Navbar = memo((props) => {
                             }
                         </Col>
                     </Row>
-                    <Row className="d-flex justify-content-center my-3">
+                    {/* mobile register is hide */}
+                    <Row className="d-none justify-content-center my-3">
                         <Col sm={11} xs={11} className="d-flex align-items-center justify-content-center py-4 bg-light" style={{ borderRadius: "20px" }}>
                             <p className="m-0 en-font-default" style={{ color: colors.black }}>
                                 {`${t("newUser")} ${i18n.language === locales.EN ? " ? " : " ؟ "}`}

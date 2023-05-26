@@ -101,7 +101,7 @@ const Card = memo((props) => {
     const specificDownloadOptions = newResources?.map(item => (
         {
             id: item.identifier,
-            title: i18n.language === locales.AR ? (item.titlelear && item.titlelear != "" ? item.title_ar : item.url) : (item.title && item.title != "" ? item.title : item.url),
+            title: i18n.language === locales.AR ? (item.titlelear && item.titlelear != "" ? item.titlelear : item.url) : (item.title && item.title != "" ? item.title : item.url),
             onClick: addDownloadCounts,
             downloadLink: item.url,
             icon: item.format === "pdf" ? <img src={pdfImage} />

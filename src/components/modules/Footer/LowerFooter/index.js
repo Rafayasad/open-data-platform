@@ -40,7 +40,7 @@ const LowerFooter = memo(() => {
                         <p className='text-white m-0 px-4 fs-2xs-static' style={{ cursor: "pointer" }} onClick={() => { navigate(routes.POLICY) }}>
                             {`${t("privacy")}`}
                         </p>
-                        <span className='text-white m-0 fs-2xs-static' style={{ cursor: "pointer" }} onClick={() => { navigate(routes.POLICY) }}>
+                        <span className='text-white m-0 fs-2xs-static' style={{ cursor: "pointer" }} onClick={() => { navigate(routes.TERMS) }}>
                             {`${t("terms")}`}
                         </span>
                     </div>

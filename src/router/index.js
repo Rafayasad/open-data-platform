@@ -21,6 +21,8 @@ const OTP = lazy(() => import('../pages/Authentication/OTP'))
 // const SuccessStories = lazy(() => import('../pages/SuccessStories'))
 // const SuccessStoriesDetail = lazy(() => import('../pages/SuccessStoriesDetail'))
 const PrivacyPolicy = lazy(() => import('../pages/Authentication/PrivacyPolicy'))
+const Terms = lazy(() => import('../pages/Authentication/Terms'))
+const License = lazy(() => import('../pages/License'))
 const ChangePassword = lazy(() => import('../pages/Authentication/ChangePassword'))
 const ContactUs = lazy(() => import('../pages/ContactUs'))
 const RealTimeApis = lazy(() => import('../pages/RealTimeApis'))
@@ -56,6 +58,8 @@ const Router = () => {
             {/* <Route path={routes.SUCCESS_STOIRES} element={<SuccessStories />} />
             <Route path={routes.SUCCESS_STOIRES_DETAIL} element={<SuccessStoriesDetail />} /> */}
             <Route path={routes.POLICY} element={<PrivacyPolicy />} />
+            <Route path={routes.TERMS} element={<Terms />} />
+            <Route path={routes.LICENSE} element={<License />} />
             <Route path={routes.CHANGE} element={<ChangePassword />} />
             <Route path={routes.CONTACT} element={<ContactUs />} />
             <Route path={routes.REAL_TIME_APIS} element={<RealTimeApis />} />
