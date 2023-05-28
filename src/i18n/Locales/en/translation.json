@@ -275,5 +275,6 @@
     "fileFormat": "File Format",
     "noResultFound!": "No Results Found!",
     "copylink": "Copy link",
-    "email": "Email"
+    "email": "Email",
+    "noPublisherFound": "No Publisher Found!"
 }

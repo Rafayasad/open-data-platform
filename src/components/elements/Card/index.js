@@ -1,6 +1,6 @@
 import './style.css';
 import React, { memo, useEffect, useState } from "react";
-import { Card as RBCard, Col, Row } from "react-bootstrap";
+import { Card as RBCard, Col, Row, Spinner } from "react-bootstrap";
 import { BsPerson, BsShare, BsThreeDots } from "react-icons/bs";
 import { FiTwitter, FiLinkedin } from "react-icons/fi";
 import { MdOutlineFileDownload } from 'react-icons/md';
@@ -26,6 +26,8 @@ import BottomSheetBar from "../../modules/BottomSheet";
 import { routes } from "../../../router/helper";
 import { addDownloadCount, getResourcesByIdentifier } from "../../../axios/api";
 import i18next from "i18next";
+import Loader from '../../modules/Loader';
+import Shimmer from '../Shimmer';
 
 const Card = memo((props) => {
 
@@ -46,7 +48,8 @@ const Card = memo((props) => {
     const [newResources, setNewResources] = useState();
 
     const isClicked = useCallback((value, id) => {
-        // console.log("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEELO",datasetID);
+        getResourcesByIdentifier(id, setNewResources)
+
         setSelectedDropdownValue(value)
     })
 
@@ -87,18 +90,20 @@ const Card = memo((props) => {
 
     const options = [
         {
+            id: datasetID,
             title: window.innerWidth <= 768 ? t("downloadDatasets") : t("download"),
             icon: window.innerWidth <= 768 ? <BsArrowDownCircleFill size={20} color="black" /> : <MdOutlineFileDownload size={20} color="black" />,
             onClick: isClicked,
         },
         {
+            id: "share",
             title: t("share"),
             icon: <BsShare color="black" />,
             onClick: isClicked,
         }
     ]
 
-    const specificDownloadOptions = newResources?.map(item => (
+    const specificDownloadOptions = newResources?.length > 0 ? newResources?.map(item => (
         {
             id: item.identifier,
             title: i18n.language === locales.AR ? (item.titlelear && item.titlelear != "" ? item.titlelear : item.url) : (item.title && item.title != "" ? item.title : item.url),
@@ -110,7 +115,16 @@ const Card = memo((props) => {
                         : item.format === "csv" ? <img src={csvImage} height={20} width={20} />
                             : item.format === "api" || item.format === "API" && <img src={apiImage} />
         }
+
     ))
+        :
+        [{
+            title: "Loading...",
+            icon: <Spinner size='sm' />
+        }]
+    // <div className='bg-info' style={{height:"20px"}}>
+    //     <Shimmer rounded='xs' width="70%" className={"my-1"} backgroundColor={colors.black} />
+    // </div>
 
     const specificShareOptions = shareOptions?.map(item => (
         {
@@ -125,12 +139,12 @@ const Card = memo((props) => {
         }
     ))
 
-    console.log("datasetsss",datasetID);
+    console.log("datasetsss", datasetID);
 
     // for getting resorces by id
-    useEffect(() => {
-        getResourcesByIdentifier(datasetID, setNewResources)
-    }, [datasetID])
+    // useEffect(() => {
+    //     getResourcesByIdentifier(datasetID, setNewResources)
+    // }, [datasetID])
 
     return (
         <>

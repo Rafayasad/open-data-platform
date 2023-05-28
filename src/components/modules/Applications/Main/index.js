@@ -12,7 +12,7 @@ import Search from "../../../elements/Search";
 const Main = memo((props) => {
 
     const { t } = useTranslation()
-    const { title, description, isSearchBar, onSearch, popularSearch } = props;
+    const { title, description, isSearchBar, noimage, onSearch, popularSearch } = props;
 
     return (
         <Container fluid className="my-4 page-padding">
@@ -26,15 +26,16 @@ const Main = memo((props) => {
                     {/* <Heading size='xxs' nomargin heading={t("applicationDiscription")} /> */}
                 </Col>
             </Row>
-
-            <Row className="py-2 max-width">
-                <Col className="p-0">
-                    <img
-                        className="image-sizing"
-                        src={Application}
-                        style={{ borderRadius: '30px' }} />
-                </Col>
-            </Row>
+            {!noimage &&
+                <Row className="py-2 max-width">
+                    <Col className="p-0">
+                        <img
+                            className="image-sizing"
+                            src={Application}
+                            style={{ borderRadius: '30px' }} />
+                    </Col>
+                </Row>
+            }
             {isSearchBar &&
                 <Row>
                     <Col />

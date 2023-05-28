@@ -101,6 +101,7 @@ const Publisher = memo(() => {
                                 title={t("publishers")}
                                 description={t("publishersDiscription")}
                                 isSearchBar
+                                noimage
                                 onSearch={onSearch}
                                 popularSearch={i18n.language === locales.AR ? publisherSuggestion?.ar : publisherSuggestion?.en}
                             />

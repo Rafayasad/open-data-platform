@@ -67,6 +67,7 @@ const Cards = memo((props) => {
             )
         } else if (type === 'image-outer-text') {
             return (
+
                 !loading && data && data?.length > 0 ? data?.map((item, index) => (
                     <Col key={index} md={6} lg={4} className="py-2">
                         <CardWithOuterText
@@ -79,7 +80,11 @@ const Cards = memo((props) => {
                             onClick={() => onClick(item.id)}
                         />
                     </Col>
-                )) : <Loader type={type} backgroundColor={backgroundColor} />
+                )) :
+                    !loading ?
+                        <p className={`${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} m-0 text-center en-font-default`}>{t("noPublisherFound")}</p>
+                        :
+                        <Loader type={type} backgroundColor={backgroundColor} />
             )
         } else if (type === 'story-cards') {
             return (

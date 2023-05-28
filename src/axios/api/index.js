@@ -395,37 +395,35 @@ export const getDatasetById = (id, setData) => {
         getDatasetById(id).then(async (res) => {
             if (res.status === 200) {
 
-                let item = res.data;
-                console.log("AdassaS", item.distribution);
+                let item = res.data.data;
+                console.log("DATATTATA", res.data.data);
                 // for resources filterout
                 let filteredResources = item.distribution?.filter(item => {
-                    let itemm = item.data
-                    if (itemm.downloadURL && itemm.downloadURL !== "") {
+                    if (item.url && item.url !== "") {
                         return item
                     }
                 })?.map(item => {
-                    let itemm = item.data
                     return (
                         {
                             id: item.identifier,
-                            title: itemm.title ? itemm.title : "No Name Found",
-                            title_ar: itemm.titlelear ? itemm.titlelear : "لم يتم العثور على اسم",
-                            description: itemm.description,
-                            description_ar: itemm.descriptionlear,
-                            format: itemm.format === "pdf" ? "pdf"
-                                : item.format === "excel" || itemm.format === "xlsx" || itemm.format === "esri rest" || itemm.format == "xls" ? "excel"
-                                    : itemm.format === "csv" ? "csv"
-                                        : itemm.format === "API" || itemm.format === "api" && "API",
-                            downloadURL: itemm.downloadURL ? itemm.downloadURL : "No File Uploaded Yet"
+                            title: item.title ? item.title : "No Name Found",
+                            title_ar: item.titlelear ? item.titlelear : "لم يتم العثور على اسم",
+                            format: item.format === "pdf" ? "pdf"
+                                : item.format === "excel" || item.format === "xlsx" || item.format === "esri rest" || item.format == "xls" ? "excel"
+                                    : item.format === "csv" ? "csv"
+                                        : item.format === "API" || item.format === "api" && "API",
+                            downloadURL: item.url
                         }
                     )
                 })
 
-                let keyword = item && item.keyword && item.keyword?.filter(el => el.data && el.data !== ' ' && el)?.map(item => item.data);
-                let keywordlear = item && item.keywordlear && item.keywordlear?.filter(el => el.data && el.data !== ' ' && el)?.map(item => item.data);
-                let topics = item && item.theme && item.theme?.filter(el => el.data && el.data !== ' ' && el)?.map(item => item.data);
-                let topics_ar = item && item.themelear && item.themelear?.filter(el => el.data && el.data !== ' ' && el)?.map(item => item.data);
 
+                let keyword = item && item.keyword && item.keyword?.filter(el => el && el !== ' ' && el)?.map(item => item);
+                let keywordlear = item && item.keywordlear && item.keywordlear?.filter(el => el && el !== ' ' && el)?.map(item => item);
+                let topics = item && item.theme && item.theme?.filter(el => el && el !== ' ' && el)?.map(item => item);
+                let topics_ar = item && item.themelear && item.themelear?.filter(el => el && el !== ' ' && el)?.map(item => item);
+
+                console.log("DATATTATA FIL", keyword, keywordlear, topics, topics_ar);
 
                 let downloadCount = await endpoints.getDownloadCountById(id)
                     .then((res) => {
@@ -436,31 +434,18 @@ export const getDatasetById = (id, setData) => {
                         console.log("Error message", err)
                     })
 
-                // let obj = [
-                //     {
-                //         data: " ",
-                //         identifier: "2476ab9e-6421-5e20-b2a3-89275ccf22bb"
-                //     },
-                //     {
-                //         data: "hello",
-                //         identifier: "2476ab9e-6421-5e20-b2a3-89275ccf22bb"
-                //     }
-                // ]
-
                 let data = {
                     id: item.identifier,
                     title: item.title,
                     title_ar: item.titlear,
                     description: item.description,
                     description_ar: item.descriptionlear,
-                    publisher: item.publisher?.data.name,
-                    publisher_ar: item.publisherlear?.data.name,
-                    frequency: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
-                    frequency_ar: item.accrualPeriodicity === "R/P1Y" ? "سنوي" : item.accrualPeriodicity === "auto/freq" ? "تلقائي" : "لا يوجد",
-                    access_level: item.accessLevel,
-                    access_level_ar: item.accessLevellear,
-                    // license: item.license,
-                    // license_ar: item.licenselear,
+                    publisher: item.publisher,
+                    publisher_ar: item.publisherlear,
+                    frequency: item.frequency,
+                    frequency_ar: item.frequency_ar,
+                    access_level: item.access_level,
+                    access_level_ar: item.access_level_ar,
                     license: "https://data.abudhabi/opendata/addata_open_license",
                     license_ar: "https://data.abudhabi/opendata/addata_open_license",
                     topics: topics && topics?.length > 0 ? topics : ['No Topics Found'],
@@ -473,12 +458,11 @@ export const getDatasetById = (id, setData) => {
                             title: 'No file uploaded yet.',
                             title_ar: "لم يتم تحميل أي ملف بعد."
                         }],
-                    created: item.issued,
+                    created: item.created,
                     modified: item.modified,
                     downloadCount
                 }
-
-                // console.log("DATATTATA", data);
+                
                 setData(data)
 
                 const view_count_payload = {

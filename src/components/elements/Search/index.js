@@ -56,7 +56,7 @@ const Search = memo((props) => {
 
         let value = e.target.value;
 
-        if (e.key === "Enter" && !isEmptyString(value)) {
+        if (e.key === "Enter" ) {
             onPressEnter && onPressEnter((value).trim())
             setInputText(value.trim())
             setOpenModal(false)

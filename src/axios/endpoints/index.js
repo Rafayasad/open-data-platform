@@ -49,7 +49,7 @@ export const endpoints = {
         return client.get(`/apis/dataset_resource_by_id.php?identifier=${identifier}`)
     },
     getDatasetById: (id) => {
-        return client.get(`/api/1/metastore/schemas/dataset/items/${id}?show-reference-ids`);
+        return client.get(`/apis/search_inner.php?identifier=${id}`);
     },
     getAllApplications: () => {
         return client.get('/jsonapi/node/applications');

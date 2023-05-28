@@ -100,18 +100,13 @@ const Home = memo(() => {
 
     const onApplyFilter = useCallback((filters) => { navigate(routes.DATASET, { state: { listItem: filters } }) })
 
-    const newArray = JSON.parse(JSON.stringify(topics));
-
-    console.log("NEW ARRAY topic",topics);
-    console.log("NEW ARRAY",staticTopics);
-
     return (
         // <div style={{ maxWidth: "1800px", margin: "auto" }}>
         <View sticky footerTitle={t("GetMore")} footerButton={t("registerNow")} >
             <Main filterData={data} onSearch={onSearch} onClickExplore={() => topicsDiv.scrollIntoView()} onApplyFilter={onApplyFilter} />
             <div id='topics' className="m-0 p-0">
                 <Topics onClickViewless={() => topicsDiv.scrollIntoView()} onClickList={onClickList}
-                    data={i18n.language === locales.AR ? newArray && newArray : newArray && newArray}
+                    data={i18n.language === locales.AR ? topics && topics : topics && topics}
                 />
             </div>
             <Images />
