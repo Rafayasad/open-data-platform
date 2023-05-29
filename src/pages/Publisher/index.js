@@ -20,12 +20,12 @@ import { Col, Row } from "react-bootstrap";
 
 const Publisher = memo(() => {
 
-    const { t,i18n } = useTranslation()
+    const { t, i18n } = useTranslation()
     const ref1 = useRef(null);
 
     const { publisherSuggestion } = useSelector(state => state.publisher)
 
-    console.log("publisherSuggestion",publisherSuggestion);
+    console.log("publisherSuggestion", publisherSuggestion);
 
     const cardsDiv = document.getElementById("publisher-cards");
 
@@ -48,6 +48,10 @@ const Publisher = memo(() => {
         setCurrentPage(page);
         setDisplayPublishers();
     }, [currentPage]);
+
+    useEffect(() => {
+        setCurrentPage(1)
+    }, [i18next.language])
 
     useEffect(() => {
         getPublishers(currentPage, rowsPerPage, i18n.language === locales.AR ? "ar" : "en", setDisplayPublishers, setTotalCount, searchText, setLoading)
@@ -93,6 +97,7 @@ const Publisher = memo(() => {
 
     return (
         <>
+            {console.log("isOPEN", isOpen)}
             {!isOpen ?
                 <div style={{ maxWidth: "1800px", margin: "auto" }}>
                     <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
@@ -100,6 +105,7 @@ const Publisher = memo(() => {
                             <Main
                                 title={t("publishers")}
                                 description={t("publishersDiscription")}
+                                nodiscroptiontemp
                                 isSearchBar
                                 noimage
                                 onSearch={onSearch}
@@ -120,8 +126,9 @@ const Publisher = memo(() => {
                                 currentPage={currentPage}
                                 totalCount={Math.ceil(totalCount / rowsPerPage)}
                                 onChange={(page) => {
-                                    cardsDiv.scrollIntoView(true)
                                     onChangePage(page)
+                                    console.log("pahhhhhhhhhhhhhhhhe", page);
+                                    cardsDiv?.scrollIntoView(true)
                                 }}
                             />
                         </div>

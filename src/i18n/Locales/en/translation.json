@@ -276,5 +276,6 @@
     "noResultFound!": "No Results Found!",
     "copylink": "Copy link",
     "email": "Email",
-    "noPublisherFound": "No Publisher Found!"
+    "noPublisherFound": "No Publisher Found!",
+    "loading":"Loading..."
 }

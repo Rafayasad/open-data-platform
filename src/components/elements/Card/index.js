@@ -119,7 +119,7 @@ const Card = memo((props) => {
     ))
         :
         [{
-            title: "Loading...",
+            title: t("loading"),
             icon: <Spinner size='sm' />
         }]
     // <div className='bg-info' style={{height:"20px"}}>

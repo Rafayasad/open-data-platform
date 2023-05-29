@@ -12,17 +12,19 @@ import Search from "../../../elements/Search";
 const Main = memo((props) => {
 
     const { t } = useTranslation()
-    const { title, description, isSearchBar, noimage, onSearch, popularSearch } = props;
+    const { title, description, isSearchBar, noimage, onSearch, popularSearch, nodiscroptiontemp } = props;
 
     return (
         <Container fluid className="my-4 page-padding">
-            <Row className="align-items-start justify-content-between py-0 py-md-5 max-width">
+            <Row className="align-items-start justify-content-between py-0 py-md-5 margin max-width">
                 <Col md={5} xs={12} className='py-3 p-0'>
                     <p className={`m-0 fs-xl ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{title ? title : t("applicationTitle")}</p>
                     {/* <Heading bold nomargin heading={t("applicationTitle")} /> */}
                 </Col>
                 <Col md={5} xs={12} className='py-3 p-0'>
-                    <p className="m-0 fs-xs-static" style={{ color: colors.dark_gray }}>{description ? description : t("applicationDiscription")}</p>
+                    {!nodiscroptiontemp &&
+                        <p className="m-0 fs-xs-static" style={{ color: colors.dark_gray }}>{description ? description : t("applicationDiscription")}</p>
+                    }
                     {/* <Heading size='xxs' nomargin heading={t("applicationDiscription")} /> */}
                 </Col>
             </Row>

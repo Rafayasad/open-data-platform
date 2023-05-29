@@ -243,12 +243,12 @@ export const getSimilarDatasets = (id, topic, setData, setLoading) => {
         })
 }
 
-export const getFacets = async (key, dispatch, setData, finalfilters, filters) => {
+export const getFacets = async (key, dispatch, setData, finalfilters, filters, search) => {
 
     console.log("AAAAAAAAAAAAAAAAAAAASD", filters);
 
     let arr = await endpoints.
-        getFacets(key, finalfilters, filters).then((res) => {
+        getFacets(key, finalfilters, filters, search).then((res) => {
 
             if (res.status === 200) {
 
@@ -334,10 +334,10 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
         { key: "distribution__item__format", values: filesArray }
     )
 
-    getFacets(currentLanguage === locales.AR ? "themelear" : "theme", dispatch, setTopics, finalFilters, filters);
-    getFacets(currentLanguage === locales.AR ? "keywordlear" : "keyword", dispatch, setTags, finalFilters, filters);
-    getFacets(currentLanguage === locales.AR ? "publisherlear__name" : "publisher__name", dispatch, setPublishers, finalFilters, filters);
-    getFacets("distribution__item__format", dispatch, setFileFormats, finalFilters, filters);
+    getFacets(currentLanguage === locales.AR ? "themelear" : "theme", dispatch, setTopics, finalFilters, filters, search);
+    getFacets(currentLanguage === locales.AR ? "keywordlear" : "keyword", dispatch, setTags, finalFilters, filters, search);
+    getFacets(currentLanguage === locales.AR ? "publisherlear__name" : "publisher__name", dispatch, setPublishers, finalFilters, filters, search);
+    getFacets("distribution__item__format", dispatch, setFileFormats, finalFilters, filters, search);
 
     // getFileFormatsFacets("distribution__item__format", dispatch, setFileFormats, finalFilters);
 
@@ -462,7 +462,7 @@ export const getDatasetById = (id, setData) => {
                     modified: item.modified,
                     downloadCount
                 }
-                
+
                 setData(data)
 
                 const view_count_payload = {

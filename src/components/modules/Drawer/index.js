@@ -82,19 +82,12 @@ const Drawer = memo((props) => {
 
         let filter = [...filters]
 
-        if (filters.some(el => el.title == item.title)) {
+        if (filters.some(el => el.id == item.id)) {
 
             let index = filters.findIndex(el => el.id === item.id)
             let temp = [...filter]
             temp.splice(index, 1)
             setFilters(temp)
-
-            //     let index = filters.indexOf(item)
-            // console.log("DADADADAD", index);
-
-            //     let temp = [...filter]
-            //     temp.splice(index, 1)
-            //     setFilters(temp)
 
         } else {
             filter.push(item)

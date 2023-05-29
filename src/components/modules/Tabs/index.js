@@ -29,7 +29,7 @@ const Tabs = memo((props) => {
                         </Nav>
                     </Col>
                 </div>
-                <Row className="d-flex py-3" style={{ borderBottom: '1px solid #CFCFCF' }}>
+                <Row className="d-flex py-4" style={{ borderBottom: '1px solid #CFCFCF' }}>
                     <Col xs={12} sm={12} lg={8}>
                         <Tab.Content>
                             {

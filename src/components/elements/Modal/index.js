@@ -79,7 +79,7 @@ const ModalEelment = memo((props) => {
                 </Typography> */}
                   <div className='custom-scrollbar' style={{ height: descriptionHeight ? descriptionHeight : "400px" }}>
                     <div className='scroll-content'>
-                      <p className={`${i18next.language === locales.AR ? "ar-font" : "en-font"}`} dangerouslySetInnerHTML={{ __html: description }} />
+                      <p className={`${i18next.language === locales.AR ? "ar-font" : "fs-xs en-font"}`} dangerouslySetInnerHTML={{ __html: description }} />
                     </div>
                   </div>
                 </>
@@ -107,7 +107,7 @@ const ModalEelment = memo((props) => {
                   {description}
                 </Typography> */}
                 <div style={{ height: window.innerWidth >= 992 ? "400px" : "100%" }}>
-                  <p dangerouslySetInnerHTML={{ __html: description }} />
+                  <p className='fs-xs bg-info' dangerouslySetInnerHTML={{ __html: description }} />
                 </div>
               </>
             )}

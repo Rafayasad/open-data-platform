@@ -129,7 +129,6 @@ const Dataset = memo(() => {
         if (!most_viewed_datasets) {
             if (currentPage || storedSearch || sort || storedFilters) {
                 if (!state?.search && !state?.listItem) {
-                    console.log("ARRayssssssssssssssss", storedFilters, filters);
                     getAllDatasets(setDatasets, setTotalCount, setLoading, storedSearch, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, storedFilters, i18n.language, dispatch, setTopics, setTags, setPublishers, setFileFormats)
                 }
             }

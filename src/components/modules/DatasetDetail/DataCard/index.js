@@ -16,7 +16,7 @@ const DataCard = memo((props) => {
     const navigate = useNavigate();
     const { t, i18n } = useTranslation();
 
-    console.log("LOGOGOGOG",data);
+    console.log("LOGOGOGOG", data);
 
     return (
         <Container fluid className="p-0">
@@ -25,14 +25,14 @@ const DataCard = memo((props) => {
                     <div key={index} className="py-1">
                         <div>
                             {/* <Heading heading={item.title} size='xs' bold /> */}
-                            <p className={`fs-sm ${i18next.language === locales.AR ? "ar-font-bolder" : "en-font-bolder"}`}>
+                            <p style={{ color: colors.darker_gray }} className={`fs-sm ${i18next.language === locales.AR ? "ar-font-bolder" : "en-font-bolder"}`}>
                                 {item.title}
                             </p>
                         </div>
                         {
                             !item.tags ? (
                                 <div className="">
-                                    <p className={`fs-xs en-font-default ${item.capitalize && "text-capitalize"} ${item.underline && "text-underline-hover"}`} style={{ color: item.color }} onClick={item.onClick}>{item.detail}</p>
+                                    <p className={`fs-xs en-font-default ${item.capitalize && "text-capitalize"} ${item.underline && "text-underline-hover"}`} style={{ color: colors.dark_gray }} onClick={item.onClick}>{item.detail}</p>
                                     {/* <Heading capitalize={item.capitalize} color={item.color} underline={item.underline} heading={item.detail} size='xxs' onClick={item.onClick} /> */}
                                 </div>
                             ) : (

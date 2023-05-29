@@ -23,13 +23,12 @@ export const endpoints = {
     getSimilarDatasets: (topic) => {
         return client.get(`/apis/similar_dataset.php?type=similar&topic=${topic}`);
     },
-    getFacets: (key, filters, listedFilters) => {
-        console.log("hello", key, filters, listedFilters);
-        if (listedFilters != null && filters && filters.length > 0) {
-            return client.get(`/apis/facets.php?fulltext=&page=1&page-size=0&sort=modified&sort-order=desc&facets=${key}&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
+    getFacets: (key, filters, listedFilters, search) => {
+        if (listedFilters != null || search && filters && filters.length > 0) {
+            return client.get(`/apis/facets.php?fulltext=${search}&facets=${key}&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
         }
         else {
-            return client.get(`/apis/facets.php?facets=${key}`);
+            return client.get(`/apis/facets.php?facets=${key}${search ? `&fulltext=${search}` : ""}`);
         }
     },
     // getFileFormatsFacets: (key, filters) => {

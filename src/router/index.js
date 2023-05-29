@@ -13,7 +13,7 @@ const Publishers = lazy(() => import('../pages/Publisher'))
 const Support = lazy(() => import('../pages/Support'))
 const SupportQuestions = lazy(() => import('../pages/SupportQuestions'))
 const SupportQuestionsDetail = lazy(() => import('../pages/SupportQuestionsDetail'))
-const Register = lazy(() => import('../pages/Authentication/Register'))
+// const Register = lazy(() => import('../pages/Authentication/Register'))
 const Login = lazy(() => import('../pages/Authentication/Login'))
 const RecoverPassword = lazy(() => import('../pages/Authentication/RecoverPassword'))
 const ResetPassword = lazy(() => import('../pages/Authentication/ResetPassword'))
@@ -50,7 +50,7 @@ const Router = () => {
             <Route path={routes.SUPPORT_QUESTIONS} element={<SupportQuestions />} />
             <Route path={routes.SUPPORT_QUESTIONS_DETAIL} element={<SupportQuestionsDetail />} />
             <Route path={routes.ABOUTUS} element={<About />} />
-            <Route path={routes.REGISTER} element={!isLoggedIn ? <Register /> : <Unauthorized title={"resetTitle"} />} />
+            {/* <Route path={routes.REGISTER} element={!isLoggedIn ? <Register /> : <Unauthorized title={"resetTitle"} />} /> */}
             <Route path={routes.LOGIN} element={!isLoggedIn ? <Login /> : <Unauthorized title={"loginTitle"} />} />
             <Route path={routes.RECOVER} element={!isLoggedIn ? <RecoverPassword /> : <Unauthorized title={"resetTitle"} />} />
             <Route path={routes.RESET} element={!isLoggedIn ? <ResetPassword /> : <Unauthorized title={"resetTitle"} />} />
@@ -65,10 +65,10 @@ const Router = () => {
             <Route path={routes.REAL_TIME_APIS} element={<RealTimeApis />} />
             <Route path={routes.REAL_TIME_APIS_DETAIL} element={<RealTimeApisDetail />} />
             <Route path={routes.CONFIRMATION} element={<Confirmation />} />
-            <Route path={routes.REPORTS} element={!isLoggedIn ? <Reports /> : <Unauthorized />} />
-            <Route path={routes.REPORTS_INSIGHTS} element={!isLoggedIn ? <InsightsReports /> : <Unauthorized />} />
-            <Route path={routes.REPORTS_PUBLISHERS} element={!isLoggedIn ? <PublishersReports /> : <Unauthorized />} />
-            <Route path={routes.REPORTS_DATASETS} element={!isLoggedIn ? <DatasetsReports /> : <Unauthorized />} />
+            <Route path={routes.REPORTS} element={isLoggedIn ? <Reports /> : <Unauthorized />} />
+            <Route path={routes.REPORTS_INSIGHTS} element={isLoggedIn ? <InsightsReports /> : <Unauthorized />} />
+            <Route path={routes.REPORTS_PUBLISHERS} element={isLoggedIn ? <PublishersReports /> : <Unauthorized />} />
+            <Route path={routes.REPORTS_DATASETS} element={isLoggedIn ? <DatasetsReports /> : <Unauthorized />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     )

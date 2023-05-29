@@ -26,6 +26,8 @@ const MiddleFooter = memo(() => {
     const topics = useSelector((state) => state.facets.topics);
     const { isLoggedIn } = useSelector(state => state.authentication);
 
+    console.log("TOPICS",topics);
+
     const [activeIndex, setActiveIndex] = useState();
 
     function CustomToggle({ eventKey }) {
