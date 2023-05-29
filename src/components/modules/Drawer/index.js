@@ -142,7 +142,7 @@ const Drawer = memo((props) => {
             lockBackgroundScroll
             style={{ zIndex: 1200, height: "100%", width: window.innerWidth >= 800 ? "30%" : "100%" }}>
             <div style={{ height: "100%" }}>
-                <div style={{ top: 0, position: "relative", left: 0, right: 0, zIndex: 1000 }} className="py-4 bg-white d-flex align-items-center justify-content-between shadow-bottom nav-padding">
+                <div style={{ top: 0, position: "relative", left: 0, right: 0, zIndex: 9999 }} className="py-4 bg-white d-flex align-items-center justify-content-between shadow-bottom nav-padding">
                     {/* <Heading size="xxs" heading={t("filters")} nomargin /> */}
                     <p className={`fs-xs-static m-0 en-font-default text-black ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("filters")}</p>
                     <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="" size={20} />

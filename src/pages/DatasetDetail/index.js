@@ -56,11 +56,14 @@ const DatasetDetail = memo(() => {
         navigate(`${routes.DATASET_DETAIL}?id=${id}`, { replace: true })
     }, [id]);
 
+
+
     useEffect(() => {
 
         if (!id) return navigate(routes.DATASET, { replace: true });
 
         getDatasetById(id, setDataset);
+        mainDiv.scrollIntoView();
 
     }, [id])
 

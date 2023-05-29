@@ -20,6 +20,7 @@ const Main = memo((props) => {
 
     const { onSearch, onClickExplore, onApplyFilter, filterData } = props;
     const { datasetsSuggestion } = useSelector((state) => state.facets);
+    const [expandedSearchbar, setExpandedSearchbar] = useState(false);
 
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -116,7 +117,11 @@ const Main = memo((props) => {
                                     placeholder={t("searchPlaceholderfordesktop")}
                                     placeholderformobile={t("searchPlaceholderformobile")}
                                     filter
-                                    onPressEnter={onSearch} />
+                                    isSearchIcon
+                                    onPressEnter={onSearch}
+                                    expandedSearchbar={expandedSearchbar}
+                                    setExpandedSearchbar={setExpandedSearchbar}
+                                />
                             </Col>
                             <Col />
                         </Row>

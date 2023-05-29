@@ -41,14 +41,11 @@ const Home = memo(() => {
     const [pageNumber, setPageNumber] = useState(1);
     const [count, setCount] = useState();
     const [search, setSearch] = useState();
-
-    const staticTopics = useSelector((state) => state.facets.staticTopics);
+    
     const topics = useSelector((state) => state.facets.topics);
     const publishers = useSelector((state) => state.facets.publishers);
     const tags = useSelector((state) => state.facets.tags);
     const files = useSelector((state) => state.facets.file_Formats);
-
-    console.log("asd", tags);
 
     useEffect(() => {
         getFacets(i18n.language === locales.AR ? "themelear" : "theme", dispatch, setTopics);
