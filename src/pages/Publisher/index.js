@@ -39,6 +39,7 @@ const Publisher = memo(() => {
     // for search
     const [searchText, setSearchText] = useState('');
     const [searchedData, setSearchedData] = useState();
+    const [expandedSearchbar, setExpandedSearchbar] = useState(false);
 
     const [loading, setLoading] = useState(false);
     const [modalData, setModalData] = useState();
@@ -109,6 +110,9 @@ const Publisher = memo(() => {
                                 isSearchBar
                                 noimage
                                 onSearch={onSearch}
+                                searchText={t("searchPublishers")}
+                                expandedSearchbar={expandedSearchbar}
+                                setExpandedSearchbar={setExpandedSearchbar}
                                 popularSearch={i18n.language === locales.AR ? publisherSuggestion?.ar : publisherSuggestion?.en}
                             />
                             <div className="" id="publisher-cards">

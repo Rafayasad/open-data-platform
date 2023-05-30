@@ -63,7 +63,7 @@ const DatasetDetail = memo(() => {
         if (!id) return navigate(routes.DATASET, { replace: true });
 
         getDatasetById(id, setDataset);
-        mainDiv.scrollIntoView();
+        mainDiv?.scrollIntoView();
 
     }, [id])
 

@@ -194,7 +194,7 @@ const Card = memo((props) => {
                                         options={selectedDropdownValue === t("download") ? specificDownloadOptions : selectedDropdownValue === t("share") ? specificShareOptions : options}
                                         selectedDropdownValue={selectedDropdownValue}
                                         setSelectedDropdownValue={setSelectedDropdownValue}
-                                        headerComponent={<div className='d-flex align-items-center m-0' style={{ height: '10px', overflow: 'hidden' }}><HiOutlineDotsHorizontal color={colors.black} size={28} style={{ cursor: 'pointer' }} /> </div>}
+                                        headerComponent={<div className='d-flex align-items-center m-0' style={{ height: '10px', overflow: 'hidden' }}><HiOutlineDotsHorizontal className='btn-primary' color={colors.black} size={28} style={{ cursor: 'pointer' }} /> </div>}
                                     />
                                 </div>
                             </Col>

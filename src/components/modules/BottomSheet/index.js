@@ -45,7 +45,7 @@ const BottomSheetBar = (props) => {
     return (
         <>
             <BottomSheet
-                className={`z-3 ${i18n.language === locales.AR ? "ar-font" : "en-font"}`}
+                className={`${i18n.language === locales.AR ? "ar-font" : "en-font"}`}
                 style={{ height: "100%" }}
                 open={open}
                 onDismiss={() => {
@@ -111,7 +111,11 @@ const BottomSheetBar = (props) => {
                                                 :
                                                 selectedSheetValue ? <a onClick={() => item.onClick(item.title, item.id)} href={item.downloadLink} className='multine-ellipsis-2 text-decoration-none text-black m-0 p-0'>{item.title}</a>
                                                     :
-                                                    <p onClick={() => setSelectedSheetValue(item.title)} className='font-weight-bold multine-ellipsis-2 text-decoration-none text-black m-0 p-0'>{item.title}</p>
+                                                    <p onClick={() => {
+                                                        setSelectedSheetValue(item.title, item.id)
+                                                        item.onClick(item.title, item.id)
+                                                    }}
+                                                        className='font-weight-bold multine-ellipsis-2 text-decoration-none text-black m-0 p-0'>{item.title}</p>
                                         }
                                     </div>
                                 </div>

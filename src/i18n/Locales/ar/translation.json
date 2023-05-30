@@ -87,7 +87,7 @@
     "abuDhabiDataLogo": "شعار برنامج أبو ظبي للبيانات",
     "privacy": "خصوصية",
     "terms": "شروط",
-    "allRights": "جميع الحقوق محفوظة © 2022 بيانات أبوظبي",
+    "allRights": "جميع الحقوق محفوظة © 2023 بيانات أبوظبي",
     "backToTop": "عد إلى الأعلى",
     "stillNeedHelp": "هل مازلت بحاجه للمساعدة؟",
     "footerPartText": "أرسل لنا رسالة باستخدام نموذج الاتصال وسيقوم أحد أعضاء الفريق بالرد عليك.",
@@ -236,7 +236,7 @@
     "facebook": "فيس بوك",
     "twitter": "تويتر",
     "linkedin": "لينكدين",
-    "openData": "أبو ظبي للبيانات المفتوحة APIs الوقت الحقيقي",
+    "openData": "أبو ظبي للبيانات المفتوحة واجهة برمجة التطبيقات الفورية",
     "openDataDescription": "نود إبلاغكم بأن لدينا على متن السفينة Garden Booking & Wedding Hall Booking APIs على مسرح ADConect. يرجى الاطلاع على التفاصيل التالية",
     "popularsearches": "عمليات البحث الشائعة",
     "fieldFullName": "اسمك الكامل",
@@ -272,11 +272,12 @@
     "returntohomepage": "العودة إلى الصفحة الرئيسية",
     "cancel": "إلغاء",
     "alreadyAccount": "هل لديك حساب بالفعل ؟",
-    "opendata": "فتح البيانات",
+    "opendata": " البيانات المفتوحة",
     "fileFormat": "تنسيق الملف",
     "noResultFound!": "لم يتم العثور على نتائج!",
     "copylink": "نسخ الارتباط",
     "email": "بريد إلكتروني",
     "noPublisherFound": "لم يتم العثور على ناشر!",
-    "loading": "تحميل..."
+    "loading": "تحميل...",
+    "searchPublishers":"البحث عن ناشرين"
 }

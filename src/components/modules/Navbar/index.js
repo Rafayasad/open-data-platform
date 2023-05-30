@@ -78,7 +78,7 @@ const Navbar = memo((props) => {
 
     return (
         <>
-            <Container fluid className="nav-padding py-3 d-none d-lg-block" style={{ zIndex: 9999, position: 'absolute', top: isLoggedIn ? '78px' : 0, right: 0, left: 0 }}>
+            <Container fluid className="nav-padding py-3 d-none d-lg-block" style={{ zIndex: 99, position: 'absolute', top: isLoggedIn ? '78px' : 0, right: 0, left: 0 }}>
                 <Row>
                     <Col className="d-flex align-items-center">
                         <Link to={routes.HOME}>

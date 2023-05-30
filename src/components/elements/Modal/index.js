@@ -107,7 +107,7 @@ const ModalEelment = memo((props) => {
                   {description}
                 </Typography> */}
                 <div style={{ height: window.innerWidth >= 992 ? "400px" : "100%" }}>
-                  <p className='fs-xs bg-info' dangerouslySetInnerHTML={{ __html: description }} />
+                  <p className='fs-xs' dangerouslySetInnerHTML={{ __html: description }} />
                 </div>
               </>
             )}

@@ -137,9 +137,7 @@ const Search = memo((props) => {
                         <div className={`${i18n.language === locales.AR ? "ms-1 me-3" : "ms-3 me-1"} ${!isFilterIcon && "d-none d-lg-block"} `}>
                             <IoIosSearch color={iconColor ? iconColor : !isFilterIcon ? "gray" : "black"} size={24} />
                         </div>
-                        <div className={`${i18n.language === locales.AR ? "ms-1 me-3" : "ms-3 me-1"} ${!isFilterIcon && "d-none d-md-block d-lg-none"}`}>
-
-                        </div>
+                        {/* <div className={`d-lg-none d-block ${i18n.language === locales.AR ? "ms-1 me-3" : "ms-3 me-1"} ${!isFilterIcon && "d-none d-md-block d-lg-none"}`} /> */}
                         {/* desktop */}
                         <div className="w-100 d-none d-md-block">
                             <input
