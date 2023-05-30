@@ -24,6 +24,7 @@ const Publisher = memo(() => {
     const ref1 = useRef(null);
 
     const { publisherSuggestion } = useSelector(state => state.publisher)
+    const ip_address = useSelector(state => state.ip_address.ip_address)
 
     console.log("publisherSuggestion", publisherSuggestion);
 
@@ -55,7 +56,7 @@ const Publisher = memo(() => {
     }, [i18next.language])
 
     useEffect(() => {
-        getPublishers(currentPage, rowsPerPage, i18n.language === locales.AR ? "ar" : "en", setDisplayPublishers, setTotalCount, searchText, setLoading)
+        getPublishers(currentPage, rowsPerPage, i18n.language === locales.AR ? "ar" : "en", setDisplayPublishers, setTotalCount, searchText, setLoading, ip_address)
     }, [currentPage, i18next.language, searchText])
 
     // useEffect(() => {

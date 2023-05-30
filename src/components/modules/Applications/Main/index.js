@@ -49,7 +49,7 @@ const Main = memo((props) => {
                             onPressEnter={onSearch}
                             placeholder={searchText ? searchText : t("searchKeywords")}
                             placeholderformobile={searchText ? searchText : t("searchPlaceholderformobileTopic")}
-                            // isFilterIcon
+                            isFilterIcon
                             iconColor={"#707070"}
                         />
                     </Col>

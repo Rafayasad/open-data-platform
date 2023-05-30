@@ -28,11 +28,13 @@ import { addDownloadCount, getResourcesByIdentifier } from "../../../axios/api";
 import i18next from "i18next";
 import Loader from '../../modules/Loader';
 import Shimmer from '../Shimmer';
+import { useSelector } from 'react-redux';
 
 const Card = memo((props) => {
 
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const ip_address = useSelector(state => state.ip_address.ip_address);
 
     const { resources, title, publisher, description, tags, size, noborder,
         hoverable, nopadding, shortTitle, headingSize, onClick, nodropdown,
@@ -54,7 +56,7 @@ const Card = memo((props) => {
     })
 
     const addDownloadCounts = useCallback((title, id) => {
-        addDownloadCount(id).then((res) => {
+        addDownloadCount(id, ip_address).then((res) => {
             console.log("hello its running...s", datasetID);
             handleReload()
         })

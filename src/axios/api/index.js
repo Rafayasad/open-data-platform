@@ -307,7 +307,7 @@ export const getFacets = async (key, dispatch, setData, finalfilters, filters, s
 
 }
 
-export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage, filters, currentLanguage, dispatch, setTopics, setTags, setPublishers, setFileFormats) => {
+export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage, filters, currentLanguage, dispatch, setTopics, setTags, setPublishers, setFileFormats, ip_data) => {
 
     setLoading(true)
     setTotalCount(0)
@@ -350,7 +350,8 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                 if (res.data.total_count > 0 && search && search.trim() !== "") {
                     let obj = {
                         keyword: search,
-                        ip: "192.168.0.44",
+                        ip: ip_data?.ip,
+                        country: ip_data?.country,
                         lang: currentLanguage,
                         type: "dataset"
                     }
@@ -388,7 +389,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
         })
 }
 
-export const getDatasetById = (id, setData) => {
+export const getDatasetById = (id, setData, ip_data) => {
 
 
     return endpoints.
@@ -467,7 +468,8 @@ export const getDatasetById = (id, setData) => {
 
                 const view_count_payload = {
                     identifier: id,
-                    ip_address: "172.0.9.01"
+                    ip_address: ip_data?.ip,
+                    country: ip_data?.country
                 }
                 return await endpoints.viewCount(view_count_payload).then((res) => {
                     if (res.status === 200) {
@@ -719,7 +721,7 @@ export const getPopularQuestions = (dispatch, setData) => {
         })
 }
 
-export const getQuestionBySearch = (text, setData, currentLanguage) => {
+export const getQuestionBySearch = (text, setData, currentLanguage, ip_data) => {
     return endpoints.
         getQuestionBySearch(text).then(async (res) => {
 
@@ -730,7 +732,8 @@ export const getQuestionBySearch = (text, setData, currentLanguage) => {
                 if (data.length > 0 && text && text.trim() !== "") {
                     let obj = {
                         keyword: text,
-                        ip: "192.168.0.44",
+                        ip: ip_data?.ip,
+                        country: ip_data?.country,
                         lang: currentLanguage,
                         type: "support"
                     }
@@ -1646,7 +1649,7 @@ export const getStoriesTags = (dispatch, setStoriesTags) => {
         })
 }
 
-export const addDownloadCount = (id, forDatasetsListing) => {
+export const addDownloadCount = (id, ip_data) => {
 
     console.log("download count", id);
 
@@ -1654,7 +1657,8 @@ export const addDownloadCount = (id, forDatasetsListing) => {
 
     const data = {
         identifier: id,
-        ip_address: "172.0.9.01"
+        ip_address: ip_data?.ip,
+        country: ip_data?.country
     }
 
     // const data_for_listing = {
@@ -1691,7 +1695,7 @@ export const getFileFormatsFacets = (key, dispatch, setData, filters) => {
         })
 }
 
-export const getPublishers = (pageNumber, rowsPerPage, lang, setData, setTotalCount, searchPublisher, setLoading) => {
+export const getPublishers = (pageNumber, rowsPerPage, lang, setData, setTotalCount, searchPublisher, setLoading, ip_data) => {
 
     setTotalCount(0);
     setLoading(true);
@@ -1710,7 +1714,8 @@ export const getPublishers = (pageNumber, rowsPerPage, lang, setData, setTotalCo
             if (res.data.data.total_count > 0 && searchPublisher && searchPublisher.trim() !== "") {
                 let obj = {
                     keyword: searchPublisher,
-                    ip: "192.168.0.44",
+                    ip: ip_data?.ip,
+                    country: ip_data?.country,
                     lang: lang,
                     type: "publishers"
                 }
@@ -1762,4 +1767,17 @@ export const getResourcesByIdentifier = (id, setData) => {
             setData(res.data.data);
         })
         .catch((err) => console.log("ERROR", err))
+}
+
+export const getIpAddress = (dispatch, setData) => {
+    return endpoints.getIpAddress()
+        .then((res) => {
+            let obj = {
+                ip: res.data.ipAddress,
+                country: res.data.countryName
+            }
+            dispatch(setData(obj))
+            console.log("res ip", obj);
+        })
+        .catch((err) => console.log("Err message", err));
 }

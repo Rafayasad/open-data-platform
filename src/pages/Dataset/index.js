@@ -21,6 +21,9 @@ const Dataset = memo(() => {
     const storedFilters = useSelector((state) => state.facets.filter);
     const storedSearch = useSelector((state) => state.facets.search);
     const { datasetsSuggestion } = useSelector((state) => state.facets);
+    const ip_address = useSelector((state) => state.ip_address.ip_address);
+
+    console.log("ip_address", ip_address)
 
     const navigate = useNavigate();
     const { state, pathname, search } = useLocation();
@@ -105,7 +108,7 @@ const Dataset = memo(() => {
         if (!most_viewed_datasets) {
             if (state) {
                 navigate(pathname, { replace: true, state: null })
-                getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : storedSearch ? storedSearch : "", sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [], i18n.language, dispatch, setTopics, setTags, setPublishers, setFileFormats)
+                getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : storedSearch ? storedSearch : "", sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [], i18n.language, dispatch, setTopics, setTags, setPublishers, setFileFormats, ip_address)
             }
         }
 
@@ -129,7 +132,7 @@ const Dataset = memo(() => {
         if (!most_viewed_datasets) {
             if (currentPage || storedSearch || sort || storedFilters) {
                 if (!state?.search && !state?.listItem) {
-                    getAllDatasets(setDatasets, setTotalCount, setLoading, storedSearch, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, storedFilters, i18n.language, dispatch, setTopics, setTags, setPublishers, setFileFormats)
+                    getAllDatasets(setDatasets, setTotalCount, setLoading, storedSearch, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, storedFilters, i18n.language, dispatch, setTopics, setTags, setPublishers, setFileFormats, ip_address)
                 }
             }
         }

@@ -125,7 +125,7 @@ const Cards = memo((props) => {
                 //     </Col>
                 // )) : <Loader backgroundColor={backgroundColor} />
                 <>
-                    <div className="d-flex d-lg-none scroll-bar">
+                    <div className="m-0 d-flex d-lg-none scroll-bar">
                         {
                             data && data.length > 0 ? data.map((item, index) => (
                                 <div key={index} className="py-2 pe-2 d-flex" style={{ minWidth: "300px" }}>
@@ -189,7 +189,7 @@ const Cards = memo((props) => {
                     </Col>
                 </Row>
             }
-            <Row>
+            <Row className='m-0'>
                 <Col className={`x-4 max-width  ${padding ? 'page-padding-md' : 'page-padding'}`}>
                     <Row>
                         {renderContent()}

@@ -27,8 +27,8 @@ const LowerFooter = memo(() => {
                 </Col>
             </div>
             <Row className='d-flex justify-content-between max-width mt-0 pb-3'>
-                <div className={`p-0 col-12 col-md-6 d-flex ${window.screen.width >= 768 ? "justify-content-start" : "justify-content-end"}`}>
-                    <div className={`${window.innerWidth >= 768 ? "px-0" : "px-4"}`} style={{ marginRight: window.screen.width >= 768 && '16px' }}>
+                <div className={`p-0 col-12 col-md-6 d-flex justify-content-lg-start justify-content-end`}>
+                    <div className={`px-lg-0 px-4`}>
                         <img height={"100px"} width={"auto"} src={AbuDhabi} />
                     </div>
                     <div className={`px-0 px-lg-4 ms-2 ms-lg-0`}>

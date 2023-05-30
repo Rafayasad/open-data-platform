@@ -88,13 +88,13 @@ const Search = memo((props) => {
 
     const renderSearchBox = (searchIcon) => (
         searchIcon ?
-            <Col xs={12} className="d-flex justify-content-end">
-                <div style={{ position: "relative", left: 4 }} className="bg-black rounded-pill p-2">
+            <Col xs={12} className={`d-flex px-2 ${i18n.language === locales.AR ? "justify-content-end" : "justify-content-end"}`}>
+                <div style={{ position: "relative" }} className="bg-black rounded-pill p-2">
                     <IoIosSearch size={24} color="white" />
                 </div>
             </Col>
             :
-            <Col className="">
+            <Col xs={12}>
                 <div onClick={toggle} className='d-flex align-items-center justify-content-center filter p-lg-2 p-0' style={{ borderRadius: '30px', position: 'relative' }}>
                     <MdOutlineFilterAlt size={24} />
                     <div className="d-none d-lg-flex align-items-center justify-content-center">
@@ -133,7 +133,7 @@ const Search = memo((props) => {
             }
             <Container id="cont" fluid ref={wrapperRef}>
                 <Row id="main" className={`d-flex ${!(toggler && !nofocuseffect) && "hover"} ${toggler && !nofocuseffect ? "search-box-active input-focused" : "search-box"}`}>
-                    <Col className={`p-0 d-flex align-items-center ${!isFilterIcon && "justify-content-center"} display-search-icon`}>
+                    <Col xs={10} className={`p-0 d-flex align-items-center ${!isFilterIcon && "justify-content-center"} display-search-icon`}>
                         <div className={`${i18n.language === locales.AR ? "ms-1 me-3" : "ms-3 me-1"} ${!isFilterIcon && "d-none d-lg-block"} `}>
                             <IoIosSearch color={iconColor ? iconColor : !isFilterIcon ? "gray" : "black"} size={24} />
                         </div>
@@ -187,7 +187,7 @@ const Search = memo((props) => {
                                 <Col xs={2} md={2} xl={2} lg={2} className='d-flex d-none d-lg-block'>
                                     {renderSearchBox()}
                                 </Col>
-                                <Col xs={2} className='d-flex d-lg-none'>
+                                <Col xs={2} className='p-0 d-flex d-lg-none'>
                                     {renderSearchBox(isSearchIcon)}
                                 </Col>
 

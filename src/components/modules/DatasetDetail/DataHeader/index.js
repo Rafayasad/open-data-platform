@@ -25,11 +25,13 @@ import { RWebShare } from "react-web-share";
 import { addDownloadCount } from "../../../../axios/api";
 import i18next from "i18next";
 import CustomButton from "../../../elements/CustomButton";
+import { useSelector } from 'react-redux';
 
 
 const DataHeader = memo((props) => {
 
-    const { title, resources, url, nooptions, downloadCount, handleReload } = props
+    const { title, resources, url, nooptions, downloadCount, handleReload } = props;
+    const ip_address = useSelector(state => state.ip_address.ip_address);
 
     const { t } = useTranslation();
     const [openBottomSheet, setOpenBottomSheet] = useState(false)
@@ -39,7 +41,7 @@ const DataHeader = memo((props) => {
     const [currentHovered, setCurrentHovered] = useState(null);
 
     const addDownloadCounts = useCallback((title, id) => {
-        addDownloadCount(id).then((res) => {
+        addDownloadCount(id, ip_address).then((res) => {
             console.log("hello its running...", id);
             handleReload()
         })
@@ -191,7 +193,7 @@ const DataHeader = memo((props) => {
                             <div className="d-flex d-lg-none justify-content-between align-items-center fixed-bottom bg-white p-3">
                                 <Col>
                                     {window.navigator.canShare ?
-                                    // <></>
+                                        // <></>
                                         <Button onClick={handleClick} backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />
                                         :
                                         <RWebShare
@@ -205,7 +207,7 @@ const DataHeader = memo((props) => {
                                         </RWebShare>
                                     }
                                 </Col>
-                                {console.log("dowenwnwnwnw",downloadCount)}
+                                {console.log("dowenwnwnwnw", downloadCount)}
                                 <Col xs={4} className="d-flex justify-content-center align-items-center px-3 text-end">
                                     <Heading size='xxs' nomargin heading={`${downloadCount ? downloadCount : "0"} ${t("download")}`} />
                                 </Col>

@@ -22,13 +22,14 @@ const Support = memo(() => {
     const categories = useSelector(state => state.support.categories)
     const questions = useSelector(state => state.support.questions)
     const { supportSuggestion } = useSelector(state => state.facets)
+    const ip_address = useSelector(state => state.ip_address.ip_address);
 
     const [searchText, setSearchText] = useState('');
     const [searchedData, setSearchedData] = useState();
 
     useEffect(() => {
         if (searchText !== '') {
-            getQuestionBySearch(searchText, setSearchedData, i18n.language)
+            getQuestionBySearch(searchText, setSearchedData, i18n.language, ip_address)
         }
     }, [searchText])
 

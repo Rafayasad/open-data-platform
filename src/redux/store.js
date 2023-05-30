@@ -9,6 +9,7 @@ import supportReducer from './reducers/Support';
 import publisherReducer from './reducers/Publishers';
 import registerReducer from './reducers/Register';
 import authenticationReducer from './reducers/Authentication';
+import ipAddressReducer from './reducers/IpAddress';
 
 const persistConfig = {
     key: 'root',
@@ -24,6 +25,7 @@ export const store = configureStore({
         support: supportReducer,
         publisher: publisherReducer,
         register: registerReducer,
+        ip_address: ipAddressReducer,
         authentication: persistReducer(persistConfig, authenticationReducer)
     }
 });

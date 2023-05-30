@@ -147,7 +147,7 @@ const Navbar = memo((props) => {
                     </Col>
                 </Row>
             </Container>
-            <Container fluid className={`nav-padding py-3 d-block d-lg-none ${scroll && "sticky bg-white transition"}`} style={{ position: !scroll && 'absolute', top: isLoggedIn ? '78px' : 0, left: 0, right: 0, zIndex: 999 }}>
+            <Container fluid className={`nav-padding py-3 d-block d-lg-none ${scroll && "sticky bg-white transition"}`} style={{ position: !scroll && 'absolute', top: isLoggedIn ? '78px' : 0, left: 0, right: 0, zIndex: 99 }}>
                 <Row className="d-flex justify-content-between align-items-center" >
                     <Col className="d-flex d-md-none align-items-center justify-content-start">
                         <Link to={routes.HOME}>
@@ -179,7 +179,7 @@ const Navbar = memo((props) => {
                 </Row>
             </Container >
             <Drawer
-                style={{ width: "100%", height: "100%", scrollBehavior: "smooth", overflow: "auto", minHeight: "100%", zIndex: 1050, backgroundColor: colors.white }}
+                style={{ width: "100%", height: "100%", scrollBehavior: "smooth", minHeight: "100%", zIndex: 1050, backgroundColor: colors.white }}
                 open={isOpen}
                 direction='right'
                 className="p-3"

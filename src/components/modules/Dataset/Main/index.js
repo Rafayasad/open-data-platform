@@ -34,14 +34,14 @@ const Main = memo((props) => {
                 <Row className="pt-4 pt-lg-5 pb2">
                     <Col className="d-flex flex-column justify-content-center">
                         <Row>
-                            <Col />
+                            <Col xs={1} md={2} />
                             <Col xs={10} md={8} style={{ textAlign: 'center' }} className="py-lg-2">
                                 {/* <Heading size="xxxl" bold color={colors.black} heading={t("datasetTitle")} /> */}
                                 <p className={`fs-lg ${i18next.language === locales.AR ? 'ar-font-bold' : 'en-font-bold'}`}>
                                     {t("datasetTitle")}
                                 </p>
                             </Col>
-                            <Col />
+                            <Col xs={1} md={2} />
                         </Row>
                     </Col>
                 </Row>
