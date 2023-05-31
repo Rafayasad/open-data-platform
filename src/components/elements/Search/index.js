@@ -167,7 +167,7 @@ const Search = memo((props) => {
                     </Col>
                     {
                         inputText?.length > 0 && !nofocuseffect && toggler ?
-                            <Col md={1} lg={1} xs={2}>
+                            <Col md={2} xs={2} className='d-flex justify-content-end px-3'>
                                 <MdCancel color="#9f9f9f" style={{ cursor: "pointer" }} onClick={() => {
                                     setInputText('');
                                     onPressEnter('');

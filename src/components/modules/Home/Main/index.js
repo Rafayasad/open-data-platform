@@ -20,6 +20,7 @@ const Main = memo((props) => {
 
     const { onSearch, onClickExplore, onApplyFilter, filterData } = props;
     const { datasetsSuggestion } = useSelector((state) => state.facets);
+    const storedFilters = useSelector((state) => state.facets.filter);
     const [expandedSearchbar, setExpandedSearchbar] = useState(false);
 
     const { t } = useTranslation();
@@ -52,7 +53,7 @@ const Main = memo((props) => {
                         <p
                             className="m-0 me-1 fs-static"
                             onClick={() => {
-                                navigate(routes.DATASET, { state: { search: item } })
+                                navigate(routes.DATASET, { state: { search: item, listItem: storedFilters } })
                             }}
                             style={{ textAlign: 'center', color: 'white', cursor: "pointer" }}>
                             {item + (index == staticPopularSearches?.ar.slice(0, viewport === "md" ? 5 : 1).length - 1 ? '' : ',')}
@@ -66,7 +67,9 @@ const Main = memo((props) => {
                         <p
                             className="m-0 me-1 fs-static"
                             onClick={() => {
-                                navigate(routes.DATASET, { state: { search: item } })
+                                navigate(routes.DATASET, {
+                                    state: { search: item, listItem: storedFilters }
+                                })
                             }}
                             style={{ textAlign: 'center', color: 'white', cursor: "pointer" }}>
                             {item + (index == staticPopularSearches?.en.slice(0, viewport === "md" ? 5 : 2).length - 1 ? '' : ',')}

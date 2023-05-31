@@ -24,7 +24,7 @@ const CardWithOuterText = memo((props) => {
             </RBCard>
             <Row>
                 <Col style={{ paddingTop: "20px" }} className="d-flex pb-2" xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                    <p onClick={!datasetViewCount && onClick} className={`fs-sm ${!datasetViewCount && "text-underline-hover"} m-0 text-black ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{title}</p>
+                    <p onClick={!datasetViewCount && onClick} className={`fs-md-static ${!datasetViewCount && "text-underline-hover"} m-0 text-black ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{title}</p>
                     {/* <Heading bold underline nomargin size='sm' heading={title} onClick={onClick} /> */}
                     {!datasetViewCount &&
                         <sup className="mx-1 my-1">
@@ -51,7 +51,7 @@ const CardWithOuterText = memo((props) => {
                                         description
                                     })
                                 }}
-                                className={`fs-xs en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ms-2`}
+                                className={`fs-2xs-static en-font-default ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} ms-2`}
                                 style={{ color: colors.purple, cursor: "pointer" }}>
                                 {t("more")}
                             </span>

@@ -1,5 +1,5 @@
 import './style.css';
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { Card as RBCard, Col, Row, Spinner } from "react-bootstrap";
 import { BsPerson, BsShare, BsThreeDots } from "react-icons/bs";
 import { FiTwitter, FiLinkedin } from "react-icons/fi";
@@ -45,6 +45,7 @@ const Card = memo((props) => {
     const [selectedDropdownValue, setSelectedDropdownValue] = useState();
     const [openBottomSheet, setOpenBottomSheet] = useState(false)
     const [selectedSheetValue, setSelectedSheetValue] = useState();
+    const [getWid, setGetWwid] = useState();
 
     // for resources
     const [newResources, setNewResources] = useState();
@@ -169,7 +170,7 @@ const Card = memo((props) => {
                 {
                     !notags &&
                     <Row className={`${nopadding && "m-0"} h-25 align-items-center`}>
-                        <Col xs={8} className="d-flex scroll" style={{ overflow: "hidden" }}>
+                        <div className="d-flex col-8 scroll" style={{ overflow: "hidden" }}>
                             {
                                 tags && tags.length > 0 && tags.map((item, index) => (
                                     <Tag key={index} title={item}
@@ -177,7 +178,7 @@ const Card = memo((props) => {
                                         onClick={() => !notagsactive && onClickTag(routes.DATASET, { listItem: [{ title: item, type: i18n.language === locales.AR ? "themelear" : "theme" }] })} />
                                 ))
                             }
-                        </Col>
+                        </div>
                         {
                             !nodropdown &&
                             <Col xs={4} className='d-flex justify-content-end'>
@@ -259,7 +260,7 @@ const Card = memo((props) => {
                             </Col>
                         </Row>
                 }
-            </RBCard>
+            </RBCard >
         </>
     )
 });

@@ -21,10 +21,6 @@
     border-bottom-right-radius: 25px;
 }
 
-.filter:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    cursor: pointer;
-}
 
 input:focus {
     outline: none !important;
@@ -34,6 +30,9 @@ input:focus {
     -webkit-box-shadow: none;
 }
 
+.wid {
+    width: 100%;
+}
 
 /* mobile */
 @media (max-width: 768.98px) {
@@ -48,10 +47,6 @@ input:focus {
         /* top: 0; */
     }
 
-    .wid {
-        width: 50%;
-    }
-
     .placeholder-color::placeholder {
         color: #9f9f9f
     }
@@ -60,16 +55,19 @@ input:focus {
 
 /* desktop */
 @media (min-width: 1199.98px) {
-    .wid {
-        width: 100%;
-    }
 
     .placeholder-color::placeholder {
         color: #9f9f9f;
     }
 
-    .hover:hover{
+    .hover:hover {
         background-color: #E7E7E7;
         transition: .2s ease-in-out;
+    }
+
+
+    .filter:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        cursor: pointer;
     }
 }

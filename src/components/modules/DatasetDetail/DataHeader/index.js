@@ -207,7 +207,6 @@ const DataHeader = memo((props) => {
                                         </RWebShare>
                                     }
                                 </Col>
-                                {console.log("dowenwnwnwnw", downloadCount)}
                                 <Col xs={4} className="d-flex justify-content-center align-items-center px-3 text-end">
                                     <Heading size='xxs' nomargin heading={`${downloadCount ? downloadCount : "0"} ${t("download")}`} />
                                 </Col>

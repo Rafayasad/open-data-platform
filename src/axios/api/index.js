@@ -1022,7 +1022,6 @@ export const validateUser = async (navigate, route, setLoading, payload) => {
 
     await endpoints.validateUser({ username: email, pass: password })
         .then(async (res) => {
-            setLoading(false);
             if (res.status === 200) {
                 if (res.data.status === 200) {
                     await endpoints.otp({ type: "send", username: email })
@@ -1031,23 +1030,27 @@ export const validateUser = async (navigate, route, setLoading, payload) => {
                                 if (res.data.status === 200) {
                                     toast(res.data.message, { type: "success" })
                                     navigate(route, { state: { email, password } })
+                                    setLoading(false)
                                 } else {
                                     toast(res.data.message, { type: "error" })
+                                    setLoading(false)
                                 }
                             }
-                            setLoading(false)
                         }).catch((err) => {
                             setLoading(false)
                             console.log("Error message", err)
+                            toast(err.message, { type: "error" })
                         })
 
                 } else {
+                    setLoading(false)
                     toast(res.data.message, { type: "error" })
                 }
             }
         }).catch((err) => {
             setLoading(false)
             console.log("Error message", err)
+            toast(err.message, { type: "error" })
         })
 }
 
