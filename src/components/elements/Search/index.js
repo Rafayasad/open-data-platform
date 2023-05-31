@@ -97,21 +97,27 @@ const Search = memo((props) => {
             <Col xs={12}>
                 <div onClick={toggle} className='d-flex align-items-center justify-content-center filter p-lg-2 p-0' style={{ borderRadius: '30px', position: 'relative' }}>
                     <MdOutlineFilterAlt size={24} />
-                    <div className="d-none d-lg-flex align-items-center justify-content-center">
+                    <div className="d-none d-md-flex align-items-center justify-content-center">
                         <p className='m-0'>{t("filters")}</p>
                         {appliedFilters && appliedFilters.length > 0
                             &&
-                            <div style={{ position: "absolute", right: i18n.language === locales.EN && 6, top: 0, left: i18n.language === locales.AR && 10 }}>
-                                <RxDotFilled color={colors.red} />
-                            </div>
+                            <Fragment>
+                                <div className='d-md-block d-lg-none d-none' style={{ position: "absolute", right: i18n.language === locales.EN && 4, top: -8, left: i18n.language === locales.AR && 10 }}>
+                                    <RxDotFilled color={colors.red} />
+                                </div>
+                                <div className='d-md-none d-lg-block d-none' style={{ position: "absolute", right: i18n.language === locales.EN && 6, top: 0, left: i18n.language === locales.AR && 10 }}>
+                                    <RxDotFilled color={colors.red} />
+                                </div>
+                            </Fragment>
                         }
                     </div>
                     {appliedFilters && appliedFilters.length > 0
                         &&
-                        <div className="d-flex d-lg-none" style={{ position: "absolute", right: i18n.language === locales.EN && -5, top: -8, left: i18n.language === locales.AR && -2 }}>
+                        <div className="d-flex d-md-none" style={{ position: "absolute", right: i18n.language === locales.EN && 6, top: -8, left: i18n.language === locales.AR && 6 }}>
                             <RxDotFilled color={colors.red} />
                         </div>
                     }
+
                 </div>
                 <Drawer data={filterData} open={filterOpen} setOpen={setFilterOpen} onClickApplyFilter={onClickApply} appliedFilters={appliedFilters} />
             </Col>

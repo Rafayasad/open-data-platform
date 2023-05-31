@@ -37,8 +37,18 @@ const Main = memo((props) => {
         {
             title: t("managedBy"),
             detail: data ? (
-                i18n.language === locales.AR ? data.publisher_ar : data.publisher
-            ) : <Shimmer rounded='xs' width="70%" className={"my-1"} />
+                <div style={{ width: "fit-content" }}>
+                    <Heading size="xxs" underline heading={i18n.language === locales.AR ? data.publisher_ar : data.publisher}
+                        onClick={() => navigate(routes.DATASET, {
+                            state: {
+                                listItem: [{
+                                    title: i18n.language === locales.AR ? data.publisher_ar : data.publisher,
+                                    type: i18n.language === locales.AR ? "publisherlear__name" : "publisher__name"
+                                }]
+                            }
+                        })} />
+                </div>
+            ) : < Shimmer rounded='xs' width="70%" className={"my-1"} />
         },
         {
             title: t("frequency"),
