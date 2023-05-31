@@ -89,7 +89,7 @@ const Search = memo((props) => {
     const renderSearchBox = (searchIcon) => (
         searchIcon ?
             <Col xs={12} className={`d-flex px-2 ${i18n.language === locales.AR ? "justify-content-end" : "justify-content-end"}`}>
-                <div style={{ position: "relative" }} className="bg-black rounded-pill p-2">
+                <div onClick={() => onKeyDown()} style={{ position: "relative" }} className="bg-black rounded-pill p-2">
                     <IoIosSearch size={24} color="white" />
                 </div>
             </Col>
@@ -143,9 +143,23 @@ const Search = memo((props) => {
                         <div className={`${i18n.language === locales.AR ? "ms-1 me-3" : "ms-3 me-1"} ${!isFilterIcon && "d-none d-lg-block"} `}>
                             <IoIosSearch color={iconColor ? iconColor : !isFilterIcon ? "gray" : "black"} size={24} />
                         </div>
-                        {/* <div className={`d-lg-none d-block ${i18n.language === locales.AR ? "ms-1 me-3" : "ms-3 me-1"} ${!isFilterIcon && "d-none d-md-block d-lg-none"}`} /> */}
+
+                        {/* tab */}
+                        <div className="w-100 d-none d-md-block d-lg-none">
+                            <input
+                                onClick={() => {
+                                    document?.getElementById("cont")?.offsetWidth <= 540 ?
+                                        setOpenModal(true)
+                                        :
+                                        setToggler(true)
+                                }}
+                                type="text"
+                                className={`${!inputText && !isFilterIcon && "textAlignCenter"} ${!isFilterIcon && "mx-4"} border-0 bg-transparent wid placeholder-color ${i18n.language === locales.AR ? "text-lg-end" : "text-lg-center"}`}
+                                value={inputText} placeholder={placeholder} onChange={onChangeSearch} onKeyDown={onKeyDown} />
+                        </div>
+
                         {/* desktop */}
-                        <div className="w-100 d-none d-md-block">
+                        <div className="w-100 d-none d-lg-block">
                             <input
                                 onClick={() => {
                                     document?.getElementById("cont")?.offsetWidth <= 540 ?
@@ -157,6 +171,7 @@ const Search = memo((props) => {
                                 className={`border-0 bg-transparent wid placeholder-color ${i18n.language === locales.AR ? "text-lg-end" : "text-lg-start"}`}
                                 value={inputText} placeholder={placeholder} onChange={onChangeSearch} onKeyDown={onKeyDown} />
                         </div>
+
                         {/* mobile */}
                         <div className="d-block d-md-none">
                             <input

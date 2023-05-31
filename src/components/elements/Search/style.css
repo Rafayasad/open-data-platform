@@ -48,7 +48,7 @@ input:focus {
     }
 
     .placeholder-color::placeholder {
-        color: #9f9f9f
+        color: #9f9f9f !important;
     }
 
 }
@@ -57,7 +57,7 @@ input:focus {
 @media (min-width: 1199.98px) {
 
     .placeholder-color::placeholder {
-        color: #9f9f9f;
+        color: #9f9f9f !important;
     }
 
     .hover:hover {
@@ -69,5 +69,18 @@ input:focus {
     .filter:hover {
         background-color: rgba(0, 0, 0, 0.05);
         cursor: pointer;
+    }
+
+}
+
+/* tab */
+
+@media (max-width: 1199.98px) {
+    .textAlignCenter {
+        text-align-last: center;
+    }
+
+    .placeholder-color::placeholder {
+        color: black !important;
     }
 }
