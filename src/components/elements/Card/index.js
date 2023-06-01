@@ -6,8 +6,6 @@ import { FiTwitter, FiLinkedin } from "react-icons/fi";
 import { MdOutlineFileDownload } from 'react-icons/md';
 import { BsArrowDownCircleFill } from "react-icons/bs";
 import { HiOutlineDotsHorizontal, HiLink } from "react-icons/hi";
-import { FaFilePdf, FaFileExcel, FaFileCsv } from "react-icons/fa";
-// import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { colors } from "../../../utils/colors";
 import { useCallback } from "react";
 import Dropdown from '../../elements/DropDown';
@@ -26,8 +24,6 @@ import BottomSheetBar from "../../modules/BottomSheet";
 import { routes } from "../../../router/helper";
 import { addDownloadCount, getResourcesByIdentifier } from "../../../axios/api";
 import i18next from "i18next";
-import Loader from '../../modules/Loader';
-import Shimmer from '../Shimmer';
 import { useSelector } from 'react-redux';
 
 const Card = memo((props) => {
@@ -45,7 +41,22 @@ const Card = memo((props) => {
     const [selectedDropdownValue, setSelectedDropdownValue] = useState();
     const [openBottomSheet, setOpenBottomSheet] = useState(false)
     const [selectedSheetValue, setSelectedSheetValue] = useState();
-    const [getWid, setGetWwid] = useState();
+
+    const [overflowedWidth, setOverflowedWidth] = useState(0);
+    const divRef = useRef(null);
+
+    useEffect(() => {
+        const divElement = divRef.current;
+
+        // Check if the content inside the div is overflowing in width
+        const isOverflowing = divElement?.offsetWidth < divElement?.scrollWidth;
+
+        if (isOverflowing) {
+            // Get the exact width of the div when it becomes overflowed
+            const { width } = divElement.getBoundingClientRect();
+            setOverflowedWidth(width);
+        }
+    }, [divRef]);
 
     // for resources
     const [newResources, setNewResources] = useState();
@@ -58,8 +69,7 @@ const Card = memo((props) => {
 
     const addDownloadCounts = useCallback((title, id) => {
         addDownloadCount(id, ip_address).then((res) => {
-            console.log("hello its running...s", datasetID);
-            handleReload()
+            handleReload();
         })
     });
 
@@ -142,13 +152,6 @@ const Card = memo((props) => {
         }
     ))
 
-    console.log("datasetsss", datasetID);
-
-    // for getting resorces by id
-    // useEffect(() => {
-    //     getResourcesByIdentifier(datasetID, setNewResources)
-    // }, [datasetID])
-
     return (
         <>
             <BottomSheetBar
@@ -170,13 +173,38 @@ const Card = memo((props) => {
                 {
                     !notags &&
                     <Row className={`${nopadding && "m-0"} h-25 align-items-center`}>
-                        <div className="d-flex col-8 scroll" style={{ overflow: "hidden" }}>
+                        <div ref={divRef} className="d-flex col-8 scroll" style={{ overflow: "hidden" }}>
                             {
-                                tags && tags.length > 0 && tags.map((item, index) => (
-                                    <Tag key={index} title={item}
-                                        margin={index == 0 ? "0" : "2"}
-                                        onClick={() => !notagsactive && onClickTag(routes.DATASET, { listItem: [{ title: item, type: i18n.language === locales.AR ? "themelear" : "theme" }] })} />
-                                ))
+                                tags && tags?.length > 0 &&
+                                tags.slice(0,
+                                    overflowedWidth && overflowedWidth < 215 ? 1 :
+                                        overflowedWidth && overflowedWidth < 230 ? 2 :
+                                            overflowedWidth && overflowedWidth < 250 ? 1 :
+                                                overflowedWidth && overflowedWidth < 300 ? 2 : 4).map((item, index) => (
+
+                                                    <Tag key={index} title={item}
+                                                        margin={index == 0 ? "0" : "1"}
+                                                        onClick={() => !notagsactive && onClickTag(routes.DATASET, { listItem: [{ title: item, type: i18n.language === locales.AR ? "themelear" : "theme" }] })}
+                                                    />
+                                                ))
+                            }
+                            {
+                                overflowedWidth && overflowedWidth == 0 ?
+                                    null
+                                    :
+                                    overflowedWidth && overflowedWidth < 215 ? <Tag
+                                        title={`+ ${(tags?.length) - 1}`}
+                                    /> :
+                                        overflowedWidth && overflowedWidth < 230 ? <Tag
+                                            title={`+ ${(tags?.length) - 2}`}
+                                        /> :
+                                            overflowedWidth && overflowedWidth < 250 ? <Tag
+                                                title={`+ ${(tags?.length) - 1}`}
+                                            /> :
+                                                overflowedWidth && overflowedWidth < 300 ? <Tag
+                                                    title={`+ ${(tags?.length) - 2}`}
+                                                />
+                                                    : null
                             }
                         </div>
                         {

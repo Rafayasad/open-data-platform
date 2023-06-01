@@ -212,7 +212,7 @@ const Navbar = memo((props) => {
                         {
                             MobileRoutes.map((item, index) => {
                                 return (
-                                    <Fragment>
+                                    <Fragment key={index}>
                                         <Col className="d-flex align-items-center py-2" xs={12}>
                                             <Link style={{ textDecoration: "none" }} to={item.route} replace={true}>
                                                 <p className="m-0 text-black fs-2xl p-0">{item.name}</p>

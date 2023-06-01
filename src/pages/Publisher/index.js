@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getAllApplications, getPublishers } from "../../axios/api";
+import { getAllApplications, getPublishers, getFacets } from "../../axios/api";
+import { setTopics } from "../../redux/reducers/Facets";
 import Pagination from "../../components/elements/Pagination";
 import Main from "../../components/modules/Applications/Main";
 import Cards from "../../components/modules/Cards";
@@ -8,7 +9,7 @@ import Navbar from '../../components/modules/Navbar';
 import UpperFooter from "../../components/modules/Footer/UpperFooter";
 import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
 import LowerFooter from '../../components/modules/Footer/LowerFooter';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import View from "../../components/modules/View";
 import Modal from "../../components/elements/Modal/index";
 import useIsFocused from "../../utils/hooks/useIsFocused";
@@ -22,6 +23,7 @@ const Publisher = memo(() => {
 
     const { t, i18n } = useTranslation()
     const ref1 = useRef(null);
+    const dispatch = useDispatch()
 
     const { publisherSuggestion } = useSelector(state => state.publisher)
     const ip_address = useSelector(state => state.ip_address.ip_address)
@@ -56,6 +58,7 @@ const Publisher = memo(() => {
     }, [i18next.language])
 
     useEffect(() => {
+        getFacets(i18n.language === locales.AR ? "themelear" : "theme", dispatch, setTopics);
         getPublishers(currentPage, rowsPerPage, i18n.language === locales.AR ? "ar" : "en", setDisplayPublishers, setTotalCount, searchText, setLoading, ip_address)
     }, [currentPage, i18next.language, searchText])
 
@@ -131,9 +134,8 @@ const Publisher = memo(() => {
                                 currentPage={currentPage}
                                 totalCount={Math.ceil(totalCount / rowsPerPage)}
                                 onChange={(page) => {
-                                    onChangePage(page)
-                                    console.log("pahhhhhhhhhhhhhhhhe", page);
                                     cardsDiv?.scrollIntoView(true)
+                                    onChangePage(page)
                                 }}
                             />
                         </div>

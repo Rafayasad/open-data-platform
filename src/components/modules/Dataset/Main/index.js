@@ -35,7 +35,7 @@ const Main = memo((props) => {
                 {
                     filter && filter?.length > 0 && filter?.slice(0, viewport == "sm" ? 2 : 5).map((item, index) =>
                     (
-                        <div className="py-1">
+                        <div key={index} className="py-1">
                             <Tag
                                 backgroundColor={colors.black}
                                 textColor={colors.white}

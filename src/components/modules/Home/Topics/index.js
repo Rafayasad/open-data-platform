@@ -38,7 +38,7 @@ const Topics = memo((props) => {
 
     const renderList = (viewport) => (
         data && data.length > 0 && data.slice(0, all ? data.length : viewport === "md" ? 8 : 5).map((item, index) => (
-            <div className="" onMouseOver={() => onHover(index)} onMouseLeave={onLeave} >
+            <div key={index} onMouseOver={() => onHover(index)} onMouseLeave={onLeave} >
                 {/* {
                     index > 0 &&
                     <hr className="m-0 mx-4" style={{ color: currentHovered === index || currentHovered != null && currentHovered + 1 === index ? 'black' : 'lightgray', borderWidth: 2 }} />

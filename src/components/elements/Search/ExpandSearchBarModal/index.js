@@ -66,7 +66,7 @@ const ExpandSearchBarModal = memo((props) => {
                     {
                         searchData?.map((item, index) => {
                             return (
-                                <div className="row d-flex py-3 align-items-start">
+                                <div key={index} className="row d-flex py-3 align-items-start">
                                     <div className="col-2">
                                         <IoIosSearch color={colors.gray} size={25} />
                                     </div>

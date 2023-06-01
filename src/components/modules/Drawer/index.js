@@ -172,7 +172,7 @@ const Drawer = memo((props) => {
                                                         }
                                                         {getFilteredSearch(item)?.length > 0 ? getFilteredSearch(item)?.map((items, index) => {
                                                             return (
-                                                                <div style={{ paddingTop: "5px", paddingBottom: "5px" }}>
+                                                                <div key={index} style={{ paddingTop: "5px", paddingBottom: "5px" }}>
                                                                     <Tag
                                                                         hoverEffect
                                                                         backgroundColor={filters.some(el => el.id === items.id) ? colors.black : colors.white}
@@ -207,7 +207,7 @@ const Drawer = memo((props) => {
                                                             {
                                                                 item.data?.map((items, index) => {
                                                                     return (
-                                                                        <div className="d-flex justify-content-between align-items-center">
+                                                                        <div key={index} className="d-flex justify-content-between align-items-center">
                                                                             <div className="py-2">
                                                                                 <Heading nomargin heading={`${items.title} ${items.value ? `(${items.value})` : ""}`} size={"xxs"} />
                                                                             </div>

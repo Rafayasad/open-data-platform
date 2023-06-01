@@ -1071,7 +1071,7 @@ export const login = async (dispatch, setData, setLoading, payload, route) => {
                     let token = await endpoints.getCRSFToken()
                         .then((res) => {
                             if (res.status === 200) {
-                                setLoading(false)
+                                // setLoading(false)
                                 return res.data
                             }
 
@@ -1089,7 +1089,7 @@ export const login = async (dispatch, setData, setLoading, payload, route) => {
                     await endpoints.login(data, headers)
                         .then((res) => {
                             if (res.status === 200) {
-                                setLoading(false)
+                                // setLoading(false)
                                 toast(res.data.message, { type: 'success' })
                                 dispatch && dispatch(setData(res.data))
                                 window.location.assign(route);
@@ -1318,7 +1318,7 @@ export const getSearch = (type, dispatch, setData) => {
 
 export const recoverPassword = async (navigate, route, setLoading, payload) => {
 
-    setLoading(true)
+    setLoading(true);
 
     let { email } = payload;
 
@@ -1336,17 +1336,21 @@ export const recoverPassword = async (navigate, route, setLoading, payload) => {
 
             if (res.status === 200) {
                 if (res.data.status === 200) {
-                    navigate(route, { replace: true });
+                    setLoading(false);
                     toast(res.data.message, { type: 'success' })
-                } else if (res.data.status === 400) {
+                    navigate(route, { replace: true });
+                } else if (res.data.status == 404) {
+                    setLoading(false);
+                    toast(res.data.message, { type: 'error' })
+                } else {
+                    setLoading(false);
                     toast(res.data.message, { type: 'error' })
                 }
             }
 
-            setLoading(false)
-
         }).catch((err) => {
             setLoading(false)
+            toast(err.message, { type: 'error' })
             console.log("Error Message", err)
         })
 }

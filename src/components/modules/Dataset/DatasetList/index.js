@@ -56,7 +56,7 @@ const DatasetList = memo((props) => {
             {
                 !loading ?
                     datasets && datasets.length > 0 && datasets.map((item, index) => (
-                        <div onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
+                        <div key={index} onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
                             {
                                 index > 0 &&
                                 <hr className="m-0" style={{ color: currentHovered == index || currentHovered != null && currentHovered + 1 == index ? 'white' : '#CFCFCF', borderWidth: 2 }} />

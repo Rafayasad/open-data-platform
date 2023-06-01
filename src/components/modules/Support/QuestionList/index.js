@@ -27,7 +27,7 @@ const QuestionList = memo((props) => {
             <Row className='mb-5 pb-3'>
                 {
                     data ? data.length > 0 ? data.map((item, index) => (
-                        <div className="p-0 px-3 py-2 py-lg-0" onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
+                        <div key={index} className="p-0 px-3 py-2 py-lg-0" onMouseOver={() => onHover(index)} onMouseLeave={onLeave}>
                             {
                                 index > 0 &&
                                 <hr className="mx-2 my-0 py-2 py-lg-0" style={{ color: currentHovered === index || currentHovered != null && currentHovered + 1 === index ? 'white' : 'lightgray', borderWidth: 2 }} />

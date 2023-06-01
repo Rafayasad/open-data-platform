@@ -27,13 +27,14 @@ const ModalEelment = memo((props) => {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: width ? width : 800,
-    // height: height && height,
+    // height: "100%",
     bgcolor: 'white',
     boxShadow: 24,
     color: 'black',
     border: 0,
     minHeight: "400px",
     p: 4,
+    zIndex: 999
   };
 
   const handleClose = () => {
@@ -54,7 +55,7 @@ const ModalEelment = memo((props) => {
           //scroll="body"
           hideBackdrop
           disableEnforceFocus
-          style={{ position: 'initial' }}
+          style={{ position: 'initial', outline: 0 }}
           disableBackdropClick
         >
           <Box sx={style}>
@@ -77,7 +78,7 @@ const ModalEelment = memo((props) => {
                   {/* <Typography id="modal-modal-description modal-body" sx={{ mt: 2, overflowY: "scroll", height: "350px" }}>
                   {description}
                 </Typography> */}
-                  <div className='custom-scrollbar' style={{ height: descriptionHeight ? descriptionHeight : "400px" }}>
+                  <div className='custom-scrollbar' style={{ height: descriptionHeight ? descriptionHeight : "350px" }}>
                     <div className='scroll-content'>
                       <p className={`${i18next.language === locales.AR ? "ar-font" : "fs-xs en-font"}`} dangerouslySetInnerHTML={{ __html: description }} />
                     </div>

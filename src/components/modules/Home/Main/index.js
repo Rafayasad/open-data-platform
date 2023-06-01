@@ -51,6 +51,7 @@ const Main = memo((props) => {
                 staticPopularSearches?.ar.slice(0, viewport === "md" ? 5 : 1).map((item, index) => {
                     return (
                         <p
+                            key={index}
                             className="m-0 me-1 fs-static"
                             onClick={() => {
                                 navigate(routes.DATASET, { state: { search: item, listItem: storedFilters } })
@@ -65,6 +66,7 @@ const Main = memo((props) => {
                 staticPopularSearches?.en.slice(0, viewport === "md" ? 5 : 2).map((item, index) => {
                     return (
                         <p
+                            key={index}
                             className="m-0 me-1 fs-static"
                             onClick={() => {
                                 navigate(routes.DATASET, {

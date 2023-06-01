@@ -176,9 +176,8 @@ const ReportsFilter = memo((props) => {
                                                 <div className="d-flex flex-wrap">
                                                     {
                                                         item.tags?.map((items, index) => {
-                                                            console.log("filllllllllll", items);
                                                             return (
-                                                                <div className={`my-1`}>
+                                                                <div key={index} className={`my-1`}>
                                                                     <Tag
                                                                         backgroundColor={
                                                                             items.type === 'publisherlear__name' ? filters?.publisher === items.title ? colors.black : colors.white :

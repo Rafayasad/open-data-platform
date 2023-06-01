@@ -107,23 +107,6 @@ const Cards = memo((props) => {
         } else {
 
             return (
-                // data && data.length > 0 ? data.map((item, index) => (
-                //     <Col key={index} md={4} sm={4} className="py-2">
-                //         <Card
-                //             notagsactive={notagsactive}
-                //             noheadercomponent={noheadercomponent}
-                //             size={size}
-                //             hoverable={hoverable}
-                //             title={i18n.language === locales.AR ? item.title_ar : item.title}
-                //             description={item.description && item.description_ar && i18n.language === locales.AR ? item.description_ar : item.description}
-                //             publisher={item.publisher && item.publisher_ar && i18n.language === locales.AR ? item.publisher_ar : item.publisher}
-                //             tags={i18n.language === locales.AR ? item.tags && item.tags_ar.slice(0, 2) : item.tags && item.tags.slice(0, 2)}
-                //             resources={i18n.language === locales.AR ? item.resources_ar : item.resources}
-                //             url={item.url}
-                //             onClick={() => onClick(item.id)}
-                //         />
-                //     </Col>
-                // )) : <Loader backgroundColor={backgroundColor} />
                 <>
                     <div className="m-0 d-flex d-lg-none scroll-bar">
                         {

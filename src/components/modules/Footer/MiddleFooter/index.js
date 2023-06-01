@@ -178,7 +178,6 @@ const MiddleFooter = memo(() => {
                                             {
                                                 item.data?.map((items, index) => {
                                                     return (
-
                                                         <Col xs={10} key={index} className="py-3">
                                                             <Link style={{ textDecoration: "none" }} to={items.link} state={items.params}>
                                                                 <Heading nomargin size="xs" heading={items.title} color={colors.white} />

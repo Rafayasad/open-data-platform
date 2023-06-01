@@ -150,8 +150,8 @@ const AuthCard = memo((props) => {
                 }
                 {
                   items.title === t("LoginWithUAE") &&
-                  <div className="d-flex mt-3 w-50 px-4 justify-content-lg-between justify-content-around">
-                    <p style={{ color: colors.dark_gray }} className="m-0 fs-mini">{t("WhatIsUAEPASS")}</p>
+                  <div className="d-flex mt-3 px-4 justify-content-lg-between justify-content-around">
+                    <p style={{ color: colors.dark_gray }} className="m-0 me-2 fs-mini">{t("WhatIsUAEPASS")}</p>
                     <AiOutlineInfoCircle color={colors.dark_gray} />
                   </div>
                 }
