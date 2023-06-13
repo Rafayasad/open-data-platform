@@ -72,7 +72,7 @@ const AuthCard = memo((props) => {
         hasOtp &&
         <Row className="py-2">
           <Col>
-            <OtpInput className="w-100" value={otp} onChange={otpCallbackk} numInputs={6} inputStyle={{ width: '100%', height: '100%', margin: '5px' }} containerStyle={{ width: "auto", height: '50px', margin: '5px' }} />
+            <OtpInput id="otp" className="w-100" value={otp} onChange={otpCallbackk} numInputs={6} inputStyle={{ width: '100%', height: '100%', margin: '5px' }} containerStyle={{ width: "auto", height: '50px', margin: '5px' }} />
           </Col>
         </Row>
       }

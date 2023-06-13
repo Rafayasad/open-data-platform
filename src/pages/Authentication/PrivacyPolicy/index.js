@@ -22,6 +22,9 @@ const PrivacyPolicy = memo(() => {
         getPrivacyPolicy(setData, setLoading, "policy")
     }, [i18n.language])
 
+
+    console.log("dataAAAAAAAAAAAAAAA",data,data?.description);
+
     return (
         <>
             <div ref={ref1} className="d-none d-lg-block"

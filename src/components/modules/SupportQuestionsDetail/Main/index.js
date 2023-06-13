@@ -29,7 +29,7 @@ const Main = memo((props) => {
                             {
                                 description ? (
                                     // <Heading nomargin size="xxs" heading={description} />
-                                    <p className="fs-xs m-0 en-font-default" style={{ color: colors.dark_gray }}>{description}</p>
+                                    <p className="fs-xs m-0 en-font-default" style={{ color: colors.dark_gray }} dangerouslySetInnerHTML={{ __html: description }} />
                                 ) : (
                                     <>
                                         <Shimmer className='my-1' rounded='xs' />

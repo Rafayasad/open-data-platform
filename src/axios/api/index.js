@@ -694,6 +694,8 @@ export const getPopularQuestions = (dispatch, setData) => {
 
                 let popularQuestions = []
 
+                console.log("REsSSSSSSSSs",data);
+
                 data.map(item => {
 
                     const id = item.id
@@ -775,13 +777,15 @@ export const getQuestionById = (id, setData) => {
         getQuestionById(id).then((res) => {
             if (res.status === 200) {
 
+                console.log("HELLELELE",res.data.data);
+
                 let { title, field_question_ar, field_answer, field_answer_ar } = res.data.data.attributes;
 
                 let detail = {
                     title,
                     title_ar: field_question_ar,
-                    description: field_answer,
-                    description_ar: field_answer_ar
+                    description: field_answer.value,
+                    description_ar: field_answer_ar.value
                 }
 
                 setData(detail)

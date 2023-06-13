@@ -12,6 +12,7 @@ const CustomButton = memo((props) => {
 
     return (
         <button
+            id={title && title?.replace(/\s+/g, '')}
             onClick={onClick ? onClick : () => { }}
             disabled={loading}
             className={`${buttonClass} m-0 fs-xs ${nopadding ? "px-0" : "px-4"} ${padding && padding} ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold en-font-default"} ${bold && (i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold")}`}

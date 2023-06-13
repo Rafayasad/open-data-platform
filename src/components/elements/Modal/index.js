@@ -15,7 +15,7 @@ import { routes } from '../../../router/helper';
 const ModalEelment = memo((props) => {
 
   const { size, backdrop, loading, title, description, isOpen,
-    setIsOpen, height, width, descriptionHeight, setData, isPublisherModal } = props;
+    setIsOpen, height, width, descriptionHeight, isPublisherModal } = props;
 
   const navigate = useNavigate();
 
@@ -40,7 +40,6 @@ const ModalEelment = memo((props) => {
   const handleClose = () => {
     setIsOpen(false)
     !isPublisherModal && navigate(-1);
-    setData();
   };
 
   return (
