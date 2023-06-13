@@ -5,7 +5,7 @@ import Heading from "../../../elements/Heading";
 import Button from "../../../elements/Button";
 import TextInput from "../../../elements/TextInput";
 import StraigthLine from "../../../elements/StraigthLine";
-import CheckBox from "../../../elements/CheckBox";
+import CheckBox from "../../../elements/checkBox";
 import { useTranslation } from "react-i18next";
 import Recaptcha from "../../../elements/Recaptcha";
 import OtpInput from "react18-input-otp";
