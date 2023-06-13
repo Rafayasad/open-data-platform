@@ -41,7 +41,7 @@
 .transition{
     transition: 0.2s ease-in-out;
 }
-::-webkit-scrollbar {display:none;}
+/* ::-webkit-scrollbar {display:none;} */
 
 /* Tablet */
 
@@ -62,7 +62,7 @@
 }
 
 /* Mobile */
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
 .nav-padding{
         padding-left: 16px;
         padding-right: 16px;

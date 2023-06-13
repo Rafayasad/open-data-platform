@@ -5,10 +5,10 @@ import pdfImage from '../../../../assets/images/pdf_img.png';
 import excelImage from '../../../../assets/images/excel_img.png';
 import csvImage from '../../../../assets/images/csv_img.png';
 import { colors } from "../../../../utils/colors";
-import Button from "../../../elements/Button";
 import Dropdown from "../../../elements/DropDown";
 import Heading from "../../../elements/Heading";
 import { useTranslation } from "react-i18next";
+import CustomButton from "../../../elements/CustomButton";
 
 const Header = memo((props) => {
 
@@ -28,7 +28,7 @@ const Header = memo((props) => {
             </Col>
             <Col md={3} className=" m-0 p-0 d-flex justify-content-end align-items-center">
                 <div className="mx-1">
-                    <Button icon={<MdOutlineFilterAlt size={20} />} borderColor={colors.black} onClick={onClickFilter} />
+                    <CustomButton buttonClass='outlined' icon={<MdOutlineFilterAlt size={20} />} borderColor={colors.black} onClick={onClickFilter} />
                 </div>
                 <div className="mx-1">
                     <Dropdown
@@ -51,7 +51,7 @@ const Header = memo((props) => {
                                 }
                             ]
                         }
-                        headerComponent={<Button width={"12rem"} icon={<MdDownloadForOffline className="mx-1" size={20} />} title={t("download")} backgroundColor={colors.black} textColor={colors.white} />} />
+                        headerComponent={<CustomButton buttonClass='contained-black' width={"12rem"} icon={<MdDownloadForOffline className="mx-1" size={20} />} title={t("download")} backgroundColor={colors.black} textColor={colors.white} />} />
                 </div>
             </Col >
         </Row >

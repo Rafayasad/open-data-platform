@@ -6,6 +6,7 @@ import { generateFile, getUnixTime } from "../../utils/generic.js";
 import { locales } from "../../i18n/helper"
 import { BiError } from "react-icons/bi";
 import i18next from 'i18next';
+import { setStaticTopics } from '../../redux/reducers/Facets';
 
 export const getPlatformInsights = (setData, setLoading) => {
     return endpoints.
@@ -242,21 +243,30 @@ export const getSimilarDatasets = (id, topic, setData, setLoading) => {
         })
 }
 
-export const getFacets = async (key_en, key_ar, dispatch, setData, filters) => {
+export const getFacets = async (key, dispatch, setData, finalfilters, filters, search) => {
 
-    let en = await endpoints.
-        getFacets(key_en, filters).then((res) => {
+    console.log("AAAAAAAAAAAAAAAAAAAASD", filters);
+
+    let arr = await endpoints.
+        getFacets(key, finalfilters, filters, search).then((res) => {
 
             if (res.status === 200) {
 
+                var getStaticTopics = res.data.facets.filter(item => item.type === "theme" || item.type === "themelear").map(item => ({
+                    id: item.identifier,
+                    title: item.name,
+                    value: item.total,
+                    type: item.type
+                }))
+
                 let transform = res.data.facets.filter(item => item.name != " ").map(item => ({
+                    id: item.identifier,
                     title: item.name,
                     value: item.total,
                     type: item.type
                 }))
 
                 let sorted = _.sortBy(transform, 'title');
-
                 return sorted
 
             }
@@ -265,36 +275,39 @@ export const getFacets = async (key_en, key_ar, dispatch, setData, filters) => {
             console.log("Error message", err)
         })
 
-    let ar = await endpoints.
-        getFacets(key_ar, filters).then((res) => {
-            if (res.status === 200) {
-                console.log("sAASASAS", res.data);
-                let transform = res.data.facets.filter(item => item.name != " ").map(item => ({
-                    title: item.name,
-                    value: item.total,
-                    type: item.type
-                })
-                )
+    // let ar = await endpoints.
+    //     getFacets(key, filters).then((res) => {
+    //         if (res.status === 200) {
+    //             console.log("sAASASAS", res.data);
+    //             let transform = res.data.facets.filter(item => item.name != " ").map(item => ({
+    //                 title: item.name,
+    //                 value: item.total,
+    //                 type: item.type,
+    //                 id: item.identifier
+    //             })
+    //             )
 
-                console.log("sAASASASssssssssssssssssssssssssssssssssssssss", transform);
+    //             console.log("sAASASASssssssssssssssssssssssssssssssssssssss", transform);
 
-                let sorted = _.sortBy(transform, 'title');
-                console.log("sAASASASsssssssssssssssssssssssssssssssssssssSORTs", sorted);
+    //             let sorted = _.sortBy(transform, 'title');
+    //             console.log("sAASASASsssssssssssssssssssssssssssssssssssssSORTs", sorted);
 
-                return sorted
+    //             return sorted
 
-            }
-        }).catch((err) => {
-            console.log("Error message", err)
-        })
+    //         }
+    //     }).catch((err) => {
+    //         console.log("Error message", err)
+    //     })
 
-    let facets = { en, ar }
+    // let facets = { en, ar }
 
-    dispatch && dispatch(setData(facets))
+    console.log("FACTES", arr);
+
+    dispatch && dispatch(setData(arr))
 
 }
 
-export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage, filters, currentLanguage, dispatch, setTopics, setTags, setPublishers, setFileFormats) => {
+export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort, currentPage, rowsPerPage, filters, currentLanguage, dispatch, setTopics, setTags, setPublishers, setFileFormats, ip_data) => {
 
     setLoading(true)
     setTotalCount(0)
@@ -311,7 +324,7 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
         el.type == "theme" ? themeArray.push(el.title) : el.type == "themelear" ? themeArray.push(el.title)
             : el.type == "publisher__name" ? publisherArray.push(el.title) : el.type == "publisherlear__name" ? publisherArray.push(el.title)
                 : el.type == "keyword" ? tagsArray.push(el.title) : el.type == "keywordlear" ? tagsArray.push(el.title)
-                    : el.type == "file" && filesArray.push(el.title)
+                    : el.type == "format" && filesArray.push(el.title)
     })
 
     finalFilters.push(
@@ -321,19 +334,24 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
         { key: "distribution__item__format", values: filesArray }
     )
 
-    getFacets("theme", "themelear", dispatch, setTopics, finalFilters);
-    getFacets("keyword", "keywordlear", dispatch, setTags, finalFilters);
-    getFacets("publisher__name", "publisherlear__name", dispatch, setPublishers, finalFilters);
-    getFileFormatsFacets("distribution__item__format", dispatch, setFileFormats, finalFilters);
+    getFacets(currentLanguage === locales.AR ? "themelear" : "theme", dispatch, setTopics, finalFilters, filters, search);
+    getFacets(currentLanguage === locales.AR ? "keywordlear" : "keyword", dispatch, setTags, finalFilters, filters, search);
+    getFacets(currentLanguage === locales.AR ? "publisherlear__name" : "publisher__name", dispatch, setPublishers, finalFilters, filters, search);
+    getFacets("distribution__item__format", dispatch, setFileFormats, finalFilters, filters, search);
+
+    // getFileFormatsFacets("distribution__item__format", dispatch, setFileFormats, finalFilters);
+
     return endpoints.
         getAllDatasets(search, sort, currentPage, rowsPerPage, finalFilters).then(async (res) => {
             if (res.status === 200) {
                 setLoading(false)
 
-                if (res.data.total > 0 && search && search.trim() !== "") {
+                // for search posting
+                if (res.data.total_count > 0 && search && search.trim() !== "") {
                     let obj = {
                         keyword: search,
-                        ip: "192.168.0.44",
+                        ip: ip_data?.ip,
+                        country: ip_data?.country,
                         lang: currentLanguage,
                         type: "dataset"
                     }
@@ -344,80 +362,25 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
                         })
                 }
 
-                setTotalCount(res.data.total)
+                setTotalCount(res.data.total_count)
 
-                let arr = []
-
-                arr = Object.values(res.data.results)?.map(item => (
-
+                // for datasets listing
+                let new_arr = res.data.data?.map((item) => (
                     {
                         id: item.identifier,
                         title: item.title,
                         title_ar: item.titlear,
                         description: item.description,
                         description_ar: item.descriptionlear,
-                        publisher: item.publisher?.name,
-                        publisher_ar: item.publisherlear?.name,
+                        publisher: item.publisher,
+                        publisher_ar: item.publisherlear,
                         tags: item.theme,
                         tags_ar: item.themelear,
-                        url: `${process.env.REACT_APP_BASE_URL}/dataset/detail?id=${item.identifier}`,
-                        resources: item.distribution
-                            &&
-                            item.distribution?.filter(item => {
-                                if (item.downloadURL && item.downloadURL !== "") {
-                                    return item
-                                }
-                            })?.map(item => (
-                                {
-                                    id: item.identifier,
-                                    title: item.title ? item.title : "No Name Found",
-                                    title_ar: item.titlelear ? item.titlelear : "لم يتم العثور على اسم",
-                                    description: item.description,
-                                    description_ar: item.descriptionlear,
-                                    format:
-                                        item.format === "pdf" ? "pdf"
-                                            : item.format === "excel" ? "excel"
-                                                : item.format === "esri rest" ? "excel"
-                                                    : item.format === "xlsx" ? "excel"
-                                                        : item.format === "xls" ? "excel"
-                                                            : item.format === "csv" ? "csv"
-                                                                : item.format === "API" && "api",
-                                    downloadURL: item.downloadURL
-                                }
-                            )).length > 0 ?
-                            item.distribution?.filter(item => {
-                                if (item.downloadURL && item.downloadURL !== "") {
-                                    return item
-                                }
-                            })?.map(item => (
-                                {
-                                    id: item.identifier,
-                                    title: item.title ? item.title : "No Name Found",
-                                    title_ar: item.titlelear ? item.titlelear : "لم يتم العثور على اسم",
-                                    description: item.description,
-                                    description_ar: item.descriptionlear,
-                                    format:
-                                        item.format === "pdf" ? "pdf"
-                                            : item.format === "excel" ? "excel"
-                                                : item.format === "esri rest" ? "excel"
-                                                    : item.format === "xlsx" ? "excel"
-                                                        : item.format === "xls" ? "excel"
-                                                            : item.format === "csv" ? "csv"
-                                                                : item.format === "API" && "api",
-                                    downloadURL: item.downloadURL
-                                }
-                            )) : [{
-                                id: '0',
-                                title: 'No file uploaded yet.',
-                                title_ar: "لم يتم تحميل أي ملف بعد."
-                            }]
-                        ,
+                        url: `${process.env.REACT_APP_BASE_URL}/dataset/detail?id=${item.identifier}`
                     }
                 ))
-                // setLoading(false)
 
-                console.log("RRRRRRRRRRRRRRRRRR", arr);
-                setData(arr);
+                setData(new_arr);
 
             }
         }).catch((err) => {
@@ -426,44 +389,42 @@ export const getAllDatasets = (setData, setTotalCount, setLoading, search, sort,
         })
 }
 
-export const getDatasetById = (id, setData) => {
+export const getDatasetById = (id, setData, ip_data) => {
 
 
     return endpoints.
         getDatasetById(id).then(async (res) => {
             if (res.status === 200) {
 
-                let item = res.data;
-                console.log("AdassaS", item.distribution);
+                let item = res.data.data;
+                console.log("DATATTATA", res.data.data);
                 // for resources filterout
                 let filteredResources = item.distribution?.filter(item => {
-                    let itemm = item.data
-                    if (itemm.downloadURL && itemm.downloadURL !== "") {
+                    if (item.url && item.url !== "") {
                         return item
                     }
                 })?.map(item => {
-                    let itemm = item.data
                     return (
                         {
                             id: item.identifier,
-                            title: itemm.title ? itemm.title : "No Name Found",
-                            title_ar: itemm.titlelear ? itemm.titlelear : "لم يتم العثور على اسم",
-                            description: itemm.description,
-                            description_ar: itemm.descriptionlear,
-                            format: itemm.format === "pdf" ? "pdf"
-                                : item.format === "excel" || itemm.format === "xlsx" || itemm.format === "esri rest" || itemm.format == "xls" ? "excel"
-                                    : itemm.format === "csv" ? "csv"
-                                        : itemm.format === "API" && "API",
-                            downloadURL: itemm.downloadURL ? itemm.downloadURL : "No File Uploaded Yet"
+                            title: item.title ? item.title : "No Name Found",
+                            title_ar: item.titlelear ? item.titlelear : "لم يتم العثور على اسم",
+                            format: item.format === "pdf" ? "pdf"
+                                : item.format === "excel" || item.format === "xlsx" || item.format === "esri rest" || item.format == "xls" ? "excel"
+                                    : item.format === "csv" ? "csv"
+                                        : item.format === "API" || item.format === "api" && "API",
+                            downloadURL: item.url
                         }
                     )
                 })
 
-                let keyword = item && item.keyword && item.keyword?.filter(el => el.data && el.data !== ' ' && el)?.map(item => item.data);
-                let keywordlear = item && item.keywordlear && item.keywordlear?.filter(el => el.data && el.data !== ' ' && el)?.map(item => item.data);
-                let topics = item && item.theme && item.theme?.filter(el => el.data && el.data !== ' ' && el)?.map(item => item.data);
-                let topics_ar = item && item.themelear && item.themelear?.filter(el => el.data && el.data !== ' ' && el)?.map(item => item.data);
 
+                let keyword = item && item.keyword && item.keyword?.filter(el => el && el !== ' ' && el)?.map(item => item);
+                let keywordlear = item && item.keywordlear && item.keywordlear?.filter(el => el && el !== ' ' && el)?.map(item => item);
+                let topics = item && item.theme && item.theme?.filter(el => el && el !== ' ' && el)?.map(item => item);
+                let topics_ar = item && item.themelear && item.themelear?.filter(el => el && el !== ' ' && el)?.map(item => item);
+
+                console.log("DATATTATA FIL", keyword, keywordlear, topics, topics_ar);
 
                 let downloadCount = await endpoints.getDownloadCountById(id)
                     .then((res) => {
@@ -474,31 +435,18 @@ export const getDatasetById = (id, setData) => {
                         console.log("Error message", err)
                     })
 
-                // let obj = [
-                //     {
-                //         data: " ",
-                //         identifier: "2476ab9e-6421-5e20-b2a3-89275ccf22bb"
-                //     },
-                //     {
-                //         data: "hello",
-                //         identifier: "2476ab9e-6421-5e20-b2a3-89275ccf22bb"
-                //     }
-                // ]
-
                 let data = {
                     id: item.identifier,
                     title: item.title,
                     title_ar: item.titlear,
                     description: item.description,
                     description_ar: item.descriptionlear,
-                    publisher: item.publisher?.data.name,
-                    publisher_ar: item.publisherlear?.data.name,
-                    frequency: item.accrualPeriodicity === "R/P1Y" ? "Annual" : item.accrualPeriodicity === "auto/freq" ? "Automated" : "None",
-                    frequency_ar: item.accrualPeriodicity === "R/P1Y" ? "سنوي" : item.accrualPeriodicity === "auto/freq" ? "تلقائي" : "لا يوجد",
-                    access_level: item.accessLevel,
-                    access_level_ar: item.accessLevellear,
-                    // license: item.license,
-                    // license_ar: item.licenselear,
+                    publisher: item.publisher,
+                    publisher_ar: item.publisherlear,
+                    frequency: item.frequency,
+                    frequency_ar: item.frequency_ar,
+                    access_level: item.access_level,
+                    access_level_ar: item.access_level_ar,
                     license: "https://data.abudhabi/opendata/addata_open_license",
                     license_ar: "https://data.abudhabi/opendata/addata_open_license",
                     topics: topics && topics?.length > 0 ? topics : ['No Topics Found'],
@@ -511,17 +459,17 @@ export const getDatasetById = (id, setData) => {
                             title: 'No file uploaded yet.',
                             title_ar: "لم يتم تحميل أي ملف بعد."
                         }],
-                    created: item.issued,
+                    created: item.created,
                     modified: item.modified,
                     downloadCount
                 }
 
-                // console.log("DATATTATA", data);
                 setData(data)
 
                 const view_count_payload = {
                     identifier: id,
-                    ip_address: "172.0.9.01"
+                    ip_address: ip_data?.ip,
+                    country: ip_data?.country
                 }
                 return await endpoints.viewCount(view_count_payload).then((res) => {
                     if (res.status === 200) {
@@ -746,6 +694,8 @@ export const getPopularQuestions = (dispatch, setData) => {
 
                 let popularQuestions = []
 
+                console.log("REsSSSSSSSSs",data);
+
                 data.map(item => {
 
                     const id = item.id
@@ -773,7 +723,7 @@ export const getPopularQuestions = (dispatch, setData) => {
         })
 }
 
-export const getQuestionBySearch = (text, setData, currentLanguage) => {
+export const getQuestionBySearch = (text, setData, currentLanguage, ip_data) => {
     return endpoints.
         getQuestionBySearch(text).then(async (res) => {
 
@@ -784,7 +734,8 @@ export const getQuestionBySearch = (text, setData, currentLanguage) => {
                 if (data.length > 0 && text && text.trim() !== "") {
                     let obj = {
                         keyword: text,
-                        ip: "192.168.0.44",
+                        ip: ip_data?.ip,
+                        country: ip_data?.country,
                         lang: currentLanguage,
                         type: "support"
                     }
@@ -826,13 +777,15 @@ export const getQuestionById = (id, setData) => {
         getQuestionById(id).then((res) => {
             if (res.status === 200) {
 
+                console.log("HELLELELE",res.data.data);
+
                 let { title, field_question_ar, field_answer, field_answer_ar } = res.data.data.attributes;
 
                 let detail = {
                     title,
                     title_ar: field_question_ar,
-                    description: field_answer,
-                    description_ar: field_answer_ar
+                    description: field_answer.value,
+                    description_ar: field_answer_ar.value
                 }
 
                 setData(detail)
@@ -1081,23 +1034,27 @@ export const validateUser = async (navigate, route, setLoading, payload) => {
                                 if (res.data.status === 200) {
                                     toast(res.data.message, { type: "success" })
                                     navigate(route, { state: { email, password } })
+                                    setLoading(false)
                                 } else {
                                     toast(res.data.message, { type: "error" })
+                                    setLoading(false)
                                 }
                             }
-                            setLoading(false)
                         }).catch((err) => {
                             setLoading(false)
                             console.log("Error message", err)
+                            toast(err.message, { type: "error" })
                         })
 
                 } else {
+                    setLoading(false)
                     toast(res.data.message, { type: "error" })
                 }
             }
         }).catch((err) => {
             setLoading(false)
             console.log("Error message", err)
+            toast(err.message, { type: "error" })
         })
 }
 
@@ -1113,16 +1070,17 @@ export const login = async (dispatch, setData, setLoading, payload, route) => {
 
     await endpoints.otp({ type: "verify", username: email, otp_v: otp })
         .then(async (res) => {
-            setLoading(false)
             if (res.status === 200) {
                 if (res.data.status === 200) {
                     let token = await endpoints.getCRSFToken()
                         .then((res) => {
                             if (res.status === 200) {
+                                // setLoading(false)
                                 return res.data
                             }
 
                         }).catch((err) => {
+                            setLoading(false)
                             console.log("Error message", err)
                         })
 
@@ -1134,14 +1092,16 @@ export const login = async (dispatch, setData, setLoading, payload, route) => {
 
                     await endpoints.login(data, headers)
                         .then((res) => {
-                            setLoading(false)
                             if (res.status === 200) {
+                                // setLoading(false)
                                 toast(res.data.message, { type: 'success' })
                                 dispatch && dispatch(setData(res.data))
                                 window.location.assign(route);
                             } else if (res.data.status === 400) {
+                                setLoading(false)
                                 toast(res.data.message, { type: 'error' })
                             } else {
+                                setLoading(false)
                                 toast("Invalid username or password.", { type: "error" })
                             }
                         }).catch((err) => {
@@ -1155,7 +1115,8 @@ export const login = async (dispatch, setData, setLoading, payload, route) => {
                 }
             }
         }).catch((err) => {
-            console.log("Error message", err)
+            setLoading(false);
+            console.log("Error message", err);
         })
 }
 
@@ -1286,7 +1247,19 @@ export const getDatasetsReport = (setData, payload, setLoading, setTotalCount, s
 
                 if (payload?.datatype !== "pdf" && payload?.datatype !== "excel" && payload?.datatype !== "csv") {
                     if (res.data.status === 200) {
-                        setData(res.data.data);
+
+                        let arr = res.data.data?.map((items) => ({
+                            ...items,
+                            resources: items?.resource?.map((item, index) => index === 0 ? item : ', ' + item)
+                        })
+                        )
+
+                        let filteredData = arr?.map(item => {
+                            delete item?.resource;
+                            return item
+                        })
+
+                        setData(filteredData);
                         setTotalCount(res.data.total_count);
                     }
                 }
@@ -1338,6 +1311,7 @@ export const getSearch = (type, dispatch, setData) => {
     return endpoints.
         getSearch(type).then((res) => {
             if (res.status === 200) {
+                console.log("salndlkjsandsalkjd", res.data);
                 dispatch && dispatch(setData(res.data.data));
             }
 
@@ -1348,7 +1322,7 @@ export const getSearch = (type, dispatch, setData) => {
 
 export const recoverPassword = async (navigate, route, setLoading, payload) => {
 
-    setLoading(true)
+    setLoading(true);
 
     let { email } = payload;
 
@@ -1366,17 +1340,21 @@ export const recoverPassword = async (navigate, route, setLoading, payload) => {
 
             if (res.status === 200) {
                 if (res.data.status === 200) {
-                    navigate(route, { replace: true });
+                    setLoading(false);
                     toast(res.data.message, { type: 'success' })
-                } else if (res.data.status === 400) {
+                    navigate(route, { replace: true });
+                } else if (res.data.status == 404) {
+                    setLoading(false);
+                    toast(res.data.message, { type: 'error' })
+                } else {
+                    setLoading(false);
                     toast(res.data.message, { type: 'error' })
                 }
             }
 
-            setLoading(false)
-
         }).catch((err) => {
             setLoading(false)
+            toast(err.message, { type: 'error' })
             console.log("Error Message", err)
         })
 }
@@ -1520,7 +1498,7 @@ export const getRealTimeApiById = (id, setData, setLoading) => {
         })
 }
 
-export const getPrivacyPolicy = (setData, setLoading) => {
+export const getPrivacyPolicy = (setData, setLoading, type) => {
 
     setLoading(true);
 
@@ -1529,15 +1507,55 @@ export const getPrivacyPolicy = (setData, setLoading) => {
         .then((res) => {
 
             setLoading(false);
-
+            console.log("arrsssssssssss", res.data);
             // if(res.data.data.length > 0)
 
-            let arr = res.data.data.slice(-1).map(item => (
+            let arr = res.data.data.map(item => (
                 {
                     title: item.attributes.title,
                     title_ar: item.attributes.field_privacytitle_ar,
                     description: item.attributes.field_body.value,
                     description_ar: item.attributes.field_privacy_description_ar.value
+                }))
+
+            let policyObj = {
+                title: arr[0].title,
+                title_ar: arr[0].title_ar,
+                description: arr[0].description,
+                description_ar: arr[0].description_ar
+            }
+
+            let termsObj = {
+                title: arr[1].title,
+                title_ar: arr[1].title_ar,
+                description: arr[1].description,
+                description_ar: arr[1].description_ar
+            }
+
+            let data = type === "terms" ? termsObj : policyObj
+            setData(data)
+
+        }).catch((err) => {
+            console.log("Error Message", err)
+            setLoading(false);
+        })
+}
+
+export const getLicenseDetails = (setData, setLoading) => {
+
+    setLoading(true)
+
+    return endpoints.getLicenseDetails()
+        .then((res) => {
+
+            setLoading(false);
+            console.log("Error Message", res.data.data)
+            let arr = res.data.data.map(item => (
+                {
+                    title: item.attributes.title,
+                    title_ar: item.attributes.field_license_title,
+                    description: item.attributes.body.value,
+                    description_ar: item.attributes.field_license_description.value
                 }))
 
             let obj = {
@@ -1642,7 +1660,7 @@ export const getStoriesTags = (dispatch, setStoriesTags) => {
         })
 }
 
-export const addDownloadCount = (id, forDatasetsListing) => {
+export const addDownloadCount = (id, ip_data) => {
 
     console.log("download count", id);
 
@@ -1650,15 +1668,16 @@ export const addDownloadCount = (id, forDatasetsListing) => {
 
     const data = {
         identifier: id,
-        ip_address: "172.0.9.01"
+        ip_address: ip_data?.ip,
+        country: ip_data?.country
     }
 
-    const data_for_listing = {
-        dataset_identifier: id,
-        ip_address: "172.0.9.01"
-    }
+    // const data_for_listing = {
+    //     identifier: id,
+    //     ip_address: "172.0.9.01"
+    // }
 
-    return endpoints.addDownloadCountById(forDatasetsListing ? data_for_listing : data)
+    return endpoints.addDownloadCountById(data)
         .then((res) => {
             // setLoading(false)
             if (res.status === 200) {
@@ -1673,6 +1692,7 @@ export const addDownloadCount = (id, forDatasetsListing) => {
 export const getFileFormatsFacets = (key, dispatch, setData, filters) => {
     return endpoints.getFileFormatsFacets(key, filters)
         .then((res) => {
+            console.log("RESFILEEEEE", res.data);
             let files_Formats = res.data.data?.map((item) => (
                 {
                     title: item.Format,
@@ -1684,4 +1704,91 @@ export const getFileFormatsFacets = (key, dispatch, setData, filters) => {
         .catch((err) => {
             console.log("Error Message", err);
         })
+}
+
+export const getPublishers = (pageNumber, rowsPerPage, lang, setData, setTotalCount, searchPublisher, setLoading, ip_data) => {
+
+    setTotalCount(0);
+    setLoading(true);
+
+    let payload = {
+        publisher: searchPublisher,
+        language: lang,
+        perpage: rowsPerPage,
+        pagenumber: pageNumber
+    }
+
+    return endpoints.getPublishers(payload)
+        .then(async (res) => {
+            setLoading(false);
+
+            if (res.data.data.total_count > 0 && searchPublisher && searchPublisher.trim() !== "") {
+                let obj = {
+                    keyword: searchPublisher,
+                    ip: ip_data?.ip,
+                    country: ip_data?.country,
+                    lang: lang,
+                    type: "publishers"
+                }
+                await endpoints.
+                    postSearch(obj).then((res) => {
+                    }).catch((err) => {
+                        console.log("Error Message", err)
+                    })
+            }
+
+            if (res.data.status === 200) {
+                setTotalCount(res.data.data.total_count)
+                let arr_en = res.data.data?.en?.map((item) => (
+                    {
+                        description: item.description,
+                        title: item.publisher,
+                        image: `${process.env.REACT_APP_IMAGE_BASE_URL}/opendata${item.image_url}`,
+                        viewDatasets: item.total_datasets
+                    }
+                ))
+
+                let arr_ar = res.data.data?.ar?.map((item) => (
+                    {
+                        description_ar: item.description,
+                        title_ar: item.publisher,
+                        image: `${process.env.REACT_APP_IMAGE_BASE_URL}/opendata${item.image_url}`,
+                        viewDatasets: item.total_datasets
+                    }
+                ))
+
+                let data = {
+                    data_en: arr_en,
+                    data_ar: arr_ar
+                }
+
+                setData(data)
+            }
+        })
+        .catch((err) => {
+            setLoading(false);
+            console.log("Error Message", err);
+        })
+}
+
+export const getResourcesByIdentifier = (id, setData) => {
+    return endpoints.getResourcesByIdentifier(id)
+        .then((res) => {
+            console.log("IDDDDDSAD", res.data);
+            setData(res.data.data);
+        })
+        .catch((err) => console.log("ERROR", err))
+}
+
+export const getIpAddress = (dispatch, setData) => {
+    return endpoints.getIpAddress()
+        .then((res) => {
+            let obj = {
+                ip: res.data.ipAddress,
+                country: res.data.countryName
+            }
+            dispatch(setData(obj))
+            console.log("res ip", obj);
+        })
+        .catch((err) => console.log("Err message", err));
 }

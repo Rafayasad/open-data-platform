@@ -15,6 +15,7 @@ import Dropdown from "../../../elements/DropDown";
 import '../../../modules/Drawer/style.css';
 import 'react-modern-drawer/dist/index.css';
 import dayjs from "dayjs";
+import CustomButton from "../../../elements/CustomButton";
 
 const ReportsFilter = memo((props) => {
 
@@ -110,7 +111,7 @@ const ReportsFilter = memo((props) => {
                 <Heading size="xxs" heading={t("filter")} nomargin />
                 <RxCross2 style={{ cursor: "pointer" }} onClick={toggleDrawer} className="mx-1" size={20} />
             </div>
-            <div style={{ overflow: "scroll", scrollBehavior: "smooth", height: "75%" }} className={"p-4"}>
+            <div style={{ scrollBehavior: "smooth", height: "75%" }} className={"p-4 scroll-bar"}>
                 <div className="w-100">
                     <Dropdown
                         textColor={filters?.date_type && "black"}
@@ -142,7 +143,6 @@ const ReportsFilter = memo((props) => {
                             title={t("startDate")}
                             onChange={(start_date) => onChangeFilter({ start_date })} maxDate={filters?.end_date} />
                     </div>
-                    {console.log("rpeorpe", filters)}
                 </div>
                 <div className="d-flex my-3">
                     <div className="w-100">
@@ -176,9 +176,8 @@ const ReportsFilter = memo((props) => {
                                                 <div className="d-flex flex-wrap">
                                                     {
                                                         item.tags?.map((items, index) => {
-                                                            console.log("filllllllllll", items);
                                                             return (
-                                                                <div className={`my-1`}>
+                                                                <div key={index} className={`my-1`}>
                                                                     <Tag
                                                                         backgroundColor={
                                                                             items.type === 'publisherlear__name' ? filters?.publisher === items.title ? colors.black : colors.white :
@@ -218,10 +217,10 @@ const ReportsFilter = memo((props) => {
             <div className="h-25">
                 <div className="d-flex justify-content-between align-items-center p-2">
                     <div className="">
-                        <Button onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} />
+                        <CustomButton buttonClass="text-purple" onClick={onClickClear} textColor={"#8207C9"} title={t("clearAll")} />
                     </div>
                     <div>
-                        <Button onClick={onClickApply} title={t("apply")} backgroundColor={"black"} textColor={"white"} />
+                        <CustomButton buttonClass='contained-black' onClick={onClickApply} title={t("apply")} backgroundColor={"black"} textColor={"white"} />
                     </div>
                 </div>
             </div>

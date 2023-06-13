@@ -32,6 +32,7 @@ const Login = memo(() => {
     }
 
   });
+  console.log("sssss",loading);
   const onClickForgetPassword = useCallback(() => navigate(routes.RECOVER));
   const onClickRegister = useCallback(() => navigate(routes.REGISTER));
 

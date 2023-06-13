@@ -136,7 +136,7 @@ code {
 
   .fs-xl {
     font-size: 64px;
-    line-height: 68px;
+    line-height: 64px;
   }
 
   .fs-lg {
@@ -175,6 +175,12 @@ code {
     letter-spacing: -0.01em;
   }
 
+  .fs-xxs {
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: -0.01em;
+  }
+
   .bold-md {
     font-family: "CircularStd-Bold";
   }
@@ -196,6 +202,11 @@ code {
     line-height: 52px;
   }
 
+  .fs-mini {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
   .img-upper-footer {
     height: 500px;
     padding-left: 40px !important;
@@ -205,6 +216,11 @@ code {
   .page-padding {
     padding-left: 40px !important;
     padding-right: 40px !important;
+  }
+
+  .navbar-padding-top{
+    padding-top: 80px;
+    padding-bottom: 80px;
   }
 
   .page-padding-md {
@@ -257,7 +273,7 @@ code {
 
   .fs-xl {
     font-size: 64px;
-    line-height: 68px;
+    line-height: 64px;
   }
 
   .fs-lg {
@@ -296,6 +312,17 @@ code {
     letter-spacing: -0.01em;
   }
 
+  .fs-xxs {
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: -0.01em;
+  }
+
+  .fs-mini {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
   .bold-lg {
     font-family: "CircularStd-Bold";
   }
@@ -312,9 +339,20 @@ code {
     font-family: "CircularAr-SemiBold";
   }
 
+  .navbar-padding-top{
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
   .page-padding {
     padding-left: 40px !important;
     padding-right: 40px !important;
+  }
+
+  .page-padding-top-bottom {
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
+    /* padding-left: 30px !important; */
   }
 
   .page-padding-md {
@@ -336,6 +374,7 @@ code {
 /* Mobile */
 
 @media (max-width: 767.98px) {
+  
   .fs-mega {
     font-size: 32px;
     line-height: 36px;
@@ -411,6 +450,12 @@ code {
     letter-spacing: -0.01em;
   }
 
+  .fs-xxs {
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: -0.01em;
+  }
+
   .fs-xs-sm-only {
     font-size: 14px;
     line-height: 20px;
@@ -436,6 +481,10 @@ code {
   .page-padding {
     padding-left: 16px !important;
     padding-right: 16px !important;
+  }
+
+  .navbar-padding-top{
+    padding-top: 36px;
   }
 
   .page-padding-md {

@@ -113,6 +113,8 @@ const Table = memo((props) => {
 
     let { data, loading, currentPage, totalCount, onChange } = props;
 
+    console.log("DATA", data);
+
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
             backgroundColor: theme.palette.common.black,
@@ -158,8 +160,8 @@ const Table = memo((props) => {
                                         {
                                             Object.keys(row).map(item => (
                                                 <>
-                                                {console.log(" inside  data",row)}
-                                                <StyledTableCell>{row[item]}</StyledTableCell>
+                                                    {console.log("TABLEEE==>",row.resource)}
+                                                    <StyledTableCell>{row[item]}</StyledTableCell>
                                                 </>
                                             ))
                                         }

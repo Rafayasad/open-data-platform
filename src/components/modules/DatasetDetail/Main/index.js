@@ -10,6 +10,7 @@ import DataHeader from "../DataHeader";
 import Shimmer from '../../../elements/Shimmer';
 import Heading from "../../../elements/Heading";
 import { useNavigate } from "react-router-dom";
+import { routes } from "../../../../router/helper";
 
 const Main = memo((props) => {
 
@@ -19,8 +20,6 @@ const Main = memo((props) => {
     const { t, i18n } = useTranslation();
 
     let option = { dateStyle: 'long' };
-
-    console.log("logsssssssssssssssssssssssss", data);
 
     let e = [
         {
@@ -38,8 +37,18 @@ const Main = memo((props) => {
         {
             title: t("managedBy"),
             detail: data ? (
-                i18n.language === locales.AR ? data.publisher_ar : data.publisher
-            ) : <Shimmer rounded='xs' width="70%" className={"my-1"} />
+                <div style={{ width: "fit-content" }}>
+                    <Heading size="xxs" underline heading={i18n.language === locales.AR ? data.publisher_ar : data.publisher}
+                        onClick={() => navigate(routes.DATASET, {
+                            state: {
+                                listItem: [{
+                                    title: i18n.language === locales.AR ? data.publisher_ar : data.publisher,
+                                    type: i18n.language === locales.AR ? "publisherlear__name" : "publisher__name"
+                                }]
+                            }
+                        })} />
+                </div>
+            ) : < Shimmer rounded='xs' width="70%" className={"my-1"} />
         },
         {
             title: t("frequency"),
@@ -102,7 +111,7 @@ const Main = memo((props) => {
             detail: data ? i18n.language === locales.EN ? "Abu Dhabi Government Open Data License" : "حكومة أبو ظبي رخصة البيانات المفتوحة" : <Shimmer rounded='xs' width="70%" className={"my-1"} />,
             color: colors.purple,
             underline: true,
-            onClick: () => data && window.open(data.license, '_blank')
+            onClick: () => data && navigate(routes.LICENSE)
         }
     ]
 

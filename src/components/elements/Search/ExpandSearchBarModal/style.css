@@ -8,9 +8,8 @@
 }
 
 .input-field {
-    border: 1px solid grey;
-    border-radius: 30px;
-    border-width: 3px;
+    border: 2px solid #cfcfcf;
+    border-radius: 100px;
 }
 
 .input-field:focus {

@@ -71,7 +71,8 @@ const Images = memo(() => {
                                 <Row className="pt-1" style={{ zIndex: 1 }}>
                                     <Col />
                                     <Col xs={10} sm={12} md={8} className='text-center' id='zoom-in'>
-                                        <Heading bold size={"xxl"} color='white' heading={t("areYouNewToOpenData")} />
+                                        <p className={`fs-lg text-white ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>{t("areYouNewToOpenData")}</p>
+                                        {/* <Heading bold size={"xxl"} color='white' heading={t("areYouNewToOpenData")} /> */}
                                     </Col>
                                     <Col />
                                 </Row>

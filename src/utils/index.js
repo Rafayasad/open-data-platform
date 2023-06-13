@@ -6,8 +6,8 @@ export const convertHtmlToString = (html) => {
 }
 
 export const socialLinks = {
-    instagram: "https://instagram.com/abudhabi_tamm/",
-    twitter: "https://twitter.com/Abudhabi_tamm"
+    instagram: "https://www.instagram.com/abudhabidigital/",
+    twitter: "https://twitter.com/AbuDhabiDigital"
 }
 
 export const ScrollToTop = () => {

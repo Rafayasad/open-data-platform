@@ -129,9 +129,10 @@ const TextInput = memo((props) => {
     <FormControl sx={{ width: '100%' }} variant="standard" className="my-2">
       <InputLabel position="right" htmlFor="standard-adornment-password">{placeholder}</InputLabel>
       <Input
+        value={value}
         onFocus={toggle}
         onBlur={toggle}
-        id="standard-adornment-password"
+        id={placeholder}
         sx={{
           ':before': { borderBottomColor: value?.length > 0 ? "black" : '#9F9F9F', borderBottomWidth: "1px" },
           ':after': {
@@ -144,7 +145,7 @@ const TextInput = memo((props) => {
             borderBottomWidth: "1px",
           },
         }}
-        type={!showPassword && type === "password" ? "password" : "text"} value={value}
+        type={!showPassword && type === "password" ? "password" : "text"}
         onChange={(e) => onChange(e.target.value)}
         endAdornment={
           <InputAdornment>
@@ -183,7 +184,7 @@ const TextInput = memo((props) => {
         <div className="mt-3">
           {passwordValidationTexts?.map(item => <p className="m-0"
 
-            style={{ color: item.isValid ? colors.green : colors.dark_red }}>
+            style={{ color: item.isValid ? colors.green : colors.gray }}>
 
             <small>{item.title}</small></p>)}
         </div>
@@ -197,7 +198,7 @@ const TextInput = memo((props) => {
           (!item.isValid &&
             <p className="m-0"
 
-              style={{ color: colors.dark_red }}>
+              style={{ color: colors.gray }}>
 
               <small>{item.inValid_title}</small></p>
           )

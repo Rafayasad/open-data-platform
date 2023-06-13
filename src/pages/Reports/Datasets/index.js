@@ -101,8 +101,8 @@ const Datasets = memo(() => {
             publisher: filters?.publisher ? filters.publisher : "",
             kpi: filters?.kpi ? filters.kpi : "",
             topic: filters?.topic ? filters.topic : "",
-            perpage: rowsPerPage,
-            pagenumber: currentPage,
+            perpage: datatype === "pdf" || datatype === "csv" || datatype === "excel" ? "all" : rowsPerPage,
+            pagenumber: datatype === "pdf" || datatype === "csv" || datatype === "excel" ? "all" : currentPage,
             type: filters?.type ? filters.type : "all"
 
         }, setLoading, setTotalCount, setDatatype)
@@ -128,7 +128,7 @@ const Datasets = memo(() => {
         <>
             <Navbar theme='dark' />
             <ReportsFilter selectedTab={selectedTab} kpi={filters?.type === "kpi"} accordinData={filters?.type === "kpi" ? AccordinDataWithoutTopics : AccordinData} open={filterOpen} setOpen={setFilterOpen} appliedFilters={filters} onApplyFilters={onApplyFilters} />
-            <Container fluid className="my-5 pt-5 px-4">
+            <Container fluid className="my-5 pt-5 page-padding">
                 <Header title={t("datasetsReports")} onClickFilter={onClickFilter} datatypeCallback={datatypeCallback} />
                 <Tabs loading={loading} data={tabs} selected={selectedTab} />
                 <div id="tableList">

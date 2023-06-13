@@ -3,7 +3,7 @@ import Cards from "../../components/modules/Cards";
 import Main from "../../components/modules/Dataset/Main";
 import DatasetList from "../../components/modules/Dataset/DatasetList";
 import { colors } from "../../utils/colors";
-import { getAllDatasets, getMostViewedDatasets, getRecentsDatasets, getSearch } from "../../axios/api";
+import { getAllDatasets, getFacets, getMostViewedDatasets, getRecentsDatasets, getSearch } from "../../axios/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../router/helper";
 import { useTranslation } from "react-i18next";
@@ -21,6 +21,9 @@ const Dataset = memo(() => {
     const storedFilters = useSelector((state) => state.facets.filter);
     const storedSearch = useSelector((state) => state.facets.search);
     const { datasetsSuggestion } = useSelector((state) => state.facets);
+    const ip_address = useSelector((state) => state.ip_address.ip_address);
+
+    console.log("ip_address", ip_address)
 
     const navigate = useNavigate();
     const { state, pathname, search } = useLocation();
@@ -45,19 +48,21 @@ const Dataset = memo(() => {
     const publishers = useSelector((state) => state.facets.publishers);
     const tags = useSelector((state) => state.facets.tags);
     const files = useSelector((state) => state.facets.file_Formats);
+    console.log("OOO File", publishers);
+    console.log("OOO THNE", files);
 
     const data = [
         {
             title: t("publisher"),
-            tags: i18n.language === locales.AR ? publishers && isDuplicates(publishers?.ar) : publishers && publishers.en
+            tags: i18n.language === locales.AR ? publishers && isDuplicates(publishers) : publishers && publishers
         },
         {
             title: t("topics"),
-            tags: i18n.language === locales.AR ? topics && topics.ar : topics && topics.en
+            tags: i18n.language === locales.AR ? topics && topics : topics && topics
         },
         {
             title: t("tags"),
-            tags: i18n.language === locales.AR ? tags && tags.ar : tags && tags.en
+            tags: i18n.language === locales.AR ? tags && tags : tags && tags
         },
         {
             title: t("fileFormat"),
@@ -71,9 +76,6 @@ const Dataset = memo(() => {
 
     useEffect(() => {
         setSearchValue("")
-        // dispatch(setSearch(""))
-        // dispatch(setFilter(null))
-        // setFilters()
         setCurrentPage(1)
         i18n.language === locales.AR ? setSort("الأكثر تحميلا") : setSort("Modified")
     }, [i18n.language])
@@ -84,7 +86,6 @@ const Dataset = memo(() => {
         //     window.scrollBy(0, -2)
         // }, 500);
     }
-
 
     useEffect(() => {
         if (storedFilters) {
@@ -107,7 +108,7 @@ const Dataset = memo(() => {
         if (!most_viewed_datasets) {
             if (state) {
                 navigate(pathname, { replace: true, state: null })
-                getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : storedSearch ? storedSearch : "", sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [], i18n.language, dispatch, setTopics, setTags, setPublishers, setFileFormats)
+                getAllDatasets(setDatasets, setTotalCount, setLoading, state.search ? state.search : storedSearch ? storedSearch : "", sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, state && state.listItem && state.listItem.length > 0 ? state.listItem : [], i18n.language, dispatch, setTopics, setTags, setPublishers, setFileFormats, ip_address)
             }
         }
 
@@ -117,6 +118,8 @@ const Dataset = memo(() => {
         }
 
     }, [!most_viewed_datasets, sort]);
+
+    console.log("sadsadsadasdasda", recentsDatasets);
 
     useEffect(() => {
         if (most_viewed_datasets) {
@@ -129,12 +132,13 @@ const Dataset = memo(() => {
         if (!most_viewed_datasets) {
             if (currentPage || storedSearch || sort || storedFilters) {
                 if (!state?.search && !state?.listItem) {
-                    console.log("ARRayssssssssssssssss", storedFilters, filters);
-                    getAllDatasets(setDatasets, setTotalCount, setLoading, storedSearch, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, storedFilters, i18n.language, dispatch, setTopics, setTags, setPublishers, setFileFormats)
+                    getAllDatasets(setDatasets, setTotalCount, setLoading, storedSearch, sort === "العنوان" ? "title" : sort?.toLowerCase(), currentPage, rowsPerPage, storedFilters, i18n.language, dispatch, setTopics, setTags, setPublishers, setFileFormats, ip_address)
                 }
             }
         }
     }, [currentPage, storedSearch, sort, storedFilters, !most_viewed_datasets]);
+
+
 
     const toggle = useCallback(() => setViewAll(!viewAll), [viewAll]);
 
@@ -194,7 +198,7 @@ const Dataset = memo(() => {
                 searchData={i18n.language === locales.AR ? datasetsSuggestion?.ar : datasetsSuggestion?.en}
                 search={storedSearch}
                 onChangeSearchEnter={onChangeSearch}
-                filter={filters}
+                filter={storedFilters}
                 onApplyFilter={onApplyFilter}
                 onDeleteFilter={onDeleteFilter} />
             {
