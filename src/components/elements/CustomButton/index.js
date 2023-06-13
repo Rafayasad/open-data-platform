@@ -8,10 +8,11 @@ const CustomButton = memo((props) => {
 
     const { t, i18n } = useTranslation()
 
-    const { nopadding, padding, isFilled, title, icon, backgroundColor, textColor, width, borderColor, loading, onClick, disable, bold, iconend ,buttonClass} = props
-    
+    const { nopadding, padding, isFilled, title, icon, backgroundColor, textColor, width, borderColor, loading, onClick, disable, bold, iconend, buttonClass } = props
+
     return (
         <button
+            id={title && title?.replace(/\s+/g, '')}
             onClick={onClick ? onClick : () => { }}
             disabled={loading}
             className={`${buttonClass} m-0 fs-xs ${nopadding ? "px-0" : "px-4"} ${padding && padding} ${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold en-font-default"} ${bold && (i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold")}`}
@@ -23,8 +24,9 @@ const CustomButton = memo((props) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 whiteSpace: "nowrap",
-                fontSize:'14px',
-                lineHeight:'20px',
+                fontSize: '14px',
+                lineHeight: '20px',
+                outline: 0
             }}>
             {
                 loading ? (

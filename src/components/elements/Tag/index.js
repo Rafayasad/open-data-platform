@@ -7,7 +7,7 @@ const Tag = memo((props) => {
 
     return (
         <div
-            onClick={() => onClick ? onClick() : () => { }} className={`tag-primary mx-${!margin ? "1" : margin} d-flex justify-content-center align-items-center ${hoverEffect && "tag-hover"}`}
+            onClick={() => onClick ? onClick() : () => { }} className={`tag-primary me-${!margin ? "1" : "1"} mx-${margin} d-flex justify-content-center align-items-center ${hoverEffect && "tag-hover"}`}
             style={{
                 minHeight: '36px',
                 backgroundColor: backgroundColor ? backgroundColor : '#F3E6FA',

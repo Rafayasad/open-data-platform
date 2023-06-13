@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import Heading from '../../../elements/Heading';
@@ -10,7 +10,9 @@ const Main = memo((props) => {
 
     const { popularSearch, onSearch } = props;
 
-    const { t } = useTranslation()
+    const { t } = useTranslation();
+
+    const [expandedSearchbar, setExpandedSearchbar] = useState(false);
 
     return (
         <Container className="pt-5 mt-5">
@@ -28,6 +30,8 @@ const Main = memo((props) => {
                         <Col />
                         <Col xs={12} md={10} lg={8} className="py-3" style={{ zIndex: 1000 }}>
                             <Search
+                                setExpandedSearchbar={setExpandedSearchbar}
+                                expandedSearchbar={expandedSearchbar}
                                 searchData={popularSearch}
                                 onPressEnter={onSearch}
                                 placeholder={t("searchKeywords")}

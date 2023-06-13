@@ -53,7 +53,7 @@ const Header = memo((props) => {
                             size={headingSize}
                             color={color}
                             heading={title} /> */}
-                        <p className={`fs-title m-0 ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`} style={{ color: color }}>
+                        <p className={`fs-title m-0 py-3 py-lg-0 ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`} style={{ color: color }}>
                             {title}
                         </p>
                     </div>
@@ -74,7 +74,7 @@ const Header = memo((props) => {
                                     backgroundColor='transparent'
                                     onClick={onClickButton}
                                 /> */}
-                                <CustomButton buttonClass={`${color==='#000000' ? 'outlined' :'outlined-transparent'}`} title={buttonText ? buttonText : t("viewAll")}  onClick={onClickButton}/>
+                                <CustomButton buttonClass={`${color === '#000000' ? 'outlined' : 'outlined-transparent'}`} title={buttonText ? buttonText : t("viewAll")} onClick={onClickButton} />
                             </div> :
                             dropdown ?
                                 <Dropdown

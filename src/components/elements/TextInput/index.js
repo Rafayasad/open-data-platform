@@ -132,7 +132,7 @@ const TextInput = memo((props) => {
         value={value}
         onFocus={toggle}
         onBlur={toggle}
-        id="standard-adornment-password"
+        id={placeholder}
         sx={{
           ':before': { borderBottomColor: value?.length > 0 ? "black" : '#9F9F9F', borderBottomWidth: "1px" },
           ':after': {

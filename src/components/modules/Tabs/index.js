@@ -19,7 +19,7 @@ const Tabs = memo((props) => {
                         <Nav>
                             {
                                 data.map((item, index) => (
-                                    <div className={`${index === 1 && "mx-4"}`}>
+                                    <div key={index} className={`${index === 1 && "mx-4"}`}>
                                         <Nav.Item className={`m-0 ${active == index && "tab-underline"}`} onClick={() => setActive(index)}>
                                             <p className={`mb-2 ${index === 1 && "mx-2"}  ${item.name === "API Documentation" && "px-1"}`} style={{ color: active == index ? colors.black : colors.gray, cursor: "pointer" }} >{item.name}</p>
                                         </Nav.Item>
@@ -29,7 +29,7 @@ const Tabs = memo((props) => {
                         </Nav>
                     </Col>
                 </div>
-                <Row className="d-flex py-3" style={{ borderBottom: '1px solid #CFCFCF' }}>
+                <Row className="d-flex py-4" style={{ borderBottom: '1px solid #CFCFCF' }}>
                     <Col xs={12} sm={12} lg={8}>
                         <Tab.Content>
                             {

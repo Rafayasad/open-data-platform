@@ -29,3 +29,8 @@ button:not(:disabled) {
 .muiltr-1drmwn4-MuiButtonBase-root-MuiPaginationItem-root {
     margin: 0% !important;
 }
+
+.muiltr-d7p1f-MuiButtonBase-root-MuiPaginationItem-root {
+    padding: 0 8px !important;
+    margin: 0px 3px !important;
+}

@@ -49,7 +49,7 @@ const SuccessStoriesDetail = memo(() => {
 
     }, [])
 
-    const shareOption = shareOptions?.map((item, index) => (
+    const shareOption = shareOptions?.map((item) => (
         {
             title: t(item.title),
             format: item.format,

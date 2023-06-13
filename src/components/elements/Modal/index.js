@@ -15,7 +15,7 @@ import { routes } from '../../../router/helper';
 const ModalEelment = memo((props) => {
 
   const { size, backdrop, loading, title, description, isOpen,
-    setIsOpen, height, width, descriptionHeight, setData, isPublisherModal } = props;
+    setIsOpen, height, width, descriptionHeight, isPublisherModal } = props;
 
   const navigate = useNavigate();
 
@@ -27,19 +27,19 @@ const ModalEelment = memo((props) => {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: width ? width : 800,
-    // height: height && height,
+    // height: "100%",
     bgcolor: 'white',
     boxShadow: 24,
     color: 'black',
     border: 0,
     minHeight: "400px",
     p: 4,
+    zIndex: 999
   };
 
   const handleClose = () => {
     setIsOpen(false)
     !isPublisherModal && navigate(-1);
-    setData();
   };
 
   return (
@@ -54,7 +54,7 @@ const ModalEelment = memo((props) => {
           //scroll="body"
           hideBackdrop
           disableEnforceFocus
-          style={{ position: 'initial' }}
+          style={{ position: 'initial', outline: 0 }}
           disableBackdropClick
         >
           <Box sx={style}>
@@ -77,9 +77,9 @@ const ModalEelment = memo((props) => {
                   {/* <Typography id="modal-modal-description modal-body" sx={{ mt: 2, overflowY: "scroll", height: "350px" }}>
                   {description}
                 </Typography> */}
-                  <div className='custom-scrollbar' style={{ height: descriptionHeight ? descriptionHeight : "400px" }}>
+                  <div className='custom-scrollbar' style={{ height: descriptionHeight ? descriptionHeight : "350px" }}>
                     <div className='scroll-content'>
-                      <p className={`${i18next.language === locales.AR ? "ar-font" : "en-font"}`} dangerouslySetInnerHTML={{ __html: description }} />
+                      <p className={`${i18next.language === locales.AR ? "ar-font" : "fs-xs en-font"}`} dangerouslySetInnerHTML={{ __html: description }} />
                     </div>
                   </div>
                 </>
@@ -107,7 +107,7 @@ const ModalEelment = memo((props) => {
                   {description}
                 </Typography> */}
                 <div style={{ height: window.innerWidth >= 992 ? "400px" : "100%" }}>
-                  <p dangerouslySetInnerHTML={{ __html: description }} />
+                  <p className='fs-xs' dangerouslySetInnerHTML={{ __html: description }} />
                 </div>
               </>
             )}

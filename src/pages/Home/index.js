@@ -13,10 +13,11 @@ import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
 import { locales } from "../../i18n/helper";
 import View from "../../components/modules/View";
-import { setFilter } from "../../redux/reducers/Facets";
+import { setFileFormats, setFilter, setPublishers, setTags, setTopics } from "../../redux/reducers/Facets";
 import { useDispatch } from "react-redux";
 import { isDuplicates } from "../../utils/generic";
 import { Container } from "react-bootstrap";
+import _ from "lodash";
 
 const Home = memo(() => {
 
@@ -40,24 +41,31 @@ const Home = memo(() => {
     const [pageNumber, setPageNumber] = useState(1);
     const [count, setCount] = useState();
     const [search, setSearch] = useState();
-
+    
     const topics = useSelector((state) => state.facets.topics);
     const publishers = useSelector((state) => state.facets.publishers);
     const tags = useSelector((state) => state.facets.tags);
     const files = useSelector((state) => state.facets.file_Formats);
 
+    useEffect(() => {
+        getFacets(i18n.language === locales.AR ? "themelear" : "theme", dispatch, setTopics);
+        getFacets(i18n.language === locales.AR ? "keywordlear" : "keyword", dispatch, setTags);
+        getFacets(i18n.language === locales.AR ? "publisherlear__name" : "publisher__name", dispatch, setPublishers);
+        getFacets("distribution__item__format", dispatch, setFileFormats);
+    }, [i18n.language])
+
     const data = [
         {
             title: t("publisher"),
-            tags: i18n.language === locales.AR ? publishers && isDuplicates(publishers?.ar) : publishers && publishers.en
+            tags: i18n.language === locales.AR ? publishers && isDuplicates(publishers) : publishers && publishers
         },
         {
             title: t("topics"),
-            tags: i18n.language === locales.AR ? topics && topics.ar : topics && topics.en
+            tags: i18n.language === locales.AR ? topics && topics : topics && topics
         },
         {
             title: t("tags"),
-            tags: i18n.language === locales.AR ? tags && tags.ar : tags && tags.en
+            tags: i18n.language === locales.AR ? tags && tags : tags && tags
         },
         {
             title: t("fileFormat"),
@@ -95,7 +103,7 @@ const Home = memo(() => {
             <Main filterData={data} onSearch={onSearch} onClickExplore={() => topicsDiv.scrollIntoView()} onApplyFilter={onApplyFilter} />
             <div id='topics' className="m-0 p-0">
                 <Topics onClickViewless={() => topicsDiv.scrollIntoView()} onClickList={onClickList}
-                    data={i18n.language === locales.AR ? topics && topics.ar : topics && topics.en}
+                    data={i18n.language === locales.AR ? topics && topics : topics && topics}
                 />
             </div>
             <Images />
