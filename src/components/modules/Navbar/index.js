@@ -78,7 +78,7 @@ const Navbar = memo((props) => {
 
     return (
         <>
-            <Container fluid className="nav-padding py-3 d-none d-lg-block" style={{ position: 'absolute', top: isLoggedIn ? '78px' : 0, right: 0, left: 0 }}>
+            <Container fluid className="nav-padding py-3 d-none d-lg-block" style={{ zIndex: 99, position: 'absolute', top: isLoggedIn ? '78px' : 0, right: 0, left: 0 }}>
                 <Row>
                     <Col className="d-flex align-items-center">
                         <Link to={routes.HOME}>
@@ -123,20 +123,21 @@ const Navbar = memo((props) => {
                         {
                             !nocontent &&
                             <>
-                                <div className="d-flex justify-content-center mx-1">
+                                {/* register button is hide */}
+                                <div className="d-none justify-content-center mx-1">
                                     <Link style={{ textDecoration: 'none' }} to={routes.REGISTER}>
                                         {/* <Button borderColor={color} backgroundColor='transparent' textColor={color} title={t("register")} /> */}
-                                        <CustomButton title={t("register")} buttonClass={`${theme==='dark'?'outlined' :'outlined-transparent'}`}/>
+                                        <CustomButton title={t("register")} buttonClass={`${theme === 'dark' ? 'outlined' : 'outlined-transparent'}`} />
                                     </Link>
                                 </div>
                                 <div className="d-flex justify-content-center mx-2">
                                     {
                                         isLoggedIn ? (
-                                            <CustomButton title={t("logout")} loading={loading} onClick={onClickLogout} buttonClass = {`${theme==='dark' ? 'contained-black' :'contained'}`}/>
-                                            
+                                            <CustomButton title={t("logout")} loading={loading} onClick={onClickLogout} buttonClass={`${theme === 'dark' ? 'contained-black' : 'contained'}`} />
+
                                         ) : (
                                             <Link style={{ textDecoration: 'none' }} to={routes.LOGIN}>
-                                                <CustomButton  title={t("LogIn")} buttonClass = {`${theme==='dark' ? 'contained-black' :'contained'}`}/>
+                                                <CustomButton title={t("LogIn")} buttonClass={`${theme === 'dark' ? 'contained-black' : 'contained'}`} />
                                             </Link>
                                         )
                                     }
@@ -146,7 +147,7 @@ const Navbar = memo((props) => {
                     </Col>
                 </Row>
             </Container>
-            <Container fluid className={`nav-padding py-3 d-block d-lg-none ${scroll && "sticky bg-white transition"}`} style={{ position: !scroll && 'absolute', top: isLoggedIn ? '78px' : 0, left: 0, right: 0, zIndex: 1000 }}>
+            <Container fluid className={`nav-padding py-3 d-block d-lg-none ${scroll && "sticky bg-white transition"}`} style={{ position: !scroll && 'absolute', top: isLoggedIn ? '78px' : 0, left: 0, right: 0, zIndex: 99 }}>
                 <Row className="d-flex justify-content-between align-items-center" >
                     <Col className="d-flex d-md-none align-items-center justify-content-start">
                         <Link to={routes.HOME}>
@@ -163,17 +164,22 @@ const Navbar = memo((props) => {
                     {!nolanguageswitcher &&
                         <Col className="d-flex align-items-center justify-content-end">
                             {searchIcon &&
-                                <AiOutlineSearch className="mx-3" size={25} onClick={() => setExpandedSearchbar(true)} />
+                                <AiOutlineSearch className="" size={25} onClick={() => setExpandedSearchbar(true)} />
                             }
                             {!nolanguageswitcher &&
-                                <RxHamburgerMenu size={25} color={theme === 'dark' || scroll ? colors.black : colors.white} onClick={onClickDrawer} />
+                                <div className="d-flex">
+                                    <div className="ps-3">
+                                        <LanguageSwitcher theme={theme} />
+                                    </div>
+                                    <RxHamburgerMenu size={25} color={theme === 'dark' || scroll ? colors.black : colors.white} onClick={onClickDrawer} />
+                                </div>
                             }
                         </Col>
                     }
                 </Row>
             </Container >
             <Drawer
-                style={{ width: "100%", height: "100%", scrollBehavior: "smooth", overflow: "auto", minHeight: "100%", zIndex: 1050, backgroundColor: colors.white }}
+                style={{ width: "100%", height: "100%", scrollBehavior: "smooth", minHeight: "100%", zIndex: 1050, backgroundColor: colors.white }}
                 open={isOpen}
                 direction='right'
                 className="p-3"
@@ -206,11 +212,11 @@ const Navbar = memo((props) => {
                         {
                             MobileRoutes.map((item, index) => {
                                 return (
-                                    <Fragment>
+                                    <Fragment key={index}>
                                         <Col className="d-flex align-items-center py-2" xs={12}>
                                             <Link style={{ textDecoration: "none" }} to={item.route} replace={true}>
-                                                {/* <p className="m-0 text-black fs-2xl p-0">{item.name}</p> */}
-                                                <Heading size={"xl"} color={colors.black} nomargin heading={item.name} />
+                                                <p className="m-0 text-black fs-2xl p-0">{item.name}</p>
+                                                {/* <Heading size={"xl"} color={colors.black} nomargin heading={item.name} /> */}
                                             </Link>
                                         </Col>
                                         {
@@ -228,16 +234,17 @@ const Navbar = memo((props) => {
                         <Col>
                             {
                                 isLoggedIn ? (
-                                    <CustomButton width={"100%"} buttonClass = 'contained-black' title={t("logout")} loading={loading} onClick={onClickLogout} />
+                                    <CustomButton width={"100%"} buttonClass='contained-black' title={t("logout")} loading={loading} onClick={onClickLogout} />
                                 ) : (
                                     <Link style={{ textDecoration: 'none' }} to={routes.LOGIN}>
-                                        <CustomButton width={"100%"} title={t("LogIn")} buttonClass = 'contained-black'/>
+                                        <CustomButton width={"100%"} title={t("LogIn")} buttonClass='contained-black' />
                                     </Link>
                                 )
                             }
                         </Col>
                     </Row>
-                    <Row className="d-flex justify-content-center my-3">
+                    {/* mobile register is hide */}
+                    <Row className="d-none justify-content-center my-3">
                         <Col sm={11} xs={11} className="d-flex align-items-center justify-content-center py-4 bg-light" style={{ borderRadius: "20px" }}>
                             <p className="m-0 en-font-default" style={{ color: colors.black }}>
                                 {`${t("newUser")} ${i18n.language === locales.EN ? " ? " : " ؟ "}`}
@@ -255,7 +262,7 @@ const Navbar = memo((props) => {
                         <LanguageSwitcher theme={"dark"} />
                     </Col>
                     <Col className="d-flex align-items-center justify-content-end p-0">
-                        <p className="m-0 p-0" style={{ color: colors.gray }}><small>{t("adda")}</small></p>
+                        <p className="m-0 p-0 fs-mini" style={{ color: colors.light_gray }}><small>{t("adda")}</small></p>
                     </Col>
                 </Row>
             </Drawer>

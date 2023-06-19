@@ -92,7 +92,7 @@ const Dropdown = (props) => {
                         ) : (
                             <BSDropdown.Toggle
                                 href={null}
-                                style={{ border: borderColor && !isOpen ? "1px solid black" : "1px solid #9F9F9F" }}
+                                style={{ border: borderColor && !isOpen ? "1px solid black" : "1px solid #cfcfcf" }}
                                 className={`w-100 bg-white my-1 d-flex align-items-center justify-content-between my-dropdown-toggle text-black ${isOpen && "dropdown-hover"}`}
                             >
                                 <div className=''>

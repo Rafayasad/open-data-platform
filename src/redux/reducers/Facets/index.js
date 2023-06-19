@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+    staticTopics: null,
     topics: null,
     publishers: null,
     tags: null,
@@ -16,6 +17,9 @@ export const facetsSlice = createSlice({
     name: 'facets',
     initialState,
     reducers: {
+        setStaticTopics: (state, action) => {
+            state.staticTopics = action.payload
+        },
         setTopics: (state, action) => {
             state.topics = action.payload
         },
@@ -46,6 +50,6 @@ export const facetsSlice = createSlice({
     }
 })
 
-export const { setTopics, setPublishers, setTags, setFileFormats, setFilter, setSearch, setStoriesTags, setDatasetsSuggestion, setSupportSuggestion } = facetsSlice.actions
+export const { setStaticTopics, setTopics, setPublishers, setTags, setFileFormats, setFilter, setSearch, setStoriesTags, setDatasetsSuggestion, setSupportSuggestion } = facetsSlice.actions
 
 export default facetsSlice.reducer

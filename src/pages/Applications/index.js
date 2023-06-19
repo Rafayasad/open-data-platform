@@ -24,6 +24,8 @@ const Applications = memo(() => {
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(9);
 
+    console.log("APPPAPAPPAPA",applications);
+
     useEffect(() => {
         if (applications) {
             let arr = [...applications]
@@ -57,8 +59,6 @@ const Applications = memo(() => {
         }
 
     })
-
-    console.log("====>", displayApplications);
 
     return (
         <div>

@@ -26,6 +26,8 @@ const MiddleFooter = memo(() => {
     const topics = useSelector((state) => state.facets.topics);
     const { isLoggedIn } = useSelector(state => state.authentication);
 
+    console.log("TOPICS", topics);
+
     const [activeIndex, setActiveIndex] = useState();
 
     function CustomToggle({ eventKey }) {
@@ -45,7 +47,7 @@ const MiddleFooter = memo(() => {
     const data = [
         {
             heading: t("datasets"),
-            data: i18n.language === locales.AR ? topics?.ar?.map(item => { return ({ ...item, link: routes.DATASET, params: { listItem: [item] } }) }) : topics?.en?.map(item => { return ({ ...item, link: routes.DATASET, params: { listItem: [item] } }) })
+            data: i18n.language === locales.AR ? topics?.map(item => { return ({ ...item, link: routes.DATASET, params: { listItem: [item] } }) }) : topics?.map(item => { return ({ ...item, link: routes.DATASET, params: { listItem: [item] } }) })
         },
         {
             heading: t("supports"),
@@ -161,7 +163,7 @@ const MiddleFooter = memo(() => {
                 </div>
                 <hr className="text-white m-0 p-0" />
                 {
-                    data.map((item, index) => {
+                    data?.map((item, index) => {
                         return (
                             <>
                                 <Accordion className='bg-black' activeKey={activeIndex} key={index}>
@@ -176,11 +178,18 @@ const MiddleFooter = memo(() => {
                                             {
                                                 item.data?.map((items, index) => {
                                                     return (
-
                                                         <Col xs={10} key={index} className="py-3">
-                                                            <Link style={{ textDecoration: "none" }} to={items.link} state={items.params}>
-                                                                <Heading nomargin size="xs" heading={items.title} color={colors.white} />
-                                                            </Link>
+                                                            {items.downloadURL ?
+                                                                <div>
+                                                                    <a style={{ textDecoration: "none" }} href={items.downloadURL}>
+                                                                        <Heading nomargin size="xs" heading={items.title} color={colors.white} />
+                                                                    </a>
+                                                                </div>
+                                                                :
+                                                                <Link style={{ textDecoration: "none" }} to={items.link} state={items.params}>
+                                                                    <Heading nomargin size="xs" heading={items.title} color={colors.white} />
+                                                                </Link>
+                                                            }
                                                         </Col>
                                                     )
                                                 })
@@ -196,10 +205,7 @@ const MiddleFooter = memo(() => {
                     })
                 }
                 <Row className='d-flex py-3'>
-                    <Col sm={6} xs={6} className={"d-flex align-items-center"}>
-                        <LanguageSwitcher theme={"light"} />
-                    </Col>
-                    <Col sm={6} xs={6}>
+                    <Col sm={12} xs={12}>
                         <div className='d-flex align-items-center justify-content-end'>
                             <div className='px-3'>
                                 <Heading onClick={() => ScrollToTop()} nomargin size="xxs" heading={t("backToTop")} color={colors.white} />

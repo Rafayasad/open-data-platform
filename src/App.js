@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import { locales } from './i18n/helper';
 import { setDatasetsSuggestion, setPublishers, setStoriesTags, setSupportSuggestion, setTags, setTopics, setFileFormats } from './redux/reducers/Facets';
 import { setAboutus } from './redux/reducers/About';
-import { checkUser, getAboutUs, getAllApplications, getFacets, getFaqsCategory, getFileFormatsFacets, getPopularQuestions, getSearch, getStoriesTags, getSuccessStories } from './axios/api';
+import { checkUser, getAboutUs, getAllApplications, getFacets, getFaqsCategory, getFileFormatsFacets, getIpAddress, getPopularQuestions, getSearch, getStoriesTags, getSuccessStories } from './axios/api';
 import { setApplications } from './redux/reducers/Applications';
 import { handleLogin, handleLogout } from './redux/reducers/Authentication';
 import { setStories, toggleLoading } from './redux/reducers/SuccessStories';
@@ -19,6 +19,7 @@ import Router from './router';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import { setPublisherSuggestion } from './redux/reducers/Publishers';
+import { setIpAddress } from './redux/reducers/IpAddress';
 
 function App() {
 
@@ -41,12 +42,10 @@ function App() {
   }, [i18n.language])
 
   useEffect(() => {
-    checkUser(dispatch, handleLogin, handleLogout)
+    getFacets(i18n.language === locales.AR ? "themelear" : "theme", dispatch, setTopics);
+    getIpAddress(dispatch, setIpAddress);
+    checkUser(dispatch, handleLogin, handleLogout);
     getAboutUs(dispatch, setAboutus);
-    getFacets("theme", "themelear", dispatch, setTopics);
-    getFacets("keyword", "keywordlear", dispatch, setTags);
-    getFacets("publisher__name", "publisherlear__name", dispatch, setPublishers);
-    getFileFormatsFacets("format", dispatch, setFileFormats);
     getAllApplications(dispatch, setApplications);
     getFaqsCategory(dispatch, setCategories);
     getPopularQuestions(dispatch, setQuestions);
@@ -57,11 +56,11 @@ function App() {
     getSuccessStories(dispatch, setStories, toggleLoading, storiesFilters);
   }, []);
 
-  // if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
-  //   console.log = () => { }
-  //   console.error = () => { }
-  //   console.warn = () => { }
-  // }
+  if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
+    console.log = () => { }
+    console.error = () => { }
+    console.warn = () => { }
+  }
 
   return (
     <CacheProvider value={i18n.language === locales.AR ? cacheRtl : emptyCache}>

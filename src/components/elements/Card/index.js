@@ -1,13 +1,11 @@
 import './style.css';
-import React, { memo, useState } from "react";
-import { Card as RBCard, Col, Row } from "react-bootstrap";
+import React, { memo, useEffect, useRef, useState } from "react";
+import { Card as RBCard, Col, Row, Spinner } from "react-bootstrap";
 import { BsPerson, BsShare, BsThreeDots } from "react-icons/bs";
 import { FiTwitter, FiLinkedin } from "react-icons/fi";
 import { MdOutlineFileDownload } from 'react-icons/md';
 import { BsArrowDownCircleFill } from "react-icons/bs";
 import { HiOutlineDotsHorizontal, HiLink } from "react-icons/hi";
-import { FaFilePdf, FaFileExcel, FaFileCsv } from "react-icons/fa";
-// import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { colors } from "../../../utils/colors";
 import { useCallback } from "react";
 import Dropdown from '../../elements/DropDown';
@@ -24,13 +22,15 @@ import i18n from "../../../i18n/i18n";
 import { locales } from "../../../i18n/helper";
 import BottomSheetBar from "../../modules/BottomSheet";
 import { routes } from "../../../router/helper";
-import { addDownloadCount } from "../../../axios/api";
+import { addDownloadCount, getResourcesByIdentifier } from "../../../axios/api";
 import i18next from "i18next";
+import { useSelector } from 'react-redux';
 
 const Card = memo((props) => {
 
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const ip_address = useSelector(state => state.ip_address.ip_address);
 
     const { resources, title, publisher, description, tags, size, noborder,
         hoverable, nopadding, shortTitle, headingSize, onClick, nodropdown,
@@ -39,20 +39,37 @@ const Card = memo((props) => {
     var HEIGHT = "332px", border, ClassName;
 
     const [selectedDropdownValue, setSelectedDropdownValue] = useState();
-    const [isDownloadLink, setIsDownloadLink] = useState(); // for linking url
     const [openBottomSheet, setOpenBottomSheet] = useState(false)
     const [selectedSheetValue, setSelectedSheetValue] = useState();
 
+    const [overflowedWidth, setOverflowedWidth] = useState(0);
+    const divRef = useRef(null);
+
+    useEffect(() => {
+        const divElement = divRef.current;
+
+        // Check if the content inside the div is overflowing in width
+        const isOverflowing = divElement?.offsetWidth < divElement?.scrollWidth;
+
+        if (isOverflowing) {
+            // Get the exact width of the div when it becomes overflowed
+            const { width } = divElement.getBoundingClientRect();
+            setOverflowedWidth(width);
+        }
+    }, [divRef]);
+
+    // for resources
+    const [newResources, setNewResources] = useState();
+
     const isClicked = useCallback((value, id) => {
+        getResourcesByIdentifier(id, setNewResources)
+
         setSelectedDropdownValue(value)
     })
 
-    const downloadResources = useCallback((links) => { setIsDownloadLink(links) }); //callback for url redirect
-
     const addDownloadCounts = useCallback((title, id) => {
-        addDownloadCount(tempIncreaseDownloadCount ? datasetID : id, tempIncreaseDownloadCount).then((res) => {
-            console.log("hello its running...s", datasetID);
-            handleReload()
+        addDownloadCount(id, ip_address).then((res) => {
+            handleReload();
         })
     });
 
@@ -86,30 +103,41 @@ const Card = memo((props) => {
 
     const options = [
         {
+            id: datasetID,
             title: window.innerWidth <= 768 ? t("downloadDatasets") : t("download"),
             icon: window.innerWidth <= 768 ? <BsArrowDownCircleFill size={20} color="black" /> : <MdOutlineFileDownload size={20} color="black" />,
             onClick: isClicked,
         },
         {
+            id: "share",
             title: t("share"),
             icon: <BsShare color="black" />,
             onClick: isClicked,
         }
     ]
 
-    const specificDownloadOptions = resources?.map(item => (
+    const specificDownloadOptions = newResources?.length > 0 ? newResources?.map(item => (
         {
-            id: item.id,
-            title: i18n.language === locales.AR ? (item.title_ar && item.title_ar != "" ? item.title_ar : item.downloadURL) : (item.title && item.title != "" ? item.title : item.downloadURL),
+            id: item.identifier,
+            title: i18n.language === locales.AR ? (item.titlelear && item.titlelear != "" ? item.titlelear : item.url) : (item.title && item.title != "" ? item.title : item.url),
             onClick: addDownloadCounts,
-            downloadLink: item.downloadURL,
+            downloadLink: item.url,
             icon: item.format === "pdf" ? <img src={pdfImage} />
                 : item.format === "excel" ? <img src={excelImage} />
                     : item.format === "xlsx" ? <img src={excelImage} />
                         : item.format === "csv" ? <img src={csvImage} height={20} width={20} />
-                            : item.format === "api" && <img src={apiImage} />
+                            : item.format === "api" || item.format === "API" && <img src={apiImage} />
         }
+
     ))
+        :
+        [{
+            title: t("loading"),
+            icon: <Spinner size='sm' />
+        }]
+    // <div className='bg-info' style={{height:"20px"}}>
+    //     <Shimmer rounded='xs' width="70%" className={"my-1"} backgroundColor={colors.black} />
+    // </div>
 
     const specificShareOptions = shareOptions?.map(item => (
         {
@@ -123,6 +151,7 @@ const Card = memo((props) => {
                             : item.format === "email" && <BsPerson />
         }
     ))
+
     return (
         <>
             <BottomSheetBar
@@ -134,7 +163,7 @@ const Card = memo((props) => {
                 options={selectedSheetValue === t("downloadDatasets") ? specificDownloadOptions : selectedSheetValue === t("share") ? specificShareOptions : options} />
             <RBCard
                 // onClick={onClick}
-                className={`${nopadding ? "py-4" : "paddofcards"} ${ClassName} hover-pl`}
+                className={`${nopadding ? "py-lg-4" : "paddofcards"} ${ClassName} hover-pl`}
                 style={{
                     height: HEIGHT,
                     width: "100%",
@@ -144,20 +173,45 @@ const Card = memo((props) => {
                 {
                     !notags &&
                     <Row className={`${nopadding && "m-0"} h-25 align-items-center`}>
-                        <Col xs={8} className="d-flex scroll" style={{ overflow: "hidden" }}>
+                        <div ref={divRef} className="d-flex col-8 scroll" style={{ overflow: "hidden" }}>
                             {
-                                tags && tags.length > 0 && tags.map((item, index) => (
-                                    <Tag key={index} title={item}
-                                        margin={index == 0 ? "0" : "2"}
-                                        onClick={() => !notagsactive && onClickTag(routes.DATASET, { listItem: [{ title: item, type: i18n.language === locales.AR ? "themelear" : "theme" }] })} />
-                                ))
+                                tags && tags?.length > 0 &&
+                                tags.slice(0,
+                                    overflowedWidth && overflowedWidth < 215 ? 1 :
+                                        overflowedWidth && overflowedWidth < 230 ? 2 :
+                                            overflowedWidth && overflowedWidth < 250 ? 1 :
+                                                overflowedWidth && overflowedWidth < 300 ? 2 : 4).map((item, index) => (
+
+                                                    <Tag key={index} title={item}
+                                                        margin={index == 0 ? "0" : "1"}
+                                                        onClick={() => !notagsactive && onClickTag(routes.DATASET, { listItem: [{ title: item, type: i18n.language === locales.AR ? "themelear" : "theme" }] })}
+                                                    />
+                                                ))
                             }
-                        </Col>
+                            {
+                                overflowedWidth && overflowedWidth == 0 ?
+                                    null
+                                    :
+                                    overflowedWidth && overflowedWidth < 215 ? <Tag
+                                        title={`+ ${(tags?.length) - 1}`}
+                                    /> :
+                                        overflowedWidth && overflowedWidth < 230 ? <Tag
+                                            title={`+ ${(tags?.length) - 2}`}
+                                        /> :
+                                            overflowedWidth && overflowedWidth < 250 ? <Tag
+                                                title={`+ ${(tags?.length) - 1}`}
+                                            /> :
+                                                overflowedWidth && overflowedWidth < 300 ? <Tag
+                                                    title={`+ ${(tags?.length) - 2}`}
+                                                />
+                                                    : null
+                            }
+                        </div>
                         {
                             !nodropdown &&
                             <Col xs={4} className='d-flex justify-content-end'>
                                 <div className="d-block d-lg-none">
-                                    <HiOutlineDotsHorizontal onClick={() => setOpenBottomSheet(true)} color={colors.black} size={28} style={{ cursor: 'pointer' }} />
+                                    <HiOutlineDotsHorizontal className='btn-primary' onClick={() => setOpenBottomSheet(true)} color={colors.black} size={28} style={{ cursor: 'pointer' }} />
                                 </div>
                                 <div className="d-none d-lg-block">
                                     <Dropdown
@@ -234,7 +288,7 @@ const Card = memo((props) => {
                             </Col>
                         </Row>
                 }
-            </RBCard>
+            </RBCard >
         </>
     )
 });

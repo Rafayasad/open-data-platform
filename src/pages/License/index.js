@@ -1,15 +1,14 @@
 import React, { memo, useEffect, useRef, useState } from "react";
-import Modal from "../../../components/elements/Modal/index";
-import AuthBackground1 from "../../../assets/images/Auth-Background-1.jpg";
-import Navbar from '../../../components/modules/Navbar'
-import useIsFocused from "../../../utils/hooks/useIsFocused";
-import View from "../../../components/modules/View";
-import { getPrivacyPolicy } from "../../../axios/api";
-import i18n from "../../../i18n/i18n";
-import { locales } from "../../../i18n/helper";
+import Modal from "../../components/elements/Modal/index";
+import AuthBackground1 from "../../assets/images/Auth-Background-1.jpg";
+import useIsFocused from "../../utils/hooks/useIsFocused";
+import View from "../../components/modules/View";
+import { getLicenseDetails } from "../../axios/api";
+import i18n from "../../i18n/i18n";
+import { locales } from "../../i18n/helper";
 import { useTranslation } from "react-i18next";
 
-const PrivacyPolicy = memo(() => {
+const License = memo(() => {
 
     const { t } = useTranslation();
 
@@ -19,11 +18,8 @@ const PrivacyPolicy = memo(() => {
     const [isOpen, setIsOpen] = useState(true);
 
     useEffect(() => {
-        getPrivacyPolicy(setData, setLoading, "policy")
+        getLicenseDetails(setData, setLoading)
     }, [i18n.language])
-
-
-    console.log("dataAAAAAAAAAAAAAAA",data,data?.description);
 
     return (
         <>
@@ -52,4 +48,4 @@ const PrivacyPolicy = memo(() => {
     )
 })
 
-export default PrivacyPolicy;
+export default License;

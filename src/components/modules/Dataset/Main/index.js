@@ -28,20 +28,60 @@ const Main = memo((props) => {
         };
     }, []);
 
+    const renderFiltersContainer = (viewport) => (
+        filter && filter?.length > 0 &&
+        <Row className="pb-3 m-0">
+            <Col className="d-flex flex-wrap justify-content-center align-items-center">
+                {
+                    filter && filter?.length > 0 && filter?.slice(0, viewport == "sm" ? 2 : 5).map((item, index) =>
+                    (
+                        <div key={index} className="py-1">
+                            <Tag
+                                backgroundColor={colors.black}
+                                textColor={colors.white}
+                                title={item.title}
+                                crossIcon={<RxCross2 size={20} onClick={() => onDeleteFilter(item)} />} />
+                        </div>
+                    ))
+                }
+                {
+                    viewport == "sm" ?
+                        filter && filter?.length > 2 &&
+                        <div className="py-1">
+                            <Tag
+                                backgroundColor={colors.black}
+                                textColor={colors.white}
+                                title={`+ ${(filter?.length) - 2}`}
+                            />
+                        </div>
+                        :
+                        filter && filter?.length > 5 &&
+                        <div className="py-1">
+                            <Tag
+                                backgroundColor={colors.black}
+                                textColor={colors.white}
+                                title={`+ ${(filter?.length) - 5}`}
+                            />
+                        </div>
+                }
+            </Col>
+        </Row>
+    )
+
     return (
         <>
             <Container className="pt-5 mt-5">
                 <Row className="pt-4 pt-lg-5 pb2">
                     <Col className="d-flex flex-column justify-content-center">
                         <Row>
-                            <Col />
-                            <Col xs={10} md={8} style={{ textAlign: 'center' }} className="py-2">
+                            <Col xs={1} md={2} />
+                            <Col xs={10} md={8} style={{ textAlign: 'center' }} className="py-lg-2">
                                 {/* <Heading size="xxxl" bold color={colors.black} heading={t("datasetTitle")} /> */}
                                 <p className={`fs-lg ${i18next.language === locales.AR ? 'ar-font-bold' : 'en-font-bold'}`}>
                                     {t("datasetTitle")}
                                 </p>
                             </Col>
-                            <Col />
+                            <Col xs={1} md={2} />
                         </Row>
                     </Col>
                 </Row>
@@ -69,35 +109,12 @@ const Main = memo((props) => {
                         </Col>
                         <Col />
                     </Row>
-                    {
-                        filter && filter.length > 0 &&
-                        <Row className="pb-3 m-0">
-                            <Col className="d-flex flex-wrap justify-content-center align-items-center">
-                                {
-                                    filter && filter.length > 0 && filter.slice(0, 5).map((item, index) =>
-                                    (
-                                        <div className="py-1">
-                                            <Tag
-                                                backgroundColor={colors.black}
-                                                textColor={colors.white}
-                                                title={item.title}
-                                                crossIcon={<RxCross2 size={20} onClick={() => onDeleteFilter(item)} />} />
-                                        </div>
-                                    ))
-                                }
-                                {
-                                    filter && filter.length > 5 &&
-                                    <div className="py-1">
-                                        <Tag
-                                            backgroundColor={colors.black}
-                                            textColor={colors.white}
-                                            title={`+ ${(filter.length) - 5}`}
-                                        />
-                                    </div>
-                                }
-                            </Col>
-                        </Row>
-                    }
+                    <div className='d-none d-md-block'>
+                        {renderFiltersContainer("lg")}
+                    </div>
+                    <div className='d-block d-md-none'>
+                        {renderFiltersContainer("sm")}
+                    </div>
                 </Container>
             </Container>
         </>

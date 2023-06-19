@@ -21,6 +21,8 @@ export const routes = {
   CHANGE: BASE_ROUTE + `/change-password`,
   OTP: BASE_ROUTE + `/otp-verification`,
   POLICY: BASE_ROUTE + `/privacy-policy`,
+  TERMS: BASE_ROUTE + `/terms-condition`,
+  LICENSE: BASE_ROUTE + `/abu-dhabi-open-data-portal`,
   CONTACT: BASE_ROUTE + `/contact-us`,
   REAL_TIME_APIS: BASE_ROUTE + `/real-time-apis`,
   REAL_TIME_APIS_DETAIL: BASE_ROUTE + `/real-time-apis/detail`,

@@ -25,7 +25,7 @@ const Main = memo((props) => {
         {
             title: t("about"),
             detail: data ? (
-                i18n.language === locales.AR ? data.description_ar : des?.map((item, index) => <p>{`${index != 0 ? "• " : ""} ${item}`}</p>)
+                i18n.language === locales.AR ? data.description_ar : des?.map((item, index) => <p key={index}>{`${index != 0 ? "• " : ""} ${item}`}</p>)
             ) : (
                 <>
                     <Shimmer rounded='xs' className={"my-1"} />

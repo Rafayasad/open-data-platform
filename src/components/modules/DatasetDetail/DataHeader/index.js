@@ -25,25 +25,23 @@ import { RWebShare } from "react-web-share";
 import { addDownloadCount } from "../../../../axios/api";
 import i18next from "i18next";
 import CustomButton from "../../../elements/CustomButton";
+import { useSelector } from 'react-redux';
 
 
 const DataHeader = memo((props) => {
 
-    const { title, resources, url, nooptions, downloadCount, handleReload } = props
+    const { title, resources, url, nooptions, downloadCount, handleReload } = props;
+    const ip_address = useSelector(state => state.ip_address.ip_address);
 
     const { t } = useTranslation();
     const [openBottomSheet, setOpenBottomSheet] = useState(false)
 
-
-    // const [offset, setOffset] = useState(false);
-
-
-
     const [headerOnTop, setHeaderOnTop] = useState(false);
+    const [offset, setOffset] = useState(false);
     const [currentHovered, setCurrentHovered] = useState(null);
 
     const addDownloadCounts = useCallback((title, id) => {
-        addDownloadCount(id).then((res) => {
+        addDownloadCount(id, ip_address).then((res) => {
             console.log("hello its running...", id);
             handleReload()
         })
@@ -102,12 +100,27 @@ const DataHeader = memo((props) => {
         window.onscroll = () => {
             if (document?.getElementById("main")?.getBoundingClientRect().top <= 20) {
                 setHeaderOnTop(true);
-                // setOffset(true);
-            } else {
+            }
+            if (document?.getElementById("main")?.getBoundingClientRect().top <= 10) {
+                setOffset(true);
+            }
+            else {
                 setHeaderOnTop(false)
+                setOffset(false);
             }
         }
     }, [])
+
+
+    // useEffect(() => {
+    //     window.onscroll = function () {
+    //         if (window.scrollY > 300) {
+    //             setOffset(true);
+    //         } else {
+    //             setOffset(false);
+    //         }
+    //     };
+    // }, []);
 
     // useEffect(() => {
     //     window.onscroll = function () {
@@ -120,7 +133,7 @@ const DataHeader = memo((props) => {
     // }, []);
 
     return (
-        <Container id='main' fluid className={`bg-white page-padding d-flex justify-content-between align-items-start py-4 ${headerOnTop && "sticky-top w-100 m-0"}`}>
+        <Container id='main' fluid className={`bg-white page-padding d-flex justify-content-between align-items-start py-4 marginbottom ${headerOnTop && "sticky w-100 m-0"} ${offset && "shadow-sm zIndex"}`}>
             <BottomSheetBar selectedSheetValue={t("download")} open={openBottomSheet} setOpen={setOpenBottomSheet} options={options} />
             <Col md={12} lg={8} className="px-0">
                 {
@@ -133,7 +146,7 @@ const DataHeader = memo((props) => {
                                 heading={title}
                                 maxNumberOfLines={headerOnTop && 2}
                             /> */}
-                            <p style={{ color: colors.darker_gray }} className={`fs-lg multine-ellipsis-${headerOnTop && 2} ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>
+                            <p style={{ color: colors.darker_gray }} className={`m-0 fs-lg multine-ellipsis-${headerOnTop && 2} ${i18next.language === locales.AR ? "ar-font-bold" : "en-font-bold"}`}>
                                 {title}
                             </p>
                         </div>
@@ -144,7 +157,7 @@ const DataHeader = memo((props) => {
                 !nooptions &&
                 (
                     <>
-                        <Col className="d-none d-lg-flex justify-content-end">
+                        <Col className="d-none m-1 d-lg-flex justify-content-end">
                             <div className="px-2" onClick={() => setCurrentHovered(false)} onMouseOver={onHover} onMouseLeave={onLeave}>
                                 <Dropdown
                                     nopadding
@@ -180,6 +193,7 @@ const DataHeader = memo((props) => {
                             <div className="d-flex d-lg-none justify-content-between align-items-center fixed-bottom bg-white p-3">
                                 <Col>
                                     {window.navigator.canShare ?
+                                        // <></>
                                         <Button onClick={handleClick} backgroundColor="white" textColor="black" borderColor={colors.black} icon={<SlShare size={20} />} />
                                         :
                                         <RWebShare
@@ -194,7 +208,7 @@ const DataHeader = memo((props) => {
                                     }
                                 </Col>
                                 <Col xs={4} className="d-flex justify-content-center align-items-center px-3 text-end">
-                                    <Heading size='xxs' nomargin heading={`${downloadCount} ${t("download")}`} />
+                                    <Heading size='xxs' nomargin heading={`${downloadCount ? downloadCount : "0"} ${t("download")}`} />
                                 </Col>
                                 <Col className="d-flex justify-content-end">
                                     <Button onClick={() => setOpenBottomSheet(true)} title={t("download")} backgroundColor="black" textColor="white" />

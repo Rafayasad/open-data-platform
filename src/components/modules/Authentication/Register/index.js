@@ -121,7 +121,7 @@ const Register = memo(() => {
                           reEmail: reEmail ? reEmail : details?.reEmail,
                           password: password ? password : details?.password
                         }))
-                        navigate(routes.POLICY)
+                        navigate(routes.TERMS)
                       }}
                         style={{ color: colors.purple, cursor: "pointer" }}> {t("terms")} </span > {t("and")} <span
                           onClick={() => {
@@ -190,7 +190,7 @@ const Register = memo(() => {
                             reEmail: reEmail ? reEmail : details?.reEmail,
                             password: password ? password : details?.password
                           }))
-                          navigate(routes.POLICY)
+                          navigate(routes.TERMS)
                         }}
                         style={{ color: colors.purple, cursor: "pointer" }}> {t("terms")} </span > {t("and")}<span
                           onClick={() => {

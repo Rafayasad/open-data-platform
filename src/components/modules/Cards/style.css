@@ -62,6 +62,7 @@
 
 .scroll-bar {
     overflow-x: scroll;
+    width: fit-content;
 }
 
 

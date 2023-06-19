@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getAllApplications, getPublishers } from "../../axios/api";
+import { getAllApplications, getPublishers, getFacets } from "../../axios/api";
+import { setTopics } from "../../redux/reducers/Facets";
 import Pagination from "../../components/elements/Pagination";
 import Main from "../../components/modules/Applications/Main";
 import Cards from "../../components/modules/Cards";
@@ -8,7 +9,7 @@ import Navbar from '../../components/modules/Navbar';
 import UpperFooter from "../../components/modules/Footer/UpperFooter";
 import MiddleFooter from "../../components/modules/Footer/MiddleFooter";
 import LowerFooter from '../../components/modules/Footer/LowerFooter';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import View from "../../components/modules/View";
 import Modal from "../../components/elements/Modal/index";
 import useIsFocused from "../../utils/hooks/useIsFocused";
@@ -20,12 +21,14 @@ import { Col, Row } from "react-bootstrap";
 
 const Publisher = memo(() => {
 
-    const { t,i18n } = useTranslation()
+    const { t, i18n } = useTranslation()
     const ref1 = useRef(null);
+    const dispatch = useDispatch()
 
     const { publisherSuggestion } = useSelector(state => state.publisher)
+    const ip_address = useSelector(state => state.ip_address.ip_address)
 
-    console.log("publisherSuggestion",publisherSuggestion);
+    console.log("publisherSuggestion", publisherSuggestion);
 
     const cardsDiv = document.getElementById("publisher-cards");
 
@@ -39,6 +42,7 @@ const Publisher = memo(() => {
     // for search
     const [searchText, setSearchText] = useState('');
     const [searchedData, setSearchedData] = useState();
+    const [expandedSearchbar, setExpandedSearchbar] = useState(false);
 
     const [loading, setLoading] = useState(false);
     const [modalData, setModalData] = useState();
@@ -50,7 +54,12 @@ const Publisher = memo(() => {
     }, [currentPage]);
 
     useEffect(() => {
-        getPublishers(currentPage, rowsPerPage, i18n.language === locales.AR ? "ar" : "en", setDisplayPublishers, setTotalCount, searchText, setLoading)
+        setCurrentPage(1)
+    }, [i18next.language])
+
+    useEffect(() => {
+        getFacets(i18n.language === locales.AR ? "themelear" : "theme", dispatch, setTopics);
+        getPublishers(currentPage, rowsPerPage, i18n.language === locales.AR ? "ar" : "en", setDisplayPublishers, setTotalCount, searchText, setLoading, ip_address)
     }, [currentPage, i18next.language, searchText])
 
     // useEffect(() => {
@@ -93,15 +102,21 @@ const Publisher = memo(() => {
 
     return (
         <>
+            {console.log("isOPEN", isOpen)}
             {!isOpen ?
                 <div style={{ maxWidth: "1800px", margin: "auto" }}>
                     <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
-                        <div className="my-5 pt-5">
+                        <div className="my-5 pt-lg-5 pt-2 pt-md-0">
                             <Main
                                 title={t("publishers")}
                                 description={t("publishersDiscription")}
+                                nodiscroptiontemp
                                 isSearchBar
+                                noimage
                                 onSearch={onSearch}
+                                searchText={t("searchPublishers")}
+                                expandedSearchbar={expandedSearchbar}
+                                setExpandedSearchbar={setExpandedSearchbar}
                                 popularSearch={i18n.language === locales.AR ? publisherSuggestion?.ar : publisherSuggestion?.en}
                             />
                             <div className="" id="publisher-cards">
@@ -119,7 +134,7 @@ const Publisher = memo(() => {
                                 currentPage={currentPage}
                                 totalCount={Math.ceil(totalCount / rowsPerPage)}
                                 onChange={(page) => {
-                                    cardsDiv.scrollIntoView(true)
+                                    cardsDiv?.scrollIntoView(true)
                                     onChangePage(page)
                                 }}
                             />

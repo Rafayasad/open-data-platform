@@ -23,24 +23,33 @@ export const endpoints = {
     getSimilarDatasets: (topic) => {
         return client.get(`/apis/similar_dataset.php?type=similar&topic=${topic}`);
     },
-    getFacets: (key, filters) => {
-        if (filters && filters.length > 0) {
-            return client.get(`/api/1/search/facets?fulltext=&page=1&page-size=0&sort=modified&sort-order=desc&facets=${key}&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
+    getFacets: (key, filters, listedFilters, search) => {
+        if (listedFilters != null || search && filters && filters.length > 0) {
+            return client.get(`/apis/facets.php?fulltext=${search}&facets=${key}&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
         }
-        return client.get(`/api/1/search/facets?fulltext=&page=1&page-size=0&sort=modified&sort-order=desc&facets=${key}`);
-    },
-    getFileFormatsFacets: (key, filters) => {
-        // &${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}
-        if (filters && filters.length > 0) {
-            return client.get(`/apis/format_facet.php?&lang=en&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
+        else {
+            return client.get(`/apis/facets.php?facets=${key}${search ? `&fulltext=${search}` : ""}`);
         }
-        return client.get(`/apis/format_facet.php?&lang=en&${key}=`);
     },
+    // getFileFormatsFacets: (key, filters) => {
+    //     // &${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}
+    //     if (filters && filters.length > 0) {
+    //         return client.get(`/apis/format_facet.php?&lang=en&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
+    //     }
+    //     return client.get(`/apis/format_facet.php?&lang=en&${key}=`);
+    // },
+    // getAllDatasets: (search, sort, currentPage, rowsPerPage, filters) => {
+    //     return client.get(`/api/1/search?fulltext=${search}&page=${currentPage}&page-size=${rowsPerPage}&sort-order=${sort === 'modified' ? "desc" : "aesc"}&sort=${sort}&facets=0&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
+    // },
     getAllDatasets: (search, sort, currentPage, rowsPerPage, filters) => {
-        return client.get(`/api/1/search?fulltext=${search}&page=${currentPage}&page-size=${rowsPerPage}&sort-order=${sort === 'modified' ? "desc" : "aesc"}&sort=${sort}&facets=0&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
+        console.log("sort",sort);
+        return client.get(`/apis/search_main.php?fulltext=${search}&page=${currentPage}&page-size=${rowsPerPage}&sort-order=${sort === 'modified' || sort === 'الأكثر تحميلا' ? "desc" : "asc"}&sort=${sort}&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`)
+    },
+    getResourcesByIdentifier: (identifier) => {
+        return client.get(`/apis/dataset_resource_by_id.php?identifier=${identifier}`)
     },
     getDatasetById: (id) => {
-        return client.get(`/api/1/metastore/schemas/dataset/items/${id}?show-reference-ids`);
+        return client.get(`/apis/search_inner.php?identifier=${id}`);
     },
     getAllApplications: () => {
         return client.get('/jsonapi/node/applications');
@@ -117,6 +126,9 @@ export const endpoints = {
     getPrivacyPolicy: () => {
         return client.get("/jsonapi/node/privacy_policy");
     },
+    getLicenseDetails: () => {
+        return client.get("/jsonapi/node/open_data_license");
+    },
     contactUs: (data) => {
         return client.post("/apis/contact.php", data);
     },
@@ -139,6 +151,6 @@ export const endpoints = {
         return client.post(`/apis/download_count.php`, data)
     },
     getPublishers: (data) => {
-        return client.post(`/apis/publisher2.php`,data)
+        return client.post(`/apis/publisher2.php`, data)
     }
 } 

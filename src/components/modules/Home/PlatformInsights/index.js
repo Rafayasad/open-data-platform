@@ -26,13 +26,13 @@ const PlatformInsights = memo((props) => {
                         <Row> */}
                             {
                                 data && data.length > 0 && data.map((item, index) => (
-                                    <Col key={index} xs={6} md={4} xl={2} className=' text-center m-0 '>
+                                    <Col key={index} xs={6} md={4} xl={2} className='text-center m-0 my-3 my-lg-0'>
                                         <Col>
                                             {/* <Heading color="white"
                                         heading={item.label === "Datasets" ? numberWithCommas(item.value) :
                                         item.label === "APIS" ? numberWithCommas(item.value) :
                                                 nFormatter(item.value, 2)} /> */}
-                                            <p className={`text-white fs-md ${i18n.language === locales.EN ? "en-font-bolder" : "ar-font-bold"} `} style={{ marginBottom: '4px' }}>
+                                            <p className={`text-white fs-md ${i18n.language === locales.EN ? "en-font-bolder" : "ar-font-bold"} `} style={{ marginBottom: '10px' }}>
                                                 {item.label === "Datasets" ? numberWithCommas(item.value) :
                                                     item.label === "APIS" ? numberWithCommas(item.value) :
                                                         nFormatter(item.value, 2)}

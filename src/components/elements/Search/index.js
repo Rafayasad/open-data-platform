@@ -1,3 +1,4 @@
+import './style.css'
 import React, { useRef, memo, useState, useCallback, useEffect, Fragment } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import _ from 'lodash';
@@ -8,7 +9,6 @@ import { useTranslation } from "react-i18next";
 import { colors } from "../../../utils/colors";
 import Drawer from '../../modules/Drawer';
 import Heading from "../Heading";
-import './style.css'
 import ExpandSearchBarModal from "./ExpandSearchBarModal";
 import { isEmptyString } from "../../../utils/generic";
 import i18n from "../../../i18n/i18n";
@@ -21,7 +21,7 @@ const Search = memo((props) => {
 
     const { t } = useTranslation();
 
-    const { expandedSearchbar, setExpandedSearchbar, isFilterIcon, nofilter, filterData, nofocuseffect, placeholder, placeholderformobile, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter, searchData, iconColor } = props;
+    const { isSearchIcon, IsfilterIcon, expandedSearchbar, setExpandedSearchbar, isFilterIcon, nofilter, filterData, nofocuseffect, placeholder, placeholderformobile, value, filter, onChange, onPressEnter, appliedFilters, onClickApplyFilter, searchData, iconColor } = props;
 
     const [filterOpen, setFilterOpen] = useState(false);
 
@@ -56,7 +56,7 @@ const Search = memo((props) => {
 
         let value = e.target.value;
 
-        if (e.key === "Enter" && !isEmptyString(value)) {
+        if (e.key === "Enter") {
             onPressEnter && onPressEnter((value).trim())
             setInputText(value.trim())
             setOpenModal(false)
@@ -86,6 +86,43 @@ const Search = memo((props) => {
 
     useOutsideAlerter(wrapperRef);
 
+    const renderSearchBox = (searchIcon) => (
+        searchIcon ?
+            <Col xs={12} className={`d-flex px-2 ${i18n.language === locales.AR ? "justify-content-end" : "justify-content-end"}`}>
+                <div onClick={() => onKeyDown()} style={{ position: "relative" }} className="bg-black rounded-pill p-2">
+                    <IoIosSearch size={24} color="white" />
+                </div>
+            </Col>
+            :
+            <Col xs={12}>
+                <div onClick={toggle} className='d-flex align-items-center justify-content-center filter p-lg-2 p-0' style={{ borderRadius: '30px', position: 'relative' }}>
+                    <MdOutlineFilterAlt size={24} />
+                    <div className="d-none d-md-flex align-items-center justify-content-center">
+                        <p className='m-0'>{t("filters")}</p>
+                        {appliedFilters && appliedFilters.length > 0
+                            &&
+                            <Fragment>
+                                <div className='d-md-block d-lg-none d-none' style={{ position: "absolute", right: i18n.language === locales.EN && 4, top: -8, left: i18n.language === locales.AR && 10 }}>
+                                    <RxDotFilled color={colors.red} />
+                                </div>
+                                <div className='d-md-none d-lg-block d-none' style={{ position: "absolute", right: i18n.language === locales.EN && 6, top: 0, left: i18n.language === locales.AR && 10 }}>
+                                    <RxDotFilled color={colors.red} />
+                                </div>
+                            </Fragment>
+                        }
+                    </div>
+                    {appliedFilters && appliedFilters.length > 0
+                        &&
+                        <div className="d-flex d-md-none" style={{ position: "absolute", right: i18n.language === locales.EN && 6, top: -8, left: i18n.language === locales.AR && 6 }}>
+                            <RxDotFilled color={colors.red} />
+                        </div>
+                    }
+
+                </div>
+                <Drawer data={filterData} open={filterOpen} setOpen={setFilterOpen} onClickApplyFilter={onClickApply} appliedFilters={appliedFilters} />
+            </Col>
+    )
+
     return (
         <div>
             {
@@ -102,12 +139,27 @@ const Search = memo((props) => {
             }
             <Container id="cont" fluid ref={wrapperRef}>
                 <Row id="main" className={`d-flex ${!(toggler && !nofocuseffect) && "hover"} ${toggler && !nofocuseffect ? "search-box-active input-focused" : "search-box"}`}>
-                    <Col className={`p-0 d-flex align-items-center ${!isFilterIcon && "justify-content-center"} display-search-icon`}>
-                        <div className={`${i18n.language === locales.AR ? "ms-1 me-3" : "ms-3 me-1"} ${!isFilterIcon && "d-none d-md-block"} `}>
+                    <Col xs={10} className={`p-0 d-flex align-items-center ${!isFilterIcon && "justify-content-center"} display-search-icon`}>
+                        <div className={`${i18n.language === locales.AR ? "ms-1 me-3" : "ms-3 me-1"} ${!isFilterIcon && "d-none d-lg-block"} `}>
                             <IoIosSearch color={iconColor ? iconColor : !isFilterIcon ? "gray" : "black"} size={24} />
                         </div>
+
+                        {/* tab */}
+                        <div className="w-100 d-none d-md-block d-lg-none">
+                            <input
+                                onClick={() => {
+                                    document?.getElementById("cont")?.offsetWidth <= 540 ?
+                                        setOpenModal(true)
+                                        :
+                                        setToggler(true)
+                                }}
+                                type="text"
+                                className={`${!inputText && !isFilterIcon && "textAlignCenter"} ${!isFilterIcon && "mx-4"} border-0 bg-transparent wid placeholder-color ${i18n.language === locales.AR ? "text-lg-end" : "text-lg-center"}`}
+                                value={inputText} placeholder={placeholder} onChange={onChangeSearch} onKeyDown={onKeyDown} />
+                        </div>
+
                         {/* desktop */}
-                        <div className="w-100 d-none d-md-block">
+                        <div className="w-100 d-none d-lg-block">
                             <input
                                 onClick={() => {
                                     document?.getElementById("cont")?.offsetWidth <= 540 ?
@@ -119,6 +171,7 @@ const Search = memo((props) => {
                                 className={`border-0 bg-transparent wid placeholder-color ${i18n.language === locales.AR ? "text-lg-end" : "text-lg-start"}`}
                                 value={inputText} placeholder={placeholder} onChange={onChangeSearch} onKeyDown={onKeyDown} />
                         </div>
+
                         {/* mobile */}
                         <div className="d-block d-md-none">
                             <input
@@ -135,7 +188,7 @@ const Search = memo((props) => {
                     </Col>
                     {
                         inputText?.length > 0 && !nofocuseffect && toggler ?
-                            <Col md={1} lg={1} xs={2}>
+                            <Col md={2} xs={2} className='d-flex justify-content-end px-3'>
                                 <MdCancel color="#9f9f9f" style={{ cursor: "pointer" }} onClick={() => {
                                     setInputText('');
                                     onPressEnter('');
@@ -143,36 +196,25 @@ const Search = memo((props) => {
                             </Col>
                             :
                             filter && !nofilter &&
-                            <Col xs={2} md={2} xl={2} lg={2} className="">
-                                <div onClick={toggle} className='d-flex align-items-center justify-content-center filter p-lg-2 p-0' style={{ borderRadius: '30px', position: 'relative' }}>
-                                    <MdOutlineFilterAlt size={24} />
-                                    <div className="d-none d-lg-flex align-items-center justify-content-center">
-                                        <p className='m-0'>{t("filters")}</p>
-                                        {appliedFilters && appliedFilters.length > 0
-                                            &&
-                                            <div style={{ position: "absolute", right: i18n.language === locales.EN && 6, top: 0, left: i18n.language === locales.AR && 10 }}>
-                                                <RxDotFilled color={colors.red} />
-                                            </div>
-                                        }
-                                    </div>
-                                    {appliedFilters && appliedFilters.length > 0
-                                        &&
-                                        <div className="d-flex d-lg-none" style={{ position: "absolute", right: i18n.language === locales.EN && -5, top: -8, left: i18n.language === locales.AR && -2 }}>
-                                            <RxDotFilled color={colors.red} />
+                            <Fragment>
+                                {/* {isSearchIcon
+                                    &&
+                                    <Col xs={2} className="d-flex d-lg-none justify-content-end">
+                                        <div style={{ position: "relative", left: 4 }} className="bg-black rounded-pill p-2">
+                                            <IoIosSearch size={24} color="white" />
                                         </div>
-                                    }
-                                    {/* {FOR RED DOT ICON} */}
-                                    {/* <div className="d-flex">
-                                <sup>
-                                    {
-                                        selectedFilters.length > 0 &&
-                                        <RxDotFilled size={20} color={colors.red} />
-                                    }
-                                </sup>
-                            </div> */}
-                                </div>
-                                <Drawer data={filterData} open={filterOpen} setOpen={setFilterOpen} onClickApplyFilter={onClickApply} appliedFilters={appliedFilters} />
-                            </Col>
+                                    </Col>
+                                } */}
+                                <Col xs={2} md={2} xl={2} lg={2} className='d-flex d-none d-lg-block'>
+                                    {renderSearchBox()}
+                                </Col>
+                                <Col xs={2} className='p-0 d-flex d-lg-none'>
+                                    {renderSearchBox(isSearchIcon)}
+                                </Col>
+
+
+
+                            </Fragment>
                     }
                 </Row>
                 {
@@ -181,7 +223,7 @@ const Search = memo((props) => {
                         <Col className="m-0">
                             <hr className="m-0 p-0" style={{ borderWidth: "2px", borderColor: colors.purple }} />
                             <div className="py-3">
-                                <div style={{ marginLeft: "32px",marginRight: "32px" }}>
+                                <div style={{ marginLeft: "32px", marginRight: "32px" }}>
                                     <p style={{ fontSize: 12 }} className="py-2 m-0 text-secondary">{t("popularsearches")}</p>
                                 </div>
                                 {

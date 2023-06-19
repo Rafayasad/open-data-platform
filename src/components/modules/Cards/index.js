@@ -41,7 +41,7 @@ const Cards = memo((props) => {
 
     const { title, notitlebutton, data, backgroundColor, hoverable, type,
         size, onClick, onClickViewAll, buttonText, notagsactive, noheadercomponent, dropdownWidth
-        , handleReload, cardsCount, textSize, padding, setData, setIsOpenModal,loading
+        , handleReload, cardsCount, textSize, padding, setData, setIsOpenModal, loading
     } = props;
 
     var numberOfColumns = 4;
@@ -67,6 +67,7 @@ const Cards = memo((props) => {
             )
         } else if (type === 'image-outer-text') {
             return (
+
                 !loading && data && data?.length > 0 ? data?.map((item, index) => (
                     <Col key={index} md={6} lg={4} className="py-2">
                         <CardWithOuterText
@@ -79,7 +80,11 @@ const Cards = memo((props) => {
                             onClick={() => onClick(item.id)}
                         />
                     </Col>
-                )) : <Loader type={type} backgroundColor={backgroundColor} />
+                )) :
+                    !loading ?
+                        <p className={`${i18n.language === locales.AR ? "ar-font-bold" : "en-font-bold"} m-0 text-center en-font-default`}>{t("noPublisherFound")}</p>
+                        :
+                        <Loader type={type} backgroundColor={backgroundColor} />
             )
         } else if (type === 'story-cards') {
             return (
@@ -102,29 +107,13 @@ const Cards = memo((props) => {
         } else {
 
             return (
-                // data && data.length > 0 ? data.map((item, index) => (
-                //     <Col key={index} md={4} sm={4} className="py-2">
-                //         <Card
-                //             notagsactive={notagsactive}
-                //             noheadercomponent={noheadercomponent}
-                //             size={size}
-                //             hoverable={hoverable}
-                //             title={i18n.language === locales.AR ? item.title_ar : item.title}
-                //             description={item.description && item.description_ar && i18n.language === locales.AR ? item.description_ar : item.description}
-                //             publisher={item.publisher && item.publisher_ar && i18n.language === locales.AR ? item.publisher_ar : item.publisher}
-                //             tags={i18n.language === locales.AR ? item.tags && item.tags_ar.slice(0, 2) : item.tags && item.tags.slice(0, 2)}
-                //             resources={i18n.language === locales.AR ? item.resources_ar : item.resources}
-                //             url={item.url}
-                //             onClick={() => onClick(item.id)}
-                //         />
-                //     </Col>
-                // )) : <Loader backgroundColor={backgroundColor} />
                 <>
-                    <div className="d-flex d-lg-none scroll-bar">
+                    <div className="m-0 d-flex d-lg-none scroll-bar">
                         {
                             data && data.length > 0 ? data.map((item, index) => (
                                 <div key={index} className="py-2 pe-2 d-flex" style={{ minWidth: "300px" }}>
                                     <Card
+                                        datasetID={item.id}
                                         notagsactive={notagsactive}
                                         noheadercomponent={noheadercomponent}
                                         size={"md"}
@@ -148,6 +137,7 @@ const Cards = memo((props) => {
                             data && data.length > 0 ? data.map((item, index) => (
                                 <Col key={index} lg={numberOfColumns} md={numberOfColumns} sm={4} className="py-2">
                                     <Card
+                                        datasetID={item.id}
                                         handleReload={handleReload}
                                         dropdownWidth={dropdownWidth}
                                         notagsactive={notagsactive}
@@ -182,7 +172,7 @@ const Cards = memo((props) => {
                     </Col>
                 </Row>
             }
-            <Row>
+            <Row className='m-0'>
                 <Col className={`x-4 max-width  ${padding ? 'page-padding-md' : 'page-padding'}`}>
                     <Row>
                         {renderContent()}

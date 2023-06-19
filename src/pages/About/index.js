@@ -11,6 +11,11 @@ import Navbar from "../../components/modules/Navbar";
 import View from "../../components/modules/View";
 import { routes } from "../../router/helper";
 import { colors } from "../../utils/colors";
+import { getFacets } from "../../axios/api";
+import { setTopics } from "../../redux/reducers/Facets";
+import { locales } from "../../i18n/helper";
+import i18next from "i18next";
+import { useDispatch } from "react-redux";
 
 const About = memo(() => {
 

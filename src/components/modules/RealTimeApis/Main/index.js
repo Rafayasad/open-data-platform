@@ -37,16 +37,6 @@ const RealTimeApisHeader = memo((props) => {
                     </div>
                 </div>
             </Container>
-            {/* <Row className="">
-                <Col className="" lg={6} xs={12}>
-                    <Heading size={"xl"} heading={t("openData")} bold />
-                </Col>
-            </Row>
-            <Row className="">
-                <Col className="" lg={6} xs={12}>
-                    <Heading heading={t("openDataDescription")} size={"xxs"} />
-                </Col>
-            </Row> */}
         </div>
     )
 })

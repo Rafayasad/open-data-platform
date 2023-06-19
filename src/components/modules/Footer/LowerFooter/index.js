@@ -26,26 +26,30 @@ const LowerFooter = memo(() => {
                     <Heading size="xs" color="white" heading={t("powered")} />
                 </Col>
             </div>
-            <Row className='d-flex justify-content-between max-width mt-0 pb-3'>
-                <div className={`p-0 col-12 col-md-6 d-flex ${window.screen.width >= 768 ? "justify-content-start" : "justify-content-end"}`}>
-                    <div className={`${window.innerWidth >= 768 ? "px-0" : "px-4"}`} style={{ marginRight: window.screen.width >= 768 && '16px' }}>
+            <Row className='d-flex justify-content-between flex-md-row-reverse flex-lg-row max-width mt-0 pb-3'>
+                <div className={`p-0 col-12 col-md-5 col-lg-6 d-flex justify-content-lg-start justify-content-end`}>
+                    <div className={`px-lg-0 px-4`}>
                         <img height={"100px"} width={"auto"} src={AbuDhabi} />
                     </div>
                     <div className={`px-0 px-lg-4 ms-2 ms-lg-0`}>
                         <img height={"100px"} width={"auto"} src={Emirates} />
                     </div>
                 </div>
-                <div className={`p-0 col-12 col-sm-12 col-md-6 d-flex flex-row-reverse flex-sm-row justify-content-between align-items-center align-items-md-end py-3 py-lg-0`}>
+                <div className={`p-0 col-12 col-sm-12 col-md-7 col-lg-6 d-flex flex-row-reverse flex-md-row-reverse flex-lg-row flex-sm-row justify-content-between align-items-center align-items-md-end py-3 py-lg-0`}>
                     <div className={`d-flex justify-content-between align-items-center`}>
-                        <p className='text-white m-0 px-4 fs-2xs-static' style={{ cursor: "pointer" }} onClick={() => { navigate(routes.POLICY) }}>
-                            {`${t("privacy")}`}
-                        </p>
-                        <span className='text-white m-0 fs-2xs-static' style={{ cursor: "pointer" }} onClick={() => { navigate(routes.POLICY) }}>
-                            {`${t("terms")}`}
-                        </span>
+                        <div className='pe-2 d-flex'>
+                            <p className='text-white m-0 fs-2xs-static' style={{ cursor: "pointer", overflow: "hidden" }} onClick={() => { navigate(routes.POLICY) }}>
+                                {`${t("privacy")}`}
+                            </p>
+                        </div>
+                        <div className='pe-2 d-flex'>
+                            <span className='text-white m-0 fs-2xs-static' style={{ cursor: "pointer" }} onClick={() => { navigate(routes.TERMS) }}>
+                                {`${t("terms")}`}
+                            </span>
+                        </div>
                     </div>
                     <div>
-                        <div className='text-start text-sm-end py-3'>
+                        <div className='text-start text-md-start text-lg-end text-sm-end py-3'>
                             <BsTwitter className='mx-2' color='white' size={28} onClick={onClickTwitter} style={{ cursor: 'pointer' }} />
                             <BsInstagram className='mx-2' color='white' size={28} onClick={onClickInstagram} style={{ cursor: 'pointer' }} />
                         </div>
@@ -59,7 +63,7 @@ const LowerFooter = memo(() => {
                     <p style={{ fontSize: "14px" }} className='text-white'>{t('allRights')}</p>
                 </div>
             </Row>
-        </Container>
+        </Container >
     )
 });
 

@@ -10,6 +10,7 @@ import BreadCrumb from "../../components/elements/BreadCrumb";
 import View from "../../components/modules/View";
 import i18n from "../../i18n/i18n";
 import { locales } from "../../i18n/helper";
+import { useSelector } from "react-redux";
 
 const data = [
     {
@@ -29,6 +30,7 @@ const data = [
 const DatasetDetail = memo(() => {
 
     const mainDiv = document.getElementById("main");
+    const ip_address = useSelector(state => state.ip_address.ip_address);
 
     const { t } = useTranslation()
 
@@ -56,16 +58,19 @@ const DatasetDetail = memo(() => {
         navigate(`${routes.DATASET_DETAIL}?id=${id}`, { replace: true })
     }, [id]);
 
+
+
     useEffect(() => {
 
         if (!id) return navigate(routes.DATASET, { replace: true });
 
-        getDatasetById(id, setDataset);
+        getDatasetById(id, setDataset, ip_address);
+        mainDiv?.scrollIntoView();
 
     }, [id])
 
     const handleReload = useCallback(() => {
-        getDatasetById(id, setDataset);
+        getDatasetById(id, setDataset, ip_address);
     })
 
     useEffect(() => {

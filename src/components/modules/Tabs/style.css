@@ -19,3 +19,10 @@
     border-radius: 5px;
     background-color: #8207C9;
 }
+
+@media (min-width: 1199.98px) {
+    .padding-top-bottom{
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+}
