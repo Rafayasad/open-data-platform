@@ -42,6 +42,7 @@ function App() {
   }, [i18n.language])
 
   useEffect(() => {
+    getFacets(i18n.language === locales.AR ? "themelear" : "theme", dispatch, setTopics);
     getIpAddress(dispatch, setIpAddress);
     checkUser(dispatch, handleLogin, handleLogout);
     getAboutUs(dispatch, setAboutus);
@@ -55,11 +56,11 @@ function App() {
     getSuccessStories(dispatch, setStories, toggleLoading, storiesFilters);
   }, []);
 
-  // if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
-  //   console.log = () => { }
-  //   console.error = () => { }
-  //   console.warn = () => { }
-  // }
+  if (process.env.REACT_APP_ENVIORNMENT !== 'dev') {
+    console.log = () => { }
+    console.error = () => { }
+    console.warn = () => { }
+  }
 
   return (
     <CacheProvider value={i18n.language === locales.AR ? cacheRtl : emptyCache}>

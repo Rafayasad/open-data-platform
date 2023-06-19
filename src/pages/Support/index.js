@@ -8,16 +8,19 @@ import QuestionList from "../../components/modules/Support/QuestionList";
 import { routes } from "../../router/helper";
 import { locales } from "../../i18n/helper";
 import View from "../../components/modules/View";
-import { getQuestionBySearch, getSearch } from "../../axios/api";
+import { getFacets, getQuestionBySearch, getSearch } from "../../axios/api";
 import FooterImage from '../../assets/images/Contact-Us.jpg';
 import FooterImageMobSupportPage from '../../assets/images/footImageMobileSupport.png';
 import FooterImageAr from '../../assets/images/Contact-Us.jpg';
+import { useDispatch } from "react-redux";
+import { setTopics } from "../../redux/reducers/Facets";
 
 const Support = memo(() => {
 
     const { t, i18n } = useTranslation()
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const categories = useSelector(state => state.support.categories)
     const questions = useSelector(state => state.support.questions)

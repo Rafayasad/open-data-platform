@@ -26,7 +26,7 @@ const MiddleFooter = memo(() => {
     const topics = useSelector((state) => state.facets.topics);
     const { isLoggedIn } = useSelector(state => state.authentication);
 
-    console.log("TOPICS",topics);
+    console.log("TOPICS", topics);
 
     const [activeIndex, setActiveIndex] = useState();
 
@@ -179,9 +179,17 @@ const MiddleFooter = memo(() => {
                                                 item.data?.map((items, index) => {
                                                     return (
                                                         <Col xs={10} key={index} className="py-3">
-                                                            <Link style={{ textDecoration: "none" }} to={items.link} state={items.params}>
-                                                                <Heading nomargin size="xs" heading={items.title} color={colors.white} />
-                                                            </Link>
+                                                            {items.downloadURL ?
+                                                                <div>
+                                                                    <a style={{ textDecoration: "none" }} href={items.downloadURL}>
+                                                                        <Heading nomargin size="xs" heading={items.title} color={colors.white} />
+                                                                    </a>
+                                                                </div>
+                                                                :
+                                                                <Link style={{ textDecoration: "none" }} to={items.link} state={items.params}>
+                                                                    <Heading nomargin size="xs" heading={items.title} color={colors.white} />
+                                                                </Link>
+                                                            }
                                                         </Col>
                                                     )
                                                 })
