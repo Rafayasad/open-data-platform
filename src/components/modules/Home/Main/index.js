@@ -31,7 +31,7 @@ const Main = memo((props) => {
 
     const staticPopularSearches = {
         en: ["Health", "Education", "Hotels", "Abu Dhabi", "Economy"],
-        ar: ["الصحة", "التعليم", "فنادق", "أبوظبي", "الاقتصاد"]
+        ar: ["الصحة", "التعليم", "الفنادق", "أبوظبي", "الاقتصاد"]
     }
 
     useEffect(() => {
