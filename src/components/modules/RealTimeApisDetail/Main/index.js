@@ -21,11 +21,13 @@ const Main = memo((props) => {
 
     let des = data?.description.split("-");
 
+    let des_ar = data?.description_ar.split("-");
+
     let e = [
         {
             title: t("about"),
             detail: data ? (
-                i18n.language === locales.AR ? data.description_ar : des?.map((item, index) => <p key={index}>{`${index != 0 ? "• " : ""} ${item}`}</p>)
+                i18n.language === locales.AR ? des_ar?.map((item, index) => <p>{`${index != 0 ? "• " : ""} ${item}`}</p>) : des?.map((item, index) => <p>{`${index != 0 ? "• " : ""} ${item}`}</p>)
             ) : (
                 <>
                     <Shimmer rounded='xs' className={"my-1"} />

@@ -14,7 +14,7 @@ import Tag from "../../elements/Tag";
 import Button from "../../elements/Button";
 import './style.css';
 import 'react-modern-drawer/dist/index.css'
-import CheckBox from "../../elements/CheckBox";
+import CheckBox from "../../elements/checkBox";
 import SearchBox from "../../elements/SearchBox";
 import CustomButton from '../../elements/CustomButton';
 import { setFilter } from "../../../redux/reducers/Facets";
