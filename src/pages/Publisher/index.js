@@ -110,11 +110,7 @@ const Publisher = memo(() => {
                             <Main
                                 title={t("publisherHeading")}
                                 description={t("publishersDiscription")}
-<<<<<<< HEAD
                                 // nodiscroptiontemp
-=======
-                                //nodiscroptiontemp
->>>>>>> ecf4360 (Real time Apis changes with APIs)
                                 isSearchBar
                                 noimage
                                 onSearch={onSearch}
