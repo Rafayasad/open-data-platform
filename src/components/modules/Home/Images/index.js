@@ -22,7 +22,7 @@ const Images = memo(() => {
 
     const onClickFindOutMore = useCallback(() => navigate(routes.SUCCESS_STOIRES));
     const onClickDiscover = useCallback(() => navigate(routes.DATASET));
-    const onClickRegister = useCallback(() => navigate(routes.REGISTER));
+    const onClickRegister = useCallback(() => navigate(routes.PUBLISHER));
 
     return (
         <Container className="" fluid style={{ backgroundColor: colors.black }}>

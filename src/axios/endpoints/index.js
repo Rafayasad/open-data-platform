@@ -42,7 +42,8 @@ export const endpoints = {
     //     return client.get(`/api/1/search?fulltext=${search}&page=${currentPage}&page-size=${rowsPerPage}&sort-order=${sort === 'modified' ? "desc" : "aesc"}&sort=${sort}&facets=0&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`);
     // },
     getAllDatasets: (search, sort, currentPage, rowsPerPage, filters) => {
-        return client.get(`/apis/search_main.php?fulltext=${search}&page=${currentPage}&page-size=${rowsPerPage}&sort-order=${sort === 'modified' ? "desc" : "asc"}&sort=${sort}&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`)
+        console.log("sort",sort);
+        return client.get(`/apis/search_main.php?fulltext=${search}&page=${currentPage}&page-size=${rowsPerPage}&sort-order=${sort === 'modified' || sort === 'الأكثر تحميلا' ? "desc" : "asc"}&sort=${sort}&${filters?.map(item => item.values.length > 0 ? `${item.key + '=' + item.values + "&"}` : "").join("")}`)
     },
     getResourcesByIdentifier: (identifier) => {
         return client.get(`/apis/dataset_resource_by_id.php?identifier=${identifier}`)

@@ -25,7 +25,7 @@ const Main = memo((props) => {
                     {!nodiscroptiontemp &&
                         <p className="m-0 fs-xs-static" style={{ color: colors.dark_gray }}>{description ? description : t("applicationDiscription")}</p>
                     }
-                    {/* <Heading size='xxs' nomargin heading={t("applicationDiscription")} /> */}
+                    {/* { <Heading size='xxs' nomargin heading={t("applicationDiscription")} /> } */}
                 </Col>
             </Row>
             {!noimage &&
