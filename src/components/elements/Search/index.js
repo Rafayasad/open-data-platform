@@ -94,10 +94,10 @@ const Search = memo((props) => {
                 </div>
             </Col>
             :
-            <Col xs={12}>
+            <Col>
                 <div onClick={toggle} className='d-flex align-items-center justify-content-center filter p-lg-2 p-0' style={{ borderRadius: '30px', position: 'relative' }}>
-                    <MdOutlineFilterAlt size={24} />
-                    <div className="d-none d-md-flex align-items-center justify-content-center">
+                    <MdOutlineFilterAlt className='d-flex' size={24} />
+                    <div className="d-none d-md-flex align-items-center justify-content-center ">
                         <p className='m-0'>{t("filters")}</p>
                         {appliedFilters && appliedFilters.length > 0
                             &&
@@ -139,7 +139,7 @@ const Search = memo((props) => {
             }
             <Container id="cont" fluid ref={wrapperRef}>
                 <Row id="main" className={`d-flex ${!(toggler && !nofocuseffect) && "hover"} ${toggler && !nofocuseffect ? "search-box-active input-focused" : "search-box"}`}>
-                    <Col xs={10} className={`p-0 d-flex align-items-center ${!isFilterIcon && "justify-content-center"} display-search-icon`}>
+                    <Col xs={10} sm={i18n.language === locales.AR ? 9 : 10} md={i18n.language === locales.AR ? 9 : 10} xl={i18n.language === locales.AR ? 9 : 10} className={`p-0 d-flex align-items-center ${!isFilterIcon && "justify-content-center"} display-search-icon`}>
                         <div className={`${i18n.language === locales.AR ? "ms-1 me-3" : "ms-3 me-1"} ${!isFilterIcon && "d-none d-lg-block"} `}>
                             <IoIosSearch color={iconColor ? iconColor : !isFilterIcon ? "gray" : "black"} size={24} />
                         </div>
@@ -205,7 +205,8 @@ const Search = memo((props) => {
                                         </div>
                                     </Col>
                                 } */}
-                                <Col xs={2} md={2} xl={2} lg={2} className='d-flex d-none d-lg-block'>
+                                {/* ahmed made change here */}
+                                <Col xs={2} md={2} xl={i18n.language === locales.AR ? 3 : 2} lg={i18n.language === locales.AR ? 3 : 2} className='d-flex d-none d-lg-block'>
                                     {renderSearchBox()}
                                 </Col>
                                 <Col xs={2} className='p-0 d-flex d-lg-none'>
