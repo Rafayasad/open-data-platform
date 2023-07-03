@@ -110,7 +110,7 @@ const Publisher = memo(() => {
                             <Main
                                 title={t("publisherHeading")}
                                 description={t("publishersDiscription")}
-                                // nodiscroptiontemp
+                                //nodiscroptiontemp
                                 isSearchBar
                                 noimage
                                 onSearch={onSearch}
