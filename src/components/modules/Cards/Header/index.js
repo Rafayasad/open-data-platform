@@ -46,7 +46,7 @@ const Header = memo((props) => {
         <Container fluid className="pt-4 py-3 px-0 padd-desktop">
             <Row className="w-100 d-flex p-0 m-0 align-items-center justify-content-between">
                 <Col md={8} lg={8} xs={!dropdown && nobutton ? 12 : 6} className='px-0'>
-                    <div>
+                    <div className='w-100'>
                         {/* <Heading
                             bold
                             nomargin
@@ -86,7 +86,8 @@ const Header = memo((props) => {
                                     selectedValue={dropdown.selectedValue}
                                     dropdownWidth={"100%"}
                                     width={"100%"}
-                                /> :
+                                />
+                                 :
                                 filterbutton ?
                                     <>
                                         {/* <div onClick={toggle} className='d-flex align-items-center justify-content-center filter py-2 px-2' style={{ borderRadius: '30px' }}>

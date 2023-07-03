@@ -77,12 +77,12 @@ const Dropdown = (props) => {
         <div className='d-flex align-items-center w-100 justify-content-end'>
             {
                 name &&
-                <div className={` ${reportsFilter ? 'p-0' : 'px-3'} d-none d-md-block w-50 ${reportsFilter ? "text-start" : i18n.language === locales.AR ? "text-start" : "text-end"}`}>
+                <div style={{ width: "10%" }} className={`w-50 ${reportsFilter ? 'p-0' : 'px-3'} d-none d-md-block  ${reportsFilter ? "text-start" : i18n.language === locales.AR ? "text-start" : "text-end"}`}>
                     <Heading size="xxs" heading={name} nomargin />
                 </div>
             }
             {/* here we set width to 100% incase if there is any issue we need to change it to dropdownWidth inplace of 100% */}
-            <BSDropdown className='' style={{ width: "100%" }} autoClose={autoClose} onToggle={toggle}>
+            <BSDropdown className='' style={{ width: "90%" }} autoClose={autoClose} onToggle={toggle}>
                 {
                     noheadercomponent ? null :
                         headerComponent ? (
