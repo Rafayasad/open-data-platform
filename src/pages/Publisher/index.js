@@ -108,7 +108,7 @@ const Publisher = memo(() => {
                     <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
                         <div className="my-5 pt-lg-5 pt-2 pt-md-0">
                             <Main
-                                title={t("publisherHeading")}
+                                title={t("publisherheading")}
                                 description={t("publishersDiscription")}
                                 //nodiscroptiontemp
                                 isSearchBar
