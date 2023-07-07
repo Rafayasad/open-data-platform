@@ -62,7 +62,7 @@ const Applications = memo(() => {
 
     return (
         <div>
-            <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
+            <View theme="dark" footerTitle={t("GetMore")} footerButton={t("explorepublisher")}>
                 <div className="my-5 pt-5 max-width">
                     <Main />
                     <div className="my-5" id="cards">

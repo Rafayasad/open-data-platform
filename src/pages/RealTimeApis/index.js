@@ -37,7 +37,7 @@ const RealTimeApis = memo((props) => {
     }
 
     return (
-        <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
+        <View theme="dark" footerTitle={t("GetMore")} footerButton={t("explorepublisher")}>
             <RealTimeApisHeader />
             <DatasetList
                 datasets={realTimeApisData}

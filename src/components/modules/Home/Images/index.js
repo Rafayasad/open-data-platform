@@ -110,7 +110,7 @@ const Images = memo(() => {
                                     <Col />
                                     <Col sm={12} md={8} className='d-flex justify-content-center align-items-center text-center'>
                                         {/* <Button bold title={t("getStarted")} onClick={onClickRegister} /> */}
-                                        <CustomButton bold title={t("getStarted")} onClick={onClickRegister} buttonClass='contained' />
+                                        <CustomButton bold title={t("explorepublisher")} onClick={onClickRegister} buttonClass='contained' />
                                     </Col>
                                     <Col />
                                 </Row>
