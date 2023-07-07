@@ -105,7 +105,7 @@ const Publisher = memo(() => {
             {console.log("isOPEN", isOpen)}
             {!isOpen ?
                 <div style={{ maxWidth: "1800px", margin: "auto" }}>
-                    <View theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
+                    <View theme="dark" footerTitle={t("GetMore")} footerButton={t("explorepublisher")}>
                         <div className="my-5 pt-lg-5 pt-2 pt-md-0">
                             <Main
                                 title={t("publisherheading")}

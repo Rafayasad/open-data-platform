@@ -99,7 +99,7 @@ const Home = memo(() => {
 
     return (
         // <div style={{ maxWidth: "1800px", margin: "auto" }}>
-        <View sticky footerTitle={t("GetMore")} footerButton={t("registerNow")} >
+        <View sticky footerTitle={t("GetMore")} footerButton={t("explorepublisher")} >
             <Main filterData={data} onSearch={onSearch} onClickExplore={() => topicsDiv.scrollIntoView()} onApplyFilter={onApplyFilter} />
             <div id='topics' className="m-0 p-0">
                 <Topics onClickViewless={() => topicsDiv.scrollIntoView()} onClickList={onClickList}

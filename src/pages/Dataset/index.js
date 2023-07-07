@@ -189,7 +189,7 @@ const Dataset = memo(() => {
     }
 
     return (
-        <View setExpandedSearchbar={setExpandedSearchbar} searchIcon theme="dark" footerTitle={t("GetMore")} footerButton={t("registerNow")}>
+        <View setExpandedSearchbar={setExpandedSearchbar} searchIcon theme="dark" footerTitle={t("GetMore")} footerButton={t("explorepublisher")}>
             <Main
                 expandedSearchbar={expandedSearchbar}
                 setExpandedSearchbar={setExpandedSearchbar}
