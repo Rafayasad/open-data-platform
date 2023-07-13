@@ -132,7 +132,7 @@ const AuthCard = memo((props) => {
                 /> */}
                 <CustomButton
                   padding={items.title === t('logIn') && 'mt-3'}
-                  width={title === t('register') ? 'auto' : '80%'}
+                  width={title === t('register') ? 'auto' : '87%'}
                   title={items.title}
                   icon={items.icon}
                   onClick={() => items.onClick()}
