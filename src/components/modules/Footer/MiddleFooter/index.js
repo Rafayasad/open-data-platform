@@ -1,8 +1,11 @@
 import './style.css';
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useEffect , useCallback, useState } from 'react';
 import { Col, Container, Row, useAccordionButton } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import { getFacets } from "../../../../axios/api";
+import { setTopics } from "../../../../redux/reducers/Facets";
+import { useDispatch } from "react-redux";
 import { RxArrowTopRight, RxArrowTopLeft } from "react-icons/rx";
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -22,11 +25,17 @@ const MiddleFooter = memo(() => {
 
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const topics = useSelector((state) => state.facets.topics);
     const { isLoggedIn } = useSelector(state => state.authentication);
 
     console.log("TOPICS", topics);
+
+
+    useEffect(() => {
+        getFacets(i18n.language === locales.AR ? "themelear" : "theme", dispatch, setTopics);
+    }, [i18n.language])
 
     const [activeIndex, setActiveIndex] = useState();
 

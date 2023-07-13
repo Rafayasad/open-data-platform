@@ -82,7 +82,7 @@ const Dropdown = (props) => {
                 </div>
             }
             {/* here we set width to 100% incase if there is any issue we need to change it to dropdownWidth inplace of 100% */}
-            <BSDropdown className='' style={{ width: "90%" }} autoClose={autoClose} onToggle={toggle}>
+            <BSDropdown className='' style={{ width: "100%" }} autoClose={autoClose} onToggle={toggle}>
                 {
                     noheadercomponent ? null :
                         headerComponent ? (
